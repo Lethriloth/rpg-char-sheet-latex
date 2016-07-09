@@ -1,0 +1,54 @@
+\def\importcharclass#1#2{
+	\if\csname#1BAB\endcsname g
+	\addtocounter{charbabcount}{#2}
+	\fi
+	\if\csname#1BAB\endcsname a
+	\addtocounter{charbabcount}{#2 * 3 / 4}
+	\fi
+	\if\csname#1BAB\endcsname p
+	\addtocounter{charbabcount}{#2 / 2}
+	\fi
+	\if\csname#1CL\endcsname g
+	\addtocounter{charCLcount}{#2}
+	\fi
+	\if\csname#1CL\endcsname a
+	\addtocounter{charCLcount}{#2 * 3 / 4}
+	\fi
+	\if\csname#1CL\endcsname p
+	\addtocounter{charCLcount}{#2 / 2}
+	\fi
+	\if\csname#1CL\endcsname {p3}
+	\ifthenelse{#2 > 3}{
+		\addtocounter{charCLcount}{(#2 - 3) / 2}}{}
+	\fi
+	\if\csname#1fort\endcsname g
+	\addtocounter{charfortitudecount}{2 + #2 / 2}
+	\fi
+	\if\csname#1fort\endcsname p
+	\addtocounter{charfortitudecount}{#2 / 3}
+	\fi
+	\if\csname#1ref\endcsname g
+	\addtocounter{charreflexcount}{2 + #2 / 2}
+	\fi
+	\if\csname#1ref\endcsname p
+	\addtocounter{charreflexcount}{#2 / 3}
+	\fi
+	\if\csname#1will\endcsname g
+	\addtocounter{charwillcount}{2 + #2 / 2}
+	\fi
+	\if\csname#1will\endcsname p
+	\addtocounter{charwillcount}{#2 / 3}
+	\fi
+	\csname#1skills\endcsname
+	\newcounter{char#1classlevelcount}
+	\setcounter{char#1classlevelcount}{#2}
+}
+
+
+\def\ninjaBAB{a}
+\def\ninjafort{p}
+\def\ninjaref{g}
+\def\ninjawill{p}
+\def\ninjaskills{
+	\forcsvlist{\isclassskill}{acrobatics, appraise, bluff, climb, craft, diplomacy, disabledevice, disguise, escapeartist, intimidate, knowledgelocal, knowledgenobility, linguistics, perception, perform, profession, sensemotive, sleightofhand, stealth, swim, usemagicdevice}
+}

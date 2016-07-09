@@ -1,0 +1,85 @@
+\def\importcharclass#1#2{
+	\if\csname#1BAB\endcsname g
+	\addtocounter{charbabcount}{#2}
+	\fi
+	\if\csname#1BAB\endcsname a
+	\addtocounter{charbabcount}{#2 * 3 / 4}
+	\fi
+	\if\csname#1BAB\endcsname p
+	\addtocounter{charbabcount}{#2 / 2}
+	\fi
+	\if\csname#1CL\endcsname g
+	\addtocounter{charCLcount}{#2}
+	\fi
+	\if\csname#1CL\endcsname a
+	\addtocounter{charCLcount}{#2 * 3 / 4}
+	\fi
+	\if\csname#1CL\endcsname p
+	\addtocounter{charCLcount}{#2 / 2}
+	\fi
+	\if\csname#1CL\endcsname {p3}
+	\ifthenelse{#2 > 3}{
+		\addtocounter{charCLcount}{(#2 - 3) / 2}}{}
+	\fi
+	\if\csname#1fort\endcsname g
+	\addtocounter{charfortitudecount}{2 + #2 / 2}
+	\fi
+	\if\csname#1fort\endcsname p
+	\addtocounter{charfortitudecount}{#2 / 3}
+	\fi
+	\if\csname#1ref\endcsname g
+	\addtocounter{charreflexcount}{2 + #2 / 2}
+	\fi
+	\if\csname#1ref\endcsname p
+	\addtocounter{charreflexcount}{#2 / 3}
+	\fi
+	\if\csname#1will\endcsname g
+	\addtocounter{charwillcount}{2 + #2 / 2}
+	\fi
+	\if\csname#1will\endcsname p
+	\addtocounter{charwillcount}{#2 / 3}
+	\fi
+	\csname#1skills\endcsname
+	\newcounter{char#1classlevelcount}
+	\setcounter{char#1classlevelcount}{#2}
+}
+
+% % NPC Classes
+\def\adeptBAB{p}
+\def\adeptfort{p}
+\def\adeptref{p}
+\def\adeptwill{g}
+\def\adeptskills{
+\forcsvlist{\isclassskill}{craft,handleanimal,heal,knowledgeall,profession,spellcraft,survival}
+}
+
+\def\aristocratBAB{a}
+\def\aristocratfort{p}
+\def\aristocratref{p}
+\def\aristocratwill{g}
+\def\aristocratskills{
+	\forcsvlist{\isclassskill}{appraise,bluff,craft,diplomacy,disguise,handleanimal,intimidate,knowledgeall,linguistics,perception,perform,profession,ride,sensemotive,swim,survival}
+}
+
+\def\commonerBAB{p}
+\def\commonerfort{p}
+\def\commonerref{p}
+\def\commonerwill{p}
+\def\commonerskills{
+	\forcsvlist{\isclassskill}{climb, craft, handleanimal, perception, profession, ride, swim}
+}
+
+\def\expertBAB{a}
+\def\expertfort{p}
+\def\expertref{p}
+\def\expertwill{g}
+\def\expertskills{
+}
+
+\def\warriorBAB{g}
+\def\warriorfort{g}
+\def\warriorref{p}
+\def\warriorwill{p}
+\def\warriorskills{
+	\forcsvlist{\isclassskill}{climb, craft, handleanimal, intimidate, knowledgenature, profession, ride, swim}
+}

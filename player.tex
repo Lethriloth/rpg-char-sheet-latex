@@ -1,41 +1,113 @@
-\renewcommand\charname{Name}
-\renewcommand\charlevel{Level 0 Nothing}
-\renewcommand\charalignment{TN}
-\renewcommand\charplayername{Nemo}
+\input{./Data/Core_Classes.tex}
 
-\addtocounter{charhpcount}{6}
-\charstr{12}
-\chardex{12}
-\charcon{12}
+
+%Just enter your name, etc. here. \charlevel should be class and level.
+\renewcommand\charname{}
+\renewcommand\charlevel{}
+\renewcommand\charalignment{}
+\renewcommand\charplayername{}
+\renewcommand\chardiety{}
+\renewcommand\charhomeland{}
+\renewcommand\charsize{}
+\renewcommand\charhair{}
+\renewcommand\chareyes{}
+\renewcommand\chargender{}
+\renewcommand\charrace{}
+\renewcommand\charweight{}
+\renewcommand\charheight{}
+\renewcommand\charage{}
+
+\addtocounter{charhpcount}{0}
+
+
+\charstr{10}
+\chardex{10}
+\charcon{10}
 \charint{12}
-\charwis{12}
-\charcha{12}
+\charwis{10}
+\charcha{10}
 
-\isclassskill{characrobaticsclassskillcount}
+% Racial Mods
+\addtocounter{charstrbasecount}{0}
+\addtocounter{chardexbasecount}{0}
+\charspeed{30}
+\addracefeature{Race Feature}
+\renewcommand\do[1]{
+\addcharlanguage{#1}
+}\docsvlist{Common}
 
-% Class skill
-\addtocounter{characrobaticsmiscmodcount}{3}
+
+\importcharclass{fighter}{1} %
+\addclassfeature{Class Feature}
+\addlimiteduse{3/day Ability}{3}
+
+
+% Character Level Ability Increases
+
+% Feats
+\addfeat{Feat}
+\addfeat{Bonus Feat*}
+
 
 % ranks
-\addtocounter{characrobaticsrankscount}{1}
+\def\maxranks{1}
+\renewcommand{\do}[1]{
+\addranks{#1}{\maxranks}}
+\docsvlist{craftone}
+\renewcommand\charcraftonename{Crafting}
+\addranks{professionone}{1}
+\renewcommand\charprofessiononename{Professionalism}
 
 % items
-%% This is not the ideal way, but I can't figure how to do it right atm.
-\renewcommand\printgearitems{\lfont item& \lfont wt.\tabularnewline\hline
-  \gearitem{thing}{2}
-\gearitem{thing2}{4}
-\gearitem{thing3}{24}
-\gearitem{thing2}{43}
-\subgearitem{part of thing2}{43}
-\totalitem}
+\gearitem{Gear}{1}
 
-%% Same problem as gear, this is not an ideal solution
-\renewcommand\printacitems{\uppercase{AC Items} & \lfont bonus & \lfont type & \lfont check penalty & \lfont spell failure & \lfont weight & \lfont properties \tabularnewline\hline
-  \acitem{Padded}{2}{light}{0}{5}{10}{}
-  \acitem{Padded}{2}{light}{0}{5}{10}{}
-}
+\storeditem{Stored Gear}{1}
 
-\renewcommand\charspelldump{This is a very non-ideal solution to the spell problem. This is just a parbox for the user to put whatever they feel best keeps track of their spells. Future versions of this character sheet will include proper spell management}
+
+
+% %Weapons
+
+\autoweapon{Sword +1}{1}{1d1+1}{20}{S}{N/A}{}{melee}{str}
+\weapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
+
+% %Belt
+\beltitem{Belt of Strength +0}{Does Nothing}{0}
+\strenh{0}
+
+% %Armor
+\addarmor{Armor}{3}{10}{0}{5}{L}{10}{Notes}{More Notes}
+
+% %Chest
+%\chestitem{}{}{}
+
+% %Eyes
+%\eyesitem{}{}{}
+
+% %Feet
+%\feetitem{}{}{}
+
+% %Hat
+%\headitem{}{}{}
+
+
+% %Headband
+%\headbanditem{}{}{}
+
+% %Shoulders
+%\shouldersitem{}{}{}
+
+% %Rings
+%\ringitem{}{}{}
+%\ringitem{}{}{}
+
+% %Wrists
+%\wristsitem{}{}{}
+
+\addplatinum{1}\addplatinum*{2}\storeplatinum{3}
+\addgold{4}\addgold*{5}\storegold{6}
+\addsilver{7}\addsilver*{8}\storesilver{9}
+\addcopper{10}\addcopper*{11}\storecopper{12}
+
 
 %%% Local Variables: 
 %%% mode: latex

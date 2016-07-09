@@ -1,0 +1,134 @@
+\def\importcharclass#1#2{
+	\if\csname#1BAB\endcsname g
+	\addtocounter{charbabcount}{#2}
+	\fi
+	\if\csname#1BAB\endcsname a
+	\addtocounter{charbabcount}{#2 * 3 / 4}
+	\fi
+	\if\csname#1BAB\endcsname p
+	\addtocounter{charbabcount}{#2 / 2}
+	\fi
+	\if\csname#1CL\endcsname g
+	\addtocounter{charCLcount}{#2}
+	\fi
+	\if\csname#1CL\endcsname a
+	\addtocounter{charCLcount}{#2 * 3 / 4}
+	\fi
+	\if\csname#1CL\endcsname p
+	\addtocounter{charCLcount}{#2 / 2}
+	\fi
+	\if\csname#1CL\endcsname {p3}
+	\ifthenelse{#2 > 3}{
+		\addtocounter{charCLcount}{(#2 - 3) / 2}}{}
+	\fi
+	\if\csname#1fort\endcsname g
+	\addtocounter{charfortitudecount}{2 + #2 / 2}
+	\fi
+	\if\csname#1fort\endcsname p
+	\addtocounter{charfortitudecount}{#2 / 3}
+	\fi
+	\if\csname#1ref\endcsname g
+	\addtocounter{charreflexcount}{2 + #2 / 2}
+	\fi
+	\if\csname#1ref\endcsname p
+	\addtocounter{charreflexcount}{#2 / 3}
+	\fi
+	\if\csname#1will\endcsname g
+	\addtocounter{charwillcount}{2 + #2 / 2}
+	\fi
+	\if\csname#1will\endcsname p
+	\addtocounter{charwillcount}{#2 / 3}
+	\fi
+	\csname#1skills\endcsname
+	\newcounter{char#1classlevelcount}
+	\setcounter{char#1classlevelcount}{#2}
+}
+
+% % Core Classes
+\def\barbarianBAB{g}
+\def\barbarianfort{g}
+\def\barbarianref{p}
+\def\barbarianwill{p}
+\def\barbarianskills{
+\forcsvlist{\isclassskill}{acrobatics, climb, craft, handleanimal, intimidate, knowledgenature, perception, ride, survival, swim}
+}
+
+\def\bardBAB{a}
+\def\bardfort{p}
+\def\bardref{g}
+\def\bardwill{g}
+\def\bardskills{
+\forcsvlist{\isclassskill}{acrobatics, appraise, bluff, climb, craft, diplomacy, disguise, escapeartist, intimidate, knowledgeall, linguistics, perception, perform, profession, sensemotive, sleightofhand, spellcraft, stealth, usemagicdevice}
+}
+
+\def\clericBAB{a}
+\def\clericfort{g}
+\def\clericref{p}
+\def\clericwill{g}
+\def\clericskills{
+\forcsvlist{\isclassskill}{appraise, craft, diplomacy, heal, knowledgearcana, knowledgehistory, knowledgenobility, knowledgeplanes, knowledgereligion, linguistics, profession, sensemotive, spellcraft}
+}
+
+\def\druidBAB{a}
+\def\druidfort{g}
+\def\druidref{p}
+\def\druidwill{g}
+\def\druidskills{
+\forcsvlist{\isclassskill}{climb, craft, fly, handleanimal, heal, knowledgegeography, knowledgenature, perception, profession, ride, spellcraft, survival, swim}
+}
+
+\def\fighterBAB{g}
+\def\fighterfort{g}
+\def\fighterref{p}
+\def\fighterwill{p}
+\def\fighterskills{
+\forcsvlist{\isclassskill}{climb, craft, handleanimal, intimidate, knowledgedungeoneering, knowledgeengineering, profession, ride, survival, swim}
+}
+
+\def\monkBAB{a}
+\def\monkfort{g}
+\def\monkref{g}
+\def\monkwill{g}
+\def\monkskills{
+\forcsvlist{\isclassskill}{acrobatics, climb, craft, escapeartist, intimidate, knowledgehistory, knowledgereligion, perception, perform, profession, ride, sensemotive, stealth, swim}
+}
+
+\def\paladinBAB{g}
+\def\paladinfort{g}
+\def\paladinref{p}
+\def\paladinwill{g}
+\def\paladinskills{
+\forcsvlist{\isclassskill}{craft, diplomacy, handleanimal, heal, knowledgenobility, knowledgereligion, profession, ride, sensemotive, spellcraft}
+}
+
+\def\rangerBAB{g}
+\def\rangerfort{g}
+\def\rangerref{g}
+\def\rangerwill{p}
+\def\rangerskills{
+\forcsvlist{\isclassskill}{climb, craft, handleanimal, heal, intimidate, knowledgedungeoneering, knowledgegeography, knowledgenature, perception, profession, ride, spellcraft, stealth, survival, swim}
+}
+
+\def\rogueBAB{a}
+\def\roguefort{p}
+\def\rogueref{g}
+\def\roguewill{p}
+\def\rogueskills{
+\forcsvlist{\isclassskill}{acrobatics, appraise, bluff, climb, craft, diplomacy, disabledevice, disguise, escapeartist, intimidate, knowledgedungeoneering, knowledgelocal, linguistics, perception, perform, profession, sensemotive, sleightofhand, stealth, swim, usemagicdevice}
+}
+
+\def\sorcererBAB{p}
+\def\sorcererfort{p}
+\def\sorcererref{p}
+\def\sorcererwill{g}
+\def\sorcererskills{
+\forcsvlist{\isclassskill}{appraise, bluff, craft, fly, intimidate, knowledgearcana, profession, spellcraft, usemagicdevice}
+}
+
+\def\wizardBAB{p}
+\def\wizardfort{p}
+\def\wizardref{p}
+\def\wizardwill{g}
+\def\wizardskills{
+\forcsvlist{\isclassskill}{appraise, craft, fly, knowledgeall, linguistics, profession, spellcraft}
+}
