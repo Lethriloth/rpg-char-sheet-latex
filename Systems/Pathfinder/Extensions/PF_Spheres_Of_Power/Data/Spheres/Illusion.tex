@@ -1,0 +1,87 @@
+\defineSphere{Illusion}{You may craft images and impressions of things that aren't there.}{You may craft images and impressions of things that aren't there. Illusion sphere abilities have a range of Close and do not allow spell resistance unless placed on a creature with resistance (Such as with the Illusionary Disguise talent). Unwilling targets are allowed a Will save to resist an \textit{illusion} or \textit{trick} being placed upon them. An \textit{illusion} may shed as much normal light as a torch and may cast a shadow.}
+\def\charillusionrange{Close}
+\defineBaseAbility{Illusion}{Trick}{You can create small, simple illusions within \charillusionrange{} range which persist for \arabic{charCLCount} minute\s. You can create obviously illusory \textit{effects}, or \textit{alter} an object or creature's appearance with minor changes that count as having a disguise kit for making disguise checks.}{As a standard action, you may create small, simple illusions called \textit{tricks}, which persist for 1 minute per level or until dismissed.
+	\par \textit{Effects:} You may create unconvincing illusions. This is the same as creating an \textit{illusion} (see below) and can include all senses you can affect through Illusion talents, except it is obviously fake (i.e., it is translucent, unrealistic, etc.), requiring no one to make a save to disbelieve. However, the effects can still be used to create distractions, display images, draw a map, or be used for entertainment. This counts as possessing the required tools to make any appropriate Perform check (such as creating a melody with the Audible Illusion talent).
+	\par \textit{Alter:} You may make minor changes to objects or creatures up to your Illusion maximum size, such as changing their color, making them appear clean or dirty, making writing appear, or other minor alterations. This counts as having a disguise kit when making Disguise checks (which take the usual time instead of a standard action), but such a disguise still counts as being magical for the purposes of detecting magic or for spells and effects that allow a target to see through magical effects and illusions.}
+\edef\charillusionelementslist{}
+\listadd{\charillusionelementslist}{visual}
+\newCounter{charillusionsize}
+\setCounter{charillusionsize}{1}
+\defineBaseAbility{Illusion}{Illusion}{You can spend a spell point to create an \textit{illusion} of up to
+		\ifnum \value{charCLCount} > 2 \stepCounter{charillusionsize}%
+		\ifnum \value{charCLCount} > 4 \stepCounter{charillusionsize}%
+		\ifnum \value{charCLCount} > 7 \stepCounter{charillusionsize}%
+		\ifnum \value{charCLCount} > 10 \stepCounter{charillusionsize}%
+		\ifnum \value{charCLCount} > 14 \addToCounter{charillusionsize}{\value{charCLCount} / 5 - 2}%
+		\fi\fi\fi\fi\fi%
+	%%%
+	%%%
+		\ifnum \value{charillusionsize} = 1 Medium%
+		\else \ifnum \value{charillusionsize} = 2 Large%
+		\else \ifnum \value{charillusionsize} = 3 Huge%
+		\else \ifnum \value{charillusionsize} = 4 Gargantuan%
+		\else \ifnum \value{charillusionsize} = 5 Colossal%
+		\else \ifnum \value{charillusionsize} > 5 Colossal\forloop[-1]{@i}{\value{charillusionsize}}{\value{@i} > 5}{+}%
+		\fi\fi\fi\fi\fi\fi{}
+	size within \charillusionrange{} range which lasts as long as you concentrate, up to \arabic{charCLCount} minute\s. Your \textit{illusions} may include\PrintList[, ][and ]{\charillusionelementslist} elements. Illusory creatures have an attack bonus of \domath{\value{charCLCount} / 2 + \value{charCastingModCount}} and a touch AC of \domath{\value{charCLCount} / 2 + \value{charCastingModCount} + 10}, both modified by its size modifier.}{
+	As a standard action, you may spend a spell point to create a silent visual \textit{illusion} within range for as long as you concentrate, to a maximum of 1 minute per caster level. You cannot move further away from the \textit{illusion} than your illusion range while maintaining it through concentration, and the \textit{illusion} is limited in size according to \textbf{Table: Illusion Maximum Size}. The image may be anything you may clearly imagine, and behaves according to your desires.
+	\begin{wraptable}[11]{l}{135\unitlength}
+		\raggedright\textbf{Table: Illusion Maximum Size} \rowcolors{2}{gray!25}{white}\small
+		\begin{tabular}{c>{\centering}p{45\unitlength}>{\centering}p{30\unitlength}}
+			\rowcolor{gray!50}
+			\textbf{\textit{Caster Level}} & \textbf{\textit{Illusion Maximum Size}} & \textbf{\textit{Maximum Cube Size}}\tabularnewline
+			1st	& Medium		& 5 ft cube	\tabularnewline
+			3rd	& Large			& 10 ft cube	\tabularnewline
+			5th	& Huge			& 15 ft cube	\tabularnewline
+			8th	& Gargantuan	& 20 ft cube	\tabularnewline
+			11th& Colossal		& 30 ft cube	\tabularnewline
+			15th& Colossal+		& 40 ft cube	\tabularnewline
+			20th& Colossal++	& 50 ft cube	\tabularnewline
+			25th& Colossal+++	& 60 ft cube
+		\end{tabular}
+	\end{wraptable}
+	\par Simply perceiving an \textit{illusion} isn't enough to detect it as fake, but any target who interacts with the \textit{illusion} or carefully studies the area is allowed a Will save to disbelieve the image, recognizing it for what it is. Anyone who finds obvious evidence of trickery (ex: throws a rock through an illusionary wall) automatically disbelieves the \textit{illusion}.
+	\par You may only create visual \textit{illusions} although certain talents may be taken to add more senses. The more complex an \textit{illusion} is, the more talents it requires to be convincing, with the chart below serving as a guideline and the GM serving as the final arbiter for what talents are required to create a specific \textit{illusion}.\\\\
+	\rowcolors{2}{gray!25}{white}\small\textbf{Table: Example Illusions}\\
+	\begin{tabular}{>{\centering}p{85\unitlength}>{\centering}p{110\unitlength}}
+		\rowcolor{gray!50}
+		\textbf{\textit{Example of Illusion}} &\textbf{\textit{Required Talents}}\tabularnewline
+		An illusionary wall & Base sphere only \tabularnewline
+		A glen full of trees & Complex Illusion \tabularnewline
+		A warrior blocking the target's way & Illusionary Sound, Illusionary Touch (to engage in combat w/ target) \tabularnewline
+		A table laden with food & Illusionary Odor, Illusionary Touch (to be consumed by target)\tabularnewline
+		A room filled with fire & Illusionary Sound, Illusionary Touch\tabularnewline
+		An army of orcs chasing the target& Illusionary Sound, Complex Illusion, Illusionary Touch (to engage in combat w/ target)
+	\end{tabular}\\
+	\par If creating an illusionary creature, your \textit{illusion} has an attack bonus equal to your caster level + your casting ability modifier, and a touch armor class equal to 10 + its size modifier + 1/2 your caster level + your casting ability modifier. An illusionary creature may provide a flanking bonus against targets who fail to disbelieve it. Any creature who strikes an \textit{illusion} in combat automatically disbelieves it.}
+\defineTalent{Complex Illusion}{Illusions can be composed of multiple components.}{
+	When creating an illusion, you may spend an additional spell point to divide the illusion into multiple, independent components. The combined size and range of these illusions must still be within your maximum illusion size, but each component can appear differently and behave differently. While each component can be given its own set of programmed instructions, you can only actively control one component at a time.
+	\par \textit{Ex:} when creating an illusion of a tavern, a creature with this talent could create a bustling group of people inside the tavern as part of the same illusion. The caster could only control one such illusionary person at a time though; and the rest would only perform their last set of instructions. Giving a component a new set of instructions is a move action.
+	\par If a creature makes its saving throw against a complex illusion, it sees through the entire illusion rather than only one component part.
+}{}
+\defineTalent{Daylight}{Your \textit{illusions} can give off bright light out to 60 ft and raise light levels by one step up to normal for another 60 ft. Sensitive eyes are affected but sensitive skin is not.}{Your \textit{illusions} may give off bright light, in a radius of up to 60 ft. The next 60 ft beyond that is raised one light level to a maximum of normal light. Creatures with Light Blindness or Light Sensitivity take penalties while in this bright light, but creatures damaged by daylight are unaffected.}{}
+\defineTalent{Enlarged Illusion}{Increase your \textit{illusion}'s maximum size by one size category.}{Increase your \textit{illusion}'s maximum size by one size category.}{\addToCounter{charillusionsize}{#1}}
+\defineTalent{Illusionary Disguise}{Attach an \textit{illusion} a creature or object, giving a + 10 circumstance bonus to Disguise checks.}{You may attach an \textit{illusion} directly onto a creature or object, making it appear as something or someone else entirely. This grants a +10 circumstance bonus to Disguise checks. Targets who interact with the disguise receive a Will save to disbelieve, and some actions can simply give the disguise away. (For example, touching a target disguised as a different size category, or seeing a creature disguised as an inanimate object move.)}{}
+\defineTalent{Illusionary Odor}{You may add smell and taste to \textit{illusions}. \ifthenelse{\value{charCLCount} > 1}{As a \textit{trick}, add \domath{\value{charCLCount} / 2} to the DC required to detect poison in foods or track a target by smell.}{}}{You may add smell and taste to your \textit{illusions}. For example, you may change something's taste or create the smell of smoke. As a \textit{trick}, you may add half your caster level to the DC required to detect poison in foods or to track a target by smell.}{\listadd{\charillusionelementslist}{olfactory}}
+\defineTalent{Illusionary Sound}{You may add sounds to your \textit{illusions}, up to a maximum volume equivalent to \domath{\value{charCLCount}*4} humans. As a \textit{trick}, you can throw your voice, or create various forms of noise.}{
+	You may add whatever sounds you desire to an \textit{illusion}. You cannot make more sound than four normal humans per caster level could make. (A horde of rats running and squeaking is equal to eight humans running and shouting. A roaring lion is equal to the noise from 16 humans, while a roaring dragon is equal to the noise from 32 humans.) 
+	\par As a \textit{trick}, you may create effects of non-specific noises (feet marching, laughing and muttering of a party) or throw your voice, making it appear as if it comes from somewhere else within your range. Targets are allowed a Will save as usual to disbelieve these sounds, or recognize your voice is not actually coming from where it appears to be.}{}
+\defineTalent{Illusionary Touch}{Your \textit{illusions} can include touch, including temperature and texture. As such, physical contact does not lead to automatic disbelief.\ifinlist{painful}{\charillusionelementslist}{In addition, your \textit{illusions} can include pain, and inflict \domath{\value{charCLCount}+\value{charCastingModCount}} nonlethal damage to any creature that would be harmed by them, up to once per round per creature.}{}}{
+	You may make an \textit{illusion} that feels real to the touch, including temperature and texture. When a creature comes into physical contact with your \textit{illusions} (touching them, striking them in melee, etc.), they do not automatically disbelieve the \textit{illusion}. Instead, they are allowed a new saving throw each round they are in contact with the \textit{illusion}. Your \textit{illusion} still cannot hold weight (thus while touching the wall would only grant a new saving throw, leaning on the wall would still cause the creature to fall through and disbelieve).
+	\par You may take this talent a total of twice; when taken a second time, your \textit{illusions} may also cause pain. When coming into contact with an appropriate \textit{illusion} (stepping into fire, being hit by an illusionary enemy, etc.), if the subject fails their Will save to disbelieve, they take non-lethal damage equal to your caster level + your casting ability modifier. A target can only be damaged by your \textit{illusions} once in a round, no matter how many times it thinks the \textit{illusion} has hurt it.}{\listadd{\charillusionelementslist}{tactile}\listadd{\charillusionelementslist}{thermal}\ifnum #1 > 1 \listadd{\charillusionelementslist}{painful}\fi}
+\defineTalent{Invisibility}{As an \textit{illusion}, you can make an object or creature invisible, giving a \PlusMinus{charCLCount} bonus to stealth checks for creatures. An invisible creature also has a 50\% miss chance for attacks against them, a +2 bonus on attack rolls against sighted creatures, and sighted creatures are denied a Dex bonus to AC against them. Finally, invisibility masks magical auras.\ifthenelse{\value{charCLCount} > 1}{As a \textit{trick}, add \domath{\value{charCLCount} / 2} to Sleight of Hand checks to palm a small object or hide a light weapon.}{}}{
+	You may make things disappear. As a \textit{trick}, you may add 1/2 your caster level to Sleight of Hand checks made to palm a small object or hide a light weapon. 
+	\par You may also place an illusion on a creature or object that makes it harder to see. Rather than make a Will save to disbelieve, creatures must make Perception checks to detect the hidden creature or object. Objects have a flat Perception DC equal to 10 + their size bonus + your caster level, while creatures gain a bonus to their Stealth checks equal to your caster level. In addition, since they are invisible, creatures may make Stealth checks even while being observed and do not require cover to retain or initiate Stealth. Even when detected by another creature, an invisible creature gains a +2 bonus to attack rolls against sighted targets and ignores their Dexterity bonus to AC. Attacks against the invisible creature have a 50\% chance they will simply miss, even if the attack has targeted the correct square.
+	\par Making a creature or object invisible also hides its magical aura from such effects as detect magic or the base Divination sphere divine ability.}{}
+\defineTalent{Lingering Illusion}{\textit{Illusions} last for 2 rounds after you stop concentrating, and you may spend a spell point to allow an \textit{illusion} to remain for \arabic{charCLCount} minute\s{} without concentration}{
+	When you create an \textit{illusion}, the \textit{illusion} remains for 2 rounds after you stop concentrating. You may also spend a spell point to allow the \textit{illusion} to remain for 1 minute per caster level without the need for concentration. When an \textit{illusion} isn't maintained through concentration, it performs whatever set of actions it was last commanded to do, and cannot move beyond Medium range of where it was placed. Giving an \textit{illusion} a new series of programmed activities is a move action.}{}
+\defineTalent{Manipulate Aura}{As a \textit{trick}, modify a creature or object's magical aura to appear nonmagical, hide a spell effect, or appear as if it were a magic item or under the effect of a spell for up to \arabic{charCLCount} day\s.}{As a \textit{trick}, you may change a creature or object's magical aura to appear to be non-magical, or to appear as a magic item you specify, or as if under the effects of a spell or sphere ability you specify for up to 1 day per caster level. A target examining this aura through detection magic is allowed a Will save to see through the trick, but on a failure believes the aura and does not detect this trick. Artifacts are too powerful to have their auras hidden or altered in this manner.}{}
+\defineTalent{Ranged Illusion}{Increase the distance by which you may manifest an illusion or trick to \charillusionrange.}{Increase the distance by which you may manifest an illusion or trick by one category (Close to Medium, Medium to Long). You may take this talent multiple times. The effects stack.}{
+	\ifnum 1 = #1
+	\def\charillusionrange{Medium}
+	\else\ifnum #1 > 1
+	\def\charillusionrange{Long}
+	\fi
+	\fi
+}
+\defineTalent{Silence}{You place an \textit{illusion} on a creature or area that negates all sound, preventing the casting of verbal spells, protecting against sonic and verbal attacks, and granting a +4 to stealth checks}{You may place an illusion on a creature or in an area that negates sound. The creature (or creatures standing in the area of effect) makes no noise, and cannot perform verbal components of any skill or magic. Creatures in an area of silence are immune to sonic or language-based attacks, spells, and effects, and gain a +4 bonus to Stealth checks.}{}

@@ -1,115 +1,125 @@
 \input{./Data/Core_Classes.tex}
+\setCounter{XP-Mode}{1} % Boolean, automatically calculates next-Level XP
+\setCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
+\setCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive Skill point increases.
+\setCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of Feats
+
+\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
+
+}
 
 
-%Just enter your name, etc. here. \charlevel should be class and level.
-\renewcommand\charname{}
-\renewcommand\charlevel{}
-\renewcommand\charalignment{}
-\renewcommand\charplayername{}
-\renewcommand\chardiety{}
-\renewcommand\charhomeland{}
-\renewcommand\charsize{}
-\renewcommand\charhair{}
-\renewcommand\chareyes{}
-\renewcommand\chargender{}
-\renewcommand\charrace{}
-\renewcommand\charweight{}
-\renewcommand\charheight{}
-\renewcommand\charage{}
-
-\addtocounter{charhpcount}{0}
+%Just enter your name, etc. here.
+\renewcommand\charName{}
+\renewcommand\charAlignment{Chaotic Neutral}
+\renewcommand\charPlayerName{}
+\renewcommand\charReligion{}
+\renewcommand\charHomeland{}
+\renewcommand\charHair{}
+\renewcommand\charEyes{}
+\renewcommand\charGender{}
+\renewcommand\charWeight{}
+\renewcommand\charHeight{}
+\renewcommand\charAge{}
 
 
-\charstr{10}
-\chardex{10}
-\charcon{10}
-\charint{12}
-\charwis{10}
-\charcha{10}
+
+\setCharStr{10}
+\setCharDex{10}
+\setCharCon{10}
+\setCharInt{10}
+\setCharWis{10}
+\setCharCha{10}
 
 % Racial Mods
-\addtocounter{charstrbasecount}{0}
-\addtocounter{chardexbasecount}{0}
-\charspeed{30}
-\addracefeature{Race Feature}
+\addToCounter{charStrBaseCount}{0}
+\addToCounter{charDexBaseCount}{0}
+\setCharSpeed{30}
+\addRaceFeature{Race Feature}
 \renewcommand\do[1]{
-\addcharlanguage{#1}
+\addCharLanguage{#1}
 }\docsvlist{Common}
 
-
-\importcharclass{fighter}{1} %
-\addclassfeature{Class Feature}
-\addlimiteduse{3/day Ability}{3}
+%\ImportCharClass{Bard}{20}
+%\ImportCharClass{Barbarian}{20}
+%\ImportCharClass{Cleric}{20}
+%\ImportCharClass{Druid}{20}
+%\ImportCharClass{Fighter}{20}
+%\ImportCharClass{Monk}{20}
+%\ImportCharClass{Paladin}{20}
+%\ImportCharClass{Ranger}{20}
+%\ImportCharClass{Rogue}{20}
+%\ImportCharClass{Sorcerer}{20}
+%\ImportCharClass{Wizard}{20}
 
 
 % Character Level Ability Increases
 
 % Feats
-\addfeat{Feat}
-\addfeat{Bonus Feat*}
+\addFeat{Feat}
+\addFeat*{Bonus Feat}
 
 
-% ranks
-\def\maxranks{1}
+% Ranks
+\def\maxRanks{1}
 \renewcommand{\do}[1]{
-\addranks{#1}{\maxranks}}
-\docsvlist{craftone}
-\renewcommand\charcraftonename{Crafting}
-\addranks{professionone}{1}
-\renewcommand\charprofessiononename{Professionalism}
+\addRanks{#1}{\maxRanks}}
+\docsvlist{CraftOne}
+\renewcommand\charCraftOneName{Crafting}
+\addRanks{ProfessionOne}{1}
+\renewcommand\charProfessionOneName{Professionalism}
 
-% items
-\gearitem{Gear}{1}
+% Items
+\addGearItem{Gear}{1}
 
-\storeditem{Stored Gear}{1}
+\addStoredItem{Stored Gear}{1}
 
 
 
 % %Weapons
 
-\autoweapon{Sword +1}{1}{1d1+1}{20}{S}{N/A}{}{melee}{str}
-\weapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
+\addAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
+\addWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
 
 % %Belt
-\beltitem{Belt of Strength +0}{Does Nothing}{0}
-\strenh{0}
+\addBeltItem{Belt of Strength +0}{Does Nothing}{0}
+\EnhancementBonus{Str}{0}
 
 % %Armor
-\addarmor{Armor}{3}{10}{0}{5}{L}{10}{Notes}{More Notes}
+%\addArmor{Armor}{3}{10}{0}{5}{L}{10}{Notes}{More Notes}
 
 % %Chest
-%\chestitem{}{}{}
+%\addChestItem{}{}{}
 
 % %Eyes
-%\eyesitem{}{}{}
+%\addEyesItem{}{}{}
 
 % %Feet
-%\feetitem{}{}{}
+%\addFeetItem{}{}{}
 
 % %Hat
-%\headitem{}{}{}
-
+%\addHeadItem{}{}{}
 
 % %Headband
-%\headbanditem{}{}{}
+%\addHeadbandItem{}{}{}
 
 % %Shoulders
-%\shouldersitem{}{}{}
+%\addShouldersItem{}{}{}
 
 % %Rings
-%\ringitem{}{}{}
-%\ringitem{}{}{}
+%\addRingItem{}{}{}
+%\addRingItem{}{}{}
 
 % %Wrists
-%\wristsitem{}{}{}
+%\addWristsItem{}{}{}
 
-\addplatinum{1}\addplatinum*{2}\storeplatinum{3}
-\addgold{4}\addgold*{5}\storegold{6}
-\addsilver{7}\addsilver*{8}\storesilver{9}
-\addcopper{10}\addcopper*{11}\storecopper{12}
+\addPlatinum{1}\addPlatinum*{2}\StorePlatinum{3}
+\addGold{4}\addGold*{5}\StoreGold{6}
+\addSilver{7}\addSilver*{8}\StoreSilver{9}
+\addCopper{10}\addCopper*{11}\StoreCopper{12}
 
 
 %%% Local Variables: 
-%%% mode: latex
+%%% Mode: latex
 %%% TeX-master: t
 %%% End: 

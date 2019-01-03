@@ -1,0 +1,157 @@
+\input{./Data/Spheres/Spheres_Classes.tex}
+\setCounter{XP-Mode}{1} % Boolean, automatically calculates next-Level XP
+\setCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
+\setCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive Skill point increases.
+\setCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of Feats
+
+\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
+
+}
+
+
+%Just enter your name, etc. here.
+\renewcommand\charName{}
+\renewcommand\charAlignment{}
+\renewcommand\charPlayerName{}
+\renewcommand\charReligion{}
+\renewcommand\charHomeland{}
+\renewcommand\charHair{}
+\renewcommand\charEyes{}
+\renewcommand\charGender{}
+\renewcommand\charWeight{}
+\renewcommand\charHeight{}
+\renewcommand\charAge{}
+
+
+
+\setCharStr{10}
+\setCharDex{10}
+\setCharCon{10}
+\setCharInt{10}
+\setCharWis{10}
+\setCharCha{10}
+
+% Racial Mods
+\addToCounter{charStrBaseCount}{0}
+\addToCounter{charDexBaseCount}{0}
+\setCharSpeed{30}
+\addRaceFeature{Race Feature}
+\renewcommand\do[1]{
+\addCharLanguage{#1}
+}\docsvlist{Common}
+
+
+\ImportSpheresClass*{Incanter}{20} %
+\setCharCastingAbility{Int}
+\addClassFeature{Class Feature}
+\addLimitedUse{3/day Ability}{3}
+
+
+%SPHERES OF POWER INSTRUCTIONS:
+%You can add a sphere with the \addsphere command.  \addsphere accepts ONE mandatory argument and TWO optional arguments.
+%The mandatory argument should be the sphere name, capitalized.
+%The first optional argument is placed BEFORE the sphere name, and denotes a sphere-specific caster level adjustment. (From eg an Incanter's specialist sphere)
+%The second optional argument is placed AFTER the sphere name and denotes any options used for the sphere.
+%Currently, the only use for this second argument is to denote which Geomancing package you have for the Nature sphere.
+%However, I hope to later adjust this later to allow you to modify a sphere's base abilities according to a casting tradition.
+%
+%You may add a talent to a sphere with the \addtalent command. \addtalent accepts TWO mandatory arguments and TWO optional arguments.
+%The first mandatory argument should be the sphere name, capitalized.
+%The mandatory argument should be the talent name, all words capitalized, with any tags (i.e. exactly how it is printed in the talent header in the SoP book.)
+%For example, \addtalent{Light}{Encompassing Light (light)}
+%NOTE: The SoP book is very inconsistent in tagging the plantlife talents. This sheet tags them all as (plantlife).
+%The first optional argument should be placed BEFORE the sphere name, and denotes the number of times you have taken that talent. (Defaults to 1).
+%The second optional argument should be placed AFTER the talent name, and denotes any other options chosen with the talent.  Currently this should only have an effect for the Expanded Geomancing talent from the Nature sphere.
+%Advanced talents are not yet implemented! It's on my todo list, right after "Be better at documentation"
+
+\addSphere{Alteration}
+\addSphere{Conjuration}
+\addSphere{Creation}
+\addSphere{Dark}
+\addSphere{Death}
+\addSphere{Destruction}
+\addSphere{Divination}
+\addSphere{Enhancement}
+\addSphere{Fate}
+\addSphere{Illusion}
+\addSphere{Life}
+\addSphere{Light}
+\addSphere{Mind}
+\addSphere{Nature}
+\addSphere{Protection}
+\addSphere{Telekinesis}
+\addSphere{Time}
+\addSphere{War}
+\addSphere{Warp}
+\addSphere{Weather}
+
+% Character Level Ability Increases
+
+% Feats
+\addFeat{Feat}
+\addFeat*{Bonus Feat}
+
+
+% Ranks
+\def\maxRanks{1}
+\renewcommand{\do}[1]{
+\addRanks{#1}{\maxRanks}}
+\docsvlist{CraftOne}
+\renewcommand\charCraftOneName{Crafting}
+\addRanks{ProfessionOne}{1}
+\renewcommand\charProfessionOneName{Professionalism}
+
+% Items
+\addGearItem{Gear}{1}
+
+\addStoredItem{Stored Gear}{1}
+
+
+
+% %Weapons
+
+\addAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
+\addWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
+
+% %Belt
+\addBeltItem{Belt of Strength +0}{Does Nothing}{0}
+\EnhancementBonus{Str}{0}
+
+% %Armor
+%\addArmor{Armor}{3}{10}{0}{5}{L}{10}{Notes}{More Notes}
+
+% %Chest
+%\addChestItem{}{}{}
+
+% %Eyes
+%\addEyesItem{}{}{}
+
+% %Feet
+%\addFeetItem{}{}{}
+
+% %Hat
+%\addHeadItem{}{}{}
+
+% %Headband
+%\addHeadbandItem{}{}{}
+
+% %Shoulders
+%\addShouldersItem{}{}{}
+
+% %Rings
+%\addRingItem{}{}{}
+%\addRingItem{}{}{}
+
+% %Wrists
+%\addWristsItem{}{}{}
+
+\addPlatinum{1}\addPlatinum*{2}\StorePlatinum{3}
+\addGold{4}\addGold*{5}\StoreGold{6}
+\addSilver{7}\addSilver*{8}\StoreSilver{9}
+\addCopper{10}\addCopper*{11}\StoreCopper{12}
+
+
+%%% Local Variables: 
+%%% Mode: latex
+%%% TeX-master: t
+%%% End: 

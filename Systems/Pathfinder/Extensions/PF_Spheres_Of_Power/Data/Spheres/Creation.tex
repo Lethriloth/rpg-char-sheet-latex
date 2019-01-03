@@ -1,0 +1,93 @@
+\defineSphere{Creation}{You may create and alter physical materials.}{You may create and alter physical materials.}
+\def\charrepairdamage{1d4 + \domath{\value{charCLCount} / 2} }
+\def\chardestroydamage{1d4 + \domath{\value{charCLCount} / 2} }
+\def\charcreationrange{Touch }
+\defineBaseAbility{Creation}{Alter}{Modify unattended objects. Can either repair \charrepairdamage damage or deal \chardestroydamage damage}{\textit{Altering} an object is a standard action and requires you to be touching the object to be altered. You cannot alter an animate target (such as a golem or animated object) and the object must be non-magical and unattended (not held, worn, or part of a creature's equipment).\par
+	When you gain the Creation sphere, you may alter objects in the following ways:\par
+	\textbf{Repair:} You may repair a damaged object, healing it a number of hit points equal to 1d4 + 1/2 your caster level. If the object has the broken condition, this condition is removed if the object is restored to at least half its original hit points. This ability cannot restore warped or transmuted items, but it can still repair damage done to such items.\par
+	\textbf{Destroy:} You deal damage to the object equal to 1d4+ 1/2 your caster level. This bypasses all hardness. An object reduced to less than half its hit points gains the broken condition. Talents marked (alter) grant you new ways to \textit{alter} objects.}
+\defineBaseAbility{Creation}{Create}{Spend a spell point to create an object within \charcreationrange range that lasts for as long as you concentrate, up to \arabic{charCLCount} minute\s.}{
+	{\begin{wraptable}[12]{r}{150\unitlength}
+		\raggedright\textbf{Table: Object Materials}
+		\rowcolors{2}{gray!25}{white}\small
+		\begin{tabular}{ccc}
+			\rowcolor{gray!50}
+			\textit{\textbf{Substance}}& \textit{\textbf{Hardness}}& \textit{\textbf{Hit Points}}\tabularnewline
+			Glass& 1& 1/in. of thickness\tabularnewline
+			Paper or cloth& 0& 2/in. of thickness\tabularnewline
+			Rope &0& 2/in. of thickness\tabularnewline
+			Ice &0& 3/in. of thickness\tabularnewline
+			Leather or hide &2& 5/in. of thickness\tabularnewline
+			Wood &5& 10/in. of thickness\tabularnewline
+			Stone &8& 15/in. of thickness\tabularnewline
+			Iron or steel &10& 30/in. of thickness\tabularnewline
+			Mithral &15& 30/in. of thickness\tabularnewline
+			Adamantine &20& 40/in. of thickness\tabularnewline
+		\end{tabular}
+	\end{wraptable}
+	As a standard action, you may spend a spell point to \textit{create} a non-magical, unattended object out of vegetable matter such as wood, hemp, or cotton in either your hand or an adjacent square. The object may be of equivalent size to one Small object per caster level (see chart below) and lasts as long as you continue to concentrate, to a maximum of 1 minute per caster level.\par
+	If the \textit{created} object is especially large, it must begin in an adjacent square and must be completely contained within Close range.\par
+	You cannot \textit{create} items that require mixing, carry special properties, or knowledge you don't possess (alchemical items, rare herbs, the key to a lock you didn't \textit{create}, etc.). A DC 15 Appraise check reveals the object as a magical fake. Fabricated objects have a lingering magical aura that can be detected as magic, although the objects themselves aren't magical.\par
+	While simple objects such as candles, folds of cloth, simple furniture, or basic weapons are easy to \textit{create}; particularly complex objects (mechanics, crossbows, objects with moving parts) require a Craft check made against the object's Craft DC.	Failure means the object comes into being broken and unusable. You cannot \textit{create} an object directly onto a target (summoning manacles onto someone's wrists, etc.).}\par
+	\textit{Notes on Walls and Coverings:} A section of 20 ft by 20 ft cloth is considered a Small object. A wall 10 ft by 10 ft and 1 inch thick counts as a Small object. Doubling the thickness counts as doubling the size.\par
+	\textit{Notes on Casings:} Creating a 1-inch thick encasement for a creature (such as a dome) counts as creating an object 1 size category larger than the intended target. Thus, a casing for a Medium creature is a Large object, a casing for a Large creature is a Huge object, etc. A creature is allowed a Reflex save to escape such an entrapment, and may attack or make Strength checks unimpeded against its own casing.\par
+		\begin{wraptable}[11]{l}{150\unitlength}
+				\raggedright\textbf{Table: Object Size}
+				\rowcolors{2}{gray!25}{white}\small
+				\begin{tabular}{A{38}A{55}A{31}A{22}}
+					\rowcolor{gray!50}
+					\textit{\textbf{Object Size}}& \textit{\textbf{Minimum Caster Level (\# of small objects contained)}}& \textit{\textbf{Example Objects}}& \textit{\textbf{Falling Damage}}\tabularnewline
+					Small & 1 & Chair & 1d6\tabularnewline
+					Medium & 2 & Table & 1d8\tabularnewline
+					Large & 4 & Statue & 2d6\tabularnewline
+					Huge & 8 & Wagon & 3d6\tabularnewline
+					Gargantuan & 16 & Catapult & 4d6\tabularnewline
+					Colossal &32& Ship &5d6\tabularnewline
+					Colossal+ &64& Tavern &6d6
+				\end{tabular}
+			\end{wraptable}
+	\textit{Notes on Falling Objects:} Objects that fall upon characters deal damage based on their size according to \textbf{Table: Object Size}. Objects made of stone or harder substances deal double damage, while objects such as cloth or water deal half damage. Also, an object falling less than 30 feet also deals half damage, while objects falling more than 150 ft deal double damage. These multipliers stack. A falling object takes the same amount of damage as it deals, and no falling object can deal more than 20d6 damage.\par
+	Dropping an object on a creature requires a ranged touch attack, with a range increment of 20 feet.
+}
+\defineTalent{Change Material (alter)}{Spend a spell point to alter the material of an object for \arabic{charCLCount} round\s.}{You may spend a spell point to alter an object, changing its composition from one material to another for 1 round per caster level. Both the material you are affecting and the material you
+	are changing it into must be materials you can create (i.e., you must possess the Expanded Materials talent to work with objects other than vegetable matter) and the object cannot exceed your maximum creation size, although you may target part of an object (such as a section of wall). When the duration expires, the object returns to its normal material, although any damage sustained while altered remains after it returns to its original
+	material. You cannot change a liquid into a solid or a solid into a liquid, and you cannot create or affect gases.}{}
+\defineTalent{Distant Creation}{Increase the range of \textit{create} by one step.}{When you \textit{create} an object, the object may appear anywhere within Close range. Objects that take up large areas must be completely contained within range. You may select this talent multiple times. Each time it is taken, increase the range by 1 step (Close to Medium, Medium to Long).}{
+	\ifnum 1 = #1 
+		\def\charcreationrange{Close } 
+	\else\ifnum #1 = 2 
+		\def\charcreationrange{Medium }	
+	\else\ifnum #1 > 2
+		\def\charcreationrange{Long }
+	\fi
+	\fi
+	\fi}
+\defineTalent{Divided Creation}{You can \textit{create} multiple objects at the same time, so long as their total size does not exceed your maximum creation size}{When creating an object, you may create multiple objects within range. Each created object must be of the same general type (suits of armor, wall sections, catapults, etc.), and the object's total size cannot exceed your maximum creation size. Alternately, you may create a single ‘object' that would normally consist of a multitude of parts (i.e., if creating a tavern with this talent, it would appear with chairs, beds, barrels, etc.).}{}
+\defineTalent{Expanded Materials}{You can \textit{alter} and \textit{create} a wider variety of materials}{
+	\begin{wraptable}[7]{r}{172\unitlength}
+			\raggedright\textbf{Table: Object Materials}
+			\rowcolors{2}{gray!25}{white}\small
+			\begin{tabular}{cc}
+				\rowcolor{gray!50}
+				\textit{\textbf{Caster Level}} & \textit{\textbf{Materials}} \tabularnewline
+				1st & stone \tabularnewline
+				5th & basic metals (iron, steel, copper) \tabularnewline
+				10th & precious metals (gold, silver) \tabularnewline
+				15th & gems, specialty metals (cold iron, mithril)
+			\end{tabular}
+		\end{wraptable}
+	When you create or alter an object, you may work with any non-harmful material with a hardness of 5 or less, including glass, ice, or leather. You may create water (3 cubic ft equals a small creature), but not gases or flesh. You may make objects with multiple materials, provided you can create all the materials required.\par
+	As you gain caster levels, you also gain the ability to make steadily more materials, as detailed in the table below. Adamantine cannot be created or altered, except for the repair and destroy abilities.\par
+	\textit{Note:} Objects of stone or harder materials deal double damage when dropped on a target.
+	}{}
+\defineTalent{Exquisite Detail}{Add your caster level to craft checks made to \textit{create} complex items, and those attempting to detect magic on your items must pass a magic skill check to succeed.}{
+	Items you create are more intricate, and much harder to identify as fakes. You may add your caster level to any Craft checks made to create detailed or complicated objects and to the Appraise DC required to detect objects you create as magical fakes. Those attempting to detect magic on your created objects must pass a magic skill check to detect any lingering creation auras.}{}
+\defineTalent{Forge (alter)}{Spend a spell point to instantaneously change the shape of an object}{You may spend a spell point to shape material with a touch. This is an instantaneous effect, as you are literally changing the shape of the material in question (i.e., it has no duration, and cannot be dispelled once finished). You can only affect materials you can create (i.e., you must possess the Expanded Materials talent to work with materials other than vegetable matter), and you may only make crude changes such as forming walls, trenches, doors, coffers and other basic shapes. Detailed work (such as forging armor) is not possible, and there is a 30\% chance that anything with moving parts simply doesn't work. You may affect targets up to your normal creation size, but when working with a mineral (stone, metals, gems, etc.) the size you may affect is reduced by half.}{}
+\defineTalent{Greater Destroy}{Increase the amount of damage dealt when you use your destroy ability to 1d6 + your caster level.}{Increase the amount of damage dealt when you use your destroy ability to 1d6 + your caster level.}{\def\chardestroydamage{1d6 + \arabic{charCLCount}}}
+\defineTalent{Greater Repair}{Increase the amount of damage healed when you use your repair ability to 1d6 + your caster level.}{Increase the amount of damage dealt when you use your repair ability to 1d6 + your caster level.}{\def\charrepairdamage{1d6 + \arabic{charCLCount}}}
+\defineTalent{Larger Creation}{Spend a spell point to double the size of objects you can \textit{create}.}{You may spend an additional spell point when creating or altering an object to double the size, letting you create or alter up to the equivalent of 2 Small objects (1 Medium object) per caster level.}{}
+\defineTalent{Lengthened Creation}{When you create or alter an object, you may spend a spell point to make the object or effect remain for 1 hour per caster level without concentration.}{When you create or alter an object, you may spend a spell point to make the object or effect remain for 1 hour per caster level without concentration.}{}
+\defineTalent{Potent Alteration}{Spend a spell point to \textit{alter} magical, attended, or animate objects}{
+	When altering an object, you may spend an additional spell point to affect magical objects, attended objects, or animate targets such as golems. While this means you may repair broken magical items with your repair ability, you cannot restore the magic to such an object unless your caster level is at least equal to the item's caster level. Items with charges (such as wands) and single-use items (such as potions and scrolls) cannot be repaired in this way.\par
+	If used against an attended object, this is treated as a sunder maneuver. If used against an animate object, this is a touch attack. If the object or object's wielder is unwilling, they are also allowed a Fortitude save to halve the damage (in the case of destroy) or otherwise negate the effect.
+}{}

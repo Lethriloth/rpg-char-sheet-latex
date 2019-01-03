@@ -1,0 +1,31 @@
+\DeclareDocumentCommand{\ImportCharRace}{m O{} O{} O{} O{} O{} O{} O{} O{}}{
+	\csname Add#1RaceFeatures\endcsname{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}
+}
+
+\def\AddHumanRaceFeatures#1{
+	\addtocounter{char#1BaseCount}{2}
+	\setSize{Medium}
+	\def\charrace{Human}
+	\setCharSpeed{30}
+	\stepcounter{charBonusFeatsCount}
+	\appto{\addIntToSkillRanks}{
+		\addtocounter{charSpareSkillRanksCount}{\value{charTotalLevelCount}}
+	}
+	\addCharLanguage{Common}
+}
+
+\def\AddDwarfRaceFeatures{
+	\addtocounter{charconbasecount}{2}
+	\addtocounter{charwisbasecount}{2}
+	\addtocounter{charchabasecount}{-2}
+	\mediumsize
+	\def\charrace{Dwarf}
+	\charspeed{20}
+	\addracefeature{Hardy}\addconditionaldefmod{+2 on saves vs. poison, spells, and spell-like abilities}
+	\addracefeature{Stability}\addconditionaldefmod{+4 to CMD to resist bull rush or trip while standing on ground}
+	\addracefeatire{Stubborn}\addconditionaldefmod{+2 on saves vs. charms and compulsions, and can make a second save one round later if the first fails}
+	\addracefeature{Greed}\addconditionalskillmod{+2 on Appraise checks for nonmagical goods with metal or gemstones}
+	\addracefeature{Stonecunning}\addconditionalskillmod{+2 to Perception to notice unusual stonework, and free check when w/i 10 ft. of unusual stonework}
+	\addracefeature{Darkvision 60 ft.}
+	\addracefeature{Weapon Familiarity}
+}

@@ -1,0 +1,255 @@
+\defineSphere{Nature}{You can command the very terrain to do your bidding.}{You can command the very terrain to do your bidding.}
+\def\chargeomancingrange{Close}
+\edef\chargeomancingpackages{}
+\defineBaseAbility{Nature}{Geomancing}{%
+	\textit{Geomancing} effects may be centered or targeted within \chargeomancingrange{} range. Non-instantaneous effects last for as long as you concentrate, or \arabic{charCLCount} round\s{} without concentration if you spend a spell point. Talents marked (geomancing) give you additional options for your \textit{geomancing}. You have access to the \PrintList[, ][and ]{\chargeomancingpackages} geomancing package\ifinlist{Expanded Geomancing}{\charNatureTalentsList}{s}{}, which give\ifinlist{Expanded Geomancing}{\charNatureTalentsList}{}{s} you the following abilities:%
+}{%
+	As a standard action, you may command terrain and natural effects to act on your behalf. The effect produced depends on the environmental aspect targeted. Each effect must be centered or targeted within Close range.
+	\par\textit{Geomancing} effects come in two forms: instantaneous and concentration. Instantaneous effects have no duration, while concentration effects persist as long as the caster concentrates. The caster may always spend a spell point as a free action to allow the effect to continue for 1 round per caster level without the need for concentration.
+	\par When a caster gains the nature sphere, he chooses and gains one of the following \textit{geomancing} packages, with its included abilities. A caster may gain the Expanded Geomancing talent to gain additional packages.}
+\defineBaseAbility{Plantlife}{Entangle}{%
+	(concentration, requires grass, weeds, vines, or underbrush) Plants grow and entangle everything in a \domath{\value{charCLCount} / 5 * 5 + 5} ft radius area centered within range.  Creatures in the area must make a Reflex save or be entangled and unable to move until they make a Strength or Escape artist check against the effect's save DC. Creatures that make their save must continue to save each round as long as they're within the area. The area is also considered difficult terrain, and if the plants have thorns deals 1 piercing damage each round.%
+}{%
+	(concentration, requires grass, weeds, vines, or underbrush): You cause plants to grow rapidly, wrapping themselves around everything in a 5 ft + 5 ft per 5 caster levels radius area centered within range. Creatures within this area must pass a Reflex save or gain the entangled condition and become unable to move. Creatures that make their save can move as normal, but those that remain in the area must save again at the end of each turn you maintain the effect. Creatures that move into the area must save immediately. Those that fail end their movement and gain the entangled condition. Entangled creatures can attempt to break free as a move action, making a Strength or Escape Artist check against a DC equal to the effect's Reflex save DC. This area is also considered difficult terrain for the duration of the effect. If the area contained plants with thorns, all creatures suffer 1 point of piercing damage each round they are within this area.}
+\defineBaseAbility{Plantlife}{Growth}{
+	(instantaneous, requires fruit trees, berry bushes, or food crops) You may spend a spell point to cause plants to sprout food. You may affect up to \arabic{charCLCount} plant\s within range. Each plant produces enough food to provide 3 medium-sized creatures or 1 horse with food for a day.%
+}{%
+	(instantaneous, requires fruit trees, berry bushes, or food crops): You may spend a spell point to cause plants to sprout food spontaneously. You may affect up to 1 plant per caster level within range. Each plant produces enough food to provide 3 medium-sized creatures or 1 horse with food for a day.}
+\defineBaseAbility{Plantlife}{Pummel}{%
+	(concentration, requires a tree) A tree or branch comes alive and attacks a foe of your choosing. It makes one attack per round until the target dies or you spend a move action to designate a new target. It has a strength score of \domath{10 + \value{charCLCount}}. You may animate trees or branches up to 
+	\ifnum \value{charCLCount} > 19 Colossal
+	\else\ifnum \value{charCLCount} > 14 Gargantuan
+	\else\ifnum \value{charCLCount} > 9 Huge
+	\else\ifnum \value{charCLCount} > 4 Large
+	\else Medium
+	\fi\fi\fi\fi{} size.
+	\par$\bullet$ Medium: +\domath{\value{charCLCount} * 3 / 2} attack bonus, 1d6\ifnum \value{HalfCL} > 0 {+\domath{\value{HalfCL} * 3 / 2}}\fi{} damage, 5 ft reach.
+	\ifnum \value{charCLCount} > 4%
+		\par$\bullet$ Large: +\domath{\value{charCLCount} * 3 / 2 + 1} attack bonus, 1d8+\domath{\value{HalfCL} * 3 / 2} damage, 10 ft reach.
+	\ifnum \value{charCLCount} > 9%
+		\par$\bullet$ Huge: +\domath{\value{charCLCount} * 3 / 2 + 2} attack bonus, 2d6+\domath{\value{HalfCL} * 3 / 2} damage, 15 ft reach.
+	\ifnum \value{charCLCount} > 14%
+		\par$\bullet$ Gargantuan: +\domath{\value{charCLCount} * 3 / 2 + 4} attack bonus, 3d6+\domath{\value{HalfCL} * 3 / 2} damage, 20 ft reach.
+	\ifnum \value{charCLCount} > 19%
+		\par$\bullet$ Colossal: +\domath{\value{charCLCount} * 3 / 2 + 8} attack bonus, 4d6+\domath{\value{HalfCL} * 3 / 2} damage, 30 ft reach.%
+	\fi\fi\fi\fi%
+}{%
+	(concentration, requires a tree): You cause a tree branch to come alive and attack a foe you designate. The tree cannot move, but it makes one slam attack each round against the designated target until you spend a move action to designate another target or until the target dies or moves out of range. A tree branch cannot flank nor aid in flanking. You cannot designate a target you cannot perceive. The tree has a Strength score equal to 10 + your caster level, and a to-hit modifier equal to your caster level + its Strength modifier + its size modifier. You may animate a Medium branch at 1st caster level, a Large branch beginning at 5th caster level, a Huge branch beginning at 10th caster level, a Gargantuan branch beginning at 15th caster level, and a Colossal branch at 20th caster level. An entire tree can count as a branch, provided the tree isn't larger than your maximum pummel size.\\
+	Medium: 1d6 damage, 5 ft reach.\\
+	Large: +1 size bonus, 1d8 damage, 10 ft reach.\\
+	Huge: +2 size bonus, 2d6 damage, 15 ft reach.\\
+	Gargantuan: +4 size bonus, 3d6 damage, 20 ft reach.\\
+	Colossal: +8 size bonus, 4d6 damage, 30 ft reach.}
+\defineBaseAbility{Water}{Vortex}{%
+	(concentration, requires a large body of liquid) You create a vortex in a body of liquid. The vortex is 5 ft wide at the base, \domath{\value{charCLCount} / 5 * 5 / 2 + 5} ft wide at the top, and \domath{\value{charCLCount} / 5 * 5 + 10} ft high. Any creature entering the vortex must make a Reflex save or take 1d8 \ifnum \value{HalfCL} > 0 {+ \arabic{HalfCL}}\fi bludgeoning damage. Creatures smaller than the vortex must pass a second save or be pulled into the center. Creatures in the center take bludgeoning damage each round with no save, and are unable to move unless they make a Reflex save to move at half their swim speed. A vortex can't contain more creatures than its volume permits. You may move the vortex 30 ft as part of the action to maintain concentration or designate a pattern for it to follow if you are maintaining it without concentration.%
+}{%
+	(concentration, requires a large body of liquid): You may create a spinning vortex in a body of liquid that sucks creatures and objects to its center. This vortex is 5 ft wide at its base, is 10 ft high + 5 ft per 5 caster levels, and is half as wide at the top as it is high. Any creature entering this area must pass a Reflex save or suffer bludgeoning damage equal to 1d8 + 1/2 your caster level. If the creature is smaller than the vortex, they must pass a second Reflex save or be pulled into the middle of the vortex. Creatures in the middle of the vortex suffer bludgeoning damage once per round with no save, and must pass a Reflex save each round or be unable to move, and on a success may only move at half their swim speed. A vortex cannot contain more creatures than would exceed its volume.
+	\par You may move the vortex up to 30 ft per round as part of the concentration check required to maintain it. If maintaining the effect through a spell point, you may designate a simple pattern for it to move, which you may alter as a move action. Creatures in the middle of the vortex are carried along with it as it moves.}
+\defineBaseAbility{Water}{Fog}{%
+	(concentration, requires rain, mist, or at least 5 cubic feet of water) You call up a fog, covering a \domath{\value{charCLCount} / 5 * 5 + 10} ft radius area centered within range. Within fog, creatures within 5 ft have concealment and creatures farther away have total concealment. This ability does not function underwater. If using a body of water, the fog must at least partially cover that body of water. You cannot use this ability in the presence of strong wind, and moderate wind will disperse a fog cloud within 4 rounds if you do not maintain concentration.
+}{%
+	(concentration, requires rain, mist, or at least 5 cubic feet of water): You call up a rolling fog, cutting off people's vision within a 10 ft + 5 ft per 5 caster levels radius area centered within range. The fog obscures all sight, including darkvision, beyond 5 feet. A creature within 5 feet has concealment (attacks have a 20\% miss chance). Creatures farther away have total concealment (50\% miss chance and the attacker can't use sight to locate the target). The ability does not function underwater.If using a body of water, the fog must be at least partially over the water itself.
+	\par If you spend a spell point to maintain this effect without concentration, a moderate wind (11+ mph) will disperse it within 4 rounds. In the presence of a strong wind (21+ mph), you cannot use this ability.}
+\defineBaseAbility{Water}{Freeze}{%
+	(Instantaneous, requires water) Spend a spell point to instantly freeze water. You may freeze \arabic{charCLCount} 1-inch thick 5 ft square\s of water, or cover a wet medium-sized creature with \arabic{charCLCount} inch\ifnum \value{charCLCount} > 1 es\fi{} of ice. You may freeze a larger area or more or larger creatures, but each extra medium-sized creature or 5 ft square divides the ice's thickness in half.  Creatures smaller than medium count as medium unless they are in the same space. Frozen creatures cannot move and take 1 point of cold damage per round per inch of ice, and must make a DC 15 + 1 per inch of ice Strength or Escape Artist check as a full-round action to escape. Creatures may make a reflex save to avoid being frozen, in which case they are entangled for 1 round instead. Ice has 3 hp per inch of thickness.
+}{%
+	\begin{wraptable}[13]{r}{110\unitlength}
+		\raggedright\textbf{Table: Creature Size} \rowcolors{2}{gray!25}{white}\small
+		\begin{tabular}{>{\centering}p{30\unitlength}>{\centering}p{65\unitlength}}
+			\rowcolor{gray!50}
+			\textbf{\textit{Creature Size}} & \textbf{\textit{Equivalent number of medium-sized creatures}} \tabularnewline
+			Fine		& 1/16	\tabularnewline
+			Diminutive	& 1/8	\tabularnewline
+			Tiny		& 1/4	\tabularnewline
+			Small		& 1/2	\tabularnewline
+			Medium		& 1		\tabularnewline
+			Large		& 2		\tabularnewline
+			Huge		& 4		\tabularnewline
+			Gargantuan	& 8		\tabularnewline
+			Colossal	& 16	\tabularnewline
+		\end{tabular}
+	\end{wraptable}
+	(Instantaneous, requires water): You may spend a spell point to flash freeze water, turning it into ice. You may freeze a 1 inch thick, 5 ft by 5 ft square of water per caster level. Alternately, you may cover a wet medium-sized creature with 1 inch of ice per caster level. You may increase the size of the frozen area or size/number of the frozen creatures, but every extra medium-sized creature or extra 5 ft square divides the ice's thickness in half. Creatures smaller than medium count as medium-sized creatures for this effect, with the exception of multiple creatures occupying the same space. Add the sizes of multiple creatures occupying the same space together when determining their size for this purpose. For swarms, count each 5 ft square as being 2 medium-sized creatures occupying the same space. You may affect both squares and creatures, but all affected targets and spaces must be contiguous and must have the same thickness of ice.
+	\par Creatures are allowed a Reflex save to avoid being frozen. On a failure, they are encased and cannot move or act and suffer 1 point of cold damage per round per inch of ice. To escape, they must pass a Strength check or Escape Artist check as a full round action to escape the ice (DC 15 + 1 per inch of thickness) or another creature must break the ice around the trapped creature (3 hp per inch). On a successful save, target is still entangled for 1 round. Ice melts 1 inch of thickness per minute on the average day}
+\defineBaseAbility{Earth}{Bury}{%
+	(concentration, requires sand) You shift the sands to bury targets within a \domath{\value{charCLCount} /5 * 5 + 5} ft radius centered within range. Creatures in the area must make a Reflex save or be unable to move until they make a Strength or Escape artist check against the effect's save DC. The DC of this check increases by 1 each round that they do not escape. Creatures that make their save or enter the area must continue to save each round as long as they're within the area. The area is also considered difficult terrain. A creature that is knocked prone and fails their save begins to suffocate until they escape.
+}{%
+	(concentration, requires sand): 
+	You shift the sands, swallowing targets within a 5 ft + 5 ft per 5 caster levels radius area centered within range. 
+	Creatures within this area must pass a Reflex save or become unable to move. Creatures that make their save can move as normal, but those that remain in the area must save again at the end of each turn you maintain the effect. Creatures that move into the area must save immediately. Those that fail end their movement. Buried creatures can attempt to break free as a move action, making a Strength or Escape Artist check against a DC equal to the effect's Reflex save DC. Each subsequent round they do not escape, the Strength and Escape Artist DC increases by 1. This area is also considered difficult terrain for the duration of the effect. If a target is knocked prone within this area and fails their save, they begin to suffocate until they escape.}
+\defineBaseAbility{Earth}{Tremor}{%
+	(instantaneous, requires dirt or stone) You may spend a spell point to send a tremor through the ground, affecting a \domath{\value{charCLCount} /5 * 5 + 5} ft radius centered within range. This makes a trip combat maneuver check with a CMB of +\domath*{\value{charCLCount} + \value{charCastingModCount}} against every target within the area.
+}{%
+	(instantaneous, requires dirt or stone): You may spend a spell point to send a tremor through the ground, affecting a 5 ft + 5 ft per 5 caster levels radius area centered within range. This makes a trip combat maneuver check against every target within the area, using your caster level plus your casting ability modifier as your CMB. This does not provoke an attack of opportunity (except as usual for using sphere effects) and you cannot be tripped in return for failing this check.}
+\defineBaseAbility{Earth}{Dust Storm}{%
+	(concentration, requires sand or loose dirt) You create a dust storm which provides concealment (but not total concealment) covering a \domath{\value{charCLCount} / 5 * 5 + 10} ft radius centered within range.
+}{%
+	(concentration, requires sand or loose dirt): You kick up sand or dirt within a 10 ft + 5 ft per 5 caster levels radius area centered within range. All creatures fully within this area gain concealment (attacks against them have a 20\% miss chance). If creatures within this area attack creatures outside this area, the targets also have concealment.}
+\defineBaseAbility{Fire}{Manipulate Lava}{%
+	You may manipulate lava.
+	\par \textit{Vortex} (Concentration): You can spend one spell point create a vortex in a body of lava. The vortex is 5 ft wide at the base, \domath{\value{charCLCount} / 5 * 5 / 2 + 5} ft wide at the top, and \domath{\value{charCLCount} / 5 * 5 + 10} ft high. Any creature entering the vortex must make a Reflex save or take 1d8 \ifnum \value{HalfCL} > 0 {+ \arabic{HalfCL}}\fi bludgeoning damage. Creatures smaller than the vortex must pass a second save or be pulled into the center. Creatures in the center take bludgeoning damage each round with no save, and are unable to move unless they make a Reflex save to move at half their swim speed. A vortex can't contain more creatures than its volume permits. The vortex bludgeoning damage is in addition to the usual fire damage from contact with or submersion in lava.
+	\par \textit{Harden} (Instantaneous): Spend two spell points to instantly solidify lava. You may solidify \arabic{charCLCount} 1-inch thick 5 ft square\s of lava, or cover a lava-soaked medium-sized creature with \arabic{charCLCount} inch\ifnum \value{charCLCount} > 1 es\fi{} of obsidian. You may harden a larger area or more or larger creatures, but each extra medium-sized creature or 5 ft square divides the obsidian's thickness in half.  Creatures smaller than medium count as medium unless they are in the same space. Encased creatures cannot move, and must make a DC 15 + 1 per inch of obsidian Strength or Escape Artist check as a full-round action to escape. Creatures may make a reflex save to avoid being encased, in which case they are entangled for 1 round instead. Obsidian has hardness 5 and 3 hp per inch of thickness.
+}{%
+	(instantaneous or concentration, requires lava): You may manipulate lava. This is exactly the same as the vortex and freeze powers from the water package, except you must spend an additional spell point for each ability, and you must target lava. Frozen lava becomes obsidian, with a hardness of 5 and 3 hit points per caster level and does not deal damage per round to trapped creatures.
+	\par \textit{Vortex} (concentration, requires a large body of lava): You may spend a spell point to create a spinning vortex in a body of lava that sucks creatures and objects to its center. This vortex is 5 ft wide at its base, is 10 ft high + 5 ft per 5 caster levels, and is half as wide at the top as it is high. Any creature entering this area must pass a Reflex save or suffer bludgeoning damage equal to 1d8 + 1/2 your caster level. If the creature is smaller than the vortex, they must pass a second Reflex save or be pulled into the middle of the vortex. Creatures in the middle of the vortex suffer bludgeoning damage once per round with no save, and must pass a Reflex save each round or be unable to move, and on a success may only move at half their swim speed. A vortex cannot contain more creatures than would exceed its volume. Bludgeoning damage from the vortex is in addition to the usual fire damage for submersion in lava.
+	\par You may move the vortex up to 30 ft per round as part of the concentration check required to maintain it. If maintaining the effect through a spell point, you may designate a simple pattern for it to move, which you may alter as a move action. Creatures in the middle of the vortex are carried along with it as it moves.
+	\begin{wraptable}[13]{r}{110\unitlength}
+		\raggedright\textbf{Table: Creature Size} \rowcolors{2}{gray!25}{white}\small
+		\begin{tabular}{>{\centering}p{25\unitlength}>{\centering}p{65\unitlength}}
+			\rowcolor{gray!50}
+			\textbf{\textit{Creature Size}} & \textbf{\textit{Equivalent number of medium-sized creatures}} \tabularnewline
+			Fine		& 1/16	\tabularnewline
+			Diminutive	& 1/8	\tabularnewline
+			Tiny		& 1/4	\tabularnewline
+			Small		& 1/2	\tabularnewline
+			Medium		& 1		\tabularnewline
+			Large		& 2		\tabularnewline
+			Huge		& 4		\tabularnewline
+			Gargantuan	& 8		\tabularnewline
+			Colossal	& 16	\tabularnewline
+			
+		\end{tabular}
+	\end{wraptable}
+	\textit{Harden} (Instantaneous, requires lava): You may spend a spell point to flash freeze lava, turning it into obsidian. You may harden a 1 inch thick, 5 ft by 5 ft square of water per caster level. Alternately, you may cover a lava-covered medium-sized creature with 1 inch of obsidian per caster level. You may increase the size of the hardened area or size/number of the encased creatures, but every extra medium-sized creature or extra 5 ft square divides the obsidian's thickness in half. Creatures smaller than medium count as medium-sized creatures for this effect, with the exception of multiple creatures occupying the same space. Add the sizes of multiple creatures occupying the same space together when determining their size for this purpose. For swarms, count each 5 ft square as being 2 medium-sized creatures occupying the same space. You may affect both squares and creatures, but all affected targets and spaces must be contiguous and must have the same thickness of obsidian.
+	\par Creatures are allowed a Reflex save to avoid being encased. On a failure, they are encased and cannot move or act. To escape, they must pass a Strength check or Escape Artist check as a full round action to escape the obsidian (DC 15 + 1 per inch of thickness) or another creature must break the obsidian around the trapped creature (hardness 5, 3 hp per inch). On a successful save, target is still entangled for 1 round.}
+\defineBaseAbility{Fire}{Create Fire}{%
+	You may produce a fire of up to 
+	\ifnum\value{charCLCount} > 19 Large size (Bonfire; 4d6 damage)
+	\else\ifnum\value{charCLCount} > 14 Medium size (Forge; 3d6 damage)
+	\else\ifnum\value{charCLCount} > 9 Small size (Large campfire; 2d6 damage)
+	\else\ifnum\value{charCLCount} > 4 Tiny size (Small campfire; 1d6 damage)
+	\else Diminutive size (Torch; 1d3 damage)
+	\fi\fi\fi\fi
+	If a target is within the area of the fire they take damage according to the fire's size and catch fire. A successful Reflex save halves the damage and prevents catching fire.
+}{%
+	(concentration, no requirements): You may produce a Diminutive-sized magical fire that burns without fuel. This fire may be 1 size category larger per 5 caster levels, and may be used to ignite flammable materials to create self-sustaining, non-magical fire. If a target is within the area of the created fire, they suffer damage as normal for that fire's size and catch fire. A successful Reflex save halves the damage and negates catching fire.}
+\defineBaseAbility{Fire}{Affect Fire}{%
+	(concentration, requires fire) You may affect a non-magical fire up to 
+	\ifnum \value{charCLCount} > 19 Colossal%
+	\else\ifnum \value{charCLCount} > 14 Gargantuan%
+	\else\ifnum \value{charCLCount} > 10 Huge%
+	\else\ifnum \value{charCLCount} > 7 Large%
+	\else\ifnum \value{charCLCount} > 4 Medium%
+	\else\ifnum \value{charCLCount} > 2 Small%
+	\else Tiny\fi\fi\fi\fi\fi\fi
+	size, increasing or decreasing its size by up to \domath{\value{charCLCount} / 5 + 1} size categor\ifnum \value{charCLCount} > 4 ies \else y\fi, and adjusting its fuel consumption and damage accordingly (see text). A creature on fire counts as a Tiny size fire.\ifnum \value{HalfCL} > 0 When you affect a fire on a creature, you can also raise or lower the save DC to put out the fire by \arabic{HalfCL}.\fi
+}{%
+	(concentration, requires fire): You may affect a normal, non-magical fire, increasing or decreasing its size by one category, plus one per 5 caster levels. This is only a temporary change; once the effect ends, the fire returns to its normal size. The fire consumes fuel and deals damage as appropriate for its new size, according to \textbf{Table: Maximum Fire Size}.
+	\par The minimum caster level required to affect a fire is also given in the chart. If two casters are affecting the same fire in the same direction (increasing or decreasing) only the strongest change occurs. If two casters attempt to affect fire in opposite directions (one making it bigger, one making it smaller), the second caster must succeed at a magic skill check.On a success, their ability functions normally, overlapping the first caster's effect. The fire counts as its altered size for determining if the second caster can affect it.
+	\par If a creature is on fire, treat that fire as being Tiny sized (1d6 damage) for the purpose of this effect. When you affect a fire on a creature, you also raise or lower the Reflex save DC to put the fire out by 1/2 your caster level.\\
+		{\raggedright\textbf{Table: Maximum Fire Size} \rowcolors{2}{gray!25}{white}\small\\
+		\begin{tabular}{>{\centering}p{25\unitlength}cc>{\centering}p{35\unitlength}c}
+			\rowcolor{gray!50}
+				\textbf{\textit{Minimum	CL}}&\textbf{\textit{Fire Size}}& \textbf{\textit{Example}} & \textbf{\textit{Damage per Round}}&  \textbf{\textit{Space}} \tabularnewline
+				1st	& Fine		& Tindertwig	& 1		& 1/2 ft square 			\tabularnewline
+				1st	& Diminutive& Torch			& 1d3	& 1 ft square 			\tabularnewline
+				1st	& Tiny		& Small campfire& 1d6	& 2.5 ft square 		\tabularnewline
+				3rd	& Small		& Large campfire& 2d6	& 5 ft square	 	\tabularnewline
+				5th	& Medium	& Forge			& 3d6	& 5 ft square				\tabularnewline
+				8th	& Large		& Bonfire		& 4d6	& 10 ft square				\tabularnewline
+				11th& Huge		& Burning shack	& 5d6	& 15 ft square		\tabularnewline
+				15th& Gargantuan& Burning tavern& 6d6	& 20 ft square	\tabularnewline
+				20th& Colossal	& Burning inn	& 7d6	& 30 ft square
+		\end{tabular}}
+}
+\defineBaseAbility{Nature}{Spirit}{Spirit talents only affect the caster.}{
+	Some talents are marked (spirit). These talents give the caster ways they have learned to tune their spirit with nature. Each (spirit) talent grants the caster a new ability they may use as a standard action. These abilities only affect the caster.
+	\par Some talents are marked (plantlife), (water), (fire), or (earth). You must possess the plant, water, fire, or earth \textit{geomancing} package respectively to gain a talent with its designation. Talents marked (geomancing) give you new \textit{geomancing} abilities.}
+\edef\charNatureBaseAbilitieslist{}
+\listadd\charNatureBaseAbilitieslist{Spirit}
+\listadd\charNatureBaseAbilitieslist{Geomancing}
+\def\sphereNatureexecutable#1{
+	\listadd\chargeomancingpackages{#1}
+	\renewcommand{\do}[1]{
+		\listadd\charNatureBaseAbilitieslist{##1}
+	}
+	\expandafter\dolistloop\csname char#1BaseAbilitieslist\endcsname
+}
+\defineTalent{Animal Friend (spirit)}{You may spend a spell point to cause animals to treat you as a friend for \arabic{charCLCount} minute\s. Indifferent animals become Friendly and Unfriendly animals become indifferent. Hostile animals are unaffected. You can make requests of animals to the extent to which you're capable of communication. Once during the duration of this ability, you can cause the nearest animal of a particular type to seek you out.}{
+	You may spend a spell point as a standard action to cause animals to treat you as a friend for 1 minute per caster level. Indifferent animals (such as domesticated animals) become Friendly to you, while Unfriendly animals (such as wild animals) become Indifferent to you. This means that wild animals will not attack unless provoked, and you may make requests of animals, provided you may communicate with them (if you cannot communicate with a creature, only basic commands such as `go', `come', `fight', or `stay' may be communicated). This has no effect on animals who are hostile to you (such as those already in combat), and an animal with a master (such as an animal companion) will still attack if commanded to by its master.
+	\par Once during the duration of this ability, you may call the nearest animal of a particular type you designate (provided the animal?s CR is equal to or less than your caster level) to seek you out. The animal moves toward you under its own power, so the time it takes to arrive depends on how close an animal of the desired type is when you cast the spell. If there is no animal of that type capable of reaching you within this effect?s duration, you are aware of this fact.}{}
+\defineTalent{Create Water (water, geomancing)}{(Instantaneous) you may spend a spell point to create \HalfCLMinOne cube\s[HalfCL] of clean water anywhere within range. You may combine this with another water \textit{geomancing} ability as part of the same action, paying the costs for both abilities but allowing you to use other \textit{geomancing} without a source of water.}{
+	As an instantaneous effect, you may spend a spell point to create water anywhere within range. This creates one 5 ft cube per 2 caster levels (minimum: 1 cube) of clean water. While this is its own \textit{geomancing} ability, you may combine this effect with another water package \textit{geomancing} ability as part of the same standard action, in which case the second \textit{geomancing} ability comes into effect immediately. You must pay any costs associated with both abilities to combine them in this manner. This can allow you to even create vortexes that can move over land.
+}{}
+\edef\expandedgeomancinglist{}
+\defineTalent{Expanded Geomancing}{
+	You have access to the\PrintList[, ][and ]{\expandedgeomancinglist} \textit{geomancing} package\ifthenelse{\expandafter\equal\csname chartalentExpanded GeomancingCount\endcsname{}}{}{s}.
+	}{
+	Choose and gain a \textit{geomancing} package you do not already possess. You may select this talent multiple times, gaining a new package each time.
+	}{
+	\forcsvlist{\listadd\expandedgeomancinglist}{#2}
+	\forcsvlist{\sphereNatureexecutable}{#2}
+	}
+\defineTalent{Feed on Fire (fire, spirit)}{You may spend a spell point to gain the ability to absorb energy from fire. You gain Resist Fire \arabic{charCLCount} for \arabic{charCLCount} minute\s. Whenever you take fire damage, whether or not it is enough to overcome this fire resistance, you are healed for half the fire damage dealt, to a maximum of \HalfCLMinOne.}{
+	You may spend a spell point to gain the ability to absorb energy from fire for 1 minute per caster level. You gain fire resistance equal to your caster level. Whenever you take damage from fire (whether or not it is enough to penetrate your fire resistance), you are healed an amount equal to 1/2 the fire damage dealt, to a maximum amount equal to 1/2 the fire resistance granted by this ability (minimum: 1). Damage dealt in excess of this amount is handled normally.}{}
+\defineTalent{Forge Earth (earth, geomancing)}{(instantaneous) You can spend a spell point to alter the ground within a \domath{\value{charCLCount} / 5 * 5 + 5} ft radius within range, either raising or lowering the terrain by up to \domath{\value{charCLCount} / 5 * 5 + 5} ft. You do not have to adjust the terrain evenly, so you can sculpt the affected area.}{
+	As an instantaneous effect, you may spend a spell point to alter the ground within a 5 ft + 5 ft per 5 caster levels radius area within range. You may raise or lower the terrain up to 5 ft + 5 ft per 5 caster levels, and may create variants within the affected area such as summoning a small wall or creating gradients and stair effects. You cannot both raise and lower the terrain with the same use of this ability and cannot create variants in anything smaller than 5 ft squares (i.e., you cannot create 1 ft diameter holes or create a spike of earth). Targets within this area are not damaged by falling if you lower the terrain, and climbing up the edges of lowered terrain usually requires a DC 15 Climb check.}{}
+\defineTalent{Fire Wielder (fire)}{When using \textit{create fire}, you may place the fire on yourself. You can concentrate the fire on your hands, it adds
+	\ifnum\value{charCLCount} > 19 4d6 
+	\else\ifnum\value{charCLCount} > 14 3d6 
+	\else\ifnum\value{charCLCount} > 9 2d6 
+	\else\ifnum\value{charCLCount} > 4 1d6 
+	\else 1d3 \fi\fi\fi\fi
+	fire damage to your unarmed strikes and you are treated as armed when making unarmed strikes. Alternately, you can place the fire around yourself as a mantle, dealing
+	\ifnum\value{charCLCount} > 19 4d6 
+	\else\ifnum\value{charCLCount} > 14 3d6 
+	\else\ifnum\value{charCLCount} > 9 2d6 
+	\else\ifnum\value{charCLCount} > 4 1d6 
+	\else 1d3 \fi\fi\fi\fi
+	fire damage to adjacent creatures each round and setting them on fire if they fail a Reflex save. Neither effect does any damage to you.
+	}{
+	When using the create fire \textit{geomancing} ability, you may encompass the fire around yourself. This accomplishes one of the two following feats:
+	\par 1. You concentrate the fire around your hands. Rather than affecting an area, this allows you to be treated as armed when making unarmed strikes. In addition, you deal an extra amount of fire damage equal to your maximum create fire size with each unarmed strike. This does not cause targets to catch fire, nor grant you the ability to make extra attacks if you are maintaining the effect through concentration.
+	\par 2. You place the fire around yourself as a mantle. This does not deal fire damage to yourself, but all adjacent creatures are damaged by your fire and suffer a chance of catching fire, as if they were within the area where the fire was created.
+}{}
+\defineTalent{Greater Range}{Increases the range of your \textit{geomancing} abilities to \chargeomancingrange.}{
+	The range of your \textit{geomancing} abilities increases from Close to Medium range. You may select this talent up to 2 times. Each time it is selected, the range increases by 1 step (Close to Medium, Medium to Long).
+}{
+	\ifnum 1 = #1
+	\def\chargeomancingrange{Medium}
+	\else\ifnum #1 > 1
+	\def\chargeomancingrange{Long}
+	\fi
+	\fi
+}
+\defineTalent{Grow Plants (plantlife, geomancing)}{(Instantaneous) You may spend a spell point to instantly grow plants. You can grow one tree no larger than
+	\ifnum \value{charCLCount} > 19 Colossal
+	\else\ifnum \value{charCLCount} > 14 Gargantuan
+	\else\ifnum \value{charCLCount} > 9 Huge
+	\else\ifnum \value{charCLCount} > 4 Large
+	\else Medium
+	\fi\fi\fi\fi{} size, or a field of plants within a \domath{\value{charCLCount} / 5 * 5 + 5} ft radius centered within range. You can combine this with another Plantlife \textit{geomancing} ability as part of the same action, paying the costs for both abilities but allowing you to use other \textit{geomancing} without existing plant life.
+	}{
+	As an instantaneous effect, you may spend a spell point to instantaneously grow plants in an area within range. This may create one tree (to a maximum size equal to that which you can control through the pummel geomancing ability) or a field of plants within a 5 ft radius + 5 ft per 5 caster levels area. This may create basic plants (corn, underbrush, ivy) but cannot create plants with inherent qualities (i.e., you cannot create rare herbs, etc.). While this is its own geomancing ability, you may combine this effect with another plant package geomancing ability as part of the same standard action, in which case the second geomancing ability comes into effect immediately. You must pay any costs associated with both abilities to combine them in this manner.}{}
+\defineTalent{Move Fire (fire, geomancing)}{(Concentration) You may take a fire up to 
+	\ifnum \value{charCLCount} > 19 Colossal%
+	\else\ifnum \value{charCLCount} > 14 Gargantuan%
+	\else\ifnum \value{charCLCount} > 10 Huge%
+	\else\ifnum \value{charCLCount} > 7 Large%
+	\else\ifnum \value{charCLCount} > 4 Medium%
+	\else\ifnum \value{charCLCount} > 2 Small%
+	\else Tiny\fi\fi\fi\fi\fi\fi
+	size and move it up to 30 ft per round in any direction. It burns without fuel, and dies when the effect ends if it does not have a fuel source. If you spend a spell point to sustain this ability, you must still spend a move action to move the fire.
+	}{
+	As a concentration effect, you may take a fire equal to or smaller than the maximum you may target with affect fire and move it up to 30 ft per round in any direction. A fire moved in this way continues to burn, even without fuel (although it may be drowned or extinguished otherwise as normal), and dies as soon as the effect ends if not moved to a new fuel source. If you have spent a spell point to make this ability self-sustaining, you must still focus as a move action to move the fire. When moving fire to a space occupied by a creature, that creature suffers the fire?s damage (Reflex half) and must pass a Reflex save or catch on fire.}{}
+\defineTalent{Speak with Animals (spirit)}{You may spend a spell point to speak with animals for \arabic{charCLCount} minute\s.}{
+	You may spend a spell point to gain the ability to speak with animals for 1 minute per caster level. You can ask questions of and receive answers from animals, but the spell doesn?t make them any more friendly than normal. Wary and cunning animals are likely to be terse and evasive, while the more stupid ones make inane comments. If an animal is friendly toward you, it may do some favor or service for you.}{}
+\defineTalent{Speak with Plants (plantlife, spirit)}{You may spend a spell point to speak with plants for \arabic{charCLCount} minute\s.}{
+	You may spend a spell point to gain the ability to speak with plants for 1 minute per caster level. You can communicate with normal plants and plant creatures and can ask questions of and receive answers from them. A normal plant?s sense of its surroundings is limited, so it won?t be able to give (or recognize) detailed descriptions of creatures or answer questions about events outside its immediate vicinity. The spell doesn?t make plant creatures any more friendly or cooperative than normal, and a plant may be stupid, cunning, or cruel as any other creature. If a plant creature is friendly, it may do some favor or service for you.}{}
+\defineTalent{Speak with Stone (earth, spirit)}{You may spend a spell point to speak with stones by touching them for \arabic{charCLCount} minute\s.}{
+	You may spend a spell point to speak with stones for 1 minute per caster level. This is not truly accomplished through speech, but rather by touching a stone you may learn what else has touched it, passed by it, what is hidden underneath it, etc. You can tell depth, weight, size, and number of passers by, but not more detailed information (the names or conversations of passers by, for instance). You can speak with both natural or worked stone.}{}
+\defineTalent{Thorns (plantlife, geomancing)}{(concentration, requires grass, weeds, vines, or underbrush) Plants grow spines and attack everything in a \domath{\value{charCLCount} / 5 * 5 + 5} ft radius area centered within range. Creatures in the area take 1d6\ifnum \value{HalfCL} > 0 {+\arabic{HalfCL}}\fi piercing and slashing damage each round (Reflex half). The area is also considered difficult terrain.}{
+	You cause plants to grow spines and attack targets. This is the same as the entangle geomancing ability, except instead of making creatures entangled and unable to move, this effect deals piercing and slashing damage to them. Targets inside the area or who enter the area suffer 1d6 damage +1 per 2 caster levels (Reflex half). Creatures who remain in the area suffer damage once per round at the end of your subsequent turns. This does not stack with any thorns already on the plants used in the effect. You may place an entangle and thorns effect on the same space.}{}
+\defineTalent{Towering Growth (plantlife)}{Your Entangle \ifinlist{Thorns (plantlife, geomancing)}{\charNatureTalentsList}{and Thorns abilities affect}{ability affects} flying creatures up to \domath{\value{charCLCount}*10} ft above the ground. When grabbed by an entangle effect, flying creatures become prone and are dragged to the ground (no falling damage), and even if they make their save must fly at half speed over the area unless they pass a DC \domath{\value{charCLCount} + 15} Fly check}{
+	When creating an entangle or thorns effect, the effect grows tall enough to affect flying creatures as well. Creatures up to 10 ft per caster level over your entangle or thorns effects must pass a Reflex save or affected as normal. If they pass this Reflex save, they must still pass a Fly check (DC 15 + caster level) or be forced to fly at half speed while over the area. When affected by an entangle effect, flying creatures are pulled to the ground by the plants and become unable to move. Flying creatures grabbed by an entangle effect become prone, but do not take falling damage.}{}
+\defineTalent{Waterwalk (water, spirit)}{You may spend a spell point to gain the ability to walk on water and a swim speed equal to your land speed for \arabic{charCLCount} minute\s.}{
+	You may spend a spell point to gain the ability to walk on water for 1 minute per caster level. Water and all other liquid becomes solid to you, allowing you to move over it as if it were normal ground. Especially turbulent water (such as during a storm) may count as difficult terrain. You may always choose to sink into the water and swim if you so desire, in which case you are considered to have a Swim speed equal to your land speed, granting you all the usual benefits of a Swim speed, including a racial +8 bonus to Swim checks. This does not, however, grant you the ability to breathe underwater.}{}
+\defineTalent{Wave (water, geomancing)}{(Instantaneous) Spend a spell point to create a wave within range which travels \domath{\value{charCLCount} / 2 * 5 + 30} ft in a straight line and may extend out of water up to \domath{\value{charCLCount} / 5 * 5 + 10} ft. Creatures within the area are pushed as if by a bull rush using a CMB of +\domath{\value{charCLCount} + \value{charCastingModCount}}. Creatures on land who are successfully pushed fall prone (Reflex negates).\ifinlist{Create Water (water, geomancing)}{\charNatureTalentsList}{ If you combine this with Create Water, the wave can travel up to \domath{\value{charCLCount} / 2 * 5 + 30} over land.}{}}{
+	As an instantaneous effect, you may spend a spell point to create a surge in water that pushing targets in its wake. This surge may be created anywhere within range and may face any direction, but once created it travels in a straight line for a distance of 30 ft + 5 ft per 2 caster levels. This area may extend out of the water and onto land to a maximum of 10 ft + 5 ft per 5 caster levels.
+	All creatures within the affected area are pushed as if by a Bull Rush combat maneuver, except it does not provoke an attack of opportunity. Use your caster level + your casting ability modifier in place of your CMB. If the target is on land and is successfully pushed by this ability, they must also pass a Reflex save or fall prone. If combined with Create Water, it may be created anywhere and may travel up to 30 ft + 5 ft per 2 caster levels over land.
+}{}
+\defineTalent{Whirlwind (earth, geomancing)}{
+	(concentration, requires sand or loose dirt) You create a whirlwind of sand or dirt. The whirlwind is 5 ft wide at the base, \domath{\value{charCLCount} / 5 * 5 / 2 + 5} ft wide at the top, and \domath{\value{charCLCount} / 5 * 5 + 10} ft high. Any creature entering the whirlwind must make a Reflex save or take 1d8 \ifnum \value{HalfCL} > 0 {+ \arabic{HalfCL}}\fi bludgeoning damage. Creatures smaller than the whirlwind must pass a second save or be pulled into the center. Creatures in the center take bludgeoning damage each round with no save, and are unable to move unless they make a Reflex save to move at half their speed. A whirlwind can't contain more creatures than its volume permits. You may move the whirlwind 30 ft as part of the action to maintain concentration or designate a pattern for it to follow if you are maintaining it without concentration.
+	}{
+	(concentration, requires sand or loose dirt): You may create a vortex out of sand or loose dirt that sucks creatures and objects to its center. A whirlwind must remain in contact with the ground at all times, and may not fly. This whirlwind is 5 ft wide at its base, is 10 ft high + 5 ft per 5 caster levels, and is half as wide at the top as it is high. Any creature entering this area must pass a Reflex save or suffer bludgeoning damage equal to 1d8 + 1/2 your caster level. If the creature is smaller than the whirlwind, they must pass a second Reflex save or be pulled into the middle of the whirlwind. Creatures in the middle of the whirlwind suffer bludgeoning damage once per round with no save, and must pass a Reflex save each round or be unable to move, and on a success may only move at half their speed. A whirlwind cannot contain more creatures than would exceed its volume.
+	\par You may move the whirlwind up to 30 ft per round as part of the concentration check required to maintain it. If maintaining the effect through a spell point, you may designate a simple pattern for it to move, which you may alter as a move action. Creatures in the middle of the whirlwind are carried along with it as it moves.}{}

@@ -1,0 +1,59 @@
+\defineSphere{Enhancement}{You may place enhancements on creatures and objects, altering their properties.}{You may place enhancements on creatures and objects, altering their properties.}
+\def\charenhancerange{Close}
+\defineBaseAbility{Enhancement}{Enhance}{You may \textit{enhance} a target within \charenhancerange{} range for as long as you concentrate, or for \ifinlist{Deep Enhancement}{\charEnhancementTalentsList}{\domath{\value{charCLCount} * 10} minutes}{\arabic{charCLCount} minute\s} if you spend a spell point. You can \textit{Enhance Equipment}, adding a +\ifinlist{Greater Enhancement}{\charEnhancementTalentsList}{\domath{\value{charCLCount}/5 + 2}}{\domath{\value{charCLCount}/5 + 1}} enhancement bonus to a targeted weapon, suit of armor, or shield. (enhance) talents grant new options for \textit{enhancements} you may bestow. Unwilling creatures get a will save if their equipment or persons are targeted.}{
+	As a standard action, you may \textit{enhance} a creature or object within Close range for as long as you concentrate. You may always spend a spell point to allow an \textit{enhancement} to continue for 1 minute per caster level without concentration. If targeting a creature or intelligent item that doesn't want to be \textit{enhanced} (or an item in a creature's possession that doesn't want their item \textit{enhanced}), the target is allowed a Will save (DC 10 + 1/2 caster level + casting ability modifier) to negate the effect. When you gain the enhancement sphere, you gain the following \textit{enhancement}:
+	\par \textit{Enhance Equipment:} You may \textit{enhance} a weapon, suit of armor, or shield, granting it a +1 enhancement bonus. This bonus increases by 1 for every 5 caster levels possessed, to a total of +5 at 20th level. This does not stack with any enhancement bonus already possessed by the item. 
+	\par Talents marked as (enhance) grant you new \textit{enhancements} you may bestow.}
+\defineTalent{Animate Object (enhance)}{Spend a spell point to animate an object. See text.}{
+	You may spend a spell point to \textit{enhance} an object, bestowing movement and a semblance of life. The object obeys your command and understands your language, but as it is not intelligent, it can only obey simple commands such as `move', `fight', `guard', `stop', etc.\\\\
+		{\textbf{Table: Animate Object} \rowcolors{2}{gray!25}{white}\small\\
+		\begin{tabular}{>{\centering}p{18\unitlength}c>{\centering}p{33\unitlength}c>{\centering}p{40\unitlength}}
+			\rowcolor{gray!50}
+			\textbf{\textit{Caster Level}} & \textbf{\textit{Size}} & \textbf{\textit{Sample Object}} & \textbf{\textit{Hit Dice}} & \textbf{\textit{Maximum Construction Points}}\tabularnewline
+			1	& Tiny& Candelabra& 1d10		& 1 \tabularnewline
+			3	& Small& Chair		& 2d10+10	& 1 \tabularnewline
+			5	& Medium& Cage		& 3d10+20	& 2 \tabularnewline
+			8	& Large& Statue	& 4d10+30	& 3 \tabularnewline
+			11 	& Huge& Wagon		& 7d10+40	& 4 \tabularnewline
+			15	& Gargantuan& Catapult	& 10d10+60	& 5 \tabularnewline
+			20	& Colossal& Ship		& 13d10+80	& 6 \tabularnewline
+		\end{tabular}}
+	\\\par If you animate an enemy's weapon, the weapon cannot move and attack while it is being held, but the wielder must pass a Reflex save (DC 10 + 1/2 caster level + casting ability modifier) each round they hold the item or lose their action fighting their weapon for control. If you animate an enemy's armor or clothing, the enemy becomes entangled and must pass a Reflex save each round or also be staggered that round.
+	\par Animated objects are constructs, and gain Hit Dice according to their size. The maximum sized object you may animate depends on your caster level, according to \textbf{Table: Animate Object}.}{}
+\defineTalent{Bestow Intelligence (enhance)}{Spend a spell point to \textit{enhance} an animal, plant, or object, giving it personlike intelligence. See text.}{You may spend a spell point to \textit{enhance} an animal, plant, or object, granting it temporary intelligence. The target becomes a magical creature (or intelligent item if an object), and gains an Intelligence, Charisma, and Wisdom score of 3d6 each (or its original score, whichever is higher), as well as an alignment equal to your own, and the ability to speak and understand one language of your choice which you also speak and understand, +1 language you know per point of Intelligence bonus. It also gains normal senses to 60 ft if it did not previously possess any. The creature or object has a beginning disposition of Friendly towards you, but does not gain greater insight into its surroundings before it gained intelligence (thus, an intelligent rock could not tell you who passed by it before it gained sentience, nor an intelligent tree describe a creature who climbed it the day before), nor does it automatically obey your commands, although it will usually provide favors and aid that is not too dangerous. This does not grant the target extra abilities nor the ability to move. You may bestow intelligence on an animated object under your control, in which case the object still continues to obey you explicitly even though it is now intelligent.}{}
+\defineTalent{Cripple (enhance)}{\textit{Enhance} a creature, giving it a -\domath{\value{charCLCount} / 5 + 1} penalty on all d20 rolls.}{You may apply an \textit{enhancement} to a creature, giving it a -1 penalty	to all of the creature’s d20 rolls (attack rolls, saving throws,	ability checks and skill checks). This penalty increases by 1 for every 5 caster levels you possess.}{}
+\defineTalent{Deadly Weapon (enhance)}{\textit{Enhance} a weapon, making it \textit{keen}\ifnum \value{charCLCount} > 2  and giving it a +\domath{\value{charCLCount} / 3} bonus on critical confirmation rolls\fi.}{You may \textit{enhance} a weapon, granting it the keen special quality if it does not already possess it and a +1 bonus to critical hit confirmation rolls for every 3 caster levels possessed (to a maximum of +6 at 18th caster level).}{}
+\defineTalent{Deep Enhancement}{When you spend a spell point to make an enhancement last 1 minute per caster level without concentration, it lasts for 10 minutes per caster level instead.}{When you spend a spell point to make an enhancement last 1 minute per caster level without concentration, it lasts for 10 minutes per caster level instead.}{}
+\defineTalent{Energy Weapon (enhance)}{You may enhance a weapon, granting it the corrosive, flaming, frost, or shock special weapon quality\ifnum \value{HalfCL} > 0, and causing it to deal an extra \arabic{HalfCL} damage\fi.}{You may enhance a weapon, granting it the corrosive, flaming, frost, or shock special weapon qualities. The weapons deal an extra point of damage for every 2 caster levels possessed.}{}
+\defineTalent{Greater Enhancement}{Increase the enhancement bonus granted by \textit{Enhance Equipment} to \domath{\value{charCLCount} / 5 + 2}.}{When using the \textit{Enhance Equipment} \textit{enhancement}, increase the enhancement bonus granted by 1. This means you can grant an item a +6 enhancement bonus if your caster level is high enough.}{}
+\defineTalent{Harden (enhance)}{You can increase an item's hardness by \HalfCLMinOne or grant a creature DR \HalfCLMinOne/adamantine}{You may enhance an item to increase its hardness, or enhance a creature to grant it DR/adamantine. The bonus is equal to your half your caster level (minimum: 1).}{}
+\defineTalent{Lighten (enhance)}{Reduce the weight of an item or creature or make it weightless}{
+	\begin{wraptable}[10]{l}{95\unitlength}
+		\raggedright\textbf{Table: Lighten Object} \rowcolors{2}{gray!25}{white}\small
+		\begin{tabular}{cc}
+			\rowcolor{gray!50}
+			\textbf{\textit{Caster Level}} & \textbf{\textit{Maximum Size}}\tabularnewline
+			1	& Small \tabularnewline
+			3	& Medium \tabularnewline
+			5	& Large \tabularnewline
+			8	& Huge \tabularnewline
+			11 	& Gargantuan \tabularnewline
+			15	& Colossal \tabularnewline
+			20	& Colossal+
+		\end{tabular}
+	\end{wraptable}
+	You may \textit{enhance} an item or creature, reducing its weight or even making it weightless. The maximum sized object you can affect is given on \textbf{Table: Lighten Object}. An enhanced object weighs half as much as normal, but if you choose, you may make objects up to one size category smaller than your limit completely weightless, or up to 2 size categories smaller float up or down as you choose at a rate of 20 ft per round. While you cannot make an object or creature move any direction other than up or down, this can easily be combined with telekinesis, wind power, or pushing off a wall (at half the target’s usual speed) to create flight-like effects. Unwilling creatures are allowed a new saving throw each round to negate this effect, but they may suffer falling damage if successful. 1/2-weight creatures suffer a -2 penalty to their CMD vs bull rush, drag, and reposition combat maneuvers. This penalty is doubled for weightless or floating creatures.}{}
+\defineTalent{Lingering Enhancement}{When you \textit{enhance} an object or creature, the enhancement remains for 2 rounds after you stop concentrating.}{When you \textit{enhance} an object or creature, the enhancement remains for 2 rounds after you stop concentrating.}{}
+\defineTalent{Mass Enhancement}{Spend one spell point to target an additional \HalfCLMinOne{} target\s[HalfCL] with \textit{enhance}.}{When bestowing an \textit{enhancement}, you may spend an additional spell point to enhance an additional target per 2 caster levels (minimum: 1 additional). All targets must be within range and must receive the same \textit{enhancement} (thus, if using the \textit{Deadly Weapon} talent, you could only target weapons with this ability).}{}
+\defineTalent{Mental Enhancement (enhance)}{\textit{Enhance} a creature, granting them a \ifnum \value{charCLCount} > 13 {+6} \else\ifnum \value{charCLCount} > 6 {+4}\else +2\fi\fi{} enhancement bonus to a single mental ability score.}{You may \textit{enhance} creatures, granting them a +2 enhancement bonus to either their Intelligence, Wisdom, or Charisma scores. This increases to +4 at 7th caster level and +6 at 14th caster level.}{}
+\defineTalent{Physical Enhancement (enhance)}{\textit{Enhance} a creature, granting them a \ifnum \value{charCLCount} > 13 {+6} \else\ifnum \value{charCLCount} > 6 {+4}\else +2\fi\fi{} enhancement bonus to a single physical ability score.}{You may \textit{enhance} creatures, granting them a +2 enhancement bonus to either their Strength, Dexterity, or Constitution scores. This increases to +4 at 7th caster level and +6 at 14th caster level.}{}
+\defineTalent{Ranged Enhancement}{Increase the range of \textit{enhance} by one step}{You may enhance targets within Medium range. You may take this talent multiple times. Each time it is taken, increase the range by an additional step (Close to Medium, Medium to Long).}{
+		\ifnum 1 = #1
+		\def\charenhancerange{Medium}
+		\else\ifnum #1 > 1
+		\def\charenhancerange{Long}
+		\fi
+		\fi
+	}
+\defineTalent{Steal Senses (enhance)}{\textit{Enhance} a creature, causing it to lose a single sense of your choice.}{You may apply an \textit{enhancement} to a creature, causing it to become either blind or deaf (your choice), or to lose one special sense such as the scent ability, Tremorsense, Blindsense, Blindsight, etc.}{}
+\defineTalent{Versatile Weapon (enhance)}{\textit{Enhance} a weapon to bypass \arabic{charCLCount} point\s{} of damage reduction (but not DR/-)}{You may \textit{enhance} a weapon, causing it to ignore an amount of damage reduction equal to your caster level. This only works against damage reduction that can be bypassed (thus, it would work against DR 5/ cold iron, but not against DR 5/-).}{}
