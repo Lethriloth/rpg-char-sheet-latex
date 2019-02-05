@@ -1,4 +1,9 @@
-\input{./Data/Core_Classes.tex}
+\documentclass{rpgcharsheet2}
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage{Systems/Pathfinder/SystemPathfinder}
+\begin{document}
+\input{Systems/Pathfinder/Data/Core_Classes.tex}
 \setCounter{XP-Mode}{1} % Boolean, automatically calculates next-Level XP
 \setCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
 \setCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive Skill point increases.
@@ -118,7 +123,8 @@
 \addSilver{7}\addSilver*{8}\StoreSilver{9}
 \addCopper{10}\addCopper*{11}\StoreCopper{12}
 
-
+\input{Sheets/Pathfinder_Sheet.tex}
+\end{document}
 %%% Local Variables: 
 %%% Mode: latex
 %%% TeX-master: t
