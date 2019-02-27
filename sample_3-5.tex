@@ -1,123 +1,125 @@
-\input{./Data/Core_Classes.tex}
-\setCounter{XP-Mode}{1} % Boolean, automatically calculates next-level XP
-\setCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
-\setCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive skill point increases.
-\setCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of feats
-
-%\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
-%}
-
-%Just enter your name, etc. here. \charlevel should be class and level.
-\renewcommand\charName{}
-\renewcommand\charAlignment{}
-\renewcommand\charPlayerName{}
-\renewcommand\charReligion{}
-\renewcommand\charHomeland{}
-\renewcommand\charHair{}
-\renewcommand\charEyes{}
-\renewcommand\charGender{}
-\renewcommand\charRace{}
-\renewcommand\charWeight{}
-\renewcommand\charHeight{}
-\renewcommand\charAge{}
-
-
-\setCharStr{10}
-\setCharDex{10}
-\setCharCon{10}
-\setCharInt{19}
-\setCharWis{19}
-\setCharCha{19}
-
-% Racial Mods
-\setSize{Medium}
-\addToCounter{charStrBaseCount}{0}
-\addToCounter{charDexBaseCount}{0}
-\setCharSpeed{30}
-\addRaceFeature{Race Feature}
-\renewcommand\do[1]{
-\addCharLanguage{#1}
-}\docsvlist{Common}
-
-
-%\newcommand{\testclass}{wizard}
-%%\importcharclass{\testclass}{20}
-%\renewcommand{\do}[1]{
-%	\addranks[\testclass]{#1}{\value{char\testclass classlevelcount}}
-%}\docsvlist{performone,knowledgehistory}
-%\addwizardspellcasting{20}[Abjuration][Transmutation][Evocation]
-
-\ImportCharClass{Barbarian}{20}
-\ImportCharClass{Bard}{20}
-\ImportCharClass{Cleric}{20}
-\ImportCharClass{Druid}{20}
-\ImportCharClass{Fighter}{20}
-\ImportCharClass{Monk}{20}
-\ImportCharClass{Paladin}{20}
-\ImportCharClass{Ranger}{20}
-\ImportCharClass{Rogue}{20}
-\ImportCharClass{Sorcerer}{20}
-\ImportCharClass{Wizard}{20}
-
-% Character Level Ability Increases
-\MiscBonus{Cha}{5}
-
-% Feats
-\addFeat{Feat}
-
-
-
-% items
-\addGearItem{Gear}{1}
-
-\addStoredItem{Stored Gear}{1}
-
-
-
-% %Weapons
-\addAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
-\addWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
-
-% %Belt
-%\addBeltItem{Belt of Strength +0}{Does Nothing}{0}
-%\EnhancementBonus{Str}{0}
-
-% %Armor
-%\addArmor{Armor}{3}{10}{-2}{5}{L}{10}{Notes}{More Notes}
-
-% %Chest
-%\addChestItem{}{}{}
-
-% %Eyes
-%\addEyesItem{}{}{}
-
-% %Feet
-%\addFeetItem{}{}{}
-
-% %Hat
-%\addHeadItem{}{}{}
-
-
-% %Headband
-%\addHeadbandItem{}{}{}
-
-% %Shoulders
-%\addShouldersItem{}{}{}
-
-% %Rings
-%\addRingItem{}{}{}
-%\addRingItem{}{}{}
-
-% %Wrists
-%\addWristsItem{}{}{}
-
-\addPlatinum{1}	\addPlatinum*{2}\addStoredPlatinum{3}
-\addGold{4}		\addGold*{5}	\addStoredGold{6}
-\addSilver{7}	\addSilver*{8}	\addStoredSilver{9}
-\addCopper{10}	\addCopper*{11}	\addStoredCopper{12}
-
-
-%%% Local Variables: 
-%%% Mode: latex
-%%% TeX-master: t
-%%% End: 
+\documentclass[twoside]{rpgcharsheet2}
+\usepackage{Systems/DnD3-5/SystemDnD3-5}
+\usepackage{longtable}
+\usepackage{multicol}
+\begin{document}
+	\input{Systems/DnD3-5/Data/Core_Classes.tex}
+	\setCounter{XP-Mode}{1} % Boolean, automatically calculates next-level XP
+	\setCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
+	\setCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive skill point increases.
+	\setCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of feats
+	
+	%\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
+	%}
+	
+	%Just enter your name, etc. here. \charlevel should be class and level.
+	\renewcommand\charName{}
+	\renewcommand\charAlignment{}
+	\renewcommand\charPlayerName{}
+	\renewcommand\charReligion{}
+	\renewcommand\charHomeland{}
+	\renewcommand\charHair{}
+	\renewcommand\charEyes{}
+	\renewcommand\charGender{}
+	\renewcommand\charRace{}
+	\renewcommand\charWeight{}
+	\renewcommand\charHeight{}
+	\renewcommand\charAge{}
+	
+	
+	\setCharStr{10}
+	\setCharDex{10}
+	\setCharCon{10}
+	\setCharInt{19}
+	\setCharWis{19}
+	\setCharCha{19}
+	
+	% Racial Mods
+	\setSize{Medium}
+	\addToCounter{charStrBaseCount}{0}
+	\addToCounter{charDexBaseCount}{0}
+	\setCharSpeed{30}
+	\addRaceFeature{Race Feature}
+	\renewcommand\do[1]{
+		\addCharLanguage{#1}
+	}\docsvlist{Common}
+	
+	
+	%\newcommand{\testclass}{wizard}
+	%%\importcharclass{\testclass}{20}
+	%\renewcommand{\do}[1]{
+	%	\addranks[\testclass]{#1}{\value{char\testclass classlevelcount}}
+	%}\docsvlist{performone,knowledgehistory}
+	%\addwizardspellcasting{20}[Abjuration][Transmutation][Evocation]
+	
+%	\ImportCharClass{Barbarian}{20}
+%	\ImportCharClass{Bard}{20}
+%	\ImportCharClass{Cleric}{20}
+%	\ImportCharClass{Druid}{20}
+%	\ImportCharClass{Fighter}{20}
+%	\ImportCharClass{Monk}{20}
+%	\ImportCharClass{Paladin}{20}
+%	\ImportCharClass{Ranger}{20}
+%	\ImportCharClass{Rogue}{20}
+%	\ImportCharClass{Sorcerer}{20}
+%	\ImportCharClass{Wizard}{20}
+	
+	% Character Level Ability Increases
+	\MiscBonus{Cha}{5}
+	
+	% Feats
+	\addFeat{Feat}
+	
+	
+	
+	% items
+	\addGearItem{Gear}{1}
+	
+	\addStoredItem{Stored Gear}{1}
+	
+	
+	
+	% %Weapons
+	\addAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
+	\addWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
+	
+	% %Belt
+	%\addBeltItem{Belt of Strength +0}{Does Nothing}{0}
+	%\EnhancementBonus{Str}{0}
+	
+	% %Armor
+	%\addArmor{Armor}{3}{10}{-2}{5}{L}{10}{Notes}{More Notes}
+	
+	% %Chest
+	%\addChestItem{}{}{}
+	
+	% %Eyes
+	%\addEyesItem{}{}{}
+	
+	% %Feet
+	%\addFeetItem{}{}{}
+	
+	% %Hat
+	%\addHeadItem{}{}{}
+	
+	
+	% %Headband
+	%\addHeadbandItem{}{}{}
+	
+	% %Shoulders
+	%\addShouldersItem{}{}{}
+	
+	% %Rings
+	%\addRingItem{}{}{}
+	%\addRingItem{}{}{}
+	
+	% %Wrists
+	%\addWristsItem{}{}{}
+	
+	\addPlatinum{1}	\addPlatinum*{2}\addStoredPlatinum{3}
+	\addGold{4}		\addGold*{5}	\addStoredGold{6}
+	\addSilver{7}	\addSilver*{8}	\addStoredSilver{9}
+	\addCopper{10}	\addCopper*{11}	\addStoredCopper{12}
+	
+	\input{Sheets/DnD3-5_Sheet.tex}
+\end{document}

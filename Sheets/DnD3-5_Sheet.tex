@@ -1,9 +1,3 @@
-\documentclass{rpgcharsheet2}
-\usepackage{SystemDnD3-5}
-\usepackage{longtable}
-\usepackage{multicol}
-\begin{document}
-\input{player.tex}
 \unitlength\textwidth
 \divide\unitlength 432
 \Initialize
@@ -48,40 +42,40 @@
 	\put(65.5,78){\line(0,-1){79}}}
 	%% STR
 	\titlebox{0}{60}{28}{STR}{strength}
-	\StretchAttributes{30}{60}{63}{\arabic{charStrCount},\plusminus{charStrModCount}}
-	\StretchAttributes{68}{60}{139}{\arabic{charStrBaseCount},\plusminus{charStrEnhancementCount},\plusminus{charStrMiscCount},\plusminus{charStrTmpCount}}
+	\StretchAttributes{30}{60}{63}{\arabic{charStrCount},\PlusMinus{charStrModCount}}
+	\StretchAttributes{68}{60}{139}{\arabic{charStrBaseCount},\PlusMinus{charStrEnhancementCount},\PlusMinus{charStrMiscCount},\PlusMinus{charStrTmpCount}}
 	
 	%% DEX
 	\titlebox{0}{48}{28}{DEX}{dexterity}
-	\StretchAttributes{30}{48}{63}{\arabic{charDexCount},\plusminus{charDexModCount}}
-	\StretchAttributes{68}{48}{139}{\arabic{charDexBaseCount},\plusminus{charDexEnhancementCount},\plusminus{charDexMiscCount},\plusminus{charDexTmpCount}}
+	\StretchAttributes{30}{48}{63}{\arabic{charDexCount},\PlusMinus{charDexModCount}}
+	\StretchAttributes{68}{48}{139}{\arabic{charDexBaseCount},\PlusMinus{charDexEnhancementCount},\PlusMinus{charDexMiscCount},\PlusMinus{charDexTmpCount}}
 	
 	%% CON
 	\titlebox{0}{36}{28}{CON}{constitution}
-	\StretchAttributes{30}{36}{63}{\arabic{charConCount},\plusminus{charConModCount}}
-	\StretchAttributes{68}{36}{139}{\arabic{charConBaseCount},\plusminus{charConEnhancementCount},\plusminus{charConMiscCount},\plusminus{charConTmpCount}}
+	\StretchAttributes{30}{36}{63}{\arabic{charConCount},\PlusMinus{charConModCount}}
+	\StretchAttributes{68}{36}{139}{\arabic{charConBaseCount},\PlusMinus{charConEnhancementCount},\PlusMinus{charConMiscCount},\PlusMinus{charConTmpCount}}
 	
 	%% INT
 	\titlebox{0}{24}{28}{INT}{intelligence}
-	\StretchAttributes{30}{24}{63}{\arabic{charIntCount},\plusminus{charIntModCount}}
-	\StretchAttributes{68}{24}{139}{\arabic{charIntBaseCount},\plusminus{charIntEnhancementCount},\plusminus{charIntMiscCount},\plusminus{charIntTmpCount}}
+	\StretchAttributes{30}{24}{63}{\arabic{charIntCount},\PlusMinus{charIntModCount}}
+	\StretchAttributes{68}{24}{139}{\arabic{charIntBaseCount},\PlusMinus{charIntEnhancementCount},\PlusMinus{charIntMiscCount},\PlusMinus{charIntTmpCount}}
 	
 	%% WIS
 	\titlebox{0}{12}{28}{WIS}{wisdom}
-	\StretchAttributes{30}{12}{63}{\arabic{charWisCount},\plusminus{charWisModCount}}
-	\StretchAttributes{68}{12}{139}{\arabic{charWisBaseCount},\plusminus{charWisEnhancementCount},\plusminus{charWisMiscCount},\plusminus{charWisTmpCount}}
+	\StretchAttributes{30}{12}{63}{\arabic{charWisCount},\PlusMinus{charWisModCount}}
+	\StretchAttributes{68}{12}{139}{\arabic{charWisBaseCount},\PlusMinus{charWisEnhancementCount},\PlusMinus{charWisMiscCount},\PlusMinus{charWisTmpCount}}
 	
 	%% CHA
 	\titlebox{0}{0}{28}{CHA}{charisma}
-	\StretchAttributes{30}{0}{63}{\arabic{charChaCount},\plusminus{charChaModCount}}
-	\StretchAttributes{68}{0}{139}{\arabic{charChaBaseCount},\plusminus{charChaEnhancementCount},\plusminus{charChaMiscCount},\plusminus{charChaTmpCount}}
+	\StretchAttributes{30}{0}{63}{\arabic{charChaCount},\PlusMinus{charChaModCount}}
+	\StretchAttributes{68}{0}{139}{\arabic{charChaBaseCount},\PlusMinus{charChaEnhancementCount},\PlusMinus{charChaMiscCount},\PlusMinus{charChaTmpCount}}
 }
 
 \put(143,480){ % % XP
 	\titlebox{0}{12}{30}{XP}{Current XP}
 	\titlebox{0}{0}{30}{XP}{To Next Level}
-	\put(32,12){\framebox(58,10){\cleanarabic{charXPCount}}}
-	\put(32,0){\framebox(58,10){\cleanarabic{charNextLevelXPCount}}}
+	\put(32,12){\framebox(58,10){\CleanArabic{charXPCount}}}
+	\put(32,0){\framebox(58,10){\CleanArabic{charNextLevelXPCount}}}
 }
 {  %% HP
   \titlebox{0}{465}{35}{HP}{Hit Points}
@@ -170,8 +164,8 @@
 	\setCounter{charIteratedAttackBonusCount}{\value{charBABCount}}
 	\put(191,84){\framebox(42,9){}}
 	\put(192,83){\parbox[b][8\unitlength][t]{40\unitlength}{\centering\ifthenelse{\value{charIteratedAttacksCount} > 3}{\footnotesize}{}
-	 	\forloop{@i}{0}{\value{@i}<\value{charIteratedAttacksCount}}{
-	 		\ifthenelse{\value{@i}=0}{}{/}\plusminus{charIteratedAttackBonusCount}\setCounter{charIteratedAttackBonusCount}{\value{charIteratedAttackBonusCount}-5}}
+	 	\forloop{@i}{0}{\value{@i}<\value{charIteratedAttacksCount}}{%
+	 		\ifthenelse{\value{@i}=0}{}{/}\PlusMinus{charIteratedAttackBonusCount}\setCounter{charIteratedAttackBonusCount}{\value{charIteratedAttackBonusCount}-5}}%
 	 	}
 	 }
 	\scaleattributelabels{53}{90}{TOTAL,BAB,Ability,Size,Misc,Temp}{18}
@@ -231,7 +225,7 @@
 	}
     \put(0,55){% Armor
 		\begin{tabular}[b]{C{15}C{25}C{100}C{45}C{25}C{25}}
-      		\multicolumn{3}{C{140}}{\itshape \charArmorName} & \cleanpm{charArmorBonusCount} & \ifthenelse{\value{charMaxDexArmorCount} < 100}{\plusminus{charMaxDexArmorCount}}{} &\ifthenelse{\equal\charArmorName{}}{}{\arabic{charArmorArmorCheckPenaltyCount}} \tabularnewline\hline
+      		\multicolumn{3}{C{140}}{\itshape \charArmorName} & \CleanPM{charArmorBonusCount} & \ifthenelse{\value{charMaxDexArmorCount} < 100}{\PlusMinus{charMaxDexArmorCount}}{} &\ifthenelse{\equal\charArmorName{}}{}{\arabic{charArmorArmorCheckPenaltyCount}} \tabularnewline\hline
 			\multicolumn{3}{C{140}}{\tiny\scshape ARMOR} &\tiny\scshape Armor Bonus &\tiny\scshape max dex &\tiny\scshape  check penalty \tabularnewline
       		\itshape \arabic{charArmorSpellFailureCount}\% &  \charArmorType & \multicolumn{4}{C{195}}{\charArmorNotes}  \tabularnewline\hline
 			\tiny\scshape spell failure & \tiny\scshape Type &\multicolumn{4}{C{195}} {\tiny\scshape Notes } \tabularnewline
@@ -239,7 +233,7 @@
 	}
 	\put(0,5){% Shield
 		\begin{tabular}[b]{C{15}C{125}C{45}C{25}C{25}}
-			\multicolumn{2}{C{140}}{\itshape \charShieldName} & \cleanpm{charShieldBonusCount} & \ifthenelse{\value{charMaxDexShieldCount} < 100}{\plusminus{charMaxDexShieldCount}}{} &\ifthenelse{\equal\charShieldName{}}{}{\arabic{charShieldArmorCheckPenaltyCount}} \tabularnewline\hline
+			\multicolumn{2}{C{140}}{\itshape \charShieldName} & \CleanPM{charShieldBonusCount} & \ifthenelse{\value{charMaxDexShieldCount} < 100}{\PlusMinus{charMaxDexShieldCount}}{} &\ifthenelse{\equal\charShieldName{}}{}{\arabic{charShieldArmorCheckPenaltyCount}} \tabularnewline\hline
 			\multicolumn{2}{C{140}}{\scriptsize\scshape Shield} &\tiny\scshape Shield Bonus &\tiny\scshape max dex &\tiny\scshape  check penalty \tabularnewline
 			\itshape \arabic{charShieldSpellFailureCount}\% &  \multicolumn{4}{C{220}}{\charShieldNotes}  \tabularnewline\hline
 			\tiny\scshape spell failure & \multicolumn{4}{C{220}} {\tiny\scshape Notes } \tabularnewline
@@ -404,10 +398,10 @@
 	\singletitlebox{0}{52.5}{121.5}{9}{Money}
 	\begin{tabular}[b]{@{}|@{}>{\centering\scriptsize\scshape}p{30\unitlength}@{}|@{}>{\centering\scriptsize}p{30\unitlength}@{}|@{}>{\centering\scriptsize}p{30\unitlength}@{}|@{}>{\centering\scriptsize}p{30\unitlength}@{}|@{}}
 		& \scshape\tiny Carried & \scshape\tiny Carried (Weightless) & \tiny\scshape Stored\tabularnewline
-		Platinum &\cleanarabic{charPlatinumCount} &\cleanarabic{charPlatinumWeightlessCount} & \cleanarabic{charPlatinumStoredCount}\tabularnewline\hline
-		Gold &\cleanarabic{charGoldCount} &\cleanarabic{charGoldWeightlessCount} & \cleanarabic{charGoldStoredCount}\tabularnewline\hline
-		Silver &\cleanarabic{charSilverCount} &\cleanarabic{charSilverWeightlessCount} & \cleanarabic{charSilverStoredCount}\tabularnewline\hline
-		Copper &\cleanarabic{charCopperCount} &\cleanarabic{charCopperWeightlessCount} & \cleanarabic{charCopperStoredCount}\tabularnewline\hline
+		Platinum &\CleanArabic{charPlatinumCount} &\CleanArabic{charPlatinumWeightlessCount} & \CleanArabic{charPlatinumStoredCount}\tabularnewline\hline
+		Gold &\CleanArabic{charGoldCount} &\CleanArabic{charGoldWeightlessCount} & \CleanArabic{charGoldStoredCount}\tabularnewline\hline
+		Silver &\CleanArabic{charSilverCount} &\CleanArabic{charSilverWeightlessCount} & \CleanArabic{charSilverStoredCount}\tabularnewline\hline
+		Copper &\CleanArabic{charCopperCount} &\CleanArabic{charCopperWeightlessCount} & \CleanArabic{charCopperStoredCount}\tabularnewline\hline
 	\end{tabular}
 }
  
@@ -436,12 +430,12 @@
 	\put(0,27){%
 		\singletitlebox{5}{15}{158}{10}{Carrying Capacity}%
 		\scaleattributelabels{0}{7}{light\\load,medium\\load,heavy\\load,lift above\\head,lift off\\ground,drag \&\\push}{26}%
-		\put(7,0){\framebox(24,8){\footnotesize\cleanarabic{charLightLoadCount} lbs.}}%
-		\put(33,0){\framebox(24,8){\footnotesize\cleanarabic{charMediumLoadCount} lbs.}}%
-		\put(59,0){\framebox(24,8){\footnotesize\cleanarabic{charHeavyLoadCount} lbs.}}%
-		\put(85,0){\framebox(24,8){\footnotesize\cleanarabic{charHeavyLoadCount} lbs.}}%
-		\put(111,0){\framebox(24,8){\footnotesize\cleanarabic{charLiftLoadCount} lbs.}}%
-		\put(137,0){\framebox(24,8){\footnotesize\cleanarabic{charDragLoadCount} lbs.}}%
+		\put(7,0){\framebox(24,8){\footnotesize\CleanArabic{charLightLoadCount} lbs.}}%
+		\put(33,0){\framebox(24,8){\footnotesize\CleanArabic{charMediumLoadCount} lbs.}}%
+		\put(59,0){\framebox(24,8){\footnotesize\CleanArabic{charHeavyLoadCount} lbs.}}%
+		\put(85,0){\framebox(24,8){\footnotesize\CleanArabic{charHeavyLoadCount} lbs.}}%
+		\put(111,0){\framebox(24,8){\footnotesize\CleanArabic{charLiftLoadCount} lbs.}}%
+		\put(137,0){\framebox(24,8){\footnotesize\CleanArabic{charDragLoadCount} lbs.}}%
 	}%
 	\put(7,18){\parbox[t]{38\unitlength}{\scshape\scriptsize Current Load}}%
 	\put(53,18){%
@@ -473,11 +467,11 @@
 
 	\put(145,127){%Caster Level
 		\put(0,13){\parbox{110\unitlength}{\scshape\large \charSpellcastingClassOne{} Caster Level}}
-		\put(110,10){\framebox(30,10){\cleanarabic{charCLOneCount}}}
+		\put(110,10){\framebox(30,10){\CleanArabic{charCLOneCount}}}
 	}
 	\put(145,115){%Casting Ability Modifier
 		\put(0,13){\parbox{105\unitlength}{\scshape\large \capitalize{\charSpellcastingClassOneability} Modifier}}
-		\put(110,10){\framebox(30,10){\cleanpm{char\charSpellcastingClassOneability ModCount}}}
+		\put(110,10){\framebox(30,10){\CleanPM{char\charSpellcastingClassOneability ModCount}}}
 	}
 	\put(0,21){% Spells per Day
 		\singletitlebox{0}{135}{140}{10}{\charSpellcastingClassOne{} Spells per Day}%
@@ -488,17 +482,17 @@
 				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingOnehascantrips}}{}{\arabic{charTotalSpellSlotsOne0Count}}} &%
 				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingOnehascantrips}}{}{\arabic{charClassSpellSlotsOne0Count}}} & &%
 				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingOnehascantrips}}{}{\arabic{charBonusSpellSlotsOne0Count}}} &%
-				\framebox(18,10){\ifthenelse{0>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownOne0Count}}}\tabularnewline%
+				\framebox(18,10){\ifthenelse{0>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne0Count}}}\tabularnewline%
 				%
-				\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{11 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{1st}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownOne1Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{12 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{2nd}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownOne2Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{13 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{3rd}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownOne3Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{14 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{4th}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne4Count}}} & \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne4Count}}}& \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownOne4Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{15 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{5th}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownOne5Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{16 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{6th}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownOne6Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{17 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{7th}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownOne7Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{18 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{8th}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownOne8Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{19 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{9th}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownOne9Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{11 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{1st}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne1Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{12 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{2nd}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne2Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{13 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{3rd}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne3Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{14 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{4th}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne4Count}}} & \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne4Count}}}& \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne4Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{15 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{5th}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne5Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{16 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{6th}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne6Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{17 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{7th}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne7Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{18 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{8th}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne8Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\domath{19 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{9th}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsOne9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsOne9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsOne9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsOne9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne9Count}}}\tabularnewline
 			\end{tabular}
 		}
 	}
@@ -576,11 +570,11 @@
 
 	\put(145,127){%Caster Level
 		\put(0,13){\parbox{110\unitlength}{\scshape\large \charSpellcastingClassTwo{} Caster Level}}
-		\put(110,10){\framebox(30,10){\cleanarabic{charCLTwoCount}}}
+		\put(110,10){\framebox(30,10){\CleanArabic{charCLTwoCount}}}
 	}
 	\put(145,115){%Casting Ability Modifier
 		\put(0,13){\parbox{105\unitlength}{\scshape\large \capitalize{\charSpellcastingClassTwoability} Modifier}}
-		\put(110,10){\framebox(30,10){\cleanpm{char\charSpellcastingClassTwoability ModCount}}}
+		\put(110,10){\framebox(30,10){\CleanPM{char\charSpellcastingClassTwoability ModCount}}}
 	}
 	\put(0,21){% Spells per Day
 		\singletitlebox{0}{135}{140}{10}{\charSpellcastingClassTwo{} Spells per Day}%
@@ -591,17 +585,17 @@
 				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingTwohascantrips}}{}{\arabic{charTotalSpellSlotsTwo0Count}}} &%
 				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingTwohascantrips}}{}{\arabic{charClassSpellSlotsTwo0Count}}} & &%
 				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingTwohascantrips}}{}{\arabic{charBonusSpellSlotsTwo0Count}}} &%
-				\framebox(18,10){\ifthenelse{0>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownTwo0Count}}}\tabularnewline%
+				\framebox(18,10){\ifthenelse{0>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo0Count}}}\tabularnewline%
 				%
-				\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{11 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{1st}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownTwo1Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{12 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{2nd}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownTwo2Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{13 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{3rd}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownTwo3Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{14 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{4th}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo4Count}}} & \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo4Count}}}& \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownTwo4Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{15 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{5th}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownTwo5Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{16 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{6th}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownTwo6Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{17 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{7th}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownTwo7Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{18 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{8th}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownTwo8Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{19 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{9th}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\cleanarabic{charSpellsknownTwo9Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{11 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{1st}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo1Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{12 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{2nd}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo2Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{13 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{3rd}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo3Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{14 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{4th}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo4Count}}} & \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo4Count}}}& \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo4Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{15 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{5th}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo5Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{16 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{6th}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo6Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{17 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{7th}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo7Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{18 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{8th}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo8Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\domath{19 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{9th}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charTotalSpellSlotsTwo9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charClassSpellSlotsTwo9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charabilitySpellSlotsTwo9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\arabic{charBonusSpellSlotsTwo9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo9Count}}}\tabularnewline
 			\end{tabular}
 		}
 	}
@@ -763,10 +757,3 @@
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 9\textup{th} Level \charSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
 	\begin{multicols}{2} \dolistloop{\charNinthSpellsListTwo} \end{multicols}%
 }
-
-\end{document}
-
-%%% Local Variables: 
-%%% mode: latex
-%%% TeX-master: t
-%%% End: 

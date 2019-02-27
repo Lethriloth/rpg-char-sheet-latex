@@ -261,7 +261,7 @@
 	}
 	\listadd{\charClassesList}{#3}
 	\if\csname#3BAB\endcsname g
-	\addToCounter{charBABCount}{#4}
+	\addtocounter{charBABCount}{#4}
 	\fi
 	\if\csname#3BAB\endcsname a
 	\addToCounter{charBABCount}{#4 * 3 / 4}
@@ -516,7 +516,7 @@
 		\expandafter\renewcommand\csname charWeapon#1Range\endcsname{##6}
 		\expandafter\renewcommand\csname charWeapon#1Notes\endcsname{##7}
 	}
-	\expandafter\newcommand\csname addAutoWeapon#1\endcsname[9][0]{%
+	\expandafter\newcommand\csname addAutoWeapon#1\endcsname[9][0]{%[##1=Extra attacks]{##2=Name}{##3=attack bonus modifier}{##4=damage}{##5=crit}{##6=Damage type}{##7=Melee or Ranged}{##8=Notes}{##9=Ability score to use for attack bonus}
 		\expandafter\renewcommand\csname charWeapon#1Name\endcsname{##2}
 		\expandafter\renewcommand\csname charWeapon#1AttackBonus\endcsname{%
 			\ifthenelse{\equal{\lowercase{##7}}{\lowercase{Melee}}}{%
@@ -544,11 +544,11 @@
 			}
 			\forloop{@i}{0}{\value{@i}<##1}{%
 				\ifthenelse{\value{@i}=0}{}{/}%
-				\plusminus{charIteratedAttackBonusCount}%
+				\PlusMinus{charIteratedAttackBonusCount}%
 			}%
 			\forloop{@i}{0}{\value{@i}<\value{charIteratedAttacksCount}}{%
 				\ifthenelse{\value{@i}=0}{\ifthenelse{##1 = 0}{}{/}}{/}%
-				\plusminus{charIteratedAttackBonusCount}%
+				\PlusMinus{charIteratedAttackBonusCount}%
 				\setCounter{charIteratedAttackBonusCount}{\value{charIteratedAttackBonusCount}-5}%
 			}%
 		}%
@@ -1411,8 +1411,9 @@
 	}
 }
 \newcommand{\EnhancementBonus}[2]{
-	\ifthenelse{\value{char#1EnhancementCount} < \domath{#2}}{
-		\setCounter{char#1EnhancementCount}{#2}
+	\setCounter{@EnhancementBonusTempCounter}{#2}
+	\ifthenelse{\value{@EnhancementBonusTempCounter} > \value{char#1EnhancementCount}}{
+		\setCounter{char#1EnhancementCount}{\value{@EnhancementBonusTempCounter}}
 	}{}
 }
 

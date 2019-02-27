@@ -255,7 +255,7 @@
 		\stepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 2}{
 		\addClassFeature{Still Mind}\addConditionalDefMod{+2 on saves vs. Enchantment}
-		\EnhancementBonus{Speed}{(#1 / 3) * 10}
+		\EnhancementBonus{Speed}{#1 / 3 * 10}
 	\ifthenelse{#1 > 3}{
 		\addClassFeature{Ki Strike (magic\ifthenelse{#1 > 9}{%
 			, lawful%
@@ -282,7 +282,7 @@
 		\addClassFeature{Diamond Soul}
 			\addSpellResistance{#1 + 10}
 	\ifthenelse{#1 > 14}{
-		\addLimitedUse{Quivering Palm (DC \domath{10 + #1 / 2 + \value{charWisModCount}}; (per week))}{1}
+		\addLimitedUse{Quivering Palm (DC \domath{10 + #1 / 2 + \value{charWisModCount}}; (1/week))}{1}
 	\ifthenelse{#1 > 16}{
 		\addClassFeature{Timeless Body}
 		\addClassFeature{Tongue of the Sun and Moon}\listadd{\charLanguagesList}{Can speak with any living creature}
@@ -290,7 +290,20 @@
 		\addLimitedUse{Empty Body (rounds)}{#1}
 	\ifthenelse{#1 > 19}{
 		\addClassFeature{Perfect Self}\addDR{magic}{10}
-	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+	}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
 }
 
 \def\PaladinBAB{g}
@@ -310,7 +323,6 @@
 	\ifthenelse{#1 > 1}{
 		\addClassFeature{Divine Grace}{
 			\gappto\Initialize{
-				\addnotice{CHA Mod is \arabic{charChaModCount}}
 				\MiscBonus{Fortitude}{\value{charChaModCount}}
 				\MiscBonus{Reflex}{\value{charChaModCount}}
 				\MiscBonus{Will}{\value{charChaModCount}}
