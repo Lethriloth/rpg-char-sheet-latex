@@ -37,7 +37,7 @@
 		\newCounter{charRagePowersCount}
 		\addToCounter{charRagePowersCount}{#1 / 2}
 		\addClassFeature{Rage Powers:\forlistloop{\\~~~~}{\charRagePowersList}}
-		\DeclareDocumentCommand{\addRagePower}{m}{
+		\NewDocumentCommand{\addRagePower}{m}{
 			\listinsert{\charRagePowersList}{##1}
 			\addToCounter{charRagePowersCount}{-1}
 		}
@@ -89,7 +89,7 @@
 		\addClassFeature{Versatile Performance\forlistloop{\\~~~~}{\charVersatilePerformancesList}}
 			\newCounter{charVersatilePerformancesCount}
 			\setCounter{charVersatilePerformancesCount}{(#1 + 2) / 4}
-			\DeclareDocumentCommand{\addVersatilePerformance}{m}{
+			\NewDocumentCommand{\addVersatilePerformance}{m}{
 				\listinsert{\charVersatilePerformancesList}{##1}
 				\addToCounter{charVersatilePerformancesCount}{-1}
 			}
@@ -415,7 +415,7 @@
 			\newCounter{charPaladinMerciesCount}
 			\addToCounter{charPaladinMerciesCount}{#1 / 3}
 			\addClassFeature{Mercies:\forlistloop{\\~~~~}{\charPaladinMerciesList}}
-			\DeclareDocumentCommand{\addMercy}{m}{
+			\NewDocumentCommand{\addMercy}{m}{
 				\listinsert{\charPaladinMerciesList}{##1}
 				\addToCounter{charPaladinMerciesCount}{-1}
 			}
@@ -607,7 +607,7 @@
 			\addSpecialDefense{\ifinlist{Improved Evasion}{\charRogueTalentsList}{Improved }{}Evasion}
 		\addClassFeature{\ifthenelse{#1 > 9}{Advanced }{}Rogue Talents\forlistloop{\\~~~~}{\charRogueTalentsList}}
 			\addToCounter{charRogueTalentsCount}{#1 / 2}
-			\DeclareDocumentCommand{\addRogueTalent}{m}{
+			\NewDocumentCommand{\addRogueTalent}{m}{
 				\listinsert{\charRogueTalentsList}{##1}
 				\addToCounter{charRogueTalentsCount}{-1}
 			}
@@ -655,7 +655,7 @@
 			}{}
 		}
 		\stepCounter{charSorcererBloodlinePowersCount}
-		\DeclareDocumentCommand{\addBloodlinePower}{m}{
+		\NewDocumentCommand{\addBloodlinePower}{m}{
 			\listinsert{\charSorcererBloodlinePowersList}{##1}
 			\addToCounter{charSorcererBloodlinePowersCount}{-1}
 		}
@@ -757,7 +757,7 @@
 \setCounter{WizardHitDieSize}{6}
 \edef\WizardClassSkillsList{}
 \forcsvlist{\listadd{\WizardClassSkillsList}}{Appraise, Craft, Fly, KnowledgeAll, Linguistics, Profession, Spellcraft}
-\DeclareDocumentCommand{\addWizardClassFeatures}{m O{Universal} O{} O{}}{
+\NewDocumentCommand{\addWizardClassFeatures}{m O{Universal} O{} O{}}{
 	\addClassFeature{Arcane Bond}
 	\addClassFeature{Scribe Scroll}
 	\addToCounter{charBonusFeatsCount}{#1 / 5 + 1}
@@ -851,7 +851,7 @@
 			\addLimitedUse{Change Shape (rounds)}{#1}
 		}{}
 	}}}}}}}
-	\DeclareDocumentCommand{\addWizardSpellcasting}{m}{
+	\NewDocumentCommand{\addWizardSpellcasting}{m}{
 		\newSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{int}
 		\newCounter{charWizardforbiddenschoolsCount}
 		\addPrimarySpellcasting{##1}

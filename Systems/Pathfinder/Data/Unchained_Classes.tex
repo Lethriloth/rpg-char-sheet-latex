@@ -82,7 +82,7 @@
 			\newCounter{charKiPowersCount}
 			\setCounter{charKiPowersCount}{#1 / 2 - 1}
 			\edef\charKiPowersList{}
-			\DeclareDocumentCommand{\addKiPower}{m}{
+			\NewDocumentCommand{\addKiPower}{m}{
 				\listinsert{\charKiPowersList}{##1}
 				\addToCounter{charKiPowersCount}{-1}
 			}
@@ -101,7 +101,7 @@
 			\newCounter{charStyleStrikesCount}
 			\setCounter{charStyleStrikesCount}{(#1 - 1) / 4}
 			\edef\charStyleStrikesList{}
-			\DeclareDocumentCommand{\addStyleStrike}{m}{
+			\NewDocumentCommand{\addStyleStrike}{m}{
 				\listinsert{\charStyleStrikesList}{##1}
 				\addToCounter{charStyleStrikesCount}{-1}
 			}
@@ -150,7 +150,7 @@
 		\edef\charFinesseTrainingWeaponsList{}
 		\addClassFeature{Finesse Training\ifthenelse{#1 > 2}{ (\PrintList{\charFinesseTrainingWeaponsList})}{}}
 			\newCounter{charFinesseTrainingWeaponsCount}
-			\DeclareDocumentCommand{\addFinesseTrainingWeapon}{m}{
+			\NewDocumentCommand{\addFinesseTrainingWeapon}{m}{
 				\listinsert{\charFinesseTrainingWeaponsList}{##1}
 				\addtocounter{charFinesseTrainingWeaponsCount}{-1}
 			}
@@ -175,7 +175,7 @@
 			\addSpecialDefense{\ifinlist{Improved Evasion}{\charRogueTalentsList}{Improved }{}Evasion}
 		\addClassFeature{\ifthenelse{#1 > 9}{Advanced }{}Rogue Talents\forlistloop{\\~~~~}{\charRogueTalentsList}}
 			\addToCounter{charRogueTalentsCount}{#1 / 2}
-			\DeclareDocumentCommand{\addRogueTalent}{m}{
+			\NewDocumentCommand{\addRogueTalent}{m}{
 				\listinsert{\charRogueTalentsList}{##1}
 				\addToCounter{charRogueTalentsCount}{-1}
 			}
@@ -201,7 +201,7 @@
 		\edef\charSkillUnlocksList{}
 		\addClassFeature{Rogue's Edge\forlistloop{\\~~~~}{\charSkillUnlocksList}}
 		\addToCounter{charSkillUnlocksCount}{#1 / 5}
-		\DeclareDocumentCommand{\addSkillUnlock}{m}{
+		\NewDocumentCommand{\addSkillUnlock}{m}{
 			\listinsert{\charSkillUnlocksList}{##1}
 			\addToCounter{charSkillUnlocksCount}{-1}
 		}

@@ -65,7 +65,7 @@
 
 %%%% Output Formatting %%%%
 %% List Printing
-\DeclareDocumentCommand{\PrintList}{O{, } O{} m}{% Option 1 is list separator (Default ', '), Option 2 is inserted before the very last item of the list (e.g. 'and')
+\NewDocumentCommand{\PrintList}{O{, } O{} m}{% Option 1 is list separator (Default ', '), Option 2 is inserted before the very last item of the list (e.g. 'and')
 	\edef\@PrintList{}%
 	\edef\@@PrintList{}%
 	\edef\@PrintListlast{}%
@@ -79,7 +79,7 @@
 	}\dolistloop{\@@PrintList}%
 	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintListlast%
 }
-\DeclareDocumentCommand{\PrintCSVList}{O{, } O{} m}{% Option 1 is list separator (Default ', '), Option 2 is inserted before the very last item of the list (e.g. 'and')
+\NewDocumentCommand{\PrintCSVList}{O{, } O{} m}{% Option 1 is list separator (Default ', '), Option 2 is inserted before the very last item of the list (e.g. 'and')
 	\edef\@PrintList{}%
 	\edef\@@PrintList{}%
 	\edef\@PrintListlast{}%
@@ -517,7 +517,7 @@
 
 %%Domath%%
 \newCounter{@domathCounter}
-\DeclareDocumentCommand{\domath}{s m}{%
+\NewDocumentCommand{\domath}{s m}{%
 	\setCounter{@domathCounter}{#2}%
 	\IfBooleanTF #1 {%
 	}{%

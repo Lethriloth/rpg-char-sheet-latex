@@ -74,7 +74,7 @@
 		}{}
 	}
 }
-\DeclareDocumentCommand{\PrintResistances}{O{, } O{}}{%
+\NewDocumentCommand{\PrintResistances}{O{, } O{}}{%
 	\edef\@PrintList{}%
 	\edef\@@PrintList{}%
 	\edef\@PrintListlast{}
@@ -109,7 +109,7 @@
 		\setCounter{charDR/#1Count}{#2}
 	}{}
 }
-\DeclareDocumentCommand{\PrintDR}{O{, } O{}}{%
+\NewDocumentCommand{\PrintDR}{O{, } O{}}{%
 	\edef\@PrintList{}%
 	\edef\@@PrintList{}%
 	\edef\@PrintListlast{}
@@ -234,7 +234,7 @@
 \newCounter{charBonusFeatsCount}
 \newCounter{CountFeats-Mode}
 
-\DeclareDocumentCommand{\addFeat}{s O{1} m}{
+\NewDocumentCommand{\addFeat}{s O{1} m}{
 	\IfBooleanTF #1 {
 		\addToCounter{charBonusFeatsCount}{-#2}
 		\listadd\charFeatsList{#3\textsuperscript{B} \ifthenelse{#2 = 1}{}{$\times#2$}}
@@ -252,7 +252,7 @@
 \newCounter{charTotalLevelCount}
 \newcounter{HP-Mode}
 \edef\charClassesList{}
-\DeclareDocumentCommand{\ImportCharClass}{s O{} m m}{
+\NewDocumentCommand{\ImportCharClass}{s O{} m m}{
 	\adddebug{IMPORTCHARCLASS: add #4 Levels of #3}
 	\ifthenelse{\equal{#2}{}}{
 		\appto\charLevel{\capitalize{#3} #4 }
@@ -474,7 +474,7 @@
 %%Gear%%
 \edef\charGearList{}
 \newlength{\GearItemWeight}
-\DeclareDocumentCommand{\addGearItem}{s O{1} m m}{%
+\NewDocumentCommand{\addGearItem}{s O{1} m m}{%
 	\IfBooleanTF #1 {%
 		\addtolength{\ExtradimensionalGearWeight}{#2pt * #4}%
 		\listadd{\charGearList}{#3\ifnum #2 > 1{ (#2)}\fi &\setLength{\GearItemWeight}{#2pt * #4} *\PrintWeight{\GearItemWeight}~lbs.}
@@ -659,7 +659,7 @@
 	\newCounter{char#1WeightlessCount}
 	\newCounter{char#1StoredCount}
 	\expandafter\newcommand\csname addStored#1\endcsname[1]{\addToCounter{char#1StoredCount}{##1}}
-	\expandafter\DeclareDocumentCommand\csname add#1\endcsname{s m}{
+	\expandafter\NewDocumentCommand\csname add#1\endcsname{s m}{
 		\IfBooleanTF ##1 {\addToCounter{char#1WeightlessCount}{##2}} {\addToCounter{char#1Count}{##2}}
 	}
 }\docsvlist{Platinum, Gold, Silver, Copper}
@@ -1183,7 +1183,7 @@
 	\setCounter{charSpellcastingClass#1maxSpellLevelCount}{-1}
 	\newCounter{charSpellcasting#1hascantrips}
 	\setCounter{charSpellcasting#1hascantrips}{0}
-	\expandafter\DeclareDocumentCommand\csname newSpellcasting#1\endcsname{s O{9} m m m}{
+	\expandafter\NewDocumentCommand\csname newSpellcasting#1\endcsname{s O{9} m m m}{
 		\IfBooleanTF ##1 {} {\setCounter{charSpellcasting#1hascantrips}{1}}
 		\setCounter{charSpellcastingClass#1maxSpellLevelCount}{##2}
 		\expandafter\renewcommand\csname charSpellcastingClass#1\endcsname{##3}
@@ -1192,7 +1192,7 @@
 	}
 }\docsvlist{One,Two}
 
-\DeclareDocumentCommand{\newSpellcasting}{s O{9} m m m}{
+\NewDocumentCommand{\newSpellcasting}{s O{9} m m m}{
 	\ifthenelse{\equal{\charSpellcastingClassOne}{}}{
 		\IfBooleanTF #1 {\newSpellcastingOne*[#2]{#3}{#4}{#5}} {\newSpellcastingOne[#2]{#3}{#4}{#5}}
 	}{

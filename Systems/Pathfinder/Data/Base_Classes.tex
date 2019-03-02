@@ -8,7 +8,7 @@
 \newCounter{AlchemistHitDieSize}
 \setCounter{AlchemistHitDieSize}{8}
 \edef\AlchemistClassSkillsList{}\forcsvlist\listadd{\AlchemistClassSkillsList}{Appraise, Craft, DisableDevice, Fly, Heal, KnowledgeArcana, KnowledgeNature, Perception, Profession, SleightOfHand, Spellcraft, Survival, UseMagicDevice}
-\DeclareDocumentCommand{\addAlchemitsClassFeatures}{m}{
+\NewDocumentCommand{\addAlchemitsClassFeatures}{m}{
 		\addClassFeature{\ifthenelse{#1 > 2}{\ifthenelse{#1 > 17}{Instant}{Swift} }{}Alchemy}
 			\addConditionalSkillMod{+#1 to Craft (Alchemy) checks to create alchemical items}
 			\addConditionalSkillMod{Can use Craft (Alchemy) to identify potions as if using \textit{detect magic}}
@@ -35,7 +35,7 @@
 			\newCounter{charAlchemistDiscoveriesCount}
 			\addClassFeature{Discoveries\forlistloop{\\~~~~}{\charAlchemistDiscoveriesList}}
 			\addToCounter{charAlchemistDiscoveriesCount}{#1 / 2}
-			\DeclareDocumentCommand{\addAlchemistDiscovery}{m}{
+			\NewDocumentCommand{\addAlchemistDiscovery}{m}{
 				\listinsert{\charAlchemistDiscoveriesList}{##1}
 				\addToCounter{charAlchemistDiscoveriesCount}{-1}
 			}
@@ -61,7 +61,7 @@
 		\edef\charGrandDiscovery{}
 		\addClassFeature{Grand Discovery\ifthenelse{\equal{\charGrandDiscovery}{}}{}{: \charGrandDiscovery}}
 			\stepcounter{charAlchemistDiscoverisCount}
-			\DeclareDocumentCommand{\setGrandDiscovery}{m}{
+			\NewDocumentCommand{\setGrandDiscovery}{m}{
 				\def\charGrandDiscovery{#1}
 			}
 			\appto{\runchecks}{
@@ -82,18 +82,18 @@
 \newCounter{CavalierHitDieSize}
 \setCounter{CavalierHitDieSize}{10}
 \edef\CavalierClassSkillsList{}\forcsvlist\listadd{\CavalierClassSkillsList}{Bluff, Climb, Craft, Diplomacy, HandleAnimal, Intimidate, Profession, Ride, SenseMotive, Swim}
-\DeclareDocumentCommand{\addCavalierClassFeatures}{m}{
+\NewDocumentCommand{\addCavalierClassFeatures}{m}{
 		\addLimitedUse{Challenge}{\domath{(#1 + 2) / 3}}
 		\addClassFeature{Mount}
 		\def\charCavalierOrder{Order}
 			\edef\charCavalierOrderAbilitiesList{}
 			\addClassFeature{\charCavalierOrder\forlistloop{\\~~~~}{\charCavalierOrderAbilitiesList}}
 			\newCounter{charCavalierOrderAbilitiesCount}
-			\DeclareDocumentCommand{\addCavalierOrderAbility}{m}{
+			\NewDocumentCommand{\addCavalierOrderAbility}{m}{
 				\listadd{\charCavalierOrderAbilitiesList}{##1}
 				\addToCounter{charCavalierOrderAbilitiesCount}{-1}
 			}
-			\DeclareDocumentCommand{\setCavalierOrder}{m}{
+			\NewDocumentCommand{\setCavalierOrder}{m}{
 				\def\charCavalierOrder{##1}
 			}
 			\gappto{\RunChecks}{%

@@ -75,7 +75,7 @@
 		}{}
 	}
 }
-\DeclareDocumentCommand{\PrintResistances}{O{, } O{}}{%
+\NewDocumentCommand{\PrintResistances}{O{, } O{}}{%
 	\edef\@PrintList{}%
 	\edef\@@PrintList{}%
 	\edef\@PrintListlast{}
@@ -110,7 +110,7 @@
 		\setCounter{charDR/#1Count}{#2}
 	}{}
 }
-\DeclareDocumentCommand{\PrintDR}{O{, } O{}}{%
+\NewDocumentCommand{\PrintDR}{O{, } O{}}{%
 	\edef\@PrintList{}%
 	\edef\@@PrintList{}%
 	\edef\@PrintListlast{}
@@ -241,7 +241,7 @@
 \newCounter{charBonusFeatsCount}
 \newCounter{CountFeats-Mode}
 
-\DeclareDocumentCommand{\addFeat}{s s O{1} m}{
+\NewDocumentCommand{\addFeat}{s s O{1} m}{
 	\IfBooleanTF #1 {
 		\IfBooleanF #2 {
 			\addToCounter{charBonusFeatsCount}{-#3}
@@ -280,7 +280,7 @@
 	}
 }
 
-\DeclareDocumentCommand{\addFavoredClassSpecial}{m O{} O{*1}}{
+\NewDocumentCommand{\addFavoredClassSpecial}{m O{} O{*1}}{
 	\ifthenelse{\equal{#1}{}}{
 		\addFavoredClassSpecial{\arabic{charSpareFavoredClassLevelsCount}}[#2][#3]
 	}{
@@ -298,7 +298,7 @@
 \newCounter{charSpareSkillRanksCount}
 \newCounter{HP-Mode}
 \edef\charClassesList{}
-\DeclareDocumentCommand{\ImportCharClass}{s O{} m O{} m}{
+\NewDocumentCommand{\ImportCharClass}{s O{} m O{} m}{
 	\adddebug{IMPORTCHARCLASS: add #5 Levels of #4 #3}
 	\ifthenelse{\equal{#4}{}}{}{\appto\charLevel{\capitalize{#4} }}
 	\ifthenelse{\equal{#2}{}}{
@@ -442,7 +442,7 @@
 %%Gear%%
 \edef\charGearList{}
 \newlength{\GearItemWeight}
-\DeclareDocumentCommand{\addGearItem}{s O{1} m m}{%
+\NewDocumentCommand{\addGearItem}{s O{1} m m}{%
 	\IfBooleanTF #1 {%
 		\addtolength{\ExtradimensionalGearWeight}{#2pt * #4}%
 		\listadd{\charGearList}{#3\ifnum #2 > 1{ (#2)}\fi &\setLength{\GearItemWeight}{#2pt * #4} *\PrintWeight{\GearItemWeight}~lbs.}
@@ -1145,7 +1145,7 @@
 	\setCounter{charSpellcastingClass#1maxSpellLevelCount}{-1}
 	\newCounter{charSpellcasting#1hascantrips}
 	\setCounter{charSpellcasting#1hascantrips}{0}
-	\expandafter\DeclareDocumentCommand\csname newSpellcasting#1\endcsname{s O{9} m m m}{
+	\expandafter\NewDocumentCommand\csname newSpellcasting#1\endcsname{s O{9} m m m}{
 		\IfBooleanF ##1 {\setCounter{charSpellcasting#1hascantrips}{1}}
 		\setCounter{charSpellcastingClass#1maxSpellLevelCount}{##2}
 		\expandafter\renewcommand\csname charSpellcastingClass#1\endcsname{##3}
@@ -1154,7 +1154,7 @@
 	}
 }\docsvlist{One,Two}
 
-\DeclareDocumentCommand{\newSpellcasting}{s O{9} m m m}{
+\NewDocumentCommand{\newSpellcasting}{s O{9} m m m}{
 	\ifthenelse{\equal{\charSpellcastingClassOne}{}}{
 		\IfBooleanTF #1 {\newSpellcastingOne*[#2]{#3}{#4}{#5}} {\newSpellcastingOne[#2]{#3}{#4}{#5}}
 	}{

@@ -507,7 +507,7 @@
 	\ifthenelse{#1 > 9}{
 		\addToCounter{charRogueSpecialAbilitiesCount}{(#1 - 7) / 3}
 		\addClassFeature{Rogue Special Abilities\forlistloop{\\~~~~}{\charRogueSpecialAbilitiesList}}
-		\DeclareDocumentCommand{\addRogueSpecialAbility}{m}{
+		\NewDocumentCommand{\addRogueSpecialAbility}{m}{
 			\listinsert{\charRogueSpecialAbilitiesList}{##1}
 			\addToCounter{charRogueSpecialAbilitiesCount}{-1}
 		}
@@ -583,7 +583,7 @@
 	\ifthenelse{#1 > 4}{
 		\addClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\domath{#1 / 5}$}{}}
 	}{}
-	\DeclareDocumentCommand{\addWizardSpellcasting}{m O{} O{} O{}}{
+	\NewDocumentCommand{\addWizardSpellcasting}{m O{} O{} O{}}{
 		\newSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{Int}
 		\newCounter{charWizardforbiddenschoolsCount}
 		\addprimarySpellcasting{##1}
