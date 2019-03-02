@@ -247,12 +247,13 @@
 \newcommand\addRaceFeature[1]{\listadd\charRaceFeaturesList{#1}}
 \newcommand\addLimitedUse[2]{\listadd\charLimitedUseList{#1 & #2}}
 
-
+\newcommand{\datafolder}{.}
 %% Class Importing %%
 \newCounter{charTotalLevelCount}
 \newcounter{HP-Mode}
 \edef\charClassesList{}
 \NewDocumentCommand{\ImportCharClass}{s O{} m m}{
+	\input{\datafolder/Classes/#3.tex}
 	\adddebug{IMPORTCHARCLASS: add #4 Levels of #3}
 	\ifthenelse{\equal{#2}{}}{
 		\appto\charLevel{\capitalize{#3} #4 }
@@ -291,7 +292,7 @@
 	\setCounter{char#3ClassLevelCount}{#4}
 	\newcounter{char#3SpareSkillRanksCount}
 	\ifthenelse{\value{charTotalLevelCount} = 0}{
-		\setCounter{char#3SpareSkillRanksCount}{\value{#3SkillRanksPerLevelCount} * (3 + #4)}
+		\setCounter{char#3SpareSkillRanksCount}{(\value{charBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * (3 + #4)}
 		\ifthenelse{\value{HP-Mode} = 1}{
 			\addToCounter{charHPCount}{\value{#3HitDieSize}}
 			\addToCounter{charHPRollsCount}{1}
@@ -302,7 +303,7 @@
 			{}
 		}
 	}{
-		\setCounter{char#3SpareSkillRanksCount}{\value{#3SkillRanksPerLevelCount} * #4}
+		\setCounter{char#3SpareSkillRanksCount}{(\value{charBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * #4}
 		\ifthenelse{\value{HP-Mode} = 1}{
 		}{
 			\ifthenelse{\value{HP-Mode} = 2}{
@@ -318,6 +319,11 @@
 	\IfBooleanTF #1 {} {\csname add#3ClassFeatures\endcsname{#4}}
 }
 
+
+%% Race Importing %%
+\NewDocumentCommand{\ImportCharRace}{m}{
+	\input{\datafolder/Races/#1.tex}
+}
 
 %%%% Skills %%%%
 
@@ -377,6 +383,7 @@
 	}
 }
 
+\newCounter{charBonusSkillRanksPerLevelCount}
 %Commands to be run at sheet initialization
 \newcounter{AutoSkillRanks-Mode}
 \newcommand{\addIntToSkillRanks}{
@@ -1480,7 +1487,7 @@
 	\CheckEncumberance
 	\SpeedInitialize
 	\setCounter{charDextoACCount}{\minof{\value{charDexModCount}}{\value{charMaxDexBonusCount}}}
-%	\RunChecks
+	\RunChecks
 }
 
 %%3.5 System Checks
@@ -1490,47 +1497,47 @@
 	%CHECK HP ROLLS
 	\ifthenelse{\value{HP-Mode} = 1}{ %Only run if we are in rolls mode for HP
 		\adddebug{HP Mode == 1. Checking that the number of HP rolls is correct:\\
-				  Number of HP rolls: \arabic{charHPRollsCount}\\
-				  Level: \arabic{chartotallevelcount}}
+			Number of HP rolls: \arabic{charHPRollsCount}\\
+			Level: \arabic{charTotalLevelCount}}
 		\ifthenelse{\arabic{charHPRollsCount} < \arabic{chartotallevelcount}}{
 			\adddebug{Num HP rolls less than expected}
-			\addnotice{\domath{\value{chartotallevelcount} - \value{charHPRollsCount}} HP rolls missing}
+			\addnotice{\domath{\value{charTotalLevelCount} - \value{charHPRollsCount}} HP rolls missing}
 		}{
-			\ifthenelse{\arabic{charHPRollsCount} > \arabic{chartotallevelcount}}{
+			\ifthenelse{\arabic{charHPRollsCount} > \arabic{charTotalLevelCount}}{
 				\adddebug{Num HP rolls more than expected}
-				\addnotice{\domath{\value{charHPRollsCount} - \value{chartotallevelcount}} extra HP rolls}
+				\addnotice{\domath{\value{charHPRollsCount} - \value{charTotalLevelCount}} extra HP rolls}
 			}{\adddebug{Num HP rolls is correct}}
 		}
 	}{\adddebug{HP Mode != 1. No need to check HP rolls}}
 	%CHECK SKILL RANKS
 	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
 		\adddebug{Checking Skill Ranks}
-		\adddebug{Class List: \printlist{\charClasseslist}}
+		\adddebug{Class List: \PrintList{\charClasseslist}}
 		\renewcommand{\do}[1]{
 			\adddebug{Checking skill ranks for Class: ##1\\}
-			\ifthenelse{\value{char##1spareskillrankscount} > 0}{
-				\addnotice{Class ##1 has \arabic{char##1spareskillrankscount} skill ranks left to spend}
+			\ifthenelse{\value{char##1SpareSkillRanksCount} > 0}{
+				\addnotice{Class ##1 has \arabic{char##1SpareSkillRanksCount} skill ranks left to spend}
 			}{
-				\ifthenelse{\value{char##1spareskillrankscount} < 0}{
-					\addnotice{Class ##1 has spent \domath{-\value{char##1spareskillrankscount}} too many skill ranks}
+				\ifthenelse{\value{char##1SpareSkillRanksCount} < 0}{
+					\addnotice{Class ##1 has spent \domath{-\value{char##1SpareSkillRanksCount}} too many skill ranks}
 				}{}
 			}
-		}\dolistloop{\charClasseslist}
+		}\dolistloop{\charClassesList}
 	}{}
 	%CHECK FEATS
 	\ifthenelse{\value{CountFeats-Mode} = 1}{
 		\adddebug{Checking Feats}
-		\ifthenelse{\value{charbonusfeatscount} < 0}{
-			\addnotice{\domath{-\value{charbonusfeatscount}} too many bonus feats selected}
+		\ifthenelse{\value{charBonusFeatsCount} < 0}{
+			\addnotice{\domath{-\value{charBonusFeatsCount}} too many bonus feats selected}
 		}{
-		\ifthenelse{\value{charbonusfeatscount} > 0}{
-			\addnotice{\arabic{charbonusfeatscount} bonus feats left to select}
-		}{}}
+			\ifthenelse{\value{charBonusFeatsCount} > 0}{
+				\addnotice{\arabic{charBonusFeatsCount} bonus feats left to select}
+			}{}}
 		\ifthenelse{\value{charFeatsCount} < 0}{
 			\addnotice{\domath{-\value{charFeatsCount}} too many feats selected}
 		}{
-		\ifthenelse{\value{charFeatsCount} > 0}{
-			\addnotice{\arabic{charFeatsCount} feats left to select}
-		}{}}
+			\ifthenelse{\value{charFeatsCount} > 0}{
+				\addnotice{\arabic{charFeatsCount} feats left to select}
+			}{}}
 	}{}
 }

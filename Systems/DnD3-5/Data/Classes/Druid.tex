@@ -1,0 +1,56 @@
+\def\DruidBAB{a}
+\def\DruidFort{g}
+\def\DruidRef{p}
+\def\DruidWill{g}
+\newCounter{DruidSkillRanksPerLevelCount}
+\setCounter{DruidSkillRanksPerLevelCount}{4}
+\newCounter{DruidHitDieSize}
+\setCounter{DruidHitDieSize}{8}
+\edef\DruidClassSkillsList{}
+\forcsvlist{\listadd{\DruidClassSkillsList}}{Concentration, Craft, Diplomacy, HandleAnimal, Heal, KnowledgeNature, Listen, Profession, Ride, Spellcraft, Spot, Survival, Swim}
+\newcommand{\addDruidClassFeatures}[1]{
+	\addClassFeature{Animal Companion}
+	\addClassFeature{Nature Sense}\MiscBonus{KnowledgeNature}{2}\MiscBonus{Survival}{2}
+	\ifthenelse{\value{charHandleAnimalRanksCount} > 4}{
+		\addClassFeature{Wild Empathy +\domath{#1 + \value{charChaModCount} + 2}}
+	}{
+		\addClassFeature{Wild Empathy +\domath{#1 + \value{charChaModCount}}}
+	}
+	\ifthenelse{#1 > 1}{
+		\addClassFeature{Woodland Stride}
+	\ifthenelse{#1 > 2}{
+		\addClassFeature{Trackless Step}
+	\ifthenelse{#1 > 3}{
+		\addClassFeature{Resist Nature's Lure}
+			\addConditionalDefMod{+4 to saves vs. Spell-like abilities of fey}
+	\ifthenelse{#1 > 4}{
+		\newCounter{charWildShapeUsesCount}
+		\stepCounter{charWildShapeUsesCount}
+		\addLimitedUse{Wild Shape}{\arabic{charWildShapeUsesCount}}
+		\addClassFeature{Wild Shape \ifthenelse{#1 > 7}{(\ifthenelse{#1 > 14}{Huge}{Large}\ifthenelse{#1 > 10}{, Tiny}{}\ifthenelse{#1 > 11}{, Plant}{})}{}}
+	\ifthenelse{#1 > 5}{
+		\stepCounter{charWildShapeUsesCount}
+	\ifthenelse{#1 > 6}{
+		\stepCounter{charWildShapeUsesCount}
+	\ifthenelse{#1 > 8}{
+		\addClassFeature{Venom Immunity}
+		\addImmunity{poison}
+	\ifthenelse{#1 > 9}{
+		\stepCounter{charWildShapeUsesCount}
+	\ifthenelse{#1 > 12}{
+		\addClassFeature{A Thousand Faces}
+	\ifthenelse{#1 > 13}{
+		\stepCounter{charWildShapeUsesCount}
+	\ifthenelse{#1 > 14}{
+		\addClassFeature{Timeless Body}
+	\ifthenelse{#1 > 15}{
+		\addClassFeature{\ifthenelse{#1 > 19}{Huge }{}Elemental Wild Shape}
+		\addLimitedUse{Elemental Wild Shape}{\domath{(#1 - 14) / 2}}
+	\ifthenelse{#1 > 17}{
+		\stepCounter{charWildShapeUsesCount}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+	\newcommand{\addDruidSpellcasting}[1]{
+		\newSpellcasting[(##1 + 1) / 2]{Druid}{##1}{Wis}
+		\addprimarySpellcasting{##1}
+	}
+}

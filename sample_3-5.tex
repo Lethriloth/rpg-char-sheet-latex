@@ -3,7 +3,7 @@
 \usepackage{longtable}
 \usepackage{multicol}
 \begin{document}
-	\input{Systems/DnD3-5/Data/Core_Classes.tex}
+	\renewcommand{\datafolder}{Systems/DnD3-5/Data/}
 	\setCounter{XP-Mode}{1} % Boolean, automatically calculates next-level XP
 	\setCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
 	\setCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive skill point increases.
@@ -35,14 +35,15 @@
 	\setCharCha{19}
 	
 	% Racial Mods
-	\setSize{Medium}
-	\addToCounter{charStrBaseCount}{0}
-	\addToCounter{charDexBaseCount}{0}
-	\setCharSpeed{30}
-	\addRaceFeature{Race Feature}
-	\renewcommand\do[1]{
-		\addCharLanguage{#1}
-	}\docsvlist{Common}
+	\ImportCharRace{Human}
+%	\setSize{Medium}
+%	\addToCounter{charStrBaseCount}{0}
+%	\addToCounter{charDexBaseCount}{0}
+%	\setCharSpeed{30}
+%	\addRaceFeature{Race Feature}
+%	\renewcommand\do[1]{
+%		\addCharLanguage{#1}
+%	}\docsvlist{Common}
 	
 	
 	%\newcommand{\testclass}{wizard}

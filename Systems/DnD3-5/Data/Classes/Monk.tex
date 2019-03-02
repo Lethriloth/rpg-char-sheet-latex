@@ -1,0 +1,103 @@
+\def\MonkBAB{a}
+\def\MonkFort{g}
+\def\MonkRef{g}
+\def\MonkWill{g}
+\newCounter{MonkSkillRanksPerLevelCount}
+\setCounter{MonkSkillRanksPerLevelCount}{4}
+\newCounter{MonkHitDieSize}
+\setCounter{MonkHitDieSize}{8}
+\edef\MonkClassSkillsList{}
+\forcsvlist{\listadd{\MonkClassSkillsList}}{Balance, Climb, Concentration, Craft, Diplomacy, EscapeArtist, Hide, Jump, KnowledgeArcana, KnowledgeReligion, Listen, MoveSilently, Perform, Profession, SenseMotive, Spot, Swim, Tumble}
+\newcommand{\addMonkClassFeatures}[1]{
+		\addClassFeature{\ifthenelse{#1 > 10}{Greater }Flurry of Blows}
+			\newCounter{charFlurryOfBlowsPenaltyCount}\setCounter{charFlurryOfBlowsPenaltyCount}{-2}
+			\newCounter{charFlurryOfBlowsAttacksCount}\stepCounter{charFlurryOfBlowsAttacksCount}
+%			\addAutoWeapon[\value{charFlurryOfBlowsAttacksCount}]{Flurry of Blows}{\value{charFlurryOfBlowsPenaltyCount}}{\charUnarmedStrikeDamage + \arabic{charStrModCount}}{20}{B}{melee}{}{str}
+		\addClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{3}{2}$}{}}
+		\addToCounter{charBonusFeatsCount}{2}
+			\newcommand{\charUnarmedStrikeDamage}{
+				\ifthenelse{\equal{\charSize}{Small}}{%
+					\ifthenelse{#1 > 15}{2d\domath{6 + ((#1 - 16)/ 4) * 2}}{1d\domath{4 + (#1 / 4) * 2}}%
+				}{%
+				\ifthenelse{\equal{\charSize}{Medium}}{%
+					\ifthenelse{#1 > 11}{2d\domath{6 + ((#1 - 12)/ 4) * 2}}{1d\domath{6 + (#1 / 4) * 2}}%
+				}{%
+				\ifthenelse{\equal{\charSize}{Large}}{%
+					\ifthenelse{#1 > 3}{%
+						\ifthenelse{#1 > 11}{%
+							\ifthenelse{#1 > 19}{4d8}{%
+							3d\domath{6 + ((#1 - 12)/ 4) * 2}}%
+						}{%
+							2d\domath{6 + ((#1 - 4)/ 4) * 2}%
+						}%
+					}{%
+						1d8%
+					}%
+				}{}}{}}{}
+			}
+		\addClassFeature{Unarmed Strike \charUnarmedStrikeDamage}
+			\addFeat*{Improved Unarmed Strike}
+		\addClassFeature{Monk AC Bonus}
+			\appto\Initialize{
+				\ifthenelse{\equal{\charArmorType}{}}{
+					\MiscBonus{AC}{#1 / 5 + \value{charWisModCount}}
+					\MiscBonus{TouchAC}{#1 / 5 + \value{charWisModCount}}
+					\MiscBonus{FlatFootedAC}{#1 / 5 + \value{charWisModCount}}
+				}{}
+			}
+	\ifthenelse{#1 > 1}{
+		\addClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
+		\ifthenelse{#1 > 8}{\addSpecialDefense{Improved Evasion}}{\addSpecialDefense{Evasion}}
+		\stepCounter{charBonusFeatsCount}
+	\ifthenelse{#1 > 2}{
+		\addClassFeature{Still Mind}\addConditionalDefMod{+2 on saves vs. Enchantment}
+		\EnhancementBonus{Speed}{#1 / 3 * 10}
+	\ifthenelse{#1 > 3}{
+		\addClassFeature{Ki Strike (magic\ifthenelse{#1 > 9}{%
+			, lawful%
+			\ifthenelse{#1 > 15}{, adamantine}{}%
+			}{})
+		}
+		\addClassFeature{Slow Fall \ifthenelse{#1 < 20}{\domath{#1 / 2}0 ft.}{any distance}}
+	\ifthenelse{#1 > 4}{
+		\addClassFeature{Purity of Body}\addImmunity{Disease}
+		\stepCounter{charFlurryOfBlowsPenaltyCount}
+	\ifthenelse{#1 > 5}{
+		\stepCounter{charBonusFeatsCount}
+	\ifthenelse{#1 > 6}{
+		\addLimitedUse{Wholeness of Body (hit points)}{\domath{#1 * 2}}
+	\ifthenelse{#1 > 8}{
+		\stepCounter{charFlurryOfBlowsPenaltyCount}
+	\ifthenelse{#1 > 10}{
+		\stepCounter{charFlurryOfBlowsAttacksCount}
+		\addClassFeature{Diamond Body}
+			\addImmunity{poison}
+	\ifthenelse{#1 > 11}{
+		\addLimitedUse{Abundant Step (\domath{(#1 / 2) * 40 + 400} ft.)}{1}
+	\ifthenelse{#1 > 12}{
+		\addClassFeature{Diamond Soul}
+			\addSpellResistance{#1 + 10}
+	\ifthenelse{#1 > 14}{
+		\addLimitedUse{Quivering Palm (DC \domath{10 + #1 / 2 + \value{charWisModCount}}; (1/week))}{1}
+	\ifthenelse{#1 > 16}{
+		\addClassFeature{Timeless Body}
+		\addClassFeature{Tongue of the Sun and Moon}\listadd{\charLanguagesList}{Can speak with any living creature}
+	\ifthenelse{#1 > 18}{
+		\addLimitedUse{Empty Body (rounds)}{#1}
+	\ifthenelse{#1 > 19}{
+		\addClassFeature{Perfect Self}\addDR{magic}{10}
+	}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}{}
+}

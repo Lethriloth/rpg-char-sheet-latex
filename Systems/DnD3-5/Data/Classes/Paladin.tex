@@ -1,0 +1,50 @@
+\def\PaladinBAB{g}
+\def\PaladinFort{g}
+\def\PaladinRef{p}
+\def\PaladinWill{p}
+\newCounter{PaladinSkillRanksPerLevelCount}
+\setCounter{PaladinSkillRanksPerLevelCount}{2}
+\newCounter{PaladinHitDieSize}
+\setCounter{PaladinHitDieSize}{10}
+\edef\PaladinClassSkillsList{}
+\forcsvlist{\listadd{\PaladinClassSkillsList}}{Concentration, Craft, Diplomacy, HandleAnimal, Heal, KnowledgeNobility, KnowledgeReligion, Profession, Ride, SenseMotive}
+\newcommand{\addPaladinClassFeatures}[1]{
+		\addClassFeature{Aura of Good}
+		\addClassFeature{Detect Evil}
+		\addLimitedUse{Smite Evil}{\domath{#1 / 5 + 1}}
+	\ifthenelse{#1 > 1}{
+		\addClassFeature{Divine Grace}{
+			\gappto\Initialize{
+				\MiscBonus{Fortitude}{\value{charChaModCount}}
+				\MiscBonus{Reflex}{\value{charChaModCount}}
+				\MiscBonus{Will}{\value{charChaModCount}}
+			}
+		}
+		\addLimitedUse{Lay on Hands (hp)}{\domath{#1 * \value{charChaModCount}}}
+	\ifthenelse{#1 > 2}{
+		\addClassFeature{Aura of Courage}\addImmunity{fear}
+		\addClassFeature{Divine Health}\addImmunity{Disease}
+	\ifthenelse{#1 > 3}{
+		\newCounter{charturnundeadusesCount}
+		\setCounter{charturnundeadusesCount}{3 + \value{charChaModCount}}
+		\addLimitedUse{Turn Undead}{\arabic{charturnundeadusesCount}}
+		\newcommand{\addPaladinSpellcasting}[1]{
+			\setCounter{@i}{0}
+			\ifthenelse{##1 > 3}{
+				\stepCounter{@i}
+			\ifthenelse{##1 > 7}{
+				\stepCounter{@i}
+			\ifthenelse{##1 > 11}{
+				\stepCounter{@i}
+			\ifthenelse{##1 > 13}{
+				\stepCounter{@i}
+			}{}}{}}{}}{}
+			\newSpellcasting*[\value{@i}]{Paladin}{##1 / 2}{Wis}
+			\addhalfSpellcasting{##1}
+		}
+	\ifthenelse{#1 > 4}{
+		\addClassFeature{Special Mount}
+	\ifthenelse{#1 > 6}{
+		\addLimitedUse{Remove Disease (per week)}{\domath{#1 / 3 - 1}}
+	}{}}{}}{}}{}}{}
+}

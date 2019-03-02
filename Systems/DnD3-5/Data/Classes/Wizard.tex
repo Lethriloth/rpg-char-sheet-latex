@@ -1,0 +1,280 @@
+\def\WizardBAB{p}
+\def\WizardFort{p}
+\def\WizardRef{p}
+\def\WizardWill{g}
+\newCounter{WizardSkillRanksPerLevelCount}
+\setCounter{WizardSkillRanksPerLevelCount}{2}
+\newCounter{WizardHitDieSize}
+\setCounter{WizardHitDieSize}{4}
+\edef\WizardClassSkillsList{}
+\forcsvlist{\listadd{\WizardClassSkillsList}}{Concentration, Craft, DecipherScript, KnowledgeArcana, KnowledgeDungeoneering, KnowledgeEngineering, KnowledgeHistory, KnowledgeGeography, KnowledgeHistory, KnowledgeLocal, KnowledgeNature, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion, Profession, Spellcraft}
+\newcommand{\addWizardClassFeatures}[1]{
+	\addClassFeature{Summon Familiar}
+	\addClassFeature{Scribe Scroll}
+	\addToCounter{charBonusFeatsCount}{#1 / 5 + 1}
+	\addFeat*{Scribe Scroll}
+	\ifthenelse{#1 > 4}{
+		\addClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\domath{#1 / 5}$}{}}
+	}{}
+	\NewDocumentCommand{\addWizardSpellcasting}{m O{} O{} O{}}{
+		\newSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{Int}
+		\newCounter{charWizardforbiddenschoolsCount}
+		\addprimarySpellcasting{##1}
+		\ifthenelse{\equal{##2}{}}{}{
+			\forloop{@i}{1}{\value{@i}<10}{
+				\addBonusSpellSlots{\arabic{@i}}{1}
+			}
+			\addSpellcastingSpecialization[Focus School]{##2}
+			\ifthenelse{\equal{##2}{Divination}}{
+				\addToCounter{charWizardforbiddenschoolsCount}{1}
+			}{
+				\addToCounter{charWizardforbiddenschoolsCount}{2}
+			}
+			\ifthenelse{\equal{##3}{}}{}{
+				\addSpellcastingProhibition[Banned School]{##3}
+				\addToCounter{charWizardforbiddenschoolsCount}{-1}
+			}
+			\ifthenelse{\equal{##4}{}}{}{
+				\addSpellcastingProhibition[Banned School]{##4}
+				\addToCounter{charWizardforbiddenschoolsCount}{-1}
+			}
+		}
+		\appto{\RunChecks}{
+			%%CHECK NUMBER OF PROHIBITED SCHOOLS
+			\ifthenelse{\value{charWizardforbiddenschoolsCount} > 0}{
+				\addnotice{Choose \arabic{charWizardforbiddenschoolsCount} more prohibited schools}
+			}{
+			\ifthenelse{\value{charWizardforbiddenschoolsCount} < 0}{
+				\addnotice{You can remove \domath{-\value{charWizardforbiddenschoolsCount}} prohibited schools}
+			}{}}
+		}
+	}
+}
+
+\newcommand{\addprimarySpellcasting}[1]{
+\addSpellSlots{0}{3}
+	\addSpellSlots{1}{1}
+	\ifthenelse{#1 > 1}{
+		\addSpellSlots{0}{1}
+		\addSpellSlots{1}{1}
+	\ifthenelse{#1 > 2}{
+		\addSpellSlots{2}{1}
+	\ifthenelse{#1 > 3}{
+		\addSpellSlots{0}{1}
+		\addSpellSlots{1}{1}
+		\addSpellSlots{2}{1}
+	\ifthenelse{#1 > 4}{
+		\addSpellSlots{3}{1}
+	\ifthenelse{#1 > 5}{
+		\addSpellSlots{2}{1}
+		\addSpellSlots{3}{1}
+	\ifthenelse{#1 > 6}{
+		\addSpellSlots{4}{1}
+		\addSpellSlots{0}{1}
+		\addSpellSlots{1}{1}
+	\ifthenelse{#1 > 7}{
+		\addSpellSlots{3}{1}
+		\addSpellSlots{4}{1}
+	\ifthenelse{#1 > 8}{
+		\addSpellSlots{5}{1}
+		\addSpellSlots{2}{1}
+	\ifthenelse{#1 > 9}{
+		\addSpellSlots{4}{1}
+		\addSpellSlots{5}{1}	
+	\ifthenelse{#1 > 10}{
+		\addSpellSlots{6}{1}
+		\addSpellSlots{3}{1}
+		\addSpellSlots{1}{1}
+	\ifthenelse{#1 > 11}{
+		\addSpellSlots{5}{1}
+		\addSpellSlots{6}{1}
+	\ifthenelse{#1 > 12}{
+		\addSpellSlots{7}{1}
+		\addSpellSlots{4}{1}
+		\addSpellSlots{2}{1}
+	\ifthenelse{#1 > 13}{
+		\addSpellSlots{6}{1}
+		\addSpellSlots{7}{1}
+	\ifthenelse{#1 > 14}{
+		\addSpellSlots{8}{1}
+		\addSpellSlots{5}{1}
+		\addSpellSlots{3}{1}
+	\ifthenelse{#1 > 15}{
+		\addSpellSlots{7}{1}
+		\addSpellSlots{8}{1}
+	\ifthenelse{#1 > 16}{
+		\addSpellSlots{9}{1}
+		\addSpellSlots{6}{1}
+		\addSpellSlots{4}{1}
+	\ifthenelse{#1 > 17}{
+		\addSpellSlots{8}{1}
+		\addSpellSlots{9}{1}
+	\ifthenelse{#1 > 18}{
+		\addSpellSlots{7}{1}
+		\addSpellSlots{9}{1}
+		\addSpellSlots{5}{1}
+	\ifthenelse{#1 > 19}{
+		\addSpellSlots{8}{1}
+		\addSpellSlots{9}{1}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}
+\newcommand{\addspontaneousprimarySpellcasting}[1]{
+	\addSpellSlots{0}{5}
+	\addSpellSlots{1}{3}
+	\ifthenelse{#1 > 1}{
+		\addSpellSlots{0}{1}
+		\addSpellSlots{1}{1}
+	\ifthenelse{#1 > 2}{
+		\addSpellSlots{1}{1}
+	\ifthenelse{#1 > 3}{
+		\addSpellSlots{1}{1}
+		\addSpellSlots{2}{3}
+	\ifthenelse{#1 > 4}{
+		\addSpellSlots{2}{1}
+	\ifthenelse{#1 > 5}{
+		\addSpellSlots{2}{1}
+		\addSpellSlots{3}{3}
+	\ifthenelse{#1 > 6}{
+		\addSpellSlots{2}{1}
+		\addSpellSlots{3}{1}
+	\ifthenelse{#1 > 7}{
+		\addSpellSlots{3}{1}
+		\addSpellSlots{4}{3}
+	\ifthenelse{#1 > 8}{
+		\addSpellSlots{3}{1}
+		\addSpellSlots{4}{1}
+	\ifthenelse{#1 > 9}{
+		\addSpellSlots{4}{1}
+		\addSpellSlots{5}{3}	
+	\ifthenelse{#1 > 10}{
+		\addSpellSlots{4}{1}
+		\addSpellSlots{5}{1}
+	\ifthenelse{#1 > 11}{
+		\addSpellSlots{5}{1}
+		\addSpellSlots{6}{3}
+	\ifthenelse{#1 > 12}{
+		\addSpellSlots{5}{1}
+		\addSpellSlots{6}{1}
+	\ifthenelse{#1 > 13}{
+		\addSpellSlots{6}{1}
+		\addSpellSlots{7}{3}
+	\ifthenelse{#1 > 14}{
+		\addSpellSlots{6}{1}
+		\addSpellSlots{7}{1}
+	\ifthenelse{#1 > 15}{
+		\addSpellSlots{7}{1}
+		\addSpellSlots{8}{3}
+	\ifthenelse{#1 > 16}{
+		\addSpellSlots{7}{1}
+		\addSpellSlots{8}{1}
+	\ifthenelse{#1 > 17}{
+		\addSpellSlots{8}{1}
+		\addSpellSlots{9}{3}
+	\ifthenelse{#1 > 18}{
+		\addSpellSlots{8}{1}
+		\addSpellSlots{9}{1}
+	\ifthenelse{#1 > 19}{
+		\addSpellSlots{9}{2}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+
+}
+\newcommand{\addtwothirdsSpellcasing}[1]{
+		\addSpellSlots{0}{2}
+		\addSpellsknown{0}{4}
+		\ifthenelse{#1 > 1}{
+			\addSpellSlots{0}{1}
+			\addSpellsknown{0}{1}
+			\addSpellsknown{1}{2}
+		\ifthenelse{#1 > 2}{
+			\addSpellSlots{1}{1}
+			\addSpellsknown{0}{1}
+			\addSpellsknown{1}{1}
+		\ifthenelse{#1 > 3}{
+			\addSpellSlots{1}{1}
+			\addSpellsknown{2}{2}
+		\ifthenelse{#1 > 4}{
+			\addSpellSlots{1}{1}
+			\addSpellSlots{2}{1}
+			\addSpellsknown{1}{1}
+			\addSpellsknown{2}{1}
+		\ifthenelse{#1 > 5}{
+			\addSpellSlots{2}{1}
+		\ifthenelse{#1 > 6}{
+			\addSpellsknown{2}{1}
+			\addSpellsknown{3}{2}
+		\ifthenelse{#1 > 7}{
+			\addSpellSlots{2}{1}
+			\addSpellSlots{3}{1}
+			\addSpellsknown{3}{1}
+		\ifthenelse{#1 > 8}{
+			\addSpellSlots{3}{1}
+		\ifthenelse{#1 > 9}{
+			\addSpellsknown{3}{1}
+			\addSpellsknown{4}{2}
+		\ifthenelse{#1 > 10}{
+			\addSpellSlots{3}{1}
+			\addSpellSlots{4}{1}
+			\addSpellsknown{4}{1}
+		\ifthenelse{#1 > 11}{
+			\addSpellSlots{4}{1}
+		\ifthenelse{#1 > 12}{
+			\addSpellsknown{4}{1}
+			\addSpellsknown{5}{2}
+		\ifthenelse{#1 > 13}{
+			\addSpellSlots{0}{1}
+			\addSpellSlots{4}{1}
+			\addSpellSlots{5}{1}
+			\addSpellsknown{5}{1}
+		\ifthenelse{#1 > 14}{
+			\addSpellSlots{1}{1}
+			\addSpellSlots{5}{1}
+		\ifthenelse{#1 > 15}{
+			\addSpellSlots{2}{1}
+			\addSpellsknown{1}{1}
+			\addSpellsknown{5}{1}
+			\addSpellsknown{6}{2}
+		\ifthenelse{#1 > 16}{
+			\addSpellSlots{3}{1}
+			\addSpellSlots{5}{1}
+			\addSpellSlots{6}{1}
+			\addSpellsknown{2}{1}
+			\addSpellsknown{6}{1}
+		\ifthenelse{#1 > 17}{
+			\addSpellSlots{4}{1}
+			\addSpellSlots{6}{1}
+			\addSpellsknown{3}{1}
+		\ifthenelse{#1 > 18}{
+			\addSpellSlots{5}{1}
+			\addSpellSlots{6}{1}
+			\addSpellsknown{4}{1}
+			\addSpellsknown{6}{1}
+		\ifthenelse{#1 > 19}{
+			\addSpellSlots{6}{1}
+			\addSpellsknown{5}{1}
+		}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}
+\newcommand{\addhalfSpellcasting}[1]{
+	\ifthenelse{#1 > 5}{
+		\addSpellSlots{1}{1}
+	\ifthenelse{#1 > 9}{
+		\addSpellSlots{2}{1}
+	\ifthenelse{#1 > 11}{
+		\addSpellSlots{3}{1}
+	\ifthenelse{#1 > 13}{
+		\addSpellSlots{1}{1}
+	\ifthenelse{#1 > 14}{
+		\addSpellSlots{4}{1}
+	\ifthenelse{#1 > 15}{
+		\addSpellSlots{2}{1}
+	\ifthenelse{#1 > 16}{
+		\addSpellSlots{3}{1}
+	\ifthenelse{#1 > 17}{
+		\addSpellSlots{1}{1}
+	\ifthenelse{#1 > 18}{
+		\addSpellSlots{2}{1}
+		\addSpellSlots{3}{1}
+		\addSpellSlots{4}{1}
+	\ifthenelse{#1 > 19}{
+		\addSpellSlots{4}{1}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}

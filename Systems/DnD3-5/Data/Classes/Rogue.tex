@@ -1,0 +1,47 @@
+\def\RogueBAB{a}
+\def\RogueFort{p}
+\def\RogueRef{g}
+\def\RogueWill{p}
+\newCounter{RogueSkillRanksPerLevelCount}
+\setCounter{RogueSkillRanksPerLevelCount}{8}
+\newCounter{RogueHitDieSize}
+\setCounter{RogueHitDieSize}{6}
+\edef\RogueClassSkillsList{}
+\forcsvlist{\listadd{\RogueClassSkillsList}}{Appraise, Balance, Bluff, Climb, Craft, DecipherScript, Diplomacy, DisableDevice, Disguise, EscapeArtist, Forgery, GatherInformation, Hide, Intimidate, Jump, KnowledgeLocal, Listen, MoveSilently, OpenLock, Perform, Profession, Search, SenseMotive, SleightOfHand, Spot, Swim, Tumble, UseMagicDevice, UseRope}
+\newcommand{\addRogueClassFeatures}[1]{
+	\addClassFeature{Sneak Attack +\domath{(#1 + 1)/2}d6}
+	\addClassFeature{Trapfinding}
+	\edef\charRogueSpecialAbilitiesList{}
+	\edef\charSkillMasteryList{}
+	\newCounter{charRogueSpecialAbilitiesCount}
+	\ifthenelse{#1 > 1}{
+		\addClassFeature{Evasion}
+			\ifinlist{Improved Evasion}{\charRogueSpecialAbilitiesList}{
+				\addSpecialDefense{Improved Evasion}
+			}{
+				\addSpecialDefense{Evasion}
+			}
+	\ifthenelse{#1 > 2}{
+		\addClassFeature{Trap Sense +\domath{#1 / 3}}
+			\addConditionalDefMod{+\domath{#1 / 3} to Reflex and AC vs. traps}
+	\ifthenelse{#1 > 3}{
+		\addClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
+			\ifthenelse{#1 > 7}{\addSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
+	\ifthenelse{#1 > 9}{
+		\addToCounter{charRogueSpecialAbilitiesCount}{(#1 - 7) / 3}
+		\addClassFeature{Rogue Special Abilities\forlistloop{\\~~~~}{\charRogueSpecialAbilitiesList}}
+		\NewDocumentCommand{\addRogueSpecialAbility}{m}{
+			\listinsert{\charRogueSpecialAbilitiesList}{##1}
+			\addToCounter{charRogueSpecialAbilitiesCount}{-1}
+		}
+		\gappto{\RunChecks}{%
+			%%CHECK ROGUE SPECIAL ABILITIES
+			\ifthenelse{\value{charRogueSpecialAbilitiesCount} < 0}{
+				\addnotice{\domath{-\value{charRogueSpecialAbilitiesCount}} too many Rogue special abilities}
+			}{
+			\ifthenelse{\value{charRogueSpecialAbilitiesCount} > 0}{
+				\addnotice{Choose \arabic{charRogueSpecialAbilitiesCount} more Rogue special abilities}
+			}{}}
+		}
+	}{}}{}}{}}{}
+}
