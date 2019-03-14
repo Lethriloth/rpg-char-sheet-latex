@@ -1,0 +1,12 @@
+\renewcommand\charRace{Elf}
+\setSize{Medium}
+\addToCounter{charConBaseCount}{-2}
+\addToCounter{charDexBaseCount}{2}
+\setCharSpeed{30}
+\addRaceFeature{Low-Light Vision}
+\addRaceFeature{Keen Senses}
+	\MiscBonus[racial]{Perception}{2}
+	\MiscBonus[racial]{Search}{2}
+	\addConditionalSkillMod{Free Search check for secret doors within 5 ft.}
+\addRaceFeature{Elven Immunities}
+	\addImmunity{Sleep}\addconditionaldefmod{+2 vs. Enchantment}
