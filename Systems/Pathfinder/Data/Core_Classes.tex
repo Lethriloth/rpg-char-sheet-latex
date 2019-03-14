@@ -442,7 +442,7 @@
 				\stepCounter{@i}
 			}{}}{}}{}}{}
 			\newSpellcasting*[\value{@i}]{Paladin}{##1 / 2}{Cha}
-			\addhalfSpellcasting{##1}
+			\addHalfSpellcasting{##1}
 		}
 	\ifthenelse{#1 > 4}{
 		\addClassFeature{Divine Bond}
@@ -563,7 +563,7 @@
 				\stepCounter{@i}
 			}{}}{}}{}}{}
 			\newSpellcasting*[\value{@i}]{Ranger}{##1 / 2}{wis}
-			\addhalfSpellcasting{##1}
+			\addHalfSpellcasting{##1}
 		}
 	\ifthenelse{#1 > 6}{
 		\addClassFeature{Woodland Stride}
@@ -1084,7 +1084,7 @@
 																				\addSpellsKnown{5}{1}
 																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
-\newcommand{\addhalfSpellcasting}[1]{
+\newcommand{\addHalfSpellcasting}[1]{
 	\ifthenelse{#1 > 5}{
 		\addSpellslots{1}{1}
 		\ifthenelse{#1 > 9}{

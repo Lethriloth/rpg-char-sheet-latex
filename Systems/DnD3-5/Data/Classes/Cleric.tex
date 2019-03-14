@@ -14,7 +14,7 @@
 	\addLimitedUse{Turn/Rebuke Undead}{\arabic{charturnrebukeundeadusesCount}}
 	\newcommand{\addClericSpellcasting}[3]{
 		\newSpellcasting[(##1 + 1) / 2]{Cleric}{##1}{Wis}
-		\addprimarySpellcasting{##1}
+		\addPrimarySpellcasting{##1}
 		\forloop{@i}{1}{\value{@i}<10}{
 			\addBonusSpellSlots{\arabic{@i}}{1}
 		}

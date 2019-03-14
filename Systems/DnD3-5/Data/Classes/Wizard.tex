@@ -19,7 +19,7 @@
 	\NewDocumentCommand{\addWizardSpellcasting}{m O{} O{} O{}}{
 		\newSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{Int}
 		\newCounter{charWizardforbiddenschoolsCount}
-		\addprimarySpellcasting{##1}
+		\addPrimarySpellcasting{##1}
 		\ifthenelse{\equal{##2}{}}{}{
 			\forloop{@i}{1}{\value{@i}<10}{
 				\addBonusSpellSlots{\arabic{@i}}{1}

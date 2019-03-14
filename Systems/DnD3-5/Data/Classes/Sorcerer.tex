@@ -16,7 +16,7 @@
 		}{
 			\newSpellcasting[##1 / 2]{Sorcerer}{##1}{cha}
 		}
-		\addspontaneousprimarySpellcasting{##1}
+		\addSpontaneousPrimarySpellcasting{##1}
 		\ifthenelse{##1 > 9}{\addSpellsknown{0}{9}}{\addSpellsknown{0}{{##1/2 + 4}}}
 		\ifthenelse{##1 > 6}{\addSpellsknown{1}{5}}{\addSpellsknown{1}{##1/3 + 2}}
 		\ifthenelse{##1 > 10}{
