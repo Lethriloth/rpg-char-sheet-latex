@@ -334,7 +334,7 @@
 \forcsvlist{\listadd\SkillsList}{Appraise, Balance, Bluff, Climb, Concentration, CraftOne, CraftTwo, CraftThree, DecipherScript, Diplomacy, DisableDevice, Disguise, EscapeArtist, Forgery, GatherInformation, HandleAnimal, Heal, Hide, Intimidate, Jump, Listen, MoveSilently, OpenLock, PerformOne, PerformTwo, PerformThree, ProfessionOne, ProfessionTwo, Ride, Search, SenseMotive, SleightOfHand, SpeakLanguage, Spellcraft, Spot, Survival, Swim, Tumble, UseMagicDevice, UseRope}
 \forlistloop{\listadd\SkillsList}{\KnowledgeSkillsList}
 
-%% Define lists for armor check penalty and trained-only
+%% Define lists for armor check Penalty and trained-only
 \edef\ArmorCheckSkillsList{}
 \forcsvlist{\listadd\ArmorCheckSkillsList}{Balance, Climb, EscapeArtist, Hide, Jump, MoveSilently, SleightOfHand, Swim, Swim, Tumble}
 \edef\TrainedSkillsList{}
@@ -379,7 +379,7 @@
 		}{
 			\addToCounter{char#2RanksCount}{#3 / 2}
 		}
-		\addToCounter{char#1SpareSkillRanksCount}{-#3}
+		\addToCounter{char#1SpareSkillRanksCount}{-1 * (#3)}
 	}
 }
 
@@ -600,11 +600,11 @@
 \newcommand{\charArmorName}{}
 \newcommand{\charArmorNotes}{}
 \newcommand{\charArmorType}{}
-\newCounter{charArmorArmorCheckpenaltyCount}
+\newCounter{charArmorArmorCheckPenaltyCount}
 \newCounter{charArmorSpellFailureCount}
 \newcommand{\charShieldName}{}
 \newcommand{\charShieldNotes}{}
-\newCounter{charShieldArmorCheckpenaltyCount}
+\newCounter{charShieldArmorCheckPenaltyCount}
 \newCounter{charShieldSpellFailureCount}
 
 %Command to add an armor item
@@ -614,15 +614,15 @@
 	\ifthenelse{\equal{#3}{}}{}{\setCounter{charMaxDexArmorCount}{#3}}
 	\ifthenelse{\value{charMaxDexArmorCount}<\value{charMaxDexBonusCount}}
 	{\setCounter{charMaxDexBonusCount}{\value{charMaxDexArmorCount}}}{}
-	\addToCounter{charArmorArmorCheckpenaltyCount}{#4}
+	\setCounter{charArmorArmorCheckPenaltyCount}{#4}
 	\renewcommand{\do}[1]{
 		\MiscBonus{##1}{#4}
-	}\dolistloop{\ArmorCheckSkillslist}
+	}\dolistloop{\ArmorCheckSkillsList}
 	\addToCounter{charArmorSpellFailureCount}{#5}
 	\addToCounter{TotalACItemsSpellFailure}{#5}
 	\renewcommand{\charArmorType}{#6}
 	\renewcommand{\charArmorNotes}{#8}
-	\addArmorItem{#1}{#9}{#7}
+	\addBodyItem{#1}{#9}{#7}
 }
 
 %Command to add a shield item
@@ -631,14 +631,14 @@
 	\ifthenelse{\equal{#3}{}}{}{\setCounter{charMaxDexShieldCount}{#3}}
 	\ifthenelse{\value{charMaxDexShieldCount}<\value{charMaxDexBonusCount}}
 	{\setCounter{charMaxDexBonusCount}{\value{charMaxDexShieldCount}}}{}
-	\addCounter{charShieldArmorCheckpenaltyCount}{#4}
+	\setCounter{charShieldArmorCheckPenaltyCount}{#4}
 	\renewcommand{\do}[1]{
 		\MiscBonus{##1}{#4}
-	}\dolistloop{\ArmorCheckSkillslist}
+	}\dolistloop{\ArmorCheckSkillsList}
 	\setCounter{charShieldSpellFailureCount}{#5}
 	\addToCounter{TotalACItemsSpellFailure}{#5}
-	\renewcommand{\charShieldNotes}{#8}
-	\addGearItem{Shield}{#7}
+	\renewcommand{\charShieldNotes}{#7}
+	\addGearItem{Shield}{#6}
 }
 
 %Initialize variables for Item Slots
