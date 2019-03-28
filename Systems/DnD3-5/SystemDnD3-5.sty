@@ -415,7 +415,7 @@
 }
 \newcommand{\CalculateSynergyBonuses}{
 	\ifthenelse{\value{charBluffRanksCount} > 4}{
-		\MiscBonus{Dipomacy}{2}
+		\MiscBonus{Diplomacy}{2}
 		\MiscBonus{Intimidate}{2}
 		\MiscBonus{SleightOfHand}{2}
 		\addConditionalSkillMod{+2 to Disguise checks to act in character}
@@ -445,14 +445,14 @@
 	\ifthenelse{\value{charKnowledgeDungeoneeringRanksCount} > 4}{
 		\addConditionalSkillMod{+2 to Survival checks in aboveground natural environments}}{}
 	\ifthenelse{\value{charKnowledgeNobilityRanksCount} > 4}{
-		\MiscBonus{Dipomacy}{2}}{}
+		\MiscBonus{Diplomacy}{2}}{}
 	\ifthenelse{\value{charKnowledgePlanesRanksCount} > 4}{
 		\addConditionalSkillMod{+2 to Survival checks when on other planes}}{}
 	\ifthenelse{\value{charSearchRanksCount} > 4}{
 		\addConditionalSkillMod{+2 to Survival checks to follow tracks}
 	}{}
 	\ifthenelse{\value{charSenseMotiveRanksCount} > 4}{
-		\MiscBonus{Dipomacy}{2}
+		\MiscBonus{Diplomacy}{2}
 	}{}
 	\ifthenelse{\value{charSpellcraftRanksCount} > 4}{
 		\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{}{\addConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}
