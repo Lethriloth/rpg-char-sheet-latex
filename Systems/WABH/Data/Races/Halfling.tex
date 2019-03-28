@@ -1,0 +1,13 @@
+\renewcommand\charRace{Halfling}
+\setSize{Small}
+\addToCounter{charStrBaseCount}{-2}
+\addToCounter{charDexBaseCount}{2}
+\setCharSpeed{20}
+\addRaceFeature{Halfling Luck}
+	\MiscBonus[racial]{Fortitude}{1}
+	\MiscBonus[racial]{Reflex}{1}
+	\MiscBonus[racial]{Will}{1}
+\addRaceFeature{Fearless}
+	\addConditionalDefMod{+2 racial bonus vs. fear}
+\addRaceFeature{Keen Senses}
+	\MiscBonus[racial]{Perception}{2}
