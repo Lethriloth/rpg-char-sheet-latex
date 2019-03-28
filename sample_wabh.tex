@@ -5,10 +5,10 @@
 \usepackage{multicol}
 \begin{document}
 	\renewcommand{\datafolder}{Systems/WABH/Data/}
-	\setCounter{XP-Mode}{1} % Boolean, automatically calculates next-level XP
-	\setCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
-	\setCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive skill point increases.
-	\setCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of feats
+	\SetCounter{XP-Mode}{1} % Boolean, automatically calculates next-level XP
+	\SetCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
+	\SetCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive skill point increases.
+	\SetCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of feats
 	
 	%\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
 	%}
@@ -28,26 +28,26 @@
 	\renewcommand\charAge{}
 	
 	
-	\setCharStr{10}
-	\setCharDex{10}
-	\setCharCon{10}
-	\setCharInt{19}
-	\setCharWis{19}
-	\setCharCha{19}
+	\SetCharStr{10}
+	\SetCharDex{10}
+	\SetCharCon{10}
+	\SetCharInt{19}
+	\SetCharWis{19}
+	\SetCharCha{19}
 	
 	% Racial Mods
 	\ImportCharRace{Human}
 	\renewcommand\do[1]{
-		\addCharLanguage{#1}
+		\AddCharLanguage{#1}
 	}\docsvlist{Raxak}
 	
 	
 	%\newcommand{\testclass}{wizard}
 	%%\importcharclass{\testclass}{20}
 	%\renewcommand{\do}[1]{
-	%	\addranks[\testclass]{#1}{\value{char\testclass classlevelcount}}
+	%	\Addranks[\testclass]{#1}{\value{char\testclass classlevelcount}}
 	%}\docsvlist{performone,knowledgehistory}
-	%\addwizardspellcasting{20}[Abjuration][Transmutation][Evocation]
+	%\Addwizardspellcasting{20}[Abjuration][Transmutation][Evocation]
 	
 %	\ImportCharClass{Barbarian}{20}
 %	\ImportCharClass{Bard}{20}
@@ -65,58 +65,58 @@
 	\MiscBonus{Cha}{5}
 	
 	% Feats
-	\addFeat{Feat}
+	\AddFeat{Feat}
 	
 	
 	
 	% items
-	\addGearItem{Gear}{1}
+	\AddGearItem{Gear}{1}
 	
-	\addStoredItem{Stored Gear}{1}
+	\AddStoredItem{Stored Gear}{1}
 	
 	
 	
 	% %Weapons
-	\addAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
-	\addWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
+	\AddAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
+	\AddWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
 	
 	% %Belt
-	%\addBeltItem{Belt of Strength +0}{Does Nothing}{0}
+	%\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
 	%\EnhancementBonus{Str}{0}
 	
 	% %Armor
-	%\addArmor{Armor}{3}{10}{-2}{5}{L}{10}{Notes}{More Notes}
+	%\AddArmor{Armor}{3}{10}{-2}{5}{L}{10}{Notes}{More Notes}
 	
 	% %Chest
-	%\addChestItem{}{}{}
+	%\AddChestItem{}{}{}
 	
 	% %Eyes
-	%\addEyesItem{}{}{}
+	%\AddEyesItem{}{}{}
 	
 	% %Feet
-	%\addFeetItem{}{}{}
+	%\AddFeetItem{}{}{}
 	
 	% %Hat
-	%\addHeadItem{}{}{}
+	%\AddHeadItem{}{}{}
 	
 	
 	% %Headband
-	%\addHeadbandItem{}{}{}
+	%\AddHeadbandItem{}{}{}
 	
 	% %Shoulders
-	%\addShouldersItem{}{}{}
+	%\AddShouldersItem{}{}{}
 	
 	% %Rings
-	%\addRingItem{}{}{}
-	%\addRingItem{}{}{}
+	%\AddRingItem{}{}{}
+	%\AddRingItem{}{}{}
 	
 	% %Wrists
-	%\addWristsItem{}{}{}
+	%\AddWristsItem{}{}{}
 	
-	\addPlatinum{1}	\addPlatinum*{2}\addStoredPlatinum{3}
-	\addGold{4}		\addGold*{5}	\addStoredGold{6}
-	\addSilver{7}	\addSilver*{8}	\addStoredSilver{9}
-	\addCopper{10}	\addCopper*{11}	\addStoredCopper{12}
+	\AddPlatinum{1}	\AddPlatinum*{2}\AddStoredPlatinum{3}
+	\AddGold{4}		\AddGold*{5}	\AddStoredGold{6}
+	\AddSilver{7}	\AddSilver*{8}	\AddStoredSilver{9}
+	\AddCopper{10}	\AddCopper*{11}	\AddStoredCopper{12}
 	
 	\input{Sheets/WABH_Sheet.tex}
 \end{document}

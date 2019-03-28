@@ -2,14 +2,14 @@
 \ProvidesPackage{WABH-houserules}[2019/03/28 Houserules for WABH2 campaign]
 
 
-\newCounter{charClassBABCount}
-\newCounter{charClassFortitudeCount}
-\newCounter{charClassReflexCount}
-\newCounter{charClassWillCount}
+\NewCounter{charClassBABCount}
+\NewCounter{charClassFortitudeCount}
+\NewCounter{charClassReflexCount}
+\NewCounter{charClassWillCount}
 
 \RenewDocumentCommand{\ImportCharClass}{s O{} m m}{
 	\input{\datafolder/Classes/#3.tex}
-	\adddebug{IMPORTCHARCLASS: add #4 Levels of #3}
+	\AddDebug{IMPORTCHARCLASS: add #4 Levels of #3}
 	\ifthenelse{\equal{#2}{}}{
 		\appto\charLevel{\capitalize{#3} #4 }
 	}{
@@ -17,60 +17,60 @@
 	}
 	\listadd{\charClassesList}{#3}
 	\if\csname#3BAB\endcsname g
-	\addtocounter{charClassBABCount}{#4 * 4}
+	\Addtocounter{charClassBABCount}{#4 * 4}
 	\fi
 	\if\csname#3BAB\endcsname a
-	\addToCounter{charClassBABCount}{#4 * 3}
+	\AddToCounter{charClassBABCount}{#4 * 3}
 	\fi
 	\if\csname#3BAB\endcsname p
-	\addToCounter{charClassBABCount}{#4 * 2 }
+	\AddToCounter{charClassBABCount}{#4 * 2 }
 	\fi
 	\if\csname#3Fort\endcsname g
-	\addToCounter{charFortitudeCount}{2}
-	\addToCounter{charClassFortitudeCount}{#4 * 3}
+	\AddToCounter{charFortitudeCount}{2}
+	\AddToCounter{charClassFortitudeCount}{#4 * 3}
 	\fi
 	\if\csname#3Fort\endcsname p
-	\addToCounter{charClassFortitudeCount}{#4 * 2}
+	\AddToCounter{charClassFortitudeCount}{#4 * 2}
 	\fi
 	\if\csname#3Ref\endcsname g
-	\addToCounter{charReflexCount}{2}
-	\addToCounter{charClassReflexCount}{#4 * 3}
+	\AddToCounter{charReflexCount}{2}
+	\AddToCounter{charClassReflexCount}{#4 * 3}
 	\fi
 	\if\csname#3Ref\endcsname p
-	\addToCounter{charClassReflexCount}{#4 * 2}
+	\AddToCounter{charClassReflexCount}{#4 * 2}
 	\fi
 	\if\csname#3Will\endcsname g
-	\addToCounter{charWillCount}{2}
-	\addToCounter{charClassWillCount}{#4 * 3}
+	\AddToCounter{charWillCount}{2}
+	\AddToCounter{charClassWillCount}{#4 * 3}
 	\fi
 	\if\csname#3Will\endcsname p
-	\addToCounter{charClassWillCount}{#4 * 2}
+	\AddToCounter{charClassWillCount}{#4 * 2}
 	\fi
-	\newCounter{char#3ClassLevelCount}
-	\setCounter{char#3ClassLevelCount}{#4}
+	\NewCounter{char#3ClassLevelCount}
+	\SetCounter{char#3ClassLevelCount}{#4}
 	\newcounter{char#3SpareSkillRanksCount}
 	\ifthenelse{\value{charTotalLevelCount} = 0}{
-		\setCounter{char#3SpareSkillRanksCount}{(\value{charBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * (3 + #4)}
+		\SetCounter{char#3SpareSkillRanksCount}{(\value{charBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * (3 + #4)}
 		\ifthenelse{\value{HP-Mode} = 1}{
-			\addToCounter{charHPCount}{\value{#3HitDieSize}}
-			\addToCounter{charHPRollsCount}{1}
+			\AddToCounter{charHPCount}{\value{#3HitDieSize}}
+			\AddToCounter{charHPRollsCount}{1}
 		}{
 			\ifthenelse{\value{HP-Mode} = 2}{
-				\addToCounter{charHPCount}{\value{#3HitDieSize} + (\value{#3HitDieSize} + 1) * (#4 - 1) / 2}
+				\AddToCounter{charHPCount}{\value{#3HitDieSize} + (\value{#3HitDieSize} + 1) * (#4 - 1) / 2}
 			}
 			{}
 		}
 	}{
-		\setCounter{char#3SpareSkillRanksCount}{(\value{charBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * #4}
+		\SetCounter{char#3SpareSkillRanksCount}{(\value{charBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * #4}
 		\ifthenelse{\value{HP-Mode} = 1}{
 		}{
 			\ifthenelse{\value{HP-Mode} = 2}{
-				\addToCounter{charHPCount}{(\value{#3HitDieSize} + 1) * #4 / 2}
+				\AddToCounter{charHPCount}{(\value{#3HitDieSize} + 1) * #4 / 2}
 			}
 			{}
 		}
 	}
-	\addToCounter{charTotalLevelCount}{#4}
+	\AddToCounter{charTotalLevelCount}{#4}
 	\renewcommand\do[1]{
 		\isClassSkill{##1}
 	}\expandafter\dolistloop\csname#3ClassSkillsList\endcsname
@@ -78,10 +78,10 @@
 }
 
 \NewDocumentCommand{\CalculateFractionalBABSaveBonuses}{}{
-	\addToCounter{charBABCount}{\value{charClassBABCount} / 4}
-	\addToCounter{charFortitudeCount}{\value{charClassFortitudeCount} / 6}
-	\addToCounter{charReflexCount}{\value{charClassReflexCount} / 6}
-	\addToCounter{charWillCount}{\value{charClassWillCount} / 6}
+	\AddToCounter{charBABCount}{\value{charClassBABCount} / 4}
+	\AddToCounter{charFortitudeCount}{\value{charClassFortitudeCount} / 6}
+	\AddToCounter{charReflexCount}{\value{charClassReflexCount} / 6}
+	\AddToCounter{charWillCount}{\value{charClassWillCount} / 6}
 }
 
 \preto{\Initialize}{
@@ -104,10 +104,10 @@
 \forcsvlist{\listadd\ArmorCheckSkillsList}{Acrobatics, Climb, EscapeArtist, Fly, Jump, SleightOfHand, Stealth, Swim, Swim}
 
 \renewcommand{\do}[1]{
-	\newCounter{char#1Count}
-	\newCounter{char#1ClassSkillBool}
-	\newCounter{char#1RanksCount}
-	\newCounter{char#1MiscCount}
+	\NewCounter{char#1Count}
+	\NewCounter{char#1ClassSkillBool}
+	\NewCounter{char#1RanksCount}
+	\NewCounter{char#1MiscCount}
 }\dolistloop{\SkillsList}
 
 % Redefine Synergy bonuses
@@ -119,58 +119,58 @@
 		\MiscBonus{Diplomacy}{2}
 		\MiscBonus{Intimidate}{2}
 		\MiscBonus{SleightOfHand}{2}
-		\addConditionalSkillMod{+2 to Disguise checks to act in character}
+		\AddConditionalSkillMod{+2 to Disguise checks to act in character}
 	}{}
 	\ifthenelse{\value{charCraftOneRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Appraise checks related to \csname charCraftOnename\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftOnename\endcsname}}{}
 	\ifthenelse{\value{charCraftTwoRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Appraise checks related to \csname charCraftTwoname\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftTwoname\endcsname}}{}
 	\ifthenelse{\value{charCraftThreeRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Appraise checks related to \csname charCraftThreename\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftThreename\endcsname}}{}
 	\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{
-		\ifthenelse{\value{charSpellcraftRanksCount} > 4}{\addConditionalSkillMod{+4 to Use Magic Device checks involving scrolls}}{\addConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}}{}
+		\ifthenelse{\value{charSpellcraftRanksCount} > 4}{\AddConditionalSkillMod{+4 to Use Magic Device checks involving scrolls}}{\AddConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}}{}
 	\ifthenelse{\value{charEscapeArtistRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Use Rope checks involving bindings}
+		\AddConditionalSkillMod{+2 to Use Rope checks involving bindings}
 	}{}
 	\ifthenelse{\value{charHandleAnimalRanksCount} > 4}{
 		\MiscBonus{Ride}{2}
 	}{}
 	\ifthenelse{\value{charJumpRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Acrobatics checks to tumble}	
+		\AddConditionalSkillMod{+2 to Acrobatics checks to tumble}	
 	}{}
 	\ifthenelse{\value{charKnowledgeArcanaRanksCount} > 4}{
 		\MiscBonus{Spellcraft}{2}
 	}{}
 	\ifthenelse{\value{charKnowledgeEngineeringRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Search checks involving secret doors and similar compartments}
+		\AddConditionalSkillMod{+2 to Search checks involving secret doors and similar compartments}
 	}{}
 	\ifthenelse{\value{charKnowledgeDungeoneeringRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Survival checks when underground}}{}
+		\AddConditionalSkillMod{+2 to Survival checks when underground}}{}
 	\ifthenelse{\value{charKnowledgeGeographyRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Survival checks to keep from getting lost or for avoiding hazards}}{}
+		\AddConditionalSkillMod{+2 to Survival checks to keep from getting lost or for avoiding hazards}}{}
 	\ifthenelse{\value{charKnowledgeLocalRanksCount} > 4}{
 		\MiscBonus{GatherInformation}{2}}{}
 	\ifthenelse{\value{charKnowledgeDungeoneeringRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Survival checks in aboveground natural environments}}{}
+		\AddConditionalSkillMod{+2 to Survival checks in aboveground natural environments}}{}
 	\ifthenelse{\value{charKnowledgePlanesRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Survival checks when on other planes}}{}
+		\AddConditionalSkillMod{+2 to Survival checks when on other planes}}{}
 	\ifthenelse{\value{charSearchRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Survival checks to follow tracks}
+		\AddConditionalSkillMod{+2 to Survival checks to follow tracks}
 	}{}
 	\ifthenelse{\value{charSenseMotiveRanksCount} > 4}{
 		\MiscBonus{Diplomacy}{2}
 	}{}
 	\ifthenelse{\value{charSpellcraftRanksCount} > 4}{
-		\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{}{\addConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}
+		\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{}{\AddConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}
 	}{}
 	\ifthenelse{\value{charSurvivalRanksCount} > 4}{
 		\MiscBonus{KnowledgeNature}{2}
 	}{}
 	\ifthenelse{\value{charUseMagicDeviceRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Spellcraft checks to decipher scrolls}
+		\AddConditionalSkillMod{+2 to Spellcraft checks to decipher scrolls}
 	}{}
 	\ifthenelse{\value{charUseRopeRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Climb checks involving ropes}
-		\addConditionalSkillMod{+2 to Escape Artist checks involving ropes}
+		\AddConditionalSkillMod{+2 to Climb checks involving ropes}
+		\AddConditionalSkillMod{+2 to Escape Artist checks involving ropes}
 	}{}
 }
