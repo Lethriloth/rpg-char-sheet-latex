@@ -4,10 +4,10 @@
 \usepackage{Systems/Pathfinder/SystemPathfinder}
 \begin{document}
 \input{Systems/Pathfinder/Data/Core_Classes.tex}
-\setCounter{XP-Mode}{1} % Boolean, automatically calculates next-Level XP
-\setCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
-\setCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive Skill point increases.
-\setCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of Feats
+\SetCounter{XP-Mode}{1} % Boolean, automatically calculates next-Level XP
+\SetCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
+\SetCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive Skill point increases.
+\SetCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of Feats
 
 \preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
 
@@ -29,20 +29,20 @@
 
 
 
-\setCharStr{10}
-\setCharDex{10}
-\setCharCon{10}
-\setCharInt{10}
-\setCharWis{10}
-\setCharCha{10}
+\SetCharStr{10}
+\SetCharDex{10}
+\SetCharCon{10}
+\SetCharInt{10}
+\SetCharWis{10}
+\SetCharCha{10}
 
 % Racial Mods
-\addToCounter{charStrBaseCount}{0}
-\addToCounter{charDexBaseCount}{0}
-\setCharSpeed{30}
+\AddToCounter{charStrBaseCount}{0}
+\AddToCounter{charDexBaseCount}{0}
+\SetCharSpeed{30}
 \addRaceFeature{Race Feature}
 \renewcommand\do[1]{
-\addCharLanguage{#1}
+\AddCharLanguage{#1}
 }\docsvlist{Common}
 
 %\ImportCharClass{Bard}{20}

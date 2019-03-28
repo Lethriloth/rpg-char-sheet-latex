@@ -6,12 +6,12 @@
 	\addtocounter{char#1BaseCount}{2}
 	\setSize{Medium}
 	\def\charrace{Human}
-	\setCharSpeed{30}
+	\SetCharSpeed{30}
 	\stepcounter{charBonusFeatsCount}
 	\appto{\addIntToSkillRanks}{
 		\addtocounter{charSpareSkillRanksCount}{\value{charTotalLevelCount}}
 	}
-	\addCharLanguage{Common}
+	\AddCharLanguage{Common}
 }
 
 \def\AddDwarfRaceFeatures{

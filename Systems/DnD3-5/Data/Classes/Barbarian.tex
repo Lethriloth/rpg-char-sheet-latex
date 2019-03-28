@@ -2,17 +2,17 @@
 \def\BarbarianFort{g}
 \def\BarbarianRef{p}
 \def\BarbarianWill{p}
-\newCounter{BarbarianSkillRanksPerLevelCount}
-\setCounter{BarbarianSkillRanksPerLevelCount}{2}
-\newCounter{BarbarianHitDieSize}
-\setCounter{BarbarianHitDieSize}{12}
+\NewCounter{BarbarianSkillRanksPerLevelCount}
+\SetCounter{BarbarianSkillRanksPerLevelCount}{2}
+\NewCounter{BarbarianHitDieSize}
+\SetCounter{BarbarianHitDieSize}{12}
 \edef\BarbarianClassSkillsList{}
 \forcsvlist{\listadd{\BarbarianClassSkillsList}}{Climb, Craft, HandleAnimal, Intimidate, Jump, Listen, Ride, Survival, Swim}
 \newcommand{\addBarbarianClassFeatures}[1]{
-		\addClassFeature{Fast Movement}\addToCounter{charBaseSpeedCount}{10}
+		\addClassFeature{Fast Movement}\AddToCounter{charBaseSpeedCount}{10}
 		\addLimitedUse{%
 			\ifthenelse{#1 > 10}{\ifthenelse{#1 > 19}{Mighty }{Greater }}{}%
-			Rage}{\domath{#1 / 4 + 1}}
+			Rage}{\DoMath{#1 / 4 + 1}}
 			\newcommand{\IWouldLikeToRage}{
 				\TmpBonus{AC}{-2}
 				\ifthenelse{#1 > 10}{\ifthenelse{#1 > 19}{
@@ -30,9 +30,9 @@
 		\addClassFeature{\ifthenelse{#1 > 4}{Improved }{}Uncanny Dodge}
 			\ifthenelse{#1 > 4}{\addConditionalDefMod{Improved Uncanny Dodge}}{\addConditionalDefMod{Uncanny Dodge}}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Trap Sense +\domath{#1 / 3}}\addConditionalDefMod{+\domath{#1 / 3} vs. traps}
+		\addClassFeature{Trap Sense +\DoMath{#1 / 3}}\addConditionalDefMod{+\DoMath{#1 / 3} vs. traps}
 	\ifthenelse{#1 > 6}{
-		\addClassFeature{Damage Reduction}\domath*{(#1 - 4) / 3}\addDR{--}{\value{@domathCounter}}
+		\addClassFeature{Damage Reduction}\DoMath*{(#1 - 4) / 3}\addDR{--}{\value{@DoMathCounter}}
 	\ifthenelse{#1 > 13}{
 		\addClassFeature{Indomitable Will}
 	\ifthenelse{#1 > 16}{

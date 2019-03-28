@@ -2,13 +2,13 @@
 \def\FighterFort{g}
 \def\FighterRef{p}
 \def\FighterWill{p}
-\newCounter{FighterSkillRanksPerLevelCount}
-\setCounter{FighterSkillRanksPerLevelCount}{2}
-\newCounter{FighterHitDieSize}
-\setCounter{FighterHitDieSize}{10}
+\NewCounter{FighterSkillRanksPerLevelCount}
+\SetCounter{FighterSkillRanksPerLevelCount}{2}
+\NewCounter{FighterHitDieSize}
+\SetCounter{FighterHitDieSize}{10}
 \edef\FighterClassSkillsList{}
 \forcsvlist{\listadd{\FighterClassSkillsList}}{Climb, Craft, HandleAnimal, Intimidate, Jump, Ride, Swim}
 \newcommand{\addFighterClassFeatures}[1]{
-	\addToCounter{charBonusFeatsCount}{#1 / 2 +1}
-	\addClassFeature{Fighter Bonus Feat\ifthenelse{#1 > 1}{ $\times\domath{#1 / 2 +1}$}{}}
+	\AddToCounter{charBonusFeatsCount}{#1 / 2 +1}
+	\addClassFeature{Fighter Bonus Feat\ifthenelse{#1 > 1}{ $\times\DoMath{#1 / 2 +1}$}{}}
 }

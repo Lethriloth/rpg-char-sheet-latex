@@ -20,7 +20,7 @@
 		\addDeed{Opportune Parry and Riposte}
 		\addclassfeature{Swashbuckler Finesse}
 	\ifthenelse{#1 > 1}{
-		\addlimiteduse{Charmed Life}{\domath{2 + (#1 + 2) / 4}}
+		\addlimiteduse{Charmed Life}{\DoMath{2 + (#1 + 2) / 4}}
 	\ifthenelse{#1 > 2}{
 		\addclassfeature{Nimble}
 			\preto{\Initialise}{\ifthenelse{\equal\chararmortype H}{}{\ifthenelse{\equal\chararmortype M }{}{\adddodgebonus{(#1 + 1) / 4}}}}
@@ -30,9 +30,9 @@
 		\addDeed{Swashbuckler Initiative}
 	\ifthenelse{#1 > 3}{
 		\addtocounter{charbonusfeatscount}{#1 / 4}
-		\addclassfeature{Swashbuckler Bonus Feat\ifthenelse{#1 > 7}{ $\times\domath{#1 / 4}$}{}}
+		\addclassfeature{Swashbuckler Bonus Feat\ifthenelse{#1 > 7}{ $\times\DoMath{#1 / 4}$}{}}
 	\ifthenelse{#1 > 4}{
-		\addclassfeature{Swashbuckler Weapon Training +\domath{(#1 - 1) / 4}}
+		\addclassfeature{Swashbuckler Weapon Training +\DoMath{(#1 - 1) / 4}}
 	\ifthenelse{#1 > 6}{
 		\addDeed{Swashbuckler's Grace}
 		\addDeed{Superior Feint}

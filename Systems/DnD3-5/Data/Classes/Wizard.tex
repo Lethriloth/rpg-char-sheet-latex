@@ -2,50 +2,50 @@
 \def\WizardFort{p}
 \def\WizardRef{p}
 \def\WizardWill{g}
-\newCounter{WizardSkillRanksPerLevelCount}
-\setCounter{WizardSkillRanksPerLevelCount}{2}
-\newCounter{WizardHitDieSize}
-\setCounter{WizardHitDieSize}{4}
+\NewCounter{WizardSkillRanksPerLevelCount}
+\SetCounter{WizardSkillRanksPerLevelCount}{2}
+\NewCounter{WizardHitDieSize}
+\SetCounter{WizardHitDieSize}{4}
 \edef\WizardClassSkillsList{}
 \forcsvlist{\listadd{\WizardClassSkillsList}}{Concentration, Craft, DecipherScript, KnowledgeArcana, KnowledgeDungeoneering, KnowledgeEngineering, KnowledgeHistory, KnowledgeGeography, KnowledgeHistory, KnowledgeLocal, KnowledgeNature, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion, Profession, Spellcraft}
 \newcommand{\addWizardClassFeatures}[1]{
 	\addClassFeature{Summon Familiar}
 	\addClassFeature{Scribe Scroll}
-	\addToCounter{charBonusFeatsCount}{#1 / 5 + 1}
+	\AddToCounter{charBonusFeatsCount}{#1 / 5 + 1}
 	\addFeat*{Scribe Scroll}
 	\ifthenelse{#1 > 4}{
-		\addClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\domath{#1 / 5}$}{}}
+		\addClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\DoMath{#1 / 5}$}{}}
 	}{}
 	\NewDocumentCommand{\addWizardSpellcasting}{m O{} O{} O{}}{
 		\newSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{Int}
-		\newCounter{charWizardforbiddenschoolsCount}
+		\NewCounter{charWizardforbiddenschoolsCount}
 		\addPrimarySpellcasting{##1}
 		\ifthenelse{\equal{##2}{}}{}{
-			\forloop{@i}{1}{\value{@i}<10}{
+			\ForLoop{@i}{1}{\value{@i}<10}{
 				\addBonusSpellSlots{\arabic{@i}}{1}
 			}
 			\addSpellcastingSpecialization[Focus School]{##2}
 			\ifthenelse{\equal{##2}{Divination}}{
-				\addToCounter{charWizardforbiddenschoolsCount}{1}
+				\AddToCounter{charWizardforbiddenschoolsCount}{1}
 			}{
-				\addToCounter{charWizardforbiddenschoolsCount}{2}
+				\AddToCounter{charWizardforbiddenschoolsCount}{2}
 			}
 			\ifthenelse{\equal{##3}{}}{}{
 				\addSpellcastingProhibition[Banned School]{##3}
-				\addToCounter{charWizardforbiddenschoolsCount}{-1}
+				\AddToCounter{charWizardforbiddenschoolsCount}{-1}
 			}
 			\ifthenelse{\equal{##4}{}}{}{
 				\addSpellcastingProhibition[Banned School]{##4}
-				\addToCounter{charWizardforbiddenschoolsCount}{-1}
+				\AddToCounter{charWizardforbiddenschoolsCount}{-1}
 			}
 		}
 		\appto{\RunChecks}{
 			%%CHECK NUMBER OF PROHIBITED SCHOOLS
 			\ifthenelse{\value{charWizardforbiddenschoolsCount} > 0}{
-				\addnotice{Choose \arabic{charWizardforbiddenschoolsCount} more prohibited schools}
+				\AddWarning{Choose \arabic{charWizardforbiddenschoolsCount} more prohibited schools}
 			}{
 			\ifthenelse{\value{charWizardforbiddenschoolsCount} < 0}{
-				\addnotice{You can remove \domath{-\value{charWizardforbiddenschoolsCount}} prohibited schools}
+				\AddWarning{You can remove \DoMath{-\value{charWizardforbiddenschoolsCount}} prohibited schools}
 			}{}}
 		}
 	}

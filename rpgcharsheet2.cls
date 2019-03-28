@@ -31,8 +31,8 @@
 
 %%%% modified counter commands %%%%
 
-%% ifCounter
-\newcommand*\ifCounter[1]{%
+%% IfCounter
+\newcommand*\IfCounter[1]{%
 	\ifcsname c@#1\endcsname%
 	\expandafter\@firstoftwo%
 	\else%
@@ -40,26 +40,26 @@
 	\fi%
 }
 
-\def\newCount#1{\newcount{#1}}
-\def\newCounter#1{%
-	\ifCounter{#1}{}{%
+\def\NewCount#1{\newcount{#1}}
+\def\NewCounter#1{%
+	\IfCounter{#1}{}{%
 		\newcounter{#1}%
 	}%
 }
-\def\addToCounter#1#2{%
-	\newCounter{#1}%
+\def\AddToCounter#1#2{%
+	\NewCounter{#1}%
 	\addtocounter{#1}{#2}%
 }
-\def\setCounter#1#2{%
-	\newCounter{#1}%
+\def\SetCounter#1#2{%
+	\NewCounter{#1}%
 	\setcounter{#1}{#2}}%
 \def\stepCounter#1{%
-	\newCounter{#1}%
+	\NewCounter{#1}%
 	\stepcounter{#1}}%
 
 %% Function Name Normalization %%
-\def\newLength#1{\newlength{#1}}
-\def\setLength#1#2{\setlength{#1}{#2}}
+\def\NewLength#1{\newlength{#1}}
+\def\SetLength#1#2{\setlength{#1}{#2}}
 
 
 
@@ -106,7 +106,7 @@
 
 \def\attributes#1#2#3{%
 	\count@#1
-	\newCount\xCount\xCount=#1
+	\NewCount\xCount\xCount=#1
 	\@for\tmp:=#3\do{%
 		\put(\xCount,#2){\framebox(15,9){\tmp}}%
 		\advance\xCount18
@@ -114,10 +114,10 @@
 }
 
 \def\plusattributes#1#2#3#4{%
-	\newCount\xCount
+	\NewCount\xCount
 	\xCount=#1
-	\newCount\plusCount
-	\newCount\tmpCount
+	\NewCount\plusCount
+	\NewCount\tmpCount
 	\@for\tmp:=#3\do{%
 		\plusCount=0
 		\advance\plusCount by #4
@@ -131,13 +131,13 @@
 }
 
 \def\equalattributes#1#2#3#4{%
-	\newCount\xCount
+	\NewCount\xCount
 	\xCount=#1
-	\newCount\plusCount
-	\newCount\tmpCount
-	\newCount\mytotalCount
+	\NewCount\plusCount
+	\NewCount\tmpCount
+	\NewCount\mytotalCount
 	\mytotalCount=0
-	\newCount\firstCount
+	\NewCount\firstCount
 	\firstCount=0
 	
 	% Just to skip the first box
@@ -178,13 +178,13 @@
 }
 
 \def\specialequalattributes#1#2#3#4#5{%
-  \newCount\xCount
+  \NewCount\xCount
   \xCount=#1
-  \newCount\plusCount
-  \newCount\tmpCount
-  \global\newCount#5
+  \NewCount\plusCount
+  \NewCount\tmpCount
+  \global\NewCount#5
   #5=0
-  \newCount\firstCount
+  \NewCount\firstCount
   \firstCount=0
 
   % Just to skip the first box
@@ -229,16 +229,16 @@
 \newcommand\CleanPM[1]{\ifthenelse{\value{#1}=0}{}{\plusminus{#1}}}
 
 %% Attribute box dimensions
-\newCount\boxwidth\boxwidth=15
-\newCount\boxheight\boxheight=9
+\NewCount\boxwidth\boxwidth=15
+\NewCount\boxheight\boxheight=9
 
 \def\StretchAttributes#1#2#3#4{%
-\newCount\xCount
+\NewCount\xCount
 \xCount=#1
-\newCount\stretchCount
+\NewCount\stretchCount
 \stretchCount=#3
 \advance\stretchCount by -#1
-\newCount\noofentriesCount
+\NewCount\noofentriesCount
 \noofentriesCount=0
 \@for\tmp:=#4\do{%
   \advance\noofentriesCount1
@@ -246,8 +246,8 @@
 \advance\noofentriesCount-1
 \advance\stretchCount-\boxwidth
 \divide\stretchCount by \number\noofentriesCount
-\newCount\plusCount
-\newCount\tmpCount
+\NewCount\plusCount
+\NewCount\tmpCount
 \@for\tmp:=#4\do{%
   \ifnum\number\xCount=#1
   \plusCount=0
@@ -267,19 +267,19 @@
 }}
 
 
-\newCount\labelheight
+\NewCount\labelheight
 \labelheight=3
-\newCount\labelwidth
+\NewCount\labelwidth
 \labelwidth=\number\boxwidth
 \advance\labelwidth4
 
 \def\stretchlabels#1#2#3#4{%
-\newCount\xCount
+\NewCount\xCount
 \xCount=#1
-\newCount\stretchCount
+\NewCount\stretchCount
 \stretchCount=#3
 \advance\stretchCount by -#1
-\newCount\noofentriesCount
+\NewCount\noofentriesCount
 \noofentriesCount=0
 \@for\tmp:=#4\do{%
   \advance\noofentriesCount1
@@ -287,8 +287,8 @@
 \advance\noofentriesCount-1
 \advance\stretchCount-\boxwidth
 \divide\stretchCount by \number\noofentriesCount
-\newCount\plusCount
-\newCount\tmpCount
+\NewCount\plusCount
+\NewCount\tmpCount
 \@for\tmp:=#4\do{%
   \ifnum\number\xCount=#1
   \plusCount=0
@@ -299,7 +299,7 @@
   \fi
   \tmpCount=\xCount
   \advance\tmpCount by \number\plusCount
-  \newCount\leftabitCount
+  \NewCount\leftabitCount
   \leftabitCount=\tmpCount
   \advance\leftabitCount by -2  \put(\leftabitCount,#2){\parbox[b][\number\labelheight\unitlength][c]{\number\labelwidth\unitlength}{\centering\lfont \tmp}}
   \ifnum\number\plusCount=0
@@ -311,8 +311,8 @@
 
 \def\attributelabels#1#2#3{%
 \Count@#1
-\newCount\xCount\xCount=#1
-\newCount\tmpCount
+\NewCount\xCount\xCount=#1
+\NewCount\tmpCount
 \@for\tmp:=#3\do{%
   \tmpCount=\xCount
   \advance\tmpCount-4
@@ -321,14 +321,14 @@
 }}
 
 \def\stretchequalattributes#1#2#3#4{%
-  \newCount\xCount
+  \NewCount\xCount
   \xCount=#1
-  \newCount\stretchCount
+  \NewCount\stretchCount
   \stretchCount=#3
   \advance\stretchCount by -#1
-  \newCount\firstCount
+  \NewCount\firstCount
   \firstCount=0
-  \newCount\noofentriesCount
+  \NewCount\noofentriesCount
   \noofentriesCount=0
   \@for\tmp:=#4\do{%
     \advance\noofentriesCount1
@@ -336,9 +336,9 @@
   % \advance\noofentriesCount-1
   \advance\stretchCount-\boxwidth
   \divide\stretchCount by \number\noofentriesCount %stretchCount completed
-  \newCount\plusCount
-  \newCount\tmpCount
-  \newCount\totalCount\totalCount=0
+  \NewCount\plusCount
+  \NewCount\tmpCount
+  \NewCount\totalCount\totalCount=0
 
   \ifnum\number\xCount=#1
   \plusCount=0
@@ -393,8 +393,8 @@
 
 \def\attributelabels#1#2#3{%
 \Count@#1
-\newCount\xCount\xCount=#1
-\newCount\tmpCount
+\NewCount\xCount\xCount=#1
+\NewCount\tmpCount
 \@for\tmp:=#3\do{%
   \tmpCount=\xCount
   \advance\tmpCount-4
@@ -404,10 +404,10 @@
 
 
 \def\scaleattributelabels#1#2#3#4{%
-\newCount\xCount
+\NewCount\xCount
 \xCount=#1
-\newCount\plusCount
-\newCount\tmpCount
+\NewCount\plusCount
+\NewCount\tmpCount
 \@for\tmp:=#3\do{%
   \plusCount=0
   \advance\plusCount by #4
@@ -420,10 +420,10 @@
 }}
 
 \def\titlebox#1#2#3#4#5{
-  \newCount\yCount\yCount#2
-  \newCount\hCount\hCount=10
-  \newCount\wCount\wCount=#3
-  \newCount\downabitCount
+  \NewCount\yCount\yCount#2
+  \NewCount\hCount\hCount=10
+  \NewCount\wCount\wCount=#3
+  \NewCount\downabitCount
   \downabitCount=#2
   \advance\downabitCount-1
   \put(#1,\downabitCount){\setlength\fboxsep{0pt}\colorbox{gray!40}{\makebox(#3,11){}}}%
@@ -445,10 +445,10 @@
   }%
 }
 \def\scaleattributes#1#2#3#4{%
-\newCount\xCount
+\NewCount\xCount
 \xCount=#1
-\newCount\plusCount
-\newCount\tmpCount
+\NewCount\plusCount
+\NewCount\tmpCount
 \@for\tmp:=#3\do{%
   \plusCount=0
   \advance\plusCount by #4
@@ -496,39 +496,39 @@
 }
 
 %%Debug and Alerts%%
-\edef\debug{}
-\newcommand{\adddebug}[1]{
-	\gappto\debug{#1 \\}
+\edef\PrintDebug{}
+\newcommand{\AddDebug}[1]{
+	\gappto\PrintDebug{#1 \\}
 }
-\edef\notices{}
-\newcommand\addnotice[1]{
-	\gappto\notices{#1; }
+\edef\PrintWarning{}
+\newcommand\AddWarning[1]{
+	\gappto\PrintWarning{#1; }
 }
 
 %%For Loop%%
-\newcommand{\forloop}[5][1]{%
-	\setCounter{#2}{#3}%
+\newcommand{\ForLoop}[5][1]{%
+	\SetCounter{#2}{#3}%
 	\ifthenelse{#4}{%
 		#5%
-		\addToCounter{#2}{#1}%
-		\forloop[#1]{#2}{\arabic{#2}}{#4}{#5}%
+		\AddToCounter{#2}{#1}%
+		\ForLoop[#1]{#2}{\arabic{#2}}{#4}{#5}%
 	}{}%
 }%
 
 %%Domath%%
-\newCounter{@domathCounter}
-\NewDocumentCommand{\domath}{s m}{%
-	\setCounter{@domathCounter}{#2}%
+\NewCounter{@DoMathCounter}
+\NewDocumentCommand{\DoMath}{s m}{%
+	\SetCounter{@DoMathCounter}{#2}%
 	\IfBooleanTF #1 {%
 	}{%
-		\arabic{@domathCounter}%
+		\arabic{@DoMathCounter}%
 	}%
 }
 
 %% Handy Loop/Temp variables
-\newCounter{@i}
-\newCounter{@j}
-\newCounter{@k}
+\NewCounter{@i}
+\NewCounter{@j}
+\NewCounter{@k}
 
 
 
@@ -564,13 +564,13 @@
 	%\edef\input##1{}
 	\edef\Initialize{}
 %	\def\equalattributes##1##2##3##4{%
-%		\newCount\xCount
+%		\NewCount\xCount
 %		\xCount=##1
-%		\newCount\plusCount
-%		\newCount\tmpCount
-%		\newCount\mytotalCount
+%		\NewCount\plusCount
+%		\NewCount\tmpCount
+%		\NewCount\mytotalCount
 %		\mytotalCount=0
-%		\newCount\firstCount
+%		\NewCount\firstCount
 %		\firstCount=0
 %		
 %		% Just to skip the first box
@@ -608,7 +608,7 @@
 }
 %%adds lines to feats, etc. sections in blank sheet
 \newcommand\lineemup{
-\forloop{@i}{0}{\arabic{@i}<10}{
+\ForLoop{@i}{0}{\arabic{@i}<10}{
 \listadd\Gearlist{\hline & \tabularnewline}
 \listadd\storeditemslist{\hline &\tabularnewline}
 }}

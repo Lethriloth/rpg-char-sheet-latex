@@ -2,10 +2,10 @@
 \def\SorcererFort{p}
 \def\SorcererRef{p}
 \def\SorcererWill{g}
-\newCounter{SorcererSkillRanksPerLevelCount}
-\setCounter{SorcererSkillRanksPerLevelCount}{2}
-\newCounter{SorcererHitDieSize}
-\setCounter{SorcererHitDieSize}{4}
+\NewCounter{SorcererSkillRanksPerLevelCount}
+\SetCounter{SorcererSkillRanksPerLevelCount}{2}
+\NewCounter{SorcererHitDieSize}
+\SetCounter{SorcererHitDieSize}{4}
 \edef\SorcererClassSkillsList{}
 \forcsvlist{\listadd{\SorcererClassSkillsList}}{Bluff, Concentration, Craft, KnowledgeArcana, Profession, Spellcraft}
 \newcommand{\addSorcererClassFeatures}[1]{

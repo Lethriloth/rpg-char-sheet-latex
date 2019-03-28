@@ -2,10 +2,10 @@
 \def\BardFort{p}
 \def\BardRef{g}
 \def\BardWill{g}
-\newCounter{BardSkillRanksPerLevelCount}
-\setCounter{BardSkillRanksPerLevelCount}{6}
-\newCounter{BardHitDieSize}
-\setCounter{BardHitDieSize}{6}
+\NewCounter{BardSkillRanksPerLevelCount}
+\SetCounter{BardSkillRanksPerLevelCount}{6}
+\NewCounter{BardHitDieSize}
+\SetCounter{BardHitDieSize}{6}
 \edef\BardClassSkillsList{}
 \forcsvlist{\listadd{\BardClassSkillsList}}{Appraise, Balance, Bluff, Climb, Concentration, Craft, DecipherScript, Diplomacy, Disguise, EscapeArtist, GatherInformation, Hide, Jump, KnowledgeAll, Listen, MoveSilently, Perform, Profession, SenseMotive, SleightOfHand, SpeakLanguage, Spellcraft, Swim, Tumble, UseMagicDevice}
 \newcommand{\addBardClassFeatures}[1]{
@@ -16,13 +16,13 @@
 			\ifthenelse{\value{charPerformOneRanksCount} > 2}{
 				\listadd{\charBardicMusicList}{Countersong}
 				\listadd{\charBardicMusicList}{Fascinate}
-				\listadd{\charBardicMusicList}{Inspire Courage +\domath{(#1 - 2) / 6 + 1}}
+				\listadd{\charBardicMusicList}{Inspire Courage +\DoMath{(#1 - 2) / 6 + 1}}
 			}{}
 		}
 	\ifthenelse{\value{charKnowledgeHistoryRanksCount} > 4}{
-		\addClassFeature{Bardic Knowledge +\domath{#1 + \value{charIntModCount} + 2}}
+		\addClassFeature{Bardic Knowledge +\DoMath{#1 + \value{charIntModCount} + 2}}
 	}{
-		\addClassFeature{Bardic Knowledge +\domath{#1 + \value{charIntModCount}}}
+		\addClassFeature{Bardic Knowledge +\DoMath{#1 + \value{charIntModCount}}}
 	}
 	\ifthenelse{#1 > 2}{
 		\appto{\Initialize}{ %Bardic music dependent on # of Perform Ranks goes here
@@ -51,12 +51,12 @@
 			}{}}
 	}{}}{}}{}}{}}{}
 	\newcommand{\addBardSpellcasting}[1]{
-		\ifthenelse{##1 < 2}{\setCounter{@i}{0}}{
-		\ifthenelse{##1 < 4}{\setCounter{@i}{1}}{
-		\ifthenelse{##1 < 7}{\setCounter{@i}{2}}{
-		\ifthenelse{##1 < 10}{\setCounter{@i}{3}}{
-		\ifthenelse{##1 < 13}{\setCounter{@i}{4}}{
-		\ifthenelse{##1 < 16}{\setCounter{@i}{5}}{\setCounter{@i}{6}}}}}}}
+		\ifthenelse{##1 < 2}{\SetCounter{@i}{0}}{
+		\ifthenelse{##1 < 4}{\SetCounter{@i}{1}}{
+		\ifthenelse{##1 < 7}{\SetCounter{@i}{2}}{
+		\ifthenelse{##1 < 10}{\SetCounter{@i}{3}}{
+		\ifthenelse{##1 < 13}{\SetCounter{@i}{4}}{
+		\ifthenelse{##1 < 16}{\SetCounter{@i}{5}}{\SetCounter{@i}{6}}}}}}}
 		\newSpellcasting[\value{@i}]{Bard}{##1}{cha}
 		\addTwoThirdsSpellcasing{##1}
 	}

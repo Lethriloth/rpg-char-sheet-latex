@@ -14,19 +14,19 @@
 \edef\ultimatemagusclassskillslist{}
 \forcsvlist{\listadd{\ultimatemagusclassskillslist}}{concentration, craftone, crafttwo, craftthree, decipherscript, knowledgearcana, knowledgedungeoneering, knowledgeengineering, knowledgehistory, knowledgegeography, knowledgehistory, knowledgelocal, knowledgenature, knowledgenobility, knowledgeplanes, knowledgereligion, professionone, professiontwo, spellcraft, usemagicdevice}
 \newcommand{\addultimatemagusclassfeatures}[1]{
-		\addclassfeature{Arcane Spell Power +\domath{(#1 - 1) / 3 + 1}}
+		\addclassfeature{Arcane Spell Power +\DoMath{(#1 - 1) / 3 + 1}}
 			\preto{\Initialize}{
 				\addtocounter{charCLonecount}{1 + (#1 - 1) / 3}
 				\addtocounter{charCLtwocount}{1 + (#1 - 1) / 3}
 			}
 	\ifthenelse{#1 > 1}{
-		\addclassfeature{Expanded Spell Knowledge\ifthenelse{#1 > 3}{ $\times\domath{#1 / 2}$}{}}
+		\addclassfeature{Expanded Spell Knowledge\ifthenelse{#1 > 3}{ $\times\DoMath{#1 / 2}$}{}}
 	\ifthenelse{#1 > 2}{
 		\addclassfeature{Augmented Casting (%
 			\ifthenelse{#1 > 3}{%
 				\ifthenelse{#1 > 5}{%
 					\ifthenelse{#1 > 7}{%
-						\domath{#1 / 2}\textsuperscript{th} level spells%
+						\DoMath{#1 / 2}\textsuperscript{th} level spells%
 					}{%
 						3\textsuperscript{rd} level spells%
 					}%
@@ -37,7 +37,7 @@
 				1\textsuperscript{st} level spells%
 			})
 		}
-	\addlimiteduse{Augmented Casting}{\domath{3 + #1 / 2}}
+	\addlimiteduse{Augmented Casting}{\DoMath{3 + #1 / 2}}
 	\ifthenelse{#1 > 4}{
 		\addclassfeature{Ultimate Magus Bonus Feat\ifthenelse{#1 > 8}{ $\times2$}{}}
 		\addtocounter{charbonusfeatscount}{(#1 - 1) / 4}

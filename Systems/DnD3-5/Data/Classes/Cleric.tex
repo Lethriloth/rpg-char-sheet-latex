@@ -2,20 +2,20 @@
 \def\ClericFort{g}
 \def\ClericRef{p}
 \def\ClericWill{g}
-\newCounter{ClericSkillRanksPerLevelCount}
-\setCounter{ClericSkillRanksPerLevelCount}{2}
-\newCounter{ClericHitDieSize}
-\setCounter{ClericHitDieSize}{8}
+\NewCounter{ClericSkillRanksPerLevelCount}
+\SetCounter{ClericSkillRanksPerLevelCount}{2}
+\NewCounter{ClericHitDieSize}
+\SetCounter{ClericHitDieSize}{8}
 \edef\ClericClassSkillsList{}
 \forcsvlist{\listadd{\ClericClassSkillsList}}{Concentration, Craft, Diplomacy, Heal, KnowledgeArcana, KnowledgeHistory, KnowledgePlanes, KnowledgeReligion, Profession, Spellcraft}
 \newcommand{\addClericClassFeatures}[1]{
-	\newCounter{charturnrebukeundeadusesCount}
-	\setCounter{charturnrebukeundeadusesCount}{3 + \value{charChaModCount}}
+	\NewCounter{charturnrebukeundeadusesCount}
+	\SetCounter{charturnrebukeundeadusesCount}{3 + \value{charChaModCount}}
 	\addLimitedUse{Turn/Rebuke Undead}{\arabic{charturnrebukeundeadusesCount}}
 	\newcommand{\addClericSpellcasting}[3]{
 		\newSpellcasting[(##1 + 1) / 2]{Cleric}{##1}{Wis}
 		\addPrimarySpellcasting{##1}
-		\forloop{@i}{1}{\value{@i}<10}{
+		\ForLoop{@i}{1}{\value{@i}<10}{
 			\addBonusSpellSlots{\arabic{@i}}{1}
 		}
 		\addSpellcastingSpecialization[Domain]{##2}
