@@ -1,9 +1,10 @@
 \documentclass[twoside]{rpgcharsheet2}
 \usepackage{Systems/DnD3-5/SystemDnD3-5}
+\usepackage{Systems/WABH/WABH-houserules}
 \usepackage{longtable}
 \usepackage{multicol}
 \begin{document}
-	\renewcommand{\datafolder}{Systems/DnD3-5/Data/}
+	\renewcommand{\datafolder}{Systems/WABH/Data/}
 	\setCounter{XP-Mode}{1} % Boolean, automatically calculates next-level XP
 	\setCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
 	\setCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive skill point increases.
@@ -36,14 +37,9 @@
 	
 	% Racial Mods
 	\ImportCharRace{Human}
-%	\setSize{Medium}
-%	\addToCounter{charStrBaseCount}{0}
-%	\addToCounter{charDexBaseCount}{0}
-%	\setCharSpeed{30}
-%	\addRaceFeature{Race Feature}
-%	\renewcommand\do[1]{
-%		\addCharLanguage{#1}
-%	}\docsvlist{Common}
+	\renewcommand\do[1]{
+		\addCharLanguage{#1}
+	}\docsvlist{Raxak}
 	
 	
 	%\newcommand{\testclass}{wizard}
@@ -122,5 +118,5 @@
 	\addSilver{7}	\addSilver*{8}	\addStoredSilver{9}
 	\addCopper{10}	\addCopper*{11}	\addStoredCopper{12}
 	
-	\input{Sheets/DnD3-5_Sheet.tex}
+	\input{Sheets/WABH_Sheet.tex}
 \end{document}

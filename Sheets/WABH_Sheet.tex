@@ -24,9 +24,10 @@
 			\cmidrule(rl){1-1}\cmidrule(rl){2-2}\cmidrule(rl){3-3}\cmidrule(rl){4-4}\cmidrule(rl){5-5}\cmidrule(rl){6-6}\cmidrule(rl){7-7}\cmidrule(rl){8-8}
     	\end{tabular}
 	}
-	\put(0,-1){\renewcommand{\arraystretch}{1.9}
-    	\begin{tabular}[b]{D{46} D{23}  D{23}  D{23}  D{23}  D{23}  D{23}  D{23} }
-			\multicolumn{3}{D{111}}{\lfont character Name} & \lfont alignment & \multicolumn{4}{D{121}}{\lfont player Name} \\
+	\put(0,-1){
+		\renewcommand{\arraystretch}{1.9}
+    	\begin{tabular}[b]{D{46} D{25}  D{23}  D{23}  D{23}  D{23}  D{23}  D{23} }
+			\multicolumn{3}{D{113}}{\lfont character Name} & \lfont alignment & \multicolumn{4}{D{121}}{\lfont player Name} \\
 			\multicolumn{4}{D{144}}{\lfont character level} &\multicolumn{2}{D{55}}{\lfont religion} & \multicolumn{2}{D{55}}{\lfont homeland} \\
 			\lfont race & \lfont size & \lfont gender & \lfont age & \lfont height & \lfont weight & \lfont hair & \lfont eyes \\
 	    \end{tabular}
@@ -253,11 +254,11 @@
 	$\arabic{char#1MiscCount}$ 
 	\tabularnewline[-1.5\unitlength]\cline{3-3}\cline{5-5}\cline{7-7}\cline{9-9}
 }
-	\put(240,110){%skills
+	\put(240,125){%skills
 	  \begin{tabular}[b]{A{10}B{78}A{14}B{20}A{14}A{8}A{14}A{8}A{14}}
 		  &\footnotesize \scshape Skill Names   &\lfont Total Bonus& &\lfont Ability Mod. &  &\lfont Ranks & & \lfont Misc.\ Mod.\ \tabularnewline\hline
+		  \PrintSkill{Acrobatics}{Acrobatics}{Dex}
 		  \PrintSkill{Appraise}{Appraise}{Int}
-		  \PrintSkill{Balance}{Balance}{Dex}
 		  \PrintSkill{Bluff}{Bluff}{Cha}
 		  \PrintSkill{Climb}{Climb}{Str}
 		  \PrintSkill{Concentration}{Concentration}{Con}
@@ -269,11 +270,11 @@
 		  \PrintSkill{DisableDevice}{Disable Device}{Dex}
 		  \PrintSkill{Disguise}{Disguise}{Cha}
 		  \PrintSkill{EscapeArtist}{Escape Artist}{Dex}
+		  \PrintSkill{Fly}{Fly}{Dex}
 		  \PrintSkill{Forgery}{Forgery}{Int}
 		  \PrintSkill{GatherInformation}{Gather Information}{Cha}
 		  \PrintSkill{HandleAnimal}{Handle Animal}{Cha}
 		  \PrintSkill{Heal}{Heal}{Wis}
-		  \PrintSkill{Hide}{Hide}{Dex}
 		  \PrintSkill{Intimidate}{Intimidate}{Cha}
 		  \PrintSkill{Jump}{Jump}{Str}
 		  \PrintSkill{KnowledgeArcana}{Know (arcana)}{Int}
@@ -286,9 +287,8 @@
 		  \PrintSkill{KnowledgeNobility}{Know (nobility)}{Int}
 		  \PrintSkill{KnowledgePlanes}{Know (planes)}{Int}
 		  \PrintSkill{KnowledgeReligion}{Know (religion)}{Int}
-		  \PrintSkill{Listen}{Listen}{Wis}
-		  \PrintSkill{MoveSilently}{Move Silently}{Dex}
 		  \PrintSkill{OpenLock}{Open Lock}{Dex}
+		  \PrintSkill{Perception}{Perception}{Wis}
 		  \PrintSkill{PerformOne}{Perform (\charPerformOneName)}{Cha}
 		  \PrintSkill{PerformTwo}{Perform (\charPerformTwoName)}{Cha}
 		  \PrintSkill{ProfessionOne}{Prof (\charProfessionOneName)}{Wis}
@@ -299,10 +299,9 @@
 		  \PrintSkill{SleightOfHand}{Sleight of Hand}{Dex}
 		  \PrintSkill{SpeakLanguage}{Speak Language}{Int}
 		  \PrintSkill{Spellcraft}{Spellcraft}{Int}
-		  \PrintSkill{Spot}{Spot}{Wis}
+		  \PrintSkill{Stealth}{Stealth}{Dex}
 		  \PrintSkill{Survival}{Survival}{Wis}
 		  \PrintSkill{Swim}{Swim}{Str}
-		  \PrintSkill{Tumble}{Tumble}{Dex}
 		  \PrintSkill{UseMagicDevice}{Use Magic Device}{Cha}
 		  \PrintSkill{UseRope}{Use Rope}{Dex}
 	  \end{tabular}

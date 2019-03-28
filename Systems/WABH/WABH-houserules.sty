@@ -2,10 +2,10 @@
 \ProvidesPackage{WABH-houserules}[2019/03/28 Houserules for WABH2 campaign]
 
 
-\NewCounter{charClassBABCount}
-\NewCounter{charClassFortitudeCount}
-\NewCounter{charClassReflexCount}
-\NewCounter{charClassWillCount}
+\newCounter{charClassBABCount}
+\newCounter{charClassFortitudeCount}
+\newCounter{charClassReflexCount}
+\newCounter{charClassWillCount}
 
 \RenewDocumentCommand{\ImportCharClass}{s O{} m m}{
 	\input{\datafolder/Classes/#3.tex}
@@ -90,4 +90,87 @@
 
 \NewDocumentCommand{\ImportCharCulture}{m}{
 	\input{\datafolder/Cultures/#1.tex}
+}
+
+
+% Redefine Skills lists
+\edef\KnowledgeSkillsList{}
+\forcsvlist{\listadd\KnowledgeSkillsList}{KnowledgeArcana, KnowledgeDungeoneering, KnowledgeEngineering, KnowledgeGeography, KnowledgeHistory, KnowledgeLocal, KnowledgeNature, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion}
+\edef\SkillsList{}
+\forcsvlist{\listadd\SkillsList}{Acrobatics, Appraise, Bluff, Climb, Concentration, CraftOne, CraftTwo, CraftThree, DecipherScript, Diplomacy, DisableDevice, Disguise, EscapeArtist, Fly, Forgery, GatherInformation, HandleAnimal, Heal, Intimidate, Jump, OpenLock, Perception, PerformOne, PerformTwo, PerformThree, ProfessionOne, ProfessionTwo, Ride, Search, SenseMotive, SleightOfHand, SpeakLanguage, Spellcraft, Stealth, Survival, Swim, UseMagicDevice, UseRope}
+\forlistloop{\listadd\SkillsList}{\KnowledgeSkillsList}
+
+\edef\ArmorCheckSkillsList{}
+\forcsvlist{\listadd\ArmorCheckSkillsList}{Acrobatics, Climb, EscapeArtist, Fly, Jump, SleightOfHand, Stealth, Swim, Swim}
+
+\renewcommand{\do}[1]{
+	\newCounter{char#1Count}
+	\newCounter{char#1ClassSkillBool}
+	\newCounter{char#1RanksCount}
+	\newCounter{char#1MiscCount}
+}\dolistloop{\SkillsList}
+
+% Redefine Synergy bonuses
+\RenewDocumentCommand{\CalculateSynergyBonuses}{}{
+	\ifthenelse{\value{charAcrobaticsRanksCount} > 4}{
+			\MiscBonus{Jump}{2}
+	}
+	\ifthenelse{\value{charBluffRanksCount} > 4}{
+		\MiscBonus{Diplomacy}{2}
+		\MiscBonus{Intimidate}{2}
+		\MiscBonus{SleightOfHand}{2}
+		\addConditionalSkillMod{+2 to Disguise checks to act in character}
+	}{}
+	\ifthenelse{\value{charCraftOneRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Appraise checks related to \csname charCraftOnename\endcsname}}{}
+	\ifthenelse{\value{charCraftTwoRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Appraise checks related to \csname charCraftTwoname\endcsname}}{}
+	\ifthenelse{\value{charCraftThreeRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Appraise checks related to \csname charCraftThreename\endcsname}}{}
+	\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{
+		\ifthenelse{\value{charSpellcraftRanksCount} > 4}{\addConditionalSkillMod{+4 to Use Magic Device checks involving scrolls}}{\addConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}}{}
+	\ifthenelse{\value{charEscapeArtistRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Use Rope checks involving bindings}
+	}{}
+	\ifthenelse{\value{charHandleAnimalRanksCount} > 4}{
+		\MiscBonus{Ride}{2}
+	}{}
+	\ifthenelse{\value{charJumpRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Acrobatics checks to tumble}	
+	}{}
+	\ifthenelse{\value{charKnowledgeArcanaRanksCount} > 4}{
+		\MiscBonus{Spellcraft}{2}
+	}{}
+	\ifthenelse{\value{charKnowledgeEngineeringRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Search checks involving secret doors and similar compartments}
+	}{}
+	\ifthenelse{\value{charKnowledgeDungeoneeringRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Survival checks when underground}}{}
+	\ifthenelse{\value{charKnowledgeGeographyRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Survival checks to keep from getting lost or for avoiding hazards}}{}
+	\ifthenelse{\value{charKnowledgeLocalRanksCount} > 4}{
+		\MiscBonus{GatherInformation}{2}}{}
+	\ifthenelse{\value{charKnowledgeDungeoneeringRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Survival checks in aboveground natural environments}}{}
+	\ifthenelse{\value{charKnowledgePlanesRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Survival checks when on other planes}}{}
+	\ifthenelse{\value{charSearchRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Survival checks to follow tracks}
+	}{}
+	\ifthenelse{\value{charSenseMotiveRanksCount} > 4}{
+		\MiscBonus{Diplomacy}{2}
+	}{}
+	\ifthenelse{\value{charSpellcraftRanksCount} > 4}{
+		\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{}{\addConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}
+	}{}
+	\ifthenelse{\value{charSurvivalRanksCount} > 4}{
+		\MiscBonus{KnowledgeNature}{2}
+	}{}
+	\ifthenelse{\value{charUseMagicDeviceRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Spellcraft checks to decipher scrolls}
+	}{}
+	\ifthenelse{\value{charUseRopeRanksCount} > 4}{
+		\addConditionalSkillMod{+2 to Climb checks involving ropes}
+		\addConditionalSkillMod{+2 to Escape Artist checks involving ropes}
+	}{}
 }
