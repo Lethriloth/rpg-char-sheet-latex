@@ -8,29 +8,29 @@
 \SetCounter{RogueHitDieSize}{6}
 \edef\RogueClassSkillsList{}
 \forcsvlist{\listadd{\RogueClassSkillsList}}{Appraise, Balance, Bluff, Climb, Craft, DecipherScript, Diplomacy, DisableDevice, Disguise, EscapeArtist, Forgery, GatherInformation, Hide, Intimidate, Jump, KnowledgeLocal, Listen, MoveSilently, OpenLock, Perform, Profession, Search, SenseMotive, SleightOfHand, Spot, Swim, Tumble, UseMagicDevice, UseRope}
-\newcommand{\addRogueClassFeatures}[1]{
-	\addClassFeature{Sneak Attack +\DoMath{(#1 + 1)/2}d6}
-	\addClassFeature{Trapfinding}
+\newcommand{\AddRogueClassFeatures}[1]{
+	\AddClassFeature{Sneak Attack +\DoMath{(#1 + 1)/2}d6}
+	\AddClassFeature{Trapfinding}
 	\edef\charRogueSpecialAbilitiesList{}
 	\edef\charSkillMasteryList{}
 	\NewCounter{charRogueSpecialAbilitiesCount}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{Evasion}
+		\AddClassFeature{Evasion}
 			\ifinlist{Improved Evasion}{\charRogueSpecialAbilitiesList}{
-				\addSpecialDefense{Improved Evasion}
+				\AddSpecialDefense{Improved Evasion}
 			}{
-				\addSpecialDefense{Evasion}
+				\AddSpecialDefense{Evasion}
 			}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Trap Sense +\DoMath{#1 / 3}}
-			\addConditionalDefMod{+\DoMath{#1 / 3} to Reflex and AC vs. traps}
+		\AddClassFeature{Trap Sense +\DoMath{#1 / 3}}
+			\AddConditionalDefMod{+\DoMath{#1 / 3} to Reflex and AC vs. traps}
 	\ifthenelse{#1 > 3}{
-		\addClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
-			\ifthenelse{#1 > 7}{\addSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
+		\AddClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
+			\ifthenelse{#1 > 7}{\AddSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
 	\ifthenelse{#1 > 9}{
 		\AddToCounter{charRogueSpecialAbilitiesCount}{(#1 - 7) / 3}
-		\addClassFeature{Rogue Special Abilities\forlistloop{\\~~~~}{\charRogueSpecialAbilitiesList}}
-		\NewDocumentCommand{\addRogueSpecialAbility}{m}{
+		\AddClassFeature{Rogue Special Abilities\forlistloop{\\~~~~}{\charRogueSpecialAbilitiesList}}
+		\NewDocumentCommand{\AddRogueSpecialAbility}{m}{
 			\listinsert{\charRogueSpecialAbilitiesList}{##1}
 			\AddToCounter{charRogueSpecialAbilitiesCount}{-1}
 		}

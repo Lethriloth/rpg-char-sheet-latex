@@ -8,34 +8,34 @@
 \SetCounter{SorcererHitDieSize}{4}
 \edef\SorcererClassSkillsList{}
 \forcsvlist{\listadd{\SorcererClassSkillsList}}{Bluff, Concentration, Craft, KnowledgeArcana, Profession, Spellcraft}
-\newcommand{\addSorcererClassFeatures}[1]{
-	\addClassFeature{Summon Familiar}
-	\newcommand{\addSorcererSpellcasting}[1]{
+\newcommand{\AddSorcererClassFeatures}[1]{
+	\AddClassFeature{Summon Familiar}
+	\newcommand{\AddSorcererSpellcasting}[1]{
 		\ifthenelse{##1 = 1}{
 			\newSpellcasting[1]{Sorcerer}{##1}{cha}
 		}{
 			\newSpellcasting[##1 / 2]{Sorcerer}{##1}{cha}
 		}
-		\addSpontaneousPrimarySpellcasting{##1}
-		\ifthenelse{##1 > 9}{\addSpellsknown{0}{9}}{\addSpellsknown{0}{{##1/2 + 4}}}
-		\ifthenelse{##1 > 6}{\addSpellsknown{1}{5}}{\addSpellsknown{1}{##1/3 + 2}}
+		\AddSpontaneousPrimarySpellcasting{##1}
+		\ifthenelse{##1 > 9}{\AddSpellsknown{0}{9}}{\addSpellsknown{0}{{##1/2 + 4}}}
+		\ifthenelse{##1 > 6}{\AddSpellsknown{1}{5}}{\addSpellsknown{1}{##1/3 + 2}}
 		\ifthenelse{##1 > 10}{
-			\addSpellsknown{2}{5}
-			\addSpellsknown{3}{4}
+			\AddSpellsknown{2}{5}
+			\AddSpellsknown{3}{4}
 		}{
-			\addSpellsknown{2}{(##1 - 1)/2}
-			\addSpellsknown{3}{(##1 - 3)/2}
+			\AddSpellsknown{2}{(##1 - 1)/2}
+			\AddSpellsknown{3}{(##1 - 3)/2}
 		}
-		\ifthenelse{##1 > 12}{\addSpellsknown{4}{4}}{\addSpellsknown{4}{(##1 - 5)/2}}
+		\ifthenelse{##1 > 12}{\AddSpellsknown{4}{4}}{\addSpellsknown{4}{(##1 - 5)/2}}
 		\ifthenelse{##1 > 14}{
-			\addSpellsknown{5}{4}
-			\addSpellsknown{6}{3}
+			\AddSpellsknown{5}{4}
+			\AddSpellsknown{6}{3}
 		}{
-			\addSpellsknown{5}{(##1 - 7)/2}
-			\addSpellsknown{6}{(##1 - 9)/2}
+			\AddSpellsknown{5}{(##1 - 7)/2}
+			\AddSpellsknown{6}{(##1 - 9)/2}
 		}
-		\ifthenelse{##1 > 16}{\addSpellsknown{7}{3}}{\addSpellsknown{7}{(##1 - 11)/2}}
-		\addSpellsknown{8}{(##1 - 13) / 2}
-		\addSpellsknown{9}{##1 - 17}
+		\ifthenelse{##1 > 16}{\AddSpellsknown{7}{3}}{\addSpellsknown{7}{(##1 - 11)/2}}
+		\AddSpellsknown{8}{(##1 - 13) / 2}
+		\AddSpellsknown{9}{##1 - 17}
 	}
 }

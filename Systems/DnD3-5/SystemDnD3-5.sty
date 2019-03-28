@@ -38,16 +38,16 @@
 
 %% Armor Class %%
 \NewCounter{charArmorBonusCount}
-	\newcommand{\addArmorBonus}[1]{\ifthenelse{\value{charArmorBonusCount}<#1}{\SetCounter{charArmorBonusCount}{#1}}{}}
+	\newcommand{\AddArmorBonus}[1]{\ifthenelse{\value{charArmorBonusCount}<#1}{\SetCounter{charArmorBonusCount}{#1}}{}}
 \NewCounter{charShieldBonusCount}
-	\newcommand{\addShieldBonus}[1]{\ifthenelse{\value{charShieldBonusCount}<#1}{\SetCounter{charShieldBonusCount}{#1}}{}}
+	\newcommand{\AddShieldBonus}[1]{\ifthenelse{\value{charShieldBonusCount}<#1}{\SetCounter{charShieldBonusCount}{#1}}{}}
 \NewCounter{charNaturalArmorModCount}
-	\newcommand{\addNaturalArmorBonus}[1]{\ifthenelse{\arabic{charNaturalArmorModCount}<#1}{\SetCounter{charNaturalArmorModCount}{#1}}{}}
+	\newcommand{\AddNaturalArmorBonus}[1]{\ifthenelse{\arabic{charNaturalArmorModCount}<#1}{\SetCounter{charNaturalArmorModCount}{#1}}{}}
 \NewCounter{charDodgeModCount}
-	\newcommand{\addDodgeBonus}[1]{\AddToCounter{charDodgeModCount}{#1}}
+	\newcommand{\AddDodgeBonus}[1]{\AddToCounter{charDodgeModCount}{#1}}
 \NewCounter{charSizeModCount}
 \NewCounter{charDeflectionModCount}
-	\newcommand{\addDeflectionBonus}[1]{\ifthenelse{\arabic{chardeflectionmodcount}<#1}{\SetCounter{chardeflectionmodcount}{#1}}{}}
+	\newcommand{\AddDeflectionBonus}[1]{\ifthenelse{\arabic{chardeflectionmodcount}<#1}{\SetCounter{chardeflectionmodcount}{#1}}{}}
 \NewCounter{charACMiscCount}\NewCounter{charACTmpCount}
 \NewCounter{charTouchACMiscCount}\NewCounter{charTouchACTmpCount}
 \NewCounter{charFlatFootedACMiscCount}\NewCounter{charFlatFootedACTmpCount}
@@ -59,11 +59,11 @@
 	\NewCounter{char#1TmpCount}
 }\docsvlist{Fortitude, Reflex, Will}
 \NewCounter{charResistanceModCount}
-\newcommand{\addResistanceBonus}[1]{\ifthenelse{\value{charResistanceModCount}<#1}{\SetCounter{charResistanceModCount}{#1}}{}}
+\newcommand{\AddResistanceBonus}[1]{\ifthenelse{\value{charResistanceModCount}<#1}{\SetCounter{charResistanceModCount}{#1}}{}}
 
 %% Special Defenses
 \edef\charResistancesList{}
-\newcommand{\addResistance}[2]{
+\newcommand{\AddResistance}[2]{
 	\ifinlist{#1}{\charImmunitiesList}{}{
 		\ifinlist{#1}{\charResistancesList}{}{
 			\NewCounter{charResist#1Count}
@@ -91,7 +91,7 @@
 	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintListlast%
 }
 \edef\charImmunitiesList{}
-\newcommand{\addImmunity}[1]{
+\newcommand{\AddImmunity}[1]{
 	\ifinlist{#1}{\charImmunitiesList}{}{
 		\listinsert{\charImmunitiesList}{#1}
 		\ifinlist{#1}{\charResistancesList}{
@@ -100,7 +100,7 @@
 	}
 }
 \edef\charDRTypesList{}
-\newcommand{\addDR}[2]{
+\newcommand{\AddDR}[2]{
 	\ifinlist{#1}{\charDRTypesList}{}{
 		\NewCounter{charDR/#1Count}
 		\listadd{\charDRTypesList}{#1}
@@ -125,7 +125,7 @@
 }
 
 \edef\charSpecialDefensesList{}
-\newcommand{\addSpecialDefense}[1]{
+\newcommand{\AddSpecialDefense}[1]{
 	\listinsert{\charSpecialDefensesList}{#1}
 }
 
@@ -141,50 +141,50 @@
 
 %% Size
 \NewCounter{charSpecialSizeModCount}
-\newcommand\setSize[1]{
+\newcommand\SetSize[1]{
 	\csname setSize#1\endcsname
 }
-\newcommand\setSizeFine{
+\newcommand\SetSizeFine{
 	\renewcommand{\charSize}{Fine}
 	\SetCounter{charSizeModCount}{8}
 	\SetCounter{charSpecialSizeModCount}{-8}
 }
-\newcommand\setSizeDiminutive{
+\newcommand\SetSizeDiminutive{
 	\renewcommand{\charSize}{Diminutive}
 	\SetCounter{charSizeModCount}{4}
 	\SetCounter{charSpecialSizeModCount}{-4}
 }
-\newcommand\setSizeTiny{
+\newcommand\SetSizeTiny{
 	\renewcommand{\charSize}{Tiny}
 	\SetCounter{charSizeModCount}{2}
 	\SetCounter{charSpecialSizeModCount}{-2}
 }
-\newcommand\setSizeSmall{
+\newcommand\SetSizeSmall{
 	\renewcommand{\charSize}{Small}
 	\SetCounter{charSizeModCount}{1}
 	\SetCounter{charSpecialSizeModCount}{-1}
 }
-\newcommand\setSizeMedium{
+\newcommand\SetSizeMedium{
 	\renewcommand{\charSize}{Medium}
 	\SetCounter{charSizeModCount}{0}
 	\SetCounter{charSpecialSizeModCount}{0}
 }
-\newcommand\setSizeLarge{
+\newcommand\SetSizeLarge{
 	\renewcommand{\charSize}{Large}
 	\SetCounter{charSizeModCount}{-1}
 	\SetCounter{charSpecialSizeModCount}{1}
 }
-\newcommand\setSizeHuge{
+\newcommand\SetSizeHuge{
 	\renewcommand{\charSize}{Huge}
 	\SetCounter{charSizeModCount}{-2}
 	\SetCounter{charSpecialSizeModCount}{2}
 }
-\newcommand\setSizeGargantuan{
+\newcommand\SetSizeGargantuan{
 	\renewcommand{\charSize}{Gargantuan}
 	\SetCounter{charSizeModCount}{-4}
 	\SetCounter{charSpecialSizeModCount}{4}
 }
-\newcommand\setSizeColossal{
+\newcommand\SetSizeColossal{
 	\renewcommand{\charSize}{Colossal}
 	\SetCounter{charSizeModCount}{-8}
 	\SetCounter{charSpecialSizeModCount}{8}
@@ -202,17 +202,17 @@
 	\SetCounter{charBaseSpeedCount}{#1}
 }
 \newcommand{\charManeuverability}{}
-\newcommand{\addFlySpeed}[2]{
+\newcommand{\AddFlySpeed}[2]{
 	\SetCounter{charFlySpeedCount}{#1}
 	\renewcommand{\charManeuverability}{#2}
 }
-\newcommand{\addClimbSpeed}[1]{
+\newcommand{\AddClimbSpeed}[1]{
 	\SetCounter{charClimbSpeedCount}{#1}
 }
-\newcommand{\addSwimSpeed}[1]{
+\newcommand{\AddSwimSpeed}[1]{
 	\SetCounter{charSwimSpeedCount}{#1}
 }
-\newcommand{\addBurrowSpeed}[1]{
+\newcommand{\AddBurrowSpeed}[1]{
 	\SetCounter{charBurrowSpeedCount}{#1}
 }
 \NewCounter{charSpeedEnhancementCount}
@@ -234,7 +234,7 @@
 \NewCounter{charBonusFeatsCount}
 \NewCounter{CountFeats-Mode}
 
-\NewDocumentCommand{\addFeat}{s O{1} m}{
+\NewDocumentCommand{\AddFeat}{s O{1} m}{
 	\IfBooleanTF #1 {
 		\AddToCounter{charBonusFeatsCount}{-#2}
 		\listadd\charFeatsList{#3\textsuperscript{B} \ifthenelse{#2 = 1}{}{$\times#2$}}
@@ -243,9 +243,9 @@
 		\AddToCounter{charFeatsCount}{-#2}
 	}
 }
-\newcommand\addClassFeature[1]{\listadd\charClassFeaturesList{#1}}
-\newcommand\addRaceFeature[1]{\listadd\charRaceFeaturesList{#1}}
-\newcommand\addLimitedUse[2]{\listadd\charLimitedUseList{#1 & #2}}
+\newcommand\AddClassFeature[1]{\listadd\charClassFeaturesList{#1}}
+\newcommand\AddRaceFeature[1]{\listadd\charRaceFeaturesList{#1}}
+\newcommand\AddLimitedUse[2]{\listadd\charLimitedUseList{#1 & #2}}
 
 \newcommand{\datafolder}{.}
 %% Class Importing %%
@@ -262,7 +262,7 @@
 	}
 	\listadd{\charClassesList}{#3}
 	\if\csname#3BAB\endcsname g
-	\addtocounter{charBABCount}{#4}
+	\Addtocounter{charBABCount}{#4}
 	\fi
 	\if\csname#3BAB\endcsname a
 	\AddToCounter{charBABCount}{#4 * 3 / 4}
@@ -368,7 +368,7 @@
 }
 
 %Command to add skill ranks
-\newcommand\addRanks[3][]{
+\newcommand\AddRanks[3][]{
 	\ifthenelse{\equal#1{}}{
 		\AddToCounter{char#2RanksCount}{#3}
 	}{
@@ -386,7 +386,7 @@
 \NewCounter{charBonusSkillRanksPerLevelCount}
 %Commands to be run at sheet initialization
 \newcounter{AutoSkillRanks-Mode}
-\newcommand{\addIntToSkillRanks}{
+\newcommand{\AddIntToSkillRanks}{
 	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
 		\SetCounter{@i}{1}
 		\SetCounter{@j}{(\value{charIntCount} - \value{charIntEnhancementCount} - \value{charIntTmpCount}) / 2 - 5}
@@ -418,44 +418,44 @@
 		\MiscBonus{Diplomacy}{2}
 		\MiscBonus{Intimidate}{2}
 		\MiscBonus{SleightOfHand}{2}
-		\addConditionalSkillMod{+2 to Disguise checks to act in character}
+		\AddConditionalSkillMod{+2 to Disguise checks to act in character}
 	}{}
 	\ifthenelse{\value{charCraftOneRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Appraise checks related to \csname charCraftOnename\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftOnename\endcsname}}{}
 	\ifthenelse{\value{charCraftTwoRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Appraise checks related to \csname charCraftTwoname\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftTwoname\endcsname}}{}
 	\ifthenelse{\value{charCraftThreeRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Appraise checks related to \csname charCraftThreename\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftThreename\endcsname}}{}
 	\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{
-		\ifthenelse{\value{charSpellcraftRanksCount} > 4}{\addConditionalSkillMod{+4 to Use Magic Device checks involving scrolls}}{\addConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}}{}
+		\ifthenelse{\value{charSpellcraftRanksCount} > 4}{\AddConditionalSkillMod{+4 to Use Magic Device checks involving scrolls}}{\addConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}}{}
 	\ifthenelse{\value{charEscapeArtistRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Use Rope checks involving bindings}}{}
+		\AddConditionalSkillMod{+2 to Use Rope checks involving bindings}}{}
 	\ifthenelse{\value{charHandleAnimalRanksCount} > 4}{
 		\MiscBonus{Ride}{2}}{}
 	\ifthenelse{\value{charKnowledgeArcanaRanksCount} > 4}{
 		\MiscBonus{Spellcraft}{2}}{}
 	\ifthenelse{\value{charKnowledgeEngineeringRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Search checks involving secret doors and similar compartments}}{}
+		\AddConditionalSkillMod{+2 to Search checks involving secret doors and similar compartments}}{}
 	\ifthenelse{\value{charKnowledgeDungeoneeringRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Survival checks when underground}}{}
+		\AddConditionalSkillMod{+2 to Survival checks when underground}}{}
 	\ifthenelse{\value{charKnowledgeGeographyRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Survival checks to keep from getting lost or for avoiding hazards}}{}
+		\AddConditionalSkillMod{+2 to Survival checks to keep from getting lost or for avoiding hazards}}{}
 	\ifthenelse{\value{charKnowledgeLocalRanksCount} > 4}{
 		\MiscBonus{GatherInformation}{2}}{}
 	\ifthenelse{\value{charKnowledgeDungeoneeringRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Survival checks in aboveground natural environments}}{}
+		\AddConditionalSkillMod{+2 to Survival checks in aboveground natural environments}}{}
 	\ifthenelse{\value{charKnowledgeNobilityRanksCount} > 4}{
 		\MiscBonus{Diplomacy}{2}}{}
 	\ifthenelse{\value{charKnowledgePlanesRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Survival checks when on other planes}}{}
+		\AddConditionalSkillMod{+2 to Survival checks when on other planes}}{}
 	\ifthenelse{\value{charSearchRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Survival checks to follow tracks}
+		\AddConditionalSkillMod{+2 to Survival checks to follow tracks}
 	}{}
 	\ifthenelse{\value{charSenseMotiveRanksCount} > 4}{
 		\MiscBonus{Diplomacy}{2}
 	}{}
 	\ifthenelse{\value{charSpellcraftRanksCount} > 4}{
-		\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{}{\addConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}
+		\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{}{\AddConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}
 	}{}
 	\ifthenelse{\value{charSurvivalRanksCount} > 4}{
 		\MiscBonus{KnowledgeNature}{2}
@@ -467,11 +467,11 @@
 		\MiscBonus{Jump}{2}
 	}{}
 	\ifthenelse{\value{charUseMagicDeviceRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Spellcraft checks to decipher scrolls}
+		\AddConditionalSkillMod{+2 to Spellcraft checks to decipher scrolls}
 	}{}
 	\ifthenelse{\value{charUseRopeRanksCount} > 4}{
-		\addConditionalSkillMod{+2 to Climb checks involving ropes}
-		\addConditionalSkillMod{+2 to Escape Artist checks involving ropes}
+		\AddConditionalSkillMod{+2 to Climb checks involving ropes}
+		\AddConditionalSkillMod{+2 to Escape Artist checks involving ropes}
 	}{}
 }
 
@@ -481,26 +481,26 @@
 %%Gear%%
 \edef\charGearList{}
 \newlength{\GearItemWeight}
-\NewDocumentCommand{\addGearItem}{s O{1} m m}{%
+\NewDocumentCommand{\AddGearItem}{s O{1} m m}{%
 	\IfBooleanTF #1 {%
-		\addtolength{\ExtradimensionalGearWeight}{#2pt * #4}%
+		\Addtolength{\ExtradimensionalGearWeight}{#2pt * #4}%
 		\listadd{\charGearList}{#3\ifnum #2 > 1{ (#2)}\fi &\SetLength{\GearItemWeight}{#2pt * #4} *\PrintWeight{\GearItemWeight}~lbs.}
 	}{%
-		\addtolength{\TotalGearWeight}{#2pt * #4}%
+		\Addtolength{\TotalGearWeight}{#2pt * #4}%
 		\listadd{\charGearList}{#3\ifnum #2 > 1{ (#2)}\fi & \SetLength{\GearItemWeight}{#2pt * #4}\PrintWeight{\GearItemWeight}~lbs.}
 	}
 }
-\newcommand\addGearSubItem[3][1]{
+\newcommand\AddGearSubItem[3][1]{
 	\listadd{\charGearList}{---#2\ifnum #1 > 1{ (#1)} & (\DoMath{#1 * #3}~lbs.) \tabularnewline}
 }
 
 %%Stored Items%%
 \edef\StoredItemsList{}
-\newcommand\addStoredItem[3][1]{
-	\addtolength{\TotalStoredWeight}{#1 pt * #3}%
+\newcommand\AddStoredItem[3][1]{
+	\Addtolength{\TotalStoredWeight}{#1 pt * #3}%
 	\listadd{\StoredItemsList}{#2\ifnum #1 > 1{ (#1)}\fi & \DoMath{#1 * #3}~lbs.}
 }
-\newcommand\addStoredSubItem[3][1]{
+\newcommand\AddStoredSubItem[3][1]{
 	\listadd{\StoredItemsList}{---#2\ifnum #1 > 1{ (#1)} & (\DoMath{#1 * #3}~lbs.) \tabularnewline}
 }
 
@@ -568,24 +568,24 @@
 }
 \docsvlist{One,Two,Three}	
 
-\newcommand\addWeapon[7]{%
+\newcommand\AddWeapon[7]{%
 	\ifthenelse{\equal{\charWeaponOneName}{}}
-	{\addWeaponOne{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
+	{\AddWeaponOne{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
 	{\ifthenelse{\equal{\charWeaponTwoName}{}}
-		{\addWeaponTwo{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
+		{\AddWeaponTwo{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
 		{\ifthenelse{\equal{\charWeaponThreeName}{}}
-			{\addWeaponThree{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
-			{\addWeaponOne{#1}{#2}{#3}{#4}{#5}{#6}{#7}
+			{\AddWeaponThree{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
+			{\AddWeaponOne{#1}{#2}{#3}{#4}{#5}{#6}{#7}
 }}}}
 
-\newcommand\addAutoWeapon[9][0]{
+\newcommand\AddAutoWeapon[9][0]{
 	\ifthenelse{\equal{\charWeaponOneName}{}}
-	{\addAutoWeaponOne[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
+	{\AddAutoWeaponOne[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
 	{\ifthenelse{\equal{\charWeaponTwoName}{}}
-		{\addAutoWeaponTwo[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
+		{\AddAutoWeaponTwo[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
 		{\ifthenelse{\equal{\charWeaponThreeName}{}}
-			{\addAutoWeaponThree[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
-			{\addAutoWeaponOne[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}
+			{\AddAutoWeaponThree[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
+			{\AddAutoWeaponOne[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}
 }}}}
 
 %Initialize Armor Item variables
@@ -608,9 +608,9 @@
 \NewCounter{charShieldSpellFailureCount}
 
 %Command to add an armor item
-\newcommand\addArmor[9]{
+\newcommand\AddArmor[9]{
 	\renewcommand{\charArmorName}{#1}
-	\addArmorBonus{#2}
+	\AddArmorBonus{#2}
 	\ifthenelse{\equal{#3}{}}{}{\SetCounter{charMaxDexArmorCount}{#3}}
 	\ifthenelse{\value{charMaxDexArmorCount}<\value{charMaxDexBonusCount}}
 	{\SetCounter{charMaxDexBonusCount}{\value{charMaxDexArmorCount}}}{}
@@ -622,12 +622,12 @@
 	\AddToCounter{TotalACItemsSpellFailure}{#5}
 	\renewcommand{\charArmorType}{#6}
 	\renewcommand{\charArmorNotes}{#8}
-	\addBodyItem{#1}{#9}{#7}
+	\AddBodyItem{#1}{#9}{#7}
 }
 
 %Command to add a shield item
-\newcommand\addShield[7]{
-	\addShieldBonus{#2}
+\newcommand\AddShield[7]{
+	\AddShieldBonus{#2}
 	\ifthenelse{\equal{#3}{}}{}{\SetCounter{charMaxDexShieldCount}{#3}}
 	\ifthenelse{\value{charMaxDexShieldCount}<\value{charMaxDexBonusCount}}
 	{\SetCounter{charMaxDexBonusCount}{\value{charMaxDexShieldCount}}}{}
@@ -638,7 +638,7 @@
 	\SetCounter{charShieldSpellFailureCount}{#5}
 	\AddToCounter{TotalACItemsSpellFailure}{#5}
 	\renewcommand{\charShieldNotes}{#7}
-	\addGearItem{Shield}{#6}
+	\AddGearItem{Shield}{#6}
 }
 
 %Initialize variables for Item Slots
@@ -652,13 +652,13 @@
 		\expandafter\renewcommand\csname ItemInSlot#1Name\endcsname{\itshape ##1}
 		\expandafter\renewcommand\csname ItemInSlot#1Description\endcsname{##2}
 		\SetLength{\csname ItemInSlot#1Weight\endcsname}{##3pt}
-		\addtolength{\WornItemsWeight}{##3pt}
+		\Addtolength{\WornItemsWeight}{##3pt}
 	}
 }\dolistloop{\ItemSlotNamesList}
-\newcommand{\addRingItem}[3]{
+\newcommand{\AddRingItem}[3]{
 	\ifthenelse{\not\equal{\ItemInSlotRingOneName}{}\and\equal{\ItemInSlotRingTwoName}{}}
-	{\addRingTwoItem{#1}{#2}{#3}}
-	{\addRingOneItem{#1}{#2}{#3}}}
+	{\AddRingTwoItem{#1}{#2}{#3}}
+	{\AddRingOneItem{#1}{#2}{#3}}}
 
 %%Money
 \renewcommand{\do}[1]{
@@ -702,7 +702,7 @@
 	\SetLength{\TotalExtradimensionalWeight}{\ExtradimensionalGearWeight+\ExtradimensionalCurrencyWeight}
 	\SetLength{\ExtradimensionalOverload}{\TotalExtradimensionalWeight - \value{charExtradimensionalCapacityCount}pt}
 	\ifthenelse{\ExtradimensionalOverload > 0}{
-		\addtolength{\TotalGearWeight}{\ExtradimensionalOverload}
+		\Addtolength{\TotalGearWeight}{\ExtradimensionalOverload}
 	}{}
 	\SetLength{\TotalCarriedWeight}{\TotalGearWeight+\CurrencyWeight+\WornItemsWeight}
 }
@@ -720,10 +720,10 @@
 
 \NewCounter{CarryingCapacityMultiplierCount}
 \SetCounter{CarryingCapacityMultiplierCount}{1}
-\newcommand\setHeavyLoad[1]{%
+\newcommand\SetHeavyLoad[1]{%
 	\ifthenelse{\value{#1}>19}{%
 		\SetCounter{@j}{\value{#1}-10}%
-		\setHeavyLoad{@j}
+		\SetHeavyLoad{@j}
 		\AddToCounter{@i}{\value{@i}}
 		\AddToCounter{@i}{\value{@i}}
 	}{%
@@ -744,7 +744,7 @@
 \newcommand\CalculateLoads{
 	\SetCounter{@i}{0}
 	\SetCounter{@j}{\value{charStrCount}+\value{charStrCarryingMiscCount}}
-	\setHeavyLoad{@j}
+	\SetHeavyLoad{@j}
 	\SetCounter{charHeavyLoadCount}{\value{@i}*\value{CarryingCapacityMultiplierCount}}
 	\SetCounter{charMediumLoadCount}{\value{charHeavyLoadCount}*2/3}
 	\SetCounter{charLightLoadCount}{\value{charHeavyLoadCount}/3}
@@ -792,231 +792,231 @@
 
 %%%% Spells %%%%
 
-\newcommand{\addPrimarySpellcasting}[1]{
-	\addSpellSlots{0}{3}
-	\addSpellSlots{1}{1}
+\newcommand{\AddPrimarySpellcasting}[1]{
+	\AddSpellSlots{0}{3}
+	\AddSpellSlots{1}{1}
 	\ifthenelse{#1 > 1}{
-		\addSpellSlots{0}{1}
-		\addSpellSlots{1}{1}
+		\AddSpellSlots{0}{1}
+		\AddSpellSlots{1}{1}
 		\ifthenelse{#1 > 2}{
-			\addSpellSlots{2}{1}
+			\AddSpellSlots{2}{1}
 			\ifthenelse{#1 > 3}{
-				\addSpellSlots{0}{1}
-				\addSpellSlots{1}{1}
-				\addSpellSlots{2}{1}
+				\AddSpellSlots{0}{1}
+				\AddSpellSlots{1}{1}
+				\AddSpellSlots{2}{1}
 				\ifthenelse{#1 > 4}{
-					\addSpellSlots{3}{1}
+					\AddSpellSlots{3}{1}
 					\ifthenelse{#1 > 5}{
-						\addSpellSlots{2}{1}
-						\addSpellSlots{3}{1}
+						\AddSpellSlots{2}{1}
+						\AddSpellSlots{3}{1}
 						\ifthenelse{#1 > 6}{
-							\addSpellSlots{4}{1}
-							\addSpellSlots{0}{1}
-							\addSpellSlots{1}{1}
+							\AddSpellSlots{4}{1}
+							\AddSpellSlots{0}{1}
+							\AddSpellSlots{1}{1}
 							\ifthenelse{#1 > 7}{
-								\addSpellSlots{3}{1}
-								\addSpellSlots{4}{1}
+								\AddSpellSlots{3}{1}
+								\AddSpellSlots{4}{1}
 								\ifthenelse{#1 > 8}{
-									\addSpellSlots{5}{1}
-									\addSpellSlots{2}{1}
+									\AddSpellSlots{5}{1}
+									\AddSpellSlots{2}{1}
 									\ifthenelse{#1 > 9}{
-										\addSpellSlots{4}{1}
-										\addSpellSlots{5}{1}	
+										\AddSpellSlots{4}{1}
+										\AddSpellSlots{5}{1}	
 										\ifthenelse{#1 > 10}{
-											\addSpellSlots{6}{1}
-											\addSpellSlots{3}{1}
-											\addSpellSlots{1}{1}
+											\AddSpellSlots{6}{1}
+											\AddSpellSlots{3}{1}
+											\AddSpellSlots{1}{1}
 											\ifthenelse{#1 > 11}{
-												\addSpellSlots{5}{1}
-												\addSpellSlots{6}{1}
+												\AddSpellSlots{5}{1}
+												\AddSpellSlots{6}{1}
 												\ifthenelse{#1 > 12}{
-													\addSpellSlots{7}{1}
-													\addSpellSlots{4}{1}
-													\addSpellSlots{2}{1}
+													\AddSpellSlots{7}{1}
+													\AddSpellSlots{4}{1}
+													\AddSpellSlots{2}{1}
 													\ifthenelse{#1 > 13}{
-														\addSpellSlots{6}{1}
-														\addSpellSlots{7}{1}
+														\AddSpellSlots{6}{1}
+														\AddSpellSlots{7}{1}
 														\ifthenelse{#1 > 14}{
-															\addSpellSlots{8}{1}
-															\addSpellSlots{5}{1}
-															\addSpellSlots{3}{1}
+															\AddSpellSlots{8}{1}
+															\AddSpellSlots{5}{1}
+															\AddSpellSlots{3}{1}
 															\ifthenelse{#1 > 15}{
-																\addSpellSlots{7}{1}
-																\addSpellSlots{8}{1}
+																\AddSpellSlots{7}{1}
+																\AddSpellSlots{8}{1}
 																\ifthenelse{#1 > 16}{
-																	\addSpellSlots{9}{1}
-																	\addSpellSlots{6}{1}
-																	\addSpellSlots{4}{1}
+																	\AddSpellSlots{9}{1}
+																	\AddSpellSlots{6}{1}
+																	\AddSpellSlots{4}{1}
 																	\ifthenelse{#1 > 17}{
-																		\addSpellSlots{8}{1}
-																		\addSpellSlots{9}{1}
+																		\AddSpellSlots{8}{1}
+																		\AddSpellSlots{9}{1}
 																		\ifthenelse{#1 > 18}{
-																			\addSpellSlots{7}{1}
-																			\addSpellSlots{9}{1}
-																			\addSpellSlots{5}{1}
+																			\AddSpellSlots{7}{1}
+																			\AddSpellSlots{9}{1}
+																			\AddSpellSlots{5}{1}
 																			\ifthenelse{#1 > 19}{
-																				\addSpellSlots{8}{1}
-																				\addSpellSlots{9}{1}
+																				\AddSpellSlots{8}{1}
+																				\AddSpellSlots{9}{1}
 																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
-\newcommand{\addSpontaneousPrimarySpellcasting}[1]{
-	\addSpellSlots{0}{5}
-	\addSpellSlots{1}{3}
+\newcommand{\AddSpontaneousPrimarySpellcasting}[1]{
+	\AddSpellSlots{0}{5}
+	\AddSpellSlots{1}{3}
 	\ifthenelse{#1 > 1}{
-		\addSpellSlots{0}{1}
-		\addSpellSlots{1}{1}
+		\AddSpellSlots{0}{1}
+		\AddSpellSlots{1}{1}
 		\ifthenelse{#1 > 2}{
-			\addSpellSlots{1}{1}
+			\AddSpellSlots{1}{1}
 			\ifthenelse{#1 > 3}{
-				\addSpellSlots{1}{1}
-				\addSpellSlots{2}{3}
+				\AddSpellSlots{1}{1}
+				\AddSpellSlots{2}{3}
 				\ifthenelse{#1 > 4}{
-					\addSpellSlots{2}{1}
+					\AddSpellSlots{2}{1}
 					\ifthenelse{#1 > 5}{
-						\addSpellSlots{2}{1}
-						\addSpellSlots{3}{3}
+						\AddSpellSlots{2}{1}
+						\AddSpellSlots{3}{3}
 						\ifthenelse{#1 > 6}{
-							\addSpellSlots{2}{1}
-							\addSpellSlots{3}{1}
+							\AddSpellSlots{2}{1}
+							\AddSpellSlots{3}{1}
 							\ifthenelse{#1 > 7}{
-								\addSpellSlots{3}{1}
-								\addSpellSlots{4}{3}
+								\AddSpellSlots{3}{1}
+								\AddSpellSlots{4}{3}
 								\ifthenelse{#1 > 8}{
-									\addSpellSlots{3}{1}
-									\addSpellSlots{4}{1}
+									\AddSpellSlots{3}{1}
+									\AddSpellSlots{4}{1}
 									\ifthenelse{#1 > 9}{
-										\addSpellSlots{4}{1}
-										\addSpellSlots{5}{3}	
+										\AddSpellSlots{4}{1}
+										\AddSpellSlots{5}{3}	
 										\ifthenelse{#1 > 10}{
-											\addSpellSlots{4}{1}
-											\addSpellSlots{5}{1}
+											\AddSpellSlots{4}{1}
+											\AddSpellSlots{5}{1}
 											\ifthenelse{#1 > 11}{
-												\addSpellSlots{5}{1}
-												\addSpellSlots{6}{3}
+												\AddSpellSlots{5}{1}
+												\AddSpellSlots{6}{3}
 												\ifthenelse{#1 > 12}{
-													\addSpellSlots{5}{1}
-													\addSpellSlots{6}{1}
+													\AddSpellSlots{5}{1}
+													\AddSpellSlots{6}{1}
 													\ifthenelse{#1 > 13}{
-														\addSpellSlots{6}{1}
-														\addSpellSlots{7}{3}
+														\AddSpellSlots{6}{1}
+														\AddSpellSlots{7}{3}
 														\ifthenelse{#1 > 14}{
-															\addSpellSlots{6}{1}
-															\addSpellSlots{7}{1}
+															\AddSpellSlots{6}{1}
+															\AddSpellSlots{7}{1}
 															\ifthenelse{#1 > 15}{
-																\addSpellSlots{7}{1}
-																\addSpellSlots{8}{3}
+																\AddSpellSlots{7}{1}
+																\AddSpellSlots{8}{3}
 																\ifthenelse{#1 > 16}{
-																	\addSpellSlots{7}{1}
-																	\addSpellSlots{8}{1}
+																	\AddSpellSlots{7}{1}
+																	\AddSpellSlots{8}{1}
 																	\ifthenelse{#1 > 17}{
-																		\addSpellSlots{8}{1}
-																		\addSpellSlots{9}{3}
+																		\AddSpellSlots{8}{1}
+																		\AddSpellSlots{9}{3}
 																		\ifthenelse{#1 > 18}{
-																			\addSpellSlots{8}{1}
-																			\addSpellSlots{9}{1}
+																			\AddSpellSlots{8}{1}
+																			\AddSpellSlots{9}{1}
 																			\ifthenelse{#1 > 19}{
-																				\addSpellSlots{9}{2}
+																				\AddSpellSlots{9}{2}
 																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 	
 }
-\newcommand{\addTwoThirdsSpellcasing}[1]{
-	\addSpellSlots{0}{2}
-	\addSpellsknown{0}{4}
+\newcommand{\AddTwoThirdsSpellcasing}[1]{
+	\AddSpellSlots{0}{2}
+	\AddSpellsknown{0}{4}
 	\ifthenelse{#1 > 1}{
-		\addSpellSlots{0}{1}
-		\addSpellsknown{0}{1}
-		\addSpellsknown{1}{2}
+		\AddSpellSlots{0}{1}
+		\AddSpellsknown{0}{1}
+		\AddSpellsknown{1}{2}
 		\ifthenelse{#1 > 2}{
-			\addSpellSlots{1}{1}
-			\addSpellsknown{0}{1}
-			\addSpellsknown{1}{1}
+			\AddSpellSlots{1}{1}
+			\AddSpellsknown{0}{1}
+			\AddSpellsknown{1}{1}
 			\ifthenelse{#1 > 3}{
-				\addSpellSlots{1}{1}
-				\addSpellsknown{2}{2}
+				\AddSpellSlots{1}{1}
+				\AddSpellsknown{2}{2}
 				\ifthenelse{#1 > 4}{
-					\addSpellSlots{1}{1}
-					\addSpellSlots{2}{1}
-					\addSpellsknown{1}{1}
-					\addSpellsknown{2}{1}
+					\AddSpellSlots{1}{1}
+					\AddSpellSlots{2}{1}
+					\AddSpellsknown{1}{1}
+					\AddSpellsknown{2}{1}
 					\ifthenelse{#1 > 5}{
-						\addSpellSlots{2}{1}
+						\AddSpellSlots{2}{1}
 						\ifthenelse{#1 > 6}{
-							\addSpellsknown{2}{1}
-							\addSpellsknown{3}{2}
+							\AddSpellsknown{2}{1}
+							\AddSpellsknown{3}{2}
 							\ifthenelse{#1 > 7}{
-								\addSpellSlots{2}{1}
-								\addSpellSlots{3}{1}
-								\addSpellsknown{3}{1}
+								\AddSpellSlots{2}{1}
+								\AddSpellSlots{3}{1}
+								\AddSpellsknown{3}{1}
 								\ifthenelse{#1 > 8}{
-									\addSpellSlots{3}{1}
+									\AddSpellSlots{3}{1}
 									\ifthenelse{#1 > 9}{
-										\addSpellsknown{3}{1}
-										\addSpellsknown{4}{2}
+										\AddSpellsknown{3}{1}
+										\AddSpellsknown{4}{2}
 										\ifthenelse{#1 > 10}{
-											\addSpellSlots{3}{1}
-											\addSpellSlots{4}{1}
-											\addSpellsknown{4}{1}
+											\AddSpellSlots{3}{1}
+											\AddSpellSlots{4}{1}
+											\AddSpellsknown{4}{1}
 											\ifthenelse{#1 > 11}{
-												\addSpellSlots{4}{1}
+												\AddSpellSlots{4}{1}
 												\ifthenelse{#1 > 12}{
-													\addSpellsknown{4}{1}
-													\addSpellsknown{5}{2}
+													\AddSpellsknown{4}{1}
+													\AddSpellsknown{5}{2}
 													\ifthenelse{#1 > 13}{
-														\addSpellSlots{0}{1}
-														\addSpellSlots{4}{1}
-														\addSpellSlots{5}{1}
-														\addSpellsknown{5}{1}
+														\AddSpellSlots{0}{1}
+														\AddSpellSlots{4}{1}
+														\AddSpellSlots{5}{1}
+														\AddSpellsknown{5}{1}
 														\ifthenelse{#1 > 14}{
-															\addSpellSlots{1}{1}
-															\addSpellSlots{5}{1}
+															\AddSpellSlots{1}{1}
+															\AddSpellSlots{5}{1}
 															\ifthenelse{#1 > 15}{
-																\addSpellSlots{2}{1}
-																\addSpellsknown{1}{1}
-																\addSpellsknown{5}{1}
-																\addSpellsknown{6}{2}
+																\AddSpellSlots{2}{1}
+																\AddSpellsknown{1}{1}
+																\AddSpellsknown{5}{1}
+																\AddSpellsknown{6}{2}
 																\ifthenelse{#1 > 16}{
-																	\addSpellSlots{3}{1}
-																	\addSpellSlots{5}{1}
-																	\addSpellSlots{6}{1}
-																	\addSpellsknown{2}{1}
-																	\addSpellsknown{6}{1}
+																	\AddSpellSlots{3}{1}
+																	\AddSpellSlots{5}{1}
+																	\AddSpellSlots{6}{1}
+																	\AddSpellsknown{2}{1}
+																	\AddSpellsknown{6}{1}
 																	\ifthenelse{#1 > 17}{
-																		\addSpellSlots{4}{1}
-																		\addSpellSlots{6}{1}
-																		\addSpellsknown{3}{1}
+																		\AddSpellSlots{4}{1}
+																		\AddSpellSlots{6}{1}
+																		\AddSpellsknown{3}{1}
 																		\ifthenelse{#1 > 18}{
-																			\addSpellSlots{5}{1}
-																			\addSpellSlots{6}{1}
-																			\addSpellsknown{4}{1}
-																			\addSpellsknown{6}{1}
+																			\AddSpellSlots{5}{1}
+																			\AddSpellSlots{6}{1}
+																			\AddSpellsknown{4}{1}
+																			\AddSpellsknown{6}{1}
 																			\ifthenelse{#1 > 19}{
-																				\addSpellSlots{6}{1}
-																				\addSpellsknown{5}{1}
+																				\AddSpellSlots{6}{1}
+																				\AddSpellsknown{5}{1}
 																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
-\newcommand{\addHalfSpellcasting}[1]{
+\newcommand{\AddHalfSpellcasting}[1]{
 	\ifthenelse{#1 > 5}{
-		\addSpellSlots{1}{1}
+		\AddSpellSlots{1}{1}
 		\ifthenelse{#1 > 9}{
-			\addSpellSlots{2}{1}
+			\AddSpellSlots{2}{1}
 			\ifthenelse{#1 > 11}{
-				\addSpellSlots{3}{1}
+				\AddSpellSlots{3}{1}
 				\ifthenelse{#1 > 13}{
-					\addSpellSlots{1}{1}
+					\AddSpellSlots{1}{1}
 					\ifthenelse{#1 > 14}{
-						\addSpellSlots{4}{1}
+						\AddSpellSlots{4}{1}
 						\ifthenelse{#1 > 15}{
-							\addSpellSlots{2}{1}
+							\AddSpellSlots{2}{1}
 							\ifthenelse{#1 > 16}{
-								\addSpellSlots{3}{1}
+								\AddSpellSlots{3}{1}
 								\ifthenelse{#1 > 17}{
-									\addSpellSlots{1}{1}
+									\AddSpellSlots{1}{1}
 									\ifthenelse{#1 > 18}{
-										\addSpellSlots{2}{1}
-										\addSpellSlots{3}{1}
-										\addSpellSlots{4}{1}
+										\AddSpellSlots{2}{1}
+										\AddSpellSlots{3}{1}
+										\AddSpellSlots{4}{1}
 										\ifthenelse{#1 > 19}{
-											\addSpellSlots{4}{1}
+											\AddSpellSlots{4}{1}
 										}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
@@ -1035,7 +1035,7 @@
 }\docsvlist{One,Two}
 
 
-\def\addCantripOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddCantripOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charCantripsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{0& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1052,7 +1052,7 @@
 	}
 	\lastargs
 }
-\def\addFirstSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddFirstSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charFirstSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{1& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1069,7 +1069,7 @@
 	}
 	\lastargs
 }
-\def\addSecondSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddSecondSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charSecondSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{2& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1086,7 +1086,7 @@
 	}
 	\lastargs
 }
-\def\addThirdSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddThirdSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charThirdSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{3& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1103,7 +1103,7 @@
 	}
 	\lastargs
 }
-\def\addFourthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddFourthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charFourthSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{4& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1120,7 +1120,7 @@
 	}
 	\lastargs
 }
-\def\addFifthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddFifthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charFifthSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{5& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1137,7 +1137,7 @@
 	}
 	\lastargs
 }
-\def\addSixthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddSixthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charSixthSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{6& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1154,7 +1154,7 @@
 	}
 	\lastargs
 }
-\def\addSeventhSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddSeventhSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charSeventhSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{7& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1171,7 +1171,7 @@
 	}
 	\lastargs
 }
-\def\addEighthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddEighthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charEighthSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{8& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1188,7 +1188,7 @@
 	}
 	\lastargs
 }
-\def\addNinthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddNinthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charNinthSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{9& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1206,7 +1206,7 @@
 	\lastargs
 }
 
-\def\addCantripTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddCantripTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charCantripsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{0& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1223,7 +1223,7 @@
 	}
 	\lastargs
 }
-\def\addFirstSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddFirstSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charFirstSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{1& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1240,7 +1240,7 @@
 	}
 	\lastargs
 }
-\def\addSecondSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddSecondSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charSecondSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{2& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1257,7 +1257,7 @@
 	}
 	\lastargs
 }
-\def\addThirdSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddThirdSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charThirdSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{3& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1274,7 +1274,7 @@
 	}
 	\lastargs
 }
-\def\addFourthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddFourthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charFourthSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{4& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1291,7 +1291,7 @@
 	}
 	\lastargs
 }
-\def\addFifthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddFifthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charFifthSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{5& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1308,7 +1308,7 @@
 	}
 	\lastargs
 }
-\def\addSixthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddSixthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charSixthSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{6& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1325,7 +1325,7 @@
 	}
 	\lastargs
 }
-\def\addSeventhSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddSeventhSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charSeventhSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{7& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1342,7 +1342,7 @@
 	}
 	\lastargs
 }
-\def\addEighthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddEighthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charEighthSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{8& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1359,7 +1359,7 @@
 	}
 	\lastargs
 }
-\def\addNinthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
+\def\AddNinthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
 	\listinsert{\charNinthSpellsListTwo}{##1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{9& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
@@ -1377,35 +1377,35 @@
 	\lastargs
 }
 
-\newcommand{\addCantrip}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addCantripOne#1}{\addCantripTwo#1}
+\newcommand{\AddCantrip}[1]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddCantripOne#1}{\addCantripTwo#1}
 }
-\newcommand{\addFirstSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addFirstSpellOne#1}{\addFirstSpellTwo#1}
+\newcommand{\AddFirstSpell}[1]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFirstSpellOne#1}{\addFirstSpellTwo#1}
 }
-\newcommand{\addSecondSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addSecondSpellOne#1}{\addSecondSpellTwo#1}
+\newcommand{\AddSecondSpell}[1]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSecondSpellOne#1}{\addSecondSpellTwo#1}
 }
-\newcommand{\addThirdSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addThirdSpellOne#1}{\addThirdSpellTwo#1}
+\newcommand{\AddThirdSpell}[1]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddThirdSpellOne#1}{\addThirdSpellTwo#1}
 }
-\newcommand{\addFourthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addFourthSpellOne#1}{\addFourthSpellTwo#1}
+\newcommand{\AddFourthSpell}[1]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFourthSpellOne#1}{\addFourthSpellTwo#1}
 }
-\newcommand{\addFifthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addFifthSpellOne#1}{\addFifthSpellTwo#1}
+\newcommand{\AddFifthSpell}[1]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFifthSpellOne#1}{\addFifthSpellTwo#1}
 }
-\newcommand{\addSixthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addSixthSpellOne#1}{\addSixthSpellTwo#1}
+\newcommand{\AddSixthSpell}[1]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSixthSpellOne#1}{\addSixthSpellTwo#1}
 }
-\newcommand{\addSeventhSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addSeventhSpellOne#1}{\addSeventhSpellTwo#1}
+\newcommand{\AddSeventhSpell}[1]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSeventhSpellOne#1}{\addSeventhSpellTwo#1}
 }
-\newcommand{\addEighthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addEighthSpellOne#1}{\addEighthSpellTwo#1}
+\newcommand{\AddEighthSpell}[1]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddEighthSpellOne#1}{\addEighthSpellTwo#1}
 }
-\newcommand{\addNinthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addNinthSpellOne}{\addNinthSpellTwo}
+\newcommand{\AddNinthSpell}[1]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddNinthSpellOne}{\addNinthSpellTwo}
 }
 \newcommand\Spelldescription[2]{
 	\expandafter\newcommand\csname Spell#1description\endcsname{#2}
@@ -1496,30 +1496,30 @@
 	}
 }
 
-\newcommand{\addBonusSpellSlotsOne}[2]{
+\newcommand{\AddBonusSpellSlotsOne}[2]{
 	\AddToCounter{charBonusSpellSlotsOne#1Count}{#2}}
-\newcommand{\addBonusSpellSlotsTwo}[2]{
+\newcommand{\AddBonusSpellSlotsTwo}[2]{
 	\AddToCounter{charBonusSpellSlotsTwo#1Count}{#2}}
 
-\newcommand{\addSpellSlotsOne}[2]{
+\newcommand{\AddSpellSlotsOne}[2]{
 	\AddToCounter{charClassSpellSlotsOne#1Count}{#2}}
-\newcommand{\addSpellSlotsTwo}[2]{
+\newcommand{\AddSpellSlotsTwo}[2]{
 	\AddToCounter{charClassSpellSlotsTwo#1Count}{#2}}
-\newcommand{\setSpellSlotsOne}[2]{
+\newcommand{\SetSpellSlotsOne}[2]{
 	\SetCounter{charClassSpellSlotsOne#1Count}{#2}}
-\newcommand{\setSpellSlotsTwo}[2]{
+\newcommand{\SetSpellSlotsTwo}[2]{
 	\SetCounter{charClassSpellSlotsTwo#1Count}{#2}}
-\newcommand{\addSpellsKnownOne}[2]{
+\newcommand{\AddSpellsKnownOne}[2]{
 	\AddToCounter{charSpellsKnownOne#1Count}{#2}}
-\newcommand{\addSpellsKnownTwo}[2]{
+\newcommand{\AddSpellsKnownTwo}[2]{
 	\AddToCounter{charSpellsKnownTwo#1Count}{#2}}
 
-\newcommand{\addSpellSlots}[2]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addSpellSlotsOne{#1}{#2}}{\addSpellSlotsTwo{#1}{#2}}}
-\newcommand{\addSpellsKnown}[2]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addSpellsKnownOne{#1}{#2}}{\addSpellsKnownTwo{#1}{#2}}}
-\newcommand{\addBonusSpellSlots}[2]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addBonusSpellSlotsOne{#1}{#2}}{\addBonusSpellSlotsTwo{#1}{#2}}
+\newcommand{\AddSpellSlots}[2]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellSlotsOne{#1}{#2}}{\addSpellSlotsTwo{#1}{#2}}}
+\newcommand{\AddSpellsKnown}[2]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellsKnownOne{#1}{#2}}{\addSpellsKnownTwo{#1}{#2}}}
+\newcommand{\AddBonusSpellSlots}[2]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddBonusSpellSlotsOne{#1}{#2}}{\addBonusSpellSlotsTwo{#1}{#2}}
 }
 
 % Range
@@ -1547,18 +1547,18 @@
 		\expandafter\renewcommand\csname charSpellcastingTwoSpecialization#1\endcsname{##2}
 	}
 }\docsvlist{One, Two}
-\newcommand\addSpellcastingOneSpecialization[2][Specialization]{
+\newcommand\AddSpellcastingOneSpecialization[2][Specialization]{
 	\ifthenelse{\equal{\charSpellcastingOneSpecializationOne}{}}{%
-		\addSpellcastingOneSpecializationOne[#1]{#2}%
+		\AddSpellcastingOneSpecializationOne[#1]{#2}%
 	}{%
-		\addSpellcastingOneSpecializationTwo[#1]{#2}%
+		\AddSpellcastingOneSpecializationTwo[#1]{#2}%
 	}
 }
-\newcommand\addSpellcastingTwoSpecialization[2][Specialization]{
+\newcommand\AddSpellcastingTwoSpecialization[2][Specialization]{
 	\ifthenelse{\equal{\charSpellcastingTwoSpecializationOne}{}}{
-		\addSpellcastingTwoSpecializationOne[#1]{#2}
+		\AddSpellcastingTwoSpecializationOne[#1]{#2}
 	}{
-		\addSpellcastingTwoSpecializationTwo[#1]{#2}
+		\AddSpellcastingTwoSpecializationTwo[#1]{#2}
 	}
 }
 
@@ -1577,22 +1577,22 @@
 		\expandafter\renewcommand\csname charSpellcastingTwoProhibition#1\endcsname{##2}
 	}
 }\docsvlist{One, Two, Three}
-\newcommand\addSpellcastingOneProhibition[2][Prohibition]{
-	\ifthenelse{\equal{\charSpellcastingOneProhibitionOne}{}}{\addSpellcastingOneProhibitionOne[#1]{#2}}{
-		\ifthenelse{\equal{\charSpellcastingOneProhibitionTwo}{}}{\addSpellcastingOneProhibitionTwo[#1]{#2}}{
-			\addSpellcastingOneProhibitionThree[#1]{#2}}}
+\newcommand\AddSpellcastingOneProhibition[2][Prohibition]{
+	\ifthenelse{\equal{\charSpellcastingOneProhibitionOne}{}}{\AddSpellcastingOneProhibitionOne[#1]{#2}}{
+		\ifthenelse{\equal{\charSpellcastingOneProhibitionTwo}{}}{\AddSpellcastingOneProhibitionTwo[#1]{#2}}{
+			\AddSpellcastingOneProhibitionThree[#1]{#2}}}
 }
-\newcommand\addSpellcastingTwoProhibition[2][Prohibition]{
-	\ifthenelse{\equal{\charSpellcastingTwoProhibitionOne}{}}{\addSpellcastingTwoProhibitionOne[#1]{#2}}{
-		\ifthenelse{\equal{\charSpellcastingTwoProhibitionTwo}{}}{\addSpellcastingTwoProhibitionTwo[#1]{#2}}{
-			\addSpellcastingTwoProhibitionThree[#1]{#2}}}
+\newcommand\AddSpellcastingTwoProhibition[2][Prohibition]{
+	\ifthenelse{\equal{\charSpellcastingTwoProhibitionOne}{}}{\AddSpellcastingTwoProhibitionOne[#1]{#2}}{
+		\ifthenelse{\equal{\charSpellcastingTwoProhibitionTwo}{}}{\AddSpellcastingTwoProhibitionTwo[#1]{#2}}{
+			\AddSpellcastingTwoProhibitionThree[#1]{#2}}}
 }
 
-\newcommand{\addSpellcastingSpecialization}[2][Specialization]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addSpellcastingOneSpecialization[#1]{#2}}{\addSpellcastingTwoSpecialization[#1]{#2}}
+\newcommand{\AddSpellcastingSpecialization}[2][Specialization]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellcastingOneSpecialization[#1]{#2}}{\addSpellcastingTwoSpecialization[#1]{#2}}
 }
-\newcommand{\addSpellcastingProhibition}[2][Prohibition]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\addSpellcastingOneProhibition[#1]{#2}}{\addSpellcastingTwoProhibition[#1]{#2}}
+\newcommand{\AddSpellcastingProhibition}[2][Prohibition]{
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellcastingOneProhibition[#1]{#2}}{\addSpellcastingTwoProhibition[#1]{#2}}
 }
 %Spellcasting Notes
 \renewcommand{\do}[1]{
@@ -1655,7 +1655,7 @@
 
 %%Spell Resistance%%
 \NewCounter{charSpellResistanceCount}
-\newcommand{\addSpellResistance}[1]{
+\newcommand{\AddSpellResistance}[1]{
 	\SetCounter{charSpellResistanceCount}{\maxof{\value{charSpellResistanceCount}}{#1}}
 }
 
@@ -1666,11 +1666,11 @@
 \edef\ConditionalSkillsModList{}
 \edef\ConditionalAttackModList{}
 \edef\ConditionalDefModList{}
-\newcommand{\addConditionalSkillMod}[1]{
+\newcommand{\AddConditionalSkillMod}[1]{
 	\listadd\ConditionalSkillsModList{#1}}
-\newcommand{\addConditionalAttackMod}[1]{
+\newcommand{\AddConditionalAttackMod}[1]{
 	\listadd\ConditionalAttackModList{#1}}
-\newcommand{\addConditionalDefMod}[1]{
+\newcommand{\AddConditionalDefMod}[1]{
 	\listadd\ConditionalDefModList{#1}}
 
 %% Languages
@@ -1707,7 +1707,7 @@
 	% add feats from levels
 	\AddToCounter{charFeatsCount}{\value{charTotalLevelCount} / 3 + 1}
 	% add INT to Skill Ranks
-	\addIntToSkillRanks
+	\AddIntToSkillRanks
 	\SetCounter{charIteratedAttacksCount}{(\value{charBABCount}-1)/5+1}
 	\InitializeSpellSlots
 	\CalculateSynergyBonuses

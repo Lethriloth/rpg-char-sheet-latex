@@ -3,53 +3,53 @@
 \def\swashbucklerref{g}
 \def\swashbucklerwill{p}
 \newcounter{swashbucklerskillranksperlevelcount}
-\setcounter{swashbucklerskillranksperlevelcount}{4}
+\Setcounter{swashbucklerskillranksperlevelcount}{4}
 \newcounter{swashbucklerhitdiesize}
-\setcounter{swashbucklerhitdiesize}{10}
+\Setcounter{swashbucklerhitdiesize}{10}
 \edef\swashbucklerclassskillslist{}\forcsvlist\listadd{\swashbucklerclassskillslist}{acrobatics, bluff, climb, craftone, crafttwo, craftthree, diplomacy, escapeartist, intimidate, knowledgelocal, knowledgenobility, perception, performone, performtwo, professionone, professiontwo, ride, sensemotive, sleightofhand, swim}
-\newcommand{\addswashbucklerclassfeatures}[1]{
-		\addlimiteduse{Panache}{\arabic{charpanachepointscount}
+\newcommand{\Addswashbucklerclassfeatures}[1]{
+		\Addlimiteduse{Panache}{\arabic{charpanachepointscount}
 			\newcounter{charpanachepointscount}
-			\setcounter{charpanachepointscount}
-		\addclassfeature{Deeds\printlist[\\~~~]{\charSwashbucklerDeedsList}}
+			\Setcounter{charpanachepointscount}
+		\Addclassfeature{Deeds\printlist[\\~~~]{\charSwashbucklerDeedsList}}
 			\edef\charSwashbucklerDeedsList{}
-				\newcommand{\addDeed}[1]{\listadd{\charSwashbucklerDeedsList}{#1}}
+				\newcommand{\AddDeed}[1]{\listadd{\charSwashbucklerDeedsList}{#1}}
 			}
-		\addDeed{Derring-Do}
-		\addDeed{Dodging Panache}
-		\addDeed{Opportune Parry and Riposte}
-		\addclassfeature{Swashbuckler Finesse}
+		\AddDeed{Derring-Do}
+		\AddDeed{Dodging Panache}
+		\AddDeed{Opportune Parry and Riposte}
+		\Addclassfeature{Swashbuckler Finesse}
 	\ifthenelse{#1 > 1}{
-		\addlimiteduse{Charmed Life}{\DoMath{2 + (#1 + 2) / 4}}
+		\Addlimiteduse{Charmed Life}{\DoMath{2 + (#1 + 2) / 4}}
 	\ifthenelse{#1 > 2}{
-		\addclassfeature{Nimble}
-			\preto{\Initialise}{\ifthenelse{\equal\chararmortype H}{}{\ifthenelse{\equal\chararmortype M }{}{\adddodgebonus{(#1 + 1) / 4}}}}
-		\addDeed{Kip-Up}
-		\addDeed{Menacing Swordplay}
-		\addDeed{Precise Strike}
-		\addDeed{Swashbuckler Initiative}
+		\Addclassfeature{Nimble}
+			\preto{\Initialise}{\ifthenelse{\equal\chararmortype H}{}{\ifthenelse{\equal\chararmortype M }{}{\Adddodgebonus{(#1 + 1) / 4}}}}
+		\AddDeed{Kip-Up}
+		\AddDeed{Menacing Swordplay}
+		\AddDeed{Precise Strike}
+		\AddDeed{Swashbuckler Initiative}
 	\ifthenelse{#1 > 3}{
-		\addtocounter{charbonusfeatscount}{#1 / 4}
-		\addclassfeature{Swashbuckler Bonus Feat\ifthenelse{#1 > 7}{ $\times\DoMath{#1 / 4}$}{}}
+		\Addtocounter{charbonusfeatscount}{#1 / 4}
+		\Addclassfeature{Swashbuckler Bonus Feat\ifthenelse{#1 > 7}{ $\times\DoMath{#1 / 4}$}{}}
 	\ifthenelse{#1 > 4}{
-		\addclassfeature{Swashbuckler Weapon Training +\DoMath{(#1 - 1) / 4}}
+		\Addclassfeature{Swashbuckler Weapon Training +\DoMath{(#1 - 1) / 4}}
 	\ifthenelse{#1 > 6}{
-		\addDeed{Swashbuckler's Grace}
-		\addDeed{Superior Feint}
-		\addDeed{Targeted Strike}
+		\AddDeed{Swashbuckler's Grace}
+		\AddDeed{Superior Feint}
+		\AddDeed{Targeted Strike}
 	\ifthenelse{#1 > 10}{
-		\addDeed{Bleeding Wound}
-		\addDeed{Evasive}
-		\addDeed{Subtle Blade}
+		\AddDeed{Bleeding Wound}
+		\AddDeed{Evasive}
+		\AddDeed{Subtle Blade}
 	\ifthenelse{#1 > 14}{
-		\addDeed{Dizzying Defense}
-		\addDeed{Perfect Thrust}
-		\addDeed{Swashbuckler's Edge}
+		\AddDeed{Dizzying Defense}
+		\AddDeed{Perfect Thrust}
+		\AddDeed{Swashbuckler's Edge}
 	\ifthenelse{#1 > 18}{
-		\addDeed{Cheat Death}
-		\addDeed{Deadly Stab}
-		\addDeed{Stunning Stab}
+		\AddDeed{Cheat Death}
+		\AddDeed{Deadly Stab}
+		\AddDeed{Stunning Stab}
 	\ifthenelse{#1 > 19}{
-		\addclassfeature{Swashbuckler Weapon Mastery}
+		\Addclassfeature{Swashbuckler Weapon Mastery}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }

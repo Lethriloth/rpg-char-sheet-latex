@@ -17,7 +17,7 @@ This class, and the template, were originally created by Nathanael Farley.  I ha
 \section{Brief Overview}
 \label{sec:how-latex-reads}
 
-Almost all numbers in the sheet are held as counters which can be changed with the \verb=\setcounter= command as per normal. Text based variables are held in commands, and can be changed with \verb=\renewcommand=. A simple \verb=player.tex= would be
+Almost all numbers in the sheet are held as counters which can be changed with the \verb=\Setcounter= command as per normal. Text based variables are held in commands, and can be changed with \verb=\renewcommand=. A simple \verb=player.tex= would be
 \begin{verbatim}
 TODO this player.tex
 \end{verbatim}
@@ -33,7 +33,7 @@ For those who are interested, the sheet is generated in this way:
 \section{Using a template}
 \label{sec:using-template}
 
-All variables can be changed with \verb=\renewcommand= and \verb=\setcounter=, however some commands are provided to make things simpler.
+All variables can be changed with \verb=\renewcommand= and \verb=\Setcounter=, however some commands are provided to make things simpler.
 
 \subsection{Naming convention}
 \label{sec:naming-convention}
@@ -69,7 +69,7 @@ When a feature of an ability/skill is used, such as temprary modifiers, the user
   \label{tab:otherabbrev}
 \end{table}
 
-To change a number, one uses \verb=\setcounter= in the usual way. A counter name is made of 4 parts:
+To change a number, one uses \verb=\Setcounter= in the usual way. A counter name is made of 4 parts:
 \protect\parbox{\linewidth}{\texttt{char}$\langle$\emph{attribute/skill name}$\rangle\langle$\emph{type of modifier}$\rangle$\texttt{count}}
 where the attribute/skill name and type of modifier are as above. An example of this is:
 \[
@@ -83,11 +83,11 @@ Command & Description\\
 \verb|\charstr{#1}| & Sets the character's base strength score to \verb|#1|. Similar commands exist for the other five classic ability scores, and for speed.\\
 \verb|\strenh{#1}| & Adds a +\verb|#1| enhancement bonus to strength.  Similar commands exist for the other ability scores and for speed.  Note that enhancement bonuses are programmed not to stack.  \verb|\strenh{4}\strenh{2}| would only give a total enhancement bonus of +4.\\
 \verb|\resist{#1}{#2}| & Adds resistance \verb|#2| to energy type \verb|#1|.  Accepted types are fire, cold, electricity, acid, and sonic.  Resistances are programmed not to stack, so only the highest value for each energy type will be printed.\\
-\verb|\addDR{#1}{#2}| & Adds damage reduction \verb|#2|, overcome by \verb|#1|. Entries for \verb|#1| should be lowercase with no spaces, so to add DR 5/Cold Iron, one would use \verb|\addDR{coldiron}{5}|.  Use \verb|\addDR{blank}{#2}| to add DR /--. DR overcome by combined sources (e.g. DR 10/Good and Silver) is not supported, but see \verb|\newDRtype|.\\
-\verb|\newDRtype{#1}{#2}| & Adds a new type of damage reduction that can be used with \verb|addDR|. The first argument takes some reference string that will be the argument for \verb|\addDR|, while the second takes the spelled-out description.  For example, one could add DR 10/Good and Silver with the commands
+\verb|\AddDR{#1}{#2}| & Adds damage reduction \verb|#2|, overcome by \verb|#1|. Entries for \verb|#1| should be lowercase with no spaces, so to add DR 5/Cold Iron, one would use \verb|\addDR{coldiron}{5}|.  Use \verb|\addDR{blank}{#2}| to add DR /--. DR overcome by combined sources (e.g. DR 10/Good and Silver) is not supported, but see \verb|\newDRtype|.\\
+\verb|\newDRtype{#1}{#2}| & Adds a new type of damage reduction that can be used with \verb|addDR|. The first argument takes some reference string that will be the argument for \verb|\AddDR|, while the second takes the spelled-out description.  For example, one could add DR 10/Good and Silver with the commands
 \begin{verbatim}
 \newDRtype{goodandsilver}{Good and Silver}
-\addDR{goodandsilver}{10}
+\AddDR{goodandsilver}{10}
 \end{verbatim}\\
 \verb|\miscbonus{#1}{#2}| & Adds a +\verb|#2| miscellaneous bonus to \verb|#1|.  So \verb|\miscbonus{str}{2}| would add a +2 miscellaneous bonus to Strength. Works for most stats, including ability scores, AC, and skills.
 \end{tabular}

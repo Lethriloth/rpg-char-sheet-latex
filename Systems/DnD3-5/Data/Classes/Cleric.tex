@@ -8,17 +8,17 @@
 \SetCounter{ClericHitDieSize}{8}
 \edef\ClericClassSkillsList{}
 \forcsvlist{\listadd{\ClericClassSkillsList}}{Concentration, Craft, Diplomacy, Heal, KnowledgeArcana, KnowledgeHistory, KnowledgePlanes, KnowledgeReligion, Profession, Spellcraft}
-\newcommand{\addClericClassFeatures}[1]{
+\newcommand{\AddClericClassFeatures}[1]{
 	\NewCounter{charturnrebukeundeadusesCount}
 	\SetCounter{charturnrebukeundeadusesCount}{3 + \value{charChaModCount}}
-	\addLimitedUse{Turn/Rebuke Undead}{\arabic{charturnrebukeundeadusesCount}}
-	\newcommand{\addClericSpellcasting}[3]{
+	\AddLimitedUse{Turn/Rebuke Undead}{\arabic{charturnrebukeundeadusesCount}}
+	\newcommand{\AddClericSpellcasting}[3]{
 		\newSpellcasting[(##1 + 1) / 2]{Cleric}{##1}{Wis}
-		\addPrimarySpellcasting{##1}
+		\AddPrimarySpellcasting{##1}
 		\ForLoop{@i}{1}{\value{@i}<10}{
-			\addBonusSpellSlots{\arabic{@i}}{1}
+			\AddBonusSpellSlots{\arabic{@i}}{1}
 		}
-		\addSpellcastingSpecialization[Domain]{##2}
-		\addSpellcastingSpecialization[Domain]{##3}
+		\AddSpellcastingSpecialization[Domain]{##2}
+		\AddSpellcastingSpecialization[Domain]{##3}
 	}
 }

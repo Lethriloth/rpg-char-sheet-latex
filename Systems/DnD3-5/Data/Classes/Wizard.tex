@@ -8,34 +8,34 @@
 \SetCounter{WizardHitDieSize}{4}
 \edef\WizardClassSkillsList{}
 \forcsvlist{\listadd{\WizardClassSkillsList}}{Concentration, Craft, DecipherScript, KnowledgeArcana, KnowledgeDungeoneering, KnowledgeEngineering, KnowledgeHistory, KnowledgeGeography, KnowledgeHistory, KnowledgeLocal, KnowledgeNature, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion, Profession, Spellcraft}
-\newcommand{\addWizardClassFeatures}[1]{
-	\addClassFeature{Summon Familiar}
-	\addClassFeature{Scribe Scroll}
+\newcommand{\AddWizardClassFeatures}[1]{
+	\AddClassFeature{Summon Familiar}
+	\AddClassFeature{Scribe Scroll}
 	\AddToCounter{charBonusFeatsCount}{#1 / 5 + 1}
-	\addFeat*{Scribe Scroll}
+	\AddFeat*{Scribe Scroll}
 	\ifthenelse{#1 > 4}{
-		\addClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\DoMath{#1 / 5}$}{}}
+		\AddClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\DoMath{#1 / 5}$}{}}
 	}{}
-	\NewDocumentCommand{\addWizardSpellcasting}{m O{} O{} O{}}{
+	\NewDocumentCommand{\AddWizardSpellcasting}{m O{} O{} O{}}{
 		\newSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{Int}
 		\NewCounter{charWizardforbiddenschoolsCount}
-		\addPrimarySpellcasting{##1}
+		\AddPrimarySpellcasting{##1}
 		\ifthenelse{\equal{##2}{}}{}{
 			\ForLoop{@i}{1}{\value{@i}<10}{
-				\addBonusSpellSlots{\arabic{@i}}{1}
+				\AddBonusSpellSlots{\arabic{@i}}{1}
 			}
-			\addSpellcastingSpecialization[Focus School]{##2}
+			\AddSpellcastingSpecialization[Focus School]{##2}
 			\ifthenelse{\equal{##2}{Divination}}{
 				\AddToCounter{charWizardforbiddenschoolsCount}{1}
 			}{
 				\AddToCounter{charWizardforbiddenschoolsCount}{2}
 			}
 			\ifthenelse{\equal{##3}{}}{}{
-				\addSpellcastingProhibition[Banned School]{##3}
+				\AddSpellcastingProhibition[Banned School]{##3}
 				\AddToCounter{charWizardforbiddenschoolsCount}{-1}
 			}
 			\ifthenelse{\equal{##4}{}}{}{
-				\addSpellcastingProhibition[Banned School]{##4}
+				\AddSpellcastingProhibition[Banned School]{##4}
 				\AddToCounter{charWizardforbiddenschoolsCount}{-1}
 			}
 		}

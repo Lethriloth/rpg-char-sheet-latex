@@ -8,11 +8,11 @@
 \NewCounter{AlchemistHitDieSize}
 \SetCounter{AlchemistHitDieSize}{8}
 \edef\AlchemistClassSkillsList{}\forcsvlist\listadd{\AlchemistClassSkillsList}{Appraise, Craft, DisableDevice, Fly, Heal, KnowledgeArcana, KnowledgeNature, Perception, Profession, SleightOfHand, Spellcraft, Survival, UseMagicDevice}
-\NewDocumentCommand{\addAlchemitsClassFeatures}{m}{
-		\addClassFeature{\ifthenelse{#1 > 2}{\ifthenelse{#1 > 17}{Instant}{Swift} }{}Alchemy}
-			\addConditionalSkillMod{+#1 to Craft (Alchemy) checks to create alchemical items}
-			\addConditionalSkillMod{Can use Craft (Alchemy) to identify potions as if using \textit{detect magic}}
-			\newcommand{\addAlchemistSpellcasting}[1]{
+\NewDocumentCommand{\AddAlchemitsClassFeatures}{m}{
+		\AddClassFeature{\ifthenelse{#1 > 2}{\ifthenelse{#1 > 17}{Instant}{Swift} }{}Alchemy}
+			\AddConditionalSkillMod{+#1 to Craft (Alchemy) checks to create alchemical items}
+			\AddConditionalSkillMod{Can use Craft (Alchemy) to identify potions as if using \textit{detect magic}}
+			\newcommand{\AddAlchemistSpellcasting}[1]{
 				\ifthenelse{##1 < 2}{\SetCounter{@i}{0}}{
 				\ifthenelse{##1 < 4}{\SetCounter{@i}{1}}{
 				\ifthenelse{##1 < 7}{\SetCounter{@i}{2}}{
@@ -20,22 +20,22 @@
 				\ifthenelse{##1 < 13}{\SetCounter{@i}{4}}{
 				\ifthenelse{##1 < 16}{\SetCounter{@i}{5}}{\SetCounter{@i}{6}}}}}}}
 				\newSpellcasting[\value{@i}]{Alchemist}{##1}{Int}
-				\addTwoThirdsSpellcasing{##1}
+				\AddTwoThirdsSpellcasing{##1}
 			}
 			\ifthenelse{#1 > 2}{
-				\addConditionalSkillMod{Can create alchemical items \ifthenelse{#1 > 17}{instantly}{in half the normal time}}
+				\AddConditionalSkillMod{Can create alchemical items \ifthenelse{#1 > 17}{instantly}{in half the normal time}}
 			}{}
-		\addClassFeature{Bomb \DoMath{(#1 + 1) / 2}d6}
-		\addClassFeature{\ifthenelse{#1 > 13}{Persistent }{}Mutagen}
-		\addtocounter{charBonusFeatsCount}{2}
-			\addClassFeature{Brew Potion}\addFeat*{Brew Potion}
-			\addClassFeature{Throw Anything}\addFeat*{Throw Anything}
+		\AddClassFeature{Bomb \DoMath{(#1 + 1) / 2}d6}
+		\AddClassFeature{\ifthenelse{#1 > 13}{Persistent }{}Mutagen}
+		\Addtocounter{charBonusFeatsCount}{2}
+			\AddClassFeature{Brew Potion}\addFeat*{Brew Potion}
+			\AddClassFeature{Throw Anything}\addFeat*{Throw Anything}
 	\ifthenelse{#1 > 1}{
 		\edef\charAlchemistDiscoveriesList{}
 			\NewCounter{charAlchemistDiscoveriesCount}
-			\addClassFeature{Discoveries\forlistloop{\\~~~~}{\charAlchemistDiscoveriesList}}
+			\AddClassFeature{Discoveries\forlistloop{\\~~~~}{\charAlchemistDiscoveriesList}}
 			\AddToCounter{charAlchemistDiscoveriesCount}{#1 / 2}
-			\NewDocumentCommand{\addAlchemistDiscovery}{m}{
+			\NewDocumentCommand{\AddAlchemistDiscovery}{m}{
 				\listinsert{\charAlchemistDiscoveriesList}{##1}
 				\AddToCounter{charAlchemistDiscoveriesCount}{-1}
 			}
@@ -48,20 +48,20 @@
 					\AddWarning{Choose \arabic{charAlchemistDiscoveriesCount} more alchemist Discoveries}
 				}{}}
 			}
-		\addClassFeature{Poison \ifthenelse{#1 > 9}{Immunity}{Resistance +\DoMath{(#1 + 1) / 3 * 2}}}
+		\AddClassFeature{Poison \ifthenelse{#1 > 9}{Immunity}{Resistance +\DoMath{(#1 + 1) / 3 * 2}}}
 			\ifthenelse{#1 > 9}{
-				\addImmunity{Poison}
+				\AddImmunity{Poison}
 			}{
-				\addConditionalDefMod{+\DoMath{(#1 + 1) / 3 * 2} vs. poison}
+				\AddConditionalDefMod{+\DoMath{(#1 + 1) / 3 * 2} vs. poison}
 			}
-		\addClassFeature{Poison Use}	
+		\AddClassFeature{Poison Use}	
 	\ifthenelse{#1 > 5}{
-		\addClassFeature{Swift Poisoning}
+		\AddClassFeature{Swift Poisoning}
 	\ifthenelse{#1 > 19}{
 		\edef\charGrandDiscovery{}
-		\addClassFeature{Grand Discovery\ifthenelse{\equal{\charGrandDiscovery}{}}{}{: \charGrandDiscovery}}
+		\AddClassFeature{Grand Discovery\ifthenelse{\equal{\charGrandDiscovery}{}}{}{: \charGrandDiscovery}}
 			\stepcounter{charAlchemistDiscoverisCount}
-			\NewDocumentCommand{\setGrandDiscovery}{m}{
+			\NewDocumentCommand{\SetGrandDiscovery}{m}{
 				\def\charGrandDiscovery{#1}
 			}
 			\appto{\runchecks}{
@@ -82,18 +82,18 @@
 \NewCounter{CavalierHitDieSize}
 \SetCounter{CavalierHitDieSize}{10}
 \edef\CavalierClassSkillsList{}\forcsvlist\listadd{\CavalierClassSkillsList}{Bluff, Climb, Craft, Diplomacy, HandleAnimal, Intimidate, Profession, Ride, SenseMotive, Swim}
-\NewDocumentCommand{\addCavalierClassFeatures}{m}{
-		\addLimitedUse{Challenge}{\DoMath{(#1 + 2) / 3}}
-		\addClassFeature{Mount}
+\NewDocumentCommand{\AddCavalierClassFeatures}{m}{
+		\AddLimitedUse{Challenge}{\DoMath{(#1 + 2) / 3}}
+		\AddClassFeature{Mount}
 		\def\charCavalierOrder{Order}
 			\edef\charCavalierOrderAbilitiesList{}
-			\addClassFeature{\charCavalierOrder\forlistloop{\\~~~~}{\charCavalierOrderAbilitiesList}}
+			\AddClassFeature{\charCavalierOrder\forlistloop{\\~~~~}{\charCavalierOrderAbilitiesList}}
 			\NewCounter{charCavalierOrderAbilitiesCount}
-			\NewDocumentCommand{\addCavalierOrderAbility}{m}{
+			\NewDocumentCommand{\AddCavalierOrderAbility}{m}{
 				\listadd{\charCavalierOrderAbilitiesList}{##1}
 				\AddToCounter{charCavalierOrderAbilitiesCount}{-1}
 			}
-			\NewDocumentCommand{\setCavalierOrder}{m}{
+			\NewDocumentCommand{\SetCavalierOrder}{m}{
 				\def\charCavalierOrder{##1}
 			}
 			\gappto{\RunChecks}{%
@@ -109,29 +109,29 @@
 					\AddWarning{Remember to input cavalier order abilities. Input \arabic{charCavalierOrderAbilitiesCount} more order abilities using \texttt{$\backslash$addCavalierOrderAbility}}
 				}{}}
 			}
-		\addClassFeature{\ifthenelse{#1 > 8}{\ifthenelse{#1 > 16}{Master}{Greater} }{}Tactician}
-			\addlimitedUse{Tactician}{\DoMath{#1 / 5 + 1}}
+		\AddClassFeature{\ifthenelse{#1 > 8}{\ifthenelse{#1 > 16}{Master}{Greater} }{}Tactician}
+			\AddlimitedUse{Tactician}{\DoMath{#1 / 5 + 1}}
 			\stepcounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 1}{
 		\stepcounter{charCavalierOrderAbilitiesCount}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Cavalier's Charge}
+		\AddClassFeature{Cavalier's Charge}
 	\ifthenelse{#1 > 3}{
-		\addClassFeature{Expert Trainer}
-			\addConditionalSkillMod{+\DoMath{#1 / 2} to Handle Animal to train mounts}
-			\addConditionalSkillMod{Can train multiple mounts at once for +2 DC per extra animal}
-			\addConditionalSkillMod{Can train mounts in one-seventh of the usual time (days instead of weeks) for +5 to DC}
+		\AddClassFeature{Expert Trainer}
+			\AddConditionalSkillMod{+\DoMath{#1 / 2} to Handle Animal to train mounts}
+			\AddConditionalSkillMod{Can train multiple mounts at once for +2 DC per extra animal}
+			\AddConditionalSkillMod{Can train mounts in one-seventh of the usual time (days instead of weeks) for +5 to DC}
 	\ifthenelse{#1 > 4}{
-		\addClassFeature{\ifthenelse{#1 > 13}{Greater }{}Banner +\DoMath{#1 / 5}}
+		\AddClassFeature{\ifthenelse{#1 > 13}{Greater }{}Banner +\DoMath{#1 / 5}}
 	\ifthenelse{#1 > 5}{
-		\addClassFeature{Cavalier Bonus Feat\ifthenelse{#1 > 11}{ $\times \DoMath{#1 / 6}$}
-		\addtocounter{charBonusFeatsCount}{#1 / 6}
+		\AddClassFeature{Cavalier Bonus Feat\ifthenelse{#1 > 11}{ $\times \DoMath{#1 / 6}$}
+		\Addtocounter{charBonusFeatsCount}{#1 / 6}
 	\ifthenelse{#1 > 10}{
-		\addClassFeature{Mighty Charge}
+		\AddClassFeature{Mighty Charge}
 	\ifthenelse{#1 > 11}{
-		\addClassFeature{Demanding Challenge}
+		\AddClassFeature{Demanding Challenge}
 	\ifthenelse{#1 > 19}{
-		\addClassFeature{Supreme Charge}
+		\AddClassFeature{Supreme Charge}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
@@ -208,229 +208,229 @@
 
 % % Prestige Classes
 
-\newcommand{\addPrimarySpellcasting}[1]{
-	\addSpellslots{0}{3}
-	\addSpellslots{1}{1}
+\newcommand{\AddPrimarySpellcasting}[1]{
+	\AddSpellslots{0}{3}
+	\AddSpellslots{1}{1}
 	\ifthenelse{#1 > 1}{
-		\addSpellslots{0}{1}
-		\addSpellslots{1}{1}
+		\AddSpellslots{0}{1}
+		\AddSpellslots{1}{1}
 		\ifthenelse{#1 > 2}{
-			\addSpellslots{2}{1}
+			\AddSpellslots{2}{1}
 			\ifthenelse{#1 > 3}{
-				\addSpellslots{0}{1}
-				\addSpellslots{1}{1}
-				\addSpellslots{2}{1}
+				\AddSpellslots{0}{1}
+				\AddSpellslots{1}{1}
+				\AddSpellslots{2}{1}
 				\ifthenelse{#1 > 4}{
-					\addSpellslots{3}{1}
+					\AddSpellslots{3}{1}
 					\ifthenelse{#1 > 5}{
-						\addSpellslots{2}{1}
-						\addSpellslots{3}{1}
+						\AddSpellslots{2}{1}
+						\AddSpellslots{3}{1}
 						\ifthenelse{#1 > 6}{
-							\addSpellslots{4}{1}
-							\addSpellslots{0}{1}
-							\addSpellslots{1}{1}
+							\AddSpellslots{4}{1}
+							\AddSpellslots{0}{1}
+							\AddSpellslots{1}{1}
 							\ifthenelse{#1 > 7}{
-								\addSpellslots{3}{1}
-								\addSpellslots{4}{1}
+								\AddSpellslots{3}{1}
+								\AddSpellslots{4}{1}
 								\ifthenelse{#1 > 8}{
-									\addSpellslots{5}{1}
-									\addSpellslots{2}{1}
+									\AddSpellslots{5}{1}
+									\AddSpellslots{2}{1}
 									\ifthenelse{#1 > 9}{
-										\addSpellslots{4}{1}
-										\addSpellslots{5}{1}	
+										\AddSpellslots{4}{1}
+										\AddSpellslots{5}{1}	
 										\ifthenelse{#1 > 10}{
-											\addSpellslots{6}{1}
-											\addSpellslots{3}{1}
-											\addSpellslots{1}{1}
+											\AddSpellslots{6}{1}
+											\AddSpellslots{3}{1}
+											\AddSpellslots{1}{1}
 											\ifthenelse{#1 > 11}{
-												\addSpellslots{5}{1}
-												\addSpellslots{6}{1}
+												\AddSpellslots{5}{1}
+												\AddSpellslots{6}{1}
 												\ifthenelse{#1 > 12}{
-													\addSpellslots{7}{1}
-													\addSpellslots{4}{1}
-													\addSpellslots{2}{1}
+													\AddSpellslots{7}{1}
+													\AddSpellslots{4}{1}
+													\AddSpellslots{2}{1}
 													\ifthenelse{#1 > 13}{
-														\addSpellslots{6}{1}
-														\addSpellslots{7}{1}
+														\AddSpellslots{6}{1}
+														\AddSpellslots{7}{1}
 														\ifthenelse{#1 > 14}{
-															\addSpellslots{8}{1}
-															\addSpellslots{5}{1}
-															\addSpellslots{3}{1}
+															\AddSpellslots{8}{1}
+															\AddSpellslots{5}{1}
+															\AddSpellslots{3}{1}
 															\ifthenelse{#1 > 15}{
-																\addSpellslots{7}{1}
-																\addSpellslots{8}{1}
+																\AddSpellslots{7}{1}
+																\AddSpellslots{8}{1}
 																\ifthenelse{#1 > 16}{
-																	\addSpellslots{9}{1}
-																	\addSpellslots{6}{1}
-																	\addSpellslots{4}{1}
+																	\AddSpellslots{9}{1}
+																	\AddSpellslots{6}{1}
+																	\AddSpellslots{4}{1}
 																	\ifthenelse{#1 > 17}{
-																		\addSpellslots{8}{1}
-																		\addSpellslots{9}{1}
+																		\AddSpellslots{8}{1}
+																		\AddSpellslots{9}{1}
 																		\ifthenelse{#1 > 18}{
-																			\addSpellslots{7}{1}
-																			\addSpellslots{9}{1}
-																			\addSpellslots{5}{1}
+																			\AddSpellslots{7}{1}
+																			\AddSpellslots{9}{1}
+																			\AddSpellslots{5}{1}
 																			\ifthenelse{#1 > 19}{
-																				\addSpellslots{8}{1}
-																				\addSpellslots{9}{1}
+																				\AddSpellslots{8}{1}
+																				\AddSpellslots{9}{1}
 																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
-\newcommand{\addSpontaneousPrimarySpellcasting}[1]{
-	\addSpellslots{0}{5}
-	\addSpellslots{1}{3}
+\newcommand{\AddSpontaneousPrimarySpellcasting}[1]{
+	\AddSpellslots{0}{5}
+	\AddSpellslots{1}{3}
 	\ifthenelse{#1 > 1}{
-		\addSpellslots{0}{1}
-		\addSpellslots{1}{1}
+		\AddSpellslots{0}{1}
+		\AddSpellslots{1}{1}
 		\ifthenelse{#1 > 2}{
-			\addSpellslots{1}{1}
+			\AddSpellslots{1}{1}
 			\ifthenelse{#1 > 3}{
-				\addSpellslots{1}{1}
-				\addSpellslots{2}{3}
+				\AddSpellslots{1}{1}
+				\AddSpellslots{2}{3}
 				\ifthenelse{#1 > 4}{
-					\addSpellslots{2}{1}
+					\AddSpellslots{2}{1}
 					\ifthenelse{#1 > 5}{
-						\addSpellslots{2}{1}
-						\addSpellslots{3}{3}
+						\AddSpellslots{2}{1}
+						\AddSpellslots{3}{3}
 						\ifthenelse{#1 > 6}{
-							\addSpellslots{2}{1}
-							\addSpellslots{3}{1}
+							\AddSpellslots{2}{1}
+							\AddSpellslots{3}{1}
 							\ifthenelse{#1 > 7}{
-								\addSpellslots{3}{1}
-								\addSpellslots{4}{3}
+								\AddSpellslots{3}{1}
+								\AddSpellslots{4}{3}
 								\ifthenelse{#1 > 8}{
-									\addSpellslots{3}{1}
-									\addSpellslots{4}{1}
+									\AddSpellslots{3}{1}
+									\AddSpellslots{4}{1}
 									\ifthenelse{#1 > 9}{
-										\addSpellslots{4}{1}
-										\addSpellslots{5}{3}	
+										\AddSpellslots{4}{1}
+										\AddSpellslots{5}{3}	
 										\ifthenelse{#1 > 10}{
-											\addSpellslots{4}{1}
-											\addSpellslots{5}{1}
+											\AddSpellslots{4}{1}
+											\AddSpellslots{5}{1}
 											\ifthenelse{#1 > 11}{
-												\addSpellslots{5}{1}
-												\addSpellslots{6}{3}
+												\AddSpellslots{5}{1}
+												\AddSpellslots{6}{3}
 												\ifthenelse{#1 > 12}{
-													\addSpellslots{5}{1}
-													\addSpellslots{6}{1}
+													\AddSpellslots{5}{1}
+													\AddSpellslots{6}{1}
 													\ifthenelse{#1 > 13}{
-														\addSpellslots{6}{1}
-														\addSpellslots{7}{3}
+														\AddSpellslots{6}{1}
+														\AddSpellslots{7}{3}
 														\ifthenelse{#1 > 14}{
-															\addSpellslots{6}{1}
-															\addSpellslots{7}{1}
+															\AddSpellslots{6}{1}
+															\AddSpellslots{7}{1}
 															\ifthenelse{#1 > 15}{
-																\addSpellslots{7}{1}
-																\addSpellslots{8}{3}
+																\AddSpellslots{7}{1}
+																\AddSpellslots{8}{3}
 																\ifthenelse{#1 > 16}{
-																	\addSpellslots{7}{1}
-																	\addSpellslots{8}{1}
+																	\AddSpellslots{7}{1}
+																	\AddSpellslots{8}{1}
 																	\ifthenelse{#1 > 17}{
-																		\addSpellslots{8}{1}
-																		\addSpellslots{9}{3}
+																		\AddSpellslots{8}{1}
+																		\AddSpellslots{9}{3}
 																		\ifthenelse{#1 > 18}{
-																			\addSpellslots{8}{1}
-																			\addSpellslots{9}{1}
+																			\AddSpellslots{8}{1}
+																			\AddSpellslots{9}{1}
 																			\ifthenelse{#1 > 19}{
-																				\addSpellslots{9}{2}
+																				\AddSpellslots{9}{2}
 																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 	
 }
-\newcommand{\addTwoThirdsSpellcasing}[1]{
-	\addSpellslots{0}{2}
-	\addSpellsKnown{0}{4}
+\newcommand{\AddTwoThirdsSpellcasing}[1]{
+	\AddSpellslots{0}{2}
+	\AddSpellsKnown{0}{4}
 	\ifthenelse{#1 > 1}{
-		\addSpellslots{0}{1}
-		\addSpellsKnown{0}{1}
-		\addSpellsKnown{1}{2}
+		\AddSpellslots{0}{1}
+		\AddSpellsKnown{0}{1}
+		\AddSpellsKnown{1}{2}
 		\ifthenelse{#1 > 2}{
-			\addSpellslots{1}{1}
-			\addSpellsKnown{0}{1}
-			\addSpellsKnown{1}{1}
+			\AddSpellslots{1}{1}
+			\AddSpellsKnown{0}{1}
+			\AddSpellsKnown{1}{1}
 			\ifthenelse{#1 > 3}{
-				\addSpellslots{1}{1}
-				\addSpellsKnown{2}{2}
+				\AddSpellslots{1}{1}
+				\AddSpellsKnown{2}{2}
 				\ifthenelse{#1 > 4}{
-					\addSpellslots{1}{1}
-					\addSpellslots{2}{1}
-					\addSpellsKnown{1}{1}
-					\addSpellsKnown{2}{1}
+					\AddSpellslots{1}{1}
+					\AddSpellslots{2}{1}
+					\AddSpellsKnown{1}{1}
+					\AddSpellsKnown{2}{1}
 					\ifthenelse{#1 > 5}{
-						\addSpellslots{2}{1}
+						\AddSpellslots{2}{1}
 						\ifthenelse{#1 > 6}{
-							\addSpellsKnown{2}{1}
-							\addSpellsKnown{3}{2}
+							\AddSpellsKnown{2}{1}
+							\AddSpellsKnown{3}{2}
 							\ifthenelse{#1 > 7}{
-								\addSpellslots{2}{1}
-								\addSpellslots{3}{1}
-								\addSpellsKnown{3}{1}
+								\AddSpellslots{2}{1}
+								\AddSpellslots{3}{1}
+								\AddSpellsKnown{3}{1}
 								\ifthenelse{#1 > 8}{
-									\addSpellslots{3}{1}
+									\AddSpellslots{3}{1}
 									\ifthenelse{#1 > 9}{
-										\addSpellsKnown{3}{1}
-										\addSpellsKnown{4}{2}
+										\AddSpellsKnown{3}{1}
+										\AddSpellsKnown{4}{2}
 										\ifthenelse{#1 > 10}{
-											\addSpellslots{3}{1}
-											\addSpellslots{4}{1}
-											\addSpellsKnown{4}{1}
+											\AddSpellslots{3}{1}
+											\AddSpellslots{4}{1}
+											\AddSpellsKnown{4}{1}
 											\ifthenelse{#1 > 11}{
-												\addSpellslots{4}{1}
+												\AddSpellslots{4}{1}
 												\ifthenelse{#1 > 12}{
-													\addSpellsKnown{4}{1}
-													\addSpellsKnown{5}{2}
+													\AddSpellsKnown{4}{1}
+													\AddSpellsKnown{5}{2}
 													\ifthenelse{#1 > 13}{
-														\addSpellslots{0}{1}
-														\addSpellslots{4}{1}
-														\addSpellslots{5}{1}
-														\addSpellsKnown{5}{1}
+														\AddSpellslots{0}{1}
+														\AddSpellslots{4}{1}
+														\AddSpellslots{5}{1}
+														\AddSpellsKnown{5}{1}
 														\ifthenelse{#1 > 14}{
-															\addSpellslots{1}{1}
-															\addSpellslots{5}{1}
+															\AddSpellslots{1}{1}
+															\AddSpellslots{5}{1}
 															\ifthenelse{#1 > 15}{
-																\addSpellslots{2}{1}
-																\addSpellsKnown{1}{1}
-																\addSpellsKnown{5}{1}
-																\addSpellsKnown{6}{2}
+																\AddSpellslots{2}{1}
+																\AddSpellsKnown{1}{1}
+																\AddSpellsKnown{5}{1}
+																\AddSpellsKnown{6}{2}
 																\ifthenelse{#1 > 16}{
-																	\addSpellslots{3}{1}
-																	\addSpellslots{5}{1}
-																	\addSpellslots{6}{1}
-																	\addSpellsKnown{2}{1}
-																	\addSpellsKnown{6}{1}
+																	\AddSpellslots{3}{1}
+																	\AddSpellslots{5}{1}
+																	\AddSpellslots{6}{1}
+																	\AddSpellsKnown{2}{1}
+																	\AddSpellsKnown{6}{1}
 																	\ifthenelse{#1 > 17}{
-																		\addSpellslots{4}{1}
-																		\addSpellslots{6}{1}
-																		\addSpellsKnown{3}{1}
+																		\AddSpellslots{4}{1}
+																		\AddSpellslots{6}{1}
+																		\AddSpellsKnown{3}{1}
 																		\ifthenelse{#1 > 18}{
-																			\addSpellslots{5}{1}
-																			\addSpellslots{6}{1}
-																			\addSpellsKnown{4}{1}
-																			\addSpellsKnown{6}{1}
+																			\AddSpellslots{5}{1}
+																			\AddSpellslots{6}{1}
+																			\AddSpellsKnown{4}{1}
+																			\AddSpellsKnown{6}{1}
 																			\ifthenelse{#1 > 19}{
-																				\addSpellslots{6}{1}
-																				\addSpellsKnown{5}{1}
+																				\AddSpellslots{6}{1}
+																				\AddSpellsKnown{5}{1}
 																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
-\newcommand{\addHalfSpellcasting}[1]{
+\newcommand{\AddHalfSpellcasting}[1]{
 	\ifthenelse{#1 > 5}{
-		\addSpellslots{1}{1}
+		\AddSpellslots{1}{1}
 		\ifthenelse{#1 > 9}{
-			\addSpellslots{2}{1}
+			\AddSpellslots{2}{1}
 			\ifthenelse{#1 > 11}{
-				\addSpellslots{3}{1}
+				\AddSpellslots{3}{1}
 				\ifthenelse{#1 > 13}{
-					\addSpellslots{1}{1}
+					\AddSpellslots{1}{1}
 					\ifthenelse{#1 > 14}{
-						\addSpellslots{4}{1}
+						\AddSpellslots{4}{1}
 						\ifthenelse{#1 > 15}{
-							\addSpellslots{2}{1}
+							\AddSpellslots{2}{1}
 							\ifthenelse{#1 > 16}{
-								\addSpellslots{3}{1}
+								\AddSpellslots{3}{1}
 								\ifthenelse{#1 > 17}{
-									\addSpellslots{1}{1}
+									\AddSpellslots{1}{1}
 									\ifthenelse{#1 > 18}{
-										\addSpellslots{2}{1}
-										\addSpellslots{3}{1}
-										\addSpellslots{4}{1}
+										\AddSpellslots{2}{1}
+										\AddSpellslots{3}{1}
+										\AddSpellslots{4}{1}
 										\ifthenelse{#1 > 19}{
-											\addSpellslots{4}{1}
+											\AddSpellslots{4}{1}
 										}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}

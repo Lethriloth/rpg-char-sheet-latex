@@ -40,7 +40,7 @@
 \AddToCounter{charStrBaseCount}{0}
 \AddToCounter{charDexBaseCount}{0}
 \SetCharSpeed{30}
-\addRaceFeature{Race Feature}
+\AddRaceFeature{Race Feature}
 \renewcommand\do[1]{
 \AddCharLanguage{#1}
 }\docsvlist{Common}
@@ -61,67 +61,67 @@
 % Character Level Ability Increases
 
 % Feats
-\addFeat{Feat}
-\addFeat*{Bonus Feat}
+\AddFeat{Feat}
+\AddFeat*{Bonus Feat}
 
 
 % Ranks
 \def\maxRanks{1}
 \renewcommand{\do}[1]{
-\addRanks{#1}{\maxRanks}}
+\AddRanks{#1}{\maxRanks}}
 \docsvlist{CraftOne}
 \renewcommand\charCraftOneName{Crafting}
-\addRanks{ProfessionOne}{1}
+\AddRanks{ProfessionOne}{1}
 \renewcommand\charProfessionOneName{Professionalism}
 
 % Items
-\addGearItem{Gear}{1}
+\AddGearItem{Gear}{1}
 
-\addStoredItem{Stored Gear}{1}
+\AddStoredItem{Stored Gear}{1}
 
 
 
 % %Weapons
 
-\addAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
-\addWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
+\AddAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
+\AddWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
 
 % %Belt
-\addBeltItem{Belt of Strength +0}{Does Nothing}{0}
+\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
 \EnhancementBonus{Str}{0}
 
 % %Armor
-%\addArmor{Armor}{3}{10}{0}{5}{L}{10}{Notes}{More Notes}
+%\AddArmor{Armor}{3}{10}{0}{5}{L}{10}{Notes}{More Notes}
 
 % %Chest
-%\addChestItem{}{}{}
+%\AddChestItem{}{}{}
 
 % %Eyes
-%\addEyesItem{}{}{}
+%\AddEyesItem{}{}{}
 
 % %Feet
-%\addFeetItem{}{}{}
+%\AddFeetItem{}{}{}
 
 % %Hat
-%\addHeadItem{}{}{}
+%\AddHeadItem{}{}{}
 
 % %Headband
-%\addHeadbandItem{}{}{}
+%\AddHeadbandItem{}{}{}
 
 % %Shoulders
-%\addShouldersItem{}{}{}
+%\AddShouldersItem{}{}{}
 
 % %Rings
-%\addRingItem{}{}{}
-%\addRingItem{}{}{}
+%\AddRingItem{}{}{}
+%\AddRingItem{}{}{}
 
 % %Wrists
-%\addWristsItem{}{}{}
+%\AddWristsItem{}{}{}
 
-\addPlatinum{1}\addPlatinum*{2}\StorePlatinum{3}
-\addGold{4}\addGold*{5}\StoreGold{6}
-\addSilver{7}\addSilver*{8}\StoreSilver{9}
-\addCopper{10}\addCopper*{11}\StoreCopper{12}
+\AddPlatinum{1}\addPlatinum*{2}\StorePlatinum{3}
+\AddGold{4}\addGold*{5}\StoreGold{6}
+\AddSilver{7}\addSilver*{8}\StoreSilver{9}
+\AddCopper{10}\addCopper*{11}\StoreCopper{12}
 
 \input{Sheets/Pathfinder_Sheet.tex}
 \end{document}

@@ -8,10 +8,10 @@
 \SetCounter{BardHitDieSize}{6}
 \edef\BardClassSkillsList{}
 \forcsvlist{\listadd{\BardClassSkillsList}}{Appraise, Balance, Bluff, Climb, Concentration, Craft, DecipherScript, Diplomacy, Disguise, EscapeArtist, GatherInformation, Hide, Jump, KnowledgeAll, Listen, MoveSilently, Perform, Profession, SenseMotive, SleightOfHand, SpeakLanguage, Spellcraft, Swim, Tumble, UseMagicDevice}
-\newcommand{\addBardClassFeatures}[1]{
+\newcommand{\AddBardClassFeatures}[1]{
 	\edef\charBardicMusicList{}
-	\addClassFeature{Bardic Music\forlistloop{\\~~~~}{\charBardicMusicList}}
-	\addLimitedUse{Bardic Music}{#1}
+	\AddClassFeature{Bardic Music\forlistloop{\\~~~~}{\charBardicMusicList}}
+	\AddLimitedUse{Bardic Music}{#1}
 		\appto{\Initialize}{ %Bardic music dependent on # of Perform Ranks goes here
 			\ifthenelse{\value{charPerformOneRanksCount} > 2}{
 				\listadd{\charBardicMusicList}{Countersong}
@@ -20,9 +20,9 @@
 			}{}
 		}
 	\ifthenelse{\value{charKnowledgeHistoryRanksCount} > 4}{
-		\addClassFeature{Bardic Knowledge +\DoMath{#1 + \value{charIntModCount} + 2}}
+		\AddClassFeature{Bardic Knowledge +\DoMath{#1 + \value{charIntModCount} + 2}}
 	}{
-		\addClassFeature{Bardic Knowledge +\DoMath{#1 + \value{charIntModCount}}}
+		\AddClassFeature{Bardic Knowledge +\DoMath{#1 + \value{charIntModCount}}}
 	}
 	\ifthenelse{#1 > 2}{
 		\appto{\Initialize}{ %Bardic music dependent on # of Perform Ranks goes here
@@ -50,7 +50,7 @@
 				\listadd{\charBardicMusicList}{Inspire Heroics}
 			}{}}
 	}{}}{}}{}}{}}{}
-	\newcommand{\addBardSpellcasting}[1]{
+	\newcommand{\AddBardSpellcasting}[1]{
 		\ifthenelse{##1 < 2}{\SetCounter{@i}{0}}{
 		\ifthenelse{##1 < 4}{\SetCounter{@i}{1}}{
 		\ifthenelse{##1 < 7}{\SetCounter{@i}{2}}{
@@ -58,6 +58,6 @@
 		\ifthenelse{##1 < 13}{\SetCounter{@i}{4}}{
 		\ifthenelse{##1 < 16}{\SetCounter{@i}{5}}{\SetCounter{@i}{6}}}}}}}
 		\newSpellcasting[\value{@i}]{Bard}{##1}{cha}
-		\addTwoThirdsSpellcasing{##1}
+		\AddTwoThirdsSpellcasing{##1}
 	}
 }

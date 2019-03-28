@@ -8,7 +8,7 @@
 \SetCounter{FighterHitDieSize}{10}
 \edef\FighterClassSkillsList{}
 \forcsvlist{\listadd{\FighterClassSkillsList}}{Climb, Craft, HandleAnimal, Intimidate, Jump, Ride, Swim}
-\newcommand{\addFighterClassFeatures}[1]{
+\newcommand{\AddFighterClassFeatures}[1]{
 	\AddToCounter{charBonusFeatsCount}{#1 / 2 +1}
-	\addClassFeature{Fighter Bonus Feat\ifthenelse{#1 > 1}{ $\times\DoMath{#1 / 2 +1}$}{}}
+	\AddClassFeature{Fighter Bonus Feat\ifthenelse{#1 > 1}{ $\times\DoMath{#1 / 2 +1}$}{}}
 }

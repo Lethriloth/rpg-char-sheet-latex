@@ -8,19 +8,19 @@
 \SetCounter{RangerHitDieSize}{8}
 \edef\RangerClassSkillsList{}
 \forcsvlist{\listadd{\RangerClassSkillsList}}{Climb, Concentration, Craft, HandleAnimal, Heal, Hide, Jump, KnowledgeDungeoneering, KnowledgeGeography, KnowledgeNature, Listen, MoveSilently, Profession, Ride, Search, Spot, Survival, Swim, UseRope}
-\newcommand{\addRangerClassFeatures}[1]{
-		\addClassFeature{Favored Enemy\forlistloop{\\~~~~}{\charFavoredEnemiesList}}
+\newcommand{\AddRangerClassFeatures}[1]{
+		\AddClassFeature{Favored Enemy\forlistloop{\\~~~~}{\charFavoredEnemiesList}}
 			\edef\charFavoredEnemiesList{}
 			\NewCounter{charFavoredEnemiesCount}
 			\SetCounter{charFavoredEnemiesCount}{#1 / 5 + 1}
 			\NewCounter{charFavoredEnemiesTotalBonusCount}
 			\SetCounter{charFavoredEnemiesTotalBonusCount}{(#1 / 5) * 4 + 2}
-			\newcommand{\addFavoredEnemy}[2]{
+			\newcommand{\AddFavoredEnemy}[2]{
 				\listinsert{\charFavoredEnemiesList}{+##2 vs ##1s}
 				\AddToCounter{charFavoredEnemiesTotalBonusCount}{-##2}
 				\AddToCounter{charFavoredEnemiesCount}{-1}
-				\addConditionalSkillMod{+##2 to Bluff, Listen, Sense Motive, Spot, and Survival vs. ##1s}
-				\addConditionalAttackMod{+##2 damage vs. ##1s}
+				\AddConditionalSkillMod{+##2 to Bluff, Listen, Sense Motive, Spot, and Survival vs. ##1s}
+				\AddConditionalAttackMod{+##2 damage vs. ##1s}
 			}
 			\appto{\RunChecks}{%
 				%%Check Favored Enemies
@@ -37,32 +37,32 @@
 					\AddWarning{Total favored enemy Bonus is \DoMath{-\value{charFavoredEnemiesTotalBonusCount}} points too high}
 				}{}}
 			}
-		\addClassFeature{Track}\stepCounter{charBonusFeatsCount}\addFeat*{Track}
+		\AddClassFeature{Track}\stepCounter{charBonusFeatsCount}\addFeat*{Track}
 		\ifthenelse{\value{charHandleAnimalRanksCount} > 4}{
-			\addClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount} + 2}}
+			\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount} + 2}}
 		}{
-			\addClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
+			\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
 		}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{Combat Style: \charCombatStyle}
+		\AddClassFeature{Combat Style: \charCombatStyle}
 			\stepCounter{charBonusFeatsCount}
 			\newcommand\charCombatStyle{}
-			\newcommand\addCombatStyle[1]{%
+			\newcommand\AddCombatStyle[1]{%
 				\renewcommand{\charCombatStyle}{##1}%
 				\ifthenelse{\equal{##1}{Two-Weapon Combat}}{%
-						\addFeat*{Two-Weapon Fighting}%
+						\AddFeat*{Two-Weapon Fighting}%
 					\ifthenelse{#1 > 5}{
-						\addFeat*{Improved Two-Weapon Fighting}
+						\AddFeat*{Improved Two-Weapon Fighting}
 					\ifthenelse{#1 > 10}{
-						\addFeat*{Greater Two-Weapon Fighting}
+						\AddFeat*{Greater Two-Weapon Fighting}
 					}{}}{}
 				}{%
 				\ifthenelse{\equal{##1}{Archery}}{%
-						\addFeat*{Rapid Shot}%
+						\AddFeat*{Rapid Shot}%
 					\ifthenelse{#1 > 5}{
-						\addFeat*{Manyshot}
+						\AddFeat*{Manyshot}
 					\ifthenelse{#1 > 10}{
-						\addFeat*{Improved Precise Shot}
+						\AddFeat*{Improved Precise Shot}
 				}{}}{}%
 				}{}}
 			}
@@ -77,12 +77,12 @@
 				}}}
 			}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Endurance}
+		\AddClassFeature{Endurance}
 			\stepCounter{charBonusFeatsCount}
-			\addFeat*{Endurance}
+			\AddFeat*{Endurance}
 	\ifthenelse{#1 > 3}{
-		\addClassFeature{Animal Companion}
-		\newcommand{\addRangerSpellcasting}[1]{
+		\AddClassFeature{Animal Companion}
+		\newcommand{\AddRangerSpellcasting}[1]{
 			\SetCounter{@i}{0}
 			\ifthenelse{##1 > 3}{
 				\stepCounter{@i}
@@ -94,24 +94,24 @@
 				\stepCounter{@i}
 			}{}}{}}{}}{}
 			\newSpellcasting*[\value{@i}]{Ranger}{##1 / 2}{Wis}
-			\addHalfSpellcasting{##1}
+			\AddHalfSpellcasting{##1}
 		}
 	\ifthenelse{#1 > 5}{
 		\stepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 6}{
-		\addClassFeature{Woodland Stride}
+		\AddClassFeature{Woodland Stride}
 	\ifthenelse{#1 > 7}{
-		\addClassFeature{Swift Tracker}
-			\addConditionalSkillMod{No Penalty for tracking at full Speed}
-			\addConditionalSkillMod{half Penalty for tracking at twice Speed}
+		\AddClassFeature{Swift Tracker}
+			\AddConditionalSkillMod{No Penalty for tracking at full Speed}
+			\AddConditionalSkillMod{half Penalty for tracking at twice Speed}
 	\ifthenelse{#1 > 8}{
-		\addClassFeature{Evasion}
-			\addSpecialDefense{Evasion}
+		\AddClassFeature{Evasion}
+			\AddSpecialDefense{Evasion}
 	\ifthenelse{#1 > 10}{
 		\stepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 12}{
-		\addClassFeature{Camouflage}
+		\AddClassFeature{Camouflage}
 	\ifthenelse{#1 > 16}{
-		\addClassFeature{Hide in Plain Sight}
+		\AddClassFeature{Hide in Plain Sight}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }

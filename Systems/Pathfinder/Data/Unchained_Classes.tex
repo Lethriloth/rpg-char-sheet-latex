@@ -20,16 +20,16 @@
 \SetCounter{UnchainedMonkHitDieSize}{8}
 \edef\UnchainedMonkClassSkillsList{}
 \forcsvlist{\listadd{\UnchainedMonkClassSkillsList}}{Acrobatics, Climb, Craft, EscapeArtist, Intimidate, KnowledgeHistory, KnowledgeReligion, Perception, Perform, Profession, Ride, SenseMotive, Stealth, Swim}
-\newcommand{\addUnchainedMonkClassFeatures}[1]{
-		\addClassFeature{\ifthenelse{#1 > 10}{Greater }Flurry of Blows}
+\newcommand{\AddUnchainedMonkClassFeatures}[1]{
+		\AddClassFeature{\ifthenelse{#1 > 10}{Greater }Flurry of Blows}
 			\NewCounter{charflurryofblowsattacksCount}\stepCounter{charflurryofblowsattacksCount}
 %			\autoweapon[\value{charflurryofblowsattacksCount}]{Flurry of Blows}{\value{charflurryofblowspenaltyCount}}{\charunarmedstrikedamage + \arabic{charstrModCount}}{20}{B}{Melee}{}{str}
-		\addClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{\DoMath{(#1 + 6) / 4}}{2}$}{}}
+		\AddClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{\DoMath{(#1 + 6) / 4}}{2}$}{}}
 		\AddToCounter{charBonusFeatsCount}{3}
-		\addFeat*{Improved Unarmed Strike}
-		\addFeat*{Stunning Fist}\addLimitedUse{Stunning Fist}{\DoMath{#1 + (\value{charTotalLevelCount} - 1) / 4}}
-		\addClassFeature{Stunning Fist \ifthenelse{#1 > 3}{(Stun 1 rd, fatigue\ifthenelse{#1 > 7}{, sicken 1 min\ifthenelse{#1 > 11}{, stagger 1d6+1 rd\ifthenelse{#1 > 15}{, blind, deafen\ifthenelse{#1 > 19}{, paralyze 1d6 + 1 rd.}{}}{}}{.}}{})}{}}
-		\addClassFeature{Unarmed Strike \charunarmedstrikedamage}
+		\AddFeat*{Improved Unarmed Strike}
+		\AddFeat*{Stunning Fist}\addLimitedUse{Stunning Fist}{\DoMath{#1 + (\value{charTotalLevelCount} - 1) / 4}}
+		\AddClassFeature{Stunning Fist \ifthenelse{#1 > 3}{(Stun 1 rd, fatigue\ifthenelse{#1 > 7}{, sicken 1 min\ifthenelse{#1 > 11}{, stagger 1d6+1 rd\ifthenelse{#1 > 15}{, blind, deafen\ifthenelse{#1 > 19}{, paralyze 1d6 + 1 rd.}{}}{}}{.}}{})}{}}
+		\AddClassFeature{Unarmed Strike \charunarmedstrikedamage}
 			\newcommand{\charunarmedstrikedamage}{
 				\ifthenelse{\equal{\charSize}{Small}}{%
 					\ifthenelse{#1 > 15}{2d\DoMath{6 + ((#1 - 16)/ 4) * 2}}{1d\DoMath{4 + (#1 / 4) * 2}}%
@@ -50,7 +50,7 @@
 					}%
 				}{}}{}}{}
 			}
-		\addClassFeature{Monk AC Bonus}
+		\AddClassFeature{Monk AC Bonus}
 			\appto\Initialize{
 				\ifthenelse{\equal{\charArmorType}{}}{
 					\MiscBonus{AC}{#1 / 4 + \value{charWisModCount}}
@@ -60,16 +60,16 @@
 				}{}
 			}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
-		\ifthenelse{#1 > 8}{\addSpecialDefense{Improved Evasion}}{\addSpecialDefense{Evasion}}
+		\AddClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
+		\ifthenelse{#1 > 8}{\AddSpecialDefense{Improved Evasion}}{\addSpecialDefense{Evasion}}
 		\stepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Fast Movement}
+		\AddClassFeature{Fast Movement}
 			\EnhancementBonus{Speed}{#1 / 3 * 10}
-		\addLimitedUse{Ki Pool}{\arabic{charKiPoolCount}}
+		\AddLimitedUse{Ki Pool}{\arabic{charKiPoolCount}}
 			\NewCounter{charKiPoolCount}
 			\SetCounter{charKiPoolCount}{#1 / 2 + \value{charWisModCount}}
-			\addClassFeature{Ki Strike (magic%
+			\AddClassFeature{Ki Strike (magic%
 				\ifthenelse{#1 > 6}{%
 				, cold iron, silver
 				\ifthenelse{#1 > 9}{%
@@ -78,11 +78,11 @@
 				}{}}{})
 			}
 	\ifthenelse{#1 > 3}{
-		\addClassFeature{\textit{Ki} powers:}
+		\AddClassFeature{\textit{Ki} powers:}
 			\NewCounter{charKiPowersCount}
 			\SetCounter{charKiPowersCount}{#1 / 2 - 1}
 			\edef\charKiPowersList{}
-			\NewDocumentCommand{\addKiPower}{m}{
+			\NewDocumentCommand{\AddKiPower}{m}{
 				\listinsert{\charKiPowersList}{##1}
 				\AddToCounter{charKiPowersCount}{-1}
 			}
@@ -95,13 +95,13 @@
 					\AddWarning{Choose \arabic{charKiPowersCount} more Ki Powers}
 				}{}}
 			}
-		\addClassFeature{Still Mind}\addConditionalDefMod{+2 on saves vs. Enchantment}
+		\AddClassFeature{Still Mind}\addConditionalDefMod{+2 on saves vs. Enchantment}
 	\ifthenelse{#1 > 4}{
-		\addClassFeature{Style Strike (\ifthenelse{#1 > 14}{2}{1}/round)}
+		\AddClassFeature{Style Strike (\ifthenelse{#1 > 14}{2}{1}/round)}
 			\NewCounter{charStyleStrikesCount}
 			\SetCounter{charStyleStrikesCount}{(#1 - 1) / 4}
 			\edef\charStyleStrikesList{}
-			\NewDocumentCommand{\addStyleStrike}{m}{
+			\NewDocumentCommand{\AddStyleStrike}{m}{
 				\listinsert{\charStyleStrikesList}{##1}
 				\AddToCounter{charStyleStrikesCount}{-1}
 			}
@@ -114,25 +114,25 @@
 					\AddWarning{Choose \arabic{charStyleStrikesCount} more Style Strikes}
 				}{}}
 			}
-		\addClassFeature{Purity of Body}\addImmunity{Disease}
+		\AddClassFeature{Purity of Body}\addImmunity{Disease}
 	\ifthenelse{#1 > 5}{
 		\AddToCounter{charBonusFeatsCount}{(#1 - 2) / 4}
 	\ifthenelse{#1 > 8}{
 		\stepCounter{charflurryofblowspenaltyCount}
 	\ifthenelse{#1 > 10}{
 		\stepCounter{charflurryofblowsattacksCount}
-		\addClassFeature{Diamond Body}\addImmunity{poison}
+		\AddClassFeature{Diamond Body}\addImmunity{poison}
 	\ifthenelse{#1 > 11}{
-		\addClassFeature{Abundant Step (\DoMath{#1 * 40 + 400} ft.)}
+		\AddClassFeature{Abundant Step (\DoMath{#1 * 40 + 400} ft.)}
 	\ifthenelse{#1 > 12}{
-		\addClassFeature{Tongue of the Sun and Moon}\listadd{\charLanguagesList}{Can speak with any living creature}
+		\AddClassFeature{Tongue of the Sun and Moon}\listadd{\charLanguagesList}{Can speak with any living creature}
 	\ifthenelse{#1 > 16}{
-		\addClassFeature{Timeless Body}
+		\AddClassFeature{Timeless Body}
 	\ifthenelse{#1 > 18}{
-		\addClassFeature{Flawless Mind}
-			\addConditionalDefMod{Roll twice and take better result on all Will saves; Can make Will save against ongoing effects each hour}
+		\AddClassFeature{Flawless Mind}
+			\AddConditionalDefMod{Roll twice and take better result on all Will saves; Can make Will save against ongoing effects each hour}
 	\ifthenelse{#1 > 19}{
-		\addClassFeature{Perfect Self}\addDR{chaotic}{10}
+		\AddClassFeature{Perfect Self}\addDR{chaotic}{10}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
@@ -146,15 +146,15 @@
 \SetCounter{UnchainedRogueHitDieSize}{8}
 \edef\UnchainedRogueClassSkillsList{}
 \forcsvlist{\listadd{\RogueClassSkillsList}}{acrobatics, appraise, bluff, climb, craftone, crafttwo, craftthree, diplomacy, disabledevice, disguise, escapeartist, intimidate, knowledgedungeoneering, knowledgelocal, linguistics, perception, performone, performtwo, professionone, professiontwo, sensemotive, sleightofhand, stealth, swim, usemagicdevice}
-\newcommand{\addUnchainedRogueClassFeatures}[1]{
+\newcommand{\AddUnchainedRogueClassFeatures}[1]{
 		\edef\charFinesseTrainingWeaponsList{}
-		\addClassFeature{Finesse Training\ifthenelse{#1 > 2}{ (\PrintList{\charFinesseTrainingWeaponsList})}{}}
+		\AddClassFeature{Finesse Training\ifthenelse{#1 > 2}{ (\PrintList{\charFinesseTrainingWeaponsList})}{}}
 			\NewCounter{charFinesseTrainingWeaponsCount}
-			\NewDocumentCommand{\addFinesseTrainingWeapon}{m}{
+			\NewDocumentCommand{\AddFinesseTrainingWeapon}{m}{
 				\listinsert{\charFinesseTrainingWeaponsList}{##1}
-				\addtocounter{charFinesseTrainingWeaponsCount}{-1}
+				\Addtocounter{charFinesseTrainingWeaponsCount}{-1}
 			}
-			\addFeat*{Weapon Finesse}\stepcounter{charBonusFeatsCount}
+			\AddFeat*{Weapon Finesse}\stepcounter{charBonusFeatsCount}
 			\gappto{\RunChecks}{%
 				%%CHECK FINESSE TRAINING WEAPONS
 				\ifthenelse{\value{charFinesseTrainingWeaponsCount} < 0}{
@@ -164,18 +164,18 @@
 					\AddWarning{Choose \arabic{charFinesseTrainingWeaponsCount} more Finesse Training weapons}
 				}{}}
 			}
-		\addClassFeature{Sneak Attack +\DoMath{(#1 + 1)/2}d6}
-		\addClassFeature{Trapfinding}
-			\addConditionalSkillMod{+ \DoMath{#1 / 2} to Perception to find traps}
+		\AddClassFeature{Sneak Attack +\DoMath{(#1 + 1)/2}d6}
+		\AddClassFeature{Trapfinding}
+			\AddConditionalSkillMod{+ \DoMath{#1 / 2} to Perception to find traps}
 			\MiscBonus{DisableDevice}{#1 / 2}
 	\edef\charRogueTalentsList{}
 	\NewCounter{charRogueTalentsCount}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{Evasion}
-			\addSpecialDefense{\ifinlist{Improved Evasion}{\charRogueTalentsList}{Improved }{}Evasion}
-		\addClassFeature{\ifthenelse{#1 > 9}{Advanced }{}Rogue Talents\forlistloop{\\~~~~}{\charRogueTalentsList}}
+		\AddClassFeature{Evasion}
+			\AddSpecialDefense{\ifinlist{Improved Evasion}{\charRogueTalentsList}{Improved }{}Evasion}
+		\AddClassFeature{\ifthenelse{#1 > 9}{Advanced }{}Rogue Talents\forlistloop{\\~~~~}{\charRogueTalentsList}}
 			\AddToCounter{charRogueTalentsCount}{#1 / 2}
-			\NewDocumentCommand{\addRogueTalent}{m}{
+			\NewDocumentCommand{\AddRogueTalent}{m}{
 				\listinsert{\charRogueTalentsList}{##1}
 				\AddToCounter{charRogueTalentsCount}{-1}
 			}
@@ -190,18 +190,18 @@
 			}
 	\ifthenelse{#1 > 2}{
 		\stepcounter{charFinesseTrainingWeaponsCount}
-		\addClassFeature{Danger Sense +\DoMath{#1 / 3}}
-			\addConditionalDefMod{+\DoMath{#1 / 3} to Reflex and AC vs. traps}
-			\addConditionalSkillMod{+\DoMath{#1 / 3} to Perception checks to avoid being surprised}
+		\AddClassFeature{Danger Sense +\DoMath{#1 / 3}}
+			\AddConditionalDefMod{+\DoMath{#1 / 3} to Reflex and AC vs. traps}
+			\AddConditionalSkillMod{+\DoMath{#1 / 3} to Perception checks to avoid being surprised}
 	\ifthenelse{#1 > 3}{
-		\addClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
-			\ifthenelse{#1 > 7}{\addSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
-		\addClassFeature{Debilitating Injury}
+		\AddClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
+			\ifthenelse{#1 > 7}{\AddSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
+		\AddClassFeature{Debilitating Injury}
 	\ifthenelse{#1 > 4}{
 		\edef\charSkillUnlocksList{}
-		\addClassFeature{Rogue's Edge\forlistloop{\\~~~~}{\charSkillUnlocksList}}
+		\AddClassFeature{Rogue's Edge\forlistloop{\\~~~~}{\charSkillUnlocksList}}
 		\AddToCounter{charSkillUnlocksCount}{#1 / 5}
-		\NewDocumentCommand{\addSkillUnlock}{m}{
+		\NewDocumentCommand{\AddSkillUnlock}{m}{
 			\listinsert{\charSkillUnlocksList}{##1}
 			\AddToCounter{charSkillUnlocksCount}{-1}
 		}
@@ -215,6 +215,6 @@
 			}{}}
 		}
 	\ifthenelse{#1 > 19}{
-		\addClassFeature{Master Strike (DC \DoMath{10 + #1 / 2 + \value{charIntModCount}})}
+		\AddClassFeature{Master Strike (DC \DoMath{10 + #1 / 2 + \value{charIntModCount}})}
 	}{}}{}}{}}{}}{}
 }

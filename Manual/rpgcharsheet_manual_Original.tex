@@ -16,7 +16,7 @@ This class is designed to create dynamic RPG character sheets. Currently, a Path
 \section{Brief Overview}
 \label{sec:how-latex-reads}
 
-Almost all numbers in the sheet are held as counters which can be changed with the \verb=\setcounter= command as per normal. Text based variables are held in commands, and can be changed with \verb=\renewcommand=. A simple \verb=player.tex= would be
+Almost all numbers in the sheet are held as counters which can be changed with the \verb=\Setcounter= command as per normal. Text based variables are held in commands, and can be changed with \verb=\renewcommand=. A simple \verb=player.tex= would be
 \begin{verbatim}
 TODO this player.tex
 \end{verbatim}
@@ -32,7 +32,7 @@ For those who are interested, the sheet is generated in this way:
 \section{Using a template}
 \label{sec:using-template}
 
-All variables can be changed with \verb=\renewcommand= and \verb=\setcounter=, however some commands are provided to make things simpler.
+All variables can be changed with \verb=\renewcommand= and \verb=\Setcounter=, however some commands are provided to make things simpler.
 
 \subsection{Naming convention}
 \label{sec:naming-convention}
@@ -68,7 +68,7 @@ When a feature of an ability/skill is used, such as temprary modifiers, the user
   \label{tab:otherabbrev}
 \end{table}
 
-To change a number, one uses \verb=\setcounter= in the usual way. A counter name is made of 4 parts:
+To change a number, one uses \verb=\Setcounter= in the usual way. A counter name is made of 4 parts:
 \protect\parbox{\linewidth}{\texttt{char}$\langle$\emph{attribute/skill name}$\rangle\langle$\emph{type of modifier}$\rangle$\texttt{count}}
 where the attribute/skill name and type of modifier are as above. An example of this is:
 \[

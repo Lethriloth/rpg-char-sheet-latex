@@ -5,19 +5,19 @@
 \def\AddGreyElfRaceFeatures{
 	\renewcommand\charrace{Grey Elf}
 	\mediumsize
-	\addtocounter{charstrbasecount}{-2}
-	\addtocounter{chardexbasecount}{2}
-	\addtocounter{charconbasecount}{-2}
-	\addtocounter{charintbasecount}{2}
+	\Addtocounter{charstrbasecount}{-2}
+	\Addtocounter{chardexbasecount}{2}
+	\Addtocounter{charconbasecount}{-2}
+	\Addtocounter{charintbasecount}{2}
 	\charspeed{30}
-	\addImmunity{Sleep}\addconditionaldefmod{+2 vs. Enchantment}
-	\addracefeature{Low-Light Vision}
-	\addracefeature{Elven Weapon Proficiencies}
-	\addracefeature{Keen Senses}
-		\addconditionalskillmod{Free Search check for secret doors within 5 ft.}
+	\AddImmunity{Sleep}\addconditionaldefmod{+2 vs. Enchantment}
+	\Addracefeature{Low-Light Vision}
+	\Addracefeature{Elven Weapon Proficiencies}
+	\Addracefeature{Keen Senses}
+		\Addconditionalskillmod{Free Search check for secret doors within 5 ft.}
 		\miscbonus[racial]{listen}{2}
 		\miscbonus[racial]{search}{2}
 		\miscbonus[racial]{spot}{2}
-	\addcharlanguage{Common}
-	\addcharlanguage{Elven}
+	\Addcharlanguage{Common}
+	\Addcharlanguage{Elven}
 }

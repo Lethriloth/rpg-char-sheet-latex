@@ -9,10 +9,10 @@
 \SetCounter{BarbarianHitDieSize}{12}
 \edef\BarbarianClassSkillsList{}
 \forcsvlist{\listadd{\BarbarianClassSkillsList}}{Acrobatics, Climb, Craft, HandleAnimal, Intimidate, KnowledgeNature, Perception, Ride, Survival, Swim}
-\newcommand{\addBarbarianClassFeatures}[1]{
-		\addClassFeature{Fast Movement}\AddToCounter{charBaseSpeedCount}{10}
-		\addClassFeature{\ifthenelse{#1 > 10}{\ifthenelse{#1 > 19}{Mighty }{Greater }}{} Rage}
-			\addLimitedUse{Rage (rounds)}{\DoMath{#1 * 2 + 2 +\value{charConModCount} + \value{charRageRoundsCount}}}
+\newcommand{\AddBarbarianClassFeatures}[1]{
+		\AddClassFeature{Fast Movement}\AddToCounter{charBaseSpeedCount}{10}
+		\AddClassFeature{\ifthenelse{#1 > 10}{\ifthenelse{#1 > 19}{Mighty }{Greater }}{} Rage}
+			\AddLimitedUse{Rage (rounds)}{\DoMath{#1 * 2 + 2 +\value{charConModCount} + \value{charRageRoundsCount}}}
 			\NewCounter{charRageRoundsCount}
 			\newcommand{\IWouldLikeToRage}{
 				\tmpBonus{AC}{-2}
@@ -27,17 +27,17 @@
 					\AddToCounter{charRageRoundsCount}{-2}
 				}
 				\ifthenelse{#1 > 13}{
-					\addConditionalDefMod{+4 vs. EnChantments}
+					\AddConditionalDefMod{+4 vs. EnChantments}
 				}{}
 			}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{\ifthenelse{#1 > 4}{Improved }{}Uncanny Dodge}
-			\ifthenelse{#1 > 4}{\addSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
+		\AddClassFeature{\ifthenelse{#1 > 4}{Improved }{}Uncanny Dodge}
+			\ifthenelse{#1 > 4}{\AddSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
 		\edef\charRagePowersList{}
 		\NewCounter{charRagePowersCount}
 		\AddToCounter{charRagePowersCount}{#1 / 2}
-		\addClassFeature{Rage Powers:\forlistloop{\\~~~~}{\charRagePowersList}}
-		\NewDocumentCommand{\addRagePower}{m}{
+		\AddClassFeature{Rage Powers:\forlistloop{\\~~~~}{\charRagePowersList}}
+		\NewDocumentCommand{\AddRagePower}{m}{
 			\listinsert{\charRagePowersList}{##1}
 			\AddToCounter{charRagePowersCount}{-1}
 		}
@@ -51,13 +51,13 @@
 			}{}}
 		}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Trap Sense +\DoMath{#1 / 3}}\addConditionalDefMod{+\DoMath{#1 / 3} vs. traps}
+		\AddClassFeature{Trap Sense +\DoMath{#1 / 3}}\addConditionalDefMod{+\DoMath{#1 / 3} vs. traps}
 	\ifthenelse{#1 > 6}{
-		\addClassFeature{Damage Reduction}\DoMath*{(#1 - 4) / 3}\addDR{--}{\value{@DoMathCounter}}
+		\AddClassFeature{Damage Reduction}\DoMath*{(#1 - 4) / 3}\addDR{--}{\value{@DoMathCounter}}
 	\ifthenelse{#1 > 13}{
-		\addClassFeature{Indomitable Will}
+		\AddClassFeature{Indomitable Will}
 	\ifthenelse{#1 > 16}{
-		\addClassFeature{Tireless Rage}
+		\AddClassFeature{Tireless Rage}
 	}{}}{}}{}}{}}{}
 }
 
@@ -71,25 +71,25 @@
 \SetCounter{BardHitDieSize}{8}
 \edef\BardClassSkillsList{}
 \forcsvlist{\listadd{\BardClassSkillsList}}{Acrobatics, Appraise, Bluff, Climb, Craft, Diplomacy, Disguise, EscapeArtist, Intimidate, KnowledgeAll, Linguistics, Perception, Perform, Profession, SenseMotive, SleightOfHand, Spellcraft, Stealth, UseMagicDevice}
-\newcommand{\addBardClassFeatures}[1]{
+\newcommand{\AddBardClassFeatures}[1]{
 	\edef\charBardicPerformanceList{}
-	\addClassFeature{Bardic Performance (save DC \DoMath{10 + #1 / 2 + \value{charChaModCount}})\forlistloop{\\~~~~}{\charBardicPerformanceList}}
+	\AddClassFeature{Bardic Performance (save DC \DoMath{10 + #1 / 2 + \value{charChaModCount}})\forlistloop{\\~~~~}{\charBardicPerformanceList}}
 		\NewCounter{charBardicPerformanceRoundsCount}
-		\addLimitedUse{Bardic Performance (rounds)}{\DoMath{#1 * 2 + 2 + \value{charChaModCount} + \value{charBardicPerformanceRoundsCount}}}
+		\AddLimitedUse{Bardic Performance (rounds)}{\DoMath{#1 * 2 + 2 + \value{charChaModCount} + \value{charBardicPerformanceRoundsCount}}}
 			\listadd{\charBardicPerformanceList}{Countersong}
 			\listadd{\charBardicPerformanceList}{Fascinate}
 			\listadd{\charBardicPerformanceList}{Inspire Courage +\DoMath{(#1 + 1) / 6 + 1}}
-	\addClassFeature{Bardic Knowledge}
+	\AddClassFeature{Bardic Knowledge}
 		\renewcommand{\do}[1]{
 			\MiscBonus{##1}{#1 / 2}
 		}\dolistloop{\KnowledgeSkillsList}
-		\addConditionalSkillMod{Can make Knowledge checks untrained.}
+		\AddConditionalSkillMod{Can make Knowledge checks untrained.}
 	\ifthenelse{#1 > 1}{
 		\edef\charVersatilePerformancesList{}
-		\addClassFeature{Versatile Performance\forlistloop{\\~~~~}{\charVersatilePerformancesList}}
+		\AddClassFeature{Versatile Performance\forlistloop{\\~~~~}{\charVersatilePerformancesList}}
 			\NewCounter{charVersatilePerformancesCount}
 			\SetCounter{charVersatilePerformancesCount}{(#1 + 2) / 4}
-			\NewDocumentCommand{\addVersatilePerformance}{m}{
+			\NewDocumentCommand{\AddVersatilePerformance}{m}{
 				\listinsert{\charVersatilePerformancesList}{##1}
 				\AddToCounter{charVersatilePerformancesCount}{-1}
 			}
@@ -102,14 +102,14 @@
 					\AddWarning{Choose \arabic{charVersatilePerformancesCount} more Versatile Performance Skills}
 				}{}}
 			}
-		\addClassFeature{Well-Versed}
-			\addConditionalDefMod{+4 vs. Bardic Performance, Sonic, Language-Dependent}
+		\AddClassFeature{Well-Versed}
+			\AddConditionalDefMod{+4 vs. Bardic Performance, Sonic, Language-Dependent}
 	\ifthenelse{#1 > 2}{
 			\listadd{\charBardicPerformanceList}{Inspire Competence +\DoMath{(#1 + 1) / 4 + 1}}
 	\ifthenelse{#1 > 4}{
-		\addClassFeature{Lore Master}
-			\addConditionalSkillMod{Can take 10 in any Knowledge Skill with ranks.}
-			\addLimitedUse{Lore Master}{\DoMath{(#1 + 1)/6}}
+		\AddClassFeature{Lore Master}
+			\AddConditionalSkillMod{Can take 10 in any Knowledge Skill with ranks.}
+			\AddLimitedUse{Lore Master}{\DoMath{(#1 + 1)/6}}
 	\ifthenelse{#1 > 5}{
 		\listadd{\charBardicPerformanceList}{\ifthenelse{#1 > 17}{Mass }{}Suggestion}
 	\ifthenelse{#1 > 7}{
@@ -117,8 +117,8 @@
 	\ifthenelse{#1 > 8}{
 		\listadd{\charBardicPerformanceList}{Inspire Greatness}
 	\ifthenelse{#1 > 9}{
-		\addClassFeature{Jack of All Trades}
-			\addConditionalSkillMod{Can use trained-only Skills as if they were trained.}
+		\AddClassFeature{Jack of All Trades}
+			\AddConditionalSkillMod{Can use trained-only Skills as if they were trained.}
 	\ifthenelse{#1 > 11}{
 		\listadd{\charBardicPerformanceList}{Soothing Performance}
 	\ifthenelse{#1 > 13}{
@@ -128,11 +128,11 @@
 	\ifthenelse{#1 > 15}{
 		\forlistloop{\isClassSkill}{\SkillsList}
 	\ifthenelse{#1 > 18}{
-		\addConditionalSkillMod{Can take 10 on any Skill check.}
+		\AddConditionalSkillMod{Can take 10 on any Skill check.}
 	\ifthenelse{#1 > 19}{
 		\listadd{\charBardicPerformanceList}{Deadly Performance}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
-	\newcommand{\addBardSpellcasting}[1]{
+	\newcommand{\AddBardSpellcasting}[1]{
 		\ifthenelse{##1 < 2}{\SetCounter{@i}{0}}{
 		\ifthenelse{##1 < 4}{\SetCounter{@i}{1}}{
 		\ifthenelse{##1 < 7}{\SetCounter{@i}{2}}{
@@ -140,7 +140,7 @@
 		\ifthenelse{##1 < 13}{\SetCounter{@i}{4}}{
 		\ifthenelse{##1 < 16}{\SetCounter{@i}{5}}{\SetCounter{@i}{6}}}}}}}
 		\newSpellcasting[\value{@i}]{Bard}{##1}{Cha}
-		\addTwoThirdsSpellcasing{##1}
+		\AddTwoThirdsSpellcasing{##1}
 	}
 }
 
@@ -154,18 +154,18 @@
 \SetCounter{ClericHitDieSize}{8}
 \edef\ClericClassSkillsList{}
 \forcsvlist{\listadd{\ClericClassSkillsList}}{Appraise, Craft, Diplomacy, Heal, KnowledgeArcana, KnowledgeHistory, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion, Linguistics, Profession, SenseMotive, Spellcraft}
-\newcommand{\addClericClassFeatures}[1]{
+\newcommand{\AddClericClassFeatures}[1]{
 	\NewCounter{charChannelenergyusesCount}
 	\SetCounter{charChannelenergyusesCount}{3 + \value{charChaModCount}}
-	\addLimitedUse{Channel Energy \DoMath{(#1 + 1) / 2}d6}{\arabic{charChannelenergyusesCount}}
-	\newcommand{\addClericSpellcasting}[3]{
+	\AddLimitedUse{Channel Energy \DoMath{(#1 + 1) / 2}d6}{\arabic{charChannelenergyusesCount}}
+	\newcommand{\AddClericSpellcasting}[3]{
 		\newSpellcasting[(##1 + 1) / 2]{Cleric}{##1}{wis}
-		\addPrimarySpellcasting{##1}
+		\AddPrimarySpellcasting{##1}
 		\ForLoop{@i}{1}{\value{@i}<10}{
-			\addBonusSpellslots{\arabic{@i}}{1}
+			\AddBonusSpellslots{\arabic{@i}}{1}
 		}
-		\addSpellcastingSpecialization[Domain]{##2}
-		\addSpellcastingSpecialization[Domain]{##3}
+		\AddSpellcastingSpecialization[Domain]{##2}
+		\AddSpellcastingSpecialization[Domain]{##3}
 	}
 }
 
@@ -179,19 +179,19 @@
 \SetCounter{DruidHitDieSize}{8}
 \edef\DruidClassSkillsList{}
 \forcsvlist{\listadd{\DruidClassSkillsList}}{Climb, Craft, Fly, HandleAnimal, Heal, KnowledgeGeography, KnowledgeNature, Perception, Profession, Ride, Spellcraft, Survival, Swim}
-\newcommand{\addDruidClassFeatures}[1]{
-	\addClassFeature{Nature Bond}
-	\addClassFeature{Nature Sense}\MiscBonus{KnowledgeNature}{2}\MiscBonus{Survival}{2}
-	\addClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
+\newcommand{\AddDruidClassFeatures}[1]{
+	\AddClassFeature{Nature Bond}
+	\AddClassFeature{Nature Sense}\MiscBonus{KnowledgeNature}{2}\MiscBonus{Survival}{2}
+	\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{Woodland StRide}
+		\AddClassFeature{Woodland StRide}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Trackless Step}
+		\AddClassFeature{Trackless Step}
 	\ifthenelse{#1 > 3}{
-		\addClassFeature{Resist Nature's Lure}\addConditionalDefMod{+4 to saves vs. Spell-like abilities of fey and Spells that target plants}
+		\AddClassFeature{Resist Nature's Lure}\addConditionalDefMod{+4 to saves vs. Spell-like abilities of fey and Spells that target plants}
 		\NewCounter{charwildshapeusesCount}
 		\SetCounter{charwildshapeusesCount}{#1 / 2 - 1}
-		\addClassFeature{Wild Shape \ifthenelse{#1 < 20}{}{(At-Will)}
+		\AddClassFeature{Wild Shape \ifthenelse{#1 < 20}{}{(At-Will)}
 		\ifthenelse{#1 > 5}{\ifthenelse{#1 > 7}{\ifthenelse{#1 > 9}{\ifthenelse{#1 > 11}{
 		\\~~~~Beast Shape III\\~~~~Elemental Body IV\\~~~~Plant Shape III
 		}{\\~~~~Beast Shape III\\~~~~Elemental Body III\\~~~~Plant Shape II}
@@ -200,19 +200,19 @@
 		}{\\~~~~Beast Shape I}
 		}
 		\ifthenelse{#1 < 20}{
-			\addLimitedUse{Wild Shape}{\arabic{charwildshapeusesCount}}
+			\AddLimitedUse{Wild Shape}{\arabic{charwildshapeusesCount}}
 		}{}
 	\ifthenelse{#1 > 8}{
-		\addClassFeature{Venom Immunity}
-		\addImmunity{poison}
+		\AddClassFeature{Venom Immunity}
+		\AddImmunity{poison}
 	\ifthenelse{#1 > 12}{
-		\addClassFeature{A Thousand Faces}
+		\AddClassFeature{A Thousand Faces}
 	\ifthenelse{#1 > 14}{
-		\addClassFeature{Timeless Body}
+		\AddClassFeature{Timeless Body}
 	}{}}{}}{}}{}}{}}{}
-	\newcommand{\addDruidSpellcasting}[1]{
+	\newcommand{\AddDruidSpellcasting}[1]{
 		\newSpellcasting[(##1 + 1) / 2]{Druid}{##1}{wis}
-		\addPrimarySpellcasting{##1}
+		\AddPrimarySpellcasting{##1}
 	}
 }
 
@@ -226,22 +226,22 @@
 \SetCounter{FighterHitDieSize}{10}
 \edef\FighterClassSkillsList{}
 \forcsvlist{\listadd{\FighterClassSkillsList}}{Climb, Craft, HandleAnimal, Intimidate, KnowledgeDungeoneering, KnowledgeEngineering, Profession, Ride, Survival, Swim}
-\newcommand{\addFighterClassFeatures}[1]{
+\newcommand{\AddFighterClassFeatures}[1]{
 	\AddToCounter{charBonusFeatsCount}{#1 / 2 +1}
-	\addClassFeature{Fighter Bonus Feat\ifthenelse{#1 > 1}{ $\times\DoMath{#1 / 2 +1}$}{}}
+	\AddClassFeature{Fighter Bonus Feat\ifthenelse{#1 > 1}{ $\times\DoMath{#1 / 2 +1}$}{}}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{Bravery +\DoMath{(#1 + 2) / 4}}
-			\addConditionalDefMod{+\DoMath{(#1 + 2) / 4} vs. fear}
+		\AddClassFeature{Bravery +\DoMath{(#1 + 2) / 4}}
+			\AddConditionalDefMod{+\DoMath{(#1 + 2) / 4} vs. fear}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Armor Training +\DoMath{(#1 + 1) / 4} (\ifthenelse{#1 > 6}{Heavy}{Medium})}
+		\AddClassFeature{Armor Training +\DoMath{(#1 + 1) / 4} (\ifthenelse{#1 > 6}{Heavy}{Medium})}
 	\ifthenelse{#1 > 4}{
-		\addClassFeature{Weapon Training}
+		\AddClassFeature{Weapon Training}
 		\edef\charFighterWeaponTrainingList{}
 		\NewCounter{charWeaponTrainingBonusCount}
 		\NewCounter{charWeaponTrainingCount}
 		\SetCounter{charWeaponTrainingBonusCount}{(#1 - 1) / 4}
 		\SetCounter{charWeaponTrainingCount}{(#1 - 1) / 4}
-		\newcommand{\addFighterWeaponTraining}[1]{
+		\newcommand{\AddFighterWeaponTraining}[1]{
 			\listadd{\charFighterWeaponTrainingList}{#1}
 			\AddToCounter{charWeaponTrainingCount}{-1}
 		}
@@ -260,15 +260,15 @@
 			}{}}
 		}
 	\ifthenelse{#1 > 18}{
-		\addClassFeature{Armor Mastery}
+		\AddClassFeature{Armor Mastery}
 		\preto{\Initialize}{
-			\ifthenelse{\equal{\charArmorName}{}}{}{\addDR{--}{5}}
-			\ifthenelse{\equal{\charShieldName}{}}{}{\addDR{--}{5}}
+			\ifthenelse{\equal{\charArmorName}{}}{}{\AddDR{--}{5}}
+			\ifthenelse{\equal{\charShieldName}{}}{}{\AddDR{--}{5}}
 		}
 	\ifthenelse{#1 > 19}{
-		\addClassFeature{Weapon Mastery \charFighterWeaponMastery}
+		\AddClassFeature{Weapon Mastery \charFighterWeaponMastery}
 		\newcommand{\charFighterWeaponMastery}{}
-		\newcommand{\addFighterWeaponMastery}[1]{
+		\newcommand{\AddFighterWeaponMastery}[1]{
 			\renewcommand{\charFighterWeaponMastery}{##1}
 		}
 		\gappto{\RunChecks}{%
@@ -291,17 +291,17 @@
 \SetCounter{MonkHitDieSize}{8}
 \edef\MonkClassSkillsList{}
 \forcsvlist{\listadd{\MonkClassSkillsList}}{Acrobatics, Climb, Craft, EscapeArtist, Intimidate, KnowledgeHistory, KnowledgeReligion, Perception, Perform, Profession, Ride, SenseMotive, Stealth, Swim}
-\newcommand{\addMonkClassFeatures}[1]{
-		\addClassFeature{\ifthenelse{#1 > 10}{Greater }Flurry of Blows}
+\newcommand{\AddMonkClassFeatures}[1]{
+		\AddClassFeature{\ifthenelse{#1 > 10}{Greater }Flurry of Blows}
 			\NewCounter{charflurryofblowspenaltyCount}\SetCounter{charflurryofblowspenaltyCount}{-2}
 			\NewCounter{charflurryofblowsattacksCount}\stepCounter{charflurryofblowsattacksCount}
 %			\autoweapon[\value{charflurryofblowsattacksCount}]{Flurry of Blows}{\value{charflurryofblowspenaltyCount}}{\charunarmedstrikedamage + \arabic{charstrModCount}}{20}{B}{Melee}{}{str}
-		\addClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{\DoMath{(#1 + 6) / 4}}{2}$}{}}
+		\AddClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{\DoMath{(#1 + 6) / 4}}{2}$}{}}
 		\AddToCounter{charBonusFeatsCount}{3}
-		\addFeat*{Improved Unarmed Strike}
-		\addFeat*{Stunning Fist}\addLimitedUse{Stunning Fist}{\DoMath{#1 + (\value{charTotalLevelCount} - 1) / 4}}
-		\addClassFeature{Stunning Fist \ifthenelse{#1 > 3}{(Stun 1 rd, fatigue\ifthenelse{#1 > 7}{, sicken 1 min\ifthenelse{#1 > 11}{, stagger 1d6+1 rd\ifthenelse{#1 > 15}{, blind, deafen\ifthenelse{#1 > 19}{, paralyze 1d6 + 1 rd.}{}}{}}{.}}{})}{}}
-		\addClassFeature{Unarmed Strike \charunarmedstrikedamage}
+		\AddFeat*{Improved Unarmed Strike}
+		\AddFeat*{Stunning Fist}\addLimitedUse{Stunning Fist}{\DoMath{#1 + (\value{charTotalLevelCount} - 1) / 4}}
+		\AddClassFeature{Stunning Fist \ifthenelse{#1 > 3}{(Stun 1 rd, fatigue\ifthenelse{#1 > 7}{, sicken 1 min\ifthenelse{#1 > 11}{, stagger 1d6+1 rd\ifthenelse{#1 > 15}{, blind, deafen\ifthenelse{#1 > 19}{, paralyze 1d6 + 1 rd.}{}}{}}{.}}{})}{}}
+		\AddClassFeature{Unarmed Strike \charunarmedstrikedamage}
 			\newcommand{\charunarmedstrikedamage}{
 				\ifthenelse{\equal{\charSize}{Small}}{%
 					\ifthenelse{#1 > 15}{2d\DoMath{6 + ((#1 - 16)/ 4) * 2}}{1d\DoMath{4 + (#1 / 4) * 2}}%
@@ -322,7 +322,7 @@
 					}%
 				}{}}{}}{}
 			}
-		\addClassFeature{Monk AC Bonus}
+		\AddClassFeature{Monk AC Bonus}
 			\appto\Initialize{
 				\ifthenelse{\equal{\charArmorType}{}}{
 					\MiscBonus{AC}{#1 / 4 + \value{charWisModCount}}
@@ -332,21 +332,21 @@
 				}{}
 			}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
-		\ifthenelse{#1 > 8}{\addSpecialDefense{Improved Evasion}}{\addSpecialDefense{Evasion}}
+		\AddClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
+		\ifthenelse{#1 > 8}{\AddSpecialDefense{Improved Evasion}}{\addSpecialDefense{Evasion}}
 		\stepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Still Mind}\addConditionalDefMod{+2 on saves vs. EnChantment}
-		\addClassFeature{Fast Movement}
+		\AddClassFeature{Still Mind}\addConditionalDefMod{+2 on saves vs. EnChantment}
+		\AddClassFeature{Fast Movement}
 			\EnhancementBonus{Speed}{#1 / 3 * 10}
-		\addClassFeature{Maneuver Training}
+		\AddClassFeature{Maneuver Training}
 			\MiscBonus{CMD}{#1 - #1 * 3 / 4}
 			\MiscBonus{CMB}{#1 - #1 * 3 / 4}
 	\ifthenelse{#1 > 3}{
-		\addLimitedUse{Ki Pool}{\arabic{charKiPoolCount}}
+		\AddLimitedUse{Ki Pool}{\arabic{charKiPoolCount}}
 			\NewCounter{charKiPoolCount}
 			\SetCounter{charKiPoolCount}{#1 / 2 + \value{charWisModCount}}
-			\addClassFeature{Ki Strike (magic%
+			\AddClassFeature{Ki Strike (magic%
 				\ifthenelse{#1 > 6}{%
 				, cold iron, silver
 				\ifthenelse{#1 > 9}{%
@@ -354,34 +354,34 @@
 				\ifthenelse{#1 > 15}{, adamantine}{}%
 				}{}}{})
 			}
-		\addClassFeature{Slow Fall \ifthenelse{#1 < 20}{\DoMath{#1 / 2}0 ft.}{any distance}}
+		\AddClassFeature{Slow Fall \ifthenelse{#1 < 20}{\DoMath{#1 / 2}0 ft.}{any distance}}
 	\ifthenelse{#1 > 4}{
-		\addClassFeature{High Jump}
-			\addConditionalSkillMod{+#1 to Acrobatics to jump, always Counts as having running start for jumps}
-		\addClassFeature{Purity of Body}\addImmunity{Disease}
+		\AddClassFeature{High Jump}
+			\AddConditionalSkillMod{+#1 to Acrobatics to jump, always Counts as having running start for jumps}
+		\AddClassFeature{Purity of Body}\addImmunity{Disease}
 		\stepCounter{charflurryofblowspenaltyCount}
 	\ifthenelse{#1 > 5}{
 		\AddToCounter{charBonusFeatsCount}{(#1 - 2) / 4}
 	\ifthenelse{#1 > 6}{
-		\addClassFeature{Wholeness of Body}
+		\AddClassFeature{Wholeness of Body}
 	\ifthenelse{#1 > 8}{
 		\stepCounter{charflurryofblowspenaltyCount}
 	\ifthenelse{#1 > 10}{
 		\stepCounter{charflurryofblowsattacksCount}
-		\addClassFeature{Diamond Body}\addImmunity{poison}
+		\AddClassFeature{Diamond Body}\addImmunity{poison}
 	\ifthenelse{#1 > 11}{
-		\addClassFeature{Abundant Step (\DoMath{#1 * 40 + 400} ft.)}
+		\AddClassFeature{Abundant Step (\DoMath{#1 * 40 + 400} ft.)}
 	\ifthenelse{#1 > 12}{
-		\addClassFeature{Diamond Soul}\addSpellResistance{#1 + 10}
+		\AddClassFeature{Diamond Soul}\addSpellResistance{#1 + 10}
 	\ifthenelse{#1 > 14}{
-		\addLimitedUse{Quivering Palm (DC \DoMath{10 + #1 / 2 + \value{charWisModCount}})}{1}
+		\AddLimitedUse{Quivering Palm (DC \DoMath{10 + #1 / 2 + \value{charWisModCount}})}{1}
 	\ifthenelse{#1 > 16}{
-		\addClassFeature{Timeless Body}
-		\addClassFeature{Tongue of the Sun and Moon}\listadd{\charLanguagesList}{Can speak with any living creature}
+		\AddClassFeature{Timeless Body}
+		\AddClassFeature{Tongue of the Sun and Moon}\listadd{\charLanguagesList}{Can speak with any living creature}
 	\ifthenelse{#1 > 18}{
-		\addClassFeature{Empty Body}
+		\AddClassFeature{Empty Body}
 	\ifthenelse{#1 > 19}{
-		\addClassFeature{Perfect Self}\addDR{Chaotic}{10}
+		\AddClassFeature{Perfect Self}\addDR{Chaotic}{10}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
@@ -395,27 +395,27 @@
 \SetCounter{PaladinHitDieSize}{10}
 \edef\PaladinClassSkillsList{}
 \forcsvlist{\listadd{\PaladinClassSkillsList}}{Craft, Diplomacy, HandleAnimal, Heal, KnowledgeNobility, KnowledgeReligion, Profession, Ride, SenseMotive, Spellcraft}
-\newcommand{\addPaladinClassFeatures}[1]{
-		\addClassFeature{Aura of Good}
-		\addClassFeature{Detect Evil}
-		\addLimitedUse{Smite Evil}{\DoMath{(#1 + 2) / 3}}
+\newcommand{\AddPaladinClassFeatures}[1]{
+		\AddClassFeature{Aura of Good}
+		\AddClassFeature{Detect Evil}
+		\AddLimitedUse{Smite Evil}{\DoMath{(#1 + 2) / 3}}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{Divine Grace}{
+		\AddClassFeature{Divine Grace}{
 			\gappto\Initialize{
 				\MiscBonus{Fortitude}{\value{charChaModCount}}
 				\MiscBonus{Reflex}{\value{charChaModCount}}
 				\MiscBonus{Will}{\value{charChaModCount}}
 			}
 		}
-		\addLimitedUse{Lay on Hands \DoMath{#1 / 2}d6}{\DoMath{#1 / 2 + \value{charChaModCount}}}
+		\AddLimitedUse{Lay on Hands \DoMath{#1 / 2}d6}{\DoMath{#1 / 2 + \value{charChaModCount}}}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Aura of Courage}\addImmunity{Fear}
-		\addClassFeature{Divine Health}\addImmunity{Disease}
+		\AddClassFeature{Aura of Courage}\addImmunity{Fear}
+		\AddClassFeature{Divine Health}\addImmunity{Disease}
 		\edef\charPaladinMerciesList{}
 			\NewCounter{charPaladinMerciesCount}
 			\AddToCounter{charPaladinMerciesCount}{#1 / 3}
-			\addClassFeature{Mercies:\forlistloop{\\~~~~}{\charPaladinMerciesList}}
-			\NewDocumentCommand{\addMercy}{m}{
+			\AddClassFeature{Mercies:\forlistloop{\\~~~~}{\charPaladinMerciesList}}
+			\NewDocumentCommand{\AddMercy}{m}{
 				\listinsert{\charPaladinMerciesList}{##1}
 				\AddToCounter{charPaladinMerciesCount}{-1}
 			}
@@ -429,8 +429,8 @@
 				}{}}
 			}
 	\ifthenelse{#1 > 3}{
-		\addClassFeature{Channel Energy (2 Lay on Hands)}
-		\newcommand{\addPaladinSpellcasting}[1]{
+		\AddClassFeature{Channel Energy (2 Lay on Hands)}
+		\newcommand{\AddPaladinSpellcasting}[1]{
 			\SetCounter{@i}{0}
 			\ifthenelse{##1 > 3}{
 				\stepCounter{@i}
@@ -442,23 +442,23 @@
 				\stepCounter{@i}
 			}{}}{}}{}}{}
 			\newSpellcasting*[\value{@i}]{Paladin}{##1 / 2}{Cha}
-			\addHalfSpellcasting{##1}
+			\AddHalfSpellcasting{##1}
 		}
 	\ifthenelse{#1 > 4}{
-		\addClassFeature{Divine Bond}
+		\AddClassFeature{Divine Bond}
 	\ifthenelse{#1 > 7}{
-		\addClassFeature{Aura of Resolve}\addImmunity{Charms}
+		\AddClassFeature{Aura of Resolve}\addImmunity{Charms}
 	\ifthenelse{#1 > 10}{
-		\addClassFeature{Aura of Justice}
+		\AddClassFeature{Aura of Justice}
 	\ifthenelse{#1 > 13}{
-		\addClassFeature{Aura of Faith}
+		\AddClassFeature{Aura of Faith}
 	\ifthenelse{#1 > 16}{
-		\addClassFeature{Aura of Righteousness}
-			\addImmunity{Compulsions}
-			\addDR{evil}{5}
+		\AddClassFeature{Aura of Righteousness}
+			\AddImmunity{Compulsions}
+			\AddDR{evil}{5}
 	\ifthenelse{#1 > 19}{
-		\addClassFeature{Holy Champion}
-			\addDR{evil}{10}
+		\AddClassFeature{Holy Champion}
+			\AddDR{evil}{10}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
@@ -472,20 +472,20 @@
 \SetCounter{RangerHitDieSize}{8}
 \edef\RangerClassSkillsList{}
 \forcsvlist{\listadd{\RangerClassSkillsList}}{Climb, Craft, HandleAnimal, Heal, Intimidate, KnowledgeDungeoneering, KnowledgeGeography, KnowledgeNature, Perception, Profession, Ride, Spellcraft, Stealth, Survival, Swim}
-\newcommand{\addRangerClassFeatures}[1]{
+\newcommand{\AddRangerClassFeatures}[1]{
 		\edef\charFavoredEnemiesList{}
-		\addClassFeature{Favored Enemy\forlistloop{\\~~~~}{\charFavoredEnemiesList}}
+		\AddClassFeature{Favored Enemy\forlistloop{\\~~~~}{\charFavoredEnemiesList}}
 			\edef\charFavoredEnemiesList{}
 			\NewCounter{charFavoredEnemiesCount}
 			\SetCounter{charFavoredEnemiesCount}{#1 / 5 + 1}
 			\NewCounter{charFavoredEnemiesTotalBonusCount}
 			\SetCounter{charFavoredEnemiesTotalBonusCount}{(#1 / 5) * 4 + 2}
-			\newcommand{\addFavoredEnemy}[2]{
+			\newcommand{\AddFavoredEnemy}[2]{
 				\listinsert{\charFavoredEnemiesList}{+##2 vs ##1s}
 				\AddToCounter{charFavoredEnemiesTotalBonusCount}{-##2}
 				\AddToCounter{charFavoredEnemiesCount}{-1}
-				\addConditionalSkillMod{+##2 to Bluff, Listen, Sense Motive, Spot, and Survival vs. ##1s}
-				\addConditionalAttackMod{+##2 damage vs. ##1s}
+				\AddConditionalSkillMod{+##2 to Bluff, Listen, Sense Motive, Spot, and Survival vs. ##1s}
+				\AddConditionalAttackMod{+##2 damage vs. ##1s}
 			}
 			\appto{\RunChecks}{%
 				%%Check Favored Enemies
@@ -502,14 +502,14 @@
 					\AddWarning{Total favored enemy Bonus is \DoMath{-\value{charFavoredEnemiesTotalBonusCount}} points too high}
 				}{}}
 			}
-		\addClassFeature{Track}
-			\ifthenelse{#1 > 1}{\addConditionalSkillMod{+\DoMath{#1 / 2} to Survival checks to follow tracks}}{\addConditionalSkillMod{+1 to Survival checks to follow tracks}}
-		\addClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
+		\AddClassFeature{Track}
+			\ifthenelse{#1 > 1}{\AddConditionalSkillMod{+\DoMath{#1 / 2} to Survival checks to follow tracks}}{\addConditionalSkillMod{+1 to Survival checks to follow tracks}}
+		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{Combat Style Bonus Feat\ifthenelse{#1 > 5}{$ \times \DoMath{(#1 + 2) / 4}$}{}: \charcombatstyle}
+		\AddClassFeature{Combat Style Bonus Feat\ifthenelse{#1 > 5}{$ \times \DoMath{(#1 + 2) / 4}$}{}: \charcombatstyle}
 			\stepCounter{charBonusFeatsCount}
 			\newcommand\charcombatstyle{}
-			\newcommand\addcombatstyle[1]{%
+			\newcommand\Addcombatstyle[1]{%
 				\renewcommand{\charcombatstyle}{##1}%
 			}
 			\appto{\RunChecks}{%
@@ -520,19 +520,19 @@
 			}
 			\AddToCounter{charBonusFeatsCount}{(#1 + 2) / 4}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Endurance}
+		\AddClassFeature{Endurance}
 			\stepCounter{charBonusFeatsCount}
-			\addFeat*{Endurance}
+			\AddFeat*{Endurance}
 		\NewCounter{charFavoredTerrainsCount}
 			\SetCounter{charFavoredTerrainsCount}{(#1 + 2)/ 5}
 			\NewCounter{charFavoredTerrainsTotalBonusCount}
 			\SetCounter{charFavoredTerrainsTotalBonusCount}{(#1 + 2) / 5 * 4 - 2}
-			\newcommand{\addfavoredterrain}[2]{
+			\newcommand{\Addfavoredterrain}[2]{
 				\listinsert{\charFavoredTerrainslist}{+##2 vs ##1s}
 				\AddToCounter{charFavoredTerrainsTotalBonusCount}{-##2}
 				\AddToCounter{charFavoredTerrainsCount}{-1}
-				\addConditionalSkillMod{+##2 to initiative, Knowledge (geography), Perception, Stealth, andSurvival while in ##1 terrain}
-				\addConditionalAttackMod{+##2 damage vs. ##1s}
+				\AddConditionalSkillMod{+##2 to initiative, Knowledge (geography), Perception, Stealth, andSurvival while in ##1 terrain}
+				\AddConditionalAttackMod{+##2 damage vs. ##1s}
 			}
 			\appto{\RunChecks}{%
 				%%Check Favored Terrains
@@ -550,8 +550,8 @@
 				}{}}
 			}
 	\ifthenelse{#1 > 3}{
-		\addClassFeature{Hunter's Bond}
-		\newcommand{\addRangerSpellcasting}[1]{
+		\AddClassFeature{Hunter's Bond}
+		\newcommand{\AddRangerSpellcasting}[1]{
 			\SetCounter{@i}{0}
 			\ifthenelse{##1 > 3}{
 				\stepCounter{@i}
@@ -563,25 +563,25 @@
 				\stepCounter{@i}
 			}{}}{}}{}}{}
 			\newSpellcasting*[\value{@i}]{Ranger}{##1 / 2}{wis}
-			\addHalfSpellcasting{##1}
+			\AddHalfSpellcasting{##1}
 		}
 	\ifthenelse{#1 > 6}{
-		\addClassFeature{Woodland Stride}
+		\AddClassFeature{Woodland Stride}
 	\ifthenelse{#1 > 7}{
-		\addClassFeature{Swift Tracker}
-			\addConditionalSkillMod{No penalty for tracking at full Speed}
-			\addConditionalSkillMod{half penalty for tracking at twice Speed}
+		\AddClassFeature{Swift Tracker}
+			\AddConditionalSkillMod{No penalty for tracking at full Speed}
+			\AddConditionalSkillMod{half penalty for tracking at twice Speed}
 	\ifthenelse{#1 > 8}{
-		\addClassFeature{\ifthenelse{#1 > 15}{Improved }{}Evasion}
-			\ifthenelse{#1 > 15}{\addSpecialDefense{Improved Evasion}}{\addSpecialDefense{Evasion}}
+		\AddClassFeature{\ifthenelse{#1 > 15}{Improved }{}Evasion}
+			\ifthenelse{#1 > 15}{\AddSpecialDefense{Improved Evasion}}{\addSpecialDefense{Evasion}}
 	\ifthenelse{#1 > 10}{
-		\addClassFeature{\ifthenelse{#1 > 18}{Improved }{}Quarry}
+		\AddClassFeature{\ifthenelse{#1 > 18}{Improved }{}Quarry}
 	\ifthenelse{#1 > 12}{
-		\addClassFeature{Camouflage}
+		\AddClassFeature{Camouflage}
 	\ifthenelse{#1 > 16}{
-		\addClassFeature{Hide in Plain Sight}
+		\AddClassFeature{Hide in Plain Sight}
 	\ifthenelse{#1 > 19}{
-		\addClassFeature{Master Hunter (DC \DoMath{10 + #1 / 2 + \value{charWisModCount}})}
+		\AddClassFeature{Master Hunter (DC \DoMath{10 + #1 / 2 + \value{charWisModCount}})}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
@@ -595,19 +595,19 @@
 \SetCounter{RogueHitDieSize}{8}
 \edef\RogueClassSkillsList{}
 \forcsvlist{\listadd{\RogueClassSkillsList}}{Acrobatics, Appraise, Bluff, Climb, Craft, Diplomacy, DisableDevice, Disguise, EscapeArtist, Intimidate, KnowledgeDungeoneering, KnowledgeLocal, Linguistics, Perception, Perform, Profession, SenseMotive, SleightOfHand, Stealth, Swim, UseMagicDevice}
-\newcommand{\addRogueClassFeatures}[1]{
-		\addClassFeature{Sneak Attack +\DoMath{(#1 + 1)/2}d6}
-		\addClassFeature{Trapfinding}
-			\addConditionalSkillMod{+ \DoMath{#1 / 2} to Perception to find traps}
+\newcommand{\AddRogueClassFeatures}[1]{
+		\AddClassFeature{Sneak Attack +\DoMath{(#1 + 1)/2}d6}
+		\AddClassFeature{Trapfinding}
+			\AddConditionalSkillMod{+ \DoMath{#1 / 2} to Perception to find traps}
 			\MiscBonus{DisableDevice}{#1 / 2}
 	\edef\charRogueTalentsList{}
 	\NewCounter{charRogueTalentsCount}
 	\ifthenelse{#1 > 1}{
-		\addClassFeature{Evasion}
-			\addSpecialDefense{\ifinlist{Improved Evasion}{\charRogueTalentsList}{Improved }{}Evasion}
-		\addClassFeature{\ifthenelse{#1 > 9}{Advanced }{}Rogue Talents\forlistloop{\\~~~~}{\charRogueTalentsList}}
+		\AddClassFeature{Evasion}
+			\AddSpecialDefense{\ifinlist{Improved Evasion}{\charRogueTalentsList}{Improved }{}Evasion}
+		\AddClassFeature{\ifthenelse{#1 > 9}{Advanced }{}Rogue Talents\forlistloop{\\~~~~}{\charRogueTalentsList}}
 			\AddToCounter{charRogueTalentsCount}{#1 / 2}
-			\NewDocumentCommand{\addRogueTalent}{m}{
+			\NewDocumentCommand{\AddRogueTalent}{m}{
 				\listinsert{\charRogueTalentsList}{##1}
 				\AddToCounter{charRogueTalentsCount}{-1}
 			}
@@ -621,13 +621,13 @@
 				}{}}
 			}
 	\ifthenelse{#1 > 2}{
-		\addClassFeature{Trap Sense +\DoMath{#1 / 3}}
-			\addConditionalDefMod{+\DoMath{#1 / 3} to Reflex and AC vs. traps}
+		\AddClassFeature{Trap Sense +\DoMath{#1 / 3}}
+			\AddConditionalDefMod{+\DoMath{#1 / 3} to Reflex and AC vs. traps}
 	\ifthenelse{#1 > 3}{
-		\addClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
-			\ifthenelse{#1 > 7}{\addSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
+		\AddClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
+			\ifthenelse{#1 > 7}{\AddSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
 	\ifthenelse{#1 > 19}{
-		\addClassFeature{Master Strike (DC \DoMath{10 + #1 / 2 + \value{charIntModCount}})}
+		\AddClassFeature{Master Strike (DC \DoMath{10 + #1 / 2 + \value{charIntModCount}})}
 	}{}}{}}{}}{}
 }
 
@@ -641,13 +641,13 @@
 \SetCounter{SorcererHitDieSize}{6}
 \edef\SorcererClassSkillsList{}
 \forcsvlist{\listadd{\SorcererClassSkillsList}}{Appraise, Bluff, Craft, Fly, Intimidate, KnowledgeArcana, Profession, Spellcraft, UseMagicDevice}
-\newcommand{\addSorcererClassFeatures}[1]{
+\newcommand{\AddSorcererClassFeatures}[1]{
 	\edef\charSorcererBloodlinePowersList{}
 	\newcommand\charSorcererBloodline{}
-	\addClassFeature{\charSorcererBloodline BloodlineArcana}
-	\addClassFeature{\charSorcererBloodline Bloodline Powers:\forlistloop{\\~~~~}{\charSorcererBloodlinePowersList}}
+	\AddClassFeature{\charSorcererBloodline BloodlineArcana}
+	\AddClassFeature{\charSorcererBloodline Bloodline Powers:\forlistloop{\\~~~~}{\charSorcererBloodlinePowersList}}
 		\NewCounter{charSorcererBloodlinePowersCount}
-		\newcommand{\addSorcererBloodline}[1]{\renewcommand{\charSorcererBloodline}{##1}}
+		\newcommand{\AddSorcererBloodline}[1]{\renewcommand{\charSorcererBloodline}{##1}}
 		\appto{\RunChecks}{%
 			%%Check Sorcerer Bloodline
 			\ifthenelse{\equal{\charSorcererBloodline}{}}{
@@ -655,7 +655,7 @@
 			}{}
 		}
 		\stepCounter{charSorcererBloodlinePowersCount}
-		\NewDocumentCommand{\addBloodlinePower}{m}{
+		\NewDocumentCommand{\AddBloodlinePower}{m}{
 			\listinsert{\charSorcererBloodlinePowersList}{##1}
 			\AddToCounter{charSorcererBloodlinePowersCount}{-1}
 		}
@@ -668,81 +668,81 @@
 				\AddWarning{Input \arabic{charSorcererBloodlinePowersCount} bloodline powers}
 			}{}}
 		}
-	\stepCounter{charBonusFeatsCount}\addFeat*{Eschew Materials}
-	\newcommand{\addBloodlineSpells}{}
+	\stepCounter{charBonusFeatsCount}\AddFeat*{Eschew Materials}
+	\newcommand{\AddBloodlineSpells}{}
 	\ifthenelse{#1 > 2}{
 		\stepCounter{charSorcererBloodlinePowersCount}
-		\addClassFeature{Bloodline Spell\ifthenelse{#1 > 4}{ $\times \DoMath{(#1 - 1) / 2}$}{}}
-			\appto{\addBloodlineSpells}{
-				\addSpellsKnown{1}{1}
+		\AddClassFeature{Bloodline Spell\ifthenelse{#1 > 4}{ $\times \DoMath{(#1 - 1) / 2}$}{}}
+			\appto{\AddBloodlineSpells}{
+				\AddSpellsKnown{1}{1}
 			}
 	\ifthenelse{#1 > 4}{
-		\appto{\addBloodlineSpells}{
-			\addSpellsKnown{2}{1}
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{2}{1}
 		}
 	\ifthenelse{#1 > 6}{
-		\appto{\addBloodlineSpells}{
-			\addSpellsKnown{3}{1}
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{3}{1}
 		}
-		\addClassFeature{Bloodline Feat\ifthenelse{#1 > 12}{ $\times \DoMath{(#1 - 1) / 6}$}{}}
+		\AddClassFeature{Bloodline Feat\ifthenelse{#1 > 12}{ $\times \DoMath{(#1 - 1) / 6}$}{}}
 			\AddToCounter{charBonusFeatsCount}{(#1 - 1) / 6}
 	\ifthenelse{#1 > 8}{
 		\stepCounter{charSorcererBloodlinePowersCount}
-		\appto{\addBloodlineSpells}{
-			\addSpellsKnown{4}{1}
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{4}{1}
 		}
 	\ifthenelse{#1 > 10}{
-		\appto{\addBloodlineSpells}{
-			\addSpellsKnown{5}{1}
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{5}{1}
 		}
 	\ifthenelse{#1 > 12}{
-		\appto{\addBloodlineSpells}{
-			\addSpellsKnown{6}{1}
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{6}{1}
 		}
 	\ifthenelse{#1 > 14}{
-		\appto{\addBloodlineSpells}{
-			\addSpellsKnown{7}{1}
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{7}{1}
 		}
 		\stepCounter{charSorcererBloodlinePowersCount}
 	\ifthenelse{#1 > 16}{
-		\appto{\addBloodlineSpells}{
-			\addSpellsKnown{8}{1}
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{8}{1}
 		}
 	\ifthenelse{#1 > 18}{
-		\appto{\addBloodlineSpells}{
-			\addSpellsKnown{9}{1}
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{9}{1}
 		}
 	\ifthenelse{#1 > 19}{
 		\stepCounter{charSorcererBloodlinePowersCount}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
-	\newcommand{\addSorcererSpellcasting}[1]{
+	\newcommand{\AddSorcererSpellcasting}[1]{
 		\ifthenelse{##1 = 1}{
 			\newSpellcasting[1]{Sorcerer}{##1}{Cha}
 		}{
 			\newSpellcasting[##1 / 2]{Sorcerer}{##1}{Cha}
 		}
-		\addSpontaneousPrimarySpellcasting{##1}
-		\ifthenelse{##1 > 9}{\addSpellsKnown{0}{9}}{\addSpellsKnown{0}{{##1/2 + 4}}}
-		\ifthenelse{##1 > 6}{\addSpellsKnown{1}{5}}{\addSpellsKnown{1}{##1/3 + 2}}
+		\AddSpontaneousPrimarySpellcasting{##1}
+		\ifthenelse{##1 > 9}{\AddSpellsKnown{0}{9}}{\addSpellsKnown{0}{{##1/2 + 4}}}
+		\ifthenelse{##1 > 6}{\AddSpellsKnown{1}{5}}{\addSpellsKnown{1}{##1/3 + 2}}
 		\ifthenelse{##1 > 10}{
-			\addSpellsKnown{2}{5}
-			\addSpellsKnown{3}{4}
+			\AddSpellsKnown{2}{5}
+			\AddSpellsKnown{3}{4}
 		}{
-			\addSpellsKnown{2}{(##1 - 1)/2}
-			\addSpellsKnown{3}{(##1 - 3)/2}
+			\AddSpellsKnown{2}{(##1 - 1)/2}
+			\AddSpellsKnown{3}{(##1 - 3)/2}
 		}
-		\ifthenelse{##1 > 12}{\addSpellsKnown{4}{4}}{\addSpellsKnown{4}{(##1 - 5)/2}}
+		\ifthenelse{##1 > 12}{\AddSpellsKnown{4}{4}}{\addSpellsKnown{4}{(##1 - 5)/2}}
 		\ifthenelse{##1 > 14}{
-			\addSpellsKnown{5}{4}
-			\addSpellsKnown{6}{3}
+			\AddSpellsKnown{5}{4}
+			\AddSpellsKnown{6}{3}
 		}{
-			\addSpellsKnown{5}{(##1 - 7)/2}
-			\addSpellsKnown{6}{(##1 - 9)/2}
+			\AddSpellsKnown{5}{(##1 - 7)/2}
+			\AddSpellsKnown{6}{(##1 - 9)/2}
 		}
-		\ifthenelse{##1 > 16}{\addSpellsKnown{7}{3}}{\addSpellsKnown{7}{(##1 - 11)/2}}
-		\addSpellsKnown{8}{(##1 - 13) / 2}
-		\addSpellsKnown{9}{##1 - 17}
-		\addBloodlineSpells
+		\ifthenelse{##1 > 16}{\AddSpellsKnown{7}{3}}{\addSpellsKnown{7}{(##1 - 11)/2}}
+		\AddSpellsKnown{8}{(##1 - 13) / 2}
+		\AddSpellsKnown{9}{##1 - 17}
+		\AddBloodlineSpells
 	}
 	
 }
@@ -757,116 +757,116 @@
 \SetCounter{WizardHitDieSize}{6}
 \edef\WizardClassSkillsList{}
 \forcsvlist{\listadd{\WizardClassSkillsList}}{Appraise, Craft, Fly, KnowledgeAll, Linguistics, Profession, Spellcraft}
-\NewDocumentCommand{\addWizardClassFeatures}{m O{Universal} O{} O{}}{
-	\addClassFeature{Arcane Bond}
-	\addClassFeature{Scribe Scroll}
+\NewDocumentCommand{\AddWizardClassFeatures}{m O{Universal} O{} O{}}{
+	\AddClassFeature{Arcane Bond}
+	\AddClassFeature{Scribe Scroll}
 	\AddToCounter{charBonusFeatsCount}{#1 / 5 + 1}
-	\addFeat*{Scribe Scroll}
+	\AddFeat*{Scribe Scroll}
 	\ifthenelse{#1 > 4}{
-		\addClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\DoMath{#1 / 5}$}{}}
+		\AddClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\DoMath{#1 / 5}$}{}}
 	}{}
 	\ifthenelse{\equal{#2}{Universal}}{
 		\newcommand{\charWizardFocusSchool}{}
-			\addLimitedUse{Hand of the Apprentice}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Hand of the Apprentice}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 7}{
-			\addLimitedUse{Metamagic Mastery}{\DoMath{(#1 - 6) / 2}}
+			\AddLimitedUse{Metamagic Mastery}{\DoMath{(#1 - 6) / 2}}
 		}{}
 	}{\ifthenelse{\equal{#2}{Abjuration}}{
 		\newcommand{\charWizardFocusSchool}{Abjuration}
-			\addClassFeature{Resistance}
+			\AddClassFeature{Resistance}
 				\ifthenelse{#1 > 19}{
-					\addImmunity{Chosen Energy}
+					\AddImmunity{Chosen Energy}
 				}{\ifthenelse{#1 > 10}{
-					\addResistance{Chosen Energy}{10}
+					\AddResistance{Chosen Energy}{10}
 				}{
-					\addResistance{Chosen Energy}{5}
+					\AddResistance{Chosen Energy}{5}
 				}}
-			\addLimitedUse{Protective Ward +\DoMath{1 + #1 / 5} (\arabic{charIntModCount} rd.)}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Protective Ward +\DoMath{1 + #1 / 5} (\arabic{charIntModCount} rd.)}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 5}{
-			\addLimitedUse{Energy Absorption (points)}{\DoMath{#1 * 3}}
+			\AddLimitedUse{Energy Absorption (points)}{\DoMath{#1 * 3}}
 		}{}
 	}{\ifthenelse{\equal{#2}{Conjuration}}{
 		\newcommand{\charWizardFocusSchool}{Conjuration}
-			\addClassFeature{SummOner's Charm}
-				\appto{\addWizardSpellcasting}{\addSpellcastingNote{Increase duration of \textit{summon monster} Spells by \DoMath{#1 / 2} round\ifthenelse{#1 > 3}{s}{}}}
-			\addLimitedUse{Acid Dart 1d6 \ifthenelse{#1 > 1}{+ \DoMath{#1 / 2}}{}}{\DoMath{3 + \value{charIntModCount}}}
+			\AddClassFeature{SummOner's Charm}
+				\appto{\AddWizardSpellcasting}{\addSpellcastingNote{Increase duration of \textit{summon monster} Spells by \DoMath{#1 / 2} round\ifthenelse{#1 > 3}{s}{}}}
+			\AddLimitedUse{Acid Dart 1d6 \ifthenelse{#1 > 1}{+ \DoMath{#1 / 2}}{}}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 7}{
-			\addLimitedUse{Dimensional Steps (ft.)}{\DoMath{#1 * 30}}
+			\AddLimitedUse{Dimensional Steps (ft.)}{\DoMath{#1 * 30}}
 		}{}
 	}{\ifthenelse{\equal{#2}{Divination}}{
 		\newcommand{\charWizardFocusSchool}{Divination}
-			\addClassFeature{Forewarned}
+			\AddClassFeature{Forewarned}
 				\MiscBonus{initiative}{#1 / 2}
-			\addLimitedUse{Diviner's Fortune +\DoMath{#1 / 2}}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Diviner's Fortune +\DoMath{#1 / 2}}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 7}
-			\addClassFeature{Scrying Adept}
-				\addSpecialDefense{Permanent \textit{detect scrying}}
-				\appto{\addWizardSpellcasting}{\addSpellcastingNote{Scry as if subject is One step more familiar}}
+			\AddClassFeature{Scrying Adept}
+				\AddSpecialDefense{Permanent \textit{detect scrying}}
+				\appto{\AddWizardSpellcasting}{\addSpellcastingNote{Scry as if subject is One step more familiar}}
 		}{}
 	}{\ifthenelse{\equal{#2}{EnChantment}}{
 		\newcommand{\charWizardFocusSchool}{EnChantment}
-			\addClassFeature{EnChanting Smile}
+			\AddClassFeature{EnChanting Smile}
 				\MiscBonus[enhancement]{Bluff}{2 + #1 / 5}
 				\MiscBonus[enhancement]{Diplomacy}{2 + #1 / 5}
 				\MiscBonus[enhancement]{Intimidate}{2 + #1 / 5}
-			\addLimitedUse{Dazing Touch}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Dazing Touch}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 7}
-			\addLimitedUse{Aura of Despair (rounds)}{#1}
+			\AddLimitedUse{Aura of Despair (rounds)}{#1}
 		}{}
 	}{\ifthenelse{\equal{#2}{Evocation}}{
 		\newcommand{\charWizardFocusSchool}{Evocation}
-			\addClassFeature{Intense Spells +\DoMath{#1 / 2}}
-				\appto{\addWizardSpellcasting}{\addSpellcastingNote{+\DoMath{#1 / 2} damage on Evocations that deal HP damage.}}
+			\AddClassFeature{Intense Spells +\DoMath{#1 / 2}}
+				\appto{\AddWizardSpellcasting}{\addSpellcastingNote{+\DoMath{#1 / 2} damage on Evocations that deal HP damage.}}
 				\ifthenelse{#1 > 19}{
-					\appto{\addWizardSpellcasting}{\addSpellcastingNote{Roll twice on rolls to penetrate Spell Resistance for evocation Spells}}
+					\appto{\AddWizardSpellcasting}{\addSpellcastingNote{Roll twice on rolls to penetrate Spell Resistance for evocation Spells}}
 				}{}
-			\addLimitedUse{Force Missile 1d4+\DoMath{#1 / 2}}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Force Missile 1d4+\DoMath{#1 / 2}}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 7}{
-			\addLimitedUse{Elemental Wall (rounds)}{#1}
+			\AddLimitedUse{Elemental Wall (rounds)}{#1}
 		}{}
 	}{\ifthenelse{\equal{#2}{Illusion}}{
 		\newcommand{\charWizardFocusSchool}{Illusion}
-			\addClassFeature{Extended Illusions}
-				\appto{\addWizardSpellcasting}{\addSpellcastingNote{+\ifthenelse{#1 = 1}{1}{\DoMath{#1 / 2}} round duration to illusions with Concentration duration.}}
-			\addLimitedUse{Blinding Ray}{\DoMath{3 + \value{charIntModCount}}}
+			\AddClassFeature{Extended Illusions}
+				\appto{\AddWizardSpellcasting}{\addSpellcastingNote{+\ifthenelse{#1 = 1}{1}{\DoMath{#1 / 2}} round duration to illusions with Concentration duration.}}
+			\AddLimitedUse{Blinding Ray}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 7}{
-			\addLimitedUse{Invisibility Field (rounds)}{#1}
+			\AddLimitedUse{Invisibility Field (rounds)}{#1}
 		}{}
 	}{\ifthenelse{\equal{#2}{Necromancy}}{
 		\newcommand{\charWizardFocusSchool}{Necromancy}
-			\addClassFeature{Power Over Undead}
+			\AddClassFeature{Power Over Undead}
 				\stepCounter{charBonusFeatsCount}
 				\NewCounter{charChannelenergyusesCount}
 				\SetCounter{charChannelenergyusesCount}{3 + \value{charIntModCount}}
-				\addLimitedUse{Channel Energy (DC \DoMath{10 + #1 / 2 +\value{charChaModCount}})}{\arabic{charChannelenergyusesCount}}
-			\addLimitedUse{Grave Touch}{3 + \value{charIntModCount}}
+				\AddLimitedUse{Channel Energy (DC \DoMath{10 + #1 / 2 +\value{charChaModCount}})}{\arabic{charChannelenergyusesCount}}
+			\AddLimitedUse{Grave Touch}{3 + \value{charIntModCount}}
 		\ifthenelse{#1 > 7}{
-			\addLimitedUse{Life Sight \DoMath{(#1 - 4) / 4 * 10} ft. (rounds)}{#1}
+			\AddLimitedUse{Life Sight \DoMath{(#1 - 4) / 4 * 10} ft. (rounds)}{#1}
 		}{}
 	}{\ifthenelse{\equal{#2}{Transmutation}}{
 		\newcommand{\charWizardFocusSchool}{Transmutation}
-			\addClassFeature{Physical Enhancement + \DoMath{1 + #1 / 5}}
-			\addLimitedUse{Telekinetic Fist 1d4+\DoMath{#1 / 2}}{\DoMath{3 + \value{charIntModCount}}}
+			\AddClassFeature{Physical Enhancement + \DoMath{1 + #1 / 5}}
+			\AddLimitedUse{Telekinetic Fist 1d4+\DoMath{#1 / 2}}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 7}{
-			\addLimitedUse{Change Shape (rounds)}{#1}
+			\AddLimitedUse{Change Shape (rounds)}{#1}
 		}{}
 	}}}}}}}
-	\NewDocumentCommand{\addWizardSpellcasting}{m}{
+	\NewDocumentCommand{\AddWizardSpellcasting}{m}{
 		\newSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{int}
 		\NewCounter{charWizardforbiddenschoolsCount}
-		\addPrimarySpellcasting{##1}
+		\AddPrimarySpellcasting{##1}
 		\ifthenelse{\equal{\charWizardFocusSchool}{}}{}{
 			\ForLoop{@i}{1}{\value{@i}<10}{
-				\addBonusSpellslots{\arabic{@i}}{1}
+				\AddBonusSpellslots{\arabic{@i}}{1}
 			}
-			\addSpellcastingSpecialization[Focus School]{\charWizardFocusSchool}
+			\AddSpellcastingSpecialization[Focus School]{\charWizardFocusSchool}
 			\AddToCounter{charWizardforbiddenschoolsCount}{2}
 			\ifthenelse{\equal{#3}{}}{}{
-				\addSpellcastingProhibition[Opposition School]{#3}
+				\AddSpellcastingProhibition[Opposition School]{#3}
 				\AddToCounter{charWizardforbiddenschoolsCount}{-1}
 			}
 			\ifthenelse{\equal{#4}{}}{}{
-				\addSpellcastingProhibition[Opposition School]{#4}
+				\AddSpellcastingProhibition[Opposition School]{#4}
 				\AddToCounter{charWizardforbiddenschoolsCount}{-1}
 			}
 		}
@@ -882,230 +882,230 @@
 	}
 }
 
-\newcommand{\addPrimarySpellcasting}[1]{
-	\addSpellslots{0}{3}
-	\addSpellslots{1}{1}
+\newcommand{\AddPrimarySpellcasting}[1]{
+	\AddSpellslots{0}{3}
+	\AddSpellslots{1}{1}
 	\ifthenelse{#1 > 1}{
-		\addSpellslots{0}{1}
-		\addSpellslots{1}{1}
+		\AddSpellslots{0}{1}
+		\AddSpellslots{1}{1}
 		\ifthenelse{#1 > 2}{
-			\addSpellslots{2}{1}
+			\AddSpellslots{2}{1}
 			\ifthenelse{#1 > 3}{
-				\addSpellslots{0}{1}
-				\addSpellslots{1}{1}
-				\addSpellslots{2}{1}
+				\AddSpellslots{0}{1}
+				\AddSpellslots{1}{1}
+				\AddSpellslots{2}{1}
 				\ifthenelse{#1 > 4}{
-					\addSpellslots{3}{1}
+					\AddSpellslots{3}{1}
 					\ifthenelse{#1 > 5}{
-						\addSpellslots{2}{1}
-						\addSpellslots{3}{1}
+						\AddSpellslots{2}{1}
+						\AddSpellslots{3}{1}
 						\ifthenelse{#1 > 6}{
-							\addSpellslots{4}{1}
-							\addSpellslots{0}{1}
-							\addSpellslots{1}{1}
+							\AddSpellslots{4}{1}
+							\AddSpellslots{0}{1}
+							\AddSpellslots{1}{1}
 							\ifthenelse{#1 > 7}{
-								\addSpellslots{3}{1}
-								\addSpellslots{4}{1}
+								\AddSpellslots{3}{1}
+								\AddSpellslots{4}{1}
 								\ifthenelse{#1 > 8}{
-									\addSpellslots{5}{1}
-									\addSpellslots{2}{1}
+									\AddSpellslots{5}{1}
+									\AddSpellslots{2}{1}
 									\ifthenelse{#1 > 9}{
-										\addSpellslots{4}{1}
-										\addSpellslots{5}{1}	
+										\AddSpellslots{4}{1}
+										\AddSpellslots{5}{1}	
 										\ifthenelse{#1 > 10}{
-											\addSpellslots{6}{1}
-											\addSpellslots{3}{1}
-											\addSpellslots{1}{1}
+											\AddSpellslots{6}{1}
+											\AddSpellslots{3}{1}
+											\AddSpellslots{1}{1}
 											\ifthenelse{#1 > 11}{
-												\addSpellslots{5}{1}
-												\addSpellslots{6}{1}
+												\AddSpellslots{5}{1}
+												\AddSpellslots{6}{1}
 												\ifthenelse{#1 > 12}{
-													\addSpellslots{7}{1}
-													\addSpellslots{4}{1}
-													\addSpellslots{2}{1}
+													\AddSpellslots{7}{1}
+													\AddSpellslots{4}{1}
+													\AddSpellslots{2}{1}
 													\ifthenelse{#1 > 13}{
-														\addSpellslots{6}{1}
-														\addSpellslots{7}{1}
+														\AddSpellslots{6}{1}
+														\AddSpellslots{7}{1}
 														\ifthenelse{#1 > 14}{
-															\addSpellslots{8}{1}
-															\addSpellslots{5}{1}
-															\addSpellslots{3}{1}
+															\AddSpellslots{8}{1}
+															\AddSpellslots{5}{1}
+															\AddSpellslots{3}{1}
 															\ifthenelse{#1 > 15}{
-																\addSpellslots{7}{1}
-																\addSpellslots{8}{1}
+																\AddSpellslots{7}{1}
+																\AddSpellslots{8}{1}
 																\ifthenelse{#1 > 16}{
-																	\addSpellslots{9}{1}
-																	\addSpellslots{6}{1}
-																	\addSpellslots{4}{1}
+																	\AddSpellslots{9}{1}
+																	\AddSpellslots{6}{1}
+																	\AddSpellslots{4}{1}
 																	\ifthenelse{#1 > 17}{
-																		\addSpellslots{8}{1}
-																		\addSpellslots{9}{1}
+																		\AddSpellslots{8}{1}
+																		\AddSpellslots{9}{1}
 																		\ifthenelse{#1 > 18}{
-																			\addSpellslots{7}{1}
-																			\addSpellslots{9}{1}
-																			\addSpellslots{5}{1}
+																			\AddSpellslots{7}{1}
+																			\AddSpellslots{9}{1}
+																			\AddSpellslots{5}{1}
 																			\ifthenelse{#1 > 19}{
-																				\addSpellslots{8}{1}
-																				\addSpellslots{9}{1}
+																				\AddSpellslots{8}{1}
+																				\AddSpellslots{9}{1}
 																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
-\newcommand{\addSpontaneousPrimarySpellcasting}[1]{
-	\addSpellslots{0}{5}
-	\addSpellslots{1}{3}
+\newcommand{\AddSpontaneousPrimarySpellcasting}[1]{
+	\AddSpellslots{0}{5}
+	\AddSpellslots{1}{3}
 	\ifthenelse{#1 > 1}{
-		\addSpellslots{0}{1}
-		\addSpellslots{1}{1}
+		\AddSpellslots{0}{1}
+		\AddSpellslots{1}{1}
 		\ifthenelse{#1 > 2}{
-			\addSpellslots{1}{1}
+			\AddSpellslots{1}{1}
 			\ifthenelse{#1 > 3}{
-				\addSpellslots{1}{1}
-				\addSpellslots{2}{3}
+				\AddSpellslots{1}{1}
+				\AddSpellslots{2}{3}
 				\ifthenelse{#1 > 4}{
-					\addSpellslots{2}{1}
+					\AddSpellslots{2}{1}
 					\ifthenelse{#1 > 5}{
-						\addSpellslots{2}{1}
-						\addSpellslots{3}{3}
+						\AddSpellslots{2}{1}
+						\AddSpellslots{3}{3}
 						\ifthenelse{#1 > 6}{
-							\addSpellslots{2}{1}
-							\addSpellslots{3}{1}
+							\AddSpellslots{2}{1}
+							\AddSpellslots{3}{1}
 							\ifthenelse{#1 > 7}{
-								\addSpellslots{3}{1}
-								\addSpellslots{4}{3}
+								\AddSpellslots{3}{1}
+								\AddSpellslots{4}{3}
 								\ifthenelse{#1 > 8}{
-									\addSpellslots{3}{1}
-									\addSpellslots{4}{1}
+									\AddSpellslots{3}{1}
+									\AddSpellslots{4}{1}
 									\ifthenelse{#1 > 9}{
-										\addSpellslots{4}{1}
-										\addSpellslots{5}{3}	
+										\AddSpellslots{4}{1}
+										\AddSpellslots{5}{3}	
 										\ifthenelse{#1 > 10}{
-											\addSpellslots{4}{1}
-											\addSpellslots{5}{1}
+											\AddSpellslots{4}{1}
+											\AddSpellslots{5}{1}
 											\ifthenelse{#1 > 11}{
-												\addSpellslots{5}{1}
-												\addSpellslots{6}{3}
+												\AddSpellslots{5}{1}
+												\AddSpellslots{6}{3}
 												\ifthenelse{#1 > 12}{
-													\addSpellslots{5}{1}
-													\addSpellslots{6}{1}
+													\AddSpellslots{5}{1}
+													\AddSpellslots{6}{1}
 													\ifthenelse{#1 > 13}{
-														\addSpellslots{6}{1}
-														\addSpellslots{7}{3}
+														\AddSpellslots{6}{1}
+														\AddSpellslots{7}{3}
 														\ifthenelse{#1 > 14}{
-															\addSpellslots{6}{1}
-															\addSpellslots{7}{1}
+															\AddSpellslots{6}{1}
+															\AddSpellslots{7}{1}
 															\ifthenelse{#1 > 15}{
-																\addSpellslots{7}{1}
-																\addSpellslots{8}{3}
+																\AddSpellslots{7}{1}
+																\AddSpellslots{8}{3}
 																\ifthenelse{#1 > 16}{
-																	\addSpellslots{7}{1}
-																	\addSpellslots{8}{1}
+																	\AddSpellslots{7}{1}
+																	\AddSpellslots{8}{1}
 																	\ifthenelse{#1 > 17}{
-																		\addSpellslots{8}{1}
-																		\addSpellslots{9}{3}
+																		\AddSpellslots{8}{1}
+																		\AddSpellslots{9}{3}
 																		\ifthenelse{#1 > 18}{
-																			\addSpellslots{8}{1}
-																			\addSpellslots{9}{1}
+																			\AddSpellslots{8}{1}
+																			\AddSpellslots{9}{1}
 																			\ifthenelse{#1 > 19}{
-																				\addSpellslots{9}{2}
+																				\AddSpellslots{9}{2}
 																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 	
 }
-\newcommand{\addTwoThirdsSpellcasing}[1]{
-	\addSpellslots{0}{2}
-	\addSpellsKnown{0}{4}
+\newcommand{\AddTwoThirdsSpellcasing}[1]{
+	\AddSpellslots{0}{2}
+	\AddSpellsKnown{0}{4}
 	\ifthenelse{#1 > 1}{
-		\addSpellslots{0}{1}
-		\addSpellsKnown{0}{1}
-		\addSpellsKnown{1}{2}
+		\AddSpellslots{0}{1}
+		\AddSpellsKnown{0}{1}
+		\AddSpellsKnown{1}{2}
 		\ifthenelse{#1 > 2}{
-			\addSpellslots{1}{1}
-			\addSpellsKnown{0}{1}
-			\addSpellsKnown{1}{1}
+			\AddSpellslots{1}{1}
+			\AddSpellsKnown{0}{1}
+			\AddSpellsKnown{1}{1}
 			\ifthenelse{#1 > 3}{
-				\addSpellslots{1}{1}
-				\addSpellsKnown{2}{2}
+				\AddSpellslots{1}{1}
+				\AddSpellsKnown{2}{2}
 				\ifthenelse{#1 > 4}{
-					\addSpellslots{1}{1}
-					\addSpellslots{2}{1}
-					\addSpellsKnown{1}{1}
-					\addSpellsKnown{2}{1}
+					\AddSpellslots{1}{1}
+					\AddSpellslots{2}{1}
+					\AddSpellsKnown{1}{1}
+					\AddSpellsKnown{2}{1}
 					\ifthenelse{#1 > 5}{
-						\addSpellslots{2}{1}
+						\AddSpellslots{2}{1}
 						\ifthenelse{#1 > 6}{
-							\addSpellsKnown{2}{1}
-							\addSpellsKnown{3}{2}
+							\AddSpellsKnown{2}{1}
+							\AddSpellsKnown{3}{2}
 							\ifthenelse{#1 > 7}{
-								\addSpellslots{2}{1}
-								\addSpellslots{3}{1}
-								\addSpellsKnown{3}{1}
+								\AddSpellslots{2}{1}
+								\AddSpellslots{3}{1}
+								\AddSpellsKnown{3}{1}
 								\ifthenelse{#1 > 8}{
-									\addSpellslots{3}{1}
+									\AddSpellslots{3}{1}
 									\ifthenelse{#1 > 9}{
-										\addSpellsKnown{3}{1}
-										\addSpellsKnown{4}{2}
+										\AddSpellsKnown{3}{1}
+										\AddSpellsKnown{4}{2}
 										\ifthenelse{#1 > 10}{
-											\addSpellslots{3}{1}
-											\addSpellslots{4}{1}
-											\addSpellsKnown{4}{1}
+											\AddSpellslots{3}{1}
+											\AddSpellslots{4}{1}
+											\AddSpellsKnown{4}{1}
 											\ifthenelse{#1 > 11}{
-												\addSpellslots{4}{1}
+												\AddSpellslots{4}{1}
 												\ifthenelse{#1 > 12}{
-													\addSpellsKnown{4}{1}
-													\addSpellsKnown{5}{2}
+													\AddSpellsKnown{4}{1}
+													\AddSpellsKnown{5}{2}
 													\ifthenelse{#1 > 13}{
-														\addSpellslots{0}{1}
-														\addSpellslots{4}{1}
-														\addSpellslots{5}{1}
-														\addSpellsKnown{5}{1}
+														\AddSpellslots{0}{1}
+														\AddSpellslots{4}{1}
+														\AddSpellslots{5}{1}
+														\AddSpellsKnown{5}{1}
 														\ifthenelse{#1 > 14}{
-															\addSpellslots{1}{1}
-															\addSpellslots{5}{1}
+															\AddSpellslots{1}{1}
+															\AddSpellslots{5}{1}
 															\ifthenelse{#1 > 15}{
-																\addSpellslots{2}{1}
-																\addSpellsKnown{1}{1}
-																\addSpellsKnown{5}{1}
-																\addSpellsKnown{6}{2}
+																\AddSpellslots{2}{1}
+																\AddSpellsKnown{1}{1}
+																\AddSpellsKnown{5}{1}
+																\AddSpellsKnown{6}{2}
 																\ifthenelse{#1 > 16}{
-																	\addSpellslots{3}{1}
-																	\addSpellslots{5}{1}
-																	\addSpellslots{6}{1}
-																	\addSpellsKnown{2}{1}
-																	\addSpellsKnown{6}{1}
+																	\AddSpellslots{3}{1}
+																	\AddSpellslots{5}{1}
+																	\AddSpellslots{6}{1}
+																	\AddSpellsKnown{2}{1}
+																	\AddSpellsKnown{6}{1}
 																	\ifthenelse{#1 > 17}{
-																		\addSpellslots{4}{1}
-																		\addSpellslots{6}{1}
-																		\addSpellsKnown{3}{1}
+																		\AddSpellslots{4}{1}
+																		\AddSpellslots{6}{1}
+																		\AddSpellsKnown{3}{1}
 																		\ifthenelse{#1 > 18}{
-																			\addSpellslots{5}{1}
-																			\addSpellslots{6}{1}
-																			\addSpellsKnown{4}{1}
-																			\addSpellsKnown{6}{1}
+																			\AddSpellslots{5}{1}
+																			\AddSpellslots{6}{1}
+																			\AddSpellsKnown{4}{1}
+																			\AddSpellsKnown{6}{1}
 																			\ifthenelse{#1 > 19}{
-																				\addSpellslots{6}{1}
-																				\addSpellsKnown{5}{1}
+																				\AddSpellslots{6}{1}
+																				\AddSpellsKnown{5}{1}
 																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
-\newcommand{\addHalfSpellcasting}[1]{
+\newcommand{\AddHalfSpellcasting}[1]{
 	\ifthenelse{#1 > 5}{
-		\addSpellslots{1}{1}
+		\AddSpellslots{1}{1}
 		\ifthenelse{#1 > 9}{
-			\addSpellslots{2}{1}
+			\AddSpellslots{2}{1}
 			\ifthenelse{#1 > 11}{
-				\addSpellslots{3}{1}
+				\AddSpellslots{3}{1}
 				\ifthenelse{#1 > 13}{
-					\addSpellslots{1}{1}
+					\AddSpellslots{1}{1}
 					\ifthenelse{#1 > 14}{
-						\addSpellslots{4}{1}
+						\AddSpellslots{4}{1}
 						\ifthenelse{#1 > 15}{
-							\addSpellslots{2}{1}
+							\AddSpellslots{2}{1}
 							\ifthenelse{#1 > 16}{
-								\addSpellslots{3}{1}
+								\AddSpellslots{3}{1}
 								\ifthenelse{#1 > 17}{
-									\addSpellslots{1}{1}
+									\AddSpellslots{1}{1}
 									\ifthenelse{#1 > 18}{
-										\addSpellslots{2}{1}
-										\addSpellslots{3}{1}
-										\addSpellslots{4}{1}
+										\AddSpellslots{2}{1}
+										\AddSpellslots{3}{1}
+										\AddSpellslots{4}{1}
 										\ifthenelse{#1 > 19}{
-											\addSpellslots{4}{1}
+											\AddSpellslots{4}{1}
 										}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
