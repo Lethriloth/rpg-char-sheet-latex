@@ -1,0 +1,93 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{WABH-houserules}[2019/03/28 Houserules for WABH2 campaign]
+
+
+\NewCounter{charClassBABCount}
+\NewCounter{charClassFortitudeCount}
+\NewCounter{charClassReflexCount}
+\NewCounter{charClassWillCount}
+
+\RenewDocumentCommand{\ImportCharClass}{s O{} m m}{
+	\input{\datafolder/Classes/#3.tex}
+	\adddebug{IMPORTCHARCLASS: add #4 Levels of #3}
+	\ifthenelse{\equal{#2}{}}{
+		\appto\charLevel{\capitalize{#3} #4 }
+	}{
+		\appto\charLevel{#2 #4 }
+	}
+	\listadd{\charClassesList}{#3}
+	\if\csname#3BAB\endcsname g
+	\addtocounter{charClassBABCount}{#4 * 4}
+	\fi
+	\if\csname#3BAB\endcsname a
+	\addToCounter{charClassBABCount}{#4 * 3}
+	\fi
+	\if\csname#3BAB\endcsname p
+	\addToCounter{charClassBABCount}{#4 * 2 }
+	\fi
+	\if\csname#3Fort\endcsname g
+	\addToCounter{charFortitudeCount}{2}
+	\addToCounter{charClassFortitudeCount}{#4 * 3}
+	\fi
+	\if\csname#3Fort\endcsname p
+	\addToCounter{charClassFortitudeCount}{#4 * 2}
+	\fi
+	\if\csname#3Ref\endcsname g
+	\addToCounter{charReflexCount}{2}
+	\addToCounter{charClassReflexCount}{#4 * 3}
+	\fi
+	\if\csname#3Ref\endcsname p
+	\addToCounter{charClassReflexCount}{#4 * 2}
+	\fi
+	\if\csname#3Will\endcsname g
+	\addToCounter{charWillCount}{2}
+	\addToCounter{charClassWillCount}{#4 * 3}
+	\fi
+	\if\csname#3Will\endcsname p
+	\addToCounter{charClassWillCount}{#4 * 2}
+	\fi
+	\newCounter{char#3ClassLevelCount}
+	\setCounter{char#3ClassLevelCount}{#4}
+	\newcounter{char#3SpareSkillRanksCount}
+	\ifthenelse{\value{charTotalLevelCount} = 0}{
+		\setCounter{char#3SpareSkillRanksCount}{(\value{charBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * (3 + #4)}
+		\ifthenelse{\value{HP-Mode} = 1}{
+			\addToCounter{charHPCount}{\value{#3HitDieSize}}
+			\addToCounter{charHPRollsCount}{1}
+		}{
+			\ifthenelse{\value{HP-Mode} = 2}{
+				\addToCounter{charHPCount}{\value{#3HitDieSize} + (\value{#3HitDieSize} + 1) * (#4 - 1) / 2}
+			}
+			{}
+		}
+	}{
+		\setCounter{char#3SpareSkillRanksCount}{(\value{charBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * #4}
+		\ifthenelse{\value{HP-Mode} = 1}{
+		}{
+			\ifthenelse{\value{HP-Mode} = 2}{
+				\addToCounter{charHPCount}{(\value{#3HitDieSize} + 1) * #4 / 2}
+			}
+			{}
+		}
+	}
+	\addToCounter{charTotalLevelCount}{#4}
+	\renewcommand\do[1]{
+		\isClassSkill{##1}
+	}\expandafter\dolistloop\csname#3ClassSkillsList\endcsname
+	\IfBooleanTF #1 {} {\csname add#3ClassFeatures\endcsname{#4}}
+}
+
+\NewDocumentCommand{\CalculateFractionalBABSaveBonuses}{}{
+	\addToCounter{charBABCount}{\value{charClassBABCount} / 4}
+	\addToCounter{charFortitudeCount}{\value{charClassFortitudeCount} / 6}
+	\addToCounter{charReflexCount}{\value{charClassReflexCount} / 6}
+	\addToCounter{charWillCount}{\value{charClassWillCount} / 6}
+}
+
+\preto{\Initialize}{
+	\CalculateFractionalBABSaveBonuses
+}
+
+\NewDocumentCommand{\ImportCharCulture}{m}{
+	\input{\datafolder/Cultures/#1.tex}
+}
