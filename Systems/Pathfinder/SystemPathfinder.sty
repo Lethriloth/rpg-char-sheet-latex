@@ -587,7 +587,7 @@
 }
 
 %Command to add a shield item
-\newcommand\addShield[8]{
+\newcommand\addShield[7]{
 	\addShieldBonus{#2}
 	\ifthenelse{\equal{#3}{}}{}{\setCounter{charMaxDexShieldCount}{#3}}
 	\ifthenelse{\value{charMaxDexShieldCount}<\value{charMaxDexBonusCount}}
@@ -598,8 +598,8 @@
 	}\dolistloop{\ArmorCheckSkillslist}
 	\setCounter{charShieldSpellFailureCount}{#5}
 	\addToCounter{TotalACItemsSpellFailure}{#5}
-	\renewcommand{\charShieldNotes}{#8}
-	\addGearItem{Shield}{#7}
+	\renewcommand{\charShieldNotes}{#7}
+	\addGearItem{Shield}{#6}
 }
 
 %Initialize variables for Item Slots

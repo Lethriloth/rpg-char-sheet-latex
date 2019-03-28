@@ -626,7 +626,7 @@
 }
 
 %Command to add a shield item
-\newcommand\addShield[8]{
+\newcommand\addShield[7]{
 	\addShieldBonus{#2}
 	\ifthenelse{\equal{#3}{}}{}{\setCounter{charMaxDexShieldCount}{#3}}
 	\ifthenelse{\value{charMaxDexShieldCount}<\value{charMaxDexBonusCount}}
