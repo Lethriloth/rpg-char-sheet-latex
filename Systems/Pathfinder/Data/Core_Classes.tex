@@ -32,7 +32,7 @@
 			}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{\ifthenelse{#1 > 4}{Improved }{}Uncanny Dodge}
-			\ifthenelse{#1 > 4}{\AddSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
+			\ifthenelse{#1 > 4}{\AddSpecialDefense{Improved Uncanny Dodge}}{\AddSpecialDefense{Uncanny Dodge}}
 		\edef\charRagePowersList{}
 		\NewCounter{charRagePowersCount}
 		\AddToCounter{charRagePowersCount}{#1 / 2}
@@ -51,9 +51,9 @@
 			}{}}
 		}
 	\ifthenelse{#1 > 2}{
-		\AddClassFeature{Trap Sense +\DoMath{#1 / 3}}\addConditionalDefMod{+\DoMath{#1 / 3} vs. traps}
+		\AddClassFeature{Trap Sense +\DoMath{#1 / 3}}\AddConditionalDefMod{+\DoMath{#1 / 3} vs. traps}
 	\ifthenelse{#1 > 6}{
-		\AddClassFeature{Damage Reduction}\DoMath*{(#1 - 4) / 3}\addDR{--}{\value{@DoMathCounter}}
+		\AddClassFeature{Damage Reduction}\DoMath*{(#1 - 4) / 3}\AddDR{--}{\value{@DoMathCounter}}
 	\ifthenelse{#1 > 13}{
 		\AddClassFeature{Indomitable Will}
 	\ifthenelse{#1 > 16}{
@@ -188,7 +188,7 @@
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Trackless Step}
 	\ifthenelse{#1 > 3}{
-		\AddClassFeature{Resist Nature's Lure}\addConditionalDefMod{+4 to saves vs. Spell-like abilities of fey and Spells that target plants}
+		\AddClassFeature{Resist Nature's Lure}\AddConditionalDefMod{+4 to saves vs. Spell-like abilities of fey and Spells that target plants}
 		\NewCounter{charwildshapeusesCount}
 		\SetCounter{charwildshapeusesCount}{#1 / 2 - 1}
 		\AddClassFeature{Wild Shape \ifthenelse{#1 < 20}{}{(At-Will)}
@@ -299,7 +299,7 @@
 		\AddClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{\DoMath{(#1 + 6) / 4}}{2}$}{}}
 		\AddToCounter{charBonusFeatsCount}{3}
 		\AddFeat*{Improved Unarmed Strike}
-		\AddFeat*{Stunning Fist}\addLimitedUse{Stunning Fist}{\DoMath{#1 + (\value{charTotalLevelCount} - 1) / 4}}
+		\AddFeat*{Stunning Fist}\AddLimitedUse{Stunning Fist}{\DoMath{#1 + (\value{charTotalLevelCount} - 1) / 4}}
 		\AddClassFeature{Stunning Fist \ifthenelse{#1 > 3}{(Stun 1 rd, fatigue\ifthenelse{#1 > 7}{, sicken 1 min\ifthenelse{#1 > 11}{, stagger 1d6+1 rd\ifthenelse{#1 > 15}{, blind, deafen\ifthenelse{#1 > 19}{, paralyze 1d6 + 1 rd.}{}}{}}{.}}{})}{}}
 		\AddClassFeature{Unarmed Strike \charunarmedstrikedamage}
 			\newcommand{\charunarmedstrikedamage}{
@@ -333,10 +333,10 @@
 			}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
-		\ifthenelse{#1 > 8}{\AddSpecialDefense{Improved Evasion}}{\addSpecialDefense{Evasion}}
+		\ifthenelse{#1 > 8}{\AddSpecialDefense{Improved Evasion}}{\AddSpecialDefense{Evasion}}
 		\stepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 2}{
-		\AddClassFeature{Still Mind}\addConditionalDefMod{+2 on saves vs. EnChantment}
+		\AddClassFeature{Still Mind}\AddConditionalDefMod{+2 on saves vs. EnChantment}
 		\AddClassFeature{Fast Movement}
 			\EnhancementBonus{Speed}{#1 / 3 * 10}
 		\AddClassFeature{Maneuver Training}
@@ -358,7 +358,7 @@
 	\ifthenelse{#1 > 4}{
 		\AddClassFeature{High Jump}
 			\AddConditionalSkillMod{+#1 to Acrobatics to jump, always Counts as having running start for jumps}
-		\AddClassFeature{Purity of Body}\addImmunity{Disease}
+		\AddClassFeature{Purity of Body}\AddImmunity{Disease}
 		\stepCounter{charflurryofblowspenaltyCount}
 	\ifthenelse{#1 > 5}{
 		\AddToCounter{charBonusFeatsCount}{(#1 - 2) / 4}
@@ -368,11 +368,11 @@
 		\stepCounter{charflurryofblowspenaltyCount}
 	\ifthenelse{#1 > 10}{
 		\stepCounter{charflurryofblowsattacksCount}
-		\AddClassFeature{Diamond Body}\addImmunity{poison}
+		\AddClassFeature{Diamond Body}\AddImmunity{poison}
 	\ifthenelse{#1 > 11}{
 		\AddClassFeature{Abundant Step (\DoMath{#1 * 40 + 400} ft.)}
 	\ifthenelse{#1 > 12}{
-		\AddClassFeature{Diamond Soul}\addSpellResistance{#1 + 10}
+		\AddClassFeature{Diamond Soul}\AddSpellResistance{#1 + 10}
 	\ifthenelse{#1 > 14}{
 		\AddLimitedUse{Quivering Palm (DC \DoMath{10 + #1 / 2 + \value{charWisModCount}})}{1}
 	\ifthenelse{#1 > 16}{
@@ -381,7 +381,7 @@
 	\ifthenelse{#1 > 18}{
 		\AddClassFeature{Empty Body}
 	\ifthenelse{#1 > 19}{
-		\AddClassFeature{Perfect Self}\addDR{Chaotic}{10}
+		\AddClassFeature{Perfect Self}\AddDR{Chaotic}{10}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
@@ -409,8 +409,8 @@
 		}
 		\AddLimitedUse{Lay on Hands \DoMath{#1 / 2}d6}{\DoMath{#1 / 2 + \value{charChaModCount}}}
 	\ifthenelse{#1 > 2}{
-		\AddClassFeature{Aura of Courage}\addImmunity{Fear}
-		\AddClassFeature{Divine Health}\addImmunity{Disease}
+		\AddClassFeature{Aura of Courage}\AddImmunity{Fear}
+		\AddClassFeature{Divine Health}\AddImmunity{Disease}
 		\edef\charPaladinMerciesList{}
 			\NewCounter{charPaladinMerciesCount}
 			\AddToCounter{charPaladinMerciesCount}{#1 / 3}
@@ -447,7 +447,7 @@
 	\ifthenelse{#1 > 4}{
 		\AddClassFeature{Divine Bond}
 	\ifthenelse{#1 > 7}{
-		\AddClassFeature{Aura of Resolve}\addImmunity{Charms}
+		\AddClassFeature{Aura of Resolve}\AddImmunity{Charms}
 	\ifthenelse{#1 > 10}{
 		\AddClassFeature{Aura of Justice}
 	\ifthenelse{#1 > 13}{
@@ -503,7 +503,7 @@
 				}{}}
 			}
 		\AddClassFeature{Track}
-			\ifthenelse{#1 > 1}{\AddConditionalSkillMod{+\DoMath{#1 / 2} to Survival checks to follow tracks}}{\addConditionalSkillMod{+1 to Survival checks to follow tracks}}
+			\ifthenelse{#1 > 1}{\AddConditionalSkillMod{+\DoMath{#1 / 2} to Survival checks to follow tracks}}{\AddConditionalSkillMod{+1 to Survival checks to follow tracks}}
 		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{Combat Style Bonus Feat\ifthenelse{#1 > 5}{$ \times \DoMath{(#1 + 2) / 4}$}{}: \charcombatstyle}
@@ -573,7 +573,7 @@
 			\AddConditionalSkillMod{half penalty for tracking at twice Speed}
 	\ifthenelse{#1 > 8}{
 		\AddClassFeature{\ifthenelse{#1 > 15}{Improved }{}Evasion}
-			\ifthenelse{#1 > 15}{\AddSpecialDefense{Improved Evasion}}{\addSpecialDefense{Evasion}}
+			\ifthenelse{#1 > 15}{\AddSpecialDefense{Improved Evasion}}{\AddSpecialDefense{Evasion}}
 	\ifthenelse{#1 > 10}{
 		\AddClassFeature{\ifthenelse{#1 > 18}{Improved }{}Quarry}
 	\ifthenelse{#1 > 12}{
@@ -625,7 +625,7 @@
 			\AddConditionalDefMod{+\DoMath{#1 / 3} to Reflex and AC vs. traps}
 	\ifthenelse{#1 > 3}{
 		\AddClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
-			\ifthenelse{#1 > 7}{\AddSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
+			\ifthenelse{#1 > 7}{\AddSpecialDefense{Improved Uncanny Dodge}}{\AddSpecialDefense{Uncanny Dodge}}
 	\ifthenelse{#1 > 19}{
 		\AddClassFeature{Master Strike (DC \DoMath{10 + #1 / 2 + \value{charIntModCount}})}
 	}{}}{}}{}}{}
@@ -722,8 +722,8 @@
 			\newSpellcasting[##1 / 2]{Sorcerer}{##1}{Cha}
 		}
 		\AddSpontaneousPrimarySpellcasting{##1}
-		\ifthenelse{##1 > 9}{\AddSpellsKnown{0}{9}}{\addSpellsKnown{0}{{##1/2 + 4}}}
-		\ifthenelse{##1 > 6}{\AddSpellsKnown{1}{5}}{\addSpellsKnown{1}{##1/3 + 2}}
+		\ifthenelse{##1 > 9}{\AddSpellsKnown{0}{9}}{\AddSpellsKnown{0}{{##1/2 + 4}}}
+		\ifthenelse{##1 > 6}{\AddSpellsKnown{1}{5}}{\AddSpellsKnown{1}{##1/3 + 2}}
 		\ifthenelse{##1 > 10}{
 			\AddSpellsKnown{2}{5}
 			\AddSpellsKnown{3}{4}
@@ -731,7 +731,7 @@
 			\AddSpellsKnown{2}{(##1 - 1)/2}
 			\AddSpellsKnown{3}{(##1 - 3)/2}
 		}
-		\ifthenelse{##1 > 12}{\AddSpellsKnown{4}{4}}{\addSpellsKnown{4}{(##1 - 5)/2}}
+		\ifthenelse{##1 > 12}{\AddSpellsKnown{4}{4}}{\AddSpellsKnown{4}{(##1 - 5)/2}}
 		\ifthenelse{##1 > 14}{
 			\AddSpellsKnown{5}{4}
 			\AddSpellsKnown{6}{3}
@@ -739,7 +739,7 @@
 			\AddSpellsKnown{5}{(##1 - 7)/2}
 			\AddSpellsKnown{6}{(##1 - 9)/2}
 		}
-		\ifthenelse{##1 > 16}{\AddSpellsKnown{7}{3}}{\addSpellsKnown{7}{(##1 - 11)/2}}
+		\ifthenelse{##1 > 16}{\AddSpellsKnown{7}{3}}{\AddSpellsKnown{7}{(##1 - 11)/2}}
 		\AddSpellsKnown{8}{(##1 - 13) / 2}
 		\AddSpellsKnown{9}{##1 - 17}
 		\AddBloodlineSpells
@@ -788,7 +788,7 @@
 	}{\ifthenelse{\equal{#2}{Conjuration}}{
 		\newcommand{\charWizardFocusSchool}{Conjuration}
 			\AddClassFeature{SummOner's Charm}
-				\appto{\AddWizardSpellcasting}{\addSpellcastingNote{Increase duration of \textit{summon monster} Spells by \DoMath{#1 / 2} round\ifthenelse{#1 > 3}{s}{}}}
+				\appto{\AddWizardSpellcasting}{\AddSpellcastingNote{Increase duration of \textit{summon monster} Spells by \DoMath{#1 / 2} round\ifthenelse{#1 > 3}{s}{}}}
 			\AddLimitedUse{Acid Dart 1d6 \ifthenelse{#1 > 1}{+ \DoMath{#1 / 2}}{}}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 7}{
 			\AddLimitedUse{Dimensional Steps (ft.)}{\DoMath{#1 * 30}}
@@ -801,7 +801,7 @@
 		\ifthenelse{#1 > 7}
 			\AddClassFeature{Scrying Adept}
 				\AddSpecialDefense{Permanent \textit{detect scrying}}
-				\appto{\AddWizardSpellcasting}{\addSpellcastingNote{Scry as if subject is One step more familiar}}
+				\appto{\AddWizardSpellcasting}{\AddSpellcastingNote{Scry as if subject is One step more familiar}}
 		}{}
 	}{\ifthenelse{\equal{#2}{EnChantment}}{
 		\newcommand{\charWizardFocusSchool}{EnChantment}
@@ -816,9 +816,9 @@
 	}{\ifthenelse{\equal{#2}{Evocation}}{
 		\newcommand{\charWizardFocusSchool}{Evocation}
 			\AddClassFeature{Intense Spells +\DoMath{#1 / 2}}
-				\appto{\AddWizardSpellcasting}{\addSpellcastingNote{+\DoMath{#1 / 2} damage on Evocations that deal HP damage.}}
+				\appto{\AddWizardSpellcasting}{\AddSpellcastingNote{+\DoMath{#1 / 2} damage on Evocations that deal HP damage.}}
 				\ifthenelse{#1 > 19}{
-					\appto{\AddWizardSpellcasting}{\addSpellcastingNote{Roll twice on rolls to penetrate Spell Resistance for evocation Spells}}
+					\appto{\AddWizardSpellcasting}{\AddSpellcastingNote{Roll twice on rolls to penetrate Spell Resistance for evocation Spells}}
 				}{}
 			\AddLimitedUse{Force Missile 1d4+\DoMath{#1 / 2}}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 7}{
@@ -827,7 +827,7 @@
 	}{\ifthenelse{\equal{#2}{Illusion}}{
 		\newcommand{\charWizardFocusSchool}{Illusion}
 			\AddClassFeature{Extended Illusions}
-				\appto{\AddWizardSpellcasting}{\addSpellcastingNote{+\ifthenelse{#1 = 1}{1}{\DoMath{#1 / 2}} round duration to illusions with Concentration duration.}}
+				\appto{\AddWizardSpellcasting}{\AddSpellcastingNote{+\ifthenelse{#1 = 1}{1}{\DoMath{#1 / 2}} round duration to illusions with Concentration duration.}}
 			\AddLimitedUse{Blinding Ray}{\DoMath{3 + \value{charIntModCount}}}
 		\ifthenelse{#1 > 7}{
 			\AddLimitedUse{Invisibility Field (rounds)}{#1}

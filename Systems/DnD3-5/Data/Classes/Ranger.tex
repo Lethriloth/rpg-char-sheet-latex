@@ -37,7 +37,7 @@
 					\AddWarning{Total favored enemy Bonus is \DoMath{-\value{charFavoredEnemiesTotalBonusCount}} points too high}
 				}{}}
 			}
-		\AddClassFeature{Track}\stepCounter{charBonusFeatsCount}\addFeat*{Track}
+		\AddClassFeature{Track}\stepCounter{charBonusFeatsCount}\AddFeat*{Track}
 		\ifthenelse{\value{charHandleAnimalRanksCount} > 4}{
 			\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount} + 2}}
 		}{

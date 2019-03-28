@@ -1104,34 +1104,34 @@
 }
 
 \newcommand{\AddCantrip}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddCantripOne#1}{\addCantripTwo#1}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddCantripOne#1}{\AddCantripTwo#1}
 }
 \newcommand{\AddFirstSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFirstSpellOne#1}{\addFirstSpellTwo#1}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFirstSpellOne#1}{\AddFirstSpellTwo#1}
 }
 \newcommand{\AddSecondSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSecondSpellOne#1}{\addSecondSpellTwo#1}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSecondSpellOne#1}{\AddSecondSpellTwo#1}
 }
 \newcommand{\AddThirdSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddThirdSpellOne#1}{\addThirdSpellTwo#1}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddThirdSpellOne#1}{\AddThirdSpellTwo#1}
 }
 \newcommand{\AddFourthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFourthSpellOne#1}{\addFourthSpellTwo#1}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFourthSpellOne#1}{\AddFourthSpellTwo#1}
 }
 \newcommand{\AddFifthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFifthSpellOne#1}{\addFifthSpellTwo#1}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFifthSpellOne#1}{\AddFifthSpellTwo#1}
 }
 \newcommand{\AddSixthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSixthSpellOne#1}{\addSixthSpellTwo#1}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSixthSpellOne#1}{\AddSixthSpellTwo#1}
 }
 \newcommand{\AddSeventhSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSeventhSpellOne#1}{\addSeventhSpellTwo#1}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSeventhSpellOne#1}{\AddSeventhSpellTwo#1}
 }
 \newcommand{\AddEighthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddEighthSpellOne#1}{\addEighthSpellTwo#1}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddEighthSpellOne#1}{\AddEighthSpellTwo#1}
 }
 \newcommand{\AddNinthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddNinthSpellOne}{\addNinthSpellTwo}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddNinthSpellOne}{\AddNinthSpellTwo}
 }
 \newcommand\Spelldescription[2]{
 	\expandafter\newcommand\csname Spell#1description\endcsname{#2}
@@ -1241,11 +1241,11 @@
 	\AddToCounter{charSpellsKnownTwo#1Count}{#2}}
 
 \newcommand{\AddSpellSlots}[2]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellSlotsOne{#1}{#2}}{\addSpellSlotsTwo{#1}{#2}}}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellSlotsOne{#1}{#2}}{\AddSpellSlotsTwo{#1}{#2}}}
 \newcommand{\AddSpellsKnown}[2]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellsKnownOne{#1}{#2}}{\addSpellsKnownTwo{#1}{#2}}}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellsKnownOne{#1}{#2}}{\AddSpellsKnownTwo{#1}{#2}}}
 \newcommand{\AddBonusSpellSlots}[2]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddBonusSpellSlotsOne{#1}{#2}}{\addBonusSpellSlotsTwo{#1}{#2}}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddBonusSpellSlotsOne{#1}{#2}}{\AddBonusSpellSlotsTwo{#1}{#2}}
 }
 
 % Range
@@ -1315,10 +1315,10 @@
 }
 
 \newcommand{\AddSpellcastingSpecialization}[2][Specialization]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellcastingOneSpecialization[#1]{#2}}{\addSpellcastingTwoSpecialization[#1]{#2}}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellcastingOneSpecialization[#1]{#2}}{\AddSpellcastingTwoSpecialization[#1]{#2}}
 }
 \newcommand{\AddSpellcastingProhibition}[2][Prohibition]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellcastingOneProhibition[#1]{#2}}{\addSpellcastingTwoProhibition[#1]{#2}}
+	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellcastingOneProhibition[#1]{#2}}{\AddSpellcastingTwoProhibition[#1]{#2}}
 }
 %Spellcasting Notes
 \renewcommand{\do}[1]{

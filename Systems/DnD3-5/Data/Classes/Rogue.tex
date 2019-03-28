@@ -26,7 +26,7 @@
 			\AddConditionalDefMod{+\DoMath{#1 / 3} to Reflex and AC vs. traps}
 	\ifthenelse{#1 > 3}{
 		\AddClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
-			\ifthenelse{#1 > 7}{\AddSpecialDefense{Improved Uncanny Dodge}}{\addSpecialDefense{Uncanny Dodge}}
+			\ifthenelse{#1 > 7}{\AddSpecialDefense{Improved Uncanny Dodge}}{\AddSpecialDefense{Uncanny Dodge}}
 	\ifthenelse{#1 > 9}{
 		\AddToCounter{charRogueSpecialAbilitiesCount}{(#1 - 7) / 3}
 		\AddClassFeature{Rogue Special Abilities\forlistloop{\\~~~~}{\charRogueSpecialAbilitiesList}}

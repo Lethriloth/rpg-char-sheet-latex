@@ -28,8 +28,8 @@
 		\AddClassFeature{Bomb \DoMath{(#1 + 1) / 2}d6}
 		\AddClassFeature{\ifthenelse{#1 > 13}{Persistent }{}Mutagen}
 		\Addtocounter{charBonusFeatsCount}{2}
-			\AddClassFeature{Brew Potion}\addFeat*{Brew Potion}
-			\AddClassFeature{Throw Anything}\addFeat*{Throw Anything}
+			\AddClassFeature{Brew Potion}\AddFeat*{Brew Potion}
+			\AddClassFeature{Throw Anything}\AddFeat*{Throw Anything}
 	\ifthenelse{#1 > 1}{
 		\edef\charAlchemistDiscoveriesList{}
 			\NewCounter{charAlchemistDiscoveriesCount}

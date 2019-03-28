@@ -28,11 +28,11 @@
 			}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{\ifthenelse{#1 > 4}{Improved }{}Uncanny Dodge}
-			\ifthenelse{#1 > 4}{\AddConditionalDefMod{Improved Uncanny Dodge}}{\addConditionalDefMod{Uncanny Dodge}}
+			\ifthenelse{#1 > 4}{\AddConditionalDefMod{Improved Uncanny Dodge}}{\AddConditionalDefMod{Uncanny Dodge}}
 	\ifthenelse{#1 > 2}{
-		\AddClassFeature{Trap Sense +\DoMath{#1 / 3}}\addConditionalDefMod{+\DoMath{#1 / 3} vs. traps}
+		\AddClassFeature{Trap Sense +\DoMath{#1 / 3}}\AddConditionalDefMod{+\DoMath{#1 / 3} vs. traps}
 	\ifthenelse{#1 > 6}{
-		\AddClassFeature{Damage Reduction}\DoMath*{(#1 - 4) / 3}\addDR{--}{\value{@DoMathCounter}}
+		\AddClassFeature{Damage Reduction}\DoMath*{(#1 - 4) / 3}\AddDR{--}{\value{@DoMathCounter}}
 	\ifthenelse{#1 > 13}{
 		\AddClassFeature{Indomitable Will}
 	\ifthenelse{#1 > 16}{
