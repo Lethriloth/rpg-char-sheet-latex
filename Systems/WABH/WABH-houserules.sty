@@ -74,7 +74,7 @@
 	\renewcommand\do[1]{
 		\isClassSkill{##1}
 	}\expandafter\dolistloop\csname#3ClassSkillsList\endcsname
-	\IfBooleanTF #1 {} {\csname add#3ClassFeatures\endcsname{#4}}
+	\IfBooleanTF #1 {} {\csname Add#3ClassFeatures\endcsname{#4}}
 }
 
 \NewDocumentCommand{\CalculateFractionalBABSaveBonuses}{}{
@@ -122,11 +122,11 @@
 		\AddConditionalSkillMod{+2 to Disguise checks to act in character}
 	}{}
 	\ifthenelse{\value{charCraftOneRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftOnename\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname CharCraftOnename\endcsname}}{}
 	\ifthenelse{\value{charCraftTwoRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftTwoname\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname CharCraftTwoname\endcsname}}{}
 	\ifthenelse{\value{charCraftThreeRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftThreename\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname CharCraftThreename\endcsname}}{}
 	\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{
 		\ifthenelse{\value{charSpellcraftRanksCount} > 4}{\AddConditionalSkillMod{+4 to Use Magic Device checks involving scrolls}}{\AddConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}}{}
 	\ifthenelse{\value{charEscapeArtistRanksCount} > 4}{
