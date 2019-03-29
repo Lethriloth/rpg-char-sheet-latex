@@ -4,122 +4,105 @@
 \usepackage{longtable}
 \usepackage{multicol}
 \begin{document}
-	\renewcommand{\datafolder}{Systems/WABH/Data/}
-	\SetCounter{XP-Mode}{1} % Boolean, automatically calculates next-level XP
-	\SetCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
-	\SetCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive skill point increases.
-	\SetCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of feats
-	
-	%\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
-	%}
-	
-	%Just enter your name, etc. here. \Charlevel should be class and level.
-	\renewcommand\CharName{}
-	\renewcommand\CharAlignment{}
-	\renewcommand\CharPlayerName{}
-	\renewcommand\CharReligion{}
-	\renewcommand\CharHomeland{}
-	\renewcommand\CharHair{}
-	\renewcommand\CharEyes{}
-	\renewcommand\CharGender{}
-	\renewcommand\CharRace{}
-	\renewcommand\CharWeight{}
-	\renewcommand\CharHeight{}
-	\renewcommand\CharAge{}
-	
-	
-	\SetCharStr{10}
-	\SetCharDex{10}
-	\SetCharCon{10}
-	\SetCharInt{19}
-	\SetCharWis{19}
-	\SetCharCha{19}
-	
-	% Racial Mods
-	\ImportCharRace{Human}
-	\renewcommand\do[1]{
-		\AddCharLanguage{#1}
-	}\docsvlist{Raxak}
-	
-	
-	%\newcommand{\testclass}{wizard}
-	%%\importcharclass{\testclass}{20}
-	%\renewcommand{\do}[1]{
-	%	\Addranks[\testclass]{#1}{\value{Char\testclass classlevelcount}}
-	%}\docsvlist{performone,knowledgehistory}
-	%\Addwizardspellcasting{20}[Abjuration][Transmutation][Evocation]
-	
-%	\ImportCharClass{Barbarian}{20}
-%	\ImportCharClass{Bard}{20}
-%	\ImportCharClass{Cleric}{20}
-%	\ImportCharClass{Druid}{20}
-%	\ImportCharClass{Fighter}{20}
-%	\ImportCharClass{Monk}{20}
-%	\ImportCharClass{Paladin}{20}
-%	\ImportCharClass{Ranger}{20}
-%	\ImportCharClass{Rogue}{20}
-%	\ImportCharClass{Sorcerer}{20}
-%	\ImportCharClass{Wizard}{20}
-	
-	% Character Level Ability Increases
-	\MiscBonus{Cha}{5}
-	
-	% Feats
-	\AddFeat{Feat}
+		\renewcommand{\datafolder}{Systems/WABH/Data/}
+		\SetCounter{XP-Mode}{1} % Boolean, automatically calculates next-level XP
+		\SetCounter{HP-Mode}{1} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
+		\SetCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive skill point increases.
+		\SetCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of feats
+%\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
+%}
+
+%Just enter your name, etc. here.
+\renewcommand\CharName{}
+\renewcommand\CharAlignment{}
+\renewcommand\CharPlayerName{}
+\renewcommand\CharReligion{}
+\renewcommand\CharHomeland{}
+\renewcommand\CharHair{}
+\renewcommand\CharEyes{}
+\renewcommand\CharGender{}
+\renewcommand\CharRace{}
+\renewcommand\CharWeight{}
+\renewcommand\CharHeight{}
+\renewcommand\CharAge{}
+
+%Enter the scores you rolled here; any racial adjustments will be automatically applied
+\SetCharStr{10}
+\SetCharDex{10}
+\SetCharCon{10}
+\SetCharInt{19}
+\SetCharWis{19}
+\SetCharCha{19}
+
+% Race, Culture, Languages
+\ImportCharRace{Human}
+%	\ImportCharCulture{}
+\renewcommand\do[1]{
+	\AddCharLanguage{#1}
+}\docsvlist{Raxak}
+
+% Replace with your class
+%	\ImportCharClass{Barbarian}{1}
 	
 	
-	
-	% items
-	\AddGearItem{Gear}{1}
-	
-	\AddStoredItem{Stored Gear}{1}
-	
-	
-	
-	% %Weapons
-	\AddAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
-	\AddWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
-	
-	% %Shield
-	\AddShield{Buckler}{1}[2]{3}{4}{5}{6}{7}[Notes]%{Name}{Shield Bonus}[Max Dex]{Armor Check Penalty}{Spell Failure}{Hardness}{HP}{Weight}[Notes]
-	
-	% %Belt
-	%\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
-	%\EnhancementBonus{Str}{0}
-	
-	% %Armor
-	%\AddArmor{Armor}{3}{10}{-2}{5}{L}{10}{Notes}{More Notes}
-	
-	% %Chest
-	%\AddChestItem{}{}{}
-	
-	% %Eyes
-	%\AddEyesItem{}{}{}
-	
-	% %Feet
-	%\AddFeetItem{}{}{}
-	
-	% %Hat
-	%\AddHeadItem{}{}{}
-	
-	
-	% %Headband
-	%\AddHeadbandItem{}{}{}
-	
-	% %Shoulders
-	%\AddShouldersItem{}{}{}
-	
-	% %Rings
-	%\AddRingItem{}{}{}
-	%\AddRingItem{}{}{}
-	
-	% %Wrists
-	%\AddWristsItem{}{}{}
-	
-	\AddPlatinum{1}	\AddPlatinum*{2}\AddStoredPlatinum{3}
-	\AddGold{4}		\AddGold*{5}	\AddStoredGold{6}
-	\AddSilver{7}	\AddSilver*{8}	\AddStoredSilver{9}
-	\AddCopper{10}	\AddCopper*{11}	\AddStoredCopper{12}
-	
-	\input{Sheets/WABH_Sheet.tex}
+% Character Level Ability Increases
+\MiscBonus{Cha}{1}
+
+% Feats
+\AddFeat{Feat}%\AddFeat*{Feat Name} for bonus feats
+
+
+
+% Items carried on your person
+\AddGearItem{Gear}{1}%{Name}{Weight}; \AddGearItem*{Name}{Weight}
+
+% Items not carried on your person
+\AddStoredItem{Stored Gear}{1}%{Name}{Weight}; for items not caried on your person
+
+% Currency
+\AddGold{10}% Similar commands for other currencies; \AddCrowns*{num} adds
+
+
+
+% %Weapons
+\AddAutoWeapon[1]{Longsword +1}{1}{1d8+\DoMath{\value{CharStrModCount} + 1}}{19-20}{S}{Melee}{Notes}{Str} %[Extra attacks]{Name}{Attack bonus modifier (from weapon focus, magic weapon, etc.)}{Damage}{Critical}{Damage Type}{Range}{Notes}{Ability score for attack bonus}
+\AddWeapon{Shortsword +2}{+X/+X-5}{1d6+2}{19-20}{S}{Melee}{Notes}%{Name}{Attack Bonus}{Damage}{Critical}{Damage Type}{Range}{Notes}
+
+% %Shield
+\AddShield{Buckler}{1}[2]{3}{4}{5}{6}{7}[Notes]%{Name}{Shield Bonus}[Max Dex]{Armor Check Penalty}{Spell Failure}{Hardness}{HP}{Weight}[Notes]
+
+% %Belt
+%\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
+%\EnhancementBonus{Str}{0}
+
+% %Armor
+%\AddArmor{Armor}{3}{10}{-2}{5}{L}{10}{Notes}{More Notes}
+
+% %Chest
+%\AddChestItem{}{}{}
+
+% %Eyes
+%\AddEyesItem{}{}{}
+
+% %Feet
+%\AddFeetItem{}{}{}
+
+% %Hat
+%\AddHeadItem{}{}{}
+
+
+% %Headband
+%\AddHeadbandItem{}{}{}
+
+% %Shoulders
+%\AddShouldersItem{}{}{}
+
+% %Rings
+%\AddRingItem{}{}{}
+%\AddRingItem{}{}{}
+
+% %Wrists
+%\AddWristsItem{}{}{}
+
+\input{Sheets/WABH_Sheet.tex}
 \end{document}
