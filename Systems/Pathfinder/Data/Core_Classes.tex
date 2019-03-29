@@ -294,7 +294,7 @@
 \newcommand{\AddMonkClassFeatures}[1]{
 		\AddClassFeature{\ifthenelse{#1 > 10}{Greater }Flurry of Blows}
 			\NewCounter{charflurryofblowspenaltyCount}\SetCounter{charflurryofblowspenaltyCount}{-2}
-			\NewCounter{charflurryofblowsattacksCount}\stepCounter{charflurryofblowsattacksCount}
+			\NewCounter{charflurryofblowsattacksCount}\StepCounter{charflurryofblowsattacksCount}
 %			\autoweapon[\value{charflurryofblowsattacksCount}]{Flurry of Blows}{\value{charflurryofblowspenaltyCount}}{\charunarmedstrikedamage + \arabic{charstrModCount}}{20}{B}{Melee}{}{str}
 		\AddClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{\DoMath{(#1 + 6) / 4}}{2}$}{}}
 		\AddToCounter{charBonusFeatsCount}{3}
@@ -334,7 +334,7 @@
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
 		\ifthenelse{#1 > 8}{\AddSpecialDefense{Improved Evasion}}{\AddSpecialDefense{Evasion}}
-		\stepCounter{charBonusFeatsCount}
+		\StepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Still Mind}\AddConditionalDefMod{+2 on saves vs. EnChantment}
 		\AddClassFeature{Fast Movement}
@@ -359,15 +359,15 @@
 		\AddClassFeature{High Jump}
 			\AddConditionalSkillMod{+#1 to Acrobatics to jump, always Counts as having running start for jumps}
 		\AddClassFeature{Purity of Body}\AddImmunity{Disease}
-		\stepCounter{charflurryofblowspenaltyCount}
+		\StepCounter{charflurryofblowspenaltyCount}
 	\ifthenelse{#1 > 5}{
 		\AddToCounter{charBonusFeatsCount}{(#1 - 2) / 4}
 	\ifthenelse{#1 > 6}{
 		\AddClassFeature{Wholeness of Body}
 	\ifthenelse{#1 > 8}{
-		\stepCounter{charflurryofblowspenaltyCount}
+		\StepCounter{charflurryofblowspenaltyCount}
 	\ifthenelse{#1 > 10}{
-		\stepCounter{charflurryofblowsattacksCount}
+		\StepCounter{charflurryofblowsattacksCount}
 		\AddClassFeature{Diamond Body}\AddImmunity{poison}
 	\ifthenelse{#1 > 11}{
 		\AddClassFeature{Abundant Step (\DoMath{#1 * 40 + 400} ft.)}
@@ -433,13 +433,13 @@
 		\newcommand{\AddPaladinSpellcasting}[1]{
 			\SetCounter{@i}{0}
 			\ifthenelse{##1 > 3}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			\ifthenelse{##1 > 7}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			\ifthenelse{##1 > 11}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			\ifthenelse{##1 > 13}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			}{}}{}}{}}{}
 			\newSpellcasting*[\value{@i}]{Paladin}{##1 / 2}{Cha}
 			\AddHalfSpellcasting{##1}
@@ -507,7 +507,7 @@
 		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{Combat Style Bonus Feat\ifthenelse{#1 > 5}{$ \times \DoMath{(#1 + 2) / 4}$}{}: \charcombatstyle}
-			\stepCounter{charBonusFeatsCount}
+			\StepCounter{charBonusFeatsCount}
 			\newcommand\charcombatstyle{}
 			\newcommand\Addcombatstyle[1]{%
 				\renewcommand{\charcombatstyle}{##1}%
@@ -521,7 +521,7 @@
 			\AddToCounter{charBonusFeatsCount}{(#1 + 2) / 4}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Endurance}
-			\stepCounter{charBonusFeatsCount}
+			\StepCounter{charBonusFeatsCount}
 			\AddFeat*{Endurance}
 		\NewCounter{charFavoredTerrainsCount}
 			\SetCounter{charFavoredTerrainsCount}{(#1 + 2)/ 5}
@@ -554,13 +554,13 @@
 		\newcommand{\AddRangerSpellcasting}[1]{
 			\SetCounter{@i}{0}
 			\ifthenelse{##1 > 3}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			\ifthenelse{##1 > 7}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			\ifthenelse{##1 > 11}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			\ifthenelse{##1 > 13}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			}{}}{}}{}}{}
 			\newSpellcasting*[\value{@i}]{Ranger}{##1 / 2}{wis}
 			\AddHalfSpellcasting{##1}
@@ -654,7 +654,7 @@
 				\AddWarning{Choose a Sorcerer bloodline. Use the command \texttt{$\backslash$addSorcererBloodline\{bloodline\}}}
 			}{}
 		}
-		\stepCounter{charSorcererBloodlinePowersCount}
+		\StepCounter{charSorcererBloodlinePowersCount}
 		\NewDocumentCommand{\AddBloodlinePower}{m}{
 			\listinsert{\charSorcererBloodlinePowersList}{##1}
 			\AddToCounter{charSorcererBloodlinePowersCount}{-1}
@@ -668,10 +668,10 @@
 				\AddWarning{Input \arabic{charSorcererBloodlinePowersCount} bloodline powers}
 			}{}}
 		}
-	\stepCounter{charBonusFeatsCount}\AddFeat*{Eschew Materials}
+	\StepCounter{charBonusFeatsCount}\AddFeat*{Eschew Materials}
 	\newcommand{\AddBloodlineSpells}{}
 	\ifthenelse{#1 > 2}{
-		\stepCounter{charSorcererBloodlinePowersCount}
+		\StepCounter{charSorcererBloodlinePowersCount}
 		\AddClassFeature{Bloodline Spell\ifthenelse{#1 > 4}{ $\times \DoMath{(#1 - 1) / 2}$}{}}
 			\appto{\AddBloodlineSpells}{
 				\AddSpellsKnown{1}{1}
@@ -687,7 +687,7 @@
 		\AddClassFeature{Bloodline Feat\ifthenelse{#1 > 12}{ $\times \DoMath{(#1 - 1) / 6}$}{}}
 			\AddToCounter{charBonusFeatsCount}{(#1 - 1) / 6}
 	\ifthenelse{#1 > 8}{
-		\stepCounter{charSorcererBloodlinePowersCount}
+		\StepCounter{charSorcererBloodlinePowersCount}
 		\appto{\AddBloodlineSpells}{
 			\AddSpellsKnown{4}{1}
 		}
@@ -703,7 +703,7 @@
 		\appto{\AddBloodlineSpells}{
 			\AddSpellsKnown{7}{1}
 		}
-		\stepCounter{charSorcererBloodlinePowersCount}
+		\StepCounter{charSorcererBloodlinePowersCount}
 	\ifthenelse{#1 > 16}{
 		\appto{\AddBloodlineSpells}{
 			\AddSpellsKnown{8}{1}
@@ -713,7 +713,7 @@
 			\AddSpellsKnown{9}{1}
 		}
 	\ifthenelse{#1 > 19}{
-		\stepCounter{charSorcererBloodlinePowersCount}
+		\StepCounter{charSorcererBloodlinePowersCount}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 	\newcommand{\AddSorcererSpellcasting}[1]{
 		\ifthenelse{##1 = 1}{
@@ -835,7 +835,7 @@
 	}{\ifthenelse{\equal{#2}{Necromancy}}{
 		\newcommand{\charWizardFocusSchool}{Necromancy}
 			\AddClassFeature{Power Over Undead}
-				\stepCounter{charBonusFeatsCount}
+				\StepCounter{charBonusFeatsCount}
 				\NewCounter{charChannelenergyusesCount}
 				\SetCounter{charChannelenergyusesCount}{3 + \value{charIntModCount}}
 				\AddLimitedUse{Channel Energy (DC \DoMath{10 + #1 / 2 +\value{charChaModCount}})}{\arabic{charChannelenergyusesCount}}

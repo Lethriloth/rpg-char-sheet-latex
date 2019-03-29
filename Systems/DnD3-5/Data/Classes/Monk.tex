@@ -11,7 +11,7 @@
 \newcommand{\AddMonkClassFeatures}[1]{
 		\AddClassFeature{\ifthenelse{#1 > 10}{Greater }Flurry of Blows}
 			\NewCounter{charFlurryOfBlowsPenaltyCount}\SetCounter{charFlurryOfBlowsPenaltyCount}{-2}
-			\NewCounter{charFlurryOfBlowsAttacksCount}\stepCounter{charFlurryOfBlowsAttacksCount}
+			\NewCounter{charFlurryOfBlowsAttacksCount}\StepCounter{charFlurryOfBlowsAttacksCount}
 %			\AddAutoWeapon[\value{charFlurryOfBlowsAttacksCount}]{Flurry of Blows}{\value{charFlurryOfBlowsPenaltyCount}}{\charUnarmedStrikeDamage + \arabic{charStrModCount}}{20}{B}{melee}{}{str}
 		\AddClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{3}{2}$}{}}
 		\AddToCounter{charBonusFeatsCount}{2}
@@ -48,7 +48,7 @@
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
 		\ifthenelse{#1 > 8}{\AddSpecialDefense{Improved Evasion}}{\AddSpecialDefense{Evasion}}
-		\stepCounter{charBonusFeatsCount}
+		\StepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Still Mind}\AddConditionalDefMod{+2 on saves vs. Enchantment}
 		\EnhancementBonus{Speed}{#1 / 3 * 10}
@@ -61,15 +61,15 @@
 		\AddClassFeature{Slow Fall \ifthenelse{#1 < 20}{\DoMath{#1 / 2}0 ft.}{any distance}}
 	\ifthenelse{#1 > 4}{
 		\AddClassFeature{Purity of Body}\AddImmunity{Disease}
-		\stepCounter{charFlurryOfBlowsPenaltyCount}
+		\StepCounter{charFlurryOfBlowsPenaltyCount}
 	\ifthenelse{#1 > 5}{
-		\stepCounter{charBonusFeatsCount}
+		\StepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 6}{
 		\AddLimitedUse{Wholeness of Body (hit points)}{\DoMath{#1 * 2}}
 	\ifthenelse{#1 > 8}{
-		\stepCounter{charFlurryOfBlowsPenaltyCount}
+		\StepCounter{charFlurryOfBlowsPenaltyCount}
 	\ifthenelse{#1 > 10}{
-		\stepCounter{charFlurryOfBlowsAttacksCount}
+		\StepCounter{charFlurryOfBlowsAttacksCount}
 		\AddClassFeature{Diamond Body}
 			\AddImmunity{poison}
 	\ifthenelse{#1 > 11}{

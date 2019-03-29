@@ -53,7 +53,7 @@
 \def\SetCounter#1#2{%
 	\NewCounter{#1}%
 	\setcounter{#1}{#2}}%
-\def\stepCounter#1{%
+\def\StepCounter#1{%
 	\NewCounter{#1}%
 	\stepcounter{#1}}%
 

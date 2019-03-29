@@ -37,7 +37,7 @@
 					\AddWarning{Total favored enemy Bonus is \DoMath{-\value{charFavoredEnemiesTotalBonusCount}} points too high}
 				}{}}
 			}
-		\AddClassFeature{Track}\stepCounter{charBonusFeatsCount}\AddFeat*{Track}
+		\AddClassFeature{Track}\StepCounter{charBonusFeatsCount}\AddFeat*{Track}
 		\ifthenelse{\value{charHandleAnimalRanksCount} > 4}{
 			\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount} + 2}}
 		}{
@@ -45,7 +45,7 @@
 		}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{Combat Style: \charCombatStyle}
-			\stepCounter{charBonusFeatsCount}
+			\StepCounter{charBonusFeatsCount}
 			\newcommand\charCombatStyle{}
 			\newcommand\AddCombatStyle[1]{%
 				\renewcommand{\charCombatStyle}{##1}%
@@ -78,26 +78,26 @@
 			}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Endurance}
-			\stepCounter{charBonusFeatsCount}
+			\StepCounter{charBonusFeatsCount}
 			\AddFeat*{Endurance}
 	\ifthenelse{#1 > 3}{
 		\AddClassFeature{Animal Companion}
 		\newcommand{\AddRangerSpellcasting}[1]{
 			\SetCounter{@i}{0}
 			\ifthenelse{##1 > 3}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			\ifthenelse{##1 > 7}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			\ifthenelse{##1 > 11}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			\ifthenelse{##1 > 13}{
-				\stepCounter{@i}
+				\StepCounter{@i}
 			}{}}{}}{}}{}
 			\newSpellcasting*[\value{@i}]{Ranger}{##1 / 2}{Wis}
 			\AddHalfSpellcasting{##1}
 		}
 	\ifthenelse{#1 > 5}{
-		\stepCounter{charBonusFeatsCount}
+		\StepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 6}{
 		\AddClassFeature{Woodland Stride}
 	\ifthenelse{#1 > 7}{
@@ -108,7 +108,7 @@
 		\AddClassFeature{Evasion}
 			\AddSpecialDefense{Evasion}
 	\ifthenelse{#1 > 10}{
-		\stepCounter{charBonusFeatsCount}
+		\StepCounter{charBonusFeatsCount}
 	\ifthenelse{#1 > 12}{
 		\AddClassFeature{Camouflage}
 	\ifthenelse{#1 > 16}{

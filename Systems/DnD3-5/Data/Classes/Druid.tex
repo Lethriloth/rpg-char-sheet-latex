@@ -25,29 +25,29 @@
 			\AddConditionalDefMod{+4 to saves vs. Spell-like abilities of fey}
 	\ifthenelse{#1 > 4}{
 		\NewCounter{charWildShapeUsesCount}
-		\stepCounter{charWildShapeUsesCount}
+		\StepCounter{charWildShapeUsesCount}
 		\AddLimitedUse{Wild Shape}{\arabic{charWildShapeUsesCount}}
 		\AddClassFeature{Wild Shape \ifthenelse{#1 > 7}{(\ifthenelse{#1 > 14}{Huge}{Large}\ifthenelse{#1 > 10}{, Tiny}{}\ifthenelse{#1 > 11}{, Plant}{})}{}}
 	\ifthenelse{#1 > 5}{
-		\stepCounter{charWildShapeUsesCount}
+		\StepCounter{charWildShapeUsesCount}
 	\ifthenelse{#1 > 6}{
-		\stepCounter{charWildShapeUsesCount}
+		\StepCounter{charWildShapeUsesCount}
 	\ifthenelse{#1 > 8}{
 		\AddClassFeature{Venom Immunity}
 		\AddImmunity{poison}
 	\ifthenelse{#1 > 9}{
-		\stepCounter{charWildShapeUsesCount}
+		\StepCounter{charWildShapeUsesCount}
 	\ifthenelse{#1 > 12}{
 		\AddClassFeature{A Thousand Faces}
 	\ifthenelse{#1 > 13}{
-		\stepCounter{charWildShapeUsesCount}
+		\StepCounter{charWildShapeUsesCount}
 	\ifthenelse{#1 > 14}{
 		\AddClassFeature{Timeless Body}
 	\ifthenelse{#1 > 15}{
 		\AddClassFeature{\ifthenelse{#1 > 19}{Huge }{}Elemental Wild Shape}
 		\AddLimitedUse{Elemental Wild Shape}{\DoMath{(#1 - 14) / 2}}
 	\ifthenelse{#1 > 17}{
-		\stepCounter{charWildShapeUsesCount}
+		\StepCounter{charWildShapeUsesCount}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 	\newcommand{\AddDruidSpellcasting}[1]{
 		\newSpellcasting[(##1 + 1) / 2]{Druid}{##1}{Wis}
