@@ -67,7 +67,7 @@
 	\StretchAttributes{68}{12}{139}{\arabic{CharWisBaseCount},\PlusMinus{CharWisEnhancementCount},\PlusMinus{CharWisMiscCount},\PlusMinus{CharWisTmpCount}}
 	
 	%% CHA
-	\titlebox{0}{0}{28}{CHA}{Charisma}
+	\titlebox{0}{0}{28}{CHA}{charisma}
 	\StretchAttributes{30}{0}{63}{\arabic{CharChaCount},\PlusMinus{CharChaModCount}}
 	\StretchAttributes{68}{0}{139}{\arabic{CharChaBaseCount},\PlusMinus{CharChaEnhancementCount},\PlusMinus{CharChaMiscCount},\PlusMinus{CharChaTmpCount}}
 }
@@ -233,11 +233,11 @@
 		\end{tabular}
 	}
 	\put(0,5){% Shield
-		\begin{tabular}[b]{C{15}C{125}C{45}C{25}C{25}}
-			\multicolumn{2}{C{140}}{\itshape \CharShieldName} & \CleanPM{CharShieldBonusCount} & \ifthenelse{\value{CharMaxDexShieldCount} < 100}{\PlusMinus{CharMaxDexShieldCount}}{} &\ifthenelse{\equal\CharShieldName{}}{}{\arabic{CharShieldArmorCheckPenaltyCount}} \tabularnewline\hline
-			\multicolumn{2}{C{140}}{\scriptsize\scshape Shield} &\tiny\scshape Shield Bonus &\tiny\scshape max dex &\tiny\scshape  check penalty \tabularnewline
-			\itshape \arabic{CharShieldSpellFailureCount}\% &  \multicolumn{4}{C{220}}{\CharShieldNotes}  \tabularnewline\hline
-			\tiny\scshape spell failure & \multicolumn{4}{C{220}} {\tiny\scshape Notes } \tabularnewline
+		\begin{tabular}[b]{C{15}C{25}C{35}C{65}C{45}C{25}C{25}}
+			\multicolumn{4}{C{140}}{\itshape \CharShieldName} & \arabic{CharShieldBonusCount} & \ifthenelse{\value{CharMaxDexShieldCount} < 100}{\PlusMinus{CharMaxDexShieldCount}}{} &\ifthenelse{\equal\CharShieldName{}}{}{\arabic{CharShieldArmorCheckPenaltyCount}} \tabularnewline\hline
+			\multicolumn{4}{C{140}}{\scriptsize\scshape Shield} &\tiny\scshape Shield Bonus &\tiny\scshape max dex &\tiny\scshape  check penalty \tabularnewline
+			\itshape \arabic{CharShieldSpellFailureCount}\% &  \CleanArabic{CharShieldHardnessCount} & \leavevmode\hphantom{\CleanArabic{CharShieldHPCount}}/\CleanArabic{CharShieldHPCount} & \multicolumn{4}{C{160}}{\CharShieldNotes}  \tabularnewline\hline
+			\tiny\scshape spell failure & \tiny\scshape Hardness &  \tiny\scshape HP & \multicolumn{4}{C{160}} {\tiny\scshape Notes } \tabularnewline
 	    \end{tabular}
 	}
 }

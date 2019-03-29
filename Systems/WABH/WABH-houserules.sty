@@ -48,7 +48,7 @@
 	\fi
 	\NewCounter{Char#3ClassLevelCount}
 	\SetCounter{Char#3ClassLevelCount}{#4}
-	\newcounter{Char#3SpareSkillRanksCount}
+	\Newcounter{Char#3SpareSkillRanksCount}
 	\ifthenelse{\value{CharTotalLevelCount} = 0}{
 		\SetCounter{Char#3SpareSkillRanksCount}{(\value{CharBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * (3 + #4)}
 		\ifthenelse{\value{HP-Mode} = 1}{
@@ -119,7 +119,7 @@
 		\MiscBonus{Diplomacy}{2}
 		\MiscBonus{Intimidate}{2}
 		\MiscBonus{SleightOfHand}{2}
-		\AddConditionalSkillMod{+2 to Disguise checks to act in character}
+		\AddConditionalSkillMod{+2 to Disguise checks to act in Character}
 	}{}
 	\ifthenelse{\value{CharCraftOneRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Appraise checks related to \csname CharCraftOnename\endcsname}}{}
@@ -173,4 +173,27 @@
 		\AddConditionalSkillMod{+2 to Climb checks involving ropes}
 		\AddConditionalSkillMod{+2 to Escape Artist checks involving ropes}
 	}{}
+}
+
+%% Adds shield hardness and HP for shield blocks
+\NewCounter{CharShieldHardnessCount}
+\SetCounter{CharShieldHPCount}{0}
+\RenewDocumentCommand{\AddShield}{m m o m m m m m O{}}{%{Name}{Shield Bonus}[Max Dex]{Armor Check Penalty}{Spell Failure}{Hardness}{HP}{Weight}[Notes]
+	\AddShieldBonus{#2}
+	\IfNoValueF{#3}{
+		\SetCounter{CharMaxDexShieldCount}{#3}
+		\ifthenelse{#3 < \value{CharMaxDexBonusCount}}{
+			\SetCounter{CharMaxDexBonusCount}{#3}
+		}{}
+	}
+	\SetCounter{CharShieldArmorCheckPenaltyCount}{#4}
+	\renewcommand{\do}[1]{
+		\MiscBonus{##1}{#4}
+	}\dolistloop{\ArmorCheckSkillsList}
+	\SetCounter{CharShieldSpellFailureCount}{#5}
+	\AddToCounter{TotalACItemsSpellFailure}{#5}
+	\SetCounter{CharShieldHardnessCount}{#6}
+	\SetCounter{CharShieldHPCount}{#7}
+	\AddGearItem{Shield}{#8}
+	\renewcommand{\CharShieldNotes}{#9}
 }
