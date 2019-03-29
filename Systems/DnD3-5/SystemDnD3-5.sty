@@ -262,7 +262,7 @@
 	}
 	\listadd{\CharClassesList}{#3}
 	\if\csname#3BAB\endcsname g
-	\Addtocounter{CharBABCount}{#4}
+	\AddToCounter{CharBABCount}{#4}
 	\fi
 	\if\csname#3BAB\endcsname a
 	\AddToCounter{CharBABCount}{#4 * 3 / 4}
@@ -443,7 +443,8 @@
 	\ifthenelse{\value{CharKnowledgeLocalRanksCount} > 4}{
 		\MiscBonus{GatherInformation}{2}}{}
 	\ifthenelse{\value{CharKnowledgeDungeoneeringRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Survival checks in aboveground natural environments}}{}
+		\AddConditionalSkillMod{+2 to Survival checks in aboveground natural environments}
+	}{}
 	\ifthenelse{\value{CharKnowledgeNobilityRanksCount} > 4}{
 		\MiscBonus{Diplomacy}{2}}{}
 	\ifthenelse{\value{CharKnowledgePlanesRanksCount} > 4}{
@@ -689,20 +690,6 @@
 	}
 }\docsvlist{Platinum, Gold, Silver, Copper}
 
-
-
-%\expandafter\newcommand\csname AddPlatinum\endcsname{\@ifstar\@@addPlatinum\@addPlatinum}
-%\expandafter\newcommand\csname @addPlatinum\endcsname[1]{\AddToCounter{CharPlatinumCount}{#1}}
-%\expandafter\newcommand\csname @@addPlatinum\endcsname[1]{\AddToCounter{CharPlatinumWeightlessCount}{#1}}
-%\expandafter\newcommand\csname AddGold\endcsname{\@ifstar\@@addGold\@addGold}
-%\expandafter\newcommand\csname @addGold\endcsname[1]{\AddToCounter{CharGoldCount}{#1}}
-%\expandafter\newcommand\csname @@addGold\endcsname[1]{\AddToCounter{CharGoldWeightlessCount}{#1}}
-%\expandafter\newcommand\csname AddSilver\endcsname{\@ifstar\@@addSilver\@addSilver}
-%\expandafter\newcommand\csname @addSilver\endcsname[1]{\AddToCounter{CharSilverCount}{#1}}
-%\expandafter\newcommand\csname @@addSilver\endcsname[1]{\AddToCounter{CharSilverWeightlessCount}{#1}}
-%\expandafter\newcommand\csname AddCopper\endcsname{\@ifstar\@@addCopper\@addCopper}
-%\expandafter\newcommand\csname @addCopper\endcsname[1]{\AddToCounter{CharCopperCount}{#1}}
-%\expandafter\newcommand\csname @@addCopper\endcsname[1]{\AddToCounter{CharCopperWeightlessCount}{#1}}
 
 %%Weight
 \newlength{\TotalGearWeight}
@@ -1746,7 +1733,7 @@
 		\AddDebug{HP Mode == 1. Checking that the number of HP rolls is correct:\\
 			Number of HP rolls: \arabic{CharHPRollsCount}\\
 			Level: \arabic{CharTotalLevelCount}}
-		\ifthenelse{\arabic{CharHPRollsCount} < \arabic{Chartotallevelcount}}{
+		\ifthenelse{\arabic{CharHPRollsCount} < \arabic{CharTotalLevelCount}}{
 			\AddDebug{Num HP rolls less than expected}
 			\AddWarning{\DoMath{\value{CharTotalLevelCount} - \value{CharHPRollsCount}} HP rolls missing}
 		}{
@@ -1759,7 +1746,7 @@
 	%CHECK SKILL RANKS
 	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
 		\AddDebug{Checking Skill Ranks}
-		\AddDebug{Class List: \PrintList{\CharClasseslist}}
+		\AddDebug{Class List: \PrintList{\CharClassesList}}
 		\renewcommand{\do}[1]{
 			\AddDebug{Checking skill ranks for Class: ##1\\}
 			\ifthenelse{\value{Char##1SpareSkillRanksCount} > 0}{
