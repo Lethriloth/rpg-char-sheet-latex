@@ -3,24 +3,24 @@
 }
 
 \def\AddHumanRaceFeatures#1{
-	\Addtocounter{char#1BaseCount}{2}
+	\Addtocounter{Char#1BaseCount}{2}
 	\SetSize{Medium}
-	\def\charrace{Human}
+	\def\Charrace{Human}
 	\SetCharSpeed{30}
-	\stepcounter{charBonusFeatsCount}
+	\stepcounter{CharBonusFeatsCount}
 	\appto{\AddIntToSkillRanks}{
-		\Addtocounter{charSpareSkillRanksCount}{\value{charTotalLevelCount}}
+		\Addtocounter{CharSpareSkillRanksCount}{\value{CharTotalLevelCount}}
 	}
 	\AddCharLanguage{Common}
 }
 
 \def\AddDwarfRaceFeatures{
-	\Addtocounter{charconbasecount}{2}
-	\Addtocounter{charwisbasecount}{2}
-	\Addtocounter{charchabasecount}{-2}
+	\Addtocounter{Charconbasecount}{2}
+	\Addtocounter{Charwisbasecount}{2}
+	\Addtocounter{Charchabasecount}{-2}
 	\mediumsize
-	\def\charrace{Dwarf}
-	\charspeed{20}
+	\def\Charrace{Dwarf}
+	\Charspeed{20}
 	\Addracefeature{Hardy}\Addconditionaldefmod{+2 on saves vs. poison, spells, and spell-like abilities}
 	\Addracefeature{Stability}\Addconditionaldefmod{+4 to CMD to resist bull rush or trip while standing on ground}
 	\Addracefeatire{Stubborn}\Addconditionaldefmod{+2 on saves vs. charms and compulsions, and can make a second save one round later if the first fails}

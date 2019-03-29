@@ -9,7 +9,7 @@
 \edef\BarbarianClassSkillsList{}
 \forcsvlist{\listadd{\BarbarianClassSkillsList}}{Climb, Craft, HandleAnimal, Intimidate, Jump, Listen, Ride, Survival, Swim}
 \newcommand{\AddBarbarianClassFeatures}[1]{
-		\AddClassFeature{Fast Movement}\AddToCounter{charBaseSpeedCount}{10}
+		\AddClassFeature{Fast Movement}\AddToCounter{CharBaseSpeedCount}{10}
 		\AddLimitedUse{%
 			\ifthenelse{#1 > 10}{\ifthenelse{#1 > 19}{Mighty }{Greater }}{}%
 			Rage}{\DoMath{#1 / 4 + 1}}

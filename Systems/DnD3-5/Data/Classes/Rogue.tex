@@ -11,12 +11,12 @@
 \newcommand{\AddRogueClassFeatures}[1]{
 	\AddClassFeature{Sneak Attack +\DoMath{(#1 + 1)/2}d6}
 	\AddClassFeature{Trapfinding}
-	\edef\charRogueSpecialAbilitiesList{}
-	\edef\charSkillMasteryList{}
-	\NewCounter{charRogueSpecialAbilitiesCount}
+	\edef\CharRogueSpecialAbilitiesList{}
+	\edef\CharSkillMasteryList{}
+	\NewCounter{CharRogueSpecialAbilitiesCount}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{Evasion}
-			\ifinlist{Improved Evasion}{\charRogueSpecialAbilitiesList}{
+			\ifinlist{Improved Evasion}{\CharRogueSpecialAbilitiesList}{
 				\AddSpecialDefense{Improved Evasion}
 			}{
 				\AddSpecialDefense{Evasion}
@@ -28,19 +28,19 @@
 		\AddClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
 			\ifthenelse{#1 > 7}{\AddSpecialDefense{Improved Uncanny Dodge}}{\AddSpecialDefense{Uncanny Dodge}}
 	\ifthenelse{#1 > 9}{
-		\AddToCounter{charRogueSpecialAbilitiesCount}{(#1 - 7) / 3}
-		\AddClassFeature{Rogue Special Abilities\forlistloop{\\~~~~}{\charRogueSpecialAbilitiesList}}
+		\AddToCounter{CharRogueSpecialAbilitiesCount}{(#1 - 7) / 3}
+		\AddClassFeature{Rogue Special Abilities\forlistloop{\\~~~~}{\CharRogueSpecialAbilitiesList}}
 		\NewDocumentCommand{\AddRogueSpecialAbility}{m}{
-			\listinsert{\charRogueSpecialAbilitiesList}{##1}
-			\AddToCounter{charRogueSpecialAbilitiesCount}{-1}
+			\listinsert{\CharRogueSpecialAbilitiesList}{##1}
+			\AddToCounter{CharRogueSpecialAbilitiesCount}{-1}
 		}
 		\gappto{\RunChecks}{%
 			%%CHECK ROGUE SPECIAL ABILITIES
-			\ifthenelse{\value{charRogueSpecialAbilitiesCount} < 0}{
-				\AddWarning{\DoMath{-\value{charRogueSpecialAbilitiesCount}} too many Rogue special abilities}
+			\ifthenelse{\value{CharRogueSpecialAbilitiesCount} < 0}{
+				\AddWarning{\DoMath{-\value{CharRogueSpecialAbilitiesCount}} too many Rogue special abilities}
 			}{
-			\ifthenelse{\value{charRogueSpecialAbilitiesCount} > 0}{
-				\AddWarning{Choose \arabic{charRogueSpecialAbilitiesCount} more Rogue special abilities}
+			\ifthenelse{\value{CharRogueSpecialAbilitiesCount} > 0}{
+				\AddWarning{Choose \arabic{CharRogueSpecialAbilitiesCount} more Rogue special abilities}
 			}{}}
 		}
 	}{}}{}}{}}{}

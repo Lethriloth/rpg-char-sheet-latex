@@ -9,46 +9,46 @@
 \edef\RangerClassSkillsList{}
 \forcsvlist{\listadd{\RangerClassSkillsList}}{Climb, Concentration, Craft, HandleAnimal, Heal, Hide, Jump, KnowledgeDungeoneering, KnowledgeGeography, KnowledgeNature, Listen, MoveSilently, Profession, Ride, Search, Spot, Survival, Swim, UseRope}
 \newcommand{\AddRangerClassFeatures}[1]{
-		\AddClassFeature{Favored Enemy\forlistloop{\\~~~~}{\charFavoredEnemiesList}}
-			\edef\charFavoredEnemiesList{}
-			\NewCounter{charFavoredEnemiesCount}
-			\SetCounter{charFavoredEnemiesCount}{#1 / 5 + 1}
-			\NewCounter{charFavoredEnemiesTotalBonusCount}
-			\SetCounter{charFavoredEnemiesTotalBonusCount}{(#1 / 5) * 4 + 2}
+		\AddClassFeature{Favored Enemy\forlistloop{\\~~~~}{\CharFavoredEnemiesList}}
+			\edef\CharFavoredEnemiesList{}
+			\NewCounter{CharFavoredEnemiesCount}
+			\SetCounter{CharFavoredEnemiesCount}{#1 / 5 + 1}
+			\NewCounter{CharFavoredEnemiesTotalBonusCount}
+			\SetCounter{CharFavoredEnemiesTotalBonusCount}{(#1 / 5) * 4 + 2}
 			\newcommand{\AddFavoredEnemy}[2]{
-				\listinsert{\charFavoredEnemiesList}{+##2 vs ##1s}
-				\AddToCounter{charFavoredEnemiesTotalBonusCount}{-##2}
-				\AddToCounter{charFavoredEnemiesCount}{-1}
+				\listinsert{\CharFavoredEnemiesList}{+##2 vs ##1s}
+				\AddToCounter{CharFavoredEnemiesTotalBonusCount}{-##2}
+				\AddToCounter{CharFavoredEnemiesCount}{-1}
 				\AddConditionalSkillMod{+##2 to Bluff, Listen, Sense Motive, Spot, and Survival vs. ##1s}
 				\AddConditionalAttackMod{+##2 damage vs. ##1s}
 			}
 			\appto{\RunChecks}{%
 				%%Check Favored Enemies
-				\ifthenelse{\value{charFavoredEnemiesCount} > 0}{
-					\AddWarning{Choose \arabic{charFavoredEnemiesCount} more favored enemies. Use the command \texttt{$\backslash$addFavoredEnemy\{enemy\}\{Bonus\}}}
+				\ifthenelse{\value{CharFavoredEnemiesCount} > 0}{
+					\AddWarning{Choose \arabic{CharFavoredEnemiesCount} more favored enemies. Use the command \texttt{$\backslash$addFavoredEnemy\{enemy\}\{Bonus\}}}
 				}{
-				\ifthenelse{\value{charFavoredEnemiesCount} < 0}{
-					\AddWarning{\DoMath{-\value{charFavoredEnemiesCount}} too many favored enemies}
+				\ifthenelse{\value{CharFavoredEnemiesCount} < 0}{
+					\AddWarning{\DoMath{-\value{CharFavoredEnemiesCount}} too many favored enemies}
 				}{}}
-				\ifthenelse{\value{charFavoredEnemiesTotalBonusCount} > 0}{
-					\AddWarning{You have \arabic{charFavoredEnemiesTotalBonusCount} points of favored enemy Bonus to allocate}
+				\ifthenelse{\value{CharFavoredEnemiesTotalBonusCount} > 0}{
+					\AddWarning{You have \arabic{CharFavoredEnemiesTotalBonusCount} points of favored enemy Bonus to allocate}
 				}{
-				\ifthenelse{\value{charFavoredEnemiesTotalBonusCount} < 0}{
-					\AddWarning{Total favored enemy Bonus is \DoMath{-\value{charFavoredEnemiesTotalBonusCount}} points too high}
+				\ifthenelse{\value{CharFavoredEnemiesTotalBonusCount} < 0}{
+					\AddWarning{Total favored enemy Bonus is \DoMath{-\value{CharFavoredEnemiesTotalBonusCount}} points too high}
 				}{}}
 			}
-		\AddClassFeature{Track}\StepCounter{charBonusFeatsCount}\AddFeat*{Track}
-		\ifthenelse{\value{charHandleAnimalRanksCount} > 4}{
-			\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount} + 2}}
+		\AddClassFeature{Track}\StepCounter{CharBonusFeatsCount}\AddFeat*{Track}
+		\ifthenelse{\value{CharHandleAnimalRanksCount} > 4}{
+			\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{CharChaModCount} + 2}}
 		}{
-			\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
+			\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{CharChaModCount}}}
 		}
 	\ifthenelse{#1 > 1}{
-		\AddClassFeature{Combat Style: \charCombatStyle}
-			\StepCounter{charBonusFeatsCount}
-			\newcommand\charCombatStyle{}
+		\AddClassFeature{Combat Style: \CharCombatStyle}
+			\StepCounter{CharBonusFeatsCount}
+			\newcommand\CharCombatStyle{}
 			\newcommand\AddCombatStyle[1]{%
-				\renewcommand{\charCombatStyle}{##1}%
+				\renewcommand{\CharCombatStyle}{##1}%
 				\ifthenelse{\equal{##1}{Two-Weapon Combat}}{%
 						\AddFeat*{Two-Weapon Fighting}%
 					\ifthenelse{#1 > 5}{
@@ -68,17 +68,17 @@
 			}
 			\appto{\RunChecks}{%
 				%%Check Ranger Combat Style
-				\ifthenelse{\equal{\charCombatStyle}{}}{
+				\ifthenelse{\equal{\CharCombatStyle}{}}{
 					\AddWarning{Choose a Ranger combat style. Use the command \texttt{$\backslash$addCombatStyle\{combat style\}}}
 				}{
-				\ifthenelse{\equal{\charCombatStyle}{Two-Weapon Combat}}{}{
-				\ifthenelse{\equal{\charCombatStyle}{Archery}}{}{
-					\AddWarning{Unrecognized Ranger combat style: ``\caselower{\charCombatStyle}'' is not ``\caselower{two-weapon combat}'' or ''\caselower{archery}''}
+				\ifthenelse{\equal{\CharCombatStyle}{Two-Weapon Combat}}{}{
+				\ifthenelse{\equal{\CharCombatStyle}{Archery}}{}{
+					\AddWarning{Unrecognized Ranger combat style: ``\caselower{\CharCombatStyle}'' is not ``\caselower{two-weapon combat}'' or ''\caselower{archery}''}
 				}}}
 			}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Endurance}
-			\StepCounter{charBonusFeatsCount}
+			\StepCounter{CharBonusFeatsCount}
 			\AddFeat*{Endurance}
 	\ifthenelse{#1 > 3}{
 		\AddClassFeature{Animal Companion}
@@ -97,7 +97,7 @@
 			\AddHalfSpellcasting{##1}
 		}
 	\ifthenelse{#1 > 5}{
-		\StepCounter{charBonusFeatsCount}
+		\StepCounter{CharBonusFeatsCount}
 	\ifthenelse{#1 > 6}{
 		\AddClassFeature{Woodland Stride}
 	\ifthenelse{#1 > 7}{
@@ -108,7 +108,7 @@
 		\AddClassFeature{Evasion}
 			\AddSpecialDefense{Evasion}
 	\ifthenelse{#1 > 10}{
-		\StepCounter{charBonusFeatsCount}
+		\StepCounter{CharBonusFeatsCount}
 	\ifthenelse{#1 > 12}{
 		\AddClassFeature{Camouflage}
 	\ifthenelse{#1 > 16}{

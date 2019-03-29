@@ -27,25 +27,25 @@
 			}{}
 		\AddClassFeature{Bomb \DoMath{(#1 + 1) / 2}d6}
 		\AddClassFeature{\ifthenelse{#1 > 13}{Persistent }{}Mutagen}
-		\Addtocounter{charBonusFeatsCount}{2}
+		\Addtocounter{CharBonusFeatsCount}{2}
 			\AddClassFeature{Brew Potion}\AddFeat*{Brew Potion}
 			\AddClassFeature{Throw Anything}\AddFeat*{Throw Anything}
 	\ifthenelse{#1 > 1}{
-		\edef\charAlchemistDiscoveriesList{}
-			\NewCounter{charAlchemistDiscoveriesCount}
-			\AddClassFeature{Discoveries\forlistloop{\\~~~~}{\charAlchemistDiscoveriesList}}
-			\AddToCounter{charAlchemistDiscoveriesCount}{#1 / 2}
+		\edef\CharAlchemistDiscoveriesList{}
+			\NewCounter{CharAlchemistDiscoveriesCount}
+			\AddClassFeature{Discoveries\forlistloop{\\~~~~}{\CharAlchemistDiscoveriesList}}
+			\AddToCounter{CharAlchemistDiscoveriesCount}{#1 / 2}
 			\NewDocumentCommand{\AddAlchemistDiscovery}{m}{
-				\listinsert{\charAlchemistDiscoveriesList}{##1}
-				\AddToCounter{charAlchemistDiscoveriesCount}{-1}
+				\listinsert{\CharAlchemistDiscoveriesList}{##1}
+				\AddToCounter{CharAlchemistDiscoveriesCount}{-1}
 			}
 			\gappto{\RunChecks}{%
 				%%CHECK DISCOVERIES
-				\ifthenelse{\value{charAlchemistDiscoveriesCount} < 0}{
-					\AddWarning{\DoMath{-\value{charAlchemistDiscoveriesCount}} too many alchemist Discoveries}
+				\ifthenelse{\value{CharAlchemistDiscoveriesCount} < 0}{
+					\AddWarning{\DoMath{-\value{CharAlchemistDiscoveriesCount}} too many alchemist Discoveries}
 				}{
-				\ifthenelse{\value{charAlchemistDiscoveriesCount} > 0}{
-					\AddWarning{Choose \arabic{charAlchemistDiscoveriesCount} more alchemist Discoveries}
+				\ifthenelse{\value{CharAlchemistDiscoveriesCount} > 0}{
+					\AddWarning{Choose \arabic{CharAlchemistDiscoveriesCount} more alchemist Discoveries}
 				}{}}
 			}
 		\AddClassFeature{Poison \ifthenelse{#1 > 9}{Immunity}{Resistance +\DoMath{(#1 + 1) / 3 * 2}}}
@@ -58,15 +58,15 @@
 	\ifthenelse{#1 > 5}{
 		\AddClassFeature{Swift Poisoning}
 	\ifthenelse{#1 > 19}{
-		\edef\charGrandDiscovery{}
-		\AddClassFeature{Grand Discovery\ifthenelse{\equal{\charGrandDiscovery}{}}{}{: \charGrandDiscovery}}
-			\stepcounter{charAlchemistDiscoverisCount}
+		\edef\CharGrandDiscovery{}
+		\AddClassFeature{Grand Discovery\ifthenelse{\equal{\CharGrandDiscovery}{}}{}{: \CharGrandDiscovery}}
+			\stepcounter{CharAlchemistDiscoverisCount}
 			\NewDocumentCommand{\SetGrandDiscovery}{m}{
-				\def\charGrandDiscovery{#1}
+				\def\CharGrandDiscovery{#1}
 			}
 			\appto{\runchecks}{
 				%% Check Grand Discovery
-				\ifthenelse{\equal{\charGrandDiscovery}{}}{
+				\ifthenelse{\equal{\CharGrandDiscovery}{}}{
 					\AddWarning{Choose an alchemist Grand Discovery using \texttt{$\backslash$setGrandDiscovery}}
 				}{}
 			}
@@ -85,35 +85,35 @@
 \NewDocumentCommand{\AddCavalierClassFeatures}{m}{
 		\AddLimitedUse{Challenge}{\DoMath{(#1 + 2) / 3}}
 		\AddClassFeature{Mount}
-		\def\charCavalierOrder{Order}
-			\edef\charCavalierOrderAbilitiesList{}
-			\AddClassFeature{\charCavalierOrder\forlistloop{\\~~~~}{\charCavalierOrderAbilitiesList}}
-			\NewCounter{charCavalierOrderAbilitiesCount}
+		\def\CharCavalierOrder{Order}
+			\edef\CharCavalierOrderAbilitiesList{}
+			\AddClassFeature{\CharCavalierOrder\forlistloop{\\~~~~}{\CharCavalierOrderAbilitiesList}}
+			\NewCounter{CharCavalierOrderAbilitiesCount}
 			\NewDocumentCommand{\AddCavalierOrderAbility}{m}{
-				\listadd{\charCavalierOrderAbilitiesList}{##1}
-				\AddToCounter{charCavalierOrderAbilitiesCount}{-1}
+				\listadd{\CharCavalierOrderAbilitiesList}{##1}
+				\AddToCounter{CharCavalierOrderAbilitiesCount}{-1}
 			}
 			\NewDocumentCommand{\SetCavalierOrder}{m}{
-				\def\charCavalierOrder{##1}
+				\def\CharCavalierOrder{##1}
 			}
 			\gappto{\RunChecks}{%
 				%%CHECK Cavalier order choice
-				\ifthenelse{\equal{\charCavalierOrder}{Order}}{
+				\ifthenelse{\equal{\CharCavalierOrder}{Order}}{
 					\AddWarning{Choose a cavalier order using \texttt{$\backslash$setCavalierOrder}}
 				}{}
 				%%CHECK Order Abilities
-				\ifthenelse{\value{charCavalierOrderAbilitiesCount} < 0}{
-					\AddWarning{\DoMath{-\value{charCavalierOrderAbilitiesCount}} too many cavalier order abilities}
+				\ifthenelse{\value{CharCavalierOrderAbilitiesCount} < 0}{
+					\AddWarning{\DoMath{-\value{CharCavalierOrderAbilitiesCount}} too many cavalier order abilities}
 				}{
-				\ifthenelse{\value{charCavalierOrderAbilitiesCount} > 0}{
-					\AddWarning{Remember to input cavalier order abilities. Input \arabic{charCavalierOrderAbilitiesCount} more order abilities using \texttt{$\backslash$addCavalierOrderAbility}}
+				\ifthenelse{\value{CharCavalierOrderAbilitiesCount} > 0}{
+					\AddWarning{Remember to input cavalier order abilities. Input \arabic{CharCavalierOrderAbilitiesCount} more order abilities using \texttt{$\backslash$addCavalierOrderAbility}}
 				}{}}
 			}
 		\AddClassFeature{\ifthenelse{#1 > 8}{\ifthenelse{#1 > 16}{Master}{Greater} }{}Tactician}
 			\AddlimitedUse{Tactician}{\DoMath{#1 / 5 + 1}}
-			\stepcounter{charBonusFeatsCount}
+			\stepcounter{CharBonusFeatsCount}
 	\ifthenelse{#1 > 1}{
-		\stepcounter{charCavalierOrderAbilitiesCount}
+		\stepcounter{CharCavalierOrderAbilitiesCount}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Cavalier's Charge}
 	\ifthenelse{#1 > 3}{
@@ -125,7 +125,7 @@
 		\AddClassFeature{\ifthenelse{#1 > 13}{Greater }{}Banner +\DoMath{#1 / 5}}
 	\ifthenelse{#1 > 5}{
 		\AddClassFeature{Cavalier Bonus Feat\ifthenelse{#1 > 11}{ $\times \DoMath{#1 / 6}$}
-		\Addtocounter{charBonusFeatsCount}{#1 / 6}
+		\Addtocounter{CharBonusFeatsCount}{#1 / 6}
 	\ifthenelse{#1 > 10}{
 		\AddClassFeature{Mighty Charge}
 	\ifthenelse{#1 > 11}{

@@ -17,11 +17,11 @@
 	\put(0,0){%
 	  	\renewcommand{\arraystretch}{.9}%
 		\begin{tabular}[b]{D{46} D{23}  D{23}  D{23}  D{23}  D{23}  D{23}  D{23} }%
-			\multicolumn{3}{D{111}}{\charName} & \multicolumn{2}{D{60}}{\charAlignment} & \multicolumn{3}{D{90}}{\charPlayerName} \\[-3\unitlength]
+			\multicolumn{3}{D{111}}{\CharName} & \multicolumn{2}{D{60}}{\CharAlignment} & \multicolumn{3}{D{90}}{\CharPlayerName} \\[-3\unitlength]
 			\cmidrule(rl){1-3}\cmidrule(rl){4-5}\cmidrule(rl){6-8}\\
-			\multicolumn{4}{D{142}}{\charLevel} &\multicolumn{2}{D{55}}{\charReligion} & \multicolumn{2}{D{55}}{\charHomeland} \\[-3\unitlength]
+			\multicolumn{4}{D{142}}{\CharLevel} &\multicolumn{2}{D{55}}{\CharReligion} & \multicolumn{2}{D{55}}{\CharHomeland} \\[-3\unitlength]
 			\cmidrule(rl){1-4}\cmidrule(rl){5-6}\cmidrule(rl){7-8}\\
-			\charRace & \charSize & \charGender & \charAge & \charHeight & \charWeight & \charHair & \charEyes\\[-3\unitlength]
+			\CharRace & \CharSize & \CharGender & \CharAge & \CharHeight & \CharWeight & \CharHair & \CharEyes\\[-3\unitlength]
 			\cmidrule(rl){1-1}\cmidrule(rl){2-2}\cmidrule(rl){3-3}\cmidrule(rl){4-4}\cmidrule(rl){5-5}\cmidrule(rl){6-6}\cmidrule(rl){7-7}\cmidrule(rl){8-8}
     	\end{tabular}%
 	}%
@@ -43,43 +43,43 @@
 	\put(64.5,-2){\line(0,1){77}}}
 	%% STR
 	\titlebox{0}{60}{28}{STR}{Strength}
-	\StretchAttributes{30}{60}{137}{\Arabic{charStrCount},\PlusMinus{charStrModCount},\Arabic{charStrBaseCount},\PlusMinus{charStrEnhancementCount},\PlusMinus{charStrMiscCount},\PlusMinus{charStrTmpCount}}
+	\StretchAttributes{30}{60}{137}{\Arabic{CharStrCount},\PlusMinus{CharStrModCount},\Arabic{CharStrBaseCount},\PlusMinus{CharStrEnhancementCount},\PlusMinus{CharStrMiscCount},\PlusMinus{CharStrTmpCount}}
 	
 	%% DEX
 	\titlebox{0}{48}{28}{DEX}{Dexterity}
-	\StretchAttributes{30}{48}{137}{\Arabic{charDexCount},\PlusMinus{charDexModCount},\Arabic{charDexBaseCount},\PlusMinus{charDexEnhancementCount},\PlusMinus{charDexMiscCount},\PlusMinus{charDexTmpCount}}
+	\StretchAttributes{30}{48}{137}{\Arabic{CharDexCount},\PlusMinus{CharDexModCount},\Arabic{CharDexBaseCount},\PlusMinus{CharDexEnhancementCount},\PlusMinus{CharDexMiscCount},\PlusMinus{CharDexTmpCount}}
 	
 	%% CON
 	\titlebox{0}{36}{28}{CON}{Constitution}
-	\StretchAttributes{30}{36}{137}{\Arabic{charConCount},\PlusMinus{charConModCount},\Arabic{charConBaseCount},\PlusMinus{charConEnhancementCount},\PlusMinus{charConMiscCount},\PlusMinus{charConTmpCount}}
+	\StretchAttributes{30}{36}{137}{\Arabic{CharConCount},\PlusMinus{CharConModCount},\Arabic{CharConBaseCount},\PlusMinus{CharConEnhancementCount},\PlusMinus{CharConMiscCount},\PlusMinus{CharConTmpCount}}
 	
 	%% INT
 	\titlebox{0}{24}{28}{INT}{Intelligence}
-	\StretchAttributes{30}{24}{137}{\Arabic{charIntCount},\PlusMinus{charIntModCount},\Arabic{charIntBaseCount},\PlusMinus{charIntEnhancementCount},\PlusMinus{charIntMiscCount},\PlusMinus{charIntTmpCount}}
+	\StretchAttributes{30}{24}{137}{\Arabic{CharIntCount},\PlusMinus{CharIntModCount},\Arabic{CharIntBaseCount},\PlusMinus{CharIntEnhancementCount},\PlusMinus{CharIntMiscCount},\PlusMinus{CharIntTmpCount}}
 	
 	%% WIS
 	\titlebox{0}{12}{28}{WIS}{Wisdom}
-	\StretchAttributes{30}{12}{137}{\Arabic{charWisCount},\PlusMinus{charWisModCount},\Arabic{charWisBaseCount},\PlusMinus{charWisEnhancementCount},\PlusMinus{charWisMiscCount},\PlusMinus{charWisTmpCount}}
+	\StretchAttributes{30}{12}{137}{\Arabic{CharWisCount},\PlusMinus{CharWisModCount},\Arabic{CharWisBaseCount},\PlusMinus{CharWisEnhancementCount},\PlusMinus{CharWisMiscCount},\PlusMinus{CharWisTmpCount}}
 	
 	%% CHA
 	\titlebox{0}{0}{28}{CHA}{Charisma}
-	\StretchAttributes{30}{0}{137}{\Arabic{charChaCount},\PlusMinus{charChaModCount},\Arabic{charChaBaseCount},\PlusMinus{charChaEnhancementCount},\PlusMinus{charChaMiscCount},\PlusMinus{charChaTmpCount}}
+	\StretchAttributes{30}{0}{137}{\Arabic{CharChaCount},\PlusMinus{CharChaModCount},\Arabic{CharChaBaseCount},\PlusMinus{CharChaEnhancementCount},\PlusMinus{CharChaMiscCount},\PlusMinus{CharChaTmpCount}}
 }
 
 \put(139,480){%% XP
 	\titlebox{0}{12}{30}{XP}{Current XP}
 	\titlebox{0}{0}{30}{XP}{To Next Level}
-	\put(32,12){\framebox(39,10){\CleanArabic{charXPCount}}}
-	\put(32,0){\framebox(39,10){\CleanArabic{charNextLevelXPCount}}}
+	\put(32,12){\framebox(39,10){\CleanArabic{CharXPCount}}}
+	\put(32,0){\framebox(39,10){\CleanArabic{CharNextLevelXPCount}}}
 }
 
 \put(0,461){%% HP
 	\titlebox{0}{4}{28}{HP}{Hit Points}
 	\put(31,2){\framebox(64,12){}}
 	\put(32,9){\parbox[4\unitlength]{14\unitlength}{\tiny\scshape Total}}
-	\put(46,0){\parbox[b][12\unitlength][c]{18\unitlength}{\centering \Arabic{charHPCount}}}
+	\put(46,0){\parbox[b][12\unitlength][c]{18\unitlength}{\centering \Arabic{CharHPCount}}}
 	\put(63,9){\parbox[4\unitlength]{12\unitlength}{\tiny\scshape Temp}}
-	\put(73,0){\parbox[b][12\unitlength][c]{18\unitlength}{\centering \CleanArabic{charTempHPCount}}}
+	\put(73,0){\parbox[b][12\unitlength][c]{18\unitlength}{\centering \CleanArabic{CharTempHPCount}}}
 }
 
 \put(0,416){%% little HP boxes
@@ -93,33 +93,33 @@
 	\titlebox{0}{49}{110}{\footnotesize Special Defenses}{DR, SR, Resitances, Immunities}
 	\put(0,0){\framebox(110,47){}}%
 	\put(1,1){\parbox[b][45\unitlength][t]{108\unitlength}{\scriptsize
-		\ifthenelse{\value{charSpellResistanceCount} > 0}{SR \arabic{charSpellResistanceCount}; }{}
-		\PrintDR\ifthenelse{\equal{\charDRTypesList}{}}{}{; }%
-		\ifthenelse{\equal{\charImmunitiesList}{}}{}{Immune to }\PrintList[, Immune to ]{\charImmunitiesList}\ifthenelse{\equal{\charImmunitiesList}{}}{}{; }%
-		\PrintResistances \ifthenelse{\equal{\charResistancesList}{}}{}{; }
-		\PrintList{\charSpecialDefensesList}
+		\ifthenelse{\value{CharSpellResistanceCount} > 0}{SR \arabic{CharSpellResistanceCount}; }{}
+		\PrintDR\ifthenelse{\equal{\CharDRTypesList}{}}{}{; }%
+		\ifthenelse{\equal{\CharImmunitiesList}{}}{}{Immune to }\PrintList[, Immune to ]{\CharImmunitiesList}\ifthenelse{\equal{\CharImmunitiesList}{}}{}{; }%
+		\PrintResistances \ifthenelse{\equal{\CharResistancesList}{}}{}{; }
+		\PrintList{\CharSpecialDefensesList}
 	}}
 }
 
 \put(0,377){%% AC
 	\titlebox{0}{24}{32}{AC}{Armour Class}
-	\equalattributes{30}{24}{10,\arabic{charArmorBonusCount},\arabic{charShieldBonusCount},\arabic{charDextoACCount},\arabic{charDodgeModCount},\arabic{charSizeModCount},\arabic{charNaturalArmorModCount},\arabic{charDeflectionModCount},\arabic{charACMiscCount}}{18}
+	\equalattributes{30}{24}{10,\arabic{CharArmorBonusCount},\arabic{CharShieldBonusCount},\arabic{CharDextoACCount},\arabic{CharDodgeModCount},\arabic{CharSizeModCount},\arabic{CharNaturalArmorModCount},\arabic{CharDeflectionModCount},\arabic{CharACMiscCount}}{18}
 	\scaleattributelabels{30}{30}{TOTAL,Default,Armor,Shield,Dex,Dodge,Size,Natural,Deflection,Misc }{18}
 	% Touch, Flat footed
 	\titlebox{0}{12}{32}{TOUCH}{Armour Class}
-	\equalattributes{30}{12}{10,,,\arabic{charDextoACCount},\arabic{charDodgeModCount},\arabic{charSizeModCount},,\arabic{charDeflectionModCount},\arabic{charTouchACMiscCount}}{18}
+	\equalattributes{30}{12}{10,,,\arabic{CharDextoACCount},\arabic{CharDodgeModCount},\arabic{CharSizeModCount},,\arabic{CharDeflectionModCount},\arabic{CharTouchACMiscCount}}{18}
 	\titlebox{0}{0}{32}{\fontsize{6}{7}\selectfont Flat-Footed}{Armour Class}
-	\equalattributes{30}{0}{10,\arabic{charArmorBonusCount},\arabic{charShieldBonusCount},,,\arabic{charSizeModCount},\arabic{charNaturalArmorModCount},\arabic{charDeflectionModCount},\arabic{charFlatFootedACMiscCount}}{18}
+	\equalattributes{30}{0}{10,\arabic{CharArmorBonusCount},\arabic{CharShieldBonusCount},,,\arabic{CharSizeModCount},\arabic{CharNaturalArmorModCount},\arabic{CharDeflectionModCount},\arabic{CharFlatFootedACMiscCount}}{18}
 }
 
 \put(0,330){%% Fort, Reflex and Will
 	\scaleattributelabels{46}{37}{TOTAL, Base, Ability, Resistance, Misc,Temp}{18}
 	\titlebox{0}{30}{48}{Fortitude}{(Constitution)}
-	\equalattributes{46}{30}{\arabic{charFortitudeCount},\arabic{charConModCount},\arabic{charResistanceModCount},\arabic{charFortitudeMiscCount},\arabic{charFortitudeTmpCount}}{18}
+	\equalattributes{46}{30}{\arabic{CharFortitudeCount},\arabic{CharConModCount},\arabic{CharResistanceModCount},\arabic{CharFortitudeMiscCount},\arabic{CharFortitudeTmpCount}}{18}
 	\titlebox{0}{15}{48}{Reflex}{(Dexterity)}
-	\equalattributes{46}{15}{\arabic{charReflexCount},\arabic{charDexModCount},\arabic{charResistanceModCount},\arabic{charReflexMiscCount},\arabic{charReflexTmpCount}}{18}
+	\equalattributes{46}{15}{\arabic{CharReflexCount},\arabic{CharDexModCount},\arabic{CharResistanceModCount},\arabic{CharReflexMiscCount},\arabic{CharReflexTmpCount}}{18}
 	\titlebox{0}{0}{48}{Will}{(Wisdom)}  
-	\equalattributes{46}{0}{\arabic{charWillCount},\arabic{charWisModCount},\arabic{charResistanceModCount},\arabic{charWillMiscCount},\arabic{charWillTmpCount}}{18}
+	\equalattributes{46}{0}{\arabic{CharWillCount},\arabic{CharWisModCount},\arabic{CharResistanceModCount},\arabic{CharWillMiscCount},\arabic{CharWillTmpCount}}{18}
 }
   
 \put(158,330){%% Defensive Conditional Modifiers
@@ -129,20 +129,20 @@
 }
 
 \put(0,271){%% Attacks, CMD/CMB
-	\SetCounter{charCMDBaseCount}{\value{charBABCount}+10}
+	\SetCounter{CharCMDBaseCount}{\value{CharBABCount}+10}
 	\scaleattributelabels{53}{47}{TOTAL,Base,Ability,Size,Misc,Temp}{18}
 	\titlebox{0}{39}{55}{Melee}{Attack Modifier}
-	\equalattributes{53}{39}{\arabic{charBABCount},\arabic{charStrModCount},\arabic{charSizeModCount},\arabic{charMeleeMiscCount},\arabic{charMeleeTmpCount}}{18}
+	\equalattributes{53}{39}{\arabic{CharBABCount},\arabic{CharStrModCount},\arabic{CharSizeModCount},\arabic{CharMeleeMiscCount},\arabic{CharMeleeTmpCount}}{18}
 	\titlebox{0}{26}{55}{Ranged}{Attack Modifier}
-	\equalattributes{53}{26}{\arabic{charBABCount},\arabic{charDexModCount},\arabic{charSizeModCount},\arabic{charRangedMiscCount},\arabic{charRangedTmpCount}}{18}
+	\equalattributes{53}{26}{\arabic{CharBABCount},\arabic{CharDexModCount},\arabic{CharSizeModCount},\arabic{CharRangedMiscCount},\arabic{CharRangedTmpCount}}{18}
 	\titlebox{0}{13}{55}{CMB}{Combat Maneuver Bonus}
-	\equalattributes{53}{13}{\arabic{charBABCount},\arabic{charStrModCount},\arabic{charSpecialSizeModCount},\arabic{charCMBMiscCount},\arabic{charCMBTmpCount}}{18}
+	\equalattributes{53}{13}{\arabic{CharBABCount},\arabic{CharStrModCount},\arabic{CharSpecialSizeModCount},\arabic{CharCMBMiscCount},\arabic{CharCMBTmpCount}}{18}
 	\titlebox{0}{0}{55}{CMD}{Combat Maneuver Defense}
-	\equalattributes{53}{0}{\arabic{charCMDBaseCount},\arabic{charCMDAbilityModCount},\arabic{charSpecialSizeModCount},\arabic{charCMDMiscCount},\arabic{charCMDTmpCount}}{18}
+	\equalattributes{53}{0}{\arabic{CharCMDBaseCount},\arabic{CharCMDAbilityModCount},\arabic{CharSpecialSizeModCount},\arabic{CharCMDMiscCount},\arabic{CharCMDTmpCount}}{18}
 }
 \put(165,314){%% BAB
 	\singletitlebox{0}{0}{23}{9}{BAB}
-	\put(25,0){\framebox(20,9){\arabic{charBABCount}}}
+	\put(25,0){\framebox(20,9){\arabic{CharBABCount}}}
 }
 
 \put(165,271){%% Offensive Conditional Modifiers
@@ -152,54 +152,54 @@
 
 \put(0,241){%% INIT
 	\titlebox{0}{16}{55}{INITIATIVE}{Modifier}
-	\stretchequalattributes{0}{4}{55}{\arabic{charDexModCount},\arabic{charInitiativeMiscCount}}
+	\stretchequalattributes{0}{4}{55}{\arabic{CharDexModCount},\arabic{CharInitiativeMiscCount}}
 	\stretchlabels{0}{0}{55}{TOTAL, Dex, Misc}
 }
 
 \put(63,240){%% Speed
 	\singletitlebox{0}{3}{25}{24}{Speed}
 	\put(29,17){\framebox(35,\boxheight){}}
-	\put(29,18){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{charBaseSpeedCount} &ft. & \DoMath{\value{charBaseSpeedCount} / 5}& sq.\end{tabular}}
+	\put(29,18){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{CharBaseSpeedCount} &ft. & \DoMath{\value{CharBaseSpeedCount} / 5}& sq.\end{tabular}}
 	\put(29,14){\parbox[b][3\unitlength][b]{32\unitlength}{\centering\lfont Base Speed}}
 	\put(29,3){\framebox(35,\boxheight){}}
 	\put(29,4){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}0 &ft. & 0& sq.\end{tabular}}
 	\put(29,0){\parbox[b][3\unitlength][b]{32\unitlength}{\centering\lfont with armour}}
 	\put(68,17){\framebox(35,\boxheight){}}
-	\put(68,18){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{charFlySpeedCount} &ft. & \DoMath{\value{charFlySpeedCount} / 5}& sq.\end{tabular}}
+	\put(68,18){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{CharFlySpeedCount} &ft. & \DoMath{\value{CharFlySpeedCount} / 5}& sq.\end{tabular}}
 	\put(68,14){\parbox[b][3\unitlength][b]{32\unitlength}{\lfont\centering Fly}}
 	\put(68,3){\framebox(35,\boxheight){}}
-	\put(68,4){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{charSwimSpeedCount} &ft. & \DoMath{\value{charSwimSpeedCount} / 5}& sq.\end{tabular}}
+	\put(68,4){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{CharSwimSpeedCount} &ft. & \DoMath{\value{CharSwimSpeedCount} / 5}& sq.\end{tabular}}
 	\put(68,0){\parbox[b][3\unitlength][b]{32\unitlength}{\centering\lfont Swim}}
 	\put(107,17){\framebox(35,\boxheight){}}
-	\put(107,18){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{charClimbSpeedCount} &ft. & \DoMath{\value{charClimbSpeedCount} / 5}& sq.\end{tabular}}
+	\put(107,18){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{CharClimbSpeedCount} &ft. & \DoMath{\value{CharClimbSpeedCount} / 5}& sq.\end{tabular}}
 	\put(107,14){\parbox[b][3\unitlength][b]{32\unitlength}{\centering\lfont Climb}}
 	\put(107,3){\framebox(35,\boxheight){}}
-	\put(107,4){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{charBurrowSpeedCount} &ft. & \DoMath{\value{charBurrowSpeedCount} / 5}& sq.\end{tabular}}
+	\put(107,4){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{CharBurrowSpeedCount} &ft. & \DoMath{\value{CharBurrowSpeedCount} / 5}& sq.\end{tabular}}
 	\put(107,0){\parbox[b][3\unitlength][b]{32\unitlength}{\centering\lfont Burrow}}
 }
   
 \put(0,0){%% Weapons & Armor
 	\put(0,200){% Weapon 1
 		\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
-			\multicolumn{3}{A{105}}{\itshape \charWeaponOneName} & \charWeaponOneAttackBonus & \charWeaponOneDamage &\charWeaponOneCritical \tabularnewline\hline
+			\multicolumn{3}{A{105}}{\itshape \CharWeaponOneName} & \CharWeaponOneAttackBonus & \CharWeaponOneDamage &\CharWeaponOneCritical \tabularnewline\hline
 			\multicolumn{3}{A{105}}{\tiny\scshape WEAPON} &\tiny\scshape  attack Bonus &\tiny\scshape Damage &\tiny\scshape  Critical  \tabularnewline
-			\itshape \charWeaponOneType &  \charWeaponOneRange & \multicolumn{4}{A{160}}{\charWeaponOneNotes}  \tabularnewline\hline 
+			\itshape \CharWeaponOneType &  \CharWeaponOneRange & \multicolumn{4}{A{160}}{\CharWeaponOneNotes}  \tabularnewline\hline 
 			\tiny\scshape Type & \tiny\scshape Range &\multicolumn{4}{A{160}} {\tiny\scshape ammunition \& Notes } \tabularnewline
 		\end{tabular}
 	}
 	\put(0,150){% Weapon 2
 		\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
-			\multicolumn{3}{A{105}}{\itshape \charWeaponTwoName} & \charWeaponTwoAttackBonus & \charWeaponTwoDamage &\charWeaponTwoCritical \tabularnewline\hline
+			\multicolumn{3}{A{105}}{\itshape \CharWeaponTwoName} & \CharWeaponTwoAttackBonus & \CharWeaponTwoDamage &\CharWeaponTwoCritical \tabularnewline\hline
 			\multicolumn{3}{A{105}}{\tiny\scshape WEAPON} &\tiny\scshape  attack Bonus &\tiny\scshape Damage &\tiny\scshape  Critical  \tabularnewline
-			\itshape \charWeaponTwoType &  \charWeaponTwoRange & \multicolumn{4}{A{160}}{\charWeaponTwoNotes}  \tabularnewline\hline
+			\itshape \CharWeaponTwoType &  \CharWeaponTwoRange & \multicolumn{4}{A{160}}{\CharWeaponTwoNotes}  \tabularnewline\hline
 			\tiny\scshape Type & \tiny\scshape Range &\multicolumn{4}{A{160}} {\tiny\scshape ammunition \& Notes } \tabularnewline
 		\end{tabular}
 	}
 	\put(0,100){% Weapon 3
 		\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
-    		\multicolumn{3}{A{105}}{\itshape \charWeaponThreeName} & \charWeaponThreeAttackBonus & \charWeaponThreeDamage &\charWeaponThreeCritical \tabularnewline\hline
+    		\multicolumn{3}{A{105}}{\itshape \CharWeaponThreeName} & \CharWeaponThreeAttackBonus & \CharWeaponThreeDamage &\CharWeaponThreeCritical \tabularnewline\hline
     		\multicolumn{3}{A{105}}{\tiny\scshape WEAPON} &\tiny\scshape  attack Bonus &\tiny\scshape Damage &\tiny\scshape  Critical  \tabularnewline
-    		\itshape \charWeaponThreeType &  \charWeaponThreeRange & \multicolumn{4}{A{160}}{\charWeaponThreeNotes}  \tabularnewline\hline
+    		\itshape \CharWeaponThreeType &  \CharWeaponThreeRange & \multicolumn{4}{A{160}}{\CharWeaponThreeNotes}  \tabularnewline\hline
     		\tiny\scshape Type & \tiny\scshape Range &\multicolumn{4}{A{160}} {\tiny\scshape ammunition \& Notes } \tabularnewline
 		\end{tabular}
 	}
@@ -207,17 +207,17 @@
     	\put(0,95){\line(1,0){205}}}
     \put(0,50){% Armor
 		\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
-      		\multicolumn{3}{A{105}}{\itshape \charArmorName} & \CleanPM{charArmorBonusCount} & \ifthenelse{\value{charMaxDexArmorCount} < 100}{\PlusMinus{charMaxDexArmorCount}}{} &\ifthenelse{\equal\charArmorName{}}{}{\Arabic{charArmorArmorCheckpenaltyCount}} \tabularnewline\hline
+      		\multicolumn{3}{A{105}}{\itshape \CharArmorName} & \CleanPM{CharArmorBonusCount} & \ifthenelse{\value{CharMaxDexArmorCount} < 100}{\PlusMinus{CharMaxDexArmorCount}}{} &\ifthenelse{\equal\CharArmorName{}}{}{\Arabic{CharArmorArmorCheckpenaltyCount}} \tabularnewline\hline
 		\multicolumn{3}{A{105}}{\tiny\scshape ARMOR} &\tiny\scshape Armor Bonus &\tiny\scshape Max Dex &\tiny\scshape  check penalty \tabularnewline
-      		\itshape \Arabic{charArmorSpellFailureCount}\% &  \charArmorType & \multicolumn{4}{A{160}}{\charArmorNotes}  \tabularnewline\hline
+      		\itshape \Arabic{CharArmorSpellFailureCount}\% &  \CharArmorType & \multicolumn{4}{A{160}}{\CharArmorNotes}  \tabularnewline\hline
 		\tiny\scshape Spell failure & \tiny\scshape Type &\multicolumn{4}{A{160}} {\tiny\scshape Notes } \tabularnewline
 		\end{tabular}
 	}
 	\put(0,0){% Shield
 		\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
-			\multicolumn{3}{A{105}}{\itshape \charShieldName} & \CleanPM{charShieldBonusCount} & \ifthenelse{\value{charMaxDexShieldCount} < 100}{\PlusMinus{charMaxDexShieldCount}}{} &\ifthenelse{\equal\charShieldName{}}{}{\Arabic{charShieldArmorCheckpenaltyCount}}\tabularnewline\hline
+			\multicolumn{3}{A{105}}{\itshape \CharShieldName} & \CleanPM{CharShieldBonusCount} & \ifthenelse{\value{CharMaxDexShieldCount} < 100}{\PlusMinus{CharMaxDexShieldCount}}{} &\ifthenelse{\equal\CharShieldName{}}{}{\Arabic{CharShieldArmorCheckpenaltyCount}}\tabularnewline\hline
 			\multicolumn{3}{A{105}}{\tiny\scshape Shield} &\tiny\scshape Shield Bonus &\tiny\scshape max Dex &\tiny\scshape  check penalty \tabularnewline
-			\itshape \Arabic{charShieldSpellFailureCount}\% &  \multicolumn{5}{A{185}}{\charShieldNotes}  \tabularnewline\hline
+			\itshape \Arabic{CharShieldSpellFailureCount}\% &  \multicolumn{5}{A{185}}{\CharShieldNotes}  \tabularnewline\hline
 			\tiny\scshape Spell failure & & \multicolumn{4}{A{160}} {\tiny\scshape Notes } \tabularnewline
 	    \end{tabular}
 	}
@@ -227,18 +227,18 @@
 	\ifthenelse{\value{#1} = 1}{$\cancel{\square}$}{$\square$}
 }
 \newcommand\PrintSkill[3]{
-	\ifthenelse{\value{char#1RanksCount} > 0}{
-		\SetCounter{@i}{\value{char#1ClassSkillBool}*3}
+	\ifthenelse{\value{Char#1RanksCount} > 0}{
+		\SetCounter{@i}{\value{Char#1ClassSkillBool}*3}
 	}{
 		\SetCounter{@i}{0}
 	}
-	\SetCounter{@j}{\value{char#3ModCount}+\value{char#1RanksCount}+\value{char#1MiscCount}+\value{@i}}%
-	\ClassSkillBox{char#1ClassSkillBool} &  #2\ifinlist{#1}{\ArmorCheckSkillsList}{$\dagger$}{}\ifinlist{#1}{\TrainedSkillsList}{*}{} & 
+	\SetCounter{@j}{\value{Char#3ModCount}+\value{Char#1RanksCount}+\value{Char#1MiscCount}+\value{@i}}%
+	\ClassSkillBox{Char#1ClassSkillBool} &  #2\ifinlist{#1}{\ArmorCheckSkillsList}{$\dagger$}{}\ifinlist{#1}{\TrainedSkillsList}{*}{} & 
 	\Arabic{@j} &~$=$~\capitalize{#3} & 
-	$\Arabic{char#3ModCount}$ & $+$ & 
-	$\Arabic{char#1RanksCount}$ &  $+$ & 
+	$\Arabic{Char#3ModCount}$ & $+$ & 
+	$\Arabic{Char#1RanksCount}$ &  $+$ & 
 	$\Arabic{@i}$ & $+$ &
-	$\Arabic{char#1MiscCount}$ 
+	$\Arabic{Char#1MiscCount}$ 
 	\tabularnewline\cline{3-3}\cline{5-5}\cline{7-7}\cline{9-9}\cline{11-11}
 }
 \put(214,120){%Skills
@@ -248,9 +248,9 @@
 		\PrintSkill{Appraise}{Appraise}{Int}
 		\PrintSkill{Bluff}{Bluff}{Cha}
 		\PrintSkill{Climb}{Climb}{Str}
-		\PrintSkill{CraftOne}{Craft (\charCraftOneName)}{Int}
-		\PrintSkill{CraftTwo}{Craft (\charCraftTwoName)}{Int}
-		\PrintSkill{CraftThree}{Craft (\charCraftThreeName)}{Int}
+		\PrintSkill{CraftOne}{Craft (\CharCraftOneName)}{Int}
+		\PrintSkill{CraftTwo}{Craft (\CharCraftTwoName)}{Int}
+		\PrintSkill{CraftThree}{Craft (\CharCraftThreeName)}{Int}
 		\PrintSkill{Diplomacy}{Diplomacy}{Cha}
 		\PrintSkill{DisableDevice}{Disable Device}{Dex}
 		\PrintSkill{Disguise}{Disguise}{Cha}
@@ -271,10 +271,10 @@
 		\PrintSkill{KnowledgeReligion}{Know (religion)}{Int}
 		\PrintSkill{Linguistics}{Linguistics}{Int}
 		\PrintSkill{Perception}{Perception}{Wis}
-		\PrintSkill{PerformOne}{Perform (\charPerformOneName)}{Cha}
-		\PrintSkill{PerformTwo}{Perform (\charPerformTwoName)}{Cha}
-		\PrintSkill{ProfessionOne}{Prof (\charProfessionOneName)}{Wis}
-		\PrintSkill{ProfessionTwo}{Prof (\charProfessionTwoName)}{Wis}
+		\PrintSkill{PerformOne}{Perform (\CharPerformOneName)}{Cha}
+		\PrintSkill{PerformTwo}{Perform (\CharPerformTwoName)}{Cha}
+		\PrintSkill{ProfessionOne}{Prof (\CharProfessionOneName)}{Wis}
+		\PrintSkill{ProfessionTwo}{Prof (\CharProfessionTwoName)}{Wis}
 		\PrintSkill{Ride}{Ride}{Dex}
 		\PrintSkill{SenseMotive}{Sense Motive}{Wis}
 		\PrintSkill{SleightOfHand}{Sleight of Hand}{Dex}
@@ -291,7 +291,7 @@
 	\put(2,49){\parbox[b][53\unitlength][t]{202\unitlength}{\PrintList{\ConditionalSkillsModList}}}
 	\put(0,49){\framebox(206,55){}}
 	\put(2,39){\parbox[b][10\unitlength][c]{202\unitlength}{\small\scshape Languages Spoken:}}
-	\put(2,0){\parbox[b][37\unitlength][t]{202\unitlength}{\itshape \PrintList{\charLanguagesList} }}
+	\put(2,0){\parbox[b][37\unitlength][t]{202\unitlength}{\itshape \PrintList{\CharLanguagesList} }}
 	\put(0,0){\framebox(206,39){}}
 }
 
@@ -310,7 +310,7 @@
 	\singletitlebox{0}{6}{165}{10}{Limited Use Abilities and Equipment}
 	\begin{tabular}[t]{@{}p{117\unitlength}@{\hspace{2\unitlength}}>{\centering}p{22\unitlength}@{\hspace{1\unitlength}}|@{\hspace{1\unitlength}}>{\centering}p{22\unitlength}@{}}
 		\vspace{\fill}\small\scshape Ability or Item & \small\scshape Uses\\(/Day) & \small\scshape \vspace{\fill}Used \tabularnewline\hline
-		\dolistloop{\charLimitedUseList}
+		\dolistloop{\CharLimitedUseList}
 	\end{tabular}
 }
 
@@ -321,14 +321,14 @@
 \put(0,546){
 	\singletitlebox{0}{6}{120}{10}{Class and Race Features}
 	\begin{tabular}[t]{@{}>{\small\itshape}p{120\unitlength}@{}}
-		\dolistloop{\charRaceFeaturesList}\hline
-		\dolistloop{\charClassFeaturesList}
+		\dolistloop{\CharRaceFeaturesList}\hline
+		\dolistloop{\CharClassFeaturesList}
 	\end{tabular}
 }
 \put(125,546){
 	\singletitlebox{0}{6}{120}{10}{Feats}
 	\begin{tabular}[t]{@{}>{\itshape}p{120\unitlength}@{}}
-		\dolistloop{\charFeatsList}
+		\dolistloop{\CharFeatsList}
 	\end{tabular}
 }
 
@@ -337,7 +337,7 @@
 		\singletitlebox{0}{6}{204}{10}{Carried Items}
 		\begin{tabular}[t]{@{}p{175\unitlength} @{\hspace{1\unitlength}}>{\raggedleft}p{29\unitlength}@{}}
 			\scshape\scriptsize Item& \scshape\scriptsize wt.\tabularnewline\hline
-			\dolistloop{\charGearList}
+			\dolistloop{\CharGearList}
 		\end{tabular}
 	}
 	\put(0,0){
@@ -379,10 +379,10 @@
 	\singletitlebox{0}{52.5}{121.5}{9}{Money}
 	\begin{tabular}[b]{@{}|@{}>{\centering\scriptsize\scshape}p{30\unitlength}@{}|@{}>{\centering\scriptsize}p{30\unitlength}@{}|@{}>{\centering\scriptsize}p{30\unitlength}@{}|@{}>{\centering\scriptsize}p{30\unitlength}@{}|@{}}
 		& \scshape\tiny Carried & \scshape\tiny Carried (Weightless) & \tiny\scshape Stored\tabularnewline
-		Platinum &\CleanArabic{charPlatinumCount} &\CleanArabic{charPlatinumWeightlessCount} & \CleanArabic{charPlatinumStoredCount}\tabularnewline\hline
-		Gold &\CleanArabic{charGoldCount} &\CleanArabic{charGoldWeightlessCount} & \CleanArabic{charGoldStoredCount}\tabularnewline\hline
-		Silver &\CleanArabic{charSilverCount} &\CleanArabic{charSilverWeightlessCount} & \CleanArabic{charSilverStoredCount}\tabularnewline\hline
-		Copper &\CleanArabic{charCopperCount} &\CleanArabic{charCopperWeightlessCount} & \CleanArabic{charCopperStoredCount}\tabularnewline\hline
+		Platinum &\CleanArabic{CharPlatinumCount} &\CleanArabic{CharPlatinumWeightlessCount} & \CleanArabic{CharPlatinumStoredCount}\tabularnewline\hline
+		Gold &\CleanArabic{CharGoldCount} &\CleanArabic{CharGoldWeightlessCount} & \CleanArabic{CharGoldStoredCount}\tabularnewline\hline
+		Silver &\CleanArabic{CharSilverCount} &\CleanArabic{CharSilverWeightlessCount} & \CleanArabic{CharSilverStoredCount}\tabularnewline\hline
+		Copper &\CleanArabic{CharCopperCount} &\CleanArabic{CharCopperWeightlessCount} & \CleanArabic{CharCopperStoredCount}\tabularnewline\hline
 	\end{tabular}
 }
  
@@ -394,7 +394,7 @@
 	\put(1,0){\framebox(28,10){\small\PrintWeight{\ExtradimensionalGearWeight} lbs.}}
 	\put(31,0){\framebox(28,10){\small\PrintWeight{\ExtradimensionalCurrencyWeight} lbs.}}
 	\put(61,0){\framebox(33,12){\PrintWeight{\TotalExtradimensionalWeight} lbs.}}
-	\put(96,0){\framebox(33,12){\Arabic{charExtradimensionalCapacityCount} lbs.}}
+	\put(96,0){\framebox(33,12){\Arabic{CharExtradimensionalCapacityCount} lbs.}}
 }
  
 \put(125,0){%Carried Weight
@@ -411,12 +411,12 @@
 	\put(0,27){%
 		\singletitlebox{5}{15}{158}{10}{Carrying Capacity}%
 		\scaleattributelabels{0}{7}{light\\load,medium\\load,heavy\\load,lift above\\head,lift off\\ground,drag \&\\push}{26}%
-		\put(7,0){\framebox(24,8){\footnotesize\CleanArabic{charLightLoadCount} lbs.}}%
-		\put(33,0){\framebox(24,8){\footnotesize\CleanArabic{charMediumLoadCount} lbs.}}%
-		\put(59,0){\framebox(24,8){\footnotesize\CleanArabic{charHeavyLoadCount} lbs.}}%
-		\put(85,0){\framebox(24,8){\footnotesize\CleanArabic{charHeavyLoadCount} lbs.}}%
-		\put(111,0){\framebox(24,8){\footnotesize\CleanArabic{charLiftLoadCount} lbs.}}%
-		\put(137,0){\framebox(24,8){\footnotesize\CleanArabic{charDragLoadCount} lbs.}}%
+		\put(7,0){\framebox(24,8){\footnotesize\CleanArabic{CharLightLoadCount} lbs.}}%
+		\put(33,0){\framebox(24,8){\footnotesize\CleanArabic{CharMediumLoadCount} lbs.}}%
+		\put(59,0){\framebox(24,8){\footnotesize\CleanArabic{CharHeavyLoadCount} lbs.}}%
+		\put(85,0){\framebox(24,8){\footnotesize\CleanArabic{CharHeavyLoadCount} lbs.}}%
+		\put(111,0){\framebox(24,8){\footnotesize\CleanArabic{CharLiftLoadCount} lbs.}}%
+		\put(137,0){\framebox(24,8){\footnotesize\CleanArabic{CharDragLoadCount} lbs.}}%
 	}%
 	\put(7,18){\parbox[t]{38\unitlength}{\scshape\scriptsize Current Load}}%
 	\put(53,18){%
@@ -428,7 +428,7 @@
 	\put(7,5){\parbox[t]{38\unitlength}{\scshape\scriptsize Consequences}}%
 	\put(51,0){%
 	 	\begin{tabular}[b]{@{}>{\footnotesize\centering}p{20\unitlength}@{}p{26\unitlength}@{}>{\footnotesize\centering}p{20\unitlength}@{}p{26\unitlength}@{}>{\footnotesize\centering}p{20\unitlength}@{}}
-			\ifthenelse{\value{charEncumberedMaxDexCount}>5}{}{\Arabic{charEncumberedMaxDexCount}} & & \Arabic{charEncumberedArmorCheckPenaltyCount} & & \ifthenelse{\value{charEncumberedSpeedReducedBool}=1}{Yes}{No}\tabularnewline[-3pt]
+			\ifthenelse{\value{CharEncumberedMaxDexCount}>5}{}{\Arabic{CharEncumberedMaxDexCount}} & & \Arabic{CharEncumberedArmorCheckPenaltyCount} & & \ifthenelse{\value{CharEncumberedSpeedReducedBool}=1}{Yes}{No}\tabularnewline[-3pt]
 			\cline{1-1}\cline{3-3}\cline{5-5}\tabularnewline[-15pt]
 			\scshape\tiny max Dex & & \scshape\tiny check penalty & & \scshape\tiny Speed reduced
 	 	\end{tabular}
@@ -439,43 +439,43 @@
   
 \end{picture}
 
-\ifthenelse{\equal{\charSpellcastingClassOne}{}}{}{
+\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{}{
 	\newpage
 	\centering
 	\renewcommand*\rmdefault{pzc}
 	\hrule\vspace{3\unitlength}
-	{\Huge  \rmfamily\charSpellcastingClassOne}%\hrule
+	{\Huge  \rmfamily\CharSpellcastingClassOne}%\hrule
 	\vspace{-8\unitlength}
 	\begin{picture}(420,166)
 
 	\put(145,127){%Caster Level
-		\put(0,13){\parbox{110\unitlength}{\scshape\large \charSpellcastingClassOne{} Caster Level}}
-		\put(110,10){\framebox(30,10){\CleanArabic{charCLOneCount}}}
+		\put(0,13){\parbox{110\unitlength}{\scshape\large \CharSpellcastingClassOne{} Caster Level}}
+		\put(110,10){\framebox(30,10){\CleanArabic{CharCLOneCount}}}
 	}
 	\put(145,115){%Casting Ability Modifier
-		\put(0,13){\parbox{105\unitlength}{\scshape\large \capitalize{\charSpellcastingClassOneability} Modifier}}
-		\put(110,10){\framebox(30,10){\CleanPM{char\charSpellcastingClassOneability ModCount}}}
+		\put(0,13){\parbox{105\unitlength}{\scshape\large \capitalize{\CharSpellcastingClassOneability} Modifier}}
+		\put(110,10){\framebox(30,10){\CleanPM{Char\CharSpellcastingClassOneability ModCount}}}
 	}
 	\put(0,21){% Spells per Day
-		\singletitlebox{0}{135}{140}{10}{\charSpellcastingClassOne{} Spells per Day}%
+		\singletitlebox{0}{135}{140}{10}{\CharSpellcastingClassOne{} Spells per Day}%
 		\stretchlabels{0}{128}{140}{Save DC, Level, Total, Class, Ability Bonus, Misc, Spells Known}%
 		\put(0,0){%
 			\begin{tabular}[b]{@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}}
-				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingOnehascantrips}}{}{\DoMath{10 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{0}} &%
-				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingOnehascantrips}}{}{\Arabic{charTotalSpellSlotsOne0Count}}} &%
-				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingOnehascantrips}}{}{\Arabic{charClassSpellSlotsOne0Count}}} & &%
-				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingOnehascantrips}}{}{\Arabic{charBonusSpellSlotsOne0Count}}} &%
-				\framebox(18,10){\ifthenelse{0>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne0Count}}}\tabularnewline%
+				\framebox(18,10){\ifthenelse{0 = \value{CharSpellcastingOnehascantrips}}{}{\DoMath{10 + \value{Char\CharSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{0}} &%
+				\framebox(18,10){\ifthenelse{0 = \value{CharSpellcastingOnehascantrips}}{}{\Arabic{CharTotalSpellSlotsOne0Count}}} &%
+				\framebox(18,10){\ifthenelse{0 = \value{CharSpellcastingOnehascantrips}}{}{\Arabic{CharClassSpellSlotsOne0Count}}} & &%
+				\framebox(18,10){\ifthenelse{0 = \value{CharSpellcastingOnehascantrips}}{}{\Arabic{CharBonusSpellSlotsOne0Count}}} &%
+				\framebox(18,10){\ifthenelse{0>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownOne0Count}}}\tabularnewline%
 				%
-				\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{11 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{1st}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsOne1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsOne1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsOne1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsOne1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne1Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{12 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{2nd}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsOne2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsOne2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsOne2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsOne2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne2Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{13 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{3rd}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsOne3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsOne3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsOne3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsOne3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne3Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{14 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{4th}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsOne4Count}}} & \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsOne4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsOne4Count}}}& \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsOne4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne4Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{15 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{5th}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsOne5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsOne5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsOne5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsOne5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne5Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{16 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{6th}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsOne6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsOne6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsOne6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsOne6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne6Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{17 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{7th}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsOne7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsOne7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsOne7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsOne7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne7Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{18 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{8th}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsOne8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsOne8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsOne8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsOne8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne8Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{19 + \value{char\charSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{9th}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsOne9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsOne9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsOne9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsOne9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownOne9Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{11 + \value{Char\CharSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{1st}} &\framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsOne1Count}}} & \framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsOne1Count}}} &\framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsOne1Count}}} & \framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsOne1Count}}} &\framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownOne1Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{12 + \value{Char\CharSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{2nd}} &\framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsOne2Count}}} & \framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsOne2Count}}} &\framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsOne2Count}}} & \framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsOne2Count}}} &\framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownOne2Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{13 + \value{Char\CharSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{3rd}} &\framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsOne3Count}}} & \framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsOne3Count}}} &\framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsOne3Count}}} & \framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsOne3Count}}} &\framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownOne3Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{14 + \value{Char\CharSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{4th}} &\framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsOne4Count}}} & \framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsOne4Count}}} &\framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsOne4Count}}}& \framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsOne4Count}}} &\framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownOne4Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{15 + \value{Char\CharSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{5th}} &\framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsOne5Count}}} & \framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsOne5Count}}} &\framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsOne5Count}}} & \framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsOne5Count}}} &\framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownOne5Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{16 + \value{Char\CharSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{6th}} &\framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsOne6Count}}} & \framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsOne6Count}}} &\framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsOne6Count}}} & \framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsOne6Count}}} &\framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownOne6Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{17 + \value{Char\CharSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{7th}} &\framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsOne7Count}}} & \framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsOne7Count}}} &\framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsOne7Count}}} & \framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsOne7Count}}} &\framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownOne7Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{18 + \value{Char\CharSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{8th}} &\framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsOne8Count}}} & \framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsOne8Count}}} &\framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsOne8Count}}} & \framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsOne8Count}}} &\framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownOne8Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\DoMath{19 + \value{Char\CharSpellcastingClassOneability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{9th}} &\framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsOne9Count}}} & \framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsOne9Count}}} &\framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsOne9Count}}} & \framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsOne9Count}}} &\framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassOnemaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownOne9Count}}}\tabularnewline
 			\end{tabular}
 		}
 	}
@@ -483,35 +483,35 @@
 		\calculateSpellRange{One}
 		\singletitlebox{0}{14}{140}{10}{Spell Range}
 		\put(0,4){\parbox{20\unitlength}{\centering\tiny\scshape Close:\\25 ft+\\5ft/2 lvl}}
-		\put(21,0){\framebox(22,12){\ifthenelse{\equal{\charSpellcastingClassOne}{}}{}{
-		\Arabic{charSpellRangecloseCount} ft.}}}
+		\put(21,0){\framebox(22,12){\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{}{
+		\Arabic{CharSpellRangecloseCount} ft.}}}
 		\put(44,4){\parbox{20\unitlength}{\centering\tiny\scshape Medium:\\100 ft+\\10ft/lvl}}
-		\put(65,0){\framebox(25,12){\ifthenelse{\equal{\charSpellcastingClassOne}{}}{}{
-		\Arabic{charSpellRangemediumCount} ft.}}}
+		\put(65,0){\framebox(25,12){\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{}{
+		\Arabic{CharSpellRangemediumCount} ft.}}}
 		\put(91,4){\parbox{20\unitlength}{\centering\tiny\scshape Long:\\400 ft+\\40ft/lvl}}
-		\put(111,0){\framebox(29,12){\ifthenelse{\equal{\charSpellcastingClassOne}{}}{}{
-		\Arabic{charSpellRangelongCount} ft.}}}
+		\put(111,0){\framebox(29,12){\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{}{
+		\Arabic{CharSpellRangelongCount} ft.}}}
 	}
 	\put(145,21){%Focus Schools, Domains, Etc.
 		\singletitlebox{0}{64}{140}{10}{Focus Schools, Domains, Etc.}
-		\put(0,55){\parbox{62\unitlength}{\raggedleft\scshape\small \charSpellcastingOneSpecializationOneType}}
-		\put(65,52){\framebox(75,10){\charSpellcastingOneSpecializationOne}}
-		\put(0,42){\parbox{62\unitlength}{\raggedleft\scshape\small \charSpellcastingOneSpecializationTwoType}}
-		\put(65,39){\framebox(75,10){\charSpellcastingOneSpecializationTwo}}
-		\put(0,29){\parbox{62\unitlength}{\raggedleft\scshape\small \charSpellcastingOneProhibitionOneType}}
-		\put(65,26){\framebox(75,10){\charSpellcastingOneProhibitionOne}}
-		\put(0,16){\parbox{62\unitlength}{\raggedleft\scshape\small \charSpellcastingOneProhibitionTwoType}}
-		\put(65,13){\framebox(75,10){\charSpellcastingOneProhibitionTwo}}
-		\put(0,3){\parbox{62\unitlength}{\raggedleft\scshape\small \charSpellcastingOneProhibitionThreeType}}
-		\put(65,0){\framebox(75,10){\charSpellcastingOneProhibitionThree}}
+		\put(0,55){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingOneSpecializationOneType}}
+		\put(65,52){\framebox(75,10){\CharSpellcastingOneSpecializationOne}}
+		\put(0,42){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingOneSpecializationTwoType}}
+		\put(65,39){\framebox(75,10){\CharSpellcastingOneSpecializationTwo}}
+		\put(0,29){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingOneProhibitionOneType}}
+		\put(65,26){\framebox(75,10){\CharSpellcastingOneProhibitionOne}}
+		\put(0,16){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingOneProhibitionTwoType}}
+		\put(65,13){\framebox(75,10){\CharSpellcastingOneProhibitionTwo}}
+		\put(0,3){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingOneProhibitionThreeType}}
+		\put(65,0){\framebox(75,10){\CharSpellcastingOneProhibitionThree}}
 	}
 	\put(290, 21){%Spellcasting Notes
 		\put(2,139){\parbox{20\unitlength}{\scshape Notes}}
 		\put(0,0){\framebox(130,145){}}
-		\put(2,131){\parbox[t]{145\unitlength}{\PrintList[;\\]{\charSpellcastingOneNotesList}}}
+		\put(2,131){\parbox[t]{145\unitlength}{\PrintList[;\\]{\CharSpellcastingOneNotesList}}}
 	}
 	
-	\singletitlebox{0}{0}{420}{12}{\charSpellcastingClassOne{} Spells}
+	\singletitlebox{0}{0}{420}{12}{\CharSpellcastingClassOne{} Spells}
 	\end{picture}%
 	\noindent\vspace{-9\unitlength}%
 	\renewcommand*{\do}[1]{%
@@ -528,57 +528,57 @@
 	\endhead
 	\endfoot
 	\endlastfoot
-	\dolistloop{\charCantripsListOne}
-	\dolistloop{\charFirstSpellsListOne}
-	\dolistloop{\charSecondSpellsListOne}
-	\dolistloop{\charThirdSpellsListOne}
-	\dolistloop{\charFourthSpellsListOne}
-	\dolistloop{\charFifthSpellsListOne}
-	\dolistloop{\charSixthSpellsListOne}
-	\dolistloop{\charSeventhSpellsListOne}
-	\dolistloop{\charEighthSpellsListOne}
-	\dolistloop{\charNinthSpellsListOne}
+	\dolistloop{\CharCantripsListOne}
+	\dolistloop{\CharFirstSpellsListOne}
+	\dolistloop{\CharSecondSpellsListOne}
+	\dolistloop{\CharThirdSpellsListOne}
+	\dolistloop{\CharFourthSpellsListOne}
+	\dolistloop{\CharFifthSpellsListOne}
+	\dolistloop{\CharSixthSpellsListOne}
+	\dolistloop{\CharSeventhSpellsListOne}
+	\dolistloop{\CharEighthSpellsListOne}
+	\dolistloop{\CharNinthSpellsListOne}
 	\end{longtable}
 
 }
 
-\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{}{
+\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{}{
 	\newpage
 	\centering
 	\renewcommand*\rmdefault{pzc}
 	\hrule\vspace{3\unitlength}
-	{\Huge  \rmfamily\charSpellcastingClassTwo}%\hrule
+	{\Huge  \rmfamily\CharSpellcastingClassTwo}%\hrule
 	\vspace{-8\unitlength}
 	\begin{picture}(420,166)
 
 	\put(145,127){%Caster Level
-		\put(0,13){\parbox{110\unitlength}{\scshape\large \charSpellcastingClassTwo{} Caster Level}}
-		\put(110,10){\framebox(30,10){\CleanArabic{charCLTwoCount}}}
+		\put(0,13){\parbox{110\unitlength}{\scshape\large \CharSpellcastingClassTwo{} Caster Level}}
+		\put(110,10){\framebox(30,10){\CleanArabic{CharCLTwoCount}}}
 	}
 	\put(145,115){%Casting Ability Modifier
-		\put(0,13){\parbox{105\unitlength}{\scshape\large \capitalize{\charSpellcastingClassTwoability} Modifier}}
-		\put(110,10){\framebox(30,10){\CleanPM{char\charSpellcastingClassTwoability ModCount}}}
+		\put(0,13){\parbox{105\unitlength}{\scshape\large \capitalize{\CharSpellcastingClassTwoability} Modifier}}
+		\put(110,10){\framebox(30,10){\CleanPM{Char\CharSpellcastingClassTwoability ModCount}}}
 	}
 	\put(0,21){% Spells per Day
-		\singletitlebox{0}{135}{140}{10}{\charSpellcastingClassTwo{} Spells per Day}%
+		\singletitlebox{0}{135}{140}{10}{\CharSpellcastingClassTwo{} Spells per Day}%
 		\stretchlabels{0}{128}{140}{Save DC, Level, Total, Class, Ability Bonus, Misc, Spells Known}%
 		\put(0,0){%
 			\begin{tabular}[b]{@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}@{}>{\centering}p{20\unitlength}}
-				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingTwohascantrips}}{}{\DoMath{10 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{0}} &%
-				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingTwohascantrips}}{}{\Arabic{charTotalSpellSlotsTwo0Count}}} &%
-				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingTwohascantrips}}{}{\Arabic{charClassSpellSlotsTwo0Count}}} & &%
-				\framebox(18,10){\ifthenelse{0 = \value{charSpellcastingTwohascantrips}}{}{\Arabic{charBonusSpellSlotsTwo0Count}}} &%
-				\framebox(18,10){\ifthenelse{0>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo0Count}}}\tabularnewline%
+				\framebox(18,10){\ifthenelse{0 = \value{CharSpellcastingTwohascantrips}}{}{\DoMath{10 + \value{Char\CharSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{0}} &%
+				\framebox(18,10){\ifthenelse{0 = \value{CharSpellcastingTwohascantrips}}{}{\Arabic{CharTotalSpellSlotsTwo0Count}}} &%
+				\framebox(18,10){\ifthenelse{0 = \value{CharSpellcastingTwohascantrips}}{}{\Arabic{CharClassSpellSlotsTwo0Count}}} & &%
+				\framebox(18,10){\ifthenelse{0 = \value{CharSpellcastingTwohascantrips}}{}{\Arabic{CharBonusSpellSlotsTwo0Count}}} &%
+				\framebox(18,10){\ifthenelse{0>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownTwo0Count}}}\tabularnewline%
 				%
-				\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{11 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{1st}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsTwo1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsTwo1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsTwo1Count}}} & \framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsTwo1Count}}} &\framebox(18,10){\ifthenelse{1>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo1Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{12 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{2nd}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsTwo2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsTwo2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsTwo2Count}}} & \framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsTwo2Count}}} &\framebox(18,10){\ifthenelse{2>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo2Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{13 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{3rd}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsTwo3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsTwo3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsTwo3Count}}} & \framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsTwo3Count}}} &\framebox(18,10){\ifthenelse{3>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo3Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{14 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{4th}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsTwo4Count}}} & \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsTwo4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsTwo4Count}}}& \framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsTwo4Count}}} &\framebox(18,10){\ifthenelse{4>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo4Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{15 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{5th}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsTwo5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsTwo5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsTwo5Count}}} & \framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsTwo5Count}}} &\framebox(18,10){\ifthenelse{5>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo5Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{16 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{6th}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsTwo6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsTwo6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsTwo6Count}}} & \framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsTwo6Count}}} &\framebox(18,10){\ifthenelse{6>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo6Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{17 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{7th}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsTwo7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsTwo7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsTwo7Count}}} & \framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsTwo7Count}}} &\framebox(18,10){\ifthenelse{7>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo7Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{18 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{8th}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsTwo8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsTwo8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsTwo8Count}}} & \framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsTwo8Count}}} &\framebox(18,10){\ifthenelse{8>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo8Count}}}\tabularnewline
-				\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{19 + \value{char\charSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{9th}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charTotalSpellSlotsTwo9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charClassSpellSlotsTwo9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charabilitySpellSlotsTwo9Count}}} & \framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{charBonusSpellSlotsTwo9Count}}} &\framebox(18,10){\ifthenelse{9>\value{charSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{charSpellsknownTwo9Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{11 + \value{Char\CharSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{1st}} &\framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsTwo1Count}}} & \framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsTwo1Count}}} &\framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsTwo1Count}}} & \framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsTwo1Count}}} &\framebox(18,10){\ifthenelse{1>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownTwo1Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{12 + \value{Char\CharSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{2nd}} &\framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsTwo2Count}}} & \framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsTwo2Count}}} &\framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsTwo2Count}}} & \framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsTwo2Count}}} &\framebox(18,10){\ifthenelse{2>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownTwo2Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{13 + \value{Char\CharSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{3rd}} &\framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsTwo3Count}}} & \framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsTwo3Count}}} &\framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsTwo3Count}}} & \framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsTwo3Count}}} &\framebox(18,10){\ifthenelse{3>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownTwo3Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{14 + \value{Char\CharSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{4th}} &\framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsTwo4Count}}} & \framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsTwo4Count}}} &\framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsTwo4Count}}}& \framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsTwo4Count}}} &\framebox(18,10){\ifthenelse{4>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownTwo4Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{15 + \value{Char\CharSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{5th}} &\framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsTwo5Count}}} & \framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsTwo5Count}}} &\framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsTwo5Count}}} & \framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsTwo5Count}}} &\framebox(18,10){\ifthenelse{5>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownTwo5Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{16 + \value{Char\CharSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{6th}} &\framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsTwo6Count}}} & \framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsTwo6Count}}} &\framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsTwo6Count}}} & \framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsTwo6Count}}} &\framebox(18,10){\ifthenelse{6>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownTwo6Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{17 + \value{Char\CharSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{7th}} &\framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsTwo7Count}}} & \framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsTwo7Count}}} &\framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsTwo7Count}}} & \framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsTwo7Count}}} &\framebox(18,10){\ifthenelse{7>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownTwo7Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{18 + \value{Char\CharSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{8th}} &\framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsTwo8Count}}} & \framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsTwo8Count}}} &\framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsTwo8Count}}} & \framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsTwo8Count}}} &\framebox(18,10){\ifthenelse{8>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownTwo8Count}}}\tabularnewline
+				\framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\DoMath{19 + \value{Char\CharSpellcastingClassTwoability ModCount}}}} & \parbox[t]{18\unitlength}{\vspace{-9pt}\centering\textbf{9th}} &\framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharTotalSpellSlotsTwo9Count}}} & \framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharClassSpellSlotsTwo9Count}}} &\framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharabilitySpellSlotsTwo9Count}}} & \framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\Arabic{CharBonusSpellSlotsTwo9Count}}} &\framebox(18,10){\ifthenelse{9>\value{CharSpellcastingClassTwomaxSpellLevelCount}}{}{\CleanArabic{CharSpellsknownTwo9Count}}}\tabularnewline
 			\end{tabular}
 		}
 	}
@@ -586,35 +586,35 @@
 		\calculateSpellRange{Two}
 		\singletitlebox{0}{14}{140}{10}{Spell Range}
 		\put(0,4){\parbox{20\unitlength}{\centering\tiny\scshape Close:\\25 ft+\\5ft/2 lvl}}
-		\put(21,0){\framebox(22,12){\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{}{
-		\Arabic{charSpellRangecloseCount} ft.}}}
+		\put(21,0){\framebox(22,12){\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{}{
+		\Arabic{CharSpellRangecloseCount} ft.}}}
 		\put(44,4){\parbox{20\unitlength}{\centering\tiny\scshape Medium:\\100 ft+\\10ft/lvl}}
-		\put(65,0){\framebox(25,12){\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{}{
-		\Arabic{charSpellRangemediumCount} ft.}}}
+		\put(65,0){\framebox(25,12){\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{}{
+		\Arabic{CharSpellRangemediumCount} ft.}}}
 		\put(91,4){\parbox{20\unitlength}{\centering\tiny\scshape Long:\\400 ft+\\40ft/lvl}}
-		\put(111,0){\framebox(29,12){\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{}{
-		\Arabic{charSpellRangelongCount} ft.}}}
+		\put(111,0){\framebox(29,12){\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{}{
+		\Arabic{CharSpellRangelongCount} ft.}}}
 	}
 	\put(145,21){%Focus Schools, Domains, Etc.
 		\singletitlebox{0}{64}{140}{10}{Focus Schools, Domains, Etc.}
-		\put(0,55){\parbox{62\unitlength}{\raggedleft\scshape\small \charSpellcastingTwoSpecializationTwoType}}
-		\put(65,52){\framebox(75,10){\charSpellcastingTwoSpecializationTwo}}
-		\put(0,42){\parbox{62\unitlength}{\raggedleft\scshape\small \charSpellcastingTwoSpecializationTwoType}}
-		\put(65,39){\framebox(75,10){\charSpellcastingTwoSpecializationTwo}}
-		\put(0,29){\parbox{62\unitlength}{\raggedleft\scshape\small \charSpellcastingTwoProhibitionTwoType}}
-		\put(65,26){\framebox(75,10){\charSpellcastingTwoProhibitionTwo}}
-		\put(0,16){\parbox{62\unitlength}{\raggedleft\scshape\small \charSpellcastingTwoProhibitionTwoType}}
-		\put(65,13){\framebox(75,10){\charSpellcastingTwoProhibitionTwo}}
-		\put(0,3){\parbox{62\unitlength}{\raggedleft\scshape\small \charSpellcastingTwoProhibitionThreeType}}
-		\put(65,0){\framebox(75,10){\charSpellcastingTwoProhibitionThree}}
+		\put(0,55){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoSpecializationTwoType}}
+		\put(65,52){\framebox(75,10){\CharSpellcastingTwoSpecializationTwo}}
+		\put(0,42){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoSpecializationTwoType}}
+		\put(65,39){\framebox(75,10){\CharSpellcastingTwoSpecializationTwo}}
+		\put(0,29){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoProhibitionTwoType}}
+		\put(65,26){\framebox(75,10){\CharSpellcastingTwoProhibitionTwo}}
+		\put(0,16){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoProhibitionTwoType}}
+		\put(65,13){\framebox(75,10){\CharSpellcastingTwoProhibitionTwo}}
+		\put(0,3){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoProhibitionThreeType}}
+		\put(65,0){\framebox(75,10){\CharSpellcastingTwoProhibitionThree}}
 	}
 	\put(290, 21){%Spellcasting Notes
 		\put(2,139){\parbox{20\unitlength}{\scshape Notes}}
 		\put(0,0){\framebox(130,145){}}
-		\put(2,131){\parbox[t]{145\unitlength}{\PrintList[;\\]{\charSpellcastingTwoNotesList}}}
+		\put(2,131){\parbox[t]{145\unitlength}{\PrintList[;\\]{\CharSpellcastingTwoNotesList}}}
 	}
 	
-	\singletitlebox{0}{0}{420}{12}{\charSpellcastingClassTwo{} Spells}
+	\singletitlebox{0}{0}{420}{12}{\CharSpellcastingClassTwo{} Spells}
 	\end{picture}%
 	\noindent\vspace{-9\unitlength}%
 	\renewcommand*{\do}[1]{%
@@ -631,16 +631,16 @@
 	\endhead
 	\endfoot
 	\endlastfoot
-	\dolistloop{\charCantripsListTwo}
-	\dolistloop{\charFirstSpellsListTwo}
-	\dolistloop{\charSecondSpellsListTwo}
-	\dolistloop{\charThirdSpellsListTwo}
-	\dolistloop{\charFourthSpellsListTwo}
-	\dolistloop{\charFifthSpellsListTwo}
-	\dolistloop{\charSixthSpellsListTwo}
-	\dolistloop{\charSeventhSpellsListTwo}
-	\dolistloop{\charEighthSpellsListTwo}
-	\dolistloop{\charNinthSpellsListTwo}
+	\dolistloop{\CharCantripsListTwo}
+	\dolistloop{\CharFirstSpellsListTwo}
+	\dolistloop{\CharSecondSpellsListTwo}
+	\dolistloop{\CharThirdSpellsListTwo}
+	\dolistloop{\CharFourthSpellsListTwo}
+	\dolistloop{\CharFifthSpellsListTwo}
+	\dolistloop{\CharSixthSpellsListTwo}
+	\dolistloop{\CharSeventhSpellsListTwo}
+	\dolistloop{\CharEighthSpellsListTwo}
+	\dolistloop{\CharNinthSpellsListTwo}
 	\end{longtable}
 
 }
@@ -659,86 +659,86 @@
 \vspace{10pt}
 }
 \justifying
-\ifthenelse{\equal{\charCantripsListOne}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc \charSpellcastingClassOne{} Cantrips}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charCantripsListOne} \end{multicols}%
+\ifthenelse{\equal{\CharCantripsListOne}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc \CharSpellcastingClassOne{} Cantrips}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharCantripsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\charFirstSpellsListOne}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 1\textup{st} Level \charSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charFirstSpellsListOne} \end{multicols}%
+\ifthenelse{\equal{\CharFirstSpellsListOne}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 1\textup{st} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharFirstSpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\charSecondSpellsListOne}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 2\textup{nd} Level \charSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charSecondSpellsListOne} \end{multicols}%
+\ifthenelse{\equal{\CharSecondSpellsListOne}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 2\textup{nd} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharSecondSpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\charThirdSpellsListOne}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 3\textup{rd} Level \charSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charThirdSpellsListOne} \end{multicols}%
+\ifthenelse{\equal{\CharThirdSpellsListOne}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 3\textup{rd} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharThirdSpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\charFourthSpellsListOne}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 4\textup{th} Level \charSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charFourthSpellsListOne} \end{multicols}%
+\ifthenelse{\equal{\CharFourthSpellsListOne}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 4\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharFourthSpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\charFifthSpellsListOne}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 5\textup{th} Level \charSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charFifthSpellsListOne} \end{multicols}%
+\ifthenelse{\equal{\CharFifthSpellsListOne}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 5\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharFifthSpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\charSixthSpellsListOne}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 6\textup{th} Level \charSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charSixthSpellsListOne} \end{multicols}%
+\ifthenelse{\equal{\CharSixthSpellsListOne}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 6\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharSixthSpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\charSeventhSpellsListOne}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 7\textup{th} Level \charSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charSeventhSpellsListOne} \end{multicols}%
+\ifthenelse{\equal{\CharSeventhSpellsListOne}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 7\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharSeventhSpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\charEighthSpellsListOne}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 8\textup{th} Level \charSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charEighthSpellsListOne} \end{multicols}%
+\ifthenelse{\equal{\CharEighthSpellsListOne}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 8\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharEighthSpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\charNinthSpellsListOne}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 9\textup{th} Level \charSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charNinthSpellsListOne} \end{multicols}%
+\ifthenelse{\equal{\CharNinthSpellsListOne}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 9\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharNinthSpellsListOne} \end{multicols}%
 }
 
-\ifthenelse{\equal{\charCantripsListTwo}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc \charSpellcastingClassTwo{} Cantrips}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charCantripsListTwo} \end{multicols}%
+\ifthenelse{\equal{\CharCantripsListTwo}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc \CharSpellcastingClassTwo{} Cantrips}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharCantripsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\charFirstSpellsListTwo}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 1\textup{st} Level \charSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charFirstSpellsListTwo} \end{multicols}%
+\ifthenelse{\equal{\CharFirstSpellsListTwo}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 1\textup{st} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharFirstSpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\charSecondSpellsListTwo}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 2\textup{nd} Level \charSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charSecondSpellsListTwo} \end{multicols}%
+\ifthenelse{\equal{\CharSecondSpellsListTwo}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 2\textup{nd} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharSecondSpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\charThirdSpellsListTwo}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 3\textup{rd} Level \charSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charThirdSpellsListTwo} \end{multicols}%
+\ifthenelse{\equal{\CharThirdSpellsListTwo}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 3\textup{rd} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharThirdSpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\charFourthSpellsListTwo}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 4\textup{th} Level \charSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charFourthSpellsListTwo} \end{multicols}%
+\ifthenelse{\equal{\CharFourthSpellsListTwo}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 4\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharFourthSpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\charFifthSpellsListTwo}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 5\textup{th} Level \charSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charFifthSpellsListTwo} \end{multicols}%
+\ifthenelse{\equal{\CharFifthSpellsListTwo}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 5\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharFifthSpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\charSixthSpellsListTwo}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 6\textup{th} Level \charSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charSixthSpellsListTwo} \end{multicols}%
+\ifthenelse{\equal{\CharSixthSpellsListTwo}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 6\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharSixthSpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\charSeventhSpellsListTwo}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 7\textup{th} Level \charSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charSeventhSpellsListTwo} \end{multicols}%
+\ifthenelse{\equal{\CharSeventhSpellsListTwo}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 7\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharSeventhSpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\charEighthSpellsListTwo}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 8\textup{th} Level \charSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charEighthSpellsListTwo} \end{multicols}%
+\ifthenelse{\equal{\CharEighthSpellsListTwo}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 8\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharEighthSpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\charNinthSpellsListTwo}{}}{}{%
-	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 9\textup{th} Level \charSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\charNinthSpellsListTwo} \end{multicols}%
+\ifthenelse{\equal{\CharNinthSpellsListTwo}{}}{}{%
+	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 9\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
+	\begin{multicols}{2} \dolistloop{\CharNinthSpellsListTwo} \end{multicols}%
 }
 
 %%% Local Variables: 

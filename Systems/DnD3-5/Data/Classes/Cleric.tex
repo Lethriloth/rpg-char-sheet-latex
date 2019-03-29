@@ -9,9 +9,9 @@
 \edef\ClericClassSkillsList{}
 \forcsvlist{\listadd{\ClericClassSkillsList}}{Concentration, Craft, Diplomacy, Heal, KnowledgeArcana, KnowledgeHistory, KnowledgePlanes, KnowledgeReligion, Profession, Spellcraft}
 \newcommand{\AddClericClassFeatures}[1]{
-	\NewCounter{charturnrebukeundeadusesCount}
-	\SetCounter{charturnrebukeundeadusesCount}{3 + \value{charChaModCount}}
-	\AddLimitedUse{Turn/Rebuke Undead}{\arabic{charturnrebukeundeadusesCount}}
+	\NewCounter{CharturnrebukeundeadusesCount}
+	\SetCounter{CharturnrebukeundeadusesCount}{3 + \value{CharChaModCount}}
+	\AddLimitedUse{Turn/Rebuke Undead}{\arabic{CharturnrebukeundeadusesCount}}
 	\newcommand{\AddClericSpellcasting}[3]{
 		\newSpellcasting[(##1 + 1) / 2]{Cleric}{##1}{Wis}
 		\AddPrimarySpellcasting{##1}

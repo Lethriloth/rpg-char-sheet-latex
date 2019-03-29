@@ -9,68 +9,68 @@
 \forcsvlist{\listadd\AbilityScoresList}{Str,Dex,Con,Int,Wis,Cha}
 
 \renewcommand{\do}[1]{
-	\NewCounter{char#1Count}
-	\NewCounter{char#1BaseCount}
-	\NewCounter{char#1EnhancementCount}
-	\NewCounter{char#1MiscCount}
-	\NewCounter{char#1TmpCount}
-	\NewCounter{char#1ModCount}
+	\NewCounter{Char#1Count}
+	\NewCounter{Char#1BaseCount}
+	\NewCounter{Char#1EnhancementCount}
+	\NewCounter{Char#1MiscCount}
+	\NewCounter{Char#1TmpCount}
+	\NewCounter{Char#1ModCount}
 	\expandafter\newcommand\csname SetChar#1\endcsname[1]{
-		\SetCounter{char#1BaseCount}{##1}
+		\SetCounter{Char#1BaseCount}{##1}
 	}
 }\dolistloop{\AbilityScoresList}
 \newcommand{\ComputeAbilityScores}{
 	\renewcommand{\do}[1]{
-		\SetCounter{char##1Count}{\value{char##1BaseCount}}
-		\AddToCounter{char##1Count}{\value{char##1EnhancementCount}}
-		\AddToCounter{char##1Count}{\value{char##1MiscCount}}
-		\AddToCounter{char##1Count}{\value{char##1TmpCount}}
-		\SetCounter{char##1ModCount}{0}
-		\ifthenelse{10 > \value{char##1Count}}{
-			\AddToCounter{char##1Count}{-1}
-			\SetCounter{char##1ModCount}{(\value{char##1Count} - 10) / 2}
-			\AddToCounter{char##1Count}{1}
+		\SetCounter{Char##1Count}{\value{Char##1BaseCount}}
+		\AddToCounter{Char##1Count}{\value{Char##1EnhancementCount}}
+		\AddToCounter{Char##1Count}{\value{Char##1MiscCount}}
+		\AddToCounter{Char##1Count}{\value{Char##1TmpCount}}
+		\SetCounter{Char##1ModCount}{0}
+		\ifthenelse{10 > \value{Char##1Count}}{
+			\AddToCounter{Char##1Count}{-1}
+			\SetCounter{Char##1ModCount}{(\value{Char##1Count} - 10) / 2}
+			\AddToCounter{Char##1Count}{1}
 		}{
-			\SetCounter{char##1ModCount}{(\value{char##1Count}-10)/2}
+			\SetCounter{Char##1ModCount}{(\value{Char##1Count}-10)/2}
 		}
 	}\dolistloop{\AbilityScoresList}
 }
 
 %% Armor Class %%
-\NewCounter{charArmorBonusCount}
-	\newcommand{\AddArmorBonus}[1]{\ifthenelse{\value{charArmorBonusCount}<#1}{\SetCounter{charArmorBonusCount}{#1}}{}}
-\NewCounter{charShieldBonusCount}
-	\newcommand{\AddShieldBonus}[1]{\ifthenelse{\value{charShieldBonusCount}<#1}{\SetCounter{charShieldBonusCount}{#1}}{}}
-\NewCounter{charNaturalArmorModCount}
-	\newcommand{\AddNaturalArmorBonus}[1]{\ifthenelse{\arabic{charNaturalArmorModCount}<#1}{\SetCounter{charNaturalArmorModCount}{#1}}{}}
-\NewCounter{charDodgeModCount}
-	\newcommand{\AddDodgeBonus}[1]{\AddToCounter{charDodgeModCount}{#1}}
-\NewCounter{charSizeModCount}
-\NewCounter{charDeflectionModCount}
-	\newcommand{\AddDeflectionBonus}[1]{\ifthenelse{\arabic{chardeflectionmodcount}<#1}{\SetCounter{chardeflectionmodcount}{#1}}{}}
-\NewCounter{charACMiscCount}\NewCounter{charACTmpCount}
-\NewCounter{charTouchACMiscCount}\NewCounter{charTouchACTmpCount}
-\NewCounter{charFlatFootedACMiscCount}\NewCounter{charFlatFootedACTmpCount}
+\NewCounter{CharArmorBonusCount}
+	\newcommand{\AddArmorBonus}[1]{\ifthenelse{\value{CharArmorBonusCount}<#1}{\SetCounter{CharArmorBonusCount}{#1}}{}}
+\NewCounter{CharShieldBonusCount}
+	\newcommand{\AddShieldBonus}[1]{\ifthenelse{\value{CharShieldBonusCount}<#1}{\SetCounter{CharShieldBonusCount}{#1}}{}}
+\NewCounter{CharNaturalArmorModCount}
+	\newcommand{\AddNaturalArmorBonus}[1]{\ifthenelse{\arabic{CharNaturalArmorModCount}<#1}{\SetCounter{CharNaturalArmorModCount}{#1}}{}}
+\NewCounter{CharDodgeModCount}
+	\newcommand{\AddDodgeBonus}[1]{\AddToCounter{CharDodgeModCount}{#1}}
+\NewCounter{CharSizeModCount}
+\NewCounter{CharDeflectionModCount}
+	\newcommand{\AddDeflectionBonus}[1]{\ifthenelse{\arabic{Chardeflectionmodcount}<#1}{\SetCounter{Chardeflectionmodcount}{#1}}{}}
+\NewCounter{CharACMiscCount}\NewCounter{CharACTmpCount}
+\NewCounter{CharTouchACMiscCount}\NewCounter{CharTouchACTmpCount}
+\NewCounter{CharFlatFootedACMiscCount}\NewCounter{CharFlatFootedACTmpCount}
 
 %% Saving Throws
 \renewcommand{\do}[1]{
-	\NewCounter{char#1Count}
-	\NewCounter{char#1MiscCount}
-	\NewCounter{char#1TmpCount}
+	\NewCounter{Char#1Count}
+	\NewCounter{Char#1MiscCount}
+	\NewCounter{Char#1TmpCount}
 }\docsvlist{Fortitude, Reflex, Will}
-\NewCounter{charResistanceModCount}
-\newcommand{\AddResistanceBonus}[1]{\ifthenelse{\value{charResistanceModCount}<#1}{\SetCounter{charResistanceModCount}{#1}}{}}
+\NewCounter{CharResistanceModCount}
+\newcommand{\AddResistanceBonus}[1]{\ifthenelse{\value{CharResistanceModCount}<#1}{\SetCounter{CharResistanceModCount}{#1}}{}}
 
 %% Special Defenses
-\edef\charResistancesList{}
+\edef\CharResistancesList{}
 \newcommand{\AddResistance}[2]{
-	\ifinlist{#1}{\charImmunitiesList}{}{
-		\ifinlist{#1}{\charResistancesList}{}{
-			\NewCounter{charResist#1Count}
-			\listadd{\charResistancesList}{#1}
+	\ifinlist{#1}{\CharImmunitiesList}{}{
+		\ifinlist{#1}{\CharResistancesList}{}{
+			\NewCounter{CharResist#1Count}
+			\listadd{\CharResistancesList}{#1}
 		}
-		\ifthenelse{\value{charResist#1Count} < #2}{
-			\SetCounter{charResist#1Count}{#2}
+		\ifthenelse{\value{CharResist#1Count} < #2}{
+			\SetCounter{CharResist#1Count}{#2}
 		}{}
 	}
 }
@@ -79,34 +79,34 @@
 	\edef\@@PrintList{}%
 	\edef\@PrintListlast{}
 	\renewcommand{\do}[1]{%
-		\ifthenelse{\value{charResist##1Count} = 0}{}{%
+		\ifthenelse{\value{CharResist##1Count} = 0}{}{%
 			\let\@@PrintList\@PrintList%
-			\edef\@PrintListlast{Resist ##1 \arabic{charResist##1Count}}%
-			\listadd{\@PrintList}{Resist ##1 \arabic{charResist##1Count}}%
+			\edef\@PrintListlast{Resist ##1 \arabic{CharResist##1Count}}%
+			\listadd{\@PrintList}{Resist ##1 \arabic{CharResist##1Count}}%
 		}
-	}\dolistloop{\charResistancesList}%
+	}\dolistloop{\CharResistancesList}%
 	\renewcommand{\do}[1]{%
 		##1#1%
 	}\dolistloop{\@@PrintList}%
 	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintListlast%
 }
-\edef\charImmunitiesList{}
+\edef\CharImmunitiesList{}
 \newcommand{\AddImmunity}[1]{
-	\ifinlist{#1}{\charImmunitiesList}{}{
-		\listinsert{\charImmunitiesList}{#1}
-		\ifinlist{#1}{\charResistancesList}{
-			\SetCounter{charResist#1Count}{0}
+	\ifinlist{#1}{\CharImmunitiesList}{}{
+		\listinsert{\CharImmunitiesList}{#1}
+		\ifinlist{#1}{\CharResistancesList}{
+			\SetCounter{CharResist#1Count}{0}
 		}{}
 	}
 }
-\edef\charDRTypesList{}
+\edef\CharDRTypesList{}
 \newcommand{\AddDR}[2]{
-	\ifinlist{#1}{\charDRTypesList}{}{
-		\NewCounter{charDR/#1Count}
-		\listadd{\charDRTypesList}{#1}
+	\ifinlist{#1}{\CharDRTypesList}{}{
+		\NewCounter{CharDR/#1Count}
+		\listadd{\CharDRTypesList}{#1}
 	}
-	\ifthenelse{\value{charDR/#1Count} < #2}{
-		\SetCounter{charDR/#1Count}{#2}
+	\ifthenelse{\value{CharDR/#1Count} < #2}{
+		\SetCounter{CharDR/#1Count}{#2}
 	}{}
 }
 \NewDocumentCommand{\PrintDR}{O{, } O{}}{%
@@ -115,110 +115,110 @@
 	\edef\@PrintListlast{}
 	\renewcommand{\do}[1]{%
 		\let\@@PrintList\@PrintList%
-		\edef\@PrintListlast{DR \arabic{charDR/##1Count}/##1}%
-		\listadd{\@PrintList}{DR \arabic{charDR/##1Count}/##1}%
-	}\dolistloop{\charDRTypesList}%
+		\edef\@PrintListlast{DR \arabic{CharDR/##1Count}/##1}%
+		\listadd{\@PrintList}{DR \arabic{CharDR/##1Count}/##1}%
+	}\dolistloop{\CharDRTypesList}%
 	\renewcommand{\do}[1]{%
 		##1#1%
 	}\dolistloop{\@@PrintList}%
 	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintListlast%
 }
 
-\edef\charSpecialDefensesList{}
+\edef\CharSpecialDefensesList{}
 \newcommand{\AddSpecialDefense}[1]{
-	\listinsert{\charSpecialDefensesList}{#1}
+	\listinsert{\CharSpecialDefensesList}{#1}
 }
 
 %% BAB, attacks, combat maneuvers
-\NewCounter{charBABCount}
-\NewCounter{charIteratedAttacksCount}
-\NewCounter{charIteratedAttackBonusCount}
-\NewCounter{charExtraAttacksCount}
+\NewCounter{CharBABCount}
+\NewCounter{CharIteratedAttacksCount}
+\NewCounter{CharIteratedAttackBonusCount}
+\NewCounter{CharExtraAttacksCount}
 \renewcommand{\do}[1]{
-	\NewCounter{char#1MiscCount}
-	\NewCounter{char#1TmpCount}
+	\NewCounter{Char#1MiscCount}
+	\NewCounter{Char#1TmpCount}
 }\docsvlist{Melee,Ranged,Grapple,BullRush,Disarm,Overrun,Sunder,Trip}
 
 %% Size
-\NewCounter{charSpecialSizeModCount}
+\NewCounter{CharSpecialSizeModCount}
 \newcommand\SetSize[1]{
 	\csname setSize#1\endcsname
 }
 \newcommand\SetSizeFine{
-	\renewcommand{\charSize}{Fine}
-	\SetCounter{charSizeModCount}{8}
-	\SetCounter{charSpecialSizeModCount}{-8}
+	\renewcommand{\CharSize}{Fine}
+	\SetCounter{CharSizeModCount}{8}
+	\SetCounter{CharSpecialSizeModCount}{-8}
 }
 \newcommand\SetSizeDiminutive{
-	\renewcommand{\charSize}{Diminutive}
-	\SetCounter{charSizeModCount}{4}
-	\SetCounter{charSpecialSizeModCount}{-4}
+	\renewcommand{\CharSize}{Diminutive}
+	\SetCounter{CharSizeModCount}{4}
+	\SetCounter{CharSpecialSizeModCount}{-4}
 }
 \newcommand\SetSizeTiny{
-	\renewcommand{\charSize}{Tiny}
-	\SetCounter{charSizeModCount}{2}
-	\SetCounter{charSpecialSizeModCount}{-2}
+	\renewcommand{\CharSize}{Tiny}
+	\SetCounter{CharSizeModCount}{2}
+	\SetCounter{CharSpecialSizeModCount}{-2}
 }
 \newcommand\SetSizeSmall{
-	\renewcommand{\charSize}{Small}
-	\SetCounter{charSizeModCount}{1}
-	\SetCounter{charSpecialSizeModCount}{-1}
+	\renewcommand{\CharSize}{Small}
+	\SetCounter{CharSizeModCount}{1}
+	\SetCounter{CharSpecialSizeModCount}{-1}
 }
 \newcommand\SetSizeMedium{
-	\renewcommand{\charSize}{Medium}
-	\SetCounter{charSizeModCount}{0}
-	\SetCounter{charSpecialSizeModCount}{0}
+	\renewcommand{\CharSize}{Medium}
+	\SetCounter{CharSizeModCount}{0}
+	\SetCounter{CharSpecialSizeModCount}{0}
 }
 \newcommand\SetSizeLarge{
-	\renewcommand{\charSize}{Large}
-	\SetCounter{charSizeModCount}{-1}
-	\SetCounter{charSpecialSizeModCount}{1}
+	\renewcommand{\CharSize}{Large}
+	\SetCounter{CharSizeModCount}{-1}
+	\SetCounter{CharSpecialSizeModCount}{1}
 }
 \newcommand\SetSizeHuge{
-	\renewcommand{\charSize}{Huge}
-	\SetCounter{charSizeModCount}{-2}
-	\SetCounter{charSpecialSizeModCount}{2}
+	\renewcommand{\CharSize}{Huge}
+	\SetCounter{CharSizeModCount}{-2}
+	\SetCounter{CharSpecialSizeModCount}{2}
 }
 \newcommand\SetSizeGargantuan{
-	\renewcommand{\charSize}{Gargantuan}
-	\SetCounter{charSizeModCount}{-4}
-	\SetCounter{charSpecialSizeModCount}{4}
+	\renewcommand{\CharSize}{Gargantuan}
+	\SetCounter{CharSizeModCount}{-4}
+	\SetCounter{CharSpecialSizeModCount}{4}
 }
 \newcommand\SetSizeColossal{
-	\renewcommand{\charSize}{Colossal}
-	\SetCounter{charSizeModCount}{-8}
-	\SetCounter{charSpecialSizeModCount}{8}
+	\renewcommand{\CharSize}{Colossal}
+	\SetCounter{CharSizeModCount}{-8}
+	\SetCounter{CharSpecialSizeModCount}{8}
 }
 
 %% Speed
 
-\NewCounter{charSpeedReducibleBool}
-\SetCounter{charSpeedReducibleBool}{1}
+\NewCounter{CharSpeedReducibleBool}
+\SetCounter{CharSpeedReducibleBool}{1}
 \renewcommand{\do}[1]{
-	\NewCounter{char#1SpeedCount}
+	\NewCounter{Char#1SpeedCount}
 }
 \docsvlist{Base, Fly, Swim, Burrow, Climb}
 \newcommand{\SetCharSpeed}[1]{
-	\SetCounter{charBaseSpeedCount}{#1}
+	\SetCounter{CharBaseSpeedCount}{#1}
 }
-\newcommand{\charManeuverability}{}
+\newcommand{\CharManeuverability}{}
 \newcommand{\AddFlySpeed}[2]{
-	\SetCounter{charFlySpeedCount}{#1}
-	\renewcommand{\charManeuverability}{#2}
+	\SetCounter{CharFlySpeedCount}{#1}
+	\renewcommand{\CharManeuverability}{#2}
 }
 \newcommand{\AddClimbSpeed}[1]{
-	\SetCounter{charClimbSpeedCount}{#1}
+	\SetCounter{CharClimbSpeedCount}{#1}
 }
 \newcommand{\AddSwimSpeed}[1]{
-	\SetCounter{charSwimSpeedCount}{#1}
+	\SetCounter{CharSwimSpeedCount}{#1}
 }
 \newcommand{\AddBurrowSpeed}[1]{
-	\SetCounter{charBurrowSpeedCount}{#1}
+	\SetCounter{CharBurrowSpeedCount}{#1}
 }
-\NewCounter{charSpeedEnhancementCount}
+\NewCounter{CharSpeedEnhancementCount}
 \newcommand{\SpeedInitialize}{
 	\renewcommand{\do}[1]{
-		\ifthenelse{\value{char##1SpeedCount}=0}{}{\AddToCounter{char##1SpeedCount}{\value{charSpeedEnhancementCount}}}
+		\ifthenelse{\value{Char##1SpeedCount}=0}{}{\AddToCounter{Char##1SpeedCount}{\value{CharSpeedEnhancementCount}}}
 	}
 	\docsvlist{Base, Fly, Swim, Burrow, Climb}
 }
@@ -226,93 +226,93 @@
 
 %%%% Feats, Class & Race Features %%%%
 
-\edef\charFeatsList{}
-\edef\charRaceFeaturesList{}
-\edef\charClassFeaturesList{}
-\edef\charLimitedUseList{}
-\NewCounter{charFeatsCount}
-\NewCounter{charBonusFeatsCount}
+\edef\CharFeatsList{}
+\edef\CharRaceFeaturesList{}
+\edef\CharClassFeaturesList{}
+\edef\CharLimitedUseList{}
+\NewCounter{CharFeatsCount}
+\NewCounter{CharBonusFeatsCount}
 \NewCounter{CountFeats-Mode}
 
 \NewDocumentCommand{\AddFeat}{s O{1} m}{
 	\IfBooleanTF #1 {
-		\AddToCounter{charBonusFeatsCount}{-#2}
-		\listadd\charFeatsList{#3\textsuperscript{B} \ifthenelse{#2 = 1}{}{$\times#2$}}
+		\AddToCounter{CharBonusFeatsCount}{-#2}
+		\listadd\CharFeatsList{#3\textsuperscript{B} \ifthenelse{#2 = 1}{}{$\times#2$}}
 	}{
-		\listadd\charFeatsList{#3 \ifthenelse{#2 = 1}{}{$\times#2$}}
-		\AddToCounter{charFeatsCount}{-#2}
+		\listadd\CharFeatsList{#3 \ifthenelse{#2 = 1}{}{$\times#2$}}
+		\AddToCounter{CharFeatsCount}{-#2}
 	}
 }
-\newcommand\AddClassFeature[1]{\listadd\charClassFeaturesList{#1}}
-\newcommand\AddRaceFeature[1]{\listadd\charRaceFeaturesList{#1}}
-\newcommand\AddLimitedUse[2]{\listadd\charLimitedUseList{#1 & #2}}
+\newcommand\AddClassFeature[1]{\listadd\CharClassFeaturesList{#1}}
+\newcommand\AddRaceFeature[1]{\listadd\CharRaceFeaturesList{#1}}
+\newcommand\AddLimitedUse[2]{\listadd\CharLimitedUseList{#1 & #2}}
 
 \newcommand{\datafolder}{.}
 %% Class Importing %%
-\NewCounter{charTotalLevelCount}
+\NewCounter{CharTotalLevelCount}
 \newcounter{HP-Mode}
-\edef\charClassesList{}
+\edef\CharClassesList{}
 \NewDocumentCommand{\ImportCharClass}{s O{} m m}{
 	\input{\datafolder/Classes/#3.tex}
 	\AddDebug{IMPORTCHARCLASS: add #4 Levels of #3}
 	\ifthenelse{\equal{#2}{}}{
-		\appto\charLevel{\capitalize{#3} #4 }
+		\appto\CharLevel{\capitalize{#3} #4 }
 	}{
-		\appto\charLevel{#2 #4 }
+		\appto\CharLevel{#2 #4 }
 	}
-	\listadd{\charClassesList}{#3}
+	\listadd{\CharClassesList}{#3}
 	\if\csname#3BAB\endcsname g
-	\Addtocounter{charBABCount}{#4}
+	\Addtocounter{CharBABCount}{#4}
 	\fi
 	\if\csname#3BAB\endcsname a
-	\AddToCounter{charBABCount}{#4 * 3 / 4}
+	\AddToCounter{CharBABCount}{#4 * 3 / 4}
 	\fi
 	\if\csname#3BAB\endcsname p
-	\AddToCounter{charBABCount}{#4 / 2}
+	\AddToCounter{CharBABCount}{#4 / 2}
 	\fi
 	\if\csname#3Fort\endcsname g
-	\AddToCounter{charFortitudeCount}{2 + #4 / 2}
+	\AddToCounter{CharFortitudeCount}{2 + #4 / 2}
 	\fi
 	\if\csname#3Fort\endcsname p
-	\AddToCounter{charFortitudeCount}{#4 / 3}
+	\AddToCounter{CharFortitudeCount}{#4 / 3}
 	\fi
 	\if\csname#3Ref\endcsname g
-	\AddToCounter{charReflexCount}{2 + #4 / 2}
+	\AddToCounter{CharReflexCount}{2 + #4 / 2}
 	\fi
 	\if\csname#3Ref\endcsname p
-	\AddToCounter{charReflexCount}{#4 / 3}
+	\AddToCounter{CharReflexCount}{#4 / 3}
 	\fi
 	\if\csname#3Will\endcsname g
-	\AddToCounter{charWillCount}{2 + #4 / 2}
+	\AddToCounter{CharWillCount}{2 + #4 / 2}
 	\fi
 	\if\csname#3Will\endcsname p
-	\AddToCounter{charWillCount}{#4 / 3}
+	\AddToCounter{CharWillCount}{#4 / 3}
 	\fi
-	\NewCounter{char#3ClassLevelCount}
-	\SetCounter{char#3ClassLevelCount}{#4}
-	\newcounter{char#3SpareSkillRanksCount}
-	\ifthenelse{\value{charTotalLevelCount} = 0}{
-		\SetCounter{char#3SpareSkillRanksCount}{(\value{charBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * (3 + #4)}
+	\NewCounter{Char#3ClassLevelCount}
+	\SetCounter{Char#3ClassLevelCount}{#4}
+	\newcounter{Char#3SpareSkillRanksCount}
+	\ifthenelse{\value{CharTotalLevelCount} = 0}{
+		\SetCounter{Char#3SpareSkillRanksCount}{(\value{CharBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * (3 + #4)}
 		\ifthenelse{\value{HP-Mode} = 1}{
-			\AddToCounter{charHPCount}{\value{#3HitDieSize}}
-			\AddToCounter{charHPRollsCount}{1}
+			\AddToCounter{CharHPCount}{\value{#3HitDieSize}}
+			\AddToCounter{CharHPRollsCount}{1}
 		}{
 			\ifthenelse{\value{HP-Mode} = 2}{
-				\AddToCounter{charHPCount}{\value{#3HitDieSize} + (\value{#3HitDieSize} + 1) * (#4 - 1) / 2}
+				\AddToCounter{CharHPCount}{\value{#3HitDieSize} + (\value{#3HitDieSize} + 1) * (#4 - 1) / 2}
 			}
 			{}
 		}
 	}{
-		\SetCounter{char#3SpareSkillRanksCount}{(\value{charBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * #4}
+		\SetCounter{Char#3SpareSkillRanksCount}{(\value{CharBonusSkillRanksPerLevelCount}+\value{#3SkillRanksPerLevelCount}) * #4}
 		\ifthenelse{\value{HP-Mode} = 1}{
 		}{
 			\ifthenelse{\value{HP-Mode} = 2}{
-				\AddToCounter{charHPCount}{(\value{#3HitDieSize} + 1) * #4 / 2}
+				\AddToCounter{CharHPCount}{(\value{#3HitDieSize} + 1) * #4 / 2}
 			}
 			{}
 		}
 	}
-	\AddToCounter{charTotalLevelCount}{#4}
+	\AddToCounter{CharTotalLevelCount}{#4}
 	\renewcommand\do[1]{
 		\isClassSkill{##1}
 	}\expandafter\dolistloop\csname#3ClassSkillsList\endcsname
@@ -346,10 +346,10 @@
 
 %% Initialize skill variables
 \renewcommand{\do}[1]{
-	\NewCounter{char#1Count}
-	\NewCounter{char#1ClassSkillBool}
-	\NewCounter{char#1RanksCount}
-	\NewCounter{char#1MiscCount}
+	\NewCounter{Char#1Count}
+	\NewCounter{Char#1ClassSkillBool}
+	\NewCounter{Char#1RanksCount}
+	\NewCounter{Char#1MiscCount}
 }\dolistloop{\SkillsList}
 
 %adds Skill to Class Skill list
@@ -363,113 +363,113 @@
 	}{\ifthenelse{\equal{#1}{Profession}}{
 		\forcsvlist{\isClassSkill}{ProfessionOne, ProfessionTwo}
 	}{
-		\SetCounter{char#1ClassSkillBool}{1}
+		\SetCounter{Char#1ClassSkillBool}{1}
 	}}}}
 }
 
 %Command to add skill ranks
 \newcommand\AddRanks[3][]{
 	\ifthenelse{\equal#1{}}{
-		\AddToCounter{char#2RanksCount}{#3}
+		\AddToCounter{Char#2RanksCount}{#3}
 	}{
 		\expandafter\let\expandafter\TmpClassSkillList\csname #1ClassSkillsList\endcsname
 		\ifinlist{#2}{\TmpClassSkillList}
 		{
-			\AddToCounter{char#2RanksCount}{#3}
+			\AddToCounter{Char#2RanksCount}{#3}
 		}{
-			\AddToCounter{char#2RanksCount}{#3 / 2}
+			\AddToCounter{Char#2RanksCount}{#3 / 2}
 		}
-		\AddToCounter{char#1SpareSkillRanksCount}{-1 * (#3)}
+		\AddToCounter{Char#1SpareSkillRanksCount}{-1 * (#3)}
 	}
 }
 
-\NewCounter{charBonusSkillRanksPerLevelCount}
+\NewCounter{CharBonusSkillRanksPerLevelCount}
 %Commands to be run at sheet initialization
 \newcounter{AutoSkillRanks-Mode}
 \newcommand{\AddIntToSkillRanks}{
 	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
 		\SetCounter{@i}{1}
-		\SetCounter{@j}{(\value{charIntCount} - \value{charIntEnhancementCount} - \value{charIntTmpCount}) / 2 - 5}
+		\SetCounter{@j}{(\value{CharIntCount} - \value{CharIntEnhancementCount} - \value{CharIntTmpCount}) / 2 - 5}
 		\renewcommand\do[1]{
 			\SetCounter{@k}{\value{@j} + \value{##1SkillRanksPerLevelCount}}
 			\ifthenelse{\value{@i} = 1}{
 				\AddDebug{First Class is: ##1}
 				\ifthenelse{\value{@k} < 1}{
 					\AddDebug{Min 1 rank per level}
-					\AddToCounter{char##1SpareSkillRanksCount}{(1 - \value{##1SkillRanksPerLevelCount}) * (\value{char##1ClassLevelCount} + 3)}
+					\AddToCounter{Char##1SpareSkillRanksCount}{(1 - \value{##1SkillRanksPerLevelCount}) * (\value{Char##1ClassLevelCount} + 3)}
 				}{
-					\AddToCounter{char##1SpareSkillRanksCount}{\value{@j} * (\value{char##1ClassLevelCount} + 3)}
+					\AddToCounter{Char##1SpareSkillRanksCount}{\value{@j} * (\value{Char##1ClassLevelCount} + 3)}
 				}
 			}{
 				\AddDebug{Class \# \arabic{@i} is: ##1}
 				\ifthenelse{\value{@k} < 1}{
 					\AddDebug{Min 1 rank per level}
-					\AddToCounter{char##1SpareSkillRanksCount}{(1 - \value{##1SkillRanksPerLevelCount}) * \value{char##1ClassLevelCount}}
+					\AddToCounter{Char##1SpareSkillRanksCount}{(1 - \value{##1SkillRanksPerLevelCount}) * \value{Char##1ClassLevelCount}}
 				}{
-					\AddToCounter{char##1SpareSkillRanksCount}{\value{@j} * \value{char##1ClassLevelCount}}
+					\AddToCounter{Char##1SpareSkillRanksCount}{\value{@j} * \value{Char##1ClassLevelCount}}
 				}
 			}
 			\StepCounter{@i}
-		}\dolistloop{\charClassesList}
+		}\dolistloop{\CharClassesList}
 	}{}
 }
 \newcommand{\CalculateSynergyBonuses}{
-	\ifthenelse{\value{charBluffRanksCount} > 4}{
+	\ifthenelse{\value{CharBluffRanksCount} > 4}{
 		\MiscBonus{Diplomacy}{2}
 		\MiscBonus{Intimidate}{2}
 		\MiscBonus{SleightOfHand}{2}
 		\AddConditionalSkillMod{+2 to Disguise checks to act in character}
 	}{}
-	\ifthenelse{\value{charCraftOneRanksCount} > 4}{
+	\ifthenelse{\value{CharCraftOneRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftOnename\endcsname}}{}
-	\ifthenelse{\value{charCraftTwoRanksCount} > 4}{
+	\ifthenelse{\value{CharCraftTwoRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftTwoname\endcsname}}{}
-	\ifthenelse{\value{charCraftThreeRanksCount} > 4}{
+	\ifthenelse{\value{CharCraftThreeRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftThreename\endcsname}}{}
-	\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{
-		\ifthenelse{\value{charSpellcraftRanksCount} > 4}{\AddConditionalSkillMod{+4 to Use Magic Device checks involving scrolls}}{\AddConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}}{}
-	\ifthenelse{\value{charEscapeArtistRanksCount} > 4}{
+	\ifthenelse{\value{CharDecipherScriptRanksCount} > 4}{
+		\ifthenelse{\value{CharSpellcraftRanksCount} > 4}{\AddConditionalSkillMod{+4 to Use Magic Device checks involving scrolls}}{\AddConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}}{}
+	\ifthenelse{\value{CharEscapeArtistRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Use Rope checks involving bindings}}{}
-	\ifthenelse{\value{charHandleAnimalRanksCount} > 4}{
+	\ifthenelse{\value{CharHandleAnimalRanksCount} > 4}{
 		\MiscBonus{Ride}{2}}{}
-	\ifthenelse{\value{charKnowledgeArcanaRanksCount} > 4}{
+	\ifthenelse{\value{CharKnowledgeArcanaRanksCount} > 4}{
 		\MiscBonus{Spellcraft}{2}}{}
-	\ifthenelse{\value{charKnowledgeEngineeringRanksCount} > 4}{
+	\ifthenelse{\value{CharKnowledgeEngineeringRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Search checks involving secret doors and similar compartments}}{}
-	\ifthenelse{\value{charKnowledgeDungeoneeringRanksCount} > 4}{
+	\ifthenelse{\value{CharKnowledgeDungeoneeringRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Survival checks when underground}}{}
-	\ifthenelse{\value{charKnowledgeGeographyRanksCount} > 4}{
+	\ifthenelse{\value{CharKnowledgeGeographyRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Survival checks to keep from getting lost or for avoiding hazards}}{}
-	\ifthenelse{\value{charKnowledgeLocalRanksCount} > 4}{
+	\ifthenelse{\value{CharKnowledgeLocalRanksCount} > 4}{
 		\MiscBonus{GatherInformation}{2}}{}
-	\ifthenelse{\value{charKnowledgeDungeoneeringRanksCount} > 4}{
+	\ifthenelse{\value{CharKnowledgeDungeoneeringRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Survival checks in aboveground natural environments}}{}
-	\ifthenelse{\value{charKnowledgeNobilityRanksCount} > 4}{
+	\ifthenelse{\value{CharKnowledgeNobilityRanksCount} > 4}{
 		\MiscBonus{Diplomacy}{2}}{}
-	\ifthenelse{\value{charKnowledgePlanesRanksCount} > 4}{
+	\ifthenelse{\value{CharKnowledgePlanesRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Survival checks when on other planes}}{}
-	\ifthenelse{\value{charSearchRanksCount} > 4}{
+	\ifthenelse{\value{CharSearchRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Survival checks to follow tracks}
 	}{}
-	\ifthenelse{\value{charSenseMotiveRanksCount} > 4}{
+	\ifthenelse{\value{CharSenseMotiveRanksCount} > 4}{
 		\MiscBonus{Diplomacy}{2}
 	}{}
-	\ifthenelse{\value{charSpellcraftRanksCount} > 4}{
-		\ifthenelse{\value{charDecipherScriptRanksCount} > 4}{}{\AddConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}
+	\ifthenelse{\value{CharSpellcraftRanksCount} > 4}{
+		\ifthenelse{\value{CharDecipherScriptRanksCount} > 4}{}{\AddConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}
 	}{}
-	\ifthenelse{\value{charSurvivalRanksCount} > 4}{
+	\ifthenelse{\value{CharSurvivalRanksCount} > 4}{
 		\MiscBonus{KnowledgeNature}{2}
 	}{}
-	\ifthenelse{\value{charTumbleRanksCount} > 4}{
+	\ifthenelse{\value{CharTumbleRanksCount} > 4}{
 		\MiscBonus{Balance}{2}
 	}{}
-	\ifthenelse{\value{charTumbleRanksCount} > 4}{
+	\ifthenelse{\value{CharTumbleRanksCount} > 4}{
 		\MiscBonus{Jump}{2}
 	}{}
-	\ifthenelse{\value{charUseMagicDeviceRanksCount} > 4}{
+	\ifthenelse{\value{CharUseMagicDeviceRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Spellcraft checks to decipher scrolls}
 	}{}
-	\ifthenelse{\value{charUseRopeRanksCount} > 4}{
+	\ifthenelse{\value{CharUseRopeRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Climb checks involving ropes}
 		\AddConditionalSkillMod{+2 to Escape Artist checks involving ropes}
 	}{}
@@ -479,19 +479,19 @@
 %%%% Items %%%%
 
 %%Gear%%
-\edef\charGearList{}
+\edef\CharGearList{}
 \newlength{\GearItemWeight}
 \NewDocumentCommand{\AddGearItem}{s O{1} m m}{%
 	\IfBooleanTF #1 {%
 		\Addtolength{\ExtradimensionalGearWeight}{#2pt * #4}%
-		\listadd{\charGearList}{#3\ifnum #2 > 1{ (#2)}\fi &\SetLength{\GearItemWeight}{#2pt * #4} *\PrintWeight{\GearItemWeight}~lbs.}
+		\listadd{\CharGearList}{#3\ifnum #2 > 1{ (#2)}\fi &\SetLength{\GearItemWeight}{#2pt * #4} *\PrintWeight{\GearItemWeight}~lbs.}
 	}{%
 		\Addtolength{\TotalGearWeight}{#2pt * #4}%
-		\listadd{\charGearList}{#3\ifnum #2 > 1{ (#2)}\fi & \SetLength{\GearItemWeight}{#2pt * #4}\PrintWeight{\GearItemWeight}~lbs.}
+		\listadd{\CharGearList}{#3\ifnum #2 > 1{ (#2)}\fi & \SetLength{\GearItemWeight}{#2pt * #4}\PrintWeight{\GearItemWeight}~lbs.}
 	}
 }
 \newcommand\AddGearSubItem[3][1]{
-	\listadd{\charGearList}{---#2\ifnum #1 > 1{ (#1)} & (\DoMath{#1 * #3}~lbs.) \tabularnewline}
+	\listadd{\CharGearList}{---#2\ifnum #1 > 1{ (#1)} & (\DoMath{#1 * #3}~lbs.) \tabularnewline}
 }
 
 %%Stored Items%%
@@ -508,7 +508,7 @@
 \renewcommand\do[1]{%
 	\expandafter\newcommand\csname charWeapon#1Name\endcsname{}%
 	\expandafter\newcommand\csname charWeapon#1AttackBonus\endcsname{}%
-	\NewCounter{charWeapon#1MiscCount}%
+	\NewCounter{CharWeapon#1MiscCount}%
 	\expandafter\newcommand\csname charWeapon#1Damage\endcsname{}%
 	\expandafter\newcommand\csname charWeapon#1Critical\endcsname{}%
 	\expandafter\newcommand\csname charWeapon#1Type\endcsname{}%
@@ -528,35 +528,35 @@
 		\expandafter\renewcommand\csname charWeapon#1AttackBonus\endcsname{%
 			\ifthenelse{\equal{\lowercase{##7}}{\lowercase{Melee}}}{%
 				\AddDebug{Weapon #1 is a Melee Weapon}
-				\SetCounter{charIteratedAttackBonusCount}{%
-					\value{charBABCount}+
-					\value{char##9ModCount}+%Ability score Mod
-					\value{charSizeModCount}+
-					\value{charMeleeMiscCount}+
-					\value{charMeleeTmpCount}+
-					\value{charWeapon#1MiscCount}+
+				\SetCounter{CharIteratedAttackBonusCount}{%
+					\value{CharBABCount}+
+					\value{Char##9ModCount}+%Ability score Mod
+					\value{CharSizeModCount}+
+					\value{CharMeleeMiscCount}+
+					\value{CharMeleeTmpCount}+
+					\value{CharWeapon#1MiscCount}+
 					##3
 				}
 			}{%
 				\AddDebug{Weapon #1 is a Ranged Weapon}
-				\SetCounter{charIteratedAttackBonusCount}{%
-					\value{charBABCount}+
-					\value{char##9ModCount}+%Ability score Mod
-					\value{charSizeModCount}+
-					\value{charRangedMiscCount}+
-					\value{charRangedTmpCount}+
-					\value{charWeapon#1MiscCount}+
+				\SetCounter{CharIteratedAttackBonusCount}{%
+					\value{CharBABCount}+
+					\value{Char##9ModCount}+%Ability score Mod
+					\value{CharSizeModCount}+
+					\value{CharRangedMiscCount}+
+					\value{CharRangedTmpCount}+
+					\value{CharWeapon#1MiscCount}+
 					##3
 				}
 			}
 			\ForLoop{@i}{0}{\value{@i}<##1}{%
 				\ifthenelse{\value{@i}=0}{}{/}%
-				\PlusMinus{charIteratedAttackBonusCount}%
+				\PlusMinus{CharIteratedAttackBonusCount}%
 			}%
-			\ForLoop{@i}{0}{\value{@i}<\value{charIteratedAttacksCount}}{%
+			\ForLoop{@i}{0}{\value{@i}<\value{CharIteratedAttacksCount}}{%
 				\ifthenelse{\value{@i}=0}{\ifthenelse{##1 = 0}{}{/}}{/}%
-				\PlusMinus{charIteratedAttackBonusCount}%
-				\SetCounter{charIteratedAttackBonusCount}{\value{charIteratedAttackBonusCount}-5}%
+				\PlusMinus{CharIteratedAttackBonusCount}%
+				\SetCounter{CharIteratedAttackBonusCount}{\value{CharIteratedAttackBonusCount}-5}%
 			}%
 		}%
 		\expandafter\renewcommand\csname charWeapon#1Damage\endcsname{##4}%
@@ -569,75 +569,75 @@
 \docsvlist{One,Two,Three}	
 
 \newcommand\AddWeapon[7]{%
-	\ifthenelse{\equal{\charWeaponOneName}{}}
+	\ifthenelse{\equal{\CharWeaponOneName}{}}
 	{\AddWeaponOne{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
-	{\ifthenelse{\equal{\charWeaponTwoName}{}}
+	{\ifthenelse{\equal{\CharWeaponTwoName}{}}
 		{\AddWeaponTwo{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
-		{\ifthenelse{\equal{\charWeaponThreeName}{}}
+		{\ifthenelse{\equal{\CharWeaponThreeName}{}}
 			{\AddWeaponThree{#1}{#2}{#3}{#4}{#5}{#6}{#7}}
 			{\AddWeaponOne{#1}{#2}{#3}{#4}{#5}{#6}{#7}
 }}}}
 
 \newcommand\AddAutoWeapon[9][0]{
-	\ifthenelse{\equal{\charWeaponOneName}{}}
+	\ifthenelse{\equal{\CharWeaponOneName}{}}
 	{\AddAutoWeaponOne[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
-	{\ifthenelse{\equal{\charWeaponTwoName}{}}
+	{\ifthenelse{\equal{\CharWeaponTwoName}{}}
 		{\AddAutoWeaponTwo[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
-		{\ifthenelse{\equal{\charWeaponThreeName}{}}
+		{\ifthenelse{\equal{\CharWeaponThreeName}{}}
 			{\AddAutoWeaponThree[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}}
 			{\AddAutoWeaponOne[#1]{#2}{#3}{#4}{#5}{#6}{#7}{#8}{#9}
 }}}}
 
 %Initialize Armor Item variables
 \NewCounter{TotalACItemsSpellFailure}
-\NewCounter{charMaxDexArmorCount}
-\SetCounter{charMaxDexArmorCount}{100}
-\NewCounter{charMaxDexShieldCount}
-\SetCounter{charMaxDexShieldCount}{100}
-\NewCounter{charMaxDexBonusCount}
-\SetCounter{charMaxDexBonusCount}{100}
-\NewCounter{charDextoACCount}
-\newcommand{\charArmorName}{}
-\newcommand{\charArmorNotes}{}
-\newcommand{\charArmorType}{}
-\NewCounter{charArmorArmorCheckPenaltyCount}
-\NewCounter{charArmorSpellFailureCount}
-\newcommand{\charShieldName}{}
-\newcommand{\charShieldNotes}{}
-\NewCounter{charShieldArmorCheckPenaltyCount}
-\NewCounter{charShieldSpellFailureCount}
+\NewCounter{CharMaxDexArmorCount}
+\SetCounter{CharMaxDexArmorCount}{100}
+\NewCounter{CharMaxDexShieldCount}
+\SetCounter{CharMaxDexShieldCount}{100}
+\NewCounter{CharMaxDexBonusCount}
+\SetCounter{CharMaxDexBonusCount}{100}
+\NewCounter{CharDextoACCount}
+\newcommand{\CharArmorName}{}
+\newcommand{\CharArmorNotes}{}
+\newcommand{\CharArmorType}{}
+\NewCounter{CharArmorArmorCheckPenaltyCount}
+\NewCounter{CharArmorSpellFailureCount}
+\newcommand{\CharShieldName}{}
+\newcommand{\CharShieldNotes}{}
+\NewCounter{CharShieldArmorCheckPenaltyCount}
+\NewCounter{CharShieldSpellFailureCount}
 
 %Command to add an armor item
 \newcommand\AddArmor[9]{
-	\renewcommand{\charArmorName}{#1}
+	\renewcommand{\CharArmorName}{#1}
 	\AddArmorBonus{#2}
-	\ifthenelse{\equal{#3}{}}{}{\SetCounter{charMaxDexArmorCount}{#3}}
-	\ifthenelse{\value{charMaxDexArmorCount}<\value{charMaxDexBonusCount}}
-	{\SetCounter{charMaxDexBonusCount}{\value{charMaxDexArmorCount}}}{}
-	\SetCounter{charArmorArmorCheckPenaltyCount}{#4}
+	\ifthenelse{\equal{#3}{}}{}{\SetCounter{CharMaxDexArmorCount}{#3}}
+	\ifthenelse{\value{CharMaxDexArmorCount}<\value{CharMaxDexBonusCount}}
+	{\SetCounter{CharMaxDexBonusCount}{\value{CharMaxDexArmorCount}}}{}
+	\SetCounter{CharArmorArmorCheckPenaltyCount}{#4}
 	\renewcommand{\do}[1]{
 		\MiscBonus{##1}{#4}
 	}\dolistloop{\ArmorCheckSkillsList}
-	\AddToCounter{charArmorSpellFailureCount}{#5}
+	\AddToCounter{CharArmorSpellFailureCount}{#5}
 	\AddToCounter{TotalACItemsSpellFailure}{#5}
-	\renewcommand{\charArmorType}{#6}
-	\renewcommand{\charArmorNotes}{#8}
+	\renewcommand{\CharArmorType}{#6}
+	\renewcommand{\CharArmorNotes}{#8}
 	\AddBodyItem{#1}{#9}{#7}
 }
 
 %Command to add a shield item
 \newcommand\AddShield[7]{
 	\AddShieldBonus{#2}
-	\ifthenelse{\equal{#3}{}}{}{\SetCounter{charMaxDexShieldCount}{#3}}
-	\ifthenelse{\value{charMaxDexShieldCount}<\value{charMaxDexBonusCount}}
-	{\SetCounter{charMaxDexBonusCount}{\value{charMaxDexShieldCount}}}{}
-	\SetCounter{charShieldArmorCheckPenaltyCount}{#4}
+	\ifthenelse{\equal{#3}{}}{}{\SetCounter{CharMaxDexShieldCount}{#3}}
+	\ifthenelse{\value{CharMaxDexShieldCount}<\value{CharMaxDexBonusCount}}
+	{\SetCounter{CharMaxDexBonusCount}{\value{CharMaxDexShieldCount}}}{}
+	\SetCounter{CharShieldArmorCheckPenaltyCount}{#4}
 	\renewcommand{\do}[1]{
 		\MiscBonus{##1}{#4}
 	}\dolistloop{\ArmorCheckSkillsList}
-	\SetCounter{charShieldSpellFailureCount}{#5}
+	\SetCounter{CharShieldSpellFailureCount}{#5}
 	\AddToCounter{TotalACItemsSpellFailure}{#5}
-	\renewcommand{\charShieldNotes}{#7}
+	\renewcommand{\CharShieldNotes}{#7}
 	\AddGearItem{Shield}{#6}
 }
 
@@ -662,29 +662,29 @@
 
 %%Money
 \renewcommand{\do}[1]{
-	\NewCounter{char#1Count}
-	\NewCounter{char#1WeightlessCount}
-	\NewCounter{char#1StoredCount}
-	\expandafter\newcommand\csname addStored#1\endcsname[1]{\AddToCounter{char#1StoredCount}{##1}}
+	\NewCounter{Char#1Count}
+	\NewCounter{Char#1WeightlessCount}
+	\NewCounter{Char#1StoredCount}
+	\expandafter\newcommand\csname addStored#1\endcsname[1]{\AddToCounter{Char#1StoredCount}{##1}}
 	\expandafter\NewDocumentCommand\csname add#1\endcsname{s m}{
-		\IfBooleanTF ##1 {\AddToCounter{char#1WeightlessCount}{##2}} {\AddToCounter{char#1Count}{##2}}
+		\IfBooleanTF ##1 {\AddToCounter{Char#1WeightlessCount}{##2}} {\AddToCounter{Char#1Count}{##2}}
 	}
 }\docsvlist{Platinum, Gold, Silver, Copper}
 
 
 
 %\expandafter\newcommand\csname addPlatinum\endcsname{\@ifstar\@@addPlatinum\@addPlatinum}
-%\expandafter\newcommand\csname @addPlatinum\endcsname[1]{\AddToCounter{charPlatinumCount}{#1}}
-%\expandafter\newcommand\csname @@addPlatinum\endcsname[1]{\AddToCounter{charPlatinumWeightlessCount}{#1}}
+%\expandafter\newcommand\csname @addPlatinum\endcsname[1]{\AddToCounter{CharPlatinumCount}{#1}}
+%\expandafter\newcommand\csname @@addPlatinum\endcsname[1]{\AddToCounter{CharPlatinumWeightlessCount}{#1}}
 %\expandafter\newcommand\csname addGold\endcsname{\@ifstar\@@addGold\@addGold}
-%\expandafter\newcommand\csname @addGold\endcsname[1]{\AddToCounter{charGoldCount}{#1}}
-%\expandafter\newcommand\csname @@addGold\endcsname[1]{\AddToCounter{charGoldWeightlessCount}{#1}}
+%\expandafter\newcommand\csname @addGold\endcsname[1]{\AddToCounter{CharGoldCount}{#1}}
+%\expandafter\newcommand\csname @@addGold\endcsname[1]{\AddToCounter{CharGoldWeightlessCount}{#1}}
 %\expandafter\newcommand\csname addSilver\endcsname{\@ifstar\@@addSilver\@addSilver}
-%\expandafter\newcommand\csname @addSilver\endcsname[1]{\AddToCounter{charSilverCount}{#1}}
-%\expandafter\newcommand\csname @@addSilver\endcsname[1]{\AddToCounter{charSilverWeightlessCount}{#1}}
+%\expandafter\newcommand\csname @addSilver\endcsname[1]{\AddToCounter{CharSilverCount}{#1}}
+%\expandafter\newcommand\csname @@addSilver\endcsname[1]{\AddToCounter{CharSilverWeightlessCount}{#1}}
 %\expandafter\newcommand\csname addCopper\endcsname{\@ifstar\@@addCopper\@addCopper}
-%\expandafter\newcommand\csname @addCopper\endcsname[1]{\AddToCounter{charCopperCount}{#1}}
-%\expandafter\newcommand\csname @@addCopper\endcsname[1]{\AddToCounter{charCopperWeightlessCount}{#1}}
+%\expandafter\newcommand\csname @addCopper\endcsname[1]{\AddToCounter{CharCopperCount}{#1}}
+%\expandafter\newcommand\csname @@addCopper\endcsname[1]{\AddToCounter{CharCopperWeightlessCount}{#1}}
 
 %%Weight
 \newlength{\TotalGearWeight}
@@ -697,10 +697,10 @@
 \newlength{\TotalExtradimensionalWeight}
 \newlength{\ExtradimensionalOverload}
 \newcommand{\CalculateWeights}{
-	\SetLength{\CurrencyWeight}{.02pt*\value{charPlatinumCount}+.02pt*\value{charGoldCount}+.02pt*\value{charSilverCount}+.02pt*\value{charCopperCount}}
-	\SetLength{\ExtradimensionalCurrencyWeight}{.02pt*\value{charPlatinumWeightlessCount}+.02pt*\value{charGoldWeightlessCount}+.02pt*\value{charSilverWeightlessCount}+.02pt*\value{charCopperWeightlessCount}}
+	\SetLength{\CurrencyWeight}{.02pt*\value{CharPlatinumCount}+.02pt*\value{CharGoldCount}+.02pt*\value{CharSilverCount}+.02pt*\value{CharCopperCount}}
+	\SetLength{\ExtradimensionalCurrencyWeight}{.02pt*\value{CharPlatinumWeightlessCount}+.02pt*\value{CharGoldWeightlessCount}+.02pt*\value{CharSilverWeightlessCount}+.02pt*\value{CharCopperWeightlessCount}}
 	\SetLength{\TotalExtradimensionalWeight}{\ExtradimensionalGearWeight+\ExtradimensionalCurrencyWeight}
-	\SetLength{\ExtradimensionalOverload}{\TotalExtradimensionalWeight - \value{charExtradimensionalCapacityCount}pt}
+	\SetLength{\ExtradimensionalOverload}{\TotalExtradimensionalWeight - \value{CharExtradimensionalCapacityCount}pt}
 	\ifthenelse{\ExtradimensionalOverload > 0}{
 		\Addtolength{\TotalGearWeight}{\ExtradimensionalOverload}
 	}{}
@@ -709,14 +709,14 @@
 
 
 %%Carrying Capacity
-\NewCounter{charHeavyLoadCount}
-\NewCounter{charMediumLoadCount}
-\NewCounter{charLightLoadCount}
-\NewCounter{charStrCarryingMiscCount}
-\NewCounter{charStrCarryingCount}
-\NewCounter{charLiftLoadCount}
-\NewCounter{charDragLoadCount}
-\NewCounter{charExtradimensionalCapacityCount}
+\NewCounter{CharHeavyLoadCount}
+\NewCounter{CharMediumLoadCount}
+\NewCounter{CharLightLoadCount}
+\NewCounter{CharStrCarryingMiscCount}
+\NewCounter{CharStrCarryingCount}
+\NewCounter{CharLiftLoadCount}
+\NewCounter{CharDragLoadCount}
+\NewCounter{CharExtradimensionalCapacityCount}
 
 \NewCounter{CarryingCapacityMultiplierCount}
 \SetCounter{CarryingCapacityMultiplierCount}{1}
@@ -743,51 +743,51 @@
 }
 \newcommand\CalculateLoads{
 	\SetCounter{@i}{0}
-	\SetCounter{@j}{\value{charStrCount}+\value{charStrCarryingMiscCount}}
+	\SetCounter{@j}{\value{CharStrCount}+\value{CharStrCarryingMiscCount}}
 	\SetHeavyLoad{@j}
-	\SetCounter{charHeavyLoadCount}{\value{@i}*\value{CarryingCapacityMultiplierCount}}
-	\SetCounter{charMediumLoadCount}{\value{charHeavyLoadCount}*2/3}
-	\SetCounter{charLightLoadCount}{\value{charHeavyLoadCount}/3}
-	\SetCounter{charLiftLoadCount}{\value{charHeavyLoadCount}*2}
-	\SetCounter{charDragLoadCount}{\value{charHeavyLoadCount}*5}
+	\SetCounter{CharHeavyLoadCount}{\value{@i}*\value{CarryingCapacityMultiplierCount}}
+	\SetCounter{CharMediumLoadCount}{\value{CharHeavyLoadCount}*2/3}
+	\SetCounter{CharLightLoadCount}{\value{CharHeavyLoadCount}/3}
+	\SetCounter{CharLiftLoadCount}{\value{CharHeavyLoadCount}*2}
+	\SetCounter{CharDragLoadCount}{\value{CharHeavyLoadCount}*5}
 }
 
-\NewCounter{charEncumberanceLevelCount}
-\NewCounter{charEncumberedMaxDexCount}
-\SetCounter{charEncumberedMaxDexCount}{100}
-\NewCounter{charEncumberedArmorCheckPenaltyCount}
-\NewCounter{charEncumberedSpeedReducedBool}
+\NewCounter{CharEncumberanceLevelCount}
+\NewCounter{CharEncumberedMaxDexCount}
+\SetCounter{CharEncumberedMaxDexCount}{100}
+\NewCounter{CharEncumberedArmorCheckPenaltyCount}
+\NewCounter{CharEncumberedSpeedReducedBool}
 \newlength\loadaslength
 
 \newcommand\CheckEncumberance{
-	\SetLength\loadaslength{1pt*\value{charLightLoadCount}}
+	\SetLength\loadaslength{1pt*\value{CharLightLoadCount}}
 	\ifthenelse{\lengthtest{\TotalCarriedWeight<\loadaslength}}{ 
-		\SetCounter{charEncumberanceLevelCount}{1}}{
-		\SetLength\loadaslength{1pt*\value{charMediumLoadCount}}
+		\SetCounter{CharEncumberanceLevelCount}{1}}{
+		\SetLength\loadaslength{1pt*\value{CharMediumLoadCount}}
 		\ifthenelse{\lengthtest{\TotalCarriedWeight<\loadaslength}}{
-			\SetCounter{charEncumberanceLevelCount}{2}
-			\SetCounter{charEncumberedArmorCheckPenaltyCount}{-3}
-			\SetCounter{charEncumberedMaxDexCount}{3}
-			\SetCounter{charEncumberedSpeedReducedBool}{\value{charSpeedReducibleBool}}}{
-			\SetLength\loadaslength{1pt*\value{charHeavyLoadCount}}
+			\SetCounter{CharEncumberanceLevelCount}{2}
+			\SetCounter{CharEncumberedArmorCheckPenaltyCount}{-3}
+			\SetCounter{CharEncumberedMaxDexCount}{3}
+			\SetCounter{CharEncumberedSpeedReducedBool}{\value{CharSpeedReducibleBool}}}{
+			\SetLength\loadaslength{1pt*\value{CharHeavyLoadCount}}
 			\ifthenelse{\lengthtest{\TotalCarriedWeight<\loadaslength}}{
-				\SetCounter{charEncumberanceLevelCount}{3}
-				\SetCounter{charEncumberedArmorCheckPenaltyCount}{-6}
-				\SetCounter{charEncumberedMaxDexCount}{1}
-				\SetCounter{charEncumberedSpeedReducedBool}{\value{charSpeedReducibleBool}}}{
-				\SetCounter{charEncumberanceLevelCount}{4}
-				\SetCounter{charEncumberedArmorCheckPenaltyCount}{-10}
-				\SetCounter{charEncumberedMaxDexCount}{0}
-				\SetCounter{charEncumberedSpeedReducedBool}{\value{charSpeedReducibleBool}}}}}
-	\ifthenelse{\value{charEncumberedMaxDexCount}<\value{charMaxDexBonusCount}}
-	{\SetCounter{charMaxDexBonusCount}{\value{charEncumberedMaxDexCount}}}{}
+				\SetCounter{CharEncumberanceLevelCount}{3}
+				\SetCounter{CharEncumberedArmorCheckPenaltyCount}{-6}
+				\SetCounter{CharEncumberedMaxDexCount}{1}
+				\SetCounter{CharEncumberedSpeedReducedBool}{\value{CharSpeedReducibleBool}}}{
+				\SetCounter{CharEncumberanceLevelCount}{4}
+				\SetCounter{CharEncumberedArmorCheckPenaltyCount}{-10}
+				\SetCounter{CharEncumberedMaxDexCount}{0}
+				\SetCounter{CharEncumberedSpeedReducedBool}{\value{CharSpeedReducibleBool}}}}}
+	\ifthenelse{\value{CharEncumberedMaxDexCount}<\value{CharMaxDexBonusCount}}
+	{\SetCounter{CharMaxDexBonusCount}{\value{CharEncumberedMaxDexCount}}}{}
 	\renewcommand{\do}[1]{
-		\MiscBonus{##1}{\value{charEncumberedArmorCheckPenaltyCount}}
+		\MiscBonus{##1}{\value{CharEncumberedArmorCheckPenaltyCount}}
 	}\dolistloop{\ArmorCheckSkillsList}
 }
 
 \newcommand\EncumberanceBox[1]{
-	\ifthenelse{#1 = \value{charEncumberanceLevelCount}}{$\cancel{\square}$}{$\square$}
+	\ifthenelse{#1 = \value{CharEncumberanceLevelCount}}{$\cancel{\square}$}{$\square$}
 }
 
 %%%% Spells %%%%
@@ -1036,7 +1036,7 @@
 
 
 \def\AddCantripOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charCantripsListOne}{#1}
+	\listinsert{\CharCantripsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{0& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1053,7 +1053,7 @@
 	\lastargs
 }
 \def\AddFirstSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charFirstSpellsListOne}{#1}
+	\listinsert{\CharFirstSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{1& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1070,7 +1070,7 @@
 	\lastargs
 }
 \def\AddSecondSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charSecondSpellsListOne}{#1}
+	\listinsert{\CharSecondSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{2& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1087,7 +1087,7 @@
 	\lastargs
 }
 \def\AddThirdSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charThirdSpellsListOne}{#1}
+	\listinsert{\CharThirdSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{3& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1104,7 +1104,7 @@
 	\lastargs
 }
 \def\AddFourthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charFourthSpellsListOne}{#1}
+	\listinsert{\CharFourthSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{4& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1121,7 +1121,7 @@
 	\lastargs
 }
 \def\AddFifthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charFifthSpellsListOne}{#1}
+	\listinsert{\CharFifthSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{5& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1138,7 +1138,7 @@
 	\lastargs
 }
 \def\AddSixthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charSixthSpellsListOne}{#1}
+	\listinsert{\CharSixthSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{6& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1155,7 +1155,7 @@
 	\lastargs
 }
 \def\AddSeventhSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charSeventhSpellsListOne}{#1}
+	\listinsert{\CharSeventhSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{7& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1172,7 +1172,7 @@
 	\lastargs
 }
 \def\AddEighthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charEighthSpellsListOne}{#1}
+	\listinsert{\CharEighthSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{8& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1189,7 +1189,7 @@
 	\lastargs
 }
 \def\AddNinthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charNinthSpellsListOne}{#1}
+	\listinsert{\CharNinthSpellsListOne}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{9& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1207,7 +1207,7 @@
 }
 
 \def\AddCantripTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charCantripsListTwo}{#1}
+	\listinsert{\CharCantripsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{0& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1224,7 +1224,7 @@
 	\lastargs
 }
 \def\AddFirstSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charFirstSpellsListTwo}{#1}
+	\listinsert{\CharFirstSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{1& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1241,7 +1241,7 @@
 	\lastargs
 }
 \def\AddSecondSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charSecondSpellsListTwo}{#1}
+	\listinsert{\CharSecondSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{2& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1258,7 +1258,7 @@
 	\lastargs
 }
 \def\AddThirdSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charThirdSpellsListTwo}{#1}
+	\listinsert{\CharThirdSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{3& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1275,7 +1275,7 @@
 	\lastargs
 }
 \def\AddFourthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charFourthSpellsListTwo}{#1}
+	\listinsert{\CharFourthSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{4& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1292,7 +1292,7 @@
 	\lastargs
 }
 \def\AddFifthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charFifthSpellsListTwo}{#1}
+	\listinsert{\CharFifthSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{5& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1309,7 +1309,7 @@
 	\lastargs
 }
 \def\AddSixthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charSixthSpellsListTwo}{#1}
+	\listinsert{\CharSixthSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{6& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1326,7 +1326,7 @@
 	\lastargs
 }
 \def\AddSeventhSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charSeventhSpellsListTwo}{#1}
+	\listinsert{\CharSeventhSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{7& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1343,7 +1343,7 @@
 	\lastargs
 }
 \def\AddEighthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charEighthSpellsListTwo}{#1}
+	\listinsert{\CharEighthSpellsListTwo}{#1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{8& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1360,7 +1360,7 @@
 	\lastargs
 }
 \def\AddNinthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\charNinthSpellsListTwo}{##1}
+	\listinsert{\CharNinthSpellsListTwo}{##1}
 	\def\lastargs ##1|##2|{
 		\expandafter\def\csname #1\endcsname{9& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
 		\expandafter\def\csname Spell#1header\endcsname{
@@ -1378,34 +1378,34 @@
 }
 
 \newcommand{\AddCantrip}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddCantripOne#1}{\AddCantripTwo#1}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddCantripOne#1}{\AddCantripTwo#1}
 }
 \newcommand{\AddFirstSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFirstSpellOne#1}{\AddFirstSpellTwo#1}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddFirstSpellOne#1}{\AddFirstSpellTwo#1}
 }
 \newcommand{\AddSecondSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSecondSpellOne#1}{\AddSecondSpellTwo#1}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSecondSpellOne#1}{\AddSecondSpellTwo#1}
 }
 \newcommand{\AddThirdSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddThirdSpellOne#1}{\AddThirdSpellTwo#1}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddThirdSpellOne#1}{\AddThirdSpellTwo#1}
 }
 \newcommand{\AddFourthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFourthSpellOne#1}{\AddFourthSpellTwo#1}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddFourthSpellOne#1}{\AddFourthSpellTwo#1}
 }
 \newcommand{\AddFifthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddFifthSpellOne#1}{\AddFifthSpellTwo#1}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddFifthSpellOne#1}{\AddFifthSpellTwo#1}
 }
 \newcommand{\AddSixthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSixthSpellOne#1}{\AddSixthSpellTwo#1}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSixthSpellOne#1}{\AddSixthSpellTwo#1}
 }
 \newcommand{\AddSeventhSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSeventhSpellOne#1}{\AddSeventhSpellTwo#1}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSeventhSpellOne#1}{\AddSeventhSpellTwo#1}
 }
 \newcommand{\AddEighthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddEighthSpellOne#1}{\AddEighthSpellTwo#1}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddEighthSpellOne#1}{\AddEighthSpellTwo#1}
 }
 \newcommand{\AddNinthSpell}[1]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddNinthSpellOne}{\AddNinthSpellTwo}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddNinthSpellOne}{\AddNinthSpellTwo}
 }
 \newcommand\Spelldescription[2]{
 	\expandafter\newcommand\csname Spell#1description\endcsname{#2}
@@ -1414,22 +1414,22 @@
 \renewcommand{\do}[1]{
 	\expandafter\newcommand\csname charSpellcastingClass#1\endcsname{}
 	\expandafter\newcommand\csname charSpellcastingClass#1Ability\endcsname{}
-	\NewCounter{charCL#1Count}
-	\NewCounter{charSpellcastingClass#1MaxSpellLevelCount}
-	\SetCounter{charSpellcastingClass#1MaxSpellLevelCount}{-1}
-	\NewCounter{charSpellcasting#1HasCantrips}
-	\SetCounter{charSpellcasting#1HasCantrips}{0}
+	\NewCounter{CharCL#1Count}
+	\NewCounter{CharSpellcastingClass#1MaxSpellLevelCount}
+	\SetCounter{CharSpellcastingClass#1MaxSpellLevelCount}{-1}
+	\NewCounter{CharSpellcasting#1HasCantrips}
+	\SetCounter{CharSpellcasting#1HasCantrips}{0}
 	\expandafter\NewDocumentCommand\csname newSpellcasting#1\endcsname{s O{9} m m m}{
-		\IfBooleanTF ##1 {} {\SetCounter{charSpellcasting#1HasCantrips}{1}}
-		\SetCounter{charSpellcastingClass#1MaxSpellLevelCount}{##2}
+		\IfBooleanTF ##1 {} {\SetCounter{CharSpellcasting#1HasCantrips}{1}}
+		\SetCounter{CharSpellcastingClass#1MaxSpellLevelCount}{##2}
 		\expandafter\renewcommand\csname charSpellcastingClass#1\endcsname{##3}
 		\expandafter\renewcommand\csname charSpellcastingClass#1Ability\endcsname{##5}
-		\SetCounter{charCL#1Count}{##4}
+		\SetCounter{CharCL#1Count}{##4}
 	}
 }\docsvlist{One,Two}
 
 \NewDocumentCommand{\newSpellcasting}{s O{9} m m m}{
-	\ifthenelse{\equal{\charSpellcastingClassOne}{}}{
+	\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{
 		\IfBooleanTF #1 {\newSpellcastingOne*[#2]{#3}{#4}{#5}} {\newSpellcastingOne[#2]{#3}{#4}{#5}}
 	}{
 		\IfBooleanTF #1 {\newSpellcastingTwo*[#2]{#3}{#4}{#5}} {\newSpellcastingTwo[#2]{#3}{#4}{#5}}
@@ -1437,59 +1437,59 @@
 }
 %Initialize Spellcasting variables
 \ForLoop{@i}{0}{\value{@i}<10}{
-	\NewCounter{charAbilitySpellSlotsOne\arabic{@i}Count}
-	\NewCounter{charAbilitySpellSlotsTwo\arabic{@i}Count}
-	\NewCounter{charClassSpellSlotsOne\arabic{@i}Count}
-	\NewCounter{charClassSpellSlotsTwo\arabic{@i}Count}
-	\NewCounter{charBonusSpellSlotsOne\arabic{@i}Count}
-	\NewCounter{charBonusSpellSlotsTwo\arabic{@i}Count}
-	\NewCounter{charTotalSpellSlotsOne\arabic{@i}Count}
-	\NewCounter{charTotalSpellSlotsTwo\arabic{@i}Count}
-	\NewCounter{charSpellsKnownOne\arabic{@i}Count}
-	\NewCounter{charSpellsKnownTwo\arabic{@i}Count}
+	\NewCounter{CharAbilitySpellSlotsOne\arabic{@i}Count}
+	\NewCounter{CharAbilitySpellSlotsTwo\arabic{@i}Count}
+	\NewCounter{CharClassSpellSlotsOne\arabic{@i}Count}
+	\NewCounter{CharClassSpellSlotsTwo\arabic{@i}Count}
+	\NewCounter{CharBonusSpellSlotsOne\arabic{@i}Count}
+	\NewCounter{CharBonusSpellSlotsTwo\arabic{@i}Count}
+	\NewCounter{CharTotalSpellSlotsOne\arabic{@i}Count}
+	\NewCounter{CharTotalSpellSlotsTwo\arabic{@i}Count}
+	\NewCounter{CharSpellsKnownOne\arabic{@i}Count}
+	\NewCounter{CharSpellsKnownTwo\arabic{@i}Count}
 }
 
 \newcommand{\InitializeSpellSlots}{
-	\ifthenelse{\equal{\charSpellcastingClassOneAbility}{}}{}{
-		\SetCounter{charTotalSpellSlotsOne0Count}{\value{charClassSpellSlotsOne0Count} + \value{charBonusSpellSlotsOne0Count}}
+	\ifthenelse{\equal{\CharSpellcastingClassOneAbility}{}}{}{
+		\SetCounter{CharTotalSpellSlotsOne0Count}{\value{CharClassSpellSlotsOne0Count} + \value{CharBonusSpellSlotsOne0Count}}
 		\ForLoop{@i}{1}{\value{@i}<10}{
-			\SetCounter{charAbilitySpellSlotsOne\arabic{@i}Count}{(\value{char\charSpellcastingClassOneAbility ModCount}+4-\value{@i})/4}
-			\SetCounter{charTotalSpellSlotsOne\arabic{@i}Count}{
-				\value{charAbilitySpellSlotsOne\arabic{@i}Count} +
-				\value{charClassSpellSlotsOne\arabic{@i}Count} +
-				\value{charBonusSpellSlotsOne\arabic{@i}Count}
+			\SetCounter{CharAbilitySpellSlotsOne\arabic{@i}Count}{(\value{Char\CharSpellcastingClassOneAbility ModCount}+4-\value{@i})/4}
+			\SetCounter{CharTotalSpellSlotsOne\arabic{@i}Count}{
+				\value{CharAbilitySpellSlotsOne\arabic{@i}Count} +
+				\value{CharClassSpellSlotsOne\arabic{@i}Count} +
+				\value{CharBonusSpellSlotsOne\arabic{@i}Count}
 			}
 		}
-		\AddDebug{Adjusting max Spell Level for \charSpellcastingClassOne}
-		\AddDebug{-Ability score = \arabic{char\charSpellcastingClassOneAbility Count}}
-		\AddDebug{-New max Spell Level = \DoMath{\value{char\charSpellcastingClassOneAbility Count} - 10}}
-		\AddDebug{-Old max Spell Level = \arabic{charSpellcastingClassOneMaxSpellLevelCount}}
-		\DoMath*{\value{char\charSpellcastingClassOneAbility Count} - 10}
-		\ifthenelse{\value{charSpellcastingClassOneMaxSpellLevelCount} > \value{@DoMathCounter}}{
-			\SetCounter{charSpellcastingClassOneMaxSpellLevelCount}{\value{char\charSpellcastingClassOneAbility Count} - 10}
-			\AddDebug{-Max Spell Level set to \arabic{charSpellcastingClassOneMaxSpellLevelCount}}
+		\AddDebug{Adjusting max Spell Level for \CharSpellcastingClassOne}
+		\AddDebug{-Ability score = \arabic{Char\CharSpellcastingClassOneAbility Count}}
+		\AddDebug{-New max Spell Level = \DoMath{\value{Char\CharSpellcastingClassOneAbility Count} - 10}}
+		\AddDebug{-Old max Spell Level = \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
+		\DoMath*{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
+		\ifthenelse{\value{CharSpellcastingClassOneMaxSpellLevelCount} > \value{@DoMathCounter}}{
+			\SetCounter{CharSpellcastingClassOneMaxSpellLevelCount}{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
+			\AddDebug{-Max Spell Level set to \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
 		}{
 			\AddDebug{-No adjustment needed}
 		}
 	}
-	\ifthenelse{\equal{\charSpellcastingClassTwoAbility}{}}{}{
-		\SetCounter{charTotalSpellSlotsTwo0Count}{\value{charClassSpellSlotsTwo0Count} + \value{charBonusSpellSlotsTwo0Count}}
+	\ifthenelse{\equal{\CharSpellcastingClassTwoAbility}{}}{}{
+		\SetCounter{CharTotalSpellSlotsTwo0Count}{\value{CharClassSpellSlotsTwo0Count} + \value{CharBonusSpellSlotsTwo0Count}}
 		\ForLoop{@i}{1}{\value{@i}<10}{
-			\SetCounter{charAbilitySpellSlotsTwo\arabic{@i}Count}{(\value{char\charSpellcastingClassTwoAbility ModCount}+4-\value{@i})/4}
-			\SetCounter{charTotalSpellSlotsTwo\arabic{@i}Count}{
-				\value{charAbilitySpellSlotsTwo\arabic{@i}Count} +
-				\value{charClassSpellSlotsTwo\arabic{@i}Count} +
-				\value{charBonusSpellSlotsTwo\arabic{@i}Count}
+			\SetCounter{CharAbilitySpellSlotsTwo\arabic{@i}Count}{(\value{Char\CharSpellcastingClassTwoAbility ModCount}+4-\value{@i})/4}
+			\SetCounter{CharTotalSpellSlotsTwo\arabic{@i}Count}{
+				\value{CharAbilitySpellSlotsTwo\arabic{@i}Count} +
+				\value{CharClassSpellSlotsTwo\arabic{@i}Count} +
+				\value{CharBonusSpellSlotsTwo\arabic{@i}Count}
 			}
 		}
-		\AddDebug{Adjusting max Spell Level for \charSpellcastingClassTwo}
-		\AddDebug{-Ability score = \arabic{char\charSpellcastingClassTwoAbility Count}}
-		\AddDebug{-New max Spell Level = \DoMath{\value{char\charSpellcastingClassTwoAbility Count} - 10}}
-		\AddDebug{-Old max Spell Level = \arabic{charSpellcastingClassTwoMaxSpellLevelCount}}
-		\DoMath*{\value{char\charSpellcastingClassTwoAbility Count} - 10}
-		\ifthenelse{\value{charSpellcastingClassTwoMaxSpellLevelCount} > \value{@DoMathCounter}}{
-			\SetCounter{charSpellcastingClassTwoMaxSpellLevelCount}{\value{char\charSpellcastingClassTwoAbility Count} - 10}
-			\AddDebug{-Max Spell Level set to \arabic{charSpellcastingClassTwoMaxSpellLevelCount}}
+		\AddDebug{Adjusting max Spell Level for \CharSpellcastingClassTwo}
+		\AddDebug{-Ability score = \arabic{Char\CharSpellcastingClassTwoAbility Count}}
+		\AddDebug{-New max Spell Level = \DoMath{\value{Char\CharSpellcastingClassTwoAbility Count} - 10}}
+		\AddDebug{-Old max Spell Level = \arabic{CharSpellcastingClassTwoMaxSpellLevelCount}}
+		\DoMath*{\value{Char\CharSpellcastingClassTwoAbility Count} - 10}
+		\ifthenelse{\value{CharSpellcastingClassTwoMaxSpellLevelCount} > \value{@DoMathCounter}}{
+			\SetCounter{CharSpellcastingClassTwoMaxSpellLevelCount}{\value{Char\CharSpellcastingClassTwoAbility Count} - 10}
+			\AddDebug{-Max Spell Level set to \arabic{CharSpellcastingClassTwoMaxSpellLevelCount}}
 		}{
 			\AddDebug{-No adjustment needed}
 		}
@@ -1497,39 +1497,39 @@
 }
 
 \newcommand{\AddBonusSpellSlotsOne}[2]{
-	\AddToCounter{charBonusSpellSlotsOne#1Count}{#2}}
+	\AddToCounter{CharBonusSpellSlotsOne#1Count}{#2}}
 \newcommand{\AddBonusSpellSlotsTwo}[2]{
-	\AddToCounter{charBonusSpellSlotsTwo#1Count}{#2}}
+	\AddToCounter{CharBonusSpellSlotsTwo#1Count}{#2}}
 
 \newcommand{\AddSpellSlotsOne}[2]{
-	\AddToCounter{charClassSpellSlotsOne#1Count}{#2}}
+	\AddToCounter{CharClassSpellSlotsOne#1Count}{#2}}
 \newcommand{\AddSpellSlotsTwo}[2]{
-	\AddToCounter{charClassSpellSlotsTwo#1Count}{#2}}
+	\AddToCounter{CharClassSpellSlotsTwo#1Count}{#2}}
 \newcommand{\SetSpellSlotsOne}[2]{
-	\SetCounter{charClassSpellSlotsOne#1Count}{#2}}
+	\SetCounter{CharClassSpellSlotsOne#1Count}{#2}}
 \newcommand{\SetSpellSlotsTwo}[2]{
-	\SetCounter{charClassSpellSlotsTwo#1Count}{#2}}
+	\SetCounter{CharClassSpellSlotsTwo#1Count}{#2}}
 \newcommand{\AddSpellsKnownOne}[2]{
-	\AddToCounter{charSpellsKnownOne#1Count}{#2}}
+	\AddToCounter{CharSpellsKnownOne#1Count}{#2}}
 \newcommand{\AddSpellsKnownTwo}[2]{
-	\AddToCounter{charSpellsKnownTwo#1Count}{#2}}
+	\AddToCounter{CharSpellsKnownTwo#1Count}{#2}}
 
 \newcommand{\AddSpellSlots}[2]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellSlotsOne{#1}{#2}}{\AddSpellSlotsTwo{#1}{#2}}}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSpellSlotsOne{#1}{#2}}{\AddSpellSlotsTwo{#1}{#2}}}
 \newcommand{\AddSpellsKnown}[2]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellsKnownOne{#1}{#2}}{\AddSpellsKnownTwo{#1}{#2}}}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSpellsKnownOne{#1}{#2}}{\AddSpellsKnownTwo{#1}{#2}}}
 \newcommand{\AddBonusSpellSlots}[2]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddBonusSpellSlotsOne{#1}{#2}}{\AddBonusSpellSlotsTwo{#1}{#2}}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddBonusSpellSlotsOne{#1}{#2}}{\AddBonusSpellSlotsTwo{#1}{#2}}
 }
 
 % Range
-\NewCounter{charSpellRangecloseCount}
-\NewCounter{charSpellRangemediumCount}
-\NewCounter{charSpellRangelongCount}
+\NewCounter{CharSpellRangecloseCount}
+\NewCounter{CharSpellRangemediumCount}
+\NewCounter{CharSpellRangelongCount}
 \newcommand{\calculateSpellRange}[1]{
-	\SetCounter{charSpellRangecloseCount}{25+\value{charCL#1Count}/2*5}
-	\SetCounter{charSpellRangemediumCount}{100+\value{charCL#1Count}*10}
-	\SetCounter{charSpellRangelongCount}{400+\value{charCL#1Count}*40}
+	\SetCounter{CharSpellRangecloseCount}{25+\value{CharCL#1Count}/2*5}
+	\SetCounter{CharSpellRangemediumCount}{100+\value{CharCL#1Count}*10}
+	\SetCounter{CharSpellRangelongCount}{400+\value{CharCL#1Count}*40}
 }
 
 %Magic Specializations
@@ -1548,14 +1548,14 @@
 	}
 }\docsvlist{One, Two}
 \newcommand\AddSpellcastingOneSpecialization[2][Specialization]{
-	\ifthenelse{\equal{\charSpellcastingOneSpecializationOne}{}}{%
+	\ifthenelse{\equal{\CharSpellcastingOneSpecializationOne}{}}{%
 		\AddSpellcastingOneSpecializationOne[#1]{#2}%
 	}{%
 		\AddSpellcastingOneSpecializationTwo[#1]{#2}%
 	}
 }
 \newcommand\AddSpellcastingTwoSpecialization[2][Specialization]{
-	\ifthenelse{\equal{\charSpellcastingTwoSpecializationOne}{}}{
+	\ifthenelse{\equal{\CharSpellcastingTwoSpecializationOne}{}}{
 		\AddSpellcastingTwoSpecializationOne[#1]{#2}
 	}{
 		\AddSpellcastingTwoSpecializationTwo[#1]{#2}
@@ -1578,21 +1578,21 @@
 	}
 }\docsvlist{One, Two, Three}
 \newcommand\AddSpellcastingOneProhibition[2][Prohibition]{
-	\ifthenelse{\equal{\charSpellcastingOneProhibitionOne}{}}{\AddSpellcastingOneProhibitionOne[#1]{#2}}{
-		\ifthenelse{\equal{\charSpellcastingOneProhibitionTwo}{}}{\AddSpellcastingOneProhibitionTwo[#1]{#2}}{
+	\ifthenelse{\equal{\CharSpellcastingOneProhibitionOne}{}}{\AddSpellcastingOneProhibitionOne[#1]{#2}}{
+		\ifthenelse{\equal{\CharSpellcastingOneProhibitionTwo}{}}{\AddSpellcastingOneProhibitionTwo[#1]{#2}}{
 			\AddSpellcastingOneProhibitionThree[#1]{#2}}}
 }
 \newcommand\AddSpellcastingTwoProhibition[2][Prohibition]{
-	\ifthenelse{\equal{\charSpellcastingTwoProhibitionOne}{}}{\AddSpellcastingTwoProhibitionOne[#1]{#2}}{
-		\ifthenelse{\equal{\charSpellcastingTwoProhibitionTwo}{}}{\AddSpellcastingTwoProhibitionTwo[#1]{#2}}{
+	\ifthenelse{\equal{\CharSpellcastingTwoProhibitionOne}{}}{\AddSpellcastingTwoProhibitionOne[#1]{#2}}{
+		\ifthenelse{\equal{\CharSpellcastingTwoProhibitionTwo}{}}{\AddSpellcastingTwoProhibitionTwo[#1]{#2}}{
 			\AddSpellcastingTwoProhibitionThree[#1]{#2}}}
 }
 
 \newcommand{\AddSpellcastingSpecialization}[2][Specialization]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellcastingOneSpecialization[#1]{#2}}{\AddSpellcastingTwoSpecialization[#1]{#2}}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSpellcastingOneSpecialization[#1]{#2}}{\AddSpellcastingTwoSpecialization[#1]{#2}}
 }
 \newcommand{\AddSpellcastingProhibition}[2][Prohibition]{
-	\ifthenelse{\equal{\charSpellcastingClassTwo}{}}{\AddSpellcastingOneProhibition[#1]{#2}}{\AddSpellcastingTwoProhibition[#1]{#2}}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSpellcastingOneProhibition[#1]{#2}}{\AddSpellcastingTwoProhibition[#1]{#2}}
 }
 %Spellcasting Notes
 \renewcommand{\do}[1]{
@@ -1606,61 +1606,61 @@
 %%%%Miscllany%%%%
 
 %% Health Counter
-\NewCounter{charHPCount}
-\NewCounter{charHPRollsCount}
+\NewCounter{CharHPCount}
+\NewCounter{CharHPRollsCount}
 \newcommand{\HProll}[1]{
-	\AddToCounter{charHPCount}{#1}
-	\AddToCounter{charHPRollsCount}{1}
+	\AddToCounter{CharHPCount}{#1}
+	\AddToCounter{CharHPRollsCount}{1}
 }
 
 %% Miscellaneous Bonus
 \newcommand{\MiscBonus}[3][]{
 	\ifthenelse{\equal{#1}{}}{
-		\AddToCounter{char#2MiscCount}{#3}
+		\AddToCounter{Char#2MiscCount}{#3}
 	}{
-		\IfCounter{char#2#1ModCount}{
-			\ifthenelse{\value{char#2#1ModCount} < #3}{
-				\AddToCounter{char#2MiscCount}{#3 - \value{char#2#1ModCount}}
-				\SetCounter{char#2#1ModCount}{#3}
+		\IfCounter{Char#2#1ModCount}{
+			\ifthenelse{\value{Char#2#1ModCount} < #3}{
+				\AddToCounter{Char#2MiscCount}{#3 - \value{Char#2#1ModCount}}
+				\SetCounter{Char#2#1ModCount}{#3}
 			}{}
 		}{
-			\NewCounter{char#2#1ModCount}
-			\SetCounter{char#2#1ModCount}{#3}
-			\AddToCounter{char#2MiscCount}{#3}
+			\NewCounter{Char#2#1ModCount}
+			\SetCounter{Char#2#1ModCount}{#3}
+			\AddToCounter{Char#2MiscCount}{#3}
 		}
 	}
 }
 \newcommand{\TmpBonus}[3][]{
 	\ifthenelse{\equal{#1}{}}{
-		\AddToCounter{char#2TmpCount}{#3}
+		\AddToCounter{Char#2TmpCount}{#3}
 	}{
-		\IfCounter{char#2#1ModCount}{
-			\ifthenelse{\value{char#2#1ModCount} < #3}{
-				\AddToCounter{char#2TmpCount}{#3 - \value{char#2#1ModCount}}
-				\SetCounter{char#2#1ModCount}{#3}
+		\IfCounter{Char#2#1ModCount}{
+			\ifthenelse{\value{Char#2#1ModCount} < #3}{
+				\AddToCounter{Char#2TmpCount}{#3 - \value{Char#2#1ModCount}}
+				\SetCounter{Char#2#1ModCount}{#3}
 			}{}
 		}{
-			\NewCounter{char#2#1ModCount}
-			\SetCounter{char#2#1ModCount}{#3}
-			\AddToCounter{char#2TmpCount}{#3}
+			\NewCounter{Char#2#1ModCount}
+			\SetCounter{Char#2#1ModCount}{#3}
+			\AddToCounter{Char#2TmpCount}{#3}
 		}
 	}
 }
 \newcommand{\EnhancementBonus}[2]{
 	\SetCounter{@EnhancementBonusTempCounter}{#2}
-	\ifthenelse{\value{@EnhancementBonusTempCounter} > \value{char#1EnhancementCount}}{
-		\SetCounter{char#1EnhancementCount}{\value{@EnhancementBonusTempCounter}}
+	\ifthenelse{\value{@EnhancementBonusTempCounter} > \value{Char#1EnhancementCount}}{
+		\SetCounter{Char#1EnhancementCount}{\value{@EnhancementBonusTempCounter}}
 	}{}
 }
 
 %%Spell Resistance%%
-\NewCounter{charSpellResistanceCount}
+\NewCounter{CharSpellResistanceCount}
 \newcommand{\AddSpellResistance}[1]{
-	\SetCounter{charSpellResistanceCount}{\maxof{\value{charSpellResistanceCount}}{#1}}
+	\SetCounter{CharSpellResistanceCount}{\maxof{\value{CharSpellResistanceCount}}{#1}}
 }
 
 %%Initiative%%
-\newcounter{charInitiativeMiscCount}
+\newcounter{CharInitiativeMiscCount}
 
 %%Conditional Modifiers
 \edef\ConditionalSkillsModList{}
@@ -1674,22 +1674,22 @@
 	\listadd\ConditionalDefModList{#1}}
 
 %% Languages
-\edef\charLanguagesList{}
+\edef\CharLanguagesList{}
 \newcommand{\AddCharLanguage}[1]{
-	\listinsert{\charLanguagesList}{#1}
+	\listinsert{\CharLanguagesList}{#1}
 }
 
 %% XP
-\newcounter{charXPCount}
-\newcounter{charNextLevelXPCount}
+\newcounter{CharXPCount}
+\newcounter{CharNextLevelXPCount}
 \newcounter{XP-Mode}
 \newcommand{\CalculateNextLevelXP}{
 	\ifthenelse{\arabic{XP-Mode} = 0}{}{
 		\ifthenelse{\arabic{XP-Mode} = 1}{
-			\SetCounter{charNextLevelXPCount}{0}
-			\ifthenelse{\value{charTotalLevelCount} > 0}{
-				\ForLoop{@i}{0}{\value{@i}<\value{charTotalLevelCount}}{
-					\AddToCounter{charNextLevelXPCount}{\value{@i} * 1000 + 1000}
+			\SetCounter{CharNextLevelXPCount}{0}
+			\ifthenelse{\value{CharTotalLevelCount} > 0}{
+				\ForLoop{@i}{0}{\value{@i}<\value{CharTotalLevelCount}}{
+					\AddToCounter{CharNextLevelXPCount}{\value{@i} * 1000 + 1000}
 				}
 			}{}
 		}{}
@@ -1703,19 +1703,19 @@
 	\CalculateNextLevelXP
 	\ComputeAbilityScores
 	% add Con to HP
-	\ifthenelse{\value{HP-Mode} > 0}{\AddToCounter{charHPCount}{\value{charConModCount} * \value{charTotalLevelCount}}}{}
+	\ifthenelse{\value{HP-Mode} > 0}{\AddToCounter{CharHPCount}{\value{CharConModCount} * \value{CharTotalLevelCount}}}{}
 	% add feats from levels
-	\AddToCounter{charFeatsCount}{\value{charTotalLevelCount} / 3 + 1}
+	\AddToCounter{CharFeatsCount}{\value{CharTotalLevelCount} / 3 + 1}
 	% add INT to Skill Ranks
 	\AddIntToSkillRanks
-	\SetCounter{charIteratedAttacksCount}{(\value{charBABCount}-1)/5+1}
+	\SetCounter{CharIteratedAttacksCount}{(\value{CharBABCount}-1)/5+1}
 	\InitializeSpellSlots
 	\CalculateSynergyBonuses
 	\CalculateLoads
 	\CalculateWeights
 	\CheckEncumberance
 	\SpeedInitialize
-	\SetCounter{charDextoACCount}{\minof{\value{charDexModCount}}{\value{charMaxDexBonusCount}}}
+	\SetCounter{CharDextoACCount}{\minof{\value{CharDexModCount}}{\value{CharMaxDexBonusCount}}}
 	\RunChecks
 }
 
@@ -1726,47 +1726,47 @@
 	%CHECK HP ROLLS
 	\ifthenelse{\value{HP-Mode} = 1}{ %Only run if we are in rolls mode for HP
 		\AddDebug{HP Mode == 1. Checking that the number of HP rolls is correct:\\
-			Number of HP rolls: \arabic{charHPRollsCount}\\
-			Level: \arabic{charTotalLevelCount}}
-		\ifthenelse{\arabic{charHPRollsCount} < \arabic{chartotallevelcount}}{
+			Number of HP rolls: \arabic{CharHPRollsCount}\\
+			Level: \arabic{CharTotalLevelCount}}
+		\ifthenelse{\arabic{CharHPRollsCount} < \arabic{Chartotallevelcount}}{
 			\AddDebug{Num HP rolls less than expected}
-			\AddWarning{\DoMath{\value{charTotalLevelCount} - \value{charHPRollsCount}} HP rolls missing}
+			\AddWarning{\DoMath{\value{CharTotalLevelCount} - \value{CharHPRollsCount}} HP rolls missing}
 		}{
-			\ifthenelse{\arabic{charHPRollsCount} > \arabic{charTotalLevelCount}}{
+			\ifthenelse{\arabic{CharHPRollsCount} > \arabic{CharTotalLevelCount}}{
 				\AddDebug{Num HP rolls more than expected}
-				\AddWarning{\DoMath{\value{charHPRollsCount} - \value{charTotalLevelCount}} extra HP rolls}
+				\AddWarning{\DoMath{\value{CharHPRollsCount} - \value{CharTotalLevelCount}} extra HP rolls}
 			}{\AddDebug{Num HP rolls is correct}}
 		}
 	}{\AddDebug{HP Mode != 1. No need to check HP rolls}}
 	%CHECK SKILL RANKS
 	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
 		\AddDebug{Checking Skill Ranks}
-		\AddDebug{Class List: \PrintList{\charClasseslist}}
+		\AddDebug{Class List: \PrintList{\CharClasseslist}}
 		\renewcommand{\do}[1]{
 			\AddDebug{Checking skill ranks for Class: ##1\\}
-			\ifthenelse{\value{char##1SpareSkillRanksCount} > 0}{
-				\AddWarning{Class ##1 has \arabic{char##1SpareSkillRanksCount} skill ranks left to spend}
+			\ifthenelse{\value{Char##1SpareSkillRanksCount} > 0}{
+				\AddWarning{Class ##1 has \arabic{Char##1SpareSkillRanksCount} skill ranks left to spend}
 			}{
-				\ifthenelse{\value{char##1SpareSkillRanksCount} < 0}{
-					\AddWarning{Class ##1 has spent \DoMath{-\value{char##1SpareSkillRanksCount}} too many skill ranks}
+				\ifthenelse{\value{Char##1SpareSkillRanksCount} < 0}{
+					\AddWarning{Class ##1 has spent \DoMath{-\value{Char##1SpareSkillRanksCount}} too many skill ranks}
 				}{}
 			}
-		}\dolistloop{\charClassesList}
+		}\dolistloop{\CharClassesList}
 	}{}
 	%CHECK FEATS
 	\ifthenelse{\value{CountFeats-Mode} = 1}{
 		\AddDebug{Checking Feats}
-		\ifthenelse{\value{charBonusFeatsCount} < 0}{
-			\AddWarning{\DoMath{-\value{charBonusFeatsCount}} too many bonus feats selected}
+		\ifthenelse{\value{CharBonusFeatsCount} < 0}{
+			\AddWarning{\DoMath{-\value{CharBonusFeatsCount}} too many bonus feats selected}
 		}{
-			\ifthenelse{\value{charBonusFeatsCount} > 0}{
-				\AddWarning{\arabic{charBonusFeatsCount} bonus feats left to select}
+			\ifthenelse{\value{CharBonusFeatsCount} > 0}{
+				\AddWarning{\arabic{CharBonusFeatsCount} bonus feats left to select}
 			}{}}
-		\ifthenelse{\value{charFeatsCount} < 0}{
-			\AddWarning{\DoMath{-\value{charFeatsCount}} too many feats selected}
+		\ifthenelse{\value{CharFeatsCount} < 0}{
+			\AddWarning{\DoMath{-\value{CharFeatsCount}} too many feats selected}
 		}{
-			\ifthenelse{\value{charFeatsCount} > 0}{
-				\AddWarning{\arabic{charFeatsCount} feats left to select}
+			\ifthenelse{\value{CharFeatsCount} > 0}{
+				\AddWarning{\arabic{CharFeatsCount} feats left to select}
 			}{}}
 	}{}
 }

@@ -11,10 +11,10 @@
 \newcommand{\AddDruidClassFeatures}[1]{
 	\AddClassFeature{Animal Companion}
 	\AddClassFeature{Nature Sense}\MiscBonus{KnowledgeNature}{2}\MiscBonus{Survival}{2}
-	\ifthenelse{\value{charHandleAnimalRanksCount} > 4}{
-		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount} + 2}}
+	\ifthenelse{\value{CharHandleAnimalRanksCount} > 4}{
+		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{CharChaModCount} + 2}}
 	}{
-		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
+		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{CharChaModCount}}}
 	}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{Woodland Stride}
@@ -24,30 +24,30 @@
 		\AddClassFeature{Resist Nature's Lure}
 			\AddConditionalDefMod{+4 to saves vs. Spell-like abilities of fey}
 	\ifthenelse{#1 > 4}{
-		\NewCounter{charWildShapeUsesCount}
-		\StepCounter{charWildShapeUsesCount}
-		\AddLimitedUse{Wild Shape}{\arabic{charWildShapeUsesCount}}
+		\NewCounter{CharWildShapeUsesCount}
+		\StepCounter{CharWildShapeUsesCount}
+		\AddLimitedUse{Wild Shape}{\arabic{CharWildShapeUsesCount}}
 		\AddClassFeature{Wild Shape \ifthenelse{#1 > 7}{(\ifthenelse{#1 > 14}{Huge}{Large}\ifthenelse{#1 > 10}{, Tiny}{}\ifthenelse{#1 > 11}{, Plant}{})}{}}
 	\ifthenelse{#1 > 5}{
-		\StepCounter{charWildShapeUsesCount}
+		\StepCounter{CharWildShapeUsesCount}
 	\ifthenelse{#1 > 6}{
-		\StepCounter{charWildShapeUsesCount}
+		\StepCounter{CharWildShapeUsesCount}
 	\ifthenelse{#1 > 8}{
 		\AddClassFeature{Venom Immunity}
 		\AddImmunity{poison}
 	\ifthenelse{#1 > 9}{
-		\StepCounter{charWildShapeUsesCount}
+		\StepCounter{CharWildShapeUsesCount}
 	\ifthenelse{#1 > 12}{
 		\AddClassFeature{A Thousand Faces}
 	\ifthenelse{#1 > 13}{
-		\StepCounter{charWildShapeUsesCount}
+		\StepCounter{CharWildShapeUsesCount}
 	\ifthenelse{#1 > 14}{
 		\AddClassFeature{Timeless Body}
 	\ifthenelse{#1 > 15}{
 		\AddClassFeature{\ifthenelse{#1 > 19}{Huge }{}Elemental Wild Shape}
 		\AddLimitedUse{Elemental Wild Shape}{\DoMath{(#1 - 14) / 2}}
 	\ifthenelse{#1 > 17}{
-		\StepCounter{charWildShapeUsesCount}
+		\StepCounter{CharWildShapeUsesCount}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 	\newcommand{\AddDruidSpellcasting}[1]{
 		\newSpellcasting[(##1 + 1) / 2]{Druid}{##1}{Wis}

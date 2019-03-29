@@ -55,7 +55,7 @@ In general, all character variables are prefaced with \verb=char= as in \verb=ch
   \label{tab:abbrev}
 \end{table}
 
-When a feature of an ability/skill is used, such as temprary modifiers, the user simply adds these onto the end of the ability/skill name (e.g.\ `Knowledge (Arcana) Miscellaneous Modifier' would become \verb=\charknowledgearcanamiscmodcount=. ). These variables are also abbreviated (detailed in table \ref{tab:otherabbrev})
+When a feature of an ability/skill is used, such as temprary modifiers, the user simply adds these onto the end of the ability/skill name (e.g.\ `Knowledge (Arcana) Miscellaneous Modifier' would become \verb=\Charknowledgearcanamiscmodcount=. ). These variables are also abbreviated (detailed in table \ref{tab:otherabbrev})
 
 \begin{table}[h]
   \centering
@@ -70,17 +70,17 @@ When a feature of an ability/skill is used, such as temprary modifiers, the user
 \end{table}
 
 To change a number, one uses \verb=\Setcounter= in the usual way. A counter name is made of 4 parts:
-\protect\parbox{\linewidth}{\texttt{char}$\langle$\emph{attribute/skill name}$\rangle\langle$\emph{type of modifier}$\rangle$\texttt{count}}
+\protect\parbox{\linewidth}{\texttt{Char}$\langle$\emph{attribute/skill name}$\rangle\langle$\emph{type of modifier}$\rangle$\texttt{count}}
 where the attribute/skill name and type of modifier are as above. An example of this is:
 \[
-\mathtt{\backslash setcounter\{\underbrace{\mathtt{char}}_{\mathclap{\mathrm{\emph{char}acter}}}\overbrace{\mathtt{intimidate}}^{\mathclap{\mathrm{\emph{Intimidate}\ Skill}}}\underbrace{\mathtt{miscmod}}_{\mathclap{\mathrm{\emph{Misc}ellaneous\ \emph{Mod}ifier}}}\overbrace{\mathtt{count}}^{\mathclap{\mathrm{\emph{Count}er}}}\}\{5\}}
+\mathtt{\backslash setcounter\{\underbrace{\mathtt{Char}}_{\mathclap{\mathrm{\emph{Char}acter}}}\overbrace{\mathtt{intimidate}}^{\mathclap{\mathrm{\emph{Intimidate}\ Skill}}}\underbrace{\mathtt{miscmod}}_{\mathclap{\mathrm{\emph{Misc}ellaneous\ \emph{Mod}ifier}}}\overbrace{\mathtt{count}}^{\mathclap{\mathrm{\emph{Count}er}}}\}\{5\}}
 \]
 which would be used to set the character's intimidate skill miscellaneous modifier to $+5$. Totals are automatically calculated wherever a an equals sign is seen.
 \subsection{Commands}
 Here I will list a number of the commands I have included for ease of use.
 \begin{tabular}{lp{8cm}}
 Command & Description\\
-\verb|\charstr{#1}| & Sets the character's base strength score to \verb|#1|. Similar commands exist for the other five classic ability scores, and for speed.\\
+\verb|\Charstr{#1}| & Sets the character's base strength score to \verb|#1|. Similar commands exist for the other five classic ability scores, and for speed.\\
 \verb|\strenh{#1}| & Adds a +\verb|#1| enhancement bonus to strength.  Similar commands exist for the other ability scores and for speed.  Note that enhancement bonuses are programmed not to stack.  \verb|\strenh{4}\strenh{2}| would only give a total enhancement bonus of +4.\\
 \verb|\resist{#1}{#2}| & Adds resistance \verb|#2| to energy type \verb|#1|.  Accepted types are fire, cold, electricity, acid, and sonic.  Resistances are programmed not to stack, so only the highest value for each energy type will be printed.\\
 \verb|\AddDR{#1}{#2}| & Adds damage reduction \verb|#2|, overcome by \verb|#1|. Entries for \verb|#1| should be lowercase with no spaces, so to add DR 5/Cold Iron, one would use \verb|\AddDR{coldiron}{5}|.  Use \verb|\AddDR{blank}{#2}| to add DR /--. DR overcome by combined sources (e.g. DR 10/Good and Silver) is not supported, but see \verb|\newDRtype|.\\

@@ -11,14 +11,14 @@
 \newcommand{\AddWizardClassFeatures}[1]{
 	\AddClassFeature{Summon Familiar}
 	\AddClassFeature{Scribe Scroll}
-	\AddToCounter{charBonusFeatsCount}{#1 / 5 + 1}
+	\AddToCounter{CharBonusFeatsCount}{#1 / 5 + 1}
 	\AddFeat*{Scribe Scroll}
 	\ifthenelse{#1 > 4}{
 		\AddClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\DoMath{#1 / 5}$}{}}
 	}{}
 	\NewDocumentCommand{\AddWizardSpellcasting}{m O{} O{} O{}}{
 		\newSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{Int}
-		\NewCounter{charWizardforbiddenschoolsCount}
+		\NewCounter{CharWizardforbiddenschoolsCount}
 		\AddPrimarySpellcasting{##1}
 		\ifthenelse{\equal{##2}{}}{}{
 			\ForLoop{@i}{1}{\value{@i}<10}{
@@ -26,26 +26,26 @@
 			}
 			\AddSpellcastingSpecialization[Focus School]{##2}
 			\ifthenelse{\equal{##2}{Divination}}{
-				\AddToCounter{charWizardforbiddenschoolsCount}{1}
+				\AddToCounter{CharWizardforbiddenschoolsCount}{1}
 			}{
-				\AddToCounter{charWizardforbiddenschoolsCount}{2}
+				\AddToCounter{CharWizardforbiddenschoolsCount}{2}
 			}
 			\ifthenelse{\equal{##3}{}}{}{
 				\AddSpellcastingProhibition[Banned School]{##3}
-				\AddToCounter{charWizardforbiddenschoolsCount}{-1}
+				\AddToCounter{CharWizardforbiddenschoolsCount}{-1}
 			}
 			\ifthenelse{\equal{##4}{}}{}{
 				\AddSpellcastingProhibition[Banned School]{##4}
-				\AddToCounter{charWizardforbiddenschoolsCount}{-1}
+				\AddToCounter{CharWizardforbiddenschoolsCount}{-1}
 			}
 		}
 		\appto{\RunChecks}{
 			%%CHECK NUMBER OF PROHIBITED SCHOOLS
-			\ifthenelse{\value{charWizardforbiddenschoolsCount} > 0}{
-				\AddWarning{Choose \arabic{charWizardforbiddenschoolsCount} more prohibited schools}
+			\ifthenelse{\value{CharWizardforbiddenschoolsCount} > 0}{
+				\AddWarning{Choose \arabic{CharWizardforbiddenschoolsCount} more prohibited schools}
 			}{
-			\ifthenelse{\value{charWizardforbiddenschoolsCount} < 0}{
-				\AddWarning{You can remove \DoMath{-\value{charWizardforbiddenschoolsCount}} prohibited schools}
+			\ifthenelse{\value{CharWizardforbiddenschoolsCount} < 0}{
+				\AddWarning{You can remove \DoMath{-\value{CharWizardforbiddenschoolsCount}} prohibited schools}
 			}{}}
 		}
 	}

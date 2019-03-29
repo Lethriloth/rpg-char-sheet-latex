@@ -9,6 +9,6 @@
 \edef\FighterClassSkillsList{}
 \forcsvlist{\listadd{\FighterClassSkillsList}}{Climb, Craft, HandleAnimal, Intimidate, Jump, Ride, Swim}
 \newcommand{\AddFighterClassFeatures}[1]{
-	\AddToCounter{charBonusFeatsCount}{#1 / 2 +1}
+	\AddToCounter{CharBonusFeatsCount}{#1 / 2 +1}
 	\AddClassFeature{Fighter Bonus Feat\ifthenelse{#1 > 1}{ $\times\DoMath{#1 / 2 +1}$}{}}
 }

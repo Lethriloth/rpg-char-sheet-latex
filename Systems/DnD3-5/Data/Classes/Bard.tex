@@ -9,45 +9,45 @@
 \edef\BardClassSkillsList{}
 \forcsvlist{\listadd{\BardClassSkillsList}}{Appraise, Balance, Bluff, Climb, Concentration, Craft, DecipherScript, Diplomacy, Disguise, EscapeArtist, GatherInformation, Hide, Jump, KnowledgeAll, Listen, MoveSilently, Perform, Profession, SenseMotive, SleightOfHand, SpeakLanguage, Spellcraft, Swim, Tumble, UseMagicDevice}
 \newcommand{\AddBardClassFeatures}[1]{
-	\edef\charBardicMusicList{}
-	\AddClassFeature{Bardic Music\forlistloop{\\~~~~}{\charBardicMusicList}}
+	\edef\CharBardicMusicList{}
+	\AddClassFeature{Bardic Music\forlistloop{\\~~~~}{\CharBardicMusicList}}
 	\AddLimitedUse{Bardic Music}{#1}
 		\appto{\Initialize}{ %Bardic music dependent on # of Perform Ranks goes here
-			\ifthenelse{\value{charPerformOneRanksCount} > 2}{
-				\listadd{\charBardicMusicList}{Countersong}
-				\listadd{\charBardicMusicList}{Fascinate}
-				\listadd{\charBardicMusicList}{Inspire Courage +\DoMath{(#1 - 2) / 6 + 1}}
+			\ifthenelse{\value{CharPerformOneRanksCount} > 2}{
+				\listadd{\CharBardicMusicList}{Countersong}
+				\listadd{\CharBardicMusicList}{Fascinate}
+				\listadd{\CharBardicMusicList}{Inspire Courage +\DoMath{(#1 - 2) / 6 + 1}}
 			}{}
 		}
-	\ifthenelse{\value{charKnowledgeHistoryRanksCount} > 4}{
-		\AddClassFeature{Bardic Knowledge +\DoMath{#1 + \value{charIntModCount} + 2}}
+	\ifthenelse{\value{CharKnowledgeHistoryRanksCount} > 4}{
+		\AddClassFeature{Bardic Knowledge +\DoMath{#1 + \value{CharIntModCount} + 2}}
 	}{
-		\AddClassFeature{Bardic Knowledge +\DoMath{#1 + \value{charIntModCount}}}
+		\AddClassFeature{Bardic Knowledge +\DoMath{#1 + \value{CharIntModCount}}}
 	}
 	\ifthenelse{#1 > 2}{
 		\appto{\Initialize}{ %Bardic music dependent on # of Perform Ranks goes here
-			\ifthenelse{\value{charPerformOneRanksCount} > 5}{
-				\listadd{\charBardicMusicList}{Inspire Competence}
+			\ifthenelse{\value{CharPerformOneRanksCount} > 5}{
+				\listadd{\CharBardicMusicList}{Inspire Competence}
 			}{}}
 	\ifthenelse{#1 > 5}{
 		\appto{\Initialize}{ %Bardic music dependent on # of Perform Ranks goes here
-			\ifthenelse{\value{charPerformOneRanksCount} > 8}{
-				\listadd{\charBardicMusicList}{\ifthenelse{#1 > 17}{\ifthenelse{\value{charPerformOneRanksCount} > 20}{Mass }{}}{}Suggestion}
+			\ifthenelse{\value{CharPerformOneRanksCount} > 8}{
+				\listadd{\CharBardicMusicList}{\ifthenelse{#1 > 17}{\ifthenelse{\value{CharPerformOneRanksCount} > 20}{Mass }{}}{}Suggestion}
 			}{}}
 	\ifthenelse{#1 > 8}{
 		\appto{\Initialize}{ %Bardic music dependent on # of Perform Ranks goes here
-			\ifthenelse{\value{charPerformOneRanksCount} > 11}{
-				\listadd{\charBardicMusicList}{Inspire Greatness}
+			\ifthenelse{\value{CharPerformOneRanksCount} > 11}{
+				\listadd{\CharBardicMusicList}{Inspire Greatness}
 			}{}}
 	\ifthenelse{#1 > 11}{
 		\appto{\Initialize}{ %Bardic music dependent on # of Perform Ranks goes here
-			\ifthenelse{\value{charPerformOneRanksCount} > 14}{
-				\listadd{\charBardicMusicList}{Song of Freedom}
+			\ifthenelse{\value{CharPerformOneRanksCount} > 14}{
+				\listadd{\CharBardicMusicList}{Song of Freedom}
 			}{}}
 	\ifthenelse{#1 > 14}{
 		\appto{\Initialize}{ %Bardic music dependent on # of Perform Ranks goes here
-			\ifthenelse{\value{charPerformOneRanksCount} > 17}{
-				\listadd{\charBardicMusicList}{Inspire Heroics}
+			\ifthenelse{\value{CharPerformOneRanksCount} > 17}{
+				\listadd{\CharBardicMusicList}{Inspire Heroics}
 			}{}}
 	}{}}{}}{}}{}}{}
 	\newcommand{\AddBardSpellcasting}[1]{

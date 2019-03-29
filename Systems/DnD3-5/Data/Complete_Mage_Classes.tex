@@ -16,8 +16,8 @@
 \newcommand{\Addultimatemagusclassfeatures}[1]{
 		\Addclassfeature{Arcane Spell Power +\DoMath{(#1 - 1) / 3 + 1}}
 			\preto{\Initialize}{
-				\Addtocounter{charCLonecount}{1 + (#1 - 1) / 3}
-				\Addtocounter{charCLtwocount}{1 + (#1 - 1) / 3}
+				\Addtocounter{CharCLonecount}{1 + (#1 - 1) / 3}
+				\Addtocounter{CharCLtwocount}{1 + (#1 - 1) / 3}
 			}
 	\ifthenelse{#1 > 1}{
 		\Addclassfeature{Expanded Spell Knowledge\ifthenelse{#1 > 3}{ $\times\DoMath{#1 / 2}$}{}}
@@ -40,6 +40,6 @@
 	\Addlimiteduse{Augmented Casting}{\DoMath{3 + #1 / 2}}
 	\ifthenelse{#1 > 4}{
 		\Addclassfeature{Ultimate Magus Bonus Feat\ifthenelse{#1 > 8}{ $\times2$}{}}
-		\Addtocounter{charbonusfeatscount}{(#1 - 1) / 4}
+		\Addtocounter{Charbonusfeatscount}{(#1 - 1) / 4}
 	}{}}{}}{}
 }

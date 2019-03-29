@@ -10,19 +10,19 @@
 \forcsvlist{\listadd{\MonkClassSkillsList}}{Balance, Climb, Concentration, Craft, Diplomacy, EscapeArtist, Hide, Jump, KnowledgeArcana, KnowledgeReligion, Listen, MoveSilently, Perform, Profession, SenseMotive, Spot, Swim, Tumble}
 \newcommand{\AddMonkClassFeatures}[1]{
 		\AddClassFeature{\ifthenelse{#1 > 10}{Greater }Flurry of Blows}
-			\NewCounter{charFlurryOfBlowsPenaltyCount}\SetCounter{charFlurryOfBlowsPenaltyCount}{-2}
-			\NewCounter{charFlurryOfBlowsAttacksCount}\StepCounter{charFlurryOfBlowsAttacksCount}
-%			\AddAutoWeapon[\value{charFlurryOfBlowsAttacksCount}]{Flurry of Blows}{\value{charFlurryOfBlowsPenaltyCount}}{\charUnarmedStrikeDamage + \arabic{charStrModCount}}{20}{B}{melee}{}{str}
+			\NewCounter{CharFlurryOfBlowsPenaltyCount}\SetCounter{CharFlurryOfBlowsPenaltyCount}{-2}
+			\NewCounter{CharFlurryOfBlowsAttacksCount}\StepCounter{CharFlurryOfBlowsAttacksCount}
+%			\AddAutoWeapon[\value{CharFlurryOfBlowsAttacksCount}]{Flurry of Blows}{\value{CharFlurryOfBlowsPenaltyCount}}{\CharUnarmedStrikeDamage + \arabic{CharStrModCount}}{20}{B}{melee}{}{str}
 		\AddClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{3}{2}$}{}}
-		\AddToCounter{charBonusFeatsCount}{2}
-			\newcommand{\charUnarmedStrikeDamage}{
-				\ifthenelse{\equal{\charSize}{Small}}{%
+		\AddToCounter{CharBonusFeatsCount}{2}
+			\newcommand{\CharUnarmedStrikeDamage}{
+				\ifthenelse{\equal{\CharSize}{Small}}{%
 					\ifthenelse{#1 > 15}{2d\DoMath{6 + ((#1 - 16)/ 4) * 2}}{1d\DoMath{4 + (#1 / 4) * 2}}%
 				}{%
-				\ifthenelse{\equal{\charSize}{Medium}}{%
+				\ifthenelse{\equal{\CharSize}{Medium}}{%
 					\ifthenelse{#1 > 11}{2d\DoMath{6 + ((#1 - 12)/ 4) * 2}}{1d\DoMath{6 + (#1 / 4) * 2}}%
 				}{%
-				\ifthenelse{\equal{\charSize}{Large}}{%
+				\ifthenelse{\equal{\CharSize}{Large}}{%
 					\ifthenelse{#1 > 3}{%
 						\ifthenelse{#1 > 11}{%
 							\ifthenelse{#1 > 19}{4d8}{%
@@ -35,20 +35,20 @@
 					}%
 				}{}}{}}{}
 			}
-		\AddClassFeature{Unarmed Strike \charUnarmedStrikeDamage}
+		\AddClassFeature{Unarmed Strike \CharUnarmedStrikeDamage}
 			\AddFeat*{Improved Unarmed Strike}
 		\AddClassFeature{Monk AC Bonus}
 			\appto\Initialize{
-				\ifthenelse{\equal{\charArmorType}{}}{
-					\MiscBonus{AC}{#1 / 5 + \value{charWisModCount}}
-					\MiscBonus{TouchAC}{#1 / 5 + \value{charWisModCount}}
-					\MiscBonus{FlatFootedAC}{#1 / 5 + \value{charWisModCount}}
+				\ifthenelse{\equal{\CharArmorType}{}}{
+					\MiscBonus{AC}{#1 / 5 + \value{CharWisModCount}}
+					\MiscBonus{TouchAC}{#1 / 5 + \value{CharWisModCount}}
+					\MiscBonus{FlatFootedAC}{#1 / 5 + \value{CharWisModCount}}
 				}{}
 			}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
 		\ifthenelse{#1 > 8}{\AddSpecialDefense{Improved Evasion}}{\AddSpecialDefense{Evasion}}
-		\StepCounter{charBonusFeatsCount}
+		\StepCounter{CharBonusFeatsCount}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Still Mind}\AddConditionalDefMod{+2 on saves vs. Enchantment}
 		\EnhancementBonus{Speed}{#1 / 3 * 10}
@@ -61,15 +61,15 @@
 		\AddClassFeature{Slow Fall \ifthenelse{#1 < 20}{\DoMath{#1 / 2}0 ft.}{any distance}}
 	\ifthenelse{#1 > 4}{
 		\AddClassFeature{Purity of Body}\AddImmunity{Disease}
-		\StepCounter{charFlurryOfBlowsPenaltyCount}
+		\StepCounter{CharFlurryOfBlowsPenaltyCount}
 	\ifthenelse{#1 > 5}{
-		\StepCounter{charBonusFeatsCount}
+		\StepCounter{CharBonusFeatsCount}
 	\ifthenelse{#1 > 6}{
 		\AddLimitedUse{Wholeness of Body (hit points)}{\DoMath{#1 * 2}}
 	\ifthenelse{#1 > 8}{
-		\StepCounter{charFlurryOfBlowsPenaltyCount}
+		\StepCounter{CharFlurryOfBlowsPenaltyCount}
 	\ifthenelse{#1 > 10}{
-		\StepCounter{charFlurryOfBlowsAttacksCount}
+		\StepCounter{CharFlurryOfBlowsAttacksCount}
 		\AddClassFeature{Diamond Body}
 			\AddImmunity{poison}
 	\ifthenelse{#1 > 11}{
@@ -78,10 +78,10 @@
 		\AddClassFeature{Diamond Soul}
 			\AddSpellResistance{#1 + 10}
 	\ifthenelse{#1 > 14}{
-		\AddLimitedUse{Quivering Palm (DC \DoMath{10 + #1 / 2 + \value{charWisModCount}}; (1/week))}{1}
+		\AddLimitedUse{Quivering Palm (DC \DoMath{10 + #1 / 2 + \value{CharWisModCount}}; (1/week))}{1}
 	\ifthenelse{#1 > 16}{
 		\AddClassFeature{Timeless Body}
-		\AddClassFeature{Tongue of the Sun and Moon}\listadd{\charLanguagesList}{Can speak with any living creature}
+		\AddClassFeature{Tongue of the Sun and Moon}\listadd{\CharLanguagesList}{Can speak with any living creature}
 	\ifthenelse{#1 > 18}{
 		\AddLimitedUse{Empty Body (rounds)}{#1}
 	\ifthenelse{#1 > 19}{

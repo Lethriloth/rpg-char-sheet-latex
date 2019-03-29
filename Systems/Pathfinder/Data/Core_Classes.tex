@@ -10,21 +10,21 @@
 \edef\BarbarianClassSkillsList{}
 \forcsvlist{\listadd{\BarbarianClassSkillsList}}{Acrobatics, Climb, Craft, HandleAnimal, Intimidate, KnowledgeNature, Perception, Ride, Survival, Swim}
 \newcommand{\AddBarbarianClassFeatures}[1]{
-		\AddClassFeature{Fast Movement}\AddToCounter{charBaseSpeedCount}{10}
+		\AddClassFeature{Fast Movement}\AddToCounter{CharBaseSpeedCount}{10}
 		\AddClassFeature{\ifthenelse{#1 > 10}{\ifthenelse{#1 > 19}{Mighty }{Greater }}{} Rage}
-			\AddLimitedUse{Rage (rounds)}{\DoMath{#1 * 2 + 2 +\value{charConModCount} + \value{charRageRoundsCount}}}
-			\NewCounter{charRageRoundsCount}
+			\AddLimitedUse{Rage (rounds)}{\DoMath{#1 * 2 + 2 +\value{CharConModCount} + \value{CharRageRoundsCount}}}
+			\NewCounter{CharRageRoundsCount}
 			\newcommand{\IWouldLikeToRage}{
 				\tmpBonus{AC}{-2}
 				\ifthenelse{#1 > 10}{\ifthenelse{#1 > 19}{
 					\tmpBonus{Con}{8}\tmpBonus{str}{8}\tmpBonus[morale]{Will}{4} %Mighty Rage
-					\AddToCounter{charRageRoundsCount}{-4}
+					\AddToCounter{CharRageRoundsCount}{-4}
 				}{
 					\tmpBonus{Con}{6}\tmpBonus{str}{6}\tmpBonus[morale]{Will}{3} %Greater Rage
-					\AddToCounter{charRageRoundsCount}{-3}
+					\AddToCounter{CharRageRoundsCount}{-3}
 				}}{
 					\tmpBonus{Con}{4}\tmpBonus{str}{4}\tmpBonus[morale]{Will}{2} %Rage
-					\AddToCounter{charRageRoundsCount}{-2}
+					\AddToCounter{CharRageRoundsCount}{-2}
 				}
 				\ifthenelse{#1 > 13}{
 					\AddConditionalDefMod{+4 vs. EnChantments}
@@ -33,21 +33,21 @@
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{\ifthenelse{#1 > 4}{Improved }{}Uncanny Dodge}
 			\ifthenelse{#1 > 4}{\AddSpecialDefense{Improved Uncanny Dodge}}{\AddSpecialDefense{Uncanny Dodge}}
-		\edef\charRagePowersList{}
-		\NewCounter{charRagePowersCount}
-		\AddToCounter{charRagePowersCount}{#1 / 2}
-		\AddClassFeature{Rage Powers:\forlistloop{\\~~~~}{\charRagePowersList}}
+		\edef\CharRagePowersList{}
+		\NewCounter{CharRagePowersCount}
+		\AddToCounter{CharRagePowersCount}{#1 / 2}
+		\AddClassFeature{Rage Powers:\forlistloop{\\~~~~}{\CharRagePowersList}}
 		\NewDocumentCommand{\AddRagePower}{m}{
-			\listinsert{\charRagePowersList}{##1}
-			\AddToCounter{charRagePowersCount}{-1}
+			\listinsert{\CharRagePowersList}{##1}
+			\AddToCounter{CharRagePowersCount}{-1}
 		}
 		\gappto{\RunChecks}{%
 			%%CHECK RAGE POWERS
-			\ifthenelse{\value{charRagePowersCount} < 0}{
-				\AddWarning{\DoMath{-\value{charRagePowersCount}} too many rage powers}
+			\ifthenelse{\value{CharRagePowersCount} < 0}{
+				\AddWarning{\DoMath{-\value{CharRagePowersCount}} too many rage powers}
 			}{
-			\ifthenelse{\value{charRagePowersCount} > 0}{
-				\AddWarning{Choose \arabic{charRagePowersCount} more rage powers}
+			\ifthenelse{\value{CharRagePowersCount} > 0}{
+				\AddWarning{Choose \arabic{CharRagePowersCount} more rage powers}
 			}{}}
 		}
 	\ifthenelse{#1 > 2}{
@@ -72,65 +72,65 @@
 \edef\BardClassSkillsList{}
 \forcsvlist{\listadd{\BardClassSkillsList}}{Acrobatics, Appraise, Bluff, Climb, Craft, Diplomacy, Disguise, EscapeArtist, Intimidate, KnowledgeAll, Linguistics, Perception, Perform, Profession, SenseMotive, SleightOfHand, Spellcraft, Stealth, UseMagicDevice}
 \newcommand{\AddBardClassFeatures}[1]{
-	\edef\charBardicPerformanceList{}
-	\AddClassFeature{Bardic Performance (save DC \DoMath{10 + #1 / 2 + \value{charChaModCount}})\forlistloop{\\~~~~}{\charBardicPerformanceList}}
-		\NewCounter{charBardicPerformanceRoundsCount}
-		\AddLimitedUse{Bardic Performance (rounds)}{\DoMath{#1 * 2 + 2 + \value{charChaModCount} + \value{charBardicPerformanceRoundsCount}}}
-			\listadd{\charBardicPerformanceList}{Countersong}
-			\listadd{\charBardicPerformanceList}{Fascinate}
-			\listadd{\charBardicPerformanceList}{Inspire Courage +\DoMath{(#1 + 1) / 6 + 1}}
+	\edef\CharBardicPerformanceList{}
+	\AddClassFeature{Bardic Performance (save DC \DoMath{10 + #1 / 2 + \value{CharChaModCount}})\forlistloop{\\~~~~}{\CharBardicPerformanceList}}
+		\NewCounter{CharBardicPerformanceRoundsCount}
+		\AddLimitedUse{Bardic Performance (rounds)}{\DoMath{#1 * 2 + 2 + \value{CharChaModCount} + \value{CharBardicPerformanceRoundsCount}}}
+			\listadd{\CharBardicPerformanceList}{Countersong}
+			\listadd{\CharBardicPerformanceList}{Fascinate}
+			\listadd{\CharBardicPerformanceList}{Inspire Courage +\DoMath{(#1 + 1) / 6 + 1}}
 	\AddClassFeature{Bardic Knowledge}
 		\renewcommand{\do}[1]{
 			\MiscBonus{##1}{#1 / 2}
 		}\dolistloop{\KnowledgeSkillsList}
 		\AddConditionalSkillMod{Can make Knowledge checks untrained.}
 	\ifthenelse{#1 > 1}{
-		\edef\charVersatilePerformancesList{}
-		\AddClassFeature{Versatile Performance\forlistloop{\\~~~~}{\charVersatilePerformancesList}}
-			\NewCounter{charVersatilePerformancesCount}
-			\SetCounter{charVersatilePerformancesCount}{(#1 + 2) / 4}
+		\edef\CharVersatilePerformancesList{}
+		\AddClassFeature{Versatile Performance\forlistloop{\\~~~~}{\CharVersatilePerformancesList}}
+			\NewCounter{CharVersatilePerformancesCount}
+			\SetCounter{CharVersatilePerformancesCount}{(#1 + 2) / 4}
 			\NewDocumentCommand{\AddVersatilePerformance}{m}{
-				\listinsert{\charVersatilePerformancesList}{##1}
-				\AddToCounter{charVersatilePerformancesCount}{-1}
+				\listinsert{\CharVersatilePerformancesList}{##1}
+				\AddToCounter{CharVersatilePerformancesCount}{-1}
 			}
 			\gappto{\RunChecks}{%
 				%%CHECK VERSATILE PERFORMANCES
-				\ifthenelse{\value{charVersatilePerformancesCount} < 0}{
-					\AddWarning{\DoMath{-\value{charVersatilePerformancesCount}} too many Versatile Performance Skills}
+				\ifthenelse{\value{CharVersatilePerformancesCount} < 0}{
+					\AddWarning{\DoMath{-\value{CharVersatilePerformancesCount}} too many Versatile Performance Skills}
 				}{
-				\ifthenelse{\value{charVersatilePerformancesCount} > 0}{
-					\AddWarning{Choose \arabic{charVersatilePerformancesCount} more Versatile Performance Skills}
+				\ifthenelse{\value{CharVersatilePerformancesCount} > 0}{
+					\AddWarning{Choose \arabic{CharVersatilePerformancesCount} more Versatile Performance Skills}
 				}{}}
 			}
 		\AddClassFeature{Well-Versed}
 			\AddConditionalDefMod{+4 vs. Bardic Performance, Sonic, Language-Dependent}
 	\ifthenelse{#1 > 2}{
-			\listadd{\charBardicPerformanceList}{Inspire Competence +\DoMath{(#1 + 1) / 4 + 1}}
+			\listadd{\CharBardicPerformanceList}{Inspire Competence +\DoMath{(#1 + 1) / 4 + 1}}
 	\ifthenelse{#1 > 4}{
 		\AddClassFeature{Lore Master}
 			\AddConditionalSkillMod{Can take 10 in any Knowledge Skill with ranks.}
 			\AddLimitedUse{Lore Master}{\DoMath{(#1 + 1)/6}}
 	\ifthenelse{#1 > 5}{
-		\listadd{\charBardicPerformanceList}{\ifthenelse{#1 > 17}{Mass }{}Suggestion}
+		\listadd{\CharBardicPerformanceList}{\ifthenelse{#1 > 17}{Mass }{}Suggestion}
 	\ifthenelse{#1 > 7}{
-			\listadd{\charBardicPerformanceList}{Dirge of Doom}
+			\listadd{\CharBardicPerformanceList}{Dirge of Doom}
 	\ifthenelse{#1 > 8}{
-		\listadd{\charBardicPerformanceList}{Inspire Greatness}
+		\listadd{\CharBardicPerformanceList}{Inspire Greatness}
 	\ifthenelse{#1 > 9}{
 		\AddClassFeature{Jack of All Trades}
 			\AddConditionalSkillMod{Can use trained-only Skills as if they were trained.}
 	\ifthenelse{#1 > 11}{
-		\listadd{\charBardicPerformanceList}{Soothing Performance}
+		\listadd{\CharBardicPerformanceList}{Soothing Performance}
 	\ifthenelse{#1 > 13}{
-		\listadd{\charBardicPerformanceList}{Frightening Tune}
+		\listadd{\CharBardicPerformanceList}{Frightening Tune}
 	\ifthenelse{#1 > 14}{
-		\listadd{\charBardicPerformanceList}{Inspire Heroics}
+		\listadd{\CharBardicPerformanceList}{Inspire Heroics}
 	\ifthenelse{#1 > 15}{
 		\forlistloop{\isClassSkill}{\SkillsList}
 	\ifthenelse{#1 > 18}{
 		\AddConditionalSkillMod{Can take 10 on any Skill check.}
 	\ifthenelse{#1 > 19}{
-		\listadd{\charBardicPerformanceList}{Deadly Performance}
+		\listadd{\CharBardicPerformanceList}{Deadly Performance}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 	\newcommand{\AddBardSpellcasting}[1]{
 		\ifthenelse{##1 < 2}{\SetCounter{@i}{0}}{
@@ -155,9 +155,9 @@
 \edef\ClericClassSkillsList{}
 \forcsvlist{\listadd{\ClericClassSkillsList}}{Appraise, Craft, Diplomacy, Heal, KnowledgeArcana, KnowledgeHistory, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion, Linguistics, Profession, SenseMotive, Spellcraft}
 \newcommand{\AddClericClassFeatures}[1]{
-	\NewCounter{charChannelenergyusesCount}
-	\SetCounter{charChannelenergyusesCount}{3 + \value{charChaModCount}}
-	\AddLimitedUse{Channel Energy \DoMath{(#1 + 1) / 2}d6}{\arabic{charChannelenergyusesCount}}
+	\NewCounter{CharChannelenergyusesCount}
+	\SetCounter{CharChannelenergyusesCount}{3 + \value{CharChaModCount}}
+	\AddLimitedUse{Channel Energy \DoMath{(#1 + 1) / 2}d6}{\arabic{CharChannelenergyusesCount}}
 	\newcommand{\AddClericSpellcasting}[3]{
 		\newSpellcasting[(##1 + 1) / 2]{Cleric}{##1}{wis}
 		\AddPrimarySpellcasting{##1}
@@ -182,15 +182,15 @@
 \newcommand{\AddDruidClassFeatures}[1]{
 	\AddClassFeature{Nature Bond}
 	\AddClassFeature{Nature Sense}\MiscBonus{KnowledgeNature}{2}\MiscBonus{Survival}{2}
-	\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
+	\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{CharChaModCount}}}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{Woodland StRide}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Trackless Step}
 	\ifthenelse{#1 > 3}{
 		\AddClassFeature{Resist Nature's Lure}\AddConditionalDefMod{+4 to saves vs. Spell-like abilities of fey and Spells that target plants}
-		\NewCounter{charwildshapeusesCount}
-		\SetCounter{charwildshapeusesCount}{#1 / 2 - 1}
+		\NewCounter{CharwildshapeusesCount}
+		\SetCounter{CharwildshapeusesCount}{#1 / 2 - 1}
 		\AddClassFeature{Wild Shape \ifthenelse{#1 < 20}{}{(At-Will)}
 		\ifthenelse{#1 > 5}{\ifthenelse{#1 > 7}{\ifthenelse{#1 > 9}{\ifthenelse{#1 > 11}{
 		\\~~~~Beast Shape III\\~~~~Elemental Body IV\\~~~~Plant Shape III
@@ -200,7 +200,7 @@
 		}{\\~~~~Beast Shape I}
 		}
 		\ifthenelse{#1 < 20}{
-			\AddLimitedUse{Wild Shape}{\arabic{charwildshapeusesCount}}
+			\AddLimitedUse{Wild Shape}{\arabic{CharwildshapeusesCount}}
 		}{}
 	\ifthenelse{#1 > 8}{
 		\AddClassFeature{Venom Immunity}
@@ -227,7 +227,7 @@
 \edef\FighterClassSkillsList{}
 \forcsvlist{\listadd{\FighterClassSkillsList}}{Climb, Craft, HandleAnimal, Intimidate, KnowledgeDungeoneering, KnowledgeEngineering, Profession, Ride, Survival, Swim}
 \newcommand{\AddFighterClassFeatures}[1]{
-	\AddToCounter{charBonusFeatsCount}{#1 / 2 +1}
+	\AddToCounter{CharBonusFeatsCount}{#1 / 2 +1}
 	\AddClassFeature{Fighter Bonus Feat\ifthenelse{#1 > 1}{ $\times\DoMath{#1 / 2 +1}$}{}}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{Bravery +\DoMath{(#1 + 2) / 4}}
@@ -236,44 +236,44 @@
 		\AddClassFeature{Armor Training +\DoMath{(#1 + 1) / 4} (\ifthenelse{#1 > 6}{Heavy}{Medium})}
 	\ifthenelse{#1 > 4}{
 		\AddClassFeature{Weapon Training}
-		\edef\charFighterWeaponTrainingList{}
-		\NewCounter{charWeaponTrainingBonusCount}
-		\NewCounter{charWeaponTrainingCount}
-		\SetCounter{charWeaponTrainingBonusCount}{(#1 - 1) / 4}
-		\SetCounter{charWeaponTrainingCount}{(#1 - 1) / 4}
+		\edef\CharFighterWeaponTrainingList{}
+		\NewCounter{CharWeaponTrainingBonusCount}
+		\NewCounter{CharWeaponTrainingCount}
+		\SetCounter{CharWeaponTrainingBonusCount}{(#1 - 1) / 4}
+		\SetCounter{CharWeaponTrainingCount}{(#1 - 1) / 4}
 		\newcommand{\AddFighterWeaponTraining}[1]{
-			\listadd{\charFighterWeaponTrainingList}{#1}
-			\AddToCounter{charWeaponTrainingCount}{-1}
+			\listadd{\CharFighterWeaponTrainingList}{#1}
+			\AddToCounter{CharWeaponTrainingCount}{-1}
 		}
 		\renewcommand{\do}[1]{
-			\\~~~~##1 (+\arabic{charWeaponTrainingBonusCount})%
-			\AddToCounter{charWeaponTrainingBonusCount}{-1}
+			\\~~~~##1 (+\arabic{CharWeaponTrainingBonusCount})%
+			\AddToCounter{CharWeaponTrainingBonusCount}{-1}
 		}
-		\dolistloop{\charFighterWeaponTrainingList}
+		\dolistloop{\CharFighterWeaponTrainingList}
 		\gappto{\RunChecks}{%
 			%%CHECK FIGHTER WEAPON TRAINING
-			\ifthenelse{\value{charWeaponTrainingCount} < 0}{
-				\AddWarning{\DoMath{-\value{charWeaponTrainingCount}} too many weapon groups for Fighter weapon training}
+			\ifthenelse{\value{CharWeaponTrainingCount} < 0}{
+				\AddWarning{\DoMath{-\value{CharWeaponTrainingCount}} too many weapon groups for Fighter weapon training}
 			}{
-			\ifthenelse{\value{charWeaponTrainingCount} > 0}{
-				\AddWarning{Choose \arabic{charWeaponTrainingCount} more weapon groups for Fighter weapon training}
+			\ifthenelse{\value{CharWeaponTrainingCount} > 0}{
+				\AddWarning{Choose \arabic{CharWeaponTrainingCount} more weapon groups for Fighter weapon training}
 			}{}}
 		}
 	\ifthenelse{#1 > 18}{
 		\AddClassFeature{Armor Mastery}
 		\preto{\Initialize}{
-			\ifthenelse{\equal{\charArmorName}{}}{}{\AddDR{--}{5}}
-			\ifthenelse{\equal{\charShieldName}{}}{}{\AddDR{--}{5}}
+			\ifthenelse{\equal{\CharArmorName}{}}{}{\AddDR{--}{5}}
+			\ifthenelse{\equal{\CharShieldName}{}}{}{\AddDR{--}{5}}
 		}
 	\ifthenelse{#1 > 19}{
-		\AddClassFeature{Weapon Mastery \charFighterWeaponMastery}
-		\newcommand{\charFighterWeaponMastery}{}
+		\AddClassFeature{Weapon Mastery \CharFighterWeaponMastery}
+		\newcommand{\CharFighterWeaponMastery}{}
 		\newcommand{\AddFighterWeaponMastery}[1]{
-			\renewcommand{\charFighterWeaponMastery}{##1}
+			\renewcommand{\CharFighterWeaponMastery}{##1}
 		}
 		\gappto{\RunChecks}{%
 			%%Check Fighter Weapon Mastery
-			\ifthenelse{\equal{\charFighterWeaponMastery}{}}{
+			\ifthenelse{\equal{\CharFighterWeaponMastery}{}}{
 				\AddWarning{Choose a weapon for Fighter weapon mastery. Use the command \texttt{$\backslash$addFighterWeaponMastery\{weapon\}}}
 			}{}
 		}
@@ -293,23 +293,23 @@
 \forcsvlist{\listadd{\MonkClassSkillsList}}{Acrobatics, Climb, Craft, EscapeArtist, Intimidate, KnowledgeHistory, KnowledgeReligion, Perception, Perform, Profession, Ride, SenseMotive, Stealth, Swim}
 \newcommand{\AddMonkClassFeatures}[1]{
 		\AddClassFeature{\ifthenelse{#1 > 10}{Greater }Flurry of Blows}
-			\NewCounter{charflurryofblowspenaltyCount}\SetCounter{charflurryofblowspenaltyCount}{-2}
-			\NewCounter{charflurryofblowsattacksCount}\StepCounter{charflurryofblowsattacksCount}
-%			\autoweapon[\value{charflurryofblowsattacksCount}]{Flurry of Blows}{\value{charflurryofblowspenaltyCount}}{\charunarmedstrikedamage + \arabic{charstrModCount}}{20}{B}{Melee}{}{str}
+			\NewCounter{CharflurryofblowspenaltyCount}\SetCounter{CharflurryofblowspenaltyCount}{-2}
+			\NewCounter{CharflurryofblowsattacksCount}\StepCounter{CharflurryofblowsattacksCount}
+%			\autoweapon[\value{CharflurryofblowsattacksCount}]{Flurry of Blows}{\value{CharflurryofblowspenaltyCount}}{\Charunarmedstrikedamage + \arabic{CharstrModCount}}{20}{B}{Melee}{}{str}
 		\AddClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{\DoMath{(#1 + 6) / 4}}{2}$}{}}
-		\AddToCounter{charBonusFeatsCount}{3}
+		\AddToCounter{CharBonusFeatsCount}{3}
 		\AddFeat*{Improved Unarmed Strike}
-		\AddFeat*{Stunning Fist}\AddLimitedUse{Stunning Fist}{\DoMath{#1 + (\value{charTotalLevelCount} - 1) / 4}}
+		\AddFeat*{Stunning Fist}\AddLimitedUse{Stunning Fist}{\DoMath{#1 + (\value{CharTotalLevelCount} - 1) / 4}}
 		\AddClassFeature{Stunning Fist \ifthenelse{#1 > 3}{(Stun 1 rd, fatigue\ifthenelse{#1 > 7}{, sicken 1 min\ifthenelse{#1 > 11}{, stagger 1d6+1 rd\ifthenelse{#1 > 15}{, blind, deafen\ifthenelse{#1 > 19}{, paralyze 1d6 + 1 rd.}{}}{}}{.}}{})}{}}
-		\AddClassFeature{Unarmed Strike \charunarmedstrikedamage}
-			\newcommand{\charunarmedstrikedamage}{
-				\ifthenelse{\equal{\charSize}{Small}}{%
+		\AddClassFeature{Unarmed Strike \Charunarmedstrikedamage}
+			\newcommand{\Charunarmedstrikedamage}{
+				\ifthenelse{\equal{\CharSize}{Small}}{%
 					\ifthenelse{#1 > 15}{2d\DoMath{6 + ((#1 - 16)/ 4) * 2}}{1d\DoMath{4 + (#1 / 4) * 2}}%
 				}{%
-				\ifthenelse{\equal{\charSize}{Medium}}{%
+				\ifthenelse{\equal{\CharSize}{Medium}}{%
 					\ifthenelse{#1 > 11}{2d\DoMath{6 + ((#1 - 12)/ 4) * 2}}{1d\DoMath{6 + (#1 / 4) * 2}}%
 				}{%
-				\ifthenelse{\equal{\charSize}{Large}}{%
+				\ifthenelse{\equal{\CharSize}{Large}}{%
 					\ifthenelse{#1 > 3}{%
 						\ifthenelse{#1 > 11}{%
 							\ifthenelse{#1 > 19}{4d8}{%
@@ -324,17 +324,17 @@
 			}
 		\AddClassFeature{Monk AC Bonus}
 			\appto\Initialize{
-				\ifthenelse{\equal{\charArmorType}{}}{
-					\MiscBonus{AC}{#1 / 4 + \value{charWisModCount}}
-					\MiscBonus{TouchAC}{#1 / 4 + \value{charWisModCount}}
-					\MiscBonus{FlatFootedAC}{#1 / 4 + \value{charWisModCount}}
-					\MiscBonus{CMD}{#1 / 4 + \value{charWisModCount}}
+				\ifthenelse{\equal{\CharArmorType}{}}{
+					\MiscBonus{AC}{#1 / 4 + \value{CharWisModCount}}
+					\MiscBonus{TouchAC}{#1 / 4 + \value{CharWisModCount}}
+					\MiscBonus{FlatFootedAC}{#1 / 4 + \value{CharWisModCount}}
+					\MiscBonus{CMD}{#1 / 4 + \value{CharWisModCount}}
 				}{}
 			}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
 		\ifthenelse{#1 > 8}{\AddSpecialDefense{Improved Evasion}}{\AddSpecialDefense{Evasion}}
-		\StepCounter{charBonusFeatsCount}
+		\StepCounter{CharBonusFeatsCount}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Still Mind}\AddConditionalDefMod{+2 on saves vs. EnChantment}
 		\AddClassFeature{Fast Movement}
@@ -343,9 +343,9 @@
 			\MiscBonus{CMD}{#1 - #1 * 3 / 4}
 			\MiscBonus{CMB}{#1 - #1 * 3 / 4}
 	\ifthenelse{#1 > 3}{
-		\AddLimitedUse{Ki Pool}{\arabic{charKiPoolCount}}
-			\NewCounter{charKiPoolCount}
-			\SetCounter{charKiPoolCount}{#1 / 2 + \value{charWisModCount}}
+		\AddLimitedUse{Ki Pool}{\arabic{CharKiPoolCount}}
+			\NewCounter{CharKiPoolCount}
+			\SetCounter{CharKiPoolCount}{#1 / 2 + \value{CharWisModCount}}
 			\AddClassFeature{Ki Strike (magic%
 				\ifthenelse{#1 > 6}{%
 				, cold iron, silver
@@ -359,25 +359,25 @@
 		\AddClassFeature{High Jump}
 			\AddConditionalSkillMod{+#1 to Acrobatics to jump, always Counts as having running start for jumps}
 		\AddClassFeature{Purity of Body}\AddImmunity{Disease}
-		\StepCounter{charflurryofblowspenaltyCount}
+		\StepCounter{CharflurryofblowspenaltyCount}
 	\ifthenelse{#1 > 5}{
-		\AddToCounter{charBonusFeatsCount}{(#1 - 2) / 4}
+		\AddToCounter{CharBonusFeatsCount}{(#1 - 2) / 4}
 	\ifthenelse{#1 > 6}{
 		\AddClassFeature{Wholeness of Body}
 	\ifthenelse{#1 > 8}{
-		\StepCounter{charflurryofblowspenaltyCount}
+		\StepCounter{CharflurryofblowspenaltyCount}
 	\ifthenelse{#1 > 10}{
-		\StepCounter{charflurryofblowsattacksCount}
+		\StepCounter{CharflurryofblowsattacksCount}
 		\AddClassFeature{Diamond Body}\AddImmunity{poison}
 	\ifthenelse{#1 > 11}{
 		\AddClassFeature{Abundant Step (\DoMath{#1 * 40 + 400} ft.)}
 	\ifthenelse{#1 > 12}{
 		\AddClassFeature{Diamond Soul}\AddSpellResistance{#1 + 10}
 	\ifthenelse{#1 > 14}{
-		\AddLimitedUse{Quivering Palm (DC \DoMath{10 + #1 / 2 + \value{charWisModCount}})}{1}
+		\AddLimitedUse{Quivering Palm (DC \DoMath{10 + #1 / 2 + \value{CharWisModCount}})}{1}
 	\ifthenelse{#1 > 16}{
 		\AddClassFeature{Timeless Body}
-		\AddClassFeature{Tongue of the Sun and Moon}\listadd{\charLanguagesList}{Can speak with any living creature}
+		\AddClassFeature{Tongue of the Sun and Moon}\listadd{\CharLanguagesList}{Can speak with any living creature}
 	\ifthenelse{#1 > 18}{
 		\AddClassFeature{Empty Body}
 	\ifthenelse{#1 > 19}{
@@ -402,30 +402,30 @@
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{Divine Grace}{
 			\gappto\Initialize{
-				\MiscBonus{Fortitude}{\value{charChaModCount}}
-				\MiscBonus{Reflex}{\value{charChaModCount}}
-				\MiscBonus{Will}{\value{charChaModCount}}
+				\MiscBonus{Fortitude}{\value{CharChaModCount}}
+				\MiscBonus{Reflex}{\value{CharChaModCount}}
+				\MiscBonus{Will}{\value{CharChaModCount}}
 			}
 		}
-		\AddLimitedUse{Lay on Hands \DoMath{#1 / 2}d6}{\DoMath{#1 / 2 + \value{charChaModCount}}}
+		\AddLimitedUse{Lay on Hands \DoMath{#1 / 2}d6}{\DoMath{#1 / 2 + \value{CharChaModCount}}}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Aura of Courage}\AddImmunity{Fear}
 		\AddClassFeature{Divine Health}\AddImmunity{Disease}
-		\edef\charPaladinMerciesList{}
-			\NewCounter{charPaladinMerciesCount}
-			\AddToCounter{charPaladinMerciesCount}{#1 / 3}
-			\AddClassFeature{Mercies:\forlistloop{\\~~~~}{\charPaladinMerciesList}}
+		\edef\CharPaladinMerciesList{}
+			\NewCounter{CharPaladinMerciesCount}
+			\AddToCounter{CharPaladinMerciesCount}{#1 / 3}
+			\AddClassFeature{Mercies:\forlistloop{\\~~~~}{\CharPaladinMerciesList}}
 			\NewDocumentCommand{\AddMercy}{m}{
-				\listinsert{\charPaladinMerciesList}{##1}
-				\AddToCounter{charPaladinMerciesCount}{-1}
+				\listinsert{\CharPaladinMerciesList}{##1}
+				\AddToCounter{CharPaladinMerciesCount}{-1}
 			}
 			\gappto{\RunChecks}{%
 				%%CHECK MERCIES
-				\ifthenelse{\value{charPaladinMerciesCount} < 0}{
-					\AddWarning{\DoMath{-\value{charPaladinMerciesCount}} too many mercies}
+				\ifthenelse{\value{CharPaladinMerciesCount} < 0}{
+					\AddWarning{\DoMath{-\value{CharPaladinMerciesCount}} too many mercies}
 				}{
-				\ifthenelse{\value{charPaladinMerciesCount} > 0}{
-					\AddWarning{Choose \arabic{charPaladinMerciesCount} more mercies}
+				\ifthenelse{\value{CharPaladinMerciesCount} > 0}{
+					\AddWarning{Choose \arabic{CharPaladinMerciesCount} more mercies}
 				}{}}
 			}
 	\ifthenelse{#1 > 3}{
@@ -473,80 +473,80 @@
 \edef\RangerClassSkillsList{}
 \forcsvlist{\listadd{\RangerClassSkillsList}}{Climb, Craft, HandleAnimal, Heal, Intimidate, KnowledgeDungeoneering, KnowledgeGeography, KnowledgeNature, Perception, Profession, Ride, Spellcraft, Stealth, Survival, Swim}
 \newcommand{\AddRangerClassFeatures}[1]{
-		\edef\charFavoredEnemiesList{}
-		\AddClassFeature{Favored Enemy\forlistloop{\\~~~~}{\charFavoredEnemiesList}}
-			\edef\charFavoredEnemiesList{}
-			\NewCounter{charFavoredEnemiesCount}
-			\SetCounter{charFavoredEnemiesCount}{#1 / 5 + 1}
-			\NewCounter{charFavoredEnemiesTotalBonusCount}
-			\SetCounter{charFavoredEnemiesTotalBonusCount}{(#1 / 5) * 4 + 2}
+		\edef\CharFavoredEnemiesList{}
+		\AddClassFeature{Favored Enemy\forlistloop{\\~~~~}{\CharFavoredEnemiesList}}
+			\edef\CharFavoredEnemiesList{}
+			\NewCounter{CharFavoredEnemiesCount}
+			\SetCounter{CharFavoredEnemiesCount}{#1 / 5 + 1}
+			\NewCounter{CharFavoredEnemiesTotalBonusCount}
+			\SetCounter{CharFavoredEnemiesTotalBonusCount}{(#1 / 5) * 4 + 2}
 			\newcommand{\AddFavoredEnemy}[2]{
-				\listinsert{\charFavoredEnemiesList}{+##2 vs ##1s}
-				\AddToCounter{charFavoredEnemiesTotalBonusCount}{-##2}
-				\AddToCounter{charFavoredEnemiesCount}{-1}
+				\listinsert{\CharFavoredEnemiesList}{+##2 vs ##1s}
+				\AddToCounter{CharFavoredEnemiesTotalBonusCount}{-##2}
+				\AddToCounter{CharFavoredEnemiesCount}{-1}
 				\AddConditionalSkillMod{+##2 to Bluff, Listen, Sense Motive, Spot, and Survival vs. ##1s}
 				\AddConditionalAttackMod{+##2 damage vs. ##1s}
 			}
 			\appto{\RunChecks}{%
 				%%Check Favored Enemies
-				\ifthenelse{\value{charFavoredEnemiesCount} > 0}{
-					\AddWarning{Choose \arabic{charFavoredEnemiesCount} more favored enemies. Use the command \texttt{$\backslash$addfavoredenemy\{enemy\}\{Bonus\}}}
+				\ifthenelse{\value{CharFavoredEnemiesCount} > 0}{
+					\AddWarning{Choose \arabic{CharFavoredEnemiesCount} more favored enemies. Use the command \texttt{$\backslash$addfavoredenemy\{enemy\}\{Bonus\}}}
 				}{
-				\ifthenelse{\value{charFavoredEnemiesCount} < 0}{
-					\AddWarning{\DoMath{-\value{charFavoredEnemiesCount}} too many favored enemies}
+				\ifthenelse{\value{CharFavoredEnemiesCount} < 0}{
+					\AddWarning{\DoMath{-\value{CharFavoredEnemiesCount}} too many favored enemies}
 				}{}}
-				\ifthenelse{\value{charFavoredEnemiesTotalBonusCount} > 0}{
-					\AddWarning{You have \arabic{charFavoredEnemiesTotalBonusCount} points of favored enemy Bonus to allocate}
+				\ifthenelse{\value{CharFavoredEnemiesTotalBonusCount} > 0}{
+					\AddWarning{You have \arabic{CharFavoredEnemiesTotalBonusCount} points of favored enemy Bonus to allocate}
 				}{
-				\ifthenelse{\value{charFavoredEnemiesTotalBonusCount} < 0}{
-					\AddWarning{Total favored enemy Bonus is \DoMath{-\value{charFavoredEnemiesTotalBonusCount}} points too high}
+				\ifthenelse{\value{CharFavoredEnemiesTotalBonusCount} < 0}{
+					\AddWarning{Total favored enemy Bonus is \DoMath{-\value{CharFavoredEnemiesTotalBonusCount}} points too high}
 				}{}}
 			}
 		\AddClassFeature{Track}
 			\ifthenelse{#1 > 1}{\AddConditionalSkillMod{+\DoMath{#1 / 2} to Survival checks to follow tracks}}{\AddConditionalSkillMod{+1 to Survival checks to follow tracks}}
-		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{charChaModCount}}}
+		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{CharChaModCount}}}
 	\ifthenelse{#1 > 1}{
-		\AddClassFeature{Combat Style Bonus Feat\ifthenelse{#1 > 5}{$ \times \DoMath{(#1 + 2) / 4}$}{}: \charcombatstyle}
-			\StepCounter{charBonusFeatsCount}
-			\newcommand\charcombatstyle{}
+		\AddClassFeature{Combat Style Bonus Feat\ifthenelse{#1 > 5}{$ \times \DoMath{(#1 + 2) / 4}$}{}: \Charcombatstyle}
+			\StepCounter{CharBonusFeatsCount}
+			\newcommand\Charcombatstyle{}
 			\newcommand\Addcombatstyle[1]{%
-				\renewcommand{\charcombatstyle}{##1}%
+				\renewcommand{\Charcombatstyle}{##1}%
 			}
 			\appto{\RunChecks}{%
 				%Check Ranger Combat Style
-				\ifthenelse{\equal{\charcombatstyle}{}}{
+				\ifthenelse{\equal{\Charcombatstyle}{}}{
 					\AddWarning{Choose a Ranger combat style. Use the command \texttt{$\backslash$addcombatstyle\{combat style\}}}
 				}{}
 			}
-			\AddToCounter{charBonusFeatsCount}{(#1 + 2) / 4}
+			\AddToCounter{CharBonusFeatsCount}{(#1 + 2) / 4}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Endurance}
-			\StepCounter{charBonusFeatsCount}
+			\StepCounter{CharBonusFeatsCount}
 			\AddFeat*{Endurance}
-		\NewCounter{charFavoredTerrainsCount}
-			\SetCounter{charFavoredTerrainsCount}{(#1 + 2)/ 5}
-			\NewCounter{charFavoredTerrainsTotalBonusCount}
-			\SetCounter{charFavoredTerrainsTotalBonusCount}{(#1 + 2) / 5 * 4 - 2}
+		\NewCounter{CharFavoredTerrainsCount}
+			\SetCounter{CharFavoredTerrainsCount}{(#1 + 2)/ 5}
+			\NewCounter{CharFavoredTerrainsTotalBonusCount}
+			\SetCounter{CharFavoredTerrainsTotalBonusCount}{(#1 + 2) / 5 * 4 - 2}
 			\newcommand{\Addfavoredterrain}[2]{
-				\listinsert{\charFavoredTerrainslist}{+##2 vs ##1s}
-				\AddToCounter{charFavoredTerrainsTotalBonusCount}{-##2}
-				\AddToCounter{charFavoredTerrainsCount}{-1}
+				\listinsert{\CharFavoredTerrainslist}{+##2 vs ##1s}
+				\AddToCounter{CharFavoredTerrainsTotalBonusCount}{-##2}
+				\AddToCounter{CharFavoredTerrainsCount}{-1}
 				\AddConditionalSkillMod{+##2 to initiative, Knowledge (geography), Perception, Stealth, andSurvival while in ##1 terrain}
 				\AddConditionalAttackMod{+##2 damage vs. ##1s}
 			}
 			\appto{\RunChecks}{%
 				%%Check Favored Terrains
-				\ifthenelse{\value{charFavoredTerrainsCount} > 0}{
-					\AddWarning{Choose \arabic{charFavoredTerrainsCount} more favored terrains. Use the command \texttt{$\backslash$addfavoredterrain\{terrain\}\{Bonus\}}}
+				\ifthenelse{\value{CharFavoredTerrainsCount} > 0}{
+					\AddWarning{Choose \arabic{CharFavoredTerrainsCount} more favored terrains. Use the command \texttt{$\backslash$addfavoredterrain\{terrain\}\{Bonus\}}}
 				}{
-				\ifthenelse{\value{charFavoredTerrainsCount} < 0}{
-					\AddWarning{\DoMath{-\value{charFavoredTerrainsCount}} too many favored terrains}
+				\ifthenelse{\value{CharFavoredTerrainsCount} < 0}{
+					\AddWarning{\DoMath{-\value{CharFavoredTerrainsCount}} too many favored terrains}
 				}{}}
-				\ifthenelse{\value{charFavoredTerrainsTotalBonusCount} > 0}{
-					\AddWarning{You have \arabic{charFavoredTerrainsTotalBonusCount} points of favored terrain Bonus to allocate}
+				\ifthenelse{\value{CharFavoredTerrainsTotalBonusCount} > 0}{
+					\AddWarning{You have \arabic{CharFavoredTerrainsTotalBonusCount} points of favored terrain Bonus to allocate}
 				}{
-				\ifthenelse{\value{charFavoredTerrainsTotalBonusCount} < 0}{
-					\AddWarning{Total favored terrain Bonus is \DoMath{-\value{charFavoredTerrainsTotalBonusCount}} points too high}
+				\ifthenelse{\value{CharFavoredTerrainsTotalBonusCount} < 0}{
+					\AddWarning{Total favored terrain Bonus is \DoMath{-\value{CharFavoredTerrainsTotalBonusCount}} points too high}
 				}{}}
 			}
 	\ifthenelse{#1 > 3}{
@@ -581,7 +581,7 @@
 	\ifthenelse{#1 > 16}{
 		\AddClassFeature{Hide in Plain Sight}
 	\ifthenelse{#1 > 19}{
-		\AddClassFeature{Master Hunter (DC \DoMath{10 + #1 / 2 + \value{charWisModCount}})}
+		\AddClassFeature{Master Hunter (DC \DoMath{10 + #1 / 2 + \value{CharWisModCount}})}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
@@ -600,24 +600,24 @@
 		\AddClassFeature{Trapfinding}
 			\AddConditionalSkillMod{+ \DoMath{#1 / 2} to Perception to find traps}
 			\MiscBonus{DisableDevice}{#1 / 2}
-	\edef\charRogueTalentsList{}
-	\NewCounter{charRogueTalentsCount}
+	\edef\CharRogueTalentsList{}
+	\NewCounter{CharRogueTalentsCount}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{Evasion}
-			\AddSpecialDefense{\ifinlist{Improved Evasion}{\charRogueTalentsList}{Improved }{}Evasion}
-		\AddClassFeature{\ifthenelse{#1 > 9}{Advanced }{}Rogue Talents\forlistloop{\\~~~~}{\charRogueTalentsList}}
-			\AddToCounter{charRogueTalentsCount}{#1 / 2}
+			\AddSpecialDefense{\ifinlist{Improved Evasion}{\CharRogueTalentsList}{Improved }{}Evasion}
+		\AddClassFeature{\ifthenelse{#1 > 9}{Advanced }{}Rogue Talents\forlistloop{\\~~~~}{\CharRogueTalentsList}}
+			\AddToCounter{CharRogueTalentsCount}{#1 / 2}
 			\NewDocumentCommand{\AddRogueTalent}{m}{
-				\listinsert{\charRogueTalentsList}{##1}
-				\AddToCounter{charRogueTalentsCount}{-1}
+				\listinsert{\CharRogueTalentsList}{##1}
+				\AddToCounter{CharRogueTalentsCount}{-1}
 			}
 			\gappto{\RunChecks}{%
 				%%CHECK ROGUE TALENTS
-				\ifthenelse{\value{charRogueTalentsCount} < 0}{
-					\AddWarning{\DoMath{-\value{charRogueTalentsCount}} too many Rogue talents}
+				\ifthenelse{\value{CharRogueTalentsCount} < 0}{
+					\AddWarning{\DoMath{-\value{CharRogueTalentsCount}} too many Rogue talents}
 				}{
-				\ifthenelse{\value{charRogueTalentsCount} > 0}{
-					\AddWarning{Choose \arabic{charRogueTalentsCount} more Rogue talents}
+				\ifthenelse{\value{CharRogueTalentsCount} > 0}{
+					\AddWarning{Choose \arabic{CharRogueTalentsCount} more Rogue talents}
 				}{}}
 			}
 	\ifthenelse{#1 > 2}{
@@ -627,7 +627,7 @@
 		\AddClassFeature{\ifthenelse{#1 > 7}{Improved }{}Uncanny Dodge}
 			\ifthenelse{#1 > 7}{\AddSpecialDefense{Improved Uncanny Dodge}}{\AddSpecialDefense{Uncanny Dodge}}
 	\ifthenelse{#1 > 19}{
-		\AddClassFeature{Master Strike (DC \DoMath{10 + #1 / 2 + \value{charIntModCount}})}
+		\AddClassFeature{Master Strike (DC \DoMath{10 + #1 / 2 + \value{CharIntModCount}})}
 	}{}}{}}{}}{}
 }
 
@@ -642,36 +642,36 @@
 \edef\SorcererClassSkillsList{}
 \forcsvlist{\listadd{\SorcererClassSkillsList}}{Appraise, Bluff, Craft, Fly, Intimidate, KnowledgeArcana, Profession, Spellcraft, UseMagicDevice}
 \newcommand{\AddSorcererClassFeatures}[1]{
-	\edef\charSorcererBloodlinePowersList{}
-	\newcommand\charSorcererBloodline{}
-	\AddClassFeature{\charSorcererBloodline BloodlineArcana}
-	\AddClassFeature{\charSorcererBloodline Bloodline Powers:\forlistloop{\\~~~~}{\charSorcererBloodlinePowersList}}
-		\NewCounter{charSorcererBloodlinePowersCount}
-		\newcommand{\AddSorcererBloodline}[1]{\renewcommand{\charSorcererBloodline}{##1}}
+	\edef\CharSorcererBloodlinePowersList{}
+	\newcommand\CharSorcererBloodline{}
+	\AddClassFeature{\CharSorcererBloodline BloodlineArcana}
+	\AddClassFeature{\CharSorcererBloodline Bloodline Powers:\forlistloop{\\~~~~}{\CharSorcererBloodlinePowersList}}
+		\NewCounter{CharSorcererBloodlinePowersCount}
+		\newcommand{\AddSorcererBloodline}[1]{\renewcommand{\CharSorcererBloodline}{##1}}
 		\appto{\RunChecks}{%
 			%%Check Sorcerer Bloodline
-			\ifthenelse{\equal{\charSorcererBloodline}{}}{
+			\ifthenelse{\equal{\CharSorcererBloodline}{}}{
 				\AddWarning{Choose a Sorcerer bloodline. Use the command \texttt{$\backslash$addSorcererBloodline\{bloodline\}}}
 			}{}
 		}
-		\StepCounter{charSorcererBloodlinePowersCount}
+		\StepCounter{CharSorcererBloodlinePowersCount}
 		\NewDocumentCommand{\AddBloodlinePower}{m}{
-			\listinsert{\charSorcererBloodlinePowersList}{##1}
-			\AddToCounter{charSorcererBloodlinePowersCount}{-1}
+			\listinsert{\CharSorcererBloodlinePowersList}{##1}
+			\AddToCounter{CharSorcererBloodlinePowersCount}{-1}
 		}
 		\gappto{\RunChecks}{%
 			%%CHECK BLOODLINE POWERS
-			\ifthenelse{\value{charSorcererBloodlinePowersCount} < 0}{
-				\AddWarning{\DoMath{-\value{charSorcererBloodlinePowersCount}} too many bloodline powers input}
+			\ifthenelse{\value{CharSorcererBloodlinePowersCount} < 0}{
+				\AddWarning{\DoMath{-\value{CharSorcererBloodlinePowersCount}} too many bloodline powers input}
 			}{
-			\ifthenelse{\value{charSorcererBloodlinePowersCount} > 0}{
-				\AddWarning{Input \arabic{charSorcererBloodlinePowersCount} bloodline powers}
+			\ifthenelse{\value{CharSorcererBloodlinePowersCount} > 0}{
+				\AddWarning{Input \arabic{CharSorcererBloodlinePowersCount} bloodline powers}
 			}{}}
 		}
-	\StepCounter{charBonusFeatsCount}\AddFeat*{Eschew Materials}
+	\StepCounter{CharBonusFeatsCount}\AddFeat*{Eschew Materials}
 	\newcommand{\AddBloodlineSpells}{}
 	\ifthenelse{#1 > 2}{
-		\StepCounter{charSorcererBloodlinePowersCount}
+		\StepCounter{CharSorcererBloodlinePowersCount}
 		\AddClassFeature{Bloodline Spell\ifthenelse{#1 > 4}{ $\times \DoMath{(#1 - 1) / 2}$}{}}
 			\appto{\AddBloodlineSpells}{
 				\AddSpellsKnown{1}{1}
@@ -685,9 +685,9 @@
 			\AddSpellsKnown{3}{1}
 		}
 		\AddClassFeature{Bloodline Feat\ifthenelse{#1 > 12}{ $\times \DoMath{(#1 - 1) / 6}$}{}}
-			\AddToCounter{charBonusFeatsCount}{(#1 - 1) / 6}
+			\AddToCounter{CharBonusFeatsCount}{(#1 - 1) / 6}
 	\ifthenelse{#1 > 8}{
-		\StepCounter{charSorcererBloodlinePowersCount}
+		\StepCounter{CharSorcererBloodlinePowersCount}
 		\appto{\AddBloodlineSpells}{
 			\AddSpellsKnown{4}{1}
 		}
@@ -703,7 +703,7 @@
 		\appto{\AddBloodlineSpells}{
 			\AddSpellsKnown{7}{1}
 		}
-		\StepCounter{charSorcererBloodlinePowersCount}
+		\StepCounter{CharSorcererBloodlinePowersCount}
 	\ifthenelse{#1 > 16}{
 		\appto{\AddBloodlineSpells}{
 			\AddSpellsKnown{8}{1}
@@ -713,7 +713,7 @@
 			\AddSpellsKnown{9}{1}
 		}
 	\ifthenelse{#1 > 19}{
-		\StepCounter{charSorcererBloodlinePowersCount}
+		\StepCounter{CharSorcererBloodlinePowersCount}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 	\newcommand{\AddSorcererSpellcasting}[1]{
 		\ifthenelse{##1 = 1}{
@@ -760,19 +760,19 @@
 \NewDocumentCommand{\AddWizardClassFeatures}{m O{Universal} O{} O{}}{
 	\AddClassFeature{Arcane Bond}
 	\AddClassFeature{Scribe Scroll}
-	\AddToCounter{charBonusFeatsCount}{#1 / 5 + 1}
+	\AddToCounter{CharBonusFeatsCount}{#1 / 5 + 1}
 	\AddFeat*{Scribe Scroll}
 	\ifthenelse{#1 > 4}{
 		\AddClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\DoMath{#1 / 5}$}{}}
 	}{}
 	\ifthenelse{\equal{#2}{Universal}}{
-		\newcommand{\charWizardFocusSchool}{}
-			\AddLimitedUse{Hand of the Apprentice}{\DoMath{3 + \value{charIntModCount}}}
+		\newcommand{\CharWizardFocusSchool}{}
+			\AddLimitedUse{Hand of the Apprentice}{\DoMath{3 + \value{CharIntModCount}}}
 		\ifthenelse{#1 > 7}{
 			\AddLimitedUse{Metamagic Mastery}{\DoMath{(#1 - 6) / 2}}
 		}{}
 	}{\ifthenelse{\equal{#2}{Abjuration}}{
-		\newcommand{\charWizardFocusSchool}{Abjuration}
+		\newcommand{\CharWizardFocusSchool}{Abjuration}
 			\AddClassFeature{Resistance}
 				\ifthenelse{#1 > 19}{
 					\AddImmunity{Chosen Energy}
@@ -781,102 +781,102 @@
 				}{
 					\AddResistance{Chosen Energy}{5}
 				}}
-			\AddLimitedUse{Protective Ward +\DoMath{1 + #1 / 5} (\arabic{charIntModCount} rd.)}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Protective Ward +\DoMath{1 + #1 / 5} (\arabic{CharIntModCount} rd.)}{\DoMath{3 + \value{CharIntModCount}}}
 		\ifthenelse{#1 > 5}{
 			\AddLimitedUse{Energy Absorption (points)}{\DoMath{#1 * 3}}
 		}{}
 	}{\ifthenelse{\equal{#2}{Conjuration}}{
-		\newcommand{\charWizardFocusSchool}{Conjuration}
+		\newcommand{\CharWizardFocusSchool}{Conjuration}
 			\AddClassFeature{SummOner's Charm}
 				\appto{\AddWizardSpellcasting}{\AddSpellcastingNote{Increase duration of \textit{summon monster} Spells by \DoMath{#1 / 2} round\ifthenelse{#1 > 3}{s}{}}}
-			\AddLimitedUse{Acid Dart 1d6 \ifthenelse{#1 > 1}{+ \DoMath{#1 / 2}}{}}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Acid Dart 1d6 \ifthenelse{#1 > 1}{+ \DoMath{#1 / 2}}{}}{\DoMath{3 + \value{CharIntModCount}}}
 		\ifthenelse{#1 > 7}{
 			\AddLimitedUse{Dimensional Steps (ft.)}{\DoMath{#1 * 30}}
 		}{}
 	}{\ifthenelse{\equal{#2}{Divination}}{
-		\newcommand{\charWizardFocusSchool}{Divination}
+		\newcommand{\CharWizardFocusSchool}{Divination}
 			\AddClassFeature{Forewarned}
 				\MiscBonus{initiative}{#1 / 2}
-			\AddLimitedUse{Diviner's Fortune +\DoMath{#1 / 2}}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Diviner's Fortune +\DoMath{#1 / 2}}{\DoMath{3 + \value{CharIntModCount}}}
 		\ifthenelse{#1 > 7}
 			\AddClassFeature{Scrying Adept}
 				\AddSpecialDefense{Permanent \textit{detect scrying}}
 				\appto{\AddWizardSpellcasting}{\AddSpellcastingNote{Scry as if subject is One step more familiar}}
 		}{}
 	}{\ifthenelse{\equal{#2}{EnChantment}}{
-		\newcommand{\charWizardFocusSchool}{EnChantment}
+		\newcommand{\CharWizardFocusSchool}{EnChantment}
 			\AddClassFeature{EnChanting Smile}
 				\MiscBonus[enhancement]{Bluff}{2 + #1 / 5}
 				\MiscBonus[enhancement]{Diplomacy}{2 + #1 / 5}
 				\MiscBonus[enhancement]{Intimidate}{2 + #1 / 5}
-			\AddLimitedUse{Dazing Touch}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Dazing Touch}{\DoMath{3 + \value{CharIntModCount}}}
 		\ifthenelse{#1 > 7}
 			\AddLimitedUse{Aura of Despair (rounds)}{#1}
 		}{}
 	}{\ifthenelse{\equal{#2}{Evocation}}{
-		\newcommand{\charWizardFocusSchool}{Evocation}
+		\newcommand{\CharWizardFocusSchool}{Evocation}
 			\AddClassFeature{Intense Spells +\DoMath{#1 / 2}}
 				\appto{\AddWizardSpellcasting}{\AddSpellcastingNote{+\DoMath{#1 / 2} damage on Evocations that deal HP damage.}}
 				\ifthenelse{#1 > 19}{
 					\appto{\AddWizardSpellcasting}{\AddSpellcastingNote{Roll twice on rolls to penetrate Spell Resistance for evocation Spells}}
 				}{}
-			\AddLimitedUse{Force Missile 1d4+\DoMath{#1 / 2}}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Force Missile 1d4+\DoMath{#1 / 2}}{\DoMath{3 + \value{CharIntModCount}}}
 		\ifthenelse{#1 > 7}{
 			\AddLimitedUse{Elemental Wall (rounds)}{#1}
 		}{}
 	}{\ifthenelse{\equal{#2}{Illusion}}{
-		\newcommand{\charWizardFocusSchool}{Illusion}
+		\newcommand{\CharWizardFocusSchool}{Illusion}
 			\AddClassFeature{Extended Illusions}
 				\appto{\AddWizardSpellcasting}{\AddSpellcastingNote{+\ifthenelse{#1 = 1}{1}{\DoMath{#1 / 2}} round duration to illusions with Concentration duration.}}
-			\AddLimitedUse{Blinding Ray}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Blinding Ray}{\DoMath{3 + \value{CharIntModCount}}}
 		\ifthenelse{#1 > 7}{
 			\AddLimitedUse{Invisibility Field (rounds)}{#1}
 		}{}
 	}{\ifthenelse{\equal{#2}{Necromancy}}{
-		\newcommand{\charWizardFocusSchool}{Necromancy}
+		\newcommand{\CharWizardFocusSchool}{Necromancy}
 			\AddClassFeature{Power Over Undead}
-				\StepCounter{charBonusFeatsCount}
-				\NewCounter{charChannelenergyusesCount}
-				\SetCounter{charChannelenergyusesCount}{3 + \value{charIntModCount}}
-				\AddLimitedUse{Channel Energy (DC \DoMath{10 + #1 / 2 +\value{charChaModCount}})}{\arabic{charChannelenergyusesCount}}
-			\AddLimitedUse{Grave Touch}{3 + \value{charIntModCount}}
+				\StepCounter{CharBonusFeatsCount}
+				\NewCounter{CharChannelenergyusesCount}
+				\SetCounter{CharChannelenergyusesCount}{3 + \value{CharIntModCount}}
+				\AddLimitedUse{Channel Energy (DC \DoMath{10 + #1 / 2 +\value{CharChaModCount}})}{\arabic{CharChannelenergyusesCount}}
+			\AddLimitedUse{Grave Touch}{3 + \value{CharIntModCount}}
 		\ifthenelse{#1 > 7}{
 			\AddLimitedUse{Life Sight \DoMath{(#1 - 4) / 4 * 10} ft. (rounds)}{#1}
 		}{}
 	}{\ifthenelse{\equal{#2}{Transmutation}}{
-		\newcommand{\charWizardFocusSchool}{Transmutation}
+		\newcommand{\CharWizardFocusSchool}{Transmutation}
 			\AddClassFeature{Physical Enhancement + \DoMath{1 + #1 / 5}}
-			\AddLimitedUse{Telekinetic Fist 1d4+\DoMath{#1 / 2}}{\DoMath{3 + \value{charIntModCount}}}
+			\AddLimitedUse{Telekinetic Fist 1d4+\DoMath{#1 / 2}}{\DoMath{3 + \value{CharIntModCount}}}
 		\ifthenelse{#1 > 7}{
 			\AddLimitedUse{Change Shape (rounds)}{#1}
 		}{}
 	}}}}}}}
 	\NewDocumentCommand{\AddWizardSpellcasting}{m}{
 		\newSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{int}
-		\NewCounter{charWizardforbiddenschoolsCount}
+		\NewCounter{CharWizardforbiddenschoolsCount}
 		\AddPrimarySpellcasting{##1}
-		\ifthenelse{\equal{\charWizardFocusSchool}{}}{}{
+		\ifthenelse{\equal{\CharWizardFocusSchool}{}}{}{
 			\ForLoop{@i}{1}{\value{@i}<10}{
 				\AddBonusSpellslots{\arabic{@i}}{1}
 			}
-			\AddSpellcastingSpecialization[Focus School]{\charWizardFocusSchool}
-			\AddToCounter{charWizardforbiddenschoolsCount}{2}
+			\AddSpellcastingSpecialization[Focus School]{\CharWizardFocusSchool}
+			\AddToCounter{CharWizardforbiddenschoolsCount}{2}
 			\ifthenelse{\equal{#3}{}}{}{
 				\AddSpellcastingProhibition[Opposition School]{#3}
-				\AddToCounter{charWizardforbiddenschoolsCount}{-1}
+				\AddToCounter{CharWizardforbiddenschoolsCount}{-1}
 			}
 			\ifthenelse{\equal{#4}{}}{}{
 				\AddSpellcastingProhibition[Opposition School]{#4}
-				\AddToCounter{charWizardforbiddenschoolsCount}{-1}
+				\AddToCounter{CharWizardforbiddenschoolsCount}{-1}
 			}
 		}
 		\appto{\RunChecks}{
 			%%CHECK NUMBER OF PROHIBITED SCHOOLS
-			\ifthenelse{\value{charWizardforbiddenschoolsCount} > 0}{
-				\AddWarning{Choose \arabic{charWizardforbiddenschoolsCount} more prohibited school\ifthenelse{\value{charWizardforbiddenschoolsCount} > 1}{s}{}}
+			\ifthenelse{\value{CharWizardforbiddenschoolsCount} > 0}{
+				\AddWarning{Choose \arabic{CharWizardforbiddenschoolsCount} more prohibited school\ifthenelse{\value{CharWizardforbiddenschoolsCount} > 1}{s}{}}
 			}{
-			\ifthenelse{\value{charWizardforbiddenschoolsCount} < 0}{
-				\AddWarning{You can remove \DoMath{-\value{charWizardforbiddenschoolsCount}} prohibited school\ifthenelse{\value{charWizardforbiddenschoolsCount} < -1}{s}{}}
+			\ifthenelse{\value{CharWizardforbiddenschoolsCount} < 0}{
+				\AddWarning{You can remove \DoMath{-\value{CharWizardforbiddenschoolsCount}} prohibited school\ifthenelse{\value{CharWizardforbiddenschoolsCount} < -1}{s}{}}
 			}{}}
 		}
 	}
