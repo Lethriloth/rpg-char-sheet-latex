@@ -60,7 +60,7 @@
 %% Function Name Normalization %%
 \def\NewLength#1{\newlength{#1}}
 \def\SetLength#1#2{\setlength{#1}{#2}}
-
+\def\AddToLength#1#2{\addtolength{#1}{#2}}
 
 
 %%%% Output Formatting %%%%

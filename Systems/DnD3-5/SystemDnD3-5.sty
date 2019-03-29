@@ -483,10 +483,10 @@
 \newlength{\GearItemWeight}
 \NewDocumentCommand{\AddGearItem}{s O{1} m m}{%
 	\IfBooleanTF #1 {%
-		\Addtolength{\ExtradimensionalGearWeight}{#2pt * #4}%
+		\AddToLength{\ExtradimensionalGearWeight}{#2pt * #4}%
 		\listadd{\CharGearList}{#3\ifnum #2 > 1{ (#2)}\fi &\SetLength{\GearItemWeight}{#2pt * #4} *\PrintWeight{\GearItemWeight}~lbs.}
 	}{%
-		\Addtolength{\TotalGearWeight}{#2pt * #4}%
+		\AddToLength{\TotalGearWeight}{#2pt * #4}%
 		\listadd{\CharGearList}{#3\ifnum #2 > 1{ (#2)}\fi & \SetLength{\GearItemWeight}{#2pt * #4}\PrintWeight{\GearItemWeight}~lbs.}
 	}
 }
@@ -497,7 +497,7 @@
 %%Stored Items%%
 \edef\StoredItemsList{}
 \newcommand\AddStoredItem[3][1]{
-	\Addtolength{\TotalStoredWeight}{#1 pt * #3}%
+	\AddToLength{\TotalStoredWeight}{#1 pt * #3}%
 	\listadd{\StoredItemsList}{#2\ifnum #1 > 1{ (#1)}\fi & \DoMath{#1 * #3}~lbs.}
 }
 \newcommand\AddStoredSubItem[3][1]{
@@ -652,7 +652,7 @@
 		\expandafter\renewcommand\csname ItemInSlot#1Name\endcsname{\itshape ##1}
 		\expandafter\renewcommand\csname ItemInSlot#1Description\endcsname{##2}
 		\SetLength{\csname ItemInSlot#1Weight\endcsname}{##3pt}
-		\Addtolength{\WornItemsWeight}{##3pt}
+		\AddToLength{\WornItemsWeight}{##3pt}
 	}
 }\dolistloop{\ItemSlotNamesList}
 \newcommand{\AddRingItem}[3]{
@@ -702,7 +702,7 @@
 	\SetLength{\TotalExtradimensionalWeight}{\ExtradimensionalGearWeight+\ExtradimensionalCurrencyWeight}
 	\SetLength{\ExtradimensionalOverload}{\TotalExtradimensionalWeight - \value{CharExtradimensionalCapacityCount}pt}
 	\ifthenelse{\ExtradimensionalOverload > 0}{
-		\Addtolength{\TotalGearWeight}{\ExtradimensionalOverload}
+		\AddToLength{\TotalGearWeight}{\ExtradimensionalOverload}
 	}{}
 	\SetLength{\TotalCarriedWeight}{\TotalGearWeight+\CurrencyWeight+\WornItemsWeight}
 }
