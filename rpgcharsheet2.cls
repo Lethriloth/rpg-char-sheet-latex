@@ -532,28 +532,6 @@
 
 
 
-%%%% Character Name & Description %%%%
-
-\newcommand\charName{}
-\newcommand\charLevel{}
-\newcommand\charPlayerName{}
-\newcommand\charAlignment{}
-\newcommand\charReligion{}
-\newcommand\charRace{}
-\newcommand\charHomeland{}
-\newcommand\charSize{}
-\newcommand\charGender{}
-\newcommand\charAge{}
-\newcommand\charHeight{}
-\newcommand\charWeight{}
-\newcommand\charHair{}
-\newcommand\charEyes{}
-
-
-%% Equipment Weights
-
-
-
 %%%% Miscellaney %%%%
 
 %%Blank Sheet Generator

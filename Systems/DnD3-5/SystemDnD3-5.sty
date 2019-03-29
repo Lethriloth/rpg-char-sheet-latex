@@ -142,7 +142,7 @@
 %% Size
 \NewCounter{CharSpecialSizeModCount}
 \newcommand\SetSize[1]{
-	\csname setSize#1\endcsname
+	\csname SetSize#1\endcsname
 }
 \newcommand\SetSizeFine{
 	\renewcommand{\CharSize}{Fine}
@@ -316,7 +316,7 @@
 	\renewcommand\do[1]{
 		\isClassSkill{##1}
 	}\expandafter\dolistloop\csname#3ClassSkillsList\endcsname
-	\IfBooleanTF #1 {} {\csname add#3ClassFeatures\endcsname{#4}}
+	\IfBooleanTF #1 {} {\csname Add#3ClassFeatures\endcsname{#4}}
 }
 
 
@@ -341,7 +341,7 @@
 \forcsvlist{\listadd\TrainedSkillsList}{DecipherScript, DisableDevice, HandleAnimal, OpenLock, ProfessionOne, ProfessionTwo, SleightOfHand, SpeakLanguage, Spellcraft, Tumble, UseMagicDevice}
 %% Default "Optional" for craft, profession, perform categories
 \renewcommand\do[1]{
-	\expandafter\newcommand\csname char#1Name\endcsname{Optional}
+	\expandafter\newcommand\csname Char#1Name\endcsname{Optional}
 }\docsvlist{CraftOne, CraftTwo, CraftThree, ProfessionOne, ProfessionTwo, PerformOne, PerformTwo}
 
 %% Initialize skill variables
@@ -421,11 +421,11 @@
 		\AddConditionalSkillMod{+2 to Disguise checks to act in character}
 	}{}
 	\ifthenelse{\value{CharCraftOneRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftOnename\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname CharCraftOnename\endcsname}}{}
 	\ifthenelse{\value{CharCraftTwoRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftTwoname\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname CharCraftTwoname\endcsname}}{}
 	\ifthenelse{\value{CharCraftThreeRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Appraise checks related to \csname charCraftThreename\endcsname}}{}
+		\AddConditionalSkillMod{+2 to Appraise checks related to \csname CharCraftThreename\endcsname}}{}
 	\ifthenelse{\value{CharDecipherScriptRanksCount} > 4}{
 		\ifthenelse{\value{CharSpellcraftRanksCount} > 4}{\AddConditionalSkillMod{+4 to Use Magic Device checks involving scrolls}}{\AddConditionalSkillMod{+2 to Use Magic Device checks involving scrolls}}}{}
 	\ifthenelse{\value{CharEscapeArtistRanksCount} > 4}{
@@ -476,6 +476,24 @@
 }
 
 
+%%%% Character Name & Description %%%%
+
+\newcommand\CharName{}
+\newcommand\CharLevel{}
+\newcommand\CharPlayerName{}
+\newcommand\CharAlignment{}
+\newcommand\CharReligion{}
+\newcommand\CharRace{}
+\newcommand\CharHomeland{}
+\newcommand\CharSize{}
+\newcommand\CharGender{}
+\newcommand\CharAge{}
+\newcommand\CharHeight{}
+\newcommand\CharWeight{}
+\newcommand\CharHair{}
+\newcommand\CharEyes{}
+
+
 %%%% Items %%%%
 
 %%Gear%%
@@ -506,26 +524,26 @@
 
 %%Weapons
 \renewcommand\do[1]{%
-	\expandafter\newcommand\csname charWeapon#1Name\endcsname{}%
-	\expandafter\newcommand\csname charWeapon#1AttackBonus\endcsname{}%
+	\expandafter\newcommand\csname CharWeapon#1Name\endcsname{}%
+	\expandafter\newcommand\csname CharWeapon#1AttackBonus\endcsname{}%
 	\NewCounter{CharWeapon#1MiscCount}%
-	\expandafter\newcommand\csname charWeapon#1Damage\endcsname{}%
-	\expandafter\newcommand\csname charWeapon#1Critical\endcsname{}%
-	\expandafter\newcommand\csname charWeapon#1Type\endcsname{}%
-	\expandafter\newcommand\csname charWeapon#1Range\endcsname{}%
-	\expandafter\newcommand\csname charWeapon#1Notes\endcsname{}%
-	\expandafter\newcommand\csname addWeapon#1\endcsname[7]{%
-		\expandafter\renewcommand\csname charWeapon#1Name\endcsname{##1}
-		\expandafter\renewcommand\csname charWeapon#1AttackBonus\endcsname{##2}
-		\expandafter\renewcommand\csname charWeapon#1Damage\endcsname{##3}
-		\expandafter\renewcommand\csname charWeapon#1Critical\endcsname{##4}
-		\expandafter\renewcommand\csname charWeapon#1Type\endcsname{##5}
-		\expandafter\renewcommand\csname charWeapon#1Range\endcsname{##6}
-		\expandafter\renewcommand\csname charWeapon#1Notes\endcsname{##7}
+	\expandafter\newcommand\csname CharWeapon#1Damage\endcsname{}%
+	\expandafter\newcommand\csname CharWeapon#1Critical\endcsname{}%
+	\expandafter\newcommand\csname CharWeapon#1Type\endcsname{}%
+	\expandafter\newcommand\csname CharWeapon#1Range\endcsname{}%
+	\expandafter\newcommand\csname CharWeapon#1Notes\endcsname{}%
+	\expandafter\newcommand\csname AddWeapon#1\endcsname[7]{%
+		\expandafter\renewcommand\csname CharWeapon#1Name\endcsname{##1}
+		\expandafter\renewcommand\csname CharWeapon#1AttackBonus\endcsname{##2}
+		\expandafter\renewcommand\csname CharWeapon#1Damage\endcsname{##3}
+		\expandafter\renewcommand\csname CharWeapon#1Critical\endcsname{##4}
+		\expandafter\renewcommand\csname CharWeapon#1Type\endcsname{##5}
+		\expandafter\renewcommand\csname CharWeapon#1Range\endcsname{##6}
+		\expandafter\renewcommand\csname CharWeapon#1Notes\endcsname{##7}
 	}
-	\expandafter\newcommand\csname addAutoWeapon#1\endcsname[9][0]{%[##1=Extra attacks]{##2=Name}{##3=attack bonus modifier}{##4=damage}{##5=crit}{##6=Damage type}{##7=Melee or Ranged}{##8=Notes}{##9=Ability score to use for attack bonus}
-		\expandafter\renewcommand\csname charWeapon#1Name\endcsname{##2}
-		\expandafter\renewcommand\csname charWeapon#1AttackBonus\endcsname{%
+	\expandafter\newcommand\csname AddAutoWeapon#1\endcsname[9][0]{%[##1=Extra attacks]{##2=Name}{##3=attack bonus modifier}{##4=damage}{##5=crit}{##6=Damage type}{##7=Melee or Ranged}{##8=Notes}{##9=Ability score to use for attack bonus}
+		\expandafter\renewcommand\csname CharWeapon#1Name\endcsname{##2}
+		\expandafter\renewcommand\csname CharWeapon#1AttackBonus\endcsname{%
 			\ifthenelse{\equal{\lowercase{##7}}{\lowercase{Melee}}}{%
 				\AddDebug{Weapon #1 is a Melee Weapon}
 				\SetCounter{CharIteratedAttackBonusCount}{%
@@ -559,11 +577,11 @@
 				\SetCounter{CharIteratedAttackBonusCount}{\value{CharIteratedAttackBonusCount}-5}%
 			}%
 		}%
-		\expandafter\renewcommand\csname charWeapon#1Damage\endcsname{##4}%
-		\expandafter\renewcommand\csname charWeapon#1Critical\endcsname{##5}%
-		\expandafter\renewcommand\csname charWeapon#1Type\endcsname{##6}
-		\expandafter\renewcommand\csname charWeapon#1Range\endcsname{##7}
-		\expandafter\renewcommand\csname charWeapon#1Notes\endcsname{##8}
+		\expandafter\renewcommand\csname CharWeapon#1Damage\endcsname{##4}%
+		\expandafter\renewcommand\csname CharWeapon#1Critical\endcsname{##5}%
+		\expandafter\renewcommand\csname CharWeapon#1Type\endcsname{##6}
+		\expandafter\renewcommand\csname CharWeapon#1Range\endcsname{##7}
+		\expandafter\renewcommand\csname CharWeapon#1Notes\endcsname{##8}
 	}
 }
 \docsvlist{One,Two,Three}	
@@ -648,7 +666,7 @@
 	\expandafter\newcommand\csname ItemInSlot#1Name\endcsname{}
 	\expandafter\newcommand\csname ItemInSlot#1Description\endcsname{}
 	\expandafter\newlength\csname ItemInSlot#1Weight\endcsname
-	\expandafter\newcommand \csname add#1Item\endcsname[3]{
+	\expandafter\newcommand \csname Add#1Item\endcsname[3]{
 		\expandafter\renewcommand\csname ItemInSlot#1Name\endcsname{\itshape ##1}
 		\expandafter\renewcommand\csname ItemInSlot#1Description\endcsname{##2}
 		\SetLength{\csname ItemInSlot#1Weight\endcsname}{##3pt}
@@ -665,24 +683,24 @@
 	\NewCounter{Char#1Count}
 	\NewCounter{Char#1WeightlessCount}
 	\NewCounter{Char#1StoredCount}
-	\expandafter\newcommand\csname addStored#1\endcsname[1]{\AddToCounter{Char#1StoredCount}{##1}}
-	\expandafter\NewDocumentCommand\csname add#1\endcsname{s m}{
+	\expandafter\newcommand\csname AddStored#1\endcsname[1]{\AddToCounter{Char#1StoredCount}{##1}}
+	\expandafter\NewDocumentCommand\csname Add#1\endcsname{s m}{
 		\IfBooleanTF ##1 {\AddToCounter{Char#1WeightlessCount}{##2}} {\AddToCounter{Char#1Count}{##2}}
 	}
 }\docsvlist{Platinum, Gold, Silver, Copper}
 
 
 
-%\expandafter\newcommand\csname addPlatinum\endcsname{\@ifstar\@@addPlatinum\@addPlatinum}
+%\expandafter\newcommand\csname AddPlatinum\endcsname{\@ifstar\@@addPlatinum\@addPlatinum}
 %\expandafter\newcommand\csname @addPlatinum\endcsname[1]{\AddToCounter{CharPlatinumCount}{#1}}
 %\expandafter\newcommand\csname @@addPlatinum\endcsname[1]{\AddToCounter{CharPlatinumWeightlessCount}{#1}}
-%\expandafter\newcommand\csname addGold\endcsname{\@ifstar\@@addGold\@addGold}
+%\expandafter\newcommand\csname AddGold\endcsname{\@ifstar\@@addGold\@addGold}
 %\expandafter\newcommand\csname @addGold\endcsname[1]{\AddToCounter{CharGoldCount}{#1}}
 %\expandafter\newcommand\csname @@addGold\endcsname[1]{\AddToCounter{CharGoldWeightlessCount}{#1}}
-%\expandafter\newcommand\csname addSilver\endcsname{\@ifstar\@@addSilver\@addSilver}
+%\expandafter\newcommand\csname AddSilver\endcsname{\@ifstar\@@addSilver\@addSilver}
 %\expandafter\newcommand\csname @addSilver\endcsname[1]{\AddToCounter{CharSilverCount}{#1}}
 %\expandafter\newcommand\csname @@addSilver\endcsname[1]{\AddToCounter{CharSilverWeightlessCount}{#1}}
-%\expandafter\newcommand\csname addCopper\endcsname{\@ifstar\@@addCopper\@addCopper}
+%\expandafter\newcommand\csname AddCopper\endcsname{\@ifstar\@@addCopper\@addCopper}
 %\expandafter\newcommand\csname @addCopper\endcsname[1]{\AddToCounter{CharCopperCount}{#1}}
 %\expandafter\newcommand\csname @@addCopper\endcsname[1]{\AddToCounter{CharCopperWeightlessCount}{#1}}
 
@@ -1022,16 +1040,16 @@
 
 
 \renewcommand{\do}[1]{
-	\expandafter\edef\csname charCantripsList#1\endcsname{}
-	\expandafter\edef\csname charFirstSpellsList#1\endcsname{}
-	\expandafter\edef\csname charSecondSpellsList#1\endcsname{}
-	\expandafter\edef\csname charThirdSpellsList#1\endcsname{}
-	\expandafter\edef\csname charFourthSpellsList#1\endcsname{}
-	\expandafter\edef\csname charFifthSpellsList#1\endcsname{}
-	\expandafter\edef\csname charSixthSpellsList#1\endcsname{}
-	\expandafter\edef\csname charSeventhSpellsList#1\endcsname{}
-	\expandafter\edef\csname charEighthSpellsList#1\endcsname{}
-	\expandafter\edef\csname charNinthSpellsList#1\endcsname{}
+	\expandafter\edef\csname CharCantripsList#1\endcsname{}
+	\expandafter\edef\csname CharFirstSpellsList#1\endcsname{}
+	\expandafter\edef\csname CharSecondSpellsList#1\endcsname{}
+	\expandafter\edef\csname CharThirdSpellsList#1\endcsname{}
+	\expandafter\edef\csname CharFourthSpellsList#1\endcsname{}
+	\expandafter\edef\csname CharFifthSpellsList#1\endcsname{}
+	\expandafter\edef\csname CharSixthSpellsList#1\endcsname{}
+	\expandafter\edef\csname CharSeventhSpellsList#1\endcsname{}
+	\expandafter\edef\csname CharEighthSpellsList#1\endcsname{}
+	\expandafter\edef\csname CharNinthSpellsList#1\endcsname{}
 }\docsvlist{One,Two}
 
 
@@ -1412,18 +1430,18 @@
 }
 
 \renewcommand{\do}[1]{
-	\expandafter\newcommand\csname charSpellcastingClass#1\endcsname{}
-	\expandafter\newcommand\csname charSpellcastingClass#1Ability\endcsname{}
+	\expandafter\newcommand\csname CharSpellcastingClass#1\endcsname{}
+	\expandafter\newcommand\csname CharSpellcastingClass#1Ability\endcsname{}
 	\NewCounter{CharCL#1Count}
 	\NewCounter{CharSpellcastingClass#1MaxSpellLevelCount}
 	\SetCounter{CharSpellcastingClass#1MaxSpellLevelCount}{-1}
 	\NewCounter{CharSpellcasting#1HasCantrips}
 	\SetCounter{CharSpellcasting#1HasCantrips}{0}
-	\expandafter\NewDocumentCommand\csname newSpellcasting#1\endcsname{s O{9} m m m}{
+	\expandafter\NewDocumentCommand\csname NewSpellcasting#1\endcsname{s O{9} m m m}{
 		\IfBooleanTF ##1 {} {\SetCounter{CharSpellcasting#1HasCantrips}{1}}
 		\SetCounter{CharSpellcastingClass#1MaxSpellLevelCount}{##2}
-		\expandafter\renewcommand\csname charSpellcastingClass#1\endcsname{##3}
-		\expandafter\renewcommand\csname charSpellcastingClass#1Ability\endcsname{##5}
+		\expandafter\renewcommand\csname CharSpellcastingClass#1\endcsname{##3}
+		\expandafter\renewcommand\csname CharSpellcastingClass#1Ability\endcsname{##5}
 		\SetCounter{CharCL#1Count}{##4}
 	}
 }\docsvlist{One,Two}
@@ -1534,17 +1552,17 @@
 
 %Magic Specializations
 \renewcommand{\do}[1]{
-	\expandafter\newcommand\csname charSpellcastingOneSpecialization#1\endcsname{}
-	\expandafter\newcommand\csname charSpellcastingOneSpecialization#1Type\endcsname{Specialization}
-	\expandafter\newcommand\csname addSpellcastingOneSpecialization#1\endcsname[2][Specialization]{
-		\expandafter\renewcommand\csname charSpellcastingOneSpecialization#1Type\endcsname{##1}
-		\expandafter\renewcommand\csname charSpellcastingOneSpecialization#1\endcsname{##2}
+	\expandafter\newcommand\csname CharSpellcastingOneSpecialization#1\endcsname{}
+	\expandafter\newcommand\csname CharSpellcastingOneSpecialization#1Type\endcsname{Specialization}
+	\expandafter\newcommand\csname AddSpellcastingOneSpecialization#1\endcsname[2][Specialization]{
+		\expandafter\renewcommand\csname CharSpellcastingOneSpecialization#1Type\endcsname{##1}
+		\expandafter\renewcommand\csname CharSpellcastingOneSpecialization#1\endcsname{##2}
 	}
-	\expandafter\newcommand\csname charSpellcastingTwoSpecialization#1\endcsname{}
-	\expandafter\newcommand\csname charSpellcastingTwoSpecialization#1Type\endcsname{Specialization}
-	\expandafter\newcommand\csname addSpellcastingTwoSpecialization#1\endcsname[2][Specialization]{
-		\expandafter\renewcommand\csname charSpellcastingTwoSpecialization#1Type\endcsname{##1}
-		\expandafter\renewcommand\csname charSpellcastingTwoSpecialization#1\endcsname{##2}
+	\expandafter\newcommand\csname CharSpellcastingTwoSpecialization#1\endcsname{}
+	\expandafter\newcommand\csname CharSpellcastingTwoSpecialization#1Type\endcsname{Specialization}
+	\expandafter\newcommand\csname AddSpellcastingTwoSpecialization#1\endcsname[2][Specialization]{
+		\expandafter\renewcommand\csname CharSpellcastingTwoSpecialization#1Type\endcsname{##1}
+		\expandafter\renewcommand\csname CharSpellcastingTwoSpecialization#1\endcsname{##2}
 	}
 }\docsvlist{One, Two}
 \newcommand\AddSpellcastingOneSpecialization[2][Specialization]{
@@ -1564,17 +1582,17 @@
 
 
 \renewcommand{\do}[1]{
-	\expandafter\newcommand\csname charSpellcastingOneProhibition#1\endcsname{}
-	\expandafter\newcommand\csname charSpellcastingOneProhibition#1Type\endcsname{Prohibition}
-	\expandafter\newcommand\csname addSpellcastingOneProhibition#1\endcsname[2][Prohibition]{
-		\expandafter\renewcommand\csname charSpellcastingOneProhibition#1Type\endcsname{##1}
-		\expandafter\renewcommand\csname charSpellcastingOneProhibition#1\endcsname{##2}
+	\expandafter\newcommand\csname CharSpellcastingOneProhibition#1\endcsname{}
+	\expandafter\newcommand\csname CharSpellcastingOneProhibition#1Type\endcsname{Prohibition}
+	\expandafter\newcommand\csname AddSpellcastingOneProhibition#1\endcsname[2][Prohibition]{
+		\expandafter\renewcommand\csname CharSpellcastingOneProhibition#1Type\endcsname{##1}
+		\expandafter\renewcommand\csname CharSpellcastingOneProhibition#1\endcsname{##2}
 	}
-	\expandafter\newcommand\csname charSpellcastingTwoProhibition#1\endcsname{}
-	\expandafter\newcommand\csname charSpellcastingTwoProhibition#1Type\endcsname{Prohibition}
-	\expandafter\newcommand\csname addSpellcastingTwoProhibition#1\endcsname[2][Prohibition]{
-		\expandafter\renewcommand\csname charSpellcastingTwoProhibition#1Type\endcsname{##1}
-		\expandafter\renewcommand\csname charSpellcastingTwoProhibition#1\endcsname{##2}
+	\expandafter\newcommand\csname CharSpellcastingTwoProhibition#1\endcsname{}
+	\expandafter\newcommand\csname CharSpellcastingTwoProhibition#1Type\endcsname{Prohibition}
+	\expandafter\newcommand\csname AddSpellcastingTwoProhibition#1\endcsname[2][Prohibition]{
+		\expandafter\renewcommand\csname CharSpellcastingTwoProhibition#1Type\endcsname{##1}
+		\expandafter\renewcommand\csname CharSpellcastingTwoProhibition#1\endcsname{##2}
 	}
 }\docsvlist{One, Two, Three}
 \newcommand\AddSpellcastingOneProhibition[2][Prohibition]{
@@ -1596,9 +1614,9 @@
 }
 %Spellcasting Notes
 \renewcommand{\do}[1]{
-	\expandafter\edef\csname charSpellcasting#1NotesList\endcsname{}
-	\expandafter\newcommand\csname addSpellcasting#1Note\endcsname[1]{
-		\expandafter\listadd\csname charSpellcasting#1NotesList\endcsname{##1}
+	\expandafter\edef\csname CharSpellcasting#1NotesList\endcsname{}
+	\expandafter\newcommand\csname AddSpellcasting#1Note\endcsname[1]{
+		\expandafter\listadd\csname CharSpellcasting#1NotesList\endcsname{##1}
 	}
 }\docsvlist{One,Two}
 
