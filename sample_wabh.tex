@@ -1,14 +1,4 @@
-\documentclass[twoside]{rpgcharsheet2}
-\usepackage{Systems/DnD3-5/SystemDnD3-5}
-\usepackage{Systems/WABH/WABH-houserules}
-\usepackage{longtable}
-\usepackage{multicol}
-\begin{document}
-		\renewcommand{\datafolder}{Systems/WABH/Data/}
-		\SetCounter{XP-Mode}{1} % Boolean, automatically calculates next-level XP
-		\SetCounter{HP-Mode}{1} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
-		\SetCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive skill point increases.
-		\SetCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of feats
+\input{Sheets/WABH_Header.tex}
 %\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
 %}
 
@@ -104,5 +94,5 @@
 % %Wrists
 %\AddWristsItem{}{}{}
 
-\input{Sheets/WABH_Sheet.tex}
-\end{document}
+
+\OutputSheet
