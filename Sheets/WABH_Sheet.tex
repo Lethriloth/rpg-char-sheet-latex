@@ -533,7 +533,7 @@
 	\renewcommand*{\do}[1]{%
 	\csname #1\endcsname
 	}
-	\Setlength{\tabcolsep}{.1cm}%
+	\SetLength{\tabcolsep}{.1cm}%
 	\centering%
 	\begin{longtable}{@{}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|p{6cm}|>{\centering}p{2cm}|>{\centering}p{2.6cm}|>{\centering}p{1.6cm}|>{\centering}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|@{}}
 	\hline
@@ -636,7 +636,7 @@
 	\renewcommand*{\do}[1]{%
 	\csname #1\endcsname
 	}
-	\Setlength{\tabcolsep}{.1cm}%
+	\SetLength{\tabcolsep}{.1cm}%
 	\centering%
 	\begin{longtable}{@{}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|p{6cm}|>{\centering}p{2cm}|>{\centering}p{2.6cm}|>{\centering}p{1.6cm}|>{\centering}p{1.5cm}|>{\centering\arraybackslash}p{1.3cm}|@{}}
 	\hline
@@ -662,11 +662,11 @@
 }
 
 \newlength{\currentparindent}
-\Setlength{\currentparindent}{\parindent}
+\SetLength{\currentparindent}{\parindent}
 \renewcommand{\do}[1]{
 \noindent
 \begin{minipage}{\columnwidth}
-\Setlength{\parindent}{\currentparindent}
+\SetLength{\parindent}{\currentparindent}
 \expandafter\csname Spell#1header\endcsname
 \end{minipage}
 
