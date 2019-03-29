@@ -197,3 +197,15 @@
 	\AddGearItem{Shield}{#8}
 	\renewcommand{\CharShieldNotes}{#9}
 }
+
+
+%%Renames Currencies
+\renewcommand{\do}[1]{
+	\NewCounter{Char#1Count}
+	\NewCounter{Char#1WeightlessCount}
+	\NewCounter{Char#1StoredCount}
+	\expandafter\newcommand\csname AddStored#1\endcsname[1]{\AddToCounter{Char#1StoredCount}{##1}}
+	\expandafter\NewDocumentCommand\csname Add#1\endcsname{s m}{
+		\IfBooleanTF ##1 {\AddToCounter{Char#1WeightlessCount}{##2}} {\AddToCounter{Char#1Count}{##2}}
+	}
+}\docsvlist{Skulls, Crowns, Coin, Bits}
