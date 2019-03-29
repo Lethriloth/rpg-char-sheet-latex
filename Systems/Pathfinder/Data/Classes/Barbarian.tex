@@ -1,0 +1,61 @@
+\def\BarbarianBAB{g}
+\def\BarbarianFort{g}
+\def\BarbarianRef{p}
+\def\BarbarianWill{p}
+\NewCounter{BarbarianSkillRanksPerLevelCount}
+\SetCounter{BarbarianSkillRanksPerLevelCount}{4}
+\NewCounter{BarbarianHitDieSize}
+\SetCounter{BarbarianHitDieSize}{12}
+\edef\BarbarianClassSkillsList{}
+\forcsvlist{\listadd{\BarbarianClassSkillsList}}{Acrobatics, Climb, Craft, HandleAnimal, Intimidate, KnowledgeNature, Perception, Ride, Survival, Swim}
+\newcommand{\AddBarbarianClassFeatures}[1]{
+		\AddClassFeature{Fast Movement}\AddToCounter{CharBaseSpeedCount}{10}
+		\AddClassFeature{\ifthenelse{#1 > 10}{\ifthenelse{#1 > 19}{Mighty }{Greater }}{} Rage}
+			\AddLimitedUse{Rage (rounds)}{\DoMath{#1 * 2 + 2 +\value{CharConModCount} + \value{CharRageRoundsCount}}}
+			\NewCounter{CharRageRoundsCount}
+			\newcommand{\IWouldLikeToRage}{
+				\tmpBonus{AC}{-2}
+				\ifthenelse{#1 > 10}{\ifthenelse{#1 > 19}{
+					\tmpBonus{Con}{8}\tmpBonus{str}{8}\tmpBonus[morale]{Will}{4} %Mighty Rage
+					\AddToCounter{CharRageRoundsCount}{-4}
+				}{
+					\tmpBonus{Con}{6}\tmpBonus{str}{6}\tmpBonus[morale]{Will}{3} %Greater Rage
+					\AddToCounter{CharRageRoundsCount}{-3}
+				}}{
+					\tmpBonus{Con}{4}\tmpBonus{str}{4}\tmpBonus[morale]{Will}{2} %Rage
+					\AddToCounter{CharRageRoundsCount}{-2}
+				}
+				\ifthenelse{#1 > 13}{
+					\AddConditionalDefMod{+4 vs. EnChantments}
+				}{}
+			}
+	\ifthenelse{#1 > 1}{
+		\AddClassFeature{\ifthenelse{#1 > 4}{Improved }{}Uncanny Dodge}
+			\ifthenelse{#1 > 4}{\AddSpecialDefense{Improved Uncanny Dodge}}{\AddSpecialDefense{Uncanny Dodge}}
+		\edef\CharRagePowersList{}
+		\NewCounter{CharRagePowersCount}
+		\AddToCounter{CharRagePowersCount}{#1 / 2}
+		\AddClassFeature{Rage Powers:\forlistloop{\\~~~~}{\CharRagePowersList}}
+		\NewDocumentCommand{\AddRagePower}{m}{
+			\listinsert{\CharRagePowersList}{##1}
+			\AddToCounter{CharRagePowersCount}{-1}
+		}
+		\gappto{\RunChecks}{%
+			%%CHECK RAGE POWERS
+			\ifthenelse{\value{CharRagePowersCount} < 0}{
+				\AddWarning{\DoMath{-\value{CharRagePowersCount}} too many rage powers}
+			}{
+			\ifthenelse{\value{CharRagePowersCount} > 0}{
+				\AddWarning{Choose \arabic{CharRagePowersCount} more rage powers}
+			}{}}
+		}
+	\ifthenelse{#1 > 2}{
+		\AddClassFeature{Trap Sense +\DoMath{#1 / 3}}\AddConditionalDefMod{+\DoMath{#1 / 3} vs. traps}
+	\ifthenelse{#1 > 6}{
+		\AddClassFeature{Damage Reduction}\DoMath*{(#1 - 4) / 3}\AddDR{--}{\value{@DoMathCounter}}
+	\ifthenelse{#1 > 13}{
+		\AddClassFeature{Indomitable Will}
+	\ifthenelse{#1 > 16}{
+		\AddClassFeature{Tireless Rage}
+	}{}}{}}{}}{}}{}
+}

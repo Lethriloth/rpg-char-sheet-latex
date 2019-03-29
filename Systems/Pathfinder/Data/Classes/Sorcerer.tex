@@ -1,0 +1,115 @@
+\def\SorcererBAB{p}
+\def\SorcererFort{p}
+\def\SorcererRef{p}
+\def\SorcererWill{g}
+\NewCounter{SorcererSkillRanksPerLevelCount}
+\SetCounter{SorcererSkillRanksPerLevelCount}{2}
+\NewCounter{SorcererHitDieSize}
+\SetCounter{SorcererHitDieSize}{6}
+\edef\SorcererClassSkillsList{}
+\forcsvlist{\listadd{\SorcererClassSkillsList}}{Appraise, Bluff, Craft, Fly, Intimidate, KnowledgeArcana, Profession, Spellcraft, UseMagicDevice}
+\newcommand{\AddSorcererClassFeatures}[1]{
+	\edef\CharSorcererBloodlinePowersList{}
+	\newcommand\CharSorcererBloodline{}
+	\AddClassFeature{\CharSorcererBloodline BloodlineArcana}
+	\AddClassFeature{\CharSorcererBloodline Bloodline Powers:\forlistloop{\\~~~~}{\CharSorcererBloodlinePowersList}}
+		\NewCounter{CharSorcererBloodlinePowersCount}
+		\newcommand{\AddSorcererBloodline}[1]{\renewcommand{\CharSorcererBloodline}{##1}}
+		\appto{\RunChecks}{%
+			%%Check Sorcerer Bloodline
+			\ifthenelse{\equal{\CharSorcererBloodline}{}}{
+				\AddWarning{Choose a Sorcerer bloodline. Use the command \texttt{$\backslash$addSorcererBloodline\{bloodline\}}}
+			}{}
+		}
+		\StepCounter{CharSorcererBloodlinePowersCount}
+		\NewDocumentCommand{\AddBloodlinePower}{m}{
+			\listinsert{\CharSorcererBloodlinePowersList}{##1}
+			\AddToCounter{CharSorcererBloodlinePowersCount}{-1}
+		}
+		\gappto{\RunChecks}{%
+			%%CHECK BLOODLINE POWERS
+			\ifthenelse{\value{CharSorcererBloodlinePowersCount} < 0}{
+				\AddWarning{\DoMath{-\value{CharSorcererBloodlinePowersCount}} too many bloodline powers input}
+			}{
+			\ifthenelse{\value{CharSorcererBloodlinePowersCount} > 0}{
+				\AddWarning{Input \arabic{CharSorcererBloodlinePowersCount} bloodline powers}
+			}{}}
+		}
+	\StepCounter{CharBonusFeatsCount}\AddFeat*{Eschew Materials}
+	\newcommand{\AddBloodlineSpells}{}
+	\ifthenelse{#1 > 2}{
+		\StepCounter{CharSorcererBloodlinePowersCount}
+		\AddClassFeature{Bloodline Spell\ifthenelse{#1 > 4}{ $\times \DoMath{(#1 - 1) / 2}$}{}}
+			\appto{\AddBloodlineSpells}{
+				\AddSpellsKnown{1}{1}
+			}
+	\ifthenelse{#1 > 4}{
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{2}{1}
+		}
+	\ifthenelse{#1 > 6}{
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{3}{1}
+		}
+		\AddClassFeature{Bloodline Feat\ifthenelse{#1 > 12}{ $\times \DoMath{(#1 - 1) / 6}$}{}}
+			\AddToCounter{CharBonusFeatsCount}{(#1 - 1) / 6}
+	\ifthenelse{#1 > 8}{
+		\StepCounter{CharSorcererBloodlinePowersCount}
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{4}{1}
+		}
+	\ifthenelse{#1 > 10}{
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{5}{1}
+		}
+	\ifthenelse{#1 > 12}{
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{6}{1}
+		}
+	\ifthenelse{#1 > 14}{
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{7}{1}
+		}
+		\StepCounter{CharSorcererBloodlinePowersCount}
+	\ifthenelse{#1 > 16}{
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{8}{1}
+		}
+	\ifthenelse{#1 > 18}{
+		\appto{\AddBloodlineSpells}{
+			\AddSpellsKnown{9}{1}
+		}
+	\ifthenelse{#1 > 19}{
+		\StepCounter{CharSorcererBloodlinePowersCount}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+	\newcommand{\AddSorcererSpellcasting}[1]{
+		\ifthenelse{##1 = 1}{
+			\newSpellcasting[1]{Sorcerer}{##1}{Cha}
+		}{
+			\newSpellcasting[##1 / 2]{Sorcerer}{##1}{Cha}
+		}
+		\AddSpontaneousPrimarySpellcasting{##1}
+		\ifthenelse{##1 > 9}{\AddSpellsKnown{0}{9}}{\AddSpellsKnown{0}{{##1/2 + 4}}}
+		\ifthenelse{##1 > 6}{\AddSpellsKnown{1}{5}}{\AddSpellsKnown{1}{##1/3 + 2}}
+		\ifthenelse{##1 > 10}{
+			\AddSpellsKnown{2}{5}
+			\AddSpellsKnown{3}{4}
+		}{
+			\AddSpellsKnown{2}{(##1 - 1)/2}
+			\AddSpellsKnown{3}{(##1 - 3)/2}
+		}
+		\ifthenelse{##1 > 12}{\AddSpellsKnown{4}{4}}{\AddSpellsKnown{4}{(##1 - 5)/2}}
+		\ifthenelse{##1 > 14}{
+			\AddSpellsKnown{5}{4}
+			\AddSpellsKnown{6}{3}
+		}{
+			\AddSpellsKnown{5}{(##1 - 7)/2}
+			\AddSpellsKnown{6}{(##1 - 9)/2}
+		}
+		\ifthenelse{##1 > 16}{\AddSpellsKnown{7}{3}}{\AddSpellsKnown{7}{(##1 - 11)/2}}
+		\AddSpellsKnown{8}{(##1 - 13) / 2}
+		\AddSpellsKnown{9}{##1 - 17}
+		\AddBloodlineSpells
+	}
+	
+}

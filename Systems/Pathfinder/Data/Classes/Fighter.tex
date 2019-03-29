@@ -1,0 +1,63 @@
+\def\FighterBAB{g}
+\def\FighterFort{g}
+\def\FighterRef{p}
+\def\FighterWill{p}
+\NewCounter{FighterSkillRanksPerLevelCount}
+\SetCounter{FighterSkillRanksPerLevelCount}{2}
+\NewCounter{FighterHitDieSize}
+\SetCounter{FighterHitDieSize}{10}
+\edef\FighterClassSkillsList{}
+\forcsvlist{\listadd{\FighterClassSkillsList}}{Climb, Craft, HandleAnimal, Intimidate, KnowledgeDungeoneering, KnowledgeEngineering, Profession, Ride, Survival, Swim}
+\newcommand{\AddFighterClassFeatures}[1]{
+	\AddToCounter{CharBonusFeatsCount}{#1 / 2 +1}
+	\AddClassFeature{Fighter Bonus Feat\ifthenelse{#1 > 1}{ $\times\DoMath{#1 / 2 +1}$}{}}
+	\ifthenelse{#1 > 1}{
+		\AddClassFeature{Bravery +\DoMath{(#1 + 2) / 4}}
+			\AddConditionalDefMod{+\DoMath{(#1 + 2) / 4} vs. fear}
+	\ifthenelse{#1 > 2}{
+		\AddClassFeature{Armor Training +\DoMath{(#1 + 1) / 4} (\ifthenelse{#1 > 6}{Heavy}{Medium})}
+	\ifthenelse{#1 > 4}{
+		\AddClassFeature{Weapon Training}
+		\edef\CharFighterWeaponTrainingList{}
+		\NewCounter{CharWeaponTrainingBonusCount}
+		\NewCounter{CharWeaponTrainingCount}
+		\SetCounter{CharWeaponTrainingBonusCount}{(#1 - 1) / 4}
+		\SetCounter{CharWeaponTrainingCount}{(#1 - 1) / 4}
+		\newcommand{\AddFighterWeaponTraining}[1]{
+			\listadd{\CharFighterWeaponTrainingList}{#1}
+			\AddToCounter{CharWeaponTrainingCount}{-1}
+		}
+		\renewcommand{\do}[1]{
+			\\~~~~##1 (+\arabic{CharWeaponTrainingBonusCount})%
+			\AddToCounter{CharWeaponTrainingBonusCount}{-1}
+		}
+		\dolistloop{\CharFighterWeaponTrainingList}
+		\gappto{\RunChecks}{%
+			%%CHECK FIGHTER WEAPON TRAINING
+			\ifthenelse{\value{CharWeaponTrainingCount} < 0}{
+				\AddWarning{\DoMath{-\value{CharWeaponTrainingCount}} too many weapon groups for Fighter weapon training}
+			}{
+			\ifthenelse{\value{CharWeaponTrainingCount} > 0}{
+				\AddWarning{Choose \arabic{CharWeaponTrainingCount} more weapon groups for Fighter weapon training}
+			}{}}
+		}
+	\ifthenelse{#1 > 18}{
+		\AddClassFeature{Armor Mastery}
+		\preto{\Initialize}{
+			\ifthenelse{\equal{\CharArmorName}{}}{}{\AddDR{--}{5}}
+			\ifthenelse{\equal{\CharShieldName}{}}{}{\AddDR{--}{5}}
+		}
+	\ifthenelse{#1 > 19}{
+		\AddClassFeature{Weapon Mastery \CharFighterWeaponMastery}
+		\newcommand{\CharFighterWeaponMastery}{}
+		\newcommand{\AddFighterWeaponMastery}[1]{
+			\renewcommand{\CharFighterWeaponMastery}{##1}
+		}
+		\gappto{\RunChecks}{%
+			%%Check Fighter Weapon Mastery
+			\ifthenelse{\equal{\CharFighterWeaponMastery}{}}{
+				\AddWarning{Choose a weapon for Fighter weapon mastery. Use the command \texttt{$\backslash$addFighterWeaponMastery\{weapon\}}}
+			}{}
+		}
+	}{}}{}}{}}{}}{}
+}

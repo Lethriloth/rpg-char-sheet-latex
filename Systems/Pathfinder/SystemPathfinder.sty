@@ -292,6 +292,7 @@
 	}
 }
 
+\newcommand{\datafolder}{.}
 %% Class Importing %%
 \NewCounter{CharTotalLevelCount}
 \SetCounter{CharTotalLevelCount}{0}
@@ -299,6 +300,7 @@
 \NewCounter{HP-Mode}
 \edef\CharClassesList{}
 \NewDocumentCommand{\ImportCharClass}{s O{} m O{} m}{
+	\input{\datafolder/Classes/#3.tex}
 	\AddDebug{IMPORTCHARCLASS: add #5 Levels of #4 #3}
 	\ifthenelse{\equal{#4}{}}{}{\appto\CharLevel{\capitalize{#4} }}
 	\ifthenelse{\equal{#2}{}}{
@@ -1179,6 +1181,235 @@
 		\IfBooleanTF #1 {\newSpellcastingTwo*[#2]{#3}{#4}{#5}} {\newSpellcastingTwo[#2]{#3}{#4}{#5}}
 	}
 }
+
+\newcommand{\AddPrimarySpellcasting}[1]{
+	\AddSpellslots{0}{3}
+	\AddSpellslots{1}{1}
+	\ifthenelse{#1 > 1}{
+		\AddSpellslots{0}{1}
+		\AddSpellslots{1}{1}
+		\ifthenelse{#1 > 2}{
+			\AddSpellslots{2}{1}
+			\ifthenelse{#1 > 3}{
+				\AddSpellslots{0}{1}
+				\AddSpellslots{1}{1}
+				\AddSpellslots{2}{1}
+				\ifthenelse{#1 > 4}{
+					\AddSpellslots{3}{1}
+					\ifthenelse{#1 > 5}{
+						\AddSpellslots{2}{1}
+						\AddSpellslots{3}{1}
+						\ifthenelse{#1 > 6}{
+							\AddSpellslots{4}{1}
+							\AddSpellslots{0}{1}
+							\AddSpellslots{1}{1}
+							\ifthenelse{#1 > 7}{
+								\AddSpellslots{3}{1}
+								\AddSpellslots{4}{1}
+								\ifthenelse{#1 > 8}{
+									\AddSpellslots{5}{1}
+									\AddSpellslots{2}{1}
+									\ifthenelse{#1 > 9}{
+										\AddSpellslots{4}{1}
+										\AddSpellslots{5}{1}	
+										\ifthenelse{#1 > 10}{
+											\AddSpellslots{6}{1}
+											\AddSpellslots{3}{1}
+											\AddSpellslots{1}{1}
+											\ifthenelse{#1 > 11}{
+												\AddSpellslots{5}{1}
+												\AddSpellslots{6}{1}
+												\ifthenelse{#1 > 12}{
+													\AddSpellslots{7}{1}
+													\AddSpellslots{4}{1}
+													\AddSpellslots{2}{1}
+													\ifthenelse{#1 > 13}{
+														\AddSpellslots{6}{1}
+														\AddSpellslots{7}{1}
+														\ifthenelse{#1 > 14}{
+															\AddSpellslots{8}{1}
+															\AddSpellslots{5}{1}
+															\AddSpellslots{3}{1}
+															\ifthenelse{#1 > 15}{
+																\AddSpellslots{7}{1}
+																\AddSpellslots{8}{1}
+																\ifthenelse{#1 > 16}{
+																	\AddSpellslots{9}{1}
+																	\AddSpellslots{6}{1}
+																	\AddSpellslots{4}{1}
+																	\ifthenelse{#1 > 17}{
+																		\AddSpellslots{8}{1}
+																		\AddSpellslots{9}{1}
+																		\ifthenelse{#1 > 18}{
+																			\AddSpellslots{7}{1}
+																			\AddSpellslots{9}{1}
+																			\AddSpellslots{5}{1}
+																			\ifthenelse{#1 > 19}{
+																				\AddSpellslots{8}{1}
+																				\AddSpellslots{9}{1}
+																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}
+\newcommand{\AddSpontaneousPrimarySpellcasting}[1]{
+	\AddSpellslots{0}{5}
+	\AddSpellslots{1}{3}
+	\ifthenelse{#1 > 1}{
+		\AddSpellslots{0}{1}
+		\AddSpellslots{1}{1}
+		\ifthenelse{#1 > 2}{
+			\AddSpellslots{1}{1}
+			\ifthenelse{#1 > 3}{
+				\AddSpellslots{1}{1}
+				\AddSpellslots{2}{3}
+				\ifthenelse{#1 > 4}{
+					\AddSpellslots{2}{1}
+					\ifthenelse{#1 > 5}{
+						\AddSpellslots{2}{1}
+						\AddSpellslots{3}{3}
+						\ifthenelse{#1 > 6}{
+							\AddSpellslots{2}{1}
+							\AddSpellslots{3}{1}
+							\ifthenelse{#1 > 7}{
+								\AddSpellslots{3}{1}
+								\AddSpellslots{4}{3}
+								\ifthenelse{#1 > 8}{
+									\AddSpellslots{3}{1}
+									\AddSpellslots{4}{1}
+									\ifthenelse{#1 > 9}{
+										\AddSpellslots{4}{1}
+										\AddSpellslots{5}{3}	
+										\ifthenelse{#1 > 10}{
+											\AddSpellslots{4}{1}
+											\AddSpellslots{5}{1}
+											\ifthenelse{#1 > 11}{
+												\AddSpellslots{5}{1}
+												\AddSpellslots{6}{3}
+												\ifthenelse{#1 > 12}{
+													\AddSpellslots{5}{1}
+													\AddSpellslots{6}{1}
+													\ifthenelse{#1 > 13}{
+														\AddSpellslots{6}{1}
+														\AddSpellslots{7}{3}
+														\ifthenelse{#1 > 14}{
+															\AddSpellslots{6}{1}
+															\AddSpellslots{7}{1}
+															\ifthenelse{#1 > 15}{
+																\AddSpellslots{7}{1}
+																\AddSpellslots{8}{3}
+																\ifthenelse{#1 > 16}{
+																	\AddSpellslots{7}{1}
+																	\AddSpellslots{8}{1}
+																	\ifthenelse{#1 > 17}{
+																		\AddSpellslots{8}{1}
+																		\AddSpellslots{9}{3}
+																		\ifthenelse{#1 > 18}{
+																			\AddSpellslots{8}{1}
+																			\AddSpellslots{9}{1}
+																			\ifthenelse{#1 > 19}{
+																				\AddSpellslots{9}{2}
+																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+	
+}
+\newcommand{\AddTwoThirdsSpellcasing}[1]{
+	\AddSpellslots{0}{2}
+	\AddSpellsKnown{0}{4}
+	\ifthenelse{#1 > 1}{
+		\AddSpellslots{0}{1}
+		\AddSpellsKnown{0}{1}
+		\AddSpellsKnown{1}{2}
+		\ifthenelse{#1 > 2}{
+			\AddSpellslots{1}{1}
+			\AddSpellsKnown{0}{1}
+			\AddSpellsKnown{1}{1}
+			\ifthenelse{#1 > 3}{
+				\AddSpellslots{1}{1}
+				\AddSpellsKnown{2}{2}
+				\ifthenelse{#1 > 4}{
+					\AddSpellslots{1}{1}
+					\AddSpellslots{2}{1}
+					\AddSpellsKnown{1}{1}
+					\AddSpellsKnown{2}{1}
+					\ifthenelse{#1 > 5}{
+						\AddSpellslots{2}{1}
+						\ifthenelse{#1 > 6}{
+							\AddSpellsKnown{2}{1}
+							\AddSpellsKnown{3}{2}
+							\ifthenelse{#1 > 7}{
+								\AddSpellslots{2}{1}
+								\AddSpellslots{3}{1}
+								\AddSpellsKnown{3}{1}
+								\ifthenelse{#1 > 8}{
+									\AddSpellslots{3}{1}
+									\ifthenelse{#1 > 9}{
+										\AddSpellsKnown{3}{1}
+										\AddSpellsKnown{4}{2}
+										\ifthenelse{#1 > 10}{
+											\AddSpellslots{3}{1}
+											\AddSpellslots{4}{1}
+											\AddSpellsKnown{4}{1}
+											\ifthenelse{#1 > 11}{
+												\AddSpellslots{4}{1}
+												\ifthenelse{#1 > 12}{
+													\AddSpellsKnown{4}{1}
+													\AddSpellsKnown{5}{2}
+													\ifthenelse{#1 > 13}{
+														\AddSpellslots{0}{1}
+														\AddSpellslots{4}{1}
+														\AddSpellslots{5}{1}
+														\AddSpellsKnown{5}{1}
+														\ifthenelse{#1 > 14}{
+															\AddSpellslots{1}{1}
+															\AddSpellslots{5}{1}
+															\ifthenelse{#1 > 15}{
+																\AddSpellslots{2}{1}
+																\AddSpellsKnown{1}{1}
+																\AddSpellsKnown{5}{1}
+																\AddSpellsKnown{6}{2}
+																\ifthenelse{#1 > 16}{
+																	\AddSpellslots{3}{1}
+																	\AddSpellslots{5}{1}
+																	\AddSpellslots{6}{1}
+																	\AddSpellsKnown{2}{1}
+																	\AddSpellsKnown{6}{1}
+																	\ifthenelse{#1 > 17}{
+																		\AddSpellslots{4}{1}
+																		\AddSpellslots{6}{1}
+																		\AddSpellsKnown{3}{1}
+																		\ifthenelse{#1 > 18}{
+																			\AddSpellslots{5}{1}
+																			\AddSpellslots{6}{1}
+																			\AddSpellsKnown{4}{1}
+																			\AddSpellsKnown{6}{1}
+																			\ifthenelse{#1 > 19}{
+																				\AddSpellslots{6}{1}
+																				\AddSpellsKnown{5}{1}
+																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}
+\newcommand{\AddHalfSpellcasting}[1]{
+	\ifthenelse{#1 > 5}{
+		\AddSpellslots{1}{1}
+		\ifthenelse{#1 > 9}{
+			\AddSpellslots{2}{1}
+			\ifthenelse{#1 > 11}{
+				\AddSpellslots{3}{1}
+				\ifthenelse{#1 > 13}{
+					\AddSpellslots{1}{1}
+					\ifthenelse{#1 > 14}{
+						\AddSpellslots{4}{1}
+						\ifthenelse{#1 > 15}{
+							\AddSpellslots{2}{1}
+							\ifthenelse{#1 > 16}{
+								\AddSpellslots{3}{1}
+								\ifthenelse{#1 > 17}{
+									\AddSpellslots{1}{1}
+									\ifthenelse{#1 > 18}{
+										\AddSpellslots{2}{1}
+										\AddSpellslots{3}{1}
+										\AddSpellslots{4}{1}
+										\ifthenelse{#1 > 19}{
+											\AddSpellslots{4}{1}
+										}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}
+
 %Initialize Spellcasting variables
 \ForLoop{@i}{0}{\value{@i}<10}{
 	\NewCounter{CharAbilitySpellSlotsOne\arabic{@i}Count}

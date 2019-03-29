@@ -1,0 +1,82 @@
+\def\BardBAB{a}
+\def\BardFort{p}
+\def\BardRef{g}
+\def\BardWill{g}
+\NewCounter{BardSkillRanksPerLevelCount}
+\SetCounter{BardSkillRanksPerLevelCount}{6}
+\NewCounter{BardHitDieSize}
+\SetCounter{BardHitDieSize}{8}
+\edef\BardClassSkillsList{}
+\forcsvlist{\listadd{\BardClassSkillsList}}{Acrobatics, Appraise, Bluff, Climb, Craft, Diplomacy, Disguise, EscapeArtist, Intimidate, KnowledgeAll, Linguistics, Perception, Perform, Profession, SenseMotive, SleightOfHand, Spellcraft, Stealth, UseMagicDevice}
+\newcommand{\AddBardClassFeatures}[1]{
+	\edef\CharBardicPerformanceList{}
+	\AddClassFeature{Bardic Performance (save DC \DoMath{10 + #1 / 2 + \value{CharChaModCount}})\forlistloop{\\~~~~}{\CharBardicPerformanceList}}
+		\NewCounter{CharBardicPerformanceRoundsCount}
+		\AddLimitedUse{Bardic Performance (rounds)}{\DoMath{#1 * 2 + 2 + \value{CharChaModCount} + \value{CharBardicPerformanceRoundsCount}}}
+			\listadd{\CharBardicPerformanceList}{Countersong}
+			\listadd{\CharBardicPerformanceList}{Fascinate}
+			\listadd{\CharBardicPerformanceList}{Inspire Courage +\DoMath{(#1 + 1) / 6 + 1}}
+	\AddClassFeature{Bardic Knowledge}
+		\renewcommand{\do}[1]{
+			\MiscBonus{##1}{#1 / 2}
+		}\dolistloop{\KnowledgeSkillsList}
+		\AddConditionalSkillMod{Can make Knowledge checks untrained.}
+	\ifthenelse{#1 > 1}{
+		\edef\CharVersatilePerformancesList{}
+		\AddClassFeature{Versatile Performance\forlistloop{\\~~~~}{\CharVersatilePerformancesList}}
+			\NewCounter{CharVersatilePerformancesCount}
+			\SetCounter{CharVersatilePerformancesCount}{(#1 + 2) / 4}
+			\NewDocumentCommand{\AddVersatilePerformance}{m}{
+				\listinsert{\CharVersatilePerformancesList}{##1}
+				\AddToCounter{CharVersatilePerformancesCount}{-1}
+			}
+			\gappto{\RunChecks}{%
+				%%CHECK VERSATILE PERFORMANCES
+				\ifthenelse{\value{CharVersatilePerformancesCount} < 0}{
+					\AddWarning{\DoMath{-\value{CharVersatilePerformancesCount}} too many Versatile Performance Skills}
+				}{
+				\ifthenelse{\value{CharVersatilePerformancesCount} > 0}{
+					\AddWarning{Choose \arabic{CharVersatilePerformancesCount} more Versatile Performance Skills}
+				}{}}
+			}
+		\AddClassFeature{Well-Versed}
+			\AddConditionalDefMod{+4 vs. Bardic Performance, Sonic, Language-Dependent}
+	\ifthenelse{#1 > 2}{
+			\listadd{\CharBardicPerformanceList}{Inspire Competence +\DoMath{(#1 + 1) / 4 + 1}}
+	\ifthenelse{#1 > 4}{
+		\AddClassFeature{Lore Master}
+			\AddConditionalSkillMod{Can take 10 in any Knowledge Skill with ranks.}
+			\AddLimitedUse{Lore Master}{\DoMath{(#1 + 1)/6}}
+	\ifthenelse{#1 > 5}{
+		\listadd{\CharBardicPerformanceList}{\ifthenelse{#1 > 17}{Mass }{}Suggestion}
+	\ifthenelse{#1 > 7}{
+			\listadd{\CharBardicPerformanceList}{Dirge of Doom}
+	\ifthenelse{#1 > 8}{
+		\listadd{\CharBardicPerformanceList}{Inspire Greatness}
+	\ifthenelse{#1 > 9}{
+		\AddClassFeature{Jack of All Trades}
+			\AddConditionalSkillMod{Can use trained-only Skills as if they were trained.}
+	\ifthenelse{#1 > 11}{
+		\listadd{\CharBardicPerformanceList}{Soothing Performance}
+	\ifthenelse{#1 > 13}{
+		\listadd{\CharBardicPerformanceList}{Frightening Tune}
+	\ifthenelse{#1 > 14}{
+		\listadd{\CharBardicPerformanceList}{Inspire Heroics}
+	\ifthenelse{#1 > 15}{
+		\forlistloop{\isClassSkill}{\SkillsList}
+	\ifthenelse{#1 > 18}{
+		\AddConditionalSkillMod{Can take 10 on any Skill check.}
+	\ifthenelse{#1 > 19}{
+		\listadd{\CharBardicPerformanceList}{Deadly Performance}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+	\newcommand{\AddBardSpellcasting}[1]{
+		\ifthenelse{##1 < 2}{\SetCounter{@i}{0}}{
+		\ifthenelse{##1 < 4}{\SetCounter{@i}{1}}{
+		\ifthenelse{##1 < 7}{\SetCounter{@i}{2}}{
+		\ifthenelse{##1 < 10}{\SetCounter{@i}{3}}{
+		\ifthenelse{##1 < 13}{\SetCounter{@i}{4}}{
+		\ifthenelse{##1 < 16}{\SetCounter{@i}{5}}{\SetCounter{@i}{6}}}}}}}
+		\newSpellcasting[\value{@i}]{Bard}{##1}{Cha}
+		\AddTwoThirdsSpellcasing{##1}
+	}
+}

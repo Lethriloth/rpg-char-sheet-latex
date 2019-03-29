@@ -1,0 +1,103 @@
+\def\MonkBAB{a}
+\def\MonkFort{g}
+\def\MonkRef{g}
+\def\MonkWill{g}
+\NewCounter{MonkSkillRanksPerLevelCount}
+\SetCounter{MonkSkillRanksPerLevelCount}{4}
+\NewCounter{MonkHitDieSize}
+\SetCounter{MonkHitDieSize}{8}
+\edef\MonkClassSkillsList{}
+\forcsvlist{\listadd{\MonkClassSkillsList}}{Acrobatics, Climb, Craft, EscapeArtist, Intimidate, KnowledgeHistory, KnowledgeReligion, Perception, Perform, Profession, Ride, SenseMotive, Stealth, Swim}
+\newcommand{\AddMonkClassFeatures}[1]{
+		\AddClassFeature{\ifthenelse{#1 > 10}{Greater }Flurry of Blows}
+			\NewCounter{CharflurryofblowspenaltyCount}\SetCounter{CharflurryofblowspenaltyCount}{-2}
+			\NewCounter{CharflurryofblowsattacksCount}\StepCounter{CharflurryofblowsattacksCount}
+%			\autoweapon[\value{CharflurryofblowsattacksCount}]{Flurry of Blows}{\value{CharflurryofblowspenaltyCount}}{\Charunarmedstrikedamage + \arabic{CharstrModCount}}{20}{B}{Melee}{}{str}
+		\AddClassFeature{Monk Bonus Feat\ifthenelse{#1 > 1}{$\times \ifthenelse{#1 > 5}{\DoMath{(#1 + 6) / 4}}{2}$}{}}
+		\AddToCounter{CharBonusFeatsCount}{3}
+		\AddFeat*{Improved Unarmed Strike}
+		\AddFeat*{Stunning Fist}\AddLimitedUse{Stunning Fist}{\DoMath{#1 + (\value{CharTotalLevelCount} - 1) / 4}}
+		\AddClassFeature{Stunning Fist \ifthenelse{#1 > 3}{(Stun 1 rd, fatigue\ifthenelse{#1 > 7}{, sicken 1 min\ifthenelse{#1 > 11}{, stagger 1d6+1 rd\ifthenelse{#1 > 15}{, blind, deafen\ifthenelse{#1 > 19}{, paralyze 1d6 + 1 rd.}{}}{}}{.}}{})}{}}
+		\AddClassFeature{Unarmed Strike \Charunarmedstrikedamage}
+			\newcommand{\Charunarmedstrikedamage}{
+				\ifthenelse{\equal{\CharSize}{Small}}{%
+					\ifthenelse{#1 > 15}{2d\DoMath{6 + ((#1 - 16)/ 4) * 2}}{1d\DoMath{4 + (#1 / 4) * 2}}%
+				}{%
+				\ifthenelse{\equal{\CharSize}{Medium}}{%
+					\ifthenelse{#1 > 11}{2d\DoMath{6 + ((#1 - 12)/ 4) * 2}}{1d\DoMath{6 + (#1 / 4) * 2}}%
+				}{%
+				\ifthenelse{\equal{\CharSize}{Large}}{%
+					\ifthenelse{#1 > 3}{%
+						\ifthenelse{#1 > 11}{%
+							\ifthenelse{#1 > 19}{4d8}{%
+							3d\DoMath{6 + ((#1 - 12)/ 4) * 2}}%
+						}{%
+							2d\DoMath{6 + ((#1 - 4)/ 4) * 2}%
+						}%
+					}{%
+						1d8%
+					}%
+				}{}}{}}{}
+			}
+		\AddClassFeature{Monk AC Bonus}
+			\appto\Initialize{
+				\ifthenelse{\equal{\CharArmorType}{}}{
+					\MiscBonus{AC}{#1 / 4 + \value{CharWisModCount}}
+					\MiscBonus{TouchAC}{#1 / 4 + \value{CharWisModCount}}
+					\MiscBonus{FlatFootedAC}{#1 / 4 + \value{CharWisModCount}}
+					\MiscBonus{CMD}{#1 / 4 + \value{CharWisModCount}}
+				}{}
+			}
+	\ifthenelse{#1 > 1}{
+		\AddClassFeature{\ifthenelse{#1 > 8}{Improved }{}Evasion}
+		\ifthenelse{#1 > 8}{\AddSpecialDefense{Improved Evasion}}{\AddSpecialDefense{Evasion}}
+		\StepCounter{CharBonusFeatsCount}
+	\ifthenelse{#1 > 2}{
+		\AddClassFeature{Still Mind}\AddConditionalDefMod{+2 on saves vs. EnChantment}
+		\AddClassFeature{Fast Movement}
+			\EnhancementBonus{Speed}{#1 / 3 * 10}
+		\AddClassFeature{Maneuver Training}
+			\MiscBonus{CMD}{#1 - #1 * 3 / 4}
+			\MiscBonus{CMB}{#1 - #1 * 3 / 4}
+	\ifthenelse{#1 > 3}{
+		\AddLimitedUse{Ki Pool}{\arabic{CharKiPoolCount}}
+			\NewCounter{CharKiPoolCount}
+			\SetCounter{CharKiPoolCount}{#1 / 2 + \value{CharWisModCount}}
+			\AddClassFeature{Ki Strike (magic%
+				\ifthenelse{#1 > 6}{%
+				, cold iron, silver
+				\ifthenelse{#1 > 9}{%
+				, lawful%
+				\ifthenelse{#1 > 15}{, adamantine}{}%
+				}{}}{})
+			}
+		\AddClassFeature{Slow Fall \ifthenelse{#1 < 20}{\DoMath{#1 / 2}0 ft.}{any distance}}
+	\ifthenelse{#1 > 4}{
+		\AddClassFeature{High Jump}
+			\AddConditionalSkillMod{+#1 to Acrobatics to jump, always Counts as having running start for jumps}
+		\AddClassFeature{Purity of Body}\AddImmunity{Disease}
+		\StepCounter{CharflurryofblowspenaltyCount}
+	\ifthenelse{#1 > 5}{
+		\AddToCounter{CharBonusFeatsCount}{(#1 - 2) / 4}
+	\ifthenelse{#1 > 6}{
+		\AddClassFeature{Wholeness of Body}
+	\ifthenelse{#1 > 8}{
+		\StepCounter{CharflurryofblowspenaltyCount}
+	\ifthenelse{#1 > 10}{
+		\StepCounter{CharflurryofblowsattacksCount}
+		\AddClassFeature{Diamond Body}\AddImmunity{poison}
+	\ifthenelse{#1 > 11}{
+		\AddClassFeature{Abundant Step (\DoMath{#1 * 40 + 400} ft.)}
+	\ifthenelse{#1 > 12}{
+		\AddClassFeature{Diamond Soul}\AddSpellResistance{#1 + 10}
+	\ifthenelse{#1 > 14}{
+		\AddLimitedUse{Quivering Palm (DC \DoMath{10 + #1 / 2 + \value{CharWisModCount}})}{1}
+	\ifthenelse{#1 > 16}{
+		\AddClassFeature{Timeless Body}
+		\AddClassFeature{Tongue of the Sun and Moon}\listadd{\CharLanguagesList}{Can speak with any living creature}
+	\ifthenelse{#1 > 18}{
+		\AddClassFeature{Empty Body}
+	\ifthenelse{#1 > 19}{
+		\AddClassFeature{Perfect Self}\AddDR{Chaotic}{10}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}

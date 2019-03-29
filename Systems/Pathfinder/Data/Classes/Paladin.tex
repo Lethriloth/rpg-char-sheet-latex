@@ -1,0 +1,76 @@
+\def\PaladinBAB{g}
+\def\PaladinFort{g}
+\def\PaladinRef{p}
+\def\PaladinWill{g}
+\NewCounter{PaladinSkillRanksPerLevelCount}
+\SetCounter{PaladinSkillRanksPerLevelCount}{2}
+\NewCounter{PaladinHitDieSize}
+\SetCounter{PaladinHitDieSize}{10}
+\edef\PaladinClassSkillsList{}
+\forcsvlist{\listadd{\PaladinClassSkillsList}}{Craft, Diplomacy, HandleAnimal, Heal, KnowledgeNobility, KnowledgeReligion, Profession, Ride, SenseMotive, Spellcraft}
+\newcommand{\AddPaladinClassFeatures}[1]{
+		\AddClassFeature{Aura of Good}
+		\AddClassFeature{Detect Evil}
+		\AddLimitedUse{Smite Evil}{\DoMath{(#1 + 2) / 3}}
+	\ifthenelse{#1 > 1}{
+		\AddClassFeature{Divine Grace}{
+			\gappto\Initialize{
+				\MiscBonus{Fortitude}{\value{CharChaModCount}}
+				\MiscBonus{Reflex}{\value{CharChaModCount}}
+				\MiscBonus{Will}{\value{CharChaModCount}}
+			}
+		}
+		\AddLimitedUse{Lay on Hands \DoMath{#1 / 2}d6}{\DoMath{#1 / 2 + \value{CharChaModCount}}}
+	\ifthenelse{#1 > 2}{
+		\AddClassFeature{Aura of Courage}\AddImmunity{Fear}
+		\AddClassFeature{Divine Health}\AddImmunity{Disease}
+		\edef\CharPaladinMerciesList{}
+			\NewCounter{CharPaladinMerciesCount}
+			\AddToCounter{CharPaladinMerciesCount}{#1 / 3}
+			\AddClassFeature{Mercies:\forlistloop{\\~~~~}{\CharPaladinMerciesList}}
+			\NewDocumentCommand{\AddMercy}{m}{
+				\listinsert{\CharPaladinMerciesList}{##1}
+				\AddToCounter{CharPaladinMerciesCount}{-1}
+			}
+			\gappto{\RunChecks}{%
+				%%CHECK MERCIES
+				\ifthenelse{\value{CharPaladinMerciesCount} < 0}{
+					\AddWarning{\DoMath{-\value{CharPaladinMerciesCount}} too many mercies}
+				}{
+				\ifthenelse{\value{CharPaladinMerciesCount} > 0}{
+					\AddWarning{Choose \arabic{CharPaladinMerciesCount} more mercies}
+				}{}}
+			}
+	\ifthenelse{#1 > 3}{
+		\AddClassFeature{Channel Energy (2 Lay on Hands)}
+		\newcommand{\AddPaladinSpellcasting}[1]{
+			\SetCounter{@i}{0}
+			\ifthenelse{##1 > 3}{
+				\StepCounter{@i}
+			\ifthenelse{##1 > 7}{
+				\StepCounter{@i}
+			\ifthenelse{##1 > 11}{
+				\StepCounter{@i}
+			\ifthenelse{##1 > 13}{
+				\StepCounter{@i}
+			}{}}{}}{}}{}
+			\newSpellcasting*[\value{@i}]{Paladin}{##1 / 2}{Cha}
+			\AddHalfSpellcasting{##1}
+		}
+	\ifthenelse{#1 > 4}{
+		\AddClassFeature{Divine Bond}
+	\ifthenelse{#1 > 7}{
+		\AddClassFeature{Aura of Resolve}\AddImmunity{Charms}
+	\ifthenelse{#1 > 10}{
+		\AddClassFeature{Aura of Justice}
+	\ifthenelse{#1 > 13}{
+		\AddClassFeature{Aura of Faith}
+	\ifthenelse{#1 > 16}{
+		\AddClassFeature{Aura of Righteousness}
+			\AddImmunity{Compulsions}
+			\AddDR{evil}{5}
+	\ifthenelse{#1 > 19}{
+		\AddClassFeature{Holy Champion}
+			\AddDR{evil}{10}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}
