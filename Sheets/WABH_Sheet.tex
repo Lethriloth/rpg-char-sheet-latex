@@ -254,7 +254,7 @@
 	$\arabic{Char#1MiscCount}$ 
 	\tabularnewline[-1.5\unitlength]\cline{3-3}\cline{5-5}\cline{7-7}\cline{9-9}
 }
-	\put(240,125){%skills
+	\put(240,112){%skills
 	  \begin{tabular}[b]{A{10}B{78}A{14}B{20}A{14}A{8}A{14}A{8}A{14}}
 		  &\footnotesize \scshape Skill Names   &\lfont Total Bonus& &\lfont Ability Mod. &  &\lfont Ranks & & \lfont Misc.\ Mod.\ \tabularnewline\hline
 		  \PrintSkill{Acrobatics}{Acrobatics}{Dex}
@@ -280,13 +280,14 @@
 		  \PrintSkill{KnowledgeArcana}{Know (arcana)}{Int}
 		  \PrintSkill{KnowledgeDungeoneering}{Know (dungeoneering)}{Int}
 		  \PrintSkill{KnowledgeEngineering}{Know (engineering)}{Int}
+  		  \PrintSkill{KnowledgeFaerie}{Know (faerie)}{Int}
 		  \PrintSkill{KnowledgeGeography}{Know (geography)}{Int}
 		  \PrintSkill{KnowledgeHistory}{Know (history)}{Int}
 		  \PrintSkill{KnowledgeLocal}{Know (local)}{Int}
 		  \PrintSkill{KnowledgeNature}{Know (nature)}{Int}
 		  \PrintSkill{KnowledgeNobility}{Know (nobility)}{Int}
-		  \PrintSkill{KnowledgePlanes}{Know (planes)}{Int}
 		  \PrintSkill{KnowledgeReligion}{Know (religion)}{Int}
+		  \PrintSkill{KnowledgeShade}{Know (the shade)}{Int}
 		  \PrintSkill{OpenLock}{Open Lock}{Dex}
 		  \PrintSkill{Perception}{Perception}{Wis}
 		  \PrintSkill{PerformOne}{Perform (\CharPerformOneName)}{Cha}
@@ -307,10 +308,10 @@
 	  \end{tabular}
 	}
 	\put(243,0){ %skills trailer
-		\put(3,118){\parbox[b][10\unitlength][c]{150\unitlength}{ \tiny\scshape $\footnotesize\cancel\square$  Class Skill\hspace{2ex} $\dagger$ Armor Check Penalty applies\hspace{2ex}* trained only}}
-		\put(0,109){\parbox[b][10\unitlength][c]{176\unitlength}{\small\scshape Conditional Modifiers:}}
-		\put(1,65){\parbox[b][43\unitlength][t]{176\unitlength}{\PrintList{\ConditionalSkillsModList}}}
-		\put(0,49){\framebox(177,60){}}
+		\put(3,105){\parbox[b][10\unitlength][c]{150\unitlength}{ \tiny\scshape $\footnotesize\cancel\square$  Class Skill\hspace{2ex} $\dagger$ Armor Check Penalty applies\hspace{2ex}* trained only}}
+		\put(0,96){\parbox[b][10\unitlength][c]{176\unitlength}{\small\scshape Conditional Modifiers:}}
+		\put(1,65){\parbox[b][30\unitlength][t]{176\unitlength}{\PrintList{\ConditionalSkillsModList}}}
+		\put(0,49){\framebox(177,47){}}
 		\put(0,39){\parbox[b][10\unitlength][c]{176\unitlength}{\small\scshape Languages Spoken:}}
 		\put(1,0){\parbox[b][36\unitlength][t]{176\unitlength}{\itshape\PrintList{\CharLanguagesList}}}
 		\put(0,0){\framebox(177,39){}}

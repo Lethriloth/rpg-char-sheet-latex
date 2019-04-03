@@ -95,7 +95,7 @@
 
 % Redefine Skills lists
 \edef\KnowledgeSkillsList{}
-\forcsvlist{\listadd\KnowledgeSkillsList}{KnowledgeArcana, KnowledgeDungeoneering, KnowledgeEngineering, KnowledgeGeography, KnowledgeHistory, KnowledgeLocal, KnowledgeNature, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion}
+\forcsvlist{\listadd\KnowledgeSkillsList}{KnowledgeArcana, KnowledgeDungeoneering, KnowledgeEngineering, KnowledgeFaerie, KnowledgeGeography, KnowledgeHistory, KnowledgeLocal, KnowledgeNature, KnowledgeNobility, KnowledgeReligion, KnowledgeShade}
 \edef\SkillsList{}
 \forcsvlist{\listadd\SkillsList}{Acrobatics, Appraise, Bluff, Climb, Concentration, CraftOne, CraftTwo, CraftThree, DecipherScript, Diplomacy, DisableDevice, Disguise, EscapeArtist, Fly, Forgery, GatherInformation, HandleAnimal, Heal, Intimidate, Jump, OpenLock, Perception, PerformOne, PerformTwo, PerformThree, ProfessionOne, ProfessionTwo, Ride, Search, SenseMotive, SleightOfHand, SpeakLanguage, Spellcraft, Stealth, Survival, Swim, UseMagicDevice, UseRope}
 \forlistloop{\listadd\SkillsList}{\KnowledgeSkillsList}
@@ -145,15 +145,23 @@
 		\AddConditionalSkillMod{+2 to Search checks involving secret doors and similar compartments}
 	}{}
 	\ifthenelse{\value{CharKnowledgeDungeoneeringRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Survival checks when underground}}{}
+		\AddConditionalSkillMod{+2 to Survival checks when underground}
+	}{}
 	\ifthenelse{\value{CharKnowledgeGeographyRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Survival checks to keep from getting lost or for avoiding hazards}}{}
+		\AddConditionalSkillMod{+2 to Survival checks to keep from getting lost or for avoiding hazards}
+	}{}
 	\ifthenelse{\value{CharKnowledgeLocalRanksCount} > 4}{
-		\MiscBonus{GatherInformation}{2}}{}
+		\MiscBonus{GatherInformation}{2}
+	}{}
 	\ifthenelse{\value{CharKnowledgeDungeoneeringRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Survival checks in aboveground natural environments}}{}
-	\ifthenelse{\value{CharKnowledgePlanesRanksCount} > 4}{
-		\AddConditionalSkillMod{+2 to Survival checks when on other planes}}{}
+		\AddConditionalSkillMod{+2 to Survival checks in aboveground natural environments}
+	}{}
+	\ifthenelse{\value{CharKnowledgeFaerieRanksCount} > 4}{
+		\AddConditionalSkillMod{+2 to Survival checks when in Faerie}
+	}{}
+	\ifthenelse{\value{CharKnowledgeShadeRanksCount} > 4}{
+	\AddConditionalSkillMod{+2 to Survival checks when in the Shade}
+	}{}
 	\ifthenelse{\value{CharSearchRanksCount} > 4}{
 		\AddConditionalSkillMod{+2 to Survival checks to follow tracks}
 	}{}
