@@ -1679,9 +1679,15 @@
 	\listadd\ConditionalDefModList{#1}}
 
 %% Languages
+\NewCounter{CharLanguagesCount}
+\SetCounter{CharExpectedLanguagesCount}{0}
 \edef\CharLanguagesList{}
-\newcommand{\AddCharLanguage}[1]{
-	\listinsert{\CharLanguagesList}{#1}
+\ProvideDocumentCommand{\AddCharLanguage}{s m}{
+	\listinsert{\CharLanguagesList}{#2}
+	\StepCounter{CharLanguagesCount}
+	\IfBooleanT #1 {
+		\StepCounter{CharExpectedLanguagesCount}
+	}
 }
 
 %% XP
@@ -1724,6 +1730,7 @@
 	\RunChecks
 }
 
+\def\CountLanguagesMode\BooleanFalse
 %%3.5 System Checks
 \newcommand{\RunChecks}{
 	\AddDebug{Running checks}
@@ -1774,4 +1781,24 @@
 				\AddWarning{\arabic{CharFeatsCount} feats left to select}
 			}{}}
 	}{}
+	%CHECK LANGUAGES
+	\IfBooleanT \CountLanguagesMode {
+		\AddDebug{Checking Char Language Count}	
+
+		\AddToCounter{CharExpectedLanguagesCount}{\value{CharSpeakLanguageRanksCount}}
+		\ifthenelse{((\value{CharIntBaseCount} - 10) / 2) > -1}{
+			\AddDebug{Expecting \arabic{CharExpectedLanguagesCount} languages from race, class, etc., plus \arabic{CharSpeakLanguageRanksCount} Speak Language ranks, plus \DoMath{(\value{CharIntBaseCount} - 10) / 2} from high INT}
+			\AddToCounter{CharExpectedLanguagesCount}{(\value{CharIntBaseCount} - 10) / 2}
+		}{
+			\AddDebug{Expecting \arabic{CharExpectedLanguagesCount} languages from race, class, etc., plus \arabic{CharSpeakLanguageRanksCount} Speak Language ranks, plus 0 from negative INT mod}
+		}
+		\AddToCounter{CharExpectedLanguagesCount}{\value{CharSpeakLanguageRanksCount}}
+		\ifthenelse{\value{CharExpectedLanguagesCount} > \value{CharLanguagesCount}}{
+			\AddNotice{Pick \DoMath{\value{CharExpectedLanguagesCount} - \value{CharLanguagesCount}} more languages}
+		}{
+			\ifthenelse{\value{CharExpectedLanguagesCount} < \value{CharLanguagesCount}}{
+				\AddNotice{Pick \DoMath{\value{CharLanguagesCount} - \value{CharExpectedLanguagesCount}} fewer languages}
+			}{}
+		}
+	}
 }
