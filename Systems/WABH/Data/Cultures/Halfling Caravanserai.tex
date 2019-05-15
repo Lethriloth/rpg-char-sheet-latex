@@ -1,0 +1,15 @@
+\AddRaceFeature{Glib}
+	\MiscBonus[racial]{Bluff}{1}
+	\MiscBonus[racial]{Diplomacy}{1}
+	\isClassSkill{SpeakLanguage}
+	\preto{\ImportCharClass}{
+		\listcsadd{#3ClassSkillsList}{SpeakLanguage}
+	}
+	\renewcommand{\do}[1]{
+	\listcsadd{#1ClassSkillsList}{SpeakLanguage}
+	}\dolistloop{\CharClassesList}
+\AddRaceFeature{Urban Survivalist}
+	\MiscBonus[racial]{Appraise}{2}
+	\MiscBonus[racial]{Heal}{2}
+	\MiscBonus[racial]{Search}{2}
+\AddCharLanguage{Halfling}
