@@ -187,6 +187,7 @@
 \NewCounter{CharShieldHardnessCount}
 \SetCounter{CharShieldHPCount}{0}
 \RenewDocumentCommand{\AddShield}{m m o m m m m m O{}}{%{Name}{Shield Bonus}[Max Dex]{Armor Check Penalty}{Spell Failure}{Hardness}{HP}{Weight}[Notes]
+	\renewcommand{\CharShieldName}{#1}
 	\AddShieldBonus{#2}
 	\IfNoValueF{#3}{
 		\SetCounter{CharMaxDexShieldCount}{#3}
