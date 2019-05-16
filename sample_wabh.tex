@@ -36,7 +36,10 @@
 	\AddWizardSpellcasting{1}
 
 \input{Systems/DnD3-5/Data/Spells/phb_spells.tex}
-\AddSpell{0}{Dancing Lights}
+\input{Systems/DnD3-5/Data/Spells/class_spell_lists.tex}
+\forlistcsloop{
+\AddSpell{0}
+}{Wiz0SpellList}
 
 % Character Level Ability Increases
 \MiscBonus{Cha}{1}
