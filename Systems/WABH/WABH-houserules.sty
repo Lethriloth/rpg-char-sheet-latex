@@ -8,7 +8,7 @@
 \NewCounter{CharClassWillCount}
 
 \RenewDocumentCommand{\ImportCharClass}{s O{} m m}{
-	\input{\datafolder/Classes/#3.tex}
+	\input{"\datafolder/Classes/#3.tex"}
 	\AddDebug{IMPORTCHARCLASS: add #4 Levels of #3}
 	\ifthenelse{\equal{#2}{}}{
 		\appto\CharLevel{\capitalize{#3} #4 }
@@ -89,7 +89,7 @@
 }
 
 \NewDocumentCommand{\ImportCharCulture}{m}{
-	\input{\datafolder/Cultures/#1.tex}
+	\input{"\datafolder/Cultures/#1.tex"}
 }
 
 
