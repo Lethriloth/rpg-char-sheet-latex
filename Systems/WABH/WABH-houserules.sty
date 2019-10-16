@@ -113,8 +113,8 @@
 % Redefine Synergy bonuses
 \RenewDocumentCommand{\CalculateSynergyBonuses}{}{
 	\ifthenelse{\value{CharAcrobaticsRanksCount} > 4}{
-			\MiscBonus{Jump}{2}
-	}
+		\MiscBonus{Jump}{2}
+	}{}
 	\ifthenelse{\value{CharBluffRanksCount} > 4}{
 		\MiscBonus{Diplomacy}{2}
 		\MiscBonus{Intimidate}{2}
