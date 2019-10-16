@@ -1,0 +1,134 @@
+\input{Sheets/WABH_Header.tex}
+%\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
+%}
+
+%Just enter your name, etc. here.
+\renewcommand\CharName{Szumi ``Dakshe''}
+\renewcommand\CharPlayerName{Elena}
+\renewcommand\CharReligion{}
+\renewcommand\CharHomeland{}
+\renewcommand\CharHair{}
+\renewcommand\CharEyes{}
+\renewcommand\CharGender{}
+\renewcommand\CharWeight{}
+\renewcommand\CharHeight{}
+\renewcommand\CharAge{}
+
+%Enter the scores you rolled here; any racial adjustments will be automatically applied
+%Ability Score Rolls 10, 12, 15, 9, 13, 17
+\SetCharStr{9}
+\SetCharDex{13}
+\SetCharCon{10}
+\SetCharInt{17}
+\SetCharWis{15}
+\SetCharCha{12}
+
+%HP Rolls for levels above 1
+
+
+% Race, Culture, Languages
+\ImportCharRace{Halfling}
+\ImportCharCulture{Halfling Caravanserai}
+\renewcommand\do[1]{
+	\AddCharLanguage{#1}
+}\docsvlist{Raxak, Ketsi, Ohi, Dunge, Abyssal}
+
+% Replace with your class
+\ImportCharClass{Wizard}{2}
+\AddWizardSpellcasting{\value{CharWizardClassLevelCount}}[Necromancy][Illusion][Enchantment]
+\input{Systems/DnD3-5/Data/Spells/phb_spells.tex}
+\input{Systems/WABH/Data/Spells/WABH_spells.tex}
+\input{Systems/WABH/Data/Spells/WABH_class_spell_lists.tex}
+
+\renewcommand{\do}[1]{
+	\ifthenelse{\equal{#1}{Daze}\or\equal{#1}{Ghost Sound}}{}{
+		\AddSpell{0}{#1}
+	}
+}
+\dolistcsloop{Wiz0SpellList}
+\AddSpell{0}{Amanuensis}
+\renewcommand\do[1]{
+	\AddRanks[Wizard]{#1}{\value{CharWizardClassLevelCount} + 3}
+}\docsvlist{Concentration, Spellcraft, KnowledgeArcana, KnowledgeHistory, KnowledgeReligion}
+\AddSpell{1}{Animate Rope}
+\AddSpell{1}{Chill Touch}
+\AddSpell{1}{Unseen Servant}
+\AddSpell{1}{Comprehend Languages}
+
+%Familiar Bonuses
+\AddConditionalSkillMod{When Familiar is within 5 ft. gain Alertness (+2 Perception, +2 Sense Motive)}
+\MiscBonus{Appraise}{3}
+	
+% Character Level Ability Increases
+
+
+% Feats %\AddFeat*{Feat Name} for bonus feats
+\AddFeat{Magical Aptitutde}
+	\MiscBonus{Spellcraft}{2}
+	\MiscBonus{UseMagicDevice}{2}
+
+
+
+% Items carried on your person
+\AddGearItem{Hammock}{5/4}%{Name}{Weight}; \AddGearItem*{Name}{Weight}
+\AddGearItem{Backpack}{1/2}
+\AddGearItem{Rope (50 ft.)}{10}
+\AddGearItem{Waterskin}{1}
+\AddGearItem{Belt Pouch}{1/8}
+\AddGearItem{Steel Mirror}{1/2}
+\AddGearItem{Flint \& Steel}{0}
+\AddGearItem{Winter Blanket}{3/4}
+\AddGearItem[6]{Rations}{1}
+
+% Items not carried on your person
+\AddStoredItem{Iron Pot}{10}
+\AddStoredItem{Canvas (9' x 9')}{9}
+\AddStoredItem[5]{Bedroll}{5}
+
+
+% Currency
+\AddCrowns{10}% Similar commands for other currencies; \AddCrowns*{num} marks the coins as in an extradimensional space; \StoreCrowns{num} marks the coins as stored elsewhere. (You can also use these commands with the metal names - e.g. \AddGold{num})
+\AddCoin{5}
+
+% %Weapons
+%\AddAutoWeapon[1]{Longsword +1}{1}{1d8+\DoMath{\value{CharStrModCount} + 1}}{19-20}{S}{Melee}{Notes}{Str} %[Extra attacks]{Name}{Attack bonus modifier (from weapon focus, magic weapon, etc.)}{Damage}{Critical}{Damage Type}{Range}{Notes}{Ability score for attack bonus}
+%\AddWeapon{Shortsword +2}{+X/+X-5}{1d6+2}{19-20}{S}{Melee}{Notes}%{Name}{Attack Bonus}{Damage}{Critical}{Damage Type}{Range}{Notes}
+
+% %Shield
+%\AddShield{Buckler}{1}[2]{3}{4}{5}{6}{7}[Notes]%{Name}{Shield Bonus}[Max Dex]{Armor Check Penalty}{Spell Failure}{Hardness}{HP}{Weight}[Notes]
+
+% %Belt
+%\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
+%\EnhancementBonus{Str}{0}
+
+% %Armor
+%\AddArmor{Armor}{3}{10}{-2}{5}{L}{10}{Notes}{More Notes}
+
+% %Chest
+%\AddChestItem{}{}{}
+
+% %Eyes
+%\AddEyesItem{}{}{}
+
+% %Feet
+%\AddFeetItem{}{}{}
+
+% %Hat
+%\AddHeadItem{}{}{}
+
+
+% %Headband
+%\AddHeadbandItem{}{}{}
+
+% %Shoulders
+%\AddShouldersItem{}{}{}
+
+% %Rings
+%\AddRingItem{}{}{}
+%\AddRingItem{}{}{}
+
+% %Wrists
+%\AddWristsItem{}{}{}
+
+
+\OutputSheet

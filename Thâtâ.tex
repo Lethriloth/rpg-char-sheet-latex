@@ -1,0 +1,113 @@
+\input{Sheets/WABH_Header.tex}
+%\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
+%}
+
+%Just enter your name, etc. here.
+\renewcommand\CharName{}
+\renewcommand\CharPlayerName{}
+\renewcommand\CharReligion{}
+\renewcommand\CharHomeland{}
+\renewcommand\CharHair{}
+\renewcommand\CharEyes{}
+\renewcommand\CharGender{}
+\renewcommand\CharRace{}
+\renewcommand\CharWeight{}
+\renewcommand\CharHeight{}
+\renewcommand\CharAge{}
+
+%Enter the scores you rolled here; any racial adjustments will be automatically applied
+% 16 10 14 15 12 15
+\SetCharStr{15}
+\SetCharDex{10}
+\SetCharCon{15}
+\SetCharInt{14}
+\SetCharWis{16}
+\SetCharCha{12}
+
+%HP Rolls for levels above 1; Put in raw dice rolls only (Do not add CON modifier, that will be done automatically)
+\HProll{2}
+
+% Race, Culture, Languages
+\ImportCharRace{Human}
+	\ImportCharCulture{Cosmopolitan}
+\renewcommand\do[1]{
+	\AddCharLanguage{#1}
+}\docsvlist{Raxak}
+
+% Replace with your class
+\ImportCharClass{Cleric}{2}
+\AddClericSpellcasting{\value{CharClericClassLevelCount}}{Luck}{Destruction}
+	\AddLimitedUse{1}{Good Fortune}
+\input{Systems/DnD3-5/Data/Spells/phb_spells.tex}
+\input{Systems/WABH/Data/Spells/WABH_spells.tex}
+\input{Systems/WABH/Data/Spells/WABH_class_spell_lists.tex}
+\forlistcsloop{\AddSpell{0}}{Clr0SpellList}
+\forlistcsloop{\AddSpell{1}}{Clr1SpellList}
+\forlistcsloop{\AddSpell{1}}{Luck1SpellList}
+\forlistcsloop{\AddSpell{1}}{Destruction1SpellList}
+
+\renewcommand\do[1]{
+	\AddRanks[Cleric]{#1}{\value{CharClericClassLevelCount} + 3}
+}\docsvlist{Concentration,KnowledgeHistory,KnowledgeReligion, Diplomacy}
+	
+% Character Level Ability Increases
+
+
+% Feats
+\AddFeat{Iron Will}
+\AddFeat*{Investigator}
+
+
+
+% Items carried on your person
+%\AddGearItem{Gear}{1}%{Name}{Weight}; \AddGearItem*{Name}{Weight}
+
+% Items not carried on your person
+%\AddStoredItem{Stored Gear}{1}%{Name}{Weight}; for items not caried on your person
+
+% Currency
+%\AddCrowns{100}% Similar commands for other currencies; \AddCrowns*{num} marks the coins as in an extradimensional space; \StoreCrowns{num} marks the coins as stored elsewhere. (You can also use these commands with the metal names - e.g. \AddGold{num})
+
+
+% %Weapons
+%\AddAutoWeapon[1]{Longsword +1}{1}{1d8+\DoMath{\value{CharStrModCount} + 1}}{19-20}{S}{Melee}{Notes}{Str} %[Extra attacks]{Name}{Attack bonus modifier (from weapon focus, magic weapon, etc.)}{Damage}{Critical}{Damage Type}{Range}{Notes}{Ability score for attack bonus}
+%\AddWeapon{Shortsword +2}{+X/+X-5}{1d6+2}{19-20}{S}{Melee}{Notes}%{Name}{Attack Bonus}{Damage}{Critical}{Damage Type}{Range}{Notes}
+
+% %Shield
+%\AddShield{Buckler}{1}[2]{3}{4}{5}{6}{7}[Notes]%{Name}{Shield Bonus}[Max Dex]{Armor Check Penalty}{Spell Failure}{Hardness}{HP}{Weight}[Notes]
+
+% %Belt
+%\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
+%\EnhancementBonus{Str}{0}
+
+% %Armor
+%\AddArmor{Armor}{3}{10}{-2}{5}{L}{10}{Notes}{More Notes}
+
+% %Chest
+%\AddChestItem{}{}{}
+
+% %Eyes
+%\AddEyesItem{}{}{}
+
+% %Feet
+%\AddFeetItem{}{}{}
+
+% %Hat
+%\AddHeadItem{}{}{}
+
+
+% %Headband
+%\AddHeadbandItem{}{}{}
+
+% %Shoulders
+%\AddShouldersItem{}{}{}
+
+% %Rings
+%\AddRingItem{}{}{}
+%\AddRingItem{}{}{}
+
+% %Wrists
+%\AddWristsItem{}{}{}
+
+
+\OutputSheet

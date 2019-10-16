@@ -1,0 +1,104 @@
+\input{Sheets/WABH_Header.tex}
+%\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
+%}
+
+%Just enter your name, etc. here.
+\renewcommand\CharName{}
+\renewcommand\CharPlayerName{}
+\renewcommand\CharReligion{}
+\renewcommand\CharHomeland{}
+\renewcommand\CharHair{}
+\renewcommand\CharEyes{}
+\renewcommand\CharGender{}
+\renewcommand\CharRace{}
+\renewcommand\CharWeight{}
+\renewcommand\CharHeight{}
+\renewcommand\CharAge{}
+
+%Enter the scores you rolled here; any racial adjustments will be automatically applied
+%Ability Score Rolls 10, 9, 16, 12, 18, 6
+\SetCharStr{16}
+\SetCharDex{12}
+\SetCharCon{18}
+\SetCharInt{10}
+\SetCharWis{6}
+\SetCharCha{9}
+
+%HP Rolls for levels above 1; Put in raw dice rolls only (Do not add CON modifier, that will be done automatically)
+\HProll{10}
+
+% Race, Culture, Languages
+\ImportCharRace{Half-Orc}
+%	\ImportCharCulture{}
+\renewcommand\do[1]{
+	\AddCharLanguage{#1}
+}\docsvlist{Raxak}
+
+% Replace with your class
+\ImportCharClass{Barbarian}{2}
+\AddRanks[Barbarian]{Intimidate}{4}
+\AddRanks[Barbarian]{Perception}{2}
+\AddRanks[Barbarian]{Climb}{2}
+	
+	
+% Character Level Ability Increases
+
+
+% Feats
+\AddFeat{Combat Reflexes}%\AddFeat*{Feat Name} for bonus feats
+
+
+
+% Items carried on your person
+\AddGearItem{Longsword}{4}%{Name}{Weight}; \AddGearItem*{Name}{Weight}
+\AddGearItem[39]{Kesh}{0}
+\AddGearItem[32]{Zhatim Gold Dragons (= 2 crowns)}{1/25}
+
+% Items not carried on your person
+\AddStoredItem{Stored Gear}{1}%{Name}{Weight}; for items not caried on your person
+
+% Currency
+\AddCrowns{1}% Similar commands for other currencies; \AddCrowns*{num} marks the coins as in an extradimensional space; \StoreCrowns{num} marks the coins as stored elsewhere. (You can also use these commands with the metal names - e.g. \AddGold{num})
+
+
+% %Weapons
+\AddAutoWeapon{Longsword}{0}{1d8+\DoMath{\value{CharStrModCount} + 1}}{19-20}{S}{Melee}{Notes}{Str} %[Extra attacks]{Name}{Attack bonus modifier (from weapon focus, magic weapon, etc.)}{Damage}{Critical}{Damage Type}{Range}{Notes}{Ability score for attack bonus}
+
+% %Shield
+\AddShield{Light Wooden Shield}{1}{-1}{5}{5}{7}{5}%{Name}{Shield Bonus}[Max Dex]{Armor Check Penalty}{Spell Failure}{Hardness}{HP}{Weight}[Notes]
+
+% %Belt
+%\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
+%\EnhancementBonus{Str}{0}
+
+% %Armor
+\AddArmor{Studded Leather}{3}{5}{-1}{5}{L}{10}{}{}
+
+% %Chest
+%\AddChestItem{}{}{}
+
+% %Eyes
+%\AddEyesItem{}{}{}
+
+% %Feet
+%\AddFeetItem{}{}{}
+
+% %Hat
+%\AddHeadItem{}{}{}
+
+
+% %Headband
+%\AddHeadbandItem{}{}{}
+
+% %Shoulders
+%\AddShouldersItem{}{}{}
+
+% %Rings
+%\AddRingItem{}{}{}
+%\AddRingItem{}{}{}
+
+% %Wrists
+%\AddWristsItem{}{}{}
+
+
+\OutputSheet

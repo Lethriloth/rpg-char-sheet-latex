@@ -1,0 +1,118 @@
+\input{Sheets/WABH_Header.tex}
+%\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
+%}
+
+%Just enter your name, etc. here.
+\renewcommand\CharName{Rakshi}
+\renewcommand\CharPlayerName{Samira}
+\renewcommand\CharReligion{}
+\renewcommand\CharHomeland{}
+\renewcommand\CharHair{}
+\renewcommand\CharEyes{}
+\renewcommand\CharGender{F}
+\renewcommand\CharRace{Elf}
+\renewcommand\CharWeight{}
+\renewcommand\CharHeight{}
+\renewcommand\CharAge{50/30h}
+
+%Enter the scores you rolled here; any racial adjustments will be automatically applied
+%Ability Score Rolls 17 18 15 15 9 11
+\SetCharStr{9}
+\SetCharDex{11}
+\SetCharCon{15}
+\SetCharInt{17}
+\SetCharWis{18}
+\SetCharCha{15}
+
+%HP Rolls for levels above 1; Put in raw dice rolls only (Do not add CON modifier, that will be done automatically)
+\HProll{5}
+
+% Race, Culture, Languages
+\ImportCharRace{Elf}
+%\ImportCharCulture{}
+\renewcommand\do[1]{
+	\AddCharLanguage{#1}
+}\docsvlist{Raxak, Summer Court Faerie, Zhatim, Druidic, Literacy}
+
+% Replace with your class
+\ImportCharClass{Druid}{2}
+\AddDruidSpellcasting{\value{CharDruidClassLevelCount}}
+\input{Systems/DnD3-5/Data/Spells/phb_spells.tex}
+\input{Systems/WABH/Data/Spells/WABH_spells.tex}
+\input{Systems/WABH/Data/Spells/WABH_class_spell_lists.tex}
+\forlistcsloop{\AddSpell{0}}{Drd0SpellList}
+\forlistcsloop{\AddSpell{1}}{Drd1SpellList}
+
+
+\renewcommand\do[1]{
+	\AddRanks[Druid]{#1}{\value{CharDruidClassLevelCount} + 3}
+}\docsvlist{ Concentration, Diplomacy, KnowledgeHistory, KnowledgeFaerie, KnowledgeShade, Perception, Spellcraft}                                                       
+
+	
+	
+% Character Level Ability Increases
+
+
+% Feats
+%\AddFeat*{Feat Name} for bonus feats
+
+
+
+% Items carried on your person
+\AddGearItem{Medical Text}{1}%{Name}{Weight}; \AddGearItem*{Name}{Weight}
+\AddGearItem{Fairy Book}{1}%{Name}{Weight}; \AddGearItem*{Name}{Weight}
+\AddGearItem{Quarterstaff}{4}
+\AddGearItem{Dagger}{1}
+
+% Items not carried on your person
+\AddStoredItem{Stored Gear}{1}%{Name}{Weight}; for items not caried on your person
+
+% Currency
+\AddCrowns{87}% Similar commands for other currencies; \AddCrowns*{num} marks the coins as in an extradimensional space; \StoreCrowns{num} marks the coins as stored elsewhere. (You can also use these commands with the metal names - e.g. \AddGold{num})
+\AddCoin{5}
+
+
+% %Weapons
+\AddAutoWeapon{Quarterstaff}{0}{1d6\CleanPM{CharStrModCount}}{20/X2}{B}{Melee}{}{Str} %[Extra attacks]{Name}{Attack bonus modifier (from weapon focus, magic weapon, etc.)}{Damage}{Critical}{Damage Type}{Range}{Notes}{Ability score for attack bonus}
+\AddAutoWeapon{Sling}{0}{1d4\CleanPM{CharStrModCount}}{20/X2}{B}{50 ft.}{+1 atk. +1 dmg with Magic Stone}{Dex} %[Extra attacks]{Name}{Attack bonus modifier (from weapon focus, magic weapon, etc.)}{Damage}{Critical}{Damage Type}{Range}{Notes}{Ability score for attack bonus}
+\AddAutoWeapon{Dagger}{0}{1d4 \CleanPM{CharStrModCount}}{19-20/X2}{S/P}{Melee/10 ft.}{}{Str} %[Extra attacks]{Name}{Attack bonus modifier (from weapon focus, magic weapon, etc.)}{Damage}{Critical}{Damage Type}{Range}{Notes}{Ability score for attack bonus}
+%\AddWeapon{Shortsword +2}{+X/+X-5}{1d6+2}{19-20}{S}{Melee}{Notes}%{Name}{Attack Bonus}{Damage}{Critical}{Damage Type}{Range}{Notes}
+
+% %Shield
+%\AddShield{Buckler}{1}[2]{3}{4}{5}{6}{7}[Notes]%{Name}{Shield Bonus}[Max Dex]{Armor Check Penalty}{Spell Failure}{Hardness}{HP}{Weight}[Notes]
+
+% %Belt
+%\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
+%\EnhancementBonus{Str}{0}
+
+% %Armor
+%\AddArmor{Armor}{3}{10}{-2}{5}{L}{10}{Notes}{More Notes}
+
+% %Chest
+%\AddChestItem{}{}{}
+
+% %Eyes
+%\AddEyesItem{}{}{}
+
+% %Feet
+%\AddFeetItem{}{}{}
+
+% %Hat
+%\AddHeadItem{}{}{}
+
+
+% %Headband
+%\AddHeadbandItem{}{}{}
+
+% %Shoulders
+%\AddShouldersItem{}{}{}
+
+% %Rings
+%\AddRingItem{}{}{}
+%\AddRingItem{}{}{}
+
+% %Wrists
+%\AddWristsItem{}{}{}
+
+
+\OutputSheet
