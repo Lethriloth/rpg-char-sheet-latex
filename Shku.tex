@@ -3,14 +3,13 @@
 %}
 
 %Just enter your name, etc. here.
-\renewcommand\CharName{}
-\renewcommand\CharPlayerName{}
+\renewcommand\CharName{Shku}
+\renewcommand\CharPlayerName{Scott}
 \renewcommand\CharReligion{}
 \renewcommand\CharHomeland{}
 \renewcommand\CharHair{}
 \renewcommand\CharEyes{}
 \renewcommand\CharGender{}
-\renewcommand\CharRace{}
 \renewcommand\CharWeight{}
 \renewcommand\CharHeight{}
 \renewcommand\CharAge{}
@@ -36,7 +35,7 @@
 }\docsvlist{Summer Court Fairy, Winter Court Fairy, Spring Court Fairy, Autumn Court Fairy}
 
 % Replace with your class
-\ImportCharClass{Bard}{1}
+\ImportCharClass{Bard}{2}
 \AddBardSpellcasting{\value{CharBardClassLevelCount}}
 
 \input{Systems/DnD3-5/Data/Spells/phb_spells.tex}
@@ -50,7 +49,7 @@
 	\AddRanks[Bard]{#1}{\value{CharBardClassLevelCount} + 3}
 }\docsvlist{KnowledgeFaerie, PerformOne, Diplomacy, Bluff, Perception, SenseMotive, SleightOfHand}
 \renewcommand\do[1]{
-	\AddRanks[Bard]{2}{\value{CharBardClassLevelCount} + 3}
+	\AddRanks[Bard]{#1}{2}
 }\docsvlist{PerformTwo,Acrobatics}
 \renewcommand{\CharPerformOneName}{Singing}
 \renewcommand{\CharPerformTwoName}{Fiddle}
