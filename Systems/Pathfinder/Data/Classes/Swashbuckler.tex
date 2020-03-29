@@ -6,10 +6,10 @@
 \setcounter{SwashbucklerSkillRanksPerLevelCount}{4}
 \newcounter{SwashbucklerHitDieSize}
 \setcounter{SwashbucklerHitDieSize}{10}
-\edef\SwashbucklerClassSkillsList{}\forcsvlist{\listadd{\SwashbucklerClassSkillsList}}{Acrobatics, Bluff, Climb, CraftOne, CraftTwo, CraftThree, Diplomacy, EscapeArtist, Intimidate, KnowledgeLocal, KnowledgeNobility, Perception, PerformOne, PerformTwo, Profession, Ride, SenseMotive, SleightOfHand, Swim}
+\edef\SwashbucklerClassSkillslist{}\forcsvlist{\listadd{\SwashbucklerClassSkillslist}}{Acrobatics, Bluff, Climb, Craft, Diplomacy, EscapeArtist, Intimidate, KnowledgeLocal, KnowledgeNobility, Perception, Perform, Profession, Ride, SenseMotive, SleightOfHand, Swim}
 \newcommand{\AddSwashbucklerClassFeatures}[1]{
-		\AddLimitedUse{Panache}{\domath{\value{CharChaModCount} + \value{CharPanachePointsCount}}}
-			\newCounter{CharPanachePointsCount}
+		\AddLimitedUse{Panache}{\domath{\value{CharPanachePointsCount} + \value{CharChaModCount}}}
+			\NewCounter{CharPanachePointsCount}
 		\AddClassFeature{Deeds\forlistloop{\\~~~~}{\CharSwashbucklerDeedsList}}
 			\edef\CharSwashbucklerDeedsList{}
 				\newcommand{\AddDeed}[1]{\listAdd{\CharSwashbucklerDeedsList}{##1}}

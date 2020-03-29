@@ -257,6 +257,7 @@
 \newcommand\AddLimitedUse[2]{\listadd\CharLimitedUseList{#1 & #2}}
 
 
+
 %% Favored Classes %%
 \NewCounter{CheckFavoredClass-Mode}
 \SetCounter{CheckFavoredClass-Mode}{1}
@@ -300,7 +301,6 @@
 \NewCounter{HP-Mode}
 \edef\CharClassesList{}
 \NewDocumentCommand{\ImportCharClass}{s O{} m O{} m}{
-	
 	\AddDebug{IMPORTCHARCLASS: add #5 Levels of #4 #3}
 	\ifthenelse{\equal{#4}{}}{
 		\input{"\datafolder/Classes/#3.tex"}
@@ -427,7 +427,7 @@
 	\AddToCounter{CharSpareSkillRanksCount}{-#2}
 }
 
-\newCounter{CharBonusSkillRanksPerLevelCount}
+\NewCounter{CharBonusSkillRanksPerLevelCount}
 %Commands to be run at sheet initialization
 \NewCounter{AutoSkillRanks-Mode}
 \newcommand{\AddIntToSkillRanks}{
@@ -710,19 +710,6 @@
 		\AddToCounter{@i}{\value{@i}}
 		\AddToCounter{@i}{\value{@i}}
 	}{%
-		\SetCounter{@j}{\value{#1}}
-		\ForLoop{@i}{0}{\value{@i}<10}{
-			\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{10}\AddToCounter{@j}{-1}}{}}
-		\ForLoop{@i}{0}{\value{@i}<2}{
-			\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{15}\AddToCounter{@j}{-1}}{}}
-		\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{20}\AddToCounter{@j}{-1}}{}
-		\ForLoop{@i}{0}{\value{@i}<2}{
-			\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{25}\AddToCounter{@j}{-1}}{}}
-		\ForLoop{@i}{0}{\value{@i}<2}{
-			\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{30}\AddToCounter{@j}{-1}}{}}
-		\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{40}\AddToCounter{@j}{-1}}{}
-		\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{50}\AddToCounter{@j}{-1}}{}
-=======
 		\setCounter{@j}{\value{#1}}
 		\forloop{@k}{0}{\value{@k}<10}{
 			\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{10}\AddToCounter{@j}{-1}}{}}
@@ -735,7 +722,6 @@
 			\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{30}\AddToCounter{@j}{-1}}{}}
 		\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{40}\AddToCounter{@j}{-1}}{}
 		\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{50}\AddToCounter{@j}{-1}}{}
->>>>>>> .
 	}
 }
 \newcommand\CalculateLoads{
@@ -1205,231 +1191,230 @@
 }
 
 \newcommand{\AddPrimarySpellcasting}[1]{
-	\AddSpellslots{0}{3}
-	\AddSpellslots{1}{1}
+		\AddSpellSlots{0}{3}
+		\AddSpellSlots{1}{1}
 	\ifthenelse{#1 > 1}{
-		\AddSpellslots{0}{1}
-		\AddSpellslots{1}{1}
-		\ifthenelse{#1 > 2}{
-			\AddSpellslots{2}{1}
-			\ifthenelse{#1 > 3}{
-				\AddSpellslots{0}{1}
-				\AddSpellslots{1}{1}
-				\AddSpellslots{2}{1}
-				\ifthenelse{#1 > 4}{
-					\AddSpellslots{3}{1}
-					\ifthenelse{#1 > 5}{
-						\AddSpellslots{2}{1}
-						\AddSpellslots{3}{1}
-						\ifthenelse{#1 > 6}{
-							\AddSpellslots{4}{1}
-							\AddSpellslots{0}{1}
-							\AddSpellslots{1}{1}
-							\ifthenelse{#1 > 7}{
-								\AddSpellslots{3}{1}
-								\AddSpellslots{4}{1}
-								\ifthenelse{#1 > 8}{
-									\AddSpellslots{5}{1}
-									\AddSpellslots{2}{1}
-									\ifthenelse{#1 > 9}{
-										\AddSpellslots{4}{1}
-										\AddSpellslots{5}{1}	
-										\ifthenelse{#1 > 10}{
-											\AddSpellslots{6}{1}
-											\AddSpellslots{3}{1}
-											\AddSpellslots{1}{1}
-											\ifthenelse{#1 > 11}{
-												\AddSpellslots{5}{1}
-												\AddSpellslots{6}{1}
-												\ifthenelse{#1 > 12}{
-													\AddSpellslots{7}{1}
-													\AddSpellslots{4}{1}
-													\AddSpellslots{2}{1}
-													\ifthenelse{#1 > 13}{
-														\AddSpellslots{6}{1}
-														\AddSpellslots{7}{1}
-														\ifthenelse{#1 > 14}{
-															\AddSpellslots{8}{1}
-															\AddSpellslots{5}{1}
-															\AddSpellslots{3}{1}
-															\ifthenelse{#1 > 15}{
-																\AddSpellslots{7}{1}
-																\AddSpellslots{8}{1}
-																\ifthenelse{#1 > 16}{
-																	\AddSpellslots{9}{1}
-																	\AddSpellslots{6}{1}
-																	\AddSpellslots{4}{1}
-																	\ifthenelse{#1 > 17}{
-																		\AddSpellslots{8}{1}
-																		\AddSpellslots{9}{1}
-																		\ifthenelse{#1 > 18}{
-																			\AddSpellslots{7}{1}
-																			\AddSpellslots{9}{1}
-																			\AddSpellslots{5}{1}
-																			\ifthenelse{#1 > 19}{
-																				\AddSpellslots{8}{1}
-																				\AddSpellslots{9}{1}
-																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+		\AddSpellSlots{0}{1}
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 2}{
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 3}{
+		\AddSpellSlots{0}{1}
+		\AddSpellSlots{1}{1}
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 4}{
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 5}{
+		\AddSpellSlots{2}{1}
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 6}{
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{0}{1}
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 7}{
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{4}{1}
+	\ifthenelse{#1 > 8}{
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 9}{
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{5}{1}
+	\ifthenelse{#1 > 10}{
+		\AddSpellSlots{6}{1}
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 11}{
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{6}{1}
+	\ifthenelse{#1 > 12}{
+		\AddSpellSlots{7}{1}
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 13}{
+		\AddSpellSlots{6}{1}
+		\AddSpellSlots{7}{1}
+	\ifthenelse{#1 > 14}{
+		\AddSpellSlots{8}{1}
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 15}{
+		\AddSpellSlots{7}{1}
+		\AddSpellSlots{8}{1}
+	\ifthenelse{#1 > 16}{
+		\AddSpellSlots{9}{1}
+		\AddSpellSlots{6}{1}
+		\AddSpellSlots{4}{1}
+	\ifthenelse{#1 > 17}{
+		\AddSpellSlots{8}{1}
+		\AddSpellSlots{9}{1}
+	\ifthenelse{#1 > 18}{
+		\AddSpellSlots{7}{1}
+		\AddSpellSlots{9}{1}
+		\AddSpellSlots{5}{1}
+	\ifthenelse{#1 > 19}{
+		\AddSpellSlots{8}{1}
+		\AddSpellSlots{9}{1}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 \newcommand{\AddSpontaneousPrimarySpellcasting}[1]{
-	\AddSpellslots{0}{5}
-	\AddSpellslots{1}{3}
+		\AddSpellSlots{0}{5}
+		\AddSpellSlots{1}{3}
 	\ifthenelse{#1 > 1}{
-		\AddSpellslots{0}{1}
-		\AddSpellslots{1}{1}
-		\ifthenelse{#1 > 2}{
-			\AddSpellslots{1}{1}
-			\ifthenelse{#1 > 3}{
-				\AddSpellslots{1}{1}
-				\AddSpellslots{2}{3}
-				\ifthenelse{#1 > 4}{
-					\AddSpellslots{2}{1}
-					\ifthenelse{#1 > 5}{
-						\AddSpellslots{2}{1}
-						\AddSpellslots{3}{3}
-						\ifthenelse{#1 > 6}{
-							\AddSpellslots{2}{1}
-							\AddSpellslots{3}{1}
-							\ifthenelse{#1 > 7}{
-								\AddSpellslots{3}{1}
-								\AddSpellslots{4}{3}
-								\ifthenelse{#1 > 8}{
-									\AddSpellslots{3}{1}
-									\AddSpellslots{4}{1}
-									\ifthenelse{#1 > 9}{
-										\AddSpellslots{4}{1}
-										\AddSpellslots{5}{3}	
-										\ifthenelse{#1 > 10}{
-											\AddSpellslots{4}{1}
-											\AddSpellslots{5}{1}
-											\ifthenelse{#1 > 11}{
-												\AddSpellslots{5}{1}
-												\AddSpellslots{6}{3}
-												\ifthenelse{#1 > 12}{
-													\AddSpellslots{5}{1}
-													\AddSpellslots{6}{1}
-													\ifthenelse{#1 > 13}{
-														\AddSpellslots{6}{1}
-														\AddSpellslots{7}{3}
-														\ifthenelse{#1 > 14}{
-															\AddSpellslots{6}{1}
-															\AddSpellslots{7}{1}
-															\ifthenelse{#1 > 15}{
-																\AddSpellslots{7}{1}
-																\AddSpellslots{8}{3}
-																\ifthenelse{#1 > 16}{
-																	\AddSpellslots{7}{1}
-																	\AddSpellslots{8}{1}
-																	\ifthenelse{#1 > 17}{
-																		\AddSpellslots{8}{1}
-																		\AddSpellslots{9}{3}
-																		\ifthenelse{#1 > 18}{
-																			\AddSpellslots{8}{1}
-																			\AddSpellslots{9}{1}
-																			\ifthenelse{#1 > 19}{
-																				\AddSpellslots{9}{2}
-																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
-	
+		\AddSpellSlots{0}{1}
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 2}{
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 3}{
+		\AddSpellSlots{1}{1}
+		\AddSpellSlots{2}{3}
+	\ifthenelse{#1 > 4}{
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 5}{
+		\AddSpellSlots{2}{1}
+		\AddSpellSlots{3}{3}
+	\ifthenelse{#1 > 6}{
+		\AddSpellSlots{2}{1}
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 7}{
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{4}{3}
+	\ifthenelse{#1 > 8}{
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{4}{1}
+	\ifthenelse{#1 > 9}{
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{5}{3}
+	\ifthenelse{#1 > 10}{
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{5}{1}
+	\ifthenelse{#1 > 11}{
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{6}{3}
+	\ifthenelse{#1 > 12}{
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{6}{1}
+	\ifthenelse{#1 > 13}{
+		\AddSpellSlots{6}{1}
+		\AddSpellSlots{7}{3}
+	\ifthenelse{#1 > 14}{
+		\AddSpellSlots{6}{1}
+		\AddSpellSlots{7}{1}
+	\ifthenelse{#1 > 15}{
+		\AddSpellSlots{7}{1}
+		\AddSpellSlots{8}{3}
+	\ifthenelse{#1 > 16}{
+		\AddSpellSlots{7}{1}
+		\AddSpellSlots{8}{1}
+	\ifthenelse{#1 > 17}{
+		\AddSpellSlots{8}{1}
+		\AddSpellSlots{9}{3}
+	\ifthenelse{#1 > 18}{
+		\AddSpellSlots{8}{1}
+		\AddSpellSlots{9}{1}
+	\ifthenelse{#1 > 19}{
+		\AddSpellSlots{9}{2}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 \newcommand{\AddTwoThirdsSpellcasing}[1]{
-	\AddSpellslots{0}{2}
-	\AddSpellsKnown{0}{4}
+		\AddSpellSlots{0}{2}
+		\AddSpellsKnown{0}{4}
 	\ifthenelse{#1 > 1}{
-		\AddSpellslots{0}{1}
+		\AddSpellSlots{0}{1}
 		\AddSpellsKnown{0}{1}
 		\AddSpellsKnown{1}{2}
-		\ifthenelse{#1 > 2}{
-			\AddSpellslots{1}{1}
-			\AddSpellsKnown{0}{1}
-			\AddSpellsKnown{1}{1}
-			\ifthenelse{#1 > 3}{
-				\AddSpellslots{1}{1}
-				\AddSpellsKnown{2}{2}
-				\ifthenelse{#1 > 4}{
-					\AddSpellslots{1}{1}
-					\AddSpellslots{2}{1}
-					\AddSpellsKnown{1}{1}
-					\AddSpellsKnown{2}{1}
-					\ifthenelse{#1 > 5}{
-						\AddSpellslots{2}{1}
-						\ifthenelse{#1 > 6}{
-							\AddSpellsKnown{2}{1}
-							\AddSpellsKnown{3}{2}
-							\ifthenelse{#1 > 7}{
-								\AddSpellslots{2}{1}
-								\AddSpellslots{3}{1}
-								\AddSpellsKnown{3}{1}
-								\ifthenelse{#1 > 8}{
-									\AddSpellslots{3}{1}
-									\ifthenelse{#1 > 9}{
-										\AddSpellsKnown{3}{1}
-										\AddSpellsKnown{4}{2}
-										\ifthenelse{#1 > 10}{
-											\AddSpellslots{3}{1}
-											\AddSpellslots{4}{1}
-											\AddSpellsKnown{4}{1}
-											\ifthenelse{#1 > 11}{
-												\AddSpellslots{4}{1}
-												\ifthenelse{#1 > 12}{
-													\AddSpellsKnown{4}{1}
-													\AddSpellsKnown{5}{2}
-													\ifthenelse{#1 > 13}{
-														\AddSpellslots{0}{1}
-														\AddSpellslots{4}{1}
-														\AddSpellslots{5}{1}
-														\AddSpellsKnown{5}{1}
-														\ifthenelse{#1 > 14}{
-															\AddSpellslots{1}{1}
-															\AddSpellslots{5}{1}
-															\ifthenelse{#1 > 15}{
-																\AddSpellslots{2}{1}
-																\AddSpellsKnown{1}{1}
-																\AddSpellsKnown{5}{1}
-																\AddSpellsKnown{6}{2}
-																\ifthenelse{#1 > 16}{
-																	\AddSpellslots{3}{1}
-																	\AddSpellslots{5}{1}
-																	\AddSpellslots{6}{1}
-																	\AddSpellsKnown{2}{1}
-																	\AddSpellsKnown{6}{1}
-																	\ifthenelse{#1 > 17}{
-																		\AddSpellslots{4}{1}
-																		\AddSpellslots{6}{1}
-																		\AddSpellsKnown{3}{1}
-																		\ifthenelse{#1 > 18}{
-																			\AddSpellslots{5}{1}
-																			\AddSpellslots{6}{1}
-																			\AddSpellsKnown{4}{1}
-																			\AddSpellsKnown{6}{1}
-																			\ifthenelse{#1 > 19}{
-																				\AddSpellslots{6}{1}
-																				\AddSpellsKnown{5}{1}
-																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+	\ifthenelse{#1 > 2}{
+		\AddSpellSlots{1}{1}
+		\AddSpellsKnown{0}{1}
+		\AddSpellsKnown{1}{1}
+	\ifthenelse{#1 > 3}{
+		\AddSpellSlots{1}{1}
+		\AddSpellsKnown{2}{2}
+	\ifthenelse{#1 > 4}{
+		\AddSpellSlots{1}{1}
+		\AddSpellSlots{2}{1}
+		\AddSpellsKnown{1}{1}
+		\AddSpellsKnown{2}{1}
+	\ifthenelse{#1 > 5}{
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 6}{
+		\AddSpellsKnown{2}{1}
+		\AddSpellsKnown{3}{2}
+	\ifthenelse{#1 > 7}{
+		\AddSpellSlots{2}{1}
+		\AddSpellSlots{3}{1}
+		\AddSpellsKnown{3}{1}
+	\ifthenelse{#1 > 8}{
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 9}{
+		\AddSpellsKnown{3}{1}
+		\AddSpellsKnown{4}{2}
+	\ifthenelse{#1 > 10}{
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{4}{1}
+		\AddSpellsKnown{4}{1}
+	\ifthenelse{#1 > 11}{
+		\AddSpellSlots{4}{1}
+	\ifthenelse{#1 > 12}{
+		\AddSpellsKnown{4}{1}
+		\AddSpellsKnown{5}{2}
+	\ifthenelse{#1 > 13}{
+		\AddSpellSlots{0}{1}
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{5}{1}
+		\AddSpellsKnown{5}{1}
+	\ifthenelse{#1 > 14}{
+		\AddSpellSlots{1}{1}
+		\AddSpellSlots{5}{1}
+	\ifthenelse{#1 > 15}{
+		\AddSpellSlots{2}{1}
+		\AddSpellsKnown{1}{1}
+		\AddSpellsKnown{5}{1}
+		\AddSpellsKnown{6}{2}
+	\ifthenelse{#1 > 16}{
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{6}{1}
+		\AddSpellsKnown{2}{1}
+		\AddSpellsKnown{6}{1}
+	\ifthenelse{#1 > 17}{
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{6}{1}
+		\AddSpellsKnown{3}{1}
+	\ifthenelse{#1 > 18}{
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{6}{1}
+		\AddSpellsKnown{4}{1}
+		\AddSpellsKnown{6}{1}
+	\ifthenelse{#1 > 19}{
+		\AddSpellSlots{6}{1}
+		\AddSpellsKnown{5}{1}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 \newcommand{\AddHalfSpellcasting}[1]{
 	\ifthenelse{#1 > 5}{
-		\AddSpellslots{1}{1}
-		\ifthenelse{#1 > 9}{
-			\AddSpellslots{2}{1}
-			\ifthenelse{#1 > 11}{
-				\AddSpellslots{3}{1}
-				\ifthenelse{#1 > 13}{
-					\AddSpellslots{1}{1}
-					\ifthenelse{#1 > 14}{
-						\AddSpellslots{4}{1}
-						\ifthenelse{#1 > 15}{
-							\AddSpellslots{2}{1}
-							\ifthenelse{#1 > 16}{
-								\AddSpellslots{3}{1}
-								\ifthenelse{#1 > 17}{
-									\AddSpellslots{1}{1}
-									\ifthenelse{#1 > 18}{
-										\AddSpellslots{2}{1}
-										\AddSpellslots{3}{1}
-										\AddSpellslots{4}{1}
-										\ifthenelse{#1 > 19}{
-											\AddSpellslots{4}{1}
-										}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 9}{
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 11}{
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 13}{
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 14}{
+		\AddSpellSlots{4}{1}
+	\ifthenelse{#1 > 15}{
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 16}{
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 17}{
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 18}{
+		\AddSpellSlots{2}{1}
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{4}{1}
+	\ifthenelse{#1 > 19}{
+		\AddSpellSlots{4}{1}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
 %Initialize Spellcasting variables
@@ -1527,75 +1512,6 @@
 	\SetCounter{CharSpellRangecloseCount}{25+\value{CharCL#1Count}/2*5}
 	\SetCounter{CharSpellRangemediumCount}{100+\value{CharCL#1Count}*10}
 	\SetCounter{CharSpellRangelongCount}{400+\value{CharCL#1Count}*40}
-}
-
-% Spells per day generation for full casters
-\newcommand{\AddPrimarySpellcasting}[1]{
-		\AddSpellSlots{0}{3}
-		\AddSpellSlots{1}{1}
-	\ifthenelse{#1 > 1}{
-		\AddSpellSlots{0}{1}
-		\AddSpellSlots{1}{1}
-	\ifthenelse{#1 > 2}{
-		\AddSpellSlots{2}{1}
-	\ifthenelse{#1 > 3}{
-		\AddSpellSlots{0}{1}
-		\AddSpellSlots{1}{1}
-		\AddSpellSlots{2}{1}
-	\ifthenelse{#1 > 4}{
-		\AddSpellSlots{3}{1}
-	\ifthenelse{#1 > 5}{
-		\AddSpellSlots{2}{1}
-		\AddSpellSlots{3}{1}
-	\ifthenelse{#1 > 6}{
-		\AddSpellSlots{4}{1}
-		\AddSpellSlots{0}{1}
-		\AddSpellSlots{1}{1}
-	\ifthenelse{#1 > 7}{
-		\AddSpellSlots{3}{1}
-		\AddSpellSlots{4}{1}
-	\ifthenelse{#1 > 8}{
-		\AddSpellSlots{5}{1}
-		\AddSpellSlots{2}{1}
-	\ifthenelse{#1 > 9}{
-		\AddSpellSlots{4}{1}
-		\AddSpellSlots{5}{1}
-	\ifthenelse{#1 > 10}{
-		\AddSpellSlots{6}{1}
-		\AddSpellSlots{3}{1}
-		\AddSpellSlots{1}{1}
-	\ifthenelse{#1 > 11}{
-		\AddSpellSlots{5}{1}
-		\AddSpellSlots{6}{1}
-	\ifthenelse{#1 > 12}{
-		\AddSpellSlots{7}{1}
-		\AddSpellSlots{4}{1}
-		\AddSpellSlots{2}{1}
-	\ifthenelse{#1 > 13}{
-		\AddSpellSlots{6}{1}
-		\AddSpellSlots{7}{1}
-	\ifthenelse{#1 > 14}{
-		\AddSpellSlots{8}{1}
-		\AddSpellSlots{5}{1}
-		\AddSpellSlots{3}{1}
-	\ifthenelse{#1 > 15}{
-		\AddSpellSlots{7}{1}
-		\AddSpellSlots{8}{1}
-	\ifthenelse{#1 > 16}{
-		\AddSpellSlots{9}{1}
-		\AddSpellSlots{6}{1}
-		\AddSpellSlots{4}{1}
-	\ifthenelse{#1 > 17}{
-		\AddSpellSlots{8}{1}
-		\AddSpellSlots{9}{1}
-	\ifthenelse{#1 > 18}{
-		\AddSpellSlots{7}{1}
-		\AddSpellSlots{9}{1}
-		\AdddSpellSlots{5}{1}
-	\ifthenelse{#1 > 19}{
-		\AddSpellSlots{8}{1}
-		\AddSpellSlots{9}{1}
-	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
 %Magic Specializations

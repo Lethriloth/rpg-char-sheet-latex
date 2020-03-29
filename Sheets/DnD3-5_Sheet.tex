@@ -26,7 +26,7 @@
 	}
 	\put(0,-1){\renewcommand{\arraystretch}{1.9}
     	\begin{tabular}[b]{D{46} D{23}  D{23}  D{23}  D{23}  D{23}  D{23}  D{23} }
-			\multicolumn{3}{D{111}}{\lfont character Name} & \lfont alignment & \multicolumn{4}{D{121}}{\lfont player Name} \\
+			\multicolumn{3}{D{111}}{\lfont character name} & \lfont alignment & \multicolumn{4}{D{121}}{\lfont player name} \\
 			\multicolumn{4}{D{144}}{\lfont character level} &\multicolumn{2}{D{55}}{\lfont religion} & \multicolumn{2}{D{55}}{\lfont homeland} \\
 			\lfont race & \lfont size & \lfont gender & \lfont age & \lfont height & \lfont weight & \lfont hair & \lfont eyes \\
 	    \end{tabular}
@@ -464,7 +464,6 @@
 	{\Huge  \rmfamily\CharSpellcastingClassOne}%\hrule
 	\vspace{-8\unitlength}
 	\begin{picture}(420,166)
-
 	\put(145,127){%Caster Level
 		\put(0,13){\parbox{110\unitlength}{\scshape\large \CharSpellcastingClassOne{} Caster Level}}
 		\put(110,10){\framebox(30,10){\CleanArabic{CharCLOneCount}}}
@@ -531,32 +530,55 @@
 	\singletitlebox{0}{0}{420}{12}{\CharSpellcastingClassOne{} Spells}
 	\end{picture}%
 	\noindent\vspace{-9\unitlength}%
-	\renewcommand*{\do}[1]{%
-	\csname #1\endcsname
+	\renewcommand{\do}[1]{
+		\CleanArabic{CharSpell#1PreparedCount}& \CleanArabic{CharSpell#1CastCount}& \textit{#1}: \cs{Spell#1ShortDescription} & \cs{Spell#1School} & \cs{Spell#1Duration} & \cs{Spell#1Range}&\cs{Spell#1Save}&\cs{Spell#1SR}\\\hline
 	}
 	\SetLength{\tabcolsep}{.1cm}%
 	\centering%
-	\begin{longtable}{@{}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|p{6cm}|>{\centering}p{2cm}|>{\centering}p{2.6cm}|>{\centering}p{1.6cm}|>{\centering}p{1.5cm}|>{\centering\arraybackslash}p{1.5cm}|@{}}
-	\hline
-	Lvl &Prep&Used& Name and Description & School & Duration & Range & Save & SR\\\hline
-	\endfirsthead
-	\hline
-	Lvl &Prep&Used& Name and Description & School & Duration & Range & Save & SR\\\hline
-	\endhead
-	\endfoot
-	\endlastfoot
-	\dolistloop{\CharCantripsListOne}
-	\dolistloop{\CharFirstSpellsListOne}
-	\dolistloop{\CharSecondSpellsListOne}
-	\dolistloop{\CharThirdSpellsListOne}
-	\dolistloop{\CharFourthSpellsListOne}
-	\dolistloop{\CharFifthSpellsListOne}
-	\dolistloop{\CharSixthSpellsListOne}
-	\dolistloop{\CharSeventhSpellsListOne}
-	\dolistloop{\CharEighthSpellsListOne}
-	\dolistloop{\CharNinthSpellsListOne}
+	
+	\begin{longtable}{@{}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|p{6.1cm}|>{\centering}p{2.1cm}|>{\centering}p{2.82cm}|>{\centering}p{1.7cm}|>{\centering}p{1.6cm}|>{\centering\arraybackslash}p{1.6cm}|@{}}
+	}
+	\SetLength{\tabcolsep}{.1cm}%
+	\centering%
+	
+	\begin{longtable}{@{}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|p{6.1cm}|>{\centering}p{2.1cm}|>{\centering}p{2.82cm}|>{\centering}p{1.7cm}|>{\centering}p{1.6cm}|>{\centering\arraybackslash}p{1.6cm}|@{}}
+		\hline
+		Prep&Used& Name and Description & School & Duration & Range & Save & SR\\\hline
+		\endhead
+		\endfoot
+		\ifcsempty{Char0SpellsListOne}{}{%
+			\multicolumn{8}{c}{\rmfamily \CharSpellcastingClassOne{} Cantrips}\\\hline%
+			\dolistcsloop{Char0SpellsListOne}%
+		}%
+		\ifcsempty{Char1SpellsListOne}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 1\textup{st} Level \CharSpellcastingClassOne{} Spells}\\\hline
+			\dolistcsloop{Char1SpellsListOne}
+		}\ifcsempty{Char2SpellsListOne}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 2\textup{nd} Level \CharSpellcastingClassOne{} Spells}\\\hline
+			\dolistcsloop{Char2SpellsListOne}
+		}\ifcsempty{Char3SpellsListOne}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 3\textup{rd} Level \CharSpellcastingClassOne{} Spells}\\\hline
+			\dolistcsloop{Char3SpellsListOne}
+		}\ifcsempty{Char4SpellsListOne}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 4\textup{th} Level \CharSpellcastingClassOne{} Spells}\\\hline
+			\dolistcsloop{Char4SpellsListOne}
+		}\ifcsempty{Char5SpellsListOne}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 5\textup{th} Level \CharSpellcastingClassOne{} Spells}\\\hline
+			\dolistcsloop{Char5SpellsListOne}
+		}\ifcsempty{Char6SpellsListOne}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 6\textup{th} Level \CharSpellcastingClassOne{} Spells}\\\hline
+			\dolistcsloop{Char6SpellsListOne}
+		}\ifcsempty{Char7SpellsListOne}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 7\textup{th} Level \CharSpellcastingClassOne{} Spells}\\\hline
+			\dolistcsloop{Char7SpellsListOne}
+		}\ifcsempty{Char8SpellsListOne}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 8\textup{th} Level \CharSpellcastingClassOne{} Spells}\\\hline
+			\dolistcsloop{Char8SpellsListOne}
+		}\ifcsempty{Char9SpellsListOne}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 9\textup{th} Level \CharSpellcastingClassOne{} Spells}\\\hline
+			\dolistcsloop{Char9SpellsListOne}
+		}
 	\end{longtable}
-
 }
 
 \ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{}{
@@ -567,7 +589,6 @@
 	{\Huge  \rmfamily\CharSpellcastingClassTwo}%\hrule
 	\vspace{-8\unitlength}
 	\begin{picture}(420,166)
-
 	\put(145,127){%Caster Level
 		\put(0,13){\parbox{110\unitlength}{\scshape\large \CharSpellcastingClassTwo{} Caster Level}}
 		\put(110,10){\framebox(30,10){\CleanArabic{CharCLTwoCount}}}
@@ -614,12 +635,12 @@
 	}
 	\put(145,21){%Focus Schools, Domains, Etc.
 		\singletitlebox{0}{64}{140}{10}{Focus Schools, Domains, Etc.}
-		\put(0,55){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoSpecializationTwoType}}
-		\put(65,52){\framebox(75,10){\CharSpellcastingTwoSpecializationTwo}}
+		\put(0,55){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoSpecializationOneType}}
+		\put(65,52){\framebox(75,10){\CharSpellcastingTwoSpecializationOne}}
 		\put(0,42){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoSpecializationTwoType}}
 		\put(65,39){\framebox(75,10){\CharSpellcastingTwoSpecializationTwo}}
-		\put(0,29){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoProhibitionTwoType}}
-		\put(65,26){\framebox(75,10){\CharSpellcastingTwoProhibitionTwo}}
+		\put(0,29){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoProhibitionOneType}}
+		\put(65,26){\framebox(75,10){\CharSpellcastingTwoProhibitionOne}}
 		\put(0,16){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoProhibitionTwoType}}
 		\put(65,13){\framebox(75,10){\CharSpellcastingTwoProhibitionTwo}}
 		\put(0,3){\parbox{62\unitlength}{\raggedleft\scshape\small \CharSpellcastingTwoProhibitionThreeType}}
@@ -635,125 +656,149 @@
 	\end{picture}%
 	\noindent\vspace{-9\unitlength}%
 	\renewcommand*{\do}[1]{%
-	\csname #1\endcsname
+		\csname #1\endcsname
 	}
 	\SetLength{\tabcolsep}{.1cm}%
 	\centering%
 	\begin{longtable}{@{}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|p{6cm}|>{\centering}p{2cm}|>{\centering}p{2.6cm}|>{\centering}p{1.6cm}|>{\centering}p{1.5cm}|>{\centering\arraybackslash}p{1.3cm}|@{}}
-	\hline
-	Lvl &Prep&Used& Name and Description & School & Duration & Range & Save & SR\\\hline
-	\endfirsthead
-	\hline
-	Lvl &Prep&Used& Name and Description & School & Duration & Range & Save & SR\\\hline
-	\endhead
-	\endfoot
-	\endlastfoot
-	\dolistloop{\CharCantripsListTwo}
-	\dolistloop{\CharFirstSpellsListTwo}
-	\dolistloop{\CharSecondSpellsListTwo}
-	\dolistloop{\CharThirdSpellsListTwo}
-	\dolistloop{\CharFourthSpellsListTwo}
-	\dolistloop{\CharFifthSpellsListTwo}
-	\dolistloop{\CharSixthSpellsListTwo}
-	\dolistloop{\CharSeventhSpellsListTwo}
-	\dolistloop{\CharEighthSpellsListTwo}
-	\dolistloop{\CharNinthSpellsListTwo}
+		\hline
+		Prep&Used& Name and Description & School & Duration & Range & Save & SR\\\hline
+		\endhead
+		\endfoot
+		\ifcsempty{Char0SpellsListTwo}{}{%
+			\multicolumn{8}{c}{\rmfamily \CharSpellcastingClassTwo{} Cantrips}\\\hline%
+			\dolistcsloop{Char0SpellsListTwo}%
+		}%
+		\ifcsempty{Char1SpellsListTwo}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 1\textup{st} Level \CharSpellcastingClassTwo{} Spells}\\\hline
+			\dolistcsloop{Char1SpellsListTwo}
+		}\ifcsempty{Char2SpellsListTwo}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 2\textup{nd} Level \CharSpellcastingClassTwo{} Spells}\\\hline
+			\dolistcsloop{Char2SpellsListTwo}
+		}\ifcsempty{Char3SpellsListTwo}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 3\textup{rd} Level \CharSpellcastingClassTwo{} Spells}\\\hline
+			\dolistcsloop{Char3SpellsListTwo}
+		}\ifcsempty{Char4SpellsListTwo}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 4\textup{th} Level \CharSpellcastingClassTwo{} Spells}\\\hline
+			\dolistcsloop{Char4SpellsListTwo}
+		}\ifcsempty{Char5SpellsListTwo}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 5\textup{th} Level \CharSpellcastingClassTwo{} Spells}\\\hline
+			\dolistcsloop{Char5SpellsListTwo}
+		}\ifcsempty{Char6SpellsListTwo}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 6\textup{th} Level \CharSpellcastingClassTwo{} Spells}\\\hline
+			\dolistcsloop{Char6SpellsListTwo}
+		}\ifcsempty{Char7SpellsListTwo}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 7\textup{th} Level \CharSpellcastingClassTwo{} Spells}\\\hline
+			\dolistcsloop{Char7SpellsListTwo}
+		}\ifcsempty{Char8SpellsListTwo}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 8\textup{th} Level \CharSpellcastingClassTwo{} Spells}\\\hline
+			\dolistcsloop{Char8SpellsListTwo}
+		}\ifcsempty{Char9SpellsListTwo}{}{%
+			\multicolumn{8}{c}{\bf\rmfamily 9\textup{th} Level \CharSpellcastingClassTwo{} Spells}\\\hline
+			\dolistcsloop{Char9SpellsListTwo}
+		}
 	\end{longtable}
-
 }
 
 \newlength{\currentparindent}
-\SetLength{\currentparindent}{\parindent}
+\setlength{\currentparindent}{\parindent}
 \renewcommand{\do}[1]{
-\noindent
-\begin{minipage}{\columnwidth}
-\SetLength{\parindent}{\currentparindent}
-\expandafter\csname Spell#1header\endcsname
-\end{minipage}
-
-\expandafter\csname Spell#1description\endcsname
-
-\vspace{10pt}
+	\noindent
+	\begin{minipage}{\columnwidth}
+		\setlength{\parindent}{\currentparindent}
+		\noindent{\bf\large#1}
+		\\\cs{Spell#1School}
+		\\\textbf{Components} \cs{Spell#1Components}
+		\\\textbf{Casting Time} \cs{Spell#1CastTime}
+		\\\textbf{Range} \cs{Spell#1Range}
+		\\\textbf{\cs{Spell#1EffectType}} \cs{Spell#1Effect}
+		\\\textbf{Duration} \cs{Spell#1Duration}
+		\\\textbf{Saving Throw} \cs{Spell#1Save}; \textbf{Spell Resistance} \cs{Spell#1SR}
+	\end{minipage}
+	
+	\cs{Spell#1LongDescription}
+	
+	\vspace{10pt}
 }
 \justifying
-\ifthenelse{\equal{\CharCantripsListOne}{}}{}{%
+\ifcsempty{Char0SpellsListOne}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc \CharSpellcastingClassOne{} Cantrips}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharCantripsListOne} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char0SpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\CharFirstSpellsListOne}{}}{}{%
+\ifcsempty{Char1SpellsListOne}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 1\textup{st} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharFirstSpellsListOne} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char1SpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\CharSecondSpellsListOne}{}}{}{%
+\ifcsempty{Char2SpellsListOne}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 2\textup{nd} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharSecondSpellsListOne} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char2SpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\CharThirdSpellsListOne}{}}{}{%
+\ifcsempty{Char3SpellsListOne}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 3\textup{rd} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharThirdSpellsListOne} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char3SpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\CharFourthSpellsListOne}{}}{}{%
+\ifcsempty{Char4SpellsListOne}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 4\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharFourthSpellsListOne} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char4SpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\CharFifthSpellsListOne}{}}{}{%
+\ifcsempty{Char5SpellsListOne}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 5\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharFifthSpellsListOne} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char5SpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\CharSixthSpellsListOne}{}}{}{%
+\ifcsempty{Char6SpellsListOne}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 6\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharSixthSpellsListOne} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char6SpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\CharSeventhSpellsListOne}{}}{}{%
+\ifcsempty{Char7SpellsListOne}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 7\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharSeventhSpellsListOne} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char7SpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\CharEighthSpellsListOne}{}}{}{%
+\ifcsempty{Char8SpellsListOne}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 8\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharEighthSpellsListOne} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char8SpellsListOne} \end{multicols}%
 }
-\ifthenelse{\equal{\CharNinthSpellsListOne}{}}{}{%
+\ifcsempty{Char9SpellsListOne}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 9\textup{th} Level \CharSpellcastingClassOne{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharNinthSpellsListOne} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char9SpellsListOne} \end{multicols}%
 }
 
-\ifthenelse{\equal{\CharCantripsListTwo}{}}{}{%
+\ifcsempty{Char0SpellsListTwo}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc \CharSpellcastingClassTwo{} Cantrips}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharCantripsListTwo} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char0SpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\CharFirstSpellsListTwo}{}}{}{%
+\ifcsempty{Char1SpellsListTwTwo}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 1\textup{st} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharFirstSpellsListTwo} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char1SpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\CharSecondSpellsListTwo}{}}{}{%
+\ifcsempty{Char2SpellsListTwo}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 2\textup{nd} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharSecondSpellsListTwo} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char2SpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\CharThirdSpellsListTwo}{}}{}{%
+\ifcsempty{Char3SpellsListTwo}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 3\textup{rd} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharThirdSpellsListTwo} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char3SpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\CharFourthSpellsListTwo}{}}{}{%
+\ifcsempty{Char4SpellsListTwo}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 4\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharFourthSpellsListTwo} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char4SpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\CharFifthSpellsListTwo}{}}{}{%
+\ifcsempty{Char5SpellsListTwo}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 5\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharFifthSpellsListTwo} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char5SpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\CharSixthSpellsListTwo}{}}{}{%
+\ifcsempty{Char6SpellsListTwo}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 6\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharSixthSpellsListTwo} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char6SpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\CharSeventhSpellsListTwo}{}}{}{%
+\ifcsempty{Char7SpellsListTwo}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 7\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharSeventhSpellsListTwo} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char7SpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\CharEighthSpellsListTwo}{}}{}{%
+\ifcsempty{Char8SpellsListTwo}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 8\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharEighthSpellsListTwo} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char8SpellsListTwo} \end{multicols}%
 }
-\ifthenelse{\equal{\CharNinthSpellsListTwo}{}}{}{%
+\ifcsempty{Char9SpellsListTwo}{}{%
 	\newpage\noindent\hrule\vspace{2pt} {\huge\bf\sc 9\textup{th} Level \CharSpellcastingClassTwo{} Spells}\vspace{1pt}\hrule%
-	\begin{multicols}{2} \dolistloop{\CharNinthSpellsListTwo} \end{multicols}%
+	\begin{multicols}{2} \dolistcsloop{Char9SpellsListTwo} \end{multicols}%
 }

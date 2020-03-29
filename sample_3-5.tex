@@ -36,38 +36,25 @@
 	
 	% Racial Mods
 	\ImportCharRace{Human}
-%	\renewcommand\do[1]{
-%		\AddCharLanguage{#1}
-%	}\docsvlist{Common}
+	\renewcommand\do[1]{
+		\AddCharLanguage{#1}
+	}\docsvlist{Common}
 
 	
-%	\ImportCharClass{Barbarian}{20}
-%	\ImportCharClass{Bard}{20}
-%	\ImportCharClass{Cleric}{20}
-%	\ImportCharClass{Druid}{20}
-%	\ImportCharClass{Fighter}{20}
-%	\ImportCharClass{Monk}{20}
-%	\ImportCharClass{Paladin}{20}
-%	\ImportCharClass{Ranger}{20}
-%	\ImportCharClass{Rogue}{20}
-%	\ImportCharClass{Sorcerer}{20}
-%	\ImportCharClass{Wizard}{20}
-	
+	\ImportCharClass{Fighter}{1}
+
 	% Character Level Ability Increases
-	\MiscBonus{Cha}{5}
 	
 	% Feats
 	\AddFeat{Feat}
-	
-	
-	
+
+
 	% items
 	\AddGearItem{Gear}{1}
 	
 	\AddStoredItem{Stored Gear}{1}
-	
-	
-	
+
+
 	% %Weapons
 	\AddAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
 	\AddWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
@@ -106,7 +93,7 @@
 	%\AddWristsItem{}{}{}
 	
 	\AddPlatinum{1}	\AddPlatinum*{2}\AddStoredPlatinum{3}
-	\AddGold{4}		\AddGold*{5}	\AddStoredGold{6}
+	\AddGold{4}	\AddGold*{5}	\AddStoredGold{6}
 	\AddSilver{7}	\AddSilver*{8}	\AddStoredSilver{9}
 	\AddCopper{10}	\AddCopper*{11}	\AddStoredCopper{12}
 	

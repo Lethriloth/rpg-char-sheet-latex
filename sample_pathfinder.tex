@@ -3,11 +3,11 @@
 \usepackage{multicol}
 \usepackage{Systems/Pathfinder/SystemPathfinder}
 \begin{document}
-\input{Systems/Pathfinder/Data/Core_Classes.tex}
 \SetCounter{XP-Mode}{1} % Boolean, automatically calculates next-Level XP
 \SetCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
 \SetCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive Skill point increases.
 \SetCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of Feats
+
 
 \preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
 
@@ -45,18 +45,7 @@
 \AddCharLanguage{#1}
 }\docsvlist{Common}
 
-%\ImportCharClass{Bard}{20}
-%\ImportCharClass{Barbarian}{20}
-%\ImportCharClass{Cleric}{20}
-%\ImportCharClass{Druid}{20}
-%\ImportCharClass{Fighter}{20}
-%\ImportCharClass{Monk}{20}
-%\ImportCharClass{Paladin}{20}
-%\ImportCharClass{Ranger}{20}
-%\ImportCharClass{Rogue}{20}
-%\ImportCharClass{Sorcerer}{20}
-%\ImportCharClass{Wizard}{20}
-
+\ImportCharClass{Fighter}{1}
 
 % Character Level Ability Increases
 
@@ -65,11 +54,10 @@
 \AddFeat*{Bonus Feat}
 
 
-% Ranks
-\def\maxRanks{1}
+% Skill Ranks
 \renewcommand{\do}[1]{
-\AddRanks{#1}{\maxRanks}}
-\docsvlist{CraftOne}
+	\AddRanks{#1}{\value{CharTotalLevelCount}
+} \docsvlist{CraftOne}
 \renewcommand\CharCraftOneName{Crafting}
 \AddRanks{ProfessionOne}{1}
 \renewcommand\CharProfessionOneName{Professionalism}

@@ -12,16 +12,6 @@
 	\AddClassFeature{Familiar (\CharFamiliarType)}
 		\NewDocumentCommand{\AddFamiliar}{m}{
 			\renewcommand{\CharFamiliarType}{##1}
-\newcounter{WitchSkillRanksPerLevelCount}
-\setcounter{WitchSkillRanksPerLevelCount}{2}
-\newcounter{WitchHitDieSize}
-\setcounter{WitchHitDieSize}{6}
-\edef\WitchClassSkillsList{}\forcsvlist{\listadd{\WitchClassSkillsList}}{CraftOne, CraftTwo, CraftThree, Fly, Heal, Intimidate, KnowledgeArcana, KnowledgeHistory, KnowledgeNature, KnowledgePlanes, ProfessionOne, ProfessionTwo, Spellcraft, UseMagicDevice}
-\newcommand{\addWitchClassFeatures}[1]{
-	\def\charFamiliarType{}
-	\addClassFeature{Familiar (\charFamiliarType)}
-		\NewDocumentCommand{\AddFamiliar}{m}{
-			\renewcommand{\charFamiliarType}{##1}
 			\ifthenelse{\equal{##1}{Bat}}{\MiscBonus{Fly}{3}}{}
 			\ifthenelse{\equal{##1}{Cat}}{\MiscBonus{Stealth}{3}}{}
 			\ifthenelse{\equal{##1}{Centipede}}{\MiscBonus{Stealth}{3}}{}

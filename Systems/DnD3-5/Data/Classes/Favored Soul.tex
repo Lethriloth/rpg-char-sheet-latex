@@ -54,9 +54,9 @@
 }
 \newcommand\AddFavoredSoulSpellcasting[1]{
 	\ifthenelse{#1 = 1}{
-		\newSpellcasting[1]{Favored Soul}{#1}{Cha}
+		\NewSpellcasting[1]{Favored Soul}{#1}{Cha}
 	}{
-		\newSpellcasting[#1 / 2]{Favored Soul}{#1}{Cha}
+		\NewSpellcasting[#1 / 2]{Favored Soul}{#1}{Cha}
 	}
 	\AddSpontaneousPrimarySpellcasting{#1}
 	\ifthenelse{#1 > 9}{\AddSpellsKnown{0}{9}}{\AddSpellsKnown{0}{{#1/2 + 4}}}

@@ -68,16 +68,16 @@
 \NewDocumentCommand{\PrintList}{O{, } O{} m}{% Option 1 is list separator (Default ', '), Option 2 is inserted before the very last item of the list (e.g. 'and')
 	\edef\@PrintList{}%
 	\edef\@@PrintList{}%
-	\edef\@PrintListlast{}%
+	\edef\@PrintListLast{}%
 	\renewcommand{\do}[1]{%
 		\let\@@PrintList\@PrintList%
-		\edef\@PrintListlast{##1}%
+		\edef\@PrintListLast{##1}%
 		\listadd{\@PrintList}{##1}%
 	}\dolistloop{#3}%
 	\renewcommand{\do}[1]{%
 		##1#1%
 	}\dolistloop{\@@PrintList}%
-	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintListlast%
+	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintListLast%
 }
 \NewDocumentCommand{\PrintCSVList}{O{, } O{} m}{% Option 1 is list separator (Default ', '), Option 2 is inserted before the very last item of the list (e.g. 'and')
 	\edef\@PrintList{}%
@@ -226,7 +226,7 @@
   \advance\xCount by #4
 }
 \newcommand\PlusMinus[1]{\ifthenelse{\value{#1}>0}{+\arabic{#1}}{\arabic{#1}}}
-\newcommand\CleanPM[1]{\ifthenelse{\value{#1}=0}{}{\plusminus{#1}}}
+\newcommand\CleanPM[1]{\ifthenelse{\value{#1}=0}{}{\PlusMinus{#1}}}
 
 %% Attribute box dimensions
 \NewCount\boxwidth\boxwidth=15
@@ -493,6 +493,21 @@
 	\ifnumcomp{\pdf@strcmp{#4}{#1}}<{0}
 	{\listadd#2{#4}}
 	{\listadd#3{#4}}
+}
+
+\newcommand{\listcsinsert}[2]{
+	\edef\@tmplistoneforlistinsert{}
+	\edef\@tmplisttwoforlistinsert{}
+	\forlistcsloop{\listinsert@s{#2}{\@tmplistoneforlistinsert}{\@tmplisttwoforlistinsert}}{#1}
+	\csedef{#1}{}
+	\forlistloop{\listcsadd{#1}}{\@tmplistoneforlistinsert}
+	\listcsadd{#1}{#2}
+	\forlistloop{\listcsadd{#1}}{\@tmplisttwoforlistinsert}
+}
+
+% Shortcut for entering csnames faster
+\ProvideDocumentCommand{\cs}{m}{
+	\csname #1\endcsname
 }
 
 %%Debug and Alerts%%
