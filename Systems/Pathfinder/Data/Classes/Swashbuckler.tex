@@ -1,0 +1,53 @@
+\def\SwashbucklerBAB{g}
+\def\SwashbucklerFort{p}
+\def\SwashbucklerRef{g}
+\def\SwashbucklerWill{p}
+\newcounter{SwashbucklerSkillRanksPerLevelCount}
+\setcounter{SwashbucklerSkillRanksPerLevelCount}{4}
+\newcounter{SwashbucklerHitDieSize}
+\setcounter{SwashbucklerHitDieSize}{10}
+\edef\SwashbucklerClassSkillsList{}\forcsvlist{\listadd{\SwashbucklerClassSkillsList}}{Acrobatics, Bluff, Climb, CraftOne, CraftTwo, CraftThree, Diplomacy, EscapeArtist, Intimidate, KnowledgeLocal, KnowledgeNobility, Perception, PerformOne, PerformTwo, Profession, Ride, SenseMotive, SleightOfHand, Swim}
+\newcommand{\AddSwashbucklerClassFeatures}[1]{
+		\AddLimitedUse{Panache}{\domath{\value{CharChaModCount} + \value{CharPanachePointsCount}}}
+			\newCounter{CharPanachePointsCount}
+		\AddClassFeature{Deeds\forlistloop{\\~~~~}{\CharSwashbucklerDeedsList}}
+			\edef\CharSwashbucklerDeedsList{}
+				\newcommand{\AddDeed}[1]{\listAdd{\CharSwashbucklerDeedsList}{##1}}
+		\AddDeed{Derring-Do}
+		\AddDeed{Dodging Panache}
+		\AddDeed{Opportune Parry and Riposte}
+		\AddClassFeature{Swashbuckler Finesse}
+	\ifthenelse{#1 > 1}{
+		\AddLimitedUse{Charmed Life}{\domath{2 + (#1 + 2) / 4}}
+	\ifthenelse{#1 > 2}{
+		\AddClassFeature{Nimble}
+			\preto{\Initialise}{\ifthenelse{\equal\CharArmorType H}{}{\ifthenelse{\equal\CharArmorType M }{}{\AddDodgeBonus{(#1 + 1) / 4}}}}
+		\AddDeed{Kip-Up}
+		\AddDeed{Menacing Swordplay}
+		\AddDeed{Precise Strike}
+		\AddDeed{Swashbuckler Initiative}
+	\ifthenelse{#1 > 3}{
+		\AddToCounter{CharBonusFeatsCount}{#1 / 4}
+		\AddClassFeature{Swashbuckler Bonus Feat\ifthenelse{#1 > 7}{ $\times\domath{#1 / 4}$}{}}
+	\ifthenelse{#1 > 4}{
+		\AddClassFeature{Swashbuckler Weapon Training +\domath{(#1 - 1) / 4}}
+	\ifthenelse{#1 > 6}{
+		\AddDeed{Swashbuckler's Grace}
+		\AddDeed{Superior Feint}
+		\AddDeed{Targeted Strike}
+	\ifthenelse{#1 > 10}{
+		\AddDeed{Bleeding Wound}
+		\AddDeed{Evasive}
+		\AddDeed{Subtle Blade}
+	\ifthenelse{#1 > 14}{
+		\AddDeed{Dizzying Defense}
+		\AddDeed{Perfect Thrust}
+		\AddDeed{Swashbuckler's Edge}
+	\ifthenelse{#1 > 18}{
+		\AddDeed{Cheat Death}
+		\AddDeed{Deadly Stab}
+		\AddDeed{Stunning Stab}
+	\ifthenelse{#1 > 19}{
+		\AddClassFeature{Swashbuckler Weapon Mastery}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}

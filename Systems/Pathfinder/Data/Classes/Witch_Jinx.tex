@@ -2,26 +2,16 @@
 \def\WitchFort{p}
 \def\WitchRef{p}
 \def\WitchWill{g}
-\NewCounter{WitchSkillRanksPerLevelCount}
-\SetCounter{WitchSkillRanksPerLevelCount}{2}
-\NewCounter{WitchHitDieSize}
-\SetCounter{WitchHitDieSize}{6}
-\edef\WitchClassSkillsList{}\forcsvlist\listadd{\WitchClassSkillsList}{Craft, Fly, Heal, Intimidate, KnowledgeArcana, KnowledgeHistory, KnowledgeNature, KnowledgePlanes, Profession, Spellcraft, UseMagicDevice}
+\newcounter{WitchSkillRanksPerLevelCount}
+\setcounter{WitchSkillRanksPerLevelCount}{2}
+\newcounter{WitchHitDieSize}
+\setcounter{WitchHitDieSize}{6}
+\edef\WitchClassSkillsList{}\forcsvlist{\listadd{\WitchClassSkillsList}}{Bluff, CraftOne, CraftTwo, CraftThree, Disguise, Fly, Heal, Intimidate, KnowledgeArcana, KnowledgeHistory, KnowledgeNature, KnowledgePlanes, ProfessionOne, ProfessionTwo, SenseMotive, Spellcraft, UseMagicDevice}
 \newcommand{\AddWitchClassFeatures}[1]{
 	\def\CharFamiliarType{}
 	\AddClassFeature{Familiar (\CharFamiliarType)}
 		\NewDocumentCommand{\AddFamiliar}{m}{
 			\renewcommand{\CharFamiliarType}{##1}
-\newcounter{WitchSkillRanksPerLevelCount}
-\setcounter{WitchSkillRanksPerLevelCount}{2}
-\newcounter{WitchHitDieSize}
-\setcounter{WitchHitDieSize}{6}
-\edef\WitchClassSkillsList{}\forcsvlist{\listadd{\WitchClassSkillsList}}{CraftOne, CraftTwo, CraftThree, Fly, Heal, Intimidate, KnowledgeArcana, KnowledgeHistory, KnowledgeNature, KnowledgePlanes, ProfessionOne, ProfessionTwo, Spellcraft, UseMagicDevice}
-\newcommand{\addWitchClassFeatures}[1]{
-	\def\charFamiliarType{}
-	\addClassFeature{Familiar (\charFamiliarType)}
-		\NewDocumentCommand{\AddFamiliar}{m}{
-			\renewcommand{\charFamiliarType}{##1}
 			\ifthenelse{\equal{##1}{Bat}}{\MiscBonus{Fly}{3}}{}
 			\ifthenelse{\equal{##1}{Cat}}{\MiscBonus{Stealth}{3}}{}
 			\ifthenelse{\equal{##1}{Centipede}}{\MiscBonus{Stealth}{3}}{}
@@ -55,7 +45,7 @@
 			\ifthenelse{\equal{##1}{Weasel}}{\MiscBonus{Reflex}{2}}{}
 		}
 	\def\CharPatronType{}
-	\addClassFeature{\CharPatronType Patron}
+	\AddClassFeature{\CharPatronType Patron}
 		\NewDocumentCommand{\AddPatron}{m m}{
 			\renewcommand{\CharPatronType}{##1}
 			\setcounter{@i}{0}
@@ -69,14 +59,16 @@
 			\docsvlist{##2}
 		}
 	\edef\CharHexList{}
+	\AddClassFeature{Spell Awareness}
+		\AddConditionalSkillMod{+\domath{\value{CharWitchClassLevelCount} / 2} to Spellcraft to identify spells cast on her}
 	\newcounter{CharHexDCCount}
 	\setcounter{CharHexDCCount}{10 + #1 / 2}
 	\AddClassFeature{Hexes: (DC \arabic{CharHexDCCount})\forlistloop{\\~~~~}{\CharHexList}}
 		\newCounter{CharHexCount}
-		\addtocounter{CharHexCount}{#1 / 2 + 1}
+		\AddToCounter{CharHexCount}{#1 / 2 + 1}
 		\NewDocumentCommand{\AddHex}{m}{
 			\listinsert{\CharHexList}{##1}
-			\addToCounter{CharHexCount}{-1}
+			\AddToCounter{CharHexCount}{-1}
 		}
 		\gappto{\Initialize}{
 		\addtocounter{CharHexDCCount}{\value{CharIntModCount}}
@@ -84,14 +76,22 @@
 		\gappto{\RunChecks}{%
 			%%CHECK HEXES
 			\ifthenelse{\value{CharHexCount} < 0}{
-				\addnotice{\domath{-\value{CharHexCount}} too many hexes}
+				\AddNotice{\domath{-\value{CharHexCount}} too many hexes}
 			}{
 				\ifthenelse{\value{CharHexCount} > 0}{
-					\addnotice{Choose \arabic{CharHexCount} more hexes}
+					\AddNotice{Choose \arabic{CharHexCount} more hexes}
 				}{}}
 		}
 	\NewDocumentCommand{\AddWitchSpellcasting}{m}{
-		\NewSpellcasting[(##1 + 1) / 2]{Witch}{##1}{Int}
+		\newSpellcasting[(##1 + 1) / 2]{Witch}{##1}{Int}
 		\AddPrimarySpellcasting{##1}
 	}
+	\ifthenelse{#1 > 1}{
+		\AddHex{Jinx-Eating}
+		\AddLimitedUse{Jinx-Eating}{\domath{\value{CharIntModCount} + 3}}
+	\ifthenelse{#1 > 5}{
+		\AddHex{Jinx-Gorging}
+	\ifthenelse{#1 > 9}{
+		\AddHex{Jinx-Feast}
+	}{}}{}}{}	
 }

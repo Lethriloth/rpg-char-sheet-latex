@@ -253,7 +253,7 @@
 \newcounter{HP-Mode}
 \edef\CharClassesList{}
 \NewDocumentCommand{\ImportCharClass}{s O{} m m}{
-	\input{\datafolder/Classes/#3.tex}
+	\input{"\datafolder/Classes/#3.tex"}
 	\AddDebug{IMPORTCHARCLASS: add #4 Levels of #3}
 	\ifthenelse{\equal{#2}{}}{
 		\appto\CharLevel{\capitalize{#3} #4 }
@@ -356,11 +356,14 @@
 \newcommand\isClassSkill[1]{
 	\ifthenelse{\equal{#1}{KnowledgeAll}}{
 		\forlistloop{\isClassSkill}{\KnowledgeSkillsList}
-	}{\ifthenelse{\equal{#1}{Craft}}{
+	}{
+	\ifthenelse{\equal{#1}{Craft}}{
 		\forcsvlist{\isClassSkill}{CraftOne, CraftTwo, CraftThree}
-	}{\ifthenelse{\equal{#1}{Perform}}{
+	}{
+	\ifthenelse{\equal{#1}{Perform}}{
 		\forcsvlist{\isClassSkill}{PerformOne, PerformTwo}
-	}{\ifthenelse{\equal{#1}{Profession}}{
+	}{
+	\ifthenelse{\equal{#1}{Profession}}{
 		\forcsvlist{\isClassSkill}{ProfessionOne, ProfessionTwo}
 	}{
 		\SetCounter{Char#1ClassSkillBool}{1}
@@ -797,6 +800,53 @@
 
 %%%% Spells %%%%
 
+\ProvideDocumentCommand{\AddSpell}{o m m}{%[Class]{Level}{Spell Name}
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{
+		\listcsinsert{Char#2SpellsListOne}{#3}
+	}{
+		\listcsinsert{Char#2SpellsListTwo}{#3}
+	}
+	%% Implementation for when the switch to class-specific spell lists (instead of SpellcastingClassOne/SpellcastingClassTwo) is made
+	%	\IfValueTF #1 {
+	%		\listcsinsert{Char#1#2SpellsList}{#3}
+	%		\StepCounter{Char#1#2SpellsActuallyKnown}
+	%	}{
+	%		\listcsinsert{Char\CharCurrentSpellcastingClass #2SpellsList}{#3}
+	%		\StepCounter{Char\CharCurrentSpellcastingClass #2SpellsActuallyKnown}
+	%	}
+}
+
+\newcommand{\DeclareSpellDescription}[2]{
+	\expandafter\newcommand\csname Spell#1LongDescription\endcsname{#2}
+}
+
+\ProvideDocumentCommand{\DeclareSpell}{m >{\SplitArgument{7}{|}}m O{}}{%{Name}{Attributes}[Short desc]
+	\csdef{Spell#1ShortDescription}{#3}
+	\DeclareSpellInternal{#1}#2%
+	\newCounter{CharSpell#1PreparedCount}%
+	\newCounter{CharSpell#1CastCount}%
+}
+
+\ProvideDocumentCommand{\DeclareSpellInternal}{m m m m m m m m m}{%
+	\csdef{Spell#1School}{#2}%
+	\csdef{Spell#1Components}{#3}%
+	\csdef{Spell#1CastTime}{#4}%
+	\csdef{Spell#1Range}{#5}%
+	\DeclareSpellEffect{#1}{#6}%
+	\csdef{Spell#1Duration}{#7}%
+	\csdef{Spell#1Save}{#8}%
+	\csdef{Spell#1SR}{#9}%
+}
+\ProvideDocumentCommand{\DeclareSpellEffectInternal}{m m m}{%
+	\csdef{Spell#1EffectType}{#2}%
+	\csdef{Spell#1Effect}{#3}%
+}
+
+\ProvideDocumentCommand{\DeclareSpellEffect}{m >{\SplitArgument{1}{:}}m}{%
+	\DeclareSpellEffectInternal{#1}#2%
+}
+
+
 \newcommand{\AddPrimarySpellcasting}[1]{
 	\AddSpellSlots{0}{3}
 	\AddSpellSlots{1}{1}
@@ -925,79 +975,79 @@
 	
 }
 \newcommand{\AddTwoThirdsSpellcasing}[1]{
-	\AddSpellSlots{0}{2}
-	\AddSpellsknown{0}{4}
+		\AddSpellSlots{0}{2}
+		\AddSpellsKnown{0}{4}
 	\ifthenelse{#1 > 1}{
 		\AddSpellSlots{0}{1}
-		\AddSpellsknown{0}{1}
-		\AddSpellsknown{1}{2}
-		\ifthenelse{#1 > 2}{
-			\AddSpellSlots{1}{1}
-			\AddSpellsknown{0}{1}
-			\AddSpellsknown{1}{1}
-			\ifthenelse{#1 > 3}{
-				\AddSpellSlots{1}{1}
-				\AddSpellsknown{2}{2}
-				\ifthenelse{#1 > 4}{
-					\AddSpellSlots{1}{1}
-					\AddSpellSlots{2}{1}
-					\AddSpellsknown{1}{1}
-					\AddSpellsknown{2}{1}
-					\ifthenelse{#1 > 5}{
-						\AddSpellSlots{2}{1}
-						\ifthenelse{#1 > 6}{
-							\AddSpellsknown{2}{1}
-							\AddSpellsknown{3}{2}
-							\ifthenelse{#1 > 7}{
-								\AddSpellSlots{2}{1}
-								\AddSpellSlots{3}{1}
-								\AddSpellsknown{3}{1}
-								\ifthenelse{#1 > 8}{
-									\AddSpellSlots{3}{1}
-									\ifthenelse{#1 > 9}{
-										\AddSpellsknown{3}{1}
-										\AddSpellsknown{4}{2}
-										\ifthenelse{#1 > 10}{
-											\AddSpellSlots{3}{1}
-											\AddSpellSlots{4}{1}
-											\AddSpellsknown{4}{1}
-											\ifthenelse{#1 > 11}{
-												\AddSpellSlots{4}{1}
-												\ifthenelse{#1 > 12}{
-													\AddSpellsknown{4}{1}
-													\AddSpellsknown{5}{2}
-													\ifthenelse{#1 > 13}{
-														\AddSpellSlots{0}{1}
-														\AddSpellSlots{4}{1}
-														\AddSpellSlots{5}{1}
-														\AddSpellsknown{5}{1}
-														\ifthenelse{#1 > 14}{
-															\AddSpellSlots{1}{1}
-															\AddSpellSlots{5}{1}
-															\ifthenelse{#1 > 15}{
-																\AddSpellSlots{2}{1}
-																\AddSpellsknown{1}{1}
-																\AddSpellsknown{5}{1}
-																\AddSpellsknown{6}{2}
-																\ifthenelse{#1 > 16}{
-																	\AddSpellSlots{3}{1}
-																	\AddSpellSlots{5}{1}
-																	\AddSpellSlots{6}{1}
-																	\AddSpellsknown{2}{1}
-																	\AddSpellsknown{6}{1}
-																	\ifthenelse{#1 > 17}{
-																		\AddSpellSlots{4}{1}
-																		\AddSpellSlots{6}{1}
-																		\AddSpellsknown{3}{1}
-																		\ifthenelse{#1 > 18}{
-																			\AddSpellSlots{5}{1}
-																			\AddSpellSlots{6}{1}
-																			\AddSpellsknown{4}{1}
-																			\AddSpellsknown{6}{1}
-																			\ifthenelse{#1 > 19}{
-																				\AddSpellSlots{6}{1}
-																				\AddSpellsknown{5}{1}
-																			}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+		\AddSpellsKnown{0}{1}
+		\AddSpellsKnown{1}{2}
+	\ifthenelse{#1 > 2}{
+		\AddSpellSlots{1}{1}
+		\AddSpellsKnown{0}{1}
+		\AddSpellsKnown{1}{1}
+	\ifthenelse{#1 > 3}{
+		\AddSpellSlots{1}{1}
+		\AddSpellsKnown{2}{2}
+	\ifthenelse{#1 > 4}{
+		\AddSpellSlots{1}{1}
+		\AddSpellSlots{2}{1}
+		\AddSpellsKnown{1}{1}
+		\AddSpellsKnown{2}{1}
+	\ifthenelse{#1 > 5}{
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 6}{
+		\AddSpellsKnown{2}{1}
+		\AddSpellsKnown{3}{2}
+	\ifthenelse{#1 > 7}{
+		\AddSpellSlots{2}{1}
+		\AddSpellSlots{3}{1}
+		\AddSpellsKnown{3}{1}
+	\ifthenelse{#1 > 8}{
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 9}{
+		\AddSpellsKnown{3}{1}
+		\AddSpellsKnown{4}{2}
+	\ifthenelse{#1 > 10}{
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{4}{1}
+		\AddSpellsKnown{4}{1}
+	\ifthenelse{#1 > 11}{
+		\AddSpellSlots{4}{1}
+	\ifthenelse{#1 > 12}{
+		\AddSpellsKnown{4}{1}
+		\AddSpellsKnown{5}{2}
+	\ifthenelse{#1 > 13}{
+		\AddSpellSlots{0}{1}
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{5}{1}
+		\AddSpellsKnown{5}{1}
+	\ifthenelse{#1 > 14}{
+		\AddSpellSlots{1}{1}
+		\AddSpellSlots{5}{1}
+	\ifthenelse{#1 > 15}{
+		\AddSpellSlots{2}{1}
+		\AddSpellsKnown{1}{1}
+		\AddSpellsKnown{5}{1}
+		\AddSpellsKnown{6}{2}
+	\ifthenelse{#1 > 16}{
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{6}{1}
+		\AddSpellsKnown{2}{1}
+		\AddSpellsKnown{6}{1}
+	\ifthenelse{#1 > 17}{
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{6}{1}
+		\AddSpellsKnown{3}{1}
+	\ifthenelse{#1 > 18}{
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{6}{1}
+		\AddSpellsKnown{4}{1}
+		\AddSpellsKnown{6}{1}
+	\ifthenelse{#1 > 19}{
+		\AddSpellSlots{6}{1}
+		\AddSpellsKnown{5}{1}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 \newcommand{\AddHalfSpellcasting}[1]{
 	\ifthenelse{#1 > 5}{
@@ -1038,6 +1088,12 @@
 	\expandafter\edef\csname CharEighthSpellsList#1\endcsname{}
 	\expandafter\edef\csname CharNinthSpellsList#1\endcsname{}
 }\docsvlist{One,Two}
+
+
+\renewcommand{\do}[1]{
+	\expandafter\edef\csname Char#1SpellsListOne\endcsname{}
+	\expandafter\edef\csname Char#1SpellsListTwo\endcsname{}
+}\docsvlist{0,1,2,3,4,5,6,7,8,9}
 
 
 \def\AddCantripOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
@@ -1472,6 +1528,15 @@
 		\DoMath*{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
 		\ifthenelse{\value{CharSpellcastingClassOneMaxSpellLevelCount} > \value{@DoMathCounter}}{
 			\SetCounter{CharSpellcastingClassOneMaxSpellLevelCount}{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
+			\AddDebug{-Max Spell Level set to \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
+		\AddDebug{Adjusting max Spell Level for \CharSpellcastingClassOne}
+		\AddDebug{Ability = \CharSpellcastingClassOneAbility}
+		\AddDebug{-Ability score = \arabic{Char\CharSpellcastingClassOneAbility Count}}
+		\AddDebug{-New max Spell Level = \domath{\value{Char\CharSpellcastingClassOneAbility Count} - 10}}
+		\AddDebug{-Old max Spell Level = \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
+		\domath*{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
+		\ifthenelse{\value{CharSpellcastingClassOneMaxSpellLevelCount} > \value{@domathCounter}}{
+			\setCounter{CharSpellcastingClassOneMaxSpellLevelCount}{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
 			\AddDebug{-Max Spell Level set to \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
 		}{
 			\AddDebug{-No adjustment needed}

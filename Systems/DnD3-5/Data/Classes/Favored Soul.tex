@@ -1,0 +1,81 @@
+\expandafter\def\csname Favored SoulBAB\endcsname{a}
+\expandafter\def\csname Favored SoulFort\endcsname{g}
+\expandafter\def\csname Favored SoulRef\endcsname{g}
+\expandafter\def\csname Favored SoulWill\endcsname{g}
+\NewCounter{Favored SoulSkillRanksPerLevelCount}
+\SetCounter{Favored SoulSkillRanksPerLevelCount}{2}
+\NewCounter{Favored SoulHitDieSize}
+\SetCounter{Favored SoulHitDieSize}{8}
+\expandafter\edef\csname Favored SoulClassSkillsList\endcsname{}
+\forcsvlist{\listcsadd{Favored SoulClassSkillsList}}{Concentration, Craft, Diplomacy, Heal, Jump, KnowledgeArcana, Profession, SenseMotive, Spellcraft}
+\expandafter\newcommand\csname AddFavored SoulClassFeatures\endcsname[1]{
+	\ifthenelse{#1 > 2}{
+		\AddClassFeature{Deity's Weapon Focus}\stepcounter{CharBonusFeatsCount}
+	\ifthenelse{#1 > 4}{
+		\AddClassFeature{Energy Resistance (\PrintList{\CharFavoredSoulEnergyResistances})}
+			\edef\CharFavoredSoulEnergyResistances{}
+			\newcounter{CharFavoredSoulEnergyResistanceCount}
+				\ifthenelse{#1 > 19}{
+					\setcounter{CharFavoredSoulEnergyResistanceCount}{3}}{		\setcounter{CharFavoredSoulEnergyResistanceCount}{#1 / 5}}
+			\newcommand\ChooseFavoredSoulEnergyResistance[1]{
+				\Addtocounter{CharFavoredSoulEnergyResistanceCount}{-1}
+				\listadd{\CharFavoredSoulEnergyResistances}{##1}
+				\AddResistance{##1}{10}
+			}	
+			\appto{\RunChecks}{%
+				%%Check Favored Soul energy resistances
+				\ifthenelse{\value{CharFavoredSoulEnergyResistanceCount} > 0}{
+					\AddNotice{Choose \arabic{CharFavoredSoulEnergyResistanceCount} more energy resistances. Use the command \texttt{$\backslash$ChooseFavoredSoulEnergyResistance\{Energy Type\}}}
+				}{
+					\ifthenelse{\value{CharFavoredSoulEnergyResistanceCount} < 0}{
+						\AddNotice{\domath{-\value{CharFavoredSoulEnergyResistanceCount}} too many favored soul energy resistances}
+					}{}}
+			}
+	\ifthenelse{#1 > 11}{
+		\AddClassFeature{Deity's Weapon Specialization}\stepcounter{CharBonusFeatsCount}
+	\ifthenelse{#1 > 16}{
+		\AddClassFeature{Wings}
+			\AddFlySpeed{60}{Good}
+	\ifthenelse{#1 > 19}{
+		\AddClassFeature{Damage Reduction (\CharFavoredSoulDamageReduction)}
+		\newcommand\CharFavoredSoulDamageReduction{}
+		\newcommand\ChooseFavoredSoulDamageReduction[1]{
+			\AddDR{##1}{10}
+			\renewcommand{\CharFavoredSoulDamageReduction}{##1}
+		}
+		\ifthenelse{\equal{\CharFavoredSoulDamageReduction}{}}{
+			\AddNotice{Choose a favored soul damage reduction. Use the command \texttt{$\backslash$ChooseFavoredSoulDamageReduction\{Cold Iron\}} (if chaotic) or \texttt{$\backslash$ChooseFavoredSoulDamageReduction\{Silver\}} (if lawful)}
+		}{
+			\ifthenelse{\equal{\CharFavoredSoulDamageReduction}{Cold Iron}}{}{
+				\ifthenelse{\equal{\CharFavoredSoulDamageReduction}{Silver}}{}{
+					\AddNotice{Unrecognized favored soul DR type: ``\CharFavoredSoulDamageReduction'' is not ``Cold Iron'' or ''Silver''}
+		}}}
+	}{}}{}}{}}{}}{}
+}
+\newcommand\AddFavoredSoulSpellcasting[1]{
+	\ifthenelse{#1 = 1}{
+		\newSpellcasting[1]{Favored Soul}{#1}{Cha}
+	}{
+		\newSpellcasting[#1 / 2]{Favored Soul}{#1}{Cha}
+	}
+	\AddSpontaneousPrimarySpellcasting{#1}
+	\ifthenelse{#1 > 9}{\AddSpellsKnown{0}{9}}{\AddSpellsKnown{0}{{#1/2 + 4}}}
+	\ifthenelse{#1 > 6}{\AddSpellsKnown{1}{6}}{\AddSpellsKnown{1}{(#1 + 5) / 2}}
+	\ifthenelse{#1 > 3}{
+		\ifthenelse{#1 > 9}{\AddSpellsKnown{2}{6}}{\AddSpellsKnown{2}{#1 / 2 + 1}}
+	\ifthenelse{#1 > 5}{
+		\ifthenelse{#1 > 11}{\AddSpellsKnown{3}{6}}{\AddSpellsKnown{3}{#1 / 2}}
+	\ifthenelse{#1 > 7}{
+		\ifthenelse{#1 > 13}{\AddSpellsKnown{4}{6}}{\AddSpellsKnown{4}{#1 / 2 - 1}}
+	\ifthenelse{#1 > 9}{
+		\ifthenelse{#1 > 15}{\AddSpellsKnown{5}{6}}{\AddSpellsKnown{5}{#1 / 2 - 2}}
+	\ifthenelse{#1 > 11}{
+		\ifthenelse{#1 > 17}{\AddSpellsKnown{6}{6}}{\AddSpellsKnown{6}{#1 / 2 - 3}}
+	\ifthenelse{#1 > 13}{
+		\AddSpellsKnown{7}{#1 / 2 - 4}
+	\ifthenelse{#1 > 15}{
+		\AddSpellsKnown{8}{#1 / 2 - 5}
+	\ifthenelse{#1 > 17}{
+		\AddSpellsKnown{9}{#1 / 2 - 6}
+	}{}}{}}{}}{}}{}}{}}{}}{}
+}
