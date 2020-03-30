@@ -9,16 +9,16 @@
 \edef\ClericClassSkillsList{}
 \forcsvlist{\listadd{\ClericClassSkillsList}}{Appraise, Craft, Diplomacy, Heal, KnowledgeArcana, KnowledgeHistory, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion, Linguistics, Profession, SenseMotive, Spellcraft}
 \newcommand{\AddClericClassFeatures}[1]{
-	\NewCounter{CharChannelenergyusesCount}
-	\SetCounter{CharChannelenergyusesCount}{3 + \value{CharChaModCount}}
-	\AddLimitedUse{Channel Energy \DoMath{(#1 + 1) / 2}d6}{\arabic{CharChannelenergyusesCount}}
 	\newcommand{\AddClericSpellcasting}[3]{
-		\newSpellcasting[(##1 + 1) / 2]{Cleric}{##1}{wis}
+		\NewSpellcasting[(##1 + 1) / 2]{Cleric}{#1}{Wis}
 		\AddPrimarySpellcasting{##1}
 		\ForLoop{@i}{1}{\value{@i}<10}{
-			\AddBonusSpellslots{\arabic{@i}}{1}
+			\AddBonusSpellSlots{\arabic{@i}}{1}
 		}
-		\AddSpellcastingSpecialization[Domain]{##2}
-		\AddSpellcastingSpecialization[Domain]{##3}
+		\AddSpellcastingSpecialization[Domain]{#2}
+		\AddSpellcastingSpecialization[Domain]{#3}
 	}
+	\NewCounter{CharChannelEnergyUsesCount}
+	\SetCounter{CharChannelEnergyUsesCount}{3 + \value{CharChaModCount}}
+	\AddLimitedUse{Channel Energy \DoMath{(#1 + 1) / 2}d6}{\arabic{CharChannelEnergyUsesCount}}
 }

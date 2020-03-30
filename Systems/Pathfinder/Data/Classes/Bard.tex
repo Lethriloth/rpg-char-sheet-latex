@@ -63,7 +63,7 @@
 	\ifthenelse{#1 > 14}{
 		\listadd{\CharBardicPerformanceList}{Inspire Heroics}
 	\ifthenelse{#1 > 15}{
-		\forlistloop{\isClassSkill}{\SkillsList}
+		\forlistloop{\IsClassSkill}{\SkillsList}
 	\ifthenelse{#1 > 18}{
 		\AddConditionalSkillMod{Can take 10 on any Skill check.}
 	\ifthenelse{#1 > 19}{
@@ -76,7 +76,7 @@
 		\ifthenelse{##1 < 10}{\SetCounter{@i}{3}}{
 		\ifthenelse{##1 < 13}{\SetCounter{@i}{4}}{
 		\ifthenelse{##1 < 16}{\SetCounter{@i}{5}}{\SetCounter{@i}{6}}}}}}}
-		\newSpellcasting[\value{@i}]{Bard}{##1}{Cha}
+		\NewSpellcasting[\value{@i}]{Bard}{##1}{Cha}
 		\AddTwoThirdsSpellcasing{##1}
 	}
 }

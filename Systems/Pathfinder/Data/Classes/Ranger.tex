@@ -26,7 +26,7 @@
 			\appto{\RunChecks}{%
 				%%Check Favored Enemies
 				\ifthenelse{\value{CharFavoredEnemiesCount} > 0}{
-					\AddWarning{Choose \arabic{CharFavoredEnemiesCount} more favored enemies. Use the command \texttt{$\backslash$addfavoredenemy\{enemy\}\{Bonus\}}}
+					\AddWarning{Choose \arabic{CharFavoredEnemiesCount} more favored enemies. Use the command \texttt{$\backslash$AddFavoredEnemy\{enemy\}\{Bonus\}}}
 				}{
 				\ifthenelse{\value{CharFavoredEnemiesCount} < 0}{
 					\AddWarning{\DoMath{-\value{CharFavoredEnemiesCount}} too many favored enemies}
@@ -50,8 +50,8 @@
 			}
 			\appto{\RunChecks}{%
 				%Check Ranger Combat Style
-				\ifthenelse{\equal{\Charcombatstyle}{}}{
-					\AddWarning{Choose a Ranger combat style. Use the command \texttt{$\backslash$addcombatstyle\{combat style\}}}
+				\ifthenelse{\equal{\CharCombatStyle}{}}{
+					\AddWarning{Choose a Ranger combat style. Use the command \texttt{$\backslash$AddCombatStyle\{combat style\}}}
 				}{}
 			}
 			\AddToCounter{CharBonusFeatsCount}{(#1 + 2) / 4}
@@ -73,7 +73,7 @@
 			\appto{\RunChecks}{%
 				%%Check Favored Terrains
 				\ifthenelse{\value{CharFavoredTerrainsCount} > 0}{
-					\AddWarning{Choose \arabic{CharFavoredTerrainsCount} more favored terrains. Use the command \texttt{$\backslash$addfavoredterrain\{terrain\}\{Bonus\}}}
+					\AddWarning{Choose \arabic{CharFavoredTerrainsCount} more favored terrains. Use the command \texttt{$\backslash$AddFavoredTerrain\{terrain\}\{Bonus\}}}
 				}{
 				\ifthenelse{\value{CharFavoredTerrainsCount} < 0}{
 					\AddWarning{\DoMath{-\value{CharFavoredTerrainsCount}} too many favored terrains}
@@ -98,7 +98,7 @@
 			\ifthenelse{##1 > 13}{
 				\StepCounter{@i}
 			}{}}{}}{}}{}
-			\newSpellcasting*[\value{@i}]{Ranger}{##1 / 2}{wis}
+			\NewSpellcasting*[\value{@i}]{Ranger}{##1 / 2}{Wis}
 			\AddHalfSpellcasting{##1}
 		}
 	\ifthenelse{#1 > 6}{

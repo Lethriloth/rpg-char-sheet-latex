@@ -57,7 +57,7 @@
 		\ifthenelse{##1 < 10}{\SetCounter{@i}{3}}{
 		\ifthenelse{##1 < 13}{\SetCounter{@i}{4}}{
 		\ifthenelse{##1 < 16}{\SetCounter{@i}{5}}{\SetCounter{@i}{6}}}}}}}
-		\newSpellcasting[\value{@i}]{Bard}{##1}{cha}
+		\NewSpellcasting[\value{@i}]{Bard}{##1}{Cha}
 		\AddTwoThirdsSpellcasing{##1}
 	}
 }

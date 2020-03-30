@@ -55,7 +55,7 @@
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Still Mind}\AddConditionalDefMod{+2 on saves vs. EnChantment}
 		\AddClassFeature{Fast Movement}
-			\EnhancementBonus{Speed}{#1 / 3 * 10}
+			\MiscBonus[Enhancement]{Speed}{#1 / 3 * 10}
 		\AddClassFeature{Maneuver Training}
 			\MiscBonus{CMD}{#1 - #1 * 3 / 4}
 			\MiscBonus{CMB}{#1 - #1 * 3 / 4}

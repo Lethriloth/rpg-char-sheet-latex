@@ -6,7 +6,7 @@
 \SetCounter{WitchSkillRanksPerLevelCount}{2}
 \NewCounter{WitchHitDieSize}
 \SetCounter{WitchHitDieSize}{6}
-\edef\WitchClassSkillsList{}\forcsvlist\listadd{\WitchClassSkillsList}{Craft, Fly, Heal, Intimidate, KnowledgeArcana, KnowledgeHistory, KnowledgeNature, KnowledgePlanes, Profession, Spellcraft, UseMagicDevice}
+\edef\WitchClassSkillsList{}\forcsvlist{\listadd{\WitchClassSkillsList}}{Craft, Fly, Heal, Intimidate, KnowledgeArcana, KnowledgeHistory, KnowledgeNature, KnowledgePlanes, Profession, Spellcraft, UseMagicDevice}
 \newcommand{\AddWitchClassFeatures}[1]{
 	\def\CharFamiliarType{}
 	\AddClassFeature{Familiar (\CharFamiliarType)}
@@ -45,8 +45,8 @@
 			\ifthenelse{\equal{##1}{Weasel}}{\MiscBonus{Reflex}{2}}{}
 		}
 	\def\CharPatronType{}
-	\addClassFeature{\CharPatronType Patron}
-		\NewDocumentCommand{\AddPatron}{m m}{
+	\AddClassFeature{\CharPatronType Patron}
+		\NewDocumentCommand{\SetPatron}{m m}{
 			\renewcommand{\CharPatronType}{##1}
 			\setcounter{@i}{0}
 			\setcounter{@j}{#1 / 2}
@@ -58,26 +58,32 @@
 			}
 			\docsvlist{##2}
 		}
+	\appto{\RunChecks}{%
+		%%CHECK PATRON
+		\ifthenelse{\equal{\CharPatronType}{}}{
+			\AddWarning{Choose a Witch patron. Use the command \texttt{$\backslash$SetPatron\{patron name\}\{patron spell 1, patron spell 2,...\}}}
+		}{}
+	}
 	\edef\CharHexList{}
 	\newcounter{CharHexDCCount}
 	\setcounter{CharHexDCCount}{10 + #1 / 2}
 	\AddClassFeature{Hexes: (DC \arabic{CharHexDCCount})\forlistloop{\\~~~~}{\CharHexList}}
-		\newCounter{CharHexCount}
+		\NewCounter{CharHexCount}
 		\addtocounter{CharHexCount}{#1 / 2 + 1}
 		\NewDocumentCommand{\AddHex}{m}{
 			\listinsert{\CharHexList}{##1}
-			\addToCounter{CharHexCount}{-1}
+			\AddToCounter{CharHexCount}{-1}
 		}
-		\gappto{\Initialize}{
-		\addtocounter{CharHexDCCount}{\value{CharIntModCount}}
+		\appto{\Initialize}{
+			\AddToCounter{CharHexDCCount}{\value{CharIntModCount}}
 		}
-		\gappto{\RunChecks}{%
+		\appto{\RunChecks}{%
 			%%CHECK HEXES
 			\ifthenelse{\value{CharHexCount} < 0}{
-				\addnotice{\domath{-\value{CharHexCount}} too many hexes}
+				\AddWarning{\domath{-\value{CharHexCount}} too many hexes}
 			}{
 				\ifthenelse{\value{CharHexCount} > 0}{
-					\addnotice{Choose \arabic{CharHexCount} more hexes}
+					\AddWarning{Choose \arabic{CharHexCount} more hexes}
 				}{}}
 		}
 	\NewDocumentCommand{\AddWitchSpellcasting}{m}{

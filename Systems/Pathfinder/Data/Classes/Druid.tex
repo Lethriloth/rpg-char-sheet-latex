@@ -9,9 +9,13 @@
 \edef\DruidClassSkillsList{}
 \forcsvlist{\listadd{\DruidClassSkillsList}}{Climb, Craft, Fly, HandleAnimal, Heal, KnowledgeGeography, KnowledgeNature, Perception, Profession, Ride, Spellcraft, Survival, Swim}
 \newcommand{\AddDruidClassFeatures}[1]{
-	\AddClassFeature{Nature Bond}
-	\AddClassFeature{Nature Sense}\MiscBonus{KnowledgeNature}{2}\MiscBonus{Survival}{2}
-	\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{CharChaModCount}}}
+		\newcommand{\AddDruidSpellcasting}[1]{
+			\NewSpellcasting[(##1 + 1) / 2]{Druid}{##1}{Wis}
+			\AddPrimarySpellcasting{##1}
+		}
+		\AddClassFeature{Nature Bond}
+		\AddClassFeature{Nature Sense}\MiscBonus{KnowledgeNature}{2}\MiscBonus{Survival}{2}
+		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{CharChaModCount}}}
 	\ifthenelse{#1 > 1}{
 		\AddClassFeature{Woodland StRide}
 	\ifthenelse{#1 > 2}{
@@ -39,8 +43,5 @@
 	\ifthenelse{#1 > 14}{
 		\AddClassFeature{Timeless Body}
 	}{}}{}}{}}{}}{}}{}
-	\newcommand{\AddDruidSpellcasting}[1]{
-		\newSpellcasting[(##1 + 1) / 2]{Druid}{##1}{wis}
-		\AddPrimarySpellcasting{##1}
-	}
 }
+

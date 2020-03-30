@@ -314,7 +314,7 @@
 	}
 	\AddToCounter{CharTotalLevelCount}{#4}
 	\renewcommand\do[1]{
-		\isClassSkill{##1}
+		\IsClassSkill{##1}
 	}\expandafter\dolistloop\csname#3ClassSkillsList\endcsname
 	\IfBooleanTF #1 {} {\csname Add#3ClassFeatures\endcsname{#4}}
 }
@@ -353,15 +353,15 @@
 }\dolistloop{\SkillsList}
 
 %adds Skill to Class Skill list
-\newcommand\isClassSkill[1]{
+\newcommand\IsClassSkill[1]{
 	\ifthenelse{\equal{#1}{KnowledgeAll}}{
-		\forlistloop{\isClassSkill}{\KnowledgeSkillsList}
+		\forlistloop{\IsClassSkill}{\KnowledgeSkillsList}
 	}{\ifthenelse{\equal{#1}{Craft}}{
-		\forcsvlist{\isClassSkill}{CraftOne, CraftTwo, CraftThree}
+		\forcsvlist{\IsClassSkill}{CraftOne, CraftTwo, CraftThree}
 	}{\ifthenelse{\equal{#1}{Perform}}{
-		\forcsvlist{\isClassSkill}{PerformOne, PerformTwo}
+		\forcsvlist{\IsClassSkill}{PerformOne, PerformTwo}
 	}{\ifthenelse{\equal{#1}{Profession}}{
-		\forcsvlist{\isClassSkill}{ProfessionOne, ProfessionTwo}
+		\forcsvlist{\IsClassSkill}{ProfessionOne, ProfessionTwo}
 	}{
 		\SetCounter{Char#1ClassSkillBool}{1}
 	}}}}
@@ -733,14 +733,14 @@
 		\AddToCounter{@i}{\value{@i}}
 	}{%
 		\SetCounter{@j}{\value{#1}}
-		\ForLoop{@i}{0}{\value{@i}<10}{
+		\ForLoop{@k}{0}{\value{@k}<10}{
 			\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{10}\AddToCounter{@j}{-1}}{}}
-		\ForLoop{@i}{0}{\value{@i}<2}{
+		\ForLoop{@k}{0}{\value{@k}<2}{
 			\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{15}\AddToCounter{@j}{-1}}{}}
 		\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{20}\AddToCounter{@j}{-1}}{}
-		\ForLoop{@i}{0}{\value{@i}<2}{
+		\ForLoop{@k}{0}{\value{@k}<2}{
 			\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{25}\AddToCounter{@j}{-1}}{}}
-		\ForLoop{@i}{0}{\value{@i}<2}{
+		\ForLoop{@k}{0}{\value{@k}<2}{
 			\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{30}\AddToCounter{@j}{-1}}{}}
 		\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{40}\AddToCounter{@j}{-1}}{}
 		\ifthenelse{\value{@j}>0}{\AddToCounter{@i}{50}\AddToCounter{@j}{-1}}{}
@@ -820,8 +820,8 @@
 \ProvideDocumentCommand{\DeclareSpell}{m >{\SplitArgument{7}{|}}m O{}}{%{Name}{Attributes}[Short desc]
 	\csdef{Spell#1ShortDescription}{#3}
 	\DeclareSpellInternal{#1}#2%
-	\newCounter{CharSpell#1PreparedCount}%
-	\newCounter{CharSpell#1CastCount}%
+	\NewCounter{CharSpell#1PreparedCount}%
+	\NewCounter{CharSpell#1CastCount}%
 }
 
 \ProvideDocumentCommand{\DeclareSpellInternal}{m m m m m m m m m}{%
@@ -843,6 +843,10 @@
 	\DeclareSpellEffectInternal{#1}#2%
 }
 
+\renewcommand{\do}[1]{
+	\expandafter\edef\csname Char#1SpellsListOne\endcsname{}
+	\expandafter\edef\csname Char#1SpellsListTwo\endcsname{}
+}\docsvlist{0,1,2,3,4,5,6,7,8,9}
 
 \newcommand{\AddPrimarySpellcasting}[1]{
 		\AddSpellSlots{0}{3}
@@ -1105,402 +1109,6 @@
 }
 
 \renewcommand{\do}[1]{
-	\expandafter\edef\csname CharCantripsList#1\endcsname{}
-	\expandafter\edef\csname CharFirstSpellsList#1\endcsname{}
-	\expandafter\edef\csname CharSecondSpellsList#1\endcsname{}
-	\expandafter\edef\csname CharThirdSpellsList#1\endcsname{}
-	\expandafter\edef\csname CharFourthSpellsList#1\endcsname{}
-	\expandafter\edef\csname CharFifthSpellsList#1\endcsname{}
-	\expandafter\edef\csname CharSixthSpellsList#1\endcsname{}
-	\expandafter\edef\csname CharSeventhSpellsList#1\endcsname{}
-	\expandafter\edef\csname CharEighthSpellsList#1\endcsname{}
-	\expandafter\edef\csname CharNinthSpellsList#1\endcsname{}
-}\docsvlist{One,Two}
-
-
-\renewcommand{\do}[1]{
-	\expandafter\edef\csname Char#1SpellsListOne\endcsname{}
-	\expandafter\edef\csname Char#1SpellsListTwo\endcsname{}
-}\docsvlist{0,1,2,3,4,5,6,7,8,9}
-
-
-\def\AddCantripOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharCantripsListOne}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{0& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddFirstSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharFirstSpellsListOne}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{1& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddSecondSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharSecondSpellsListOne}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{2& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddThirdSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharThirdSpellsListOne}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{3& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddFourthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharFourthSpellsListOne}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{4& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddFifthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharFifthSpellsListOne}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{5& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddSixthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharSixthSpellsListOne}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{6& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddSeventhSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharSeventhSpellsListOne}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{7& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddEighthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharEighthSpellsListOne}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{8& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddNinthSpellOne #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharNinthSpellsListOne}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{9& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-
-\def\AddCantripTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharCantripsListTwo}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{0& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddFirstSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharFirstSpellsListTwo}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{1& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddSecondSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharSecondSpellsListTwo}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{2& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddThirdSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharThirdSpellsListTwo}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{3& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddFourthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharFourthSpellsListTwo}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{4& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddFifthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharFifthSpellsListTwo}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{5& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddSixthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharSixthSpellsListTwo}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{6& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddSeventhSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharSeventhSpellsListTwo}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{7& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddEighthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharEighthSpellsListTwo}{#1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{8& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-\def\AddNinthSpellTwo #1|#2|#3|#4|#5|#6|#7|#8|#9|{ %
-	\listinsert{\CharNinthSpellsListTwo}{##1}
-	\def\lastargs ##1|##2|{
-		\expandafter\def\csname #1\endcsname{9& & & #1: #2 & #3 & #9 & #6 & ##1 & ##2\\\hline}
-		\expandafter\def\csname Spell#1header\endcsname{
-			\noindent{\bf\large#1}
-			\\#3
-			\\\textbf{Components} #4
-			\\\textbf{Casting Time} #5
-			\\\textbf{Range} #6
-			\\\textbf{#7} #8
-			\\\textbf{Duration} #9
-			\\\textbf{Saving Throw} ##1; \textbf{Spell Resistance} ##2
-		}
-	}
-	\lastargs
-}
-
-\newcommand{\AddCantrip}[1]{
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddCantripOne#1}{\AddCantripTwo#1}
-}
-\newcommand{\AddFirstSpell}[1]{
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddFirstSpellOne#1}{\AddFirstSpellTwo#1}
-}
-\newcommand{\AddSecondSpell}[1]{
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSecondSpellOne#1}{\AddSecondSpellTwo#1}
-}
-\newcommand{\AddThirdSpell}[1]{
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddThirdSpellOne#1}{\AddThirdSpellTwo#1}
-}
-\newcommand{\AddFourthSpell}[1]{
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddFourthSpellOne#1}{\AddFourthSpellTwo#1}
-}
-\newcommand{\AddFifthSpell}[1]{
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddFifthSpellOne#1}{\AddFifthSpellTwo#1}
-}
-\newcommand{\AddSixthSpell}[1]{
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSixthSpellOne#1}{\AddSixthSpellTwo#1}
-}
-\newcommand{\AddSeventhSpell}[1]{
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSeventhSpellOne#1}{\AddSeventhSpellTwo#1}
-}
-\newcommand{\AddEighthSpell}[1]{
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddEighthSpellOne#1}{\AddEighthSpellTwo#1}
-}
-\newcommand{\AddNinthSpell}[1]{
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddNinthSpellOne}{\AddNinthSpellTwo}
-}
-\newcommand\Spelldescription[2]{
-	\expandafter\newcommand\csname Spell#1description\endcsname{#2}
-}
-
-\renewcommand{\do}[1]{
 	\expandafter\newcommand\csname CharSpellcastingClass#1\endcsname{}
 	\expandafter\newcommand\csname CharSpellcastingClass#1Ability\endcsname{}
 	\NewCounter{CharCL#1Count}
@@ -1509,7 +1117,7 @@
 	\NewCounter{CharSpellcasting#1HasCantrips}
 	\SetCounter{CharSpellcasting#1HasCantrips}{0}
 	\expandafter\NewDocumentCommand\csname NewSpellcasting#1\endcsname{s O{9} m m m}{
-		\IfBooleanTF ##1 {} {\SetCounter{CharSpellcasting#1HasCantrips}{1}}
+		\IfBooleanF ##1 {\SetCounter{CharSpellcasting#1HasCantrips}{1}}
 		\SetCounter{CharSpellcastingClass#1MaxSpellLevelCount}{##2}
 		\expandafter\renewcommand\csname CharSpellcastingClass#1\endcsname{##3}
 		\expandafter\renewcommand\csname CharSpellcastingClass#1Ability\endcsname{##5}
@@ -1517,11 +1125,11 @@
 	}
 }\docsvlist{One,Two}
 
-\NewDocumentCommand{\newSpellcasting}{s O{9} m m m}{
+\NewDocumentCommand{\NewSpellcasting}{s O{9} m m m}{
 	\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{
-		\IfBooleanTF #1 {\newSpellcastingOne*[#2]{#3}{#4}{#5}} {\newSpellcastingOne[#2]{#3}{#4}{#5}}
+		\IfBooleanTF #1 {\NewSpellcastingOne*[#2]{#3}{#4}{#5}} {\NewSpellcastingOne[#2]{#3}{#4}{#5}}
 	}{
-		\IfBooleanTF #1 {\newSpellcastingTwo*[#2]{#3}{#4}{#5}} {\newSpellcastingTwo[#2]{#3}{#4}{#5}}
+		\IfBooleanTF #1 {\NewSpellcastingTwo*[#2]{#3}{#4}{#5}} {\NewSpellcastingTwo[#2]{#3}{#4}{#5}}
 	}
 }
 %Initialize Spellcasting variables
@@ -1550,21 +1158,13 @@
 			}
 		}
 		\AddDebug{Adjusting max Spell Level for \CharSpellcastingClassOne}
+		\AddDebug{Ability = \CharSpellcastingClassOneAbility}
 		\AddDebug{-Ability score = \arabic{Char\CharSpellcastingClassOneAbility Count}}
 		\AddDebug{-New max Spell Level = \DoMath{\value{Char\CharSpellcastingClassOneAbility Count} - 10}}
 		\AddDebug{-Old max Spell Level = \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
 		\DoMath*{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
 		\ifthenelse{\value{CharSpellcastingClassOneMaxSpellLevelCount} > \value{@DoMathCounter}}{
 			\SetCounter{CharSpellcastingClassOneMaxSpellLevelCount}{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
-			\AddDebug{-Max Spell Level set to \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
-		\AddDebug{Adjusting max Spell Level for \CharSpellcastingClassOne}
-		\AddDebug{Ability = \CharSpellcastingClassOneAbility}
-		\AddDebug{-Ability score = \arabic{Char\CharSpellcastingClassOneAbility Count}}
-		\AddDebug{-New max Spell Level = \domath{\value{Char\CharSpellcastingClassOneAbility Count} - 10}}
-		\AddDebug{-Old max Spell Level = \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
-		\domath*{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
-		\ifthenelse{\value{CharSpellcastingClassOneMaxSpellLevelCount} > \value{@domathCounter}}{
-			\setCounter{CharSpellcastingClassOneMaxSpellLevelCount}{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
 			\AddDebug{-Max Spell Level set to \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
 		}{
 			\AddDebug{-No adjustment needed}
@@ -1706,7 +1306,7 @@
 %% Health Counter
 \NewCounter{CharHPCount}
 \NewCounter{CharHPRollsCount}
-\newcommand{\HProll}[1]{
+\newcommand{\HPRoll}[1]{
 	\AddToCounter{CharHPCount}{#1}
 	\AddToCounter{CharHPRollsCount}{1}
 }
@@ -1820,11 +1420,10 @@
 	\CheckEncumberance
 	\SpeedInitialize
 	\SetCounter{CharDextoACCount}{\minof{\value{CharDexModCount}}{\value{CharMaxDexBonusCount}}}
-
 	\RunChecks
 }
 
-\def\CountLanguagesMode\BooleanFalse
+\let\CountLanguagesMode\BooleanFalse
 %%3.5 System Checks
 \newcommand{\RunChecks}{
 	\AddDebug{Running checks}

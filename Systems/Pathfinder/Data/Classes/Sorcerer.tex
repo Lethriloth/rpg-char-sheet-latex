@@ -18,7 +18,7 @@
 		\appto{\RunChecks}{%
 			%%Check Sorcerer Bloodline
 			\ifthenelse{\equal{\CharSorcererBloodline}{}}{
-				\AddWarning{Choose a Sorcerer bloodline. Use the command \texttt{$\backslash$addSorcererBloodline\{bloodline\}}}
+				\AddWarning{Choose a Sorcerer bloodline. Use the command \texttt{$\backslash$AddSorcererBloodline\{bloodline\}}}
 			}{}
 		}
 		\StepCounter{CharSorcererBloodlinePowersCount}
@@ -84,9 +84,9 @@
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 	\newcommand{\AddSorcererSpellcasting}[1]{
 		\ifthenelse{##1 = 1}{
-			\newSpellcasting[1]{Sorcerer}{##1}{Cha}
+			\NewSpellcasting[1]{Sorcerer}{##1}{Cha}
 		}{
-			\newSpellcasting[##1 / 2]{Sorcerer}{##1}{Cha}
+			\NewSpellcasting[##1 / 2]{Sorcerer}{##1}{Cha}
 		}
 		\AddSpontaneousPrimarySpellcasting{##1}
 		\ifthenelse{##1 > 9}{\AddSpellsKnown{0}{9}}{\AddSpellsKnown{0}{{##1/2 + 4}}}

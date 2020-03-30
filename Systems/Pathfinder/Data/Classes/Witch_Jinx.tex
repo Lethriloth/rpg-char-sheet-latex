@@ -1,94 +1,12 @@
-\def\WitchBAB{p}
-\def\WitchFort{p}
-\def\WitchRef{p}
-\def\WitchWill{g}
-\newcounter{WitchSkillRanksPerLevelCount}
-\setcounter{WitchSkillRanksPerLevelCount}{2}
-\newcounter{WitchHitDieSize}
-\setcounter{WitchHitDieSize}{6}
-\edef\WitchClassSkillsList{}\forcsvlist{\listadd{\WitchClassSkillsList}}{Bluff, CraftOne, CraftTwo, CraftThree, Disguise, Fly, Heal, Intimidate, KnowledgeArcana, KnowledgeHistory, KnowledgeNature, KnowledgePlanes, ProfessionOne, ProfessionTwo, SenseMotive, Spellcraft, UseMagicDevice}
-\newcommand{\AddWitchClassFeatures}[1]{
-	\def\CharFamiliarType{}
-	\AddClassFeature{Familiar (\CharFamiliarType)}
-		\NewDocumentCommand{\AddFamiliar}{m}{
-			\renewcommand{\CharFamiliarType}{##1}
-			\ifthenelse{\equal{##1}{Bat}}{\MiscBonus{Fly}{3}}{}
-			\ifthenelse{\equal{##1}{Cat}}{\MiscBonus{Stealth}{3}}{}
-			\ifthenelse{\equal{##1}{Centipede}}{\MiscBonus{Stealth}{3}}{}
-			\ifthenelse{\equal{##1}{House Centipede}}{\MiscBonus{Stealth}{3}}{}
-			\ifthenelse{\equal{##1}{Donkey Rat}}{\MiscBonus{Fort}{2}}{}
-			\ifthenelse{\equal{##1}{Capybara}}{\MiscBonus{Fort}{2}}{}
-			\ifthenelse{\equal{##1}{Compsognathus}}{\MiscBonus{Initiative}{4}}{}
-			\ifthenelse{\equal{##1}{Fox}}{\MiscBonus{Reflex}{2}}{}
-			\ifthenelse{\equal{##1}{Goat}}{\MiscBonus{Survival}{3}}{}
-			\ifthenelse{\equal{##1}{Hawk}}{\AddConditionalSkillMod{+3 on visual Perception checks in bright light}}{}
-			\ifthenelse{\equal{##1}{Hedgehog}}{\MiscBonus{Will}{2}}{}
-			\ifthenelse{\equal{##1}{Crab}}{\AddConditionalAttackMod{+2 to CMB to grapple}}{}
-			\ifthenelse{\equal{##1}{Lizard}}{\MiscBonus{Climb}{3}}{}
-			\ifthenelse{\equal{##1}{Monkey}}{\MiscBonus{Acrobatics}{3}}{}
-			\ifthenelse{\equal{##1}{Octopus}}{\MiscBonus{Swim}{3}}{}
-			\ifthenelse{\equal{##1}{Otter}}{\MiscBonus{Swim}{3}}{}
-			\ifthenelse{\equal{##1}{Owl}}{\AddConditionalSkillMod{+3 on visual Perception checks in shadows or darkness}}{}
-			\ifthenelse{\equal{##1}{Pig}}{\MiscBonus{Diplomacy}{3}}{}
-			\ifthenelse{\equal{##1}{Raccoon}}{\MiscBonus{SleightOfHand}{3}}{}
-			\ifthenelse{\equal{##1}{Rat}}{\MiscBonus{Fort}{2}}{}
-			\ifthenelse{\equal{##1}{Raven}}{\MiscBonus{Appraise}{3}}{}
-			\ifthenelse{\equal{##1}{Parrot}}{\MiscBonus{Appraise}{3}}{}
-			\ifthenelse{\equal{##1}{Scorpion}}{\MiscBonus{Initiative}{4}}{}
-			\ifthenelse{\equal{##1}{Spider}}{\MiscBonus{Climb}{3}}{}
-			\ifthenelse{\equal{##1}{Flying Squirrel}}{\MiscBonus{Fly}{3}}{}
-			\ifthenelse{\equal{##1}{Thrush}}{\MiscBonus{Diplomacy}{3}}{}
-			\ifthenelse{\equal{##1}{Toad}}{\AddToCounter{CharHPCount}{3}}{}
-			\ifthenelse{\equal{##1}{Turtle}}{\MiscBonus{NaturalArmor}{1}}{}
-			\ifthenelse{\equal{##1}{Snapping Turtle}}{\MiscBonus{Fort}{2}}{}
-			\ifthenelse{\equal{##1}{Viper}}{\MiscBonus{Bluff}{3}}{}
-			\ifthenelse{\equal{##1}{Weasel}}{\MiscBonus{Reflex}{2}}{}
-		}
-	\def\CharPatronType{}
-	\AddClassFeature{\CharPatronType Patron}
-		\NewDocumentCommand{\AddPatron}{m m}{
-			\renewcommand{\CharPatronType}{##1}
-			\setcounter{@i}{0}
-			\setcounter{@j}{#1 / 2}
-			\renewcommand\do[1]{
-				\ifthenelse{\value{@i}<\value{@j}}{
-					\stepcounter{@i}
-					\AddSpell[Witch]{\value{@i}}{####1}
-				}{}
-			}
-			\docsvlist{##2}
-		}
-	\edef\CharHexList{}
-	\AddClassFeature{Spell Awareness}
-		\AddConditionalSkillMod{+\domath{\value{CharWitchClassLevelCount} / 2} to Spellcraft to identify spells cast on her}
-	\newcounter{CharHexDCCount}
-	\setcounter{CharHexDCCount}{10 + #1 / 2}
-	\AddClassFeature{Hexes: (DC \arabic{CharHexDCCount})\forlistloop{\\~~~~}{\CharHexList}}
-		\newCounter{CharHexCount}
-		\AddToCounter{CharHexCount}{#1 / 2 + 1}
-		\NewDocumentCommand{\AddHex}{m}{
-			\listinsert{\CharHexList}{##1}
-			\AddToCounter{CharHexCount}{-1}
-		}
-		\gappto{\Initialize}{
-		\addtocounter{CharHexDCCount}{\value{CharIntModCount}}
-		}
-		\gappto{\RunChecks}{%
-			%%CHECK HEXES
-			\ifthenelse{\value{CharHexCount} < 0}{
-				\AddNotice{\domath{-\value{CharHexCount}} too many hexes}
-			}{
-				\ifthenelse{\value{CharHexCount} > 0}{
-					\AddNotice{Choose \arabic{CharHexCount} more hexes}
-				}{}}
-		}
-	\NewDocumentCommand{\AddWitchSpellcasting}{m}{
-		\newSpellcasting[(##1 + 1) / 2]{Witch}{##1}{Int}
-		\AddPrimarySpellcasting{##1}
-	}
+\input{"\datafolder/Classes/Witch.tex"}
+\forcsvlist{\listadd{\WitchClassSkillsList}}{Bluff,Disguise,SenseMotive}
+\let\AddBaseWitchClassFeatures\AddWitchClassFeatures
+\renewcommand{\AddWitchClassFeatures}[1]{
+	\AddBaseWitchClassFeatures{#1}
 	\ifthenelse{#1 > 1}{
 		\AddHex{Jinx-Eating}
-		\AddLimitedUse{Jinx-Eating}{\domath{\value{CharIntModCount} + 3}}
+		\AddConditionalSkillMod{+\DoMath{#1 / 2} to spellcraft checks to identify spells cast on you}
+		\AddLimitedUse{Jinx-Eating}{\DoMath{\value{CharIntModCount} + 3}}
 	\ifthenelse{#1 > 5}{
 		\AddHex{Jinx-Gorging}
 	\ifthenelse{#1 > 9}{

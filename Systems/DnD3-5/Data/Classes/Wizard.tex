@@ -17,7 +17,7 @@
 		\AddClassFeature{Wizard Bonus Feat\ifthenelse{#1 > 9}{ $\times\DoMath{#1 / 5}$}{}}
 	}{}
 	\NewDocumentCommand{\AddWizardSpellcasting}{m O{} O{} O{}}{
-		\newSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{Int}
+		\NewSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{Int}
 		\NewCounter{CharWizardforbiddenschoolsCount}
 		\AddPrimarySpellcasting{##1}
 		\ifthenelse{\equal{##2}{}}{}{

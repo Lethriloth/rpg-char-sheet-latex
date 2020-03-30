@@ -6,7 +6,7 @@
 \SetCounter{CavalierSkillRanksPerLevelCount}{4}
 \NewCounter{CavalierHitDieSize}
 \SetCounter{CavalierHitDieSize}{10}
-\edef\CavalierClassSkillsList{}\forcsvlist\listadd{\CavalierClassSkillsList}{Bluff, Climb, Craft, Diplomacy, HandleAnimal, Intimidate, Profession, Ride, SenseMotive, Swim}
+\edef\CavalierClassSkillsList{}\forcsvlist{\listadd{\CavalierClassSkillsList}}{Bluff, Climb, Craft, Diplomacy, HandleAnimal, Intimidate, Profession, Ride, SenseMotive, Swim}
 \NewDocumentCommand{\AddCavalierClassFeatures}{m}{
 		\AddLimitedUse{Challenge}{\DoMath{(#1 + 2) / 3}}
 		\AddClassFeature{Mount}
@@ -24,18 +24,18 @@
 			\gappto{\RunChecks}{%
 				%%CHECK Cavalier order choice
 				\ifthenelse{\equal{\CharCavalierOrder}{Order}}{
-					\AddWarning{Choose a cavalier order using \texttt{$\backslash$setCavalierOrder}}
+					\AddWarning{Choose a cavalier order using \texttt{$\backslash$SetCavalierOrder}}
 				}{}
 				%%CHECK Order Abilities
 				\ifthenelse{\value{CharCavalierOrderAbilitiesCount} < 0}{
 					\AddWarning{\DoMath{-\value{CharCavalierOrderAbilitiesCount}} too many cavalier order abilities}
 				}{
 				\ifthenelse{\value{CharCavalierOrderAbilitiesCount} > 0}{
-					\AddWarning{Remember to input cavalier order abilities. Input \arabic{CharCavalierOrderAbilitiesCount} more order abilities using \texttt{$\backslash$addCavalierOrderAbility}}
+					\AddWarning{Remember to input cavalier order abilities. Input \arabic{CharCavalierOrderAbilitiesCount} more order abilities using \texttt{$\backslash$AddCavalierOrderAbility}}
 				}{}}
 			}
 		\AddClassFeature{\ifthenelse{#1 > 8}{\ifthenelse{#1 > 16}{Master}{Greater} }{}Tactician}
-			\AddlimitedUse{Tactician}{\DoMath{#1 / 5 + 1}}
+			\AddLimitedUse{Tactician}{\DoMath{#1 / 5 + 1}}
 			\stepcounter{CharBonusFeatsCount}
 	\ifthenelse{#1 > 1}{
 		\stepcounter{CharCavalierOrderAbilitiesCount}

@@ -3,117 +3,117 @@
 \usepackage{multicol}
 \usepackage{Systems/Pathfinder/SystemPathfinder}
 \begin{document}
-\SetCounter{XP-Mode}{1} % Boolean, automatically calculates next-Level XP
-\SetCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
-\SetCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive Skill point increases.
-\SetCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of Feats
+	\renewcommand{\datafolder}{Systems/Pathfinder/Data}
+	\SetCounter{XP-Mode}{1} % Boolean, automatically calculates next-Level XP
+	\SetCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
+	\SetCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive Skill point increases.
+	\SetCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of Feats
 
-
-\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
-
-}
-
-
-%Just enter your name, etc. here.
-\renewcommand\CharName{}
-\renewcommand\CharAlignment{Chaotic Neutral}
-\renewcommand\CharPlayerName{}
-\renewcommand\CharReligion{}
-\renewcommand\CharHomeland{}
-\renewcommand\CharHair{}
-\renewcommand\CharEyes{}
-\renewcommand\CharGender{}
-\renewcommand\CharWeight{}
-\renewcommand\CharHeight{}
-\renewcommand\CharAge{}
-
-
-
-\SetCharStr{10}
-\SetCharDex{10}
-\SetCharCon{10}
-\SetCharInt{10}
-\SetCharWis{10}
-\SetCharCha{10}
-
-% Racial Mods
-\AddToCounter{CharStrBaseCount}{0}
-\AddToCounter{CharDexBaseCount}{0}
-\SetCharSpeed{30}
-\AddRaceFeature{Race Feature}
-\renewcommand\do[1]{
-\AddCharLanguage{#1}
-}\docsvlist{Common}
-
-\ImportCharClass{Fighter}{1}
-
-% Character Level Ability Increases
-
-% Feats
-\AddFeat{Feat}
-\AddFeat*{Bonus Feat}
-
-
-% Skill Ranks
-\renewcommand{\do}[1]{
-	\AddRanks{#1}{\value{CharTotalLevelCount}
-} \docsvlist{CraftOne}
-\renewcommand\CharCraftOneName{Crafting}
-\AddRanks{ProfessionOne}{1}
-\renewcommand\CharProfessionOneName{Professionalism}
-
-% Items
-\AddGearItem{Gear}{1}
-
-\AddStoredItem{Stored Gear}{1}
-
-
-
-% %Weapons
-
-\AddAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
-\AddWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
-
-% %Belt
-\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
-\EnhancementBonus{Str}{0}
-
-% %Armor
-%\AddArmor{Armor}{3}{10}{0}{5}{L}{10}{Notes}{More Notes}
-
-% %Chest
-%\AddChestItem{}{}{}
-
-% %Eyes
-%\AddEyesItem{}{}{}
-
-% %Feet
-%\AddFeetItem{}{}{}
-
-% %Hat
-%\AddHeadItem{}{}{}
-
-% %Headband
-%\AddHeadbandItem{}{}{}
-
-% %Shoulders
-%\AddShouldersItem{}{}{}
-
-% %Rings
-%\AddRingItem{}{}{}
-%\AddRingItem{}{}{}
-
-% %Wrists
-%\AddWristsItem{}{}{}
-
-\AddPlatinum{1}\AddPlatinum*{2}\StorePlatinum{3}
-\AddGold{4}\AddGold*{5}\StoreGold{6}
-\AddSilver{7}\AddSilver*{8}\StoreSilver{9}
-\AddCopper{10}\AddCopper*{11}\StoreCopper{12}
-
-\input{Sheets/Pathfinder_Sheet.tex}
+	\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
+	
+	}
+	
+	%Just enter your name, etc. here.
+	\renewcommand\CharName{}
+	\renewcommand\CharAlignment{Chaotic Neutral}
+	\renewcommand\CharPlayerName{}
+	\renewcommand\CharReligion{}
+	\renewcommand\CharHomeland{}
+	\renewcommand\CharHair{}
+	\renewcommand\CharEyes{}
+	\renewcommand\CharGender{}
+	\renewcommand\CharWeight{}
+	\renewcommand\CharHeight{}
+	\renewcommand\CharAge{}
+	
+	
+	
+	\SetCharStr{10}
+	\SetCharDex{10}
+	\SetCharCon{10}
+	\SetCharInt{13}
+	\SetCharWis{13}
+	\SetCharCha{13}
+	
+	% Racial Mods
+	\AddToCounter{CharStrBaseCount}{0}
+	\AddToCounter{CharDexBaseCount}{0}
+	\SetCharSpeed{30}
+	\AddRaceFeature{Race Feature}
+	\renewcommand\do[1]{
+	\AddCharLanguage{#1}
+	}\docsvlist{Common}
+	
+	\ImportCharClass{Wizard}{1}
+	\AddWizardSpellcasting{\value{CharWizardClassLevelCount}}
+	
+	% Character Level Ability Increases
+	
+	% Feats
+	\AddFeat{Feat}
+	\AddFeat*{Bonus Feat}
+	
+	
+	% Skill Ranks
+	\renewcommand{\do}[1]{
+		\AddRanks{#1}{\value{CharTotalLevelCount}}
+	} \docsvlist{CraftOne}
+	\renewcommand\CharCraftOneName{Crafting}
+	\AddRanks{ProfessionOne}{1}
+	\renewcommand\CharProfessionOneName{Professionalism}
+	
+	% Items
+	\AddGearItem{Gear}{1}
+	
+	\AddStoredItem{Stored Gear}{1}
+	
+	
+	
+	% %Weapons
+	
+	\AddAutoWeapon[1]{Sword +1}{1}{1d1+1}{20}{S}{Melee}{}{Str}
+	\AddWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
+	
+	% %Belt
+	\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
+	\EnhancementBonus{Str}{0}
+	
+	% %Armor
+	%\AddArmor{Armor}{3}{10}{0}{5}{L}{10}{Notes}{More Notes}
+	
+	% %Chest
+	%\AddChestItem{}{}{}
+	
+	% %Eyes
+	%\AddEyesItem{}{}{}
+	
+	% %Feet
+	%\AddFeetItem{}{}{}
+	
+	% %Hat
+	%\AddHeadItem{}{}{}
+	
+	% %Headband
+	%\AddHeadbandItem{}{}{}
+	
+	% %Shoulders
+	%\AddShouldersItem{}{}{}
+	
+	% %Rings
+	%\AddRingItem{}{}{}
+	%\AddRingItem{}{}{}
+	
+	% %Wrists
+	%\AddWristsItem{}{}{}
+	
+	\AddPlatinum{1}\AddPlatinum*{2}\StorePlatinum{3}
+	\AddGold{4}\AddGold*{5}\StoreGold{6}
+	\AddSilver{7}\AddSilver*{8}\StoreSilver{9}
+	\AddCopper{10}\AddCopper*{11}\StoreCopper{12}
+	
+	\input{Sheets/Pathfinder_Sheet.tex}
 \end{document}
 %%% Local Variables: 
 %%% Mode: latex
 %%% TeX-master: t
-%%% End: 
+%%% End:

@@ -9,11 +9,10 @@
 \edef\ClericClassSkillsList{}
 \forcsvlist{\listadd{\ClericClassSkillsList}}{Concentration, Craft, Diplomacy, Heal, KnowledgeArcana, KnowledgeHistory, KnowledgePlanes, KnowledgeReligion, Profession, Spellcraft}
 \newcommand{\AddClericClassFeatures}[1]{
-	\NewCounter{CharturnrebukeundeadusesCount}
-	\SetCounter{CharturnrebukeundeadusesCount}{3 + \value{CharChaModCount}}
-	\AddLimitedUse{Turn/Rebuke Undead}{\arabic{CharturnrebukeundeadusesCount}}
+	\NewCounter{CharTurnRebukeUndeadUsesCount}
+	\AddLimitedUse{Turn/Rebuke Undead}{\DoMath{3 + \value{CharChaModCount} + \value{CharTurnRebukeUndeadUsesCount}}}
 	\newcommand{\AddClericSpellcasting}[3]{
-		\newSpellcasting[(##1 + 1) / 2]{Cleric}{##1}{Wis}
+		\NewSpellcasting[(##1 + 1) / 2]{Cleric}{##1}{Wis}
 		\AddPrimarySpellcasting{##1}
 		\ForLoop{@i}{1}{\value{@i}<10}{
 			\AddBonusSpellSlots{\arabic{@i}}{1}
