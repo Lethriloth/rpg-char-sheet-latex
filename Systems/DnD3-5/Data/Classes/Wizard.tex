@@ -18,7 +18,7 @@
 	}{}
 	\NewDocumentCommand{\AddWizardSpellcasting}{m O{} O{} O{}}{
 		\NewSpellcasting[(##1 + 1) / 2]{Wizard}{##1}{Int}
-		\NewCounter{CharWizardforbiddenschoolsCount}
+		\NewCounter{CharWizardForbiddenSchoolsCount}
 		\AddPrimarySpellcasting{##1}
 		\ifthenelse{\equal{##2}{}}{}{
 			\ForLoop{@i}{1}{\value{@i}<10}{
@@ -26,26 +26,26 @@
 			}
 			\AddSpellcastingSpecialization[Focus School]{##2}
 			\ifthenelse{\equal{##2}{Divination}}{
-				\AddToCounter{CharWizardforbiddenschoolsCount}{1}
+				\AddToCounter{CharWizardForbiddenSchoolsCount}{1}
 			}{
-				\AddToCounter{CharWizardforbiddenschoolsCount}{2}
+				\AddToCounter{CharWizardForbiddenSchoolsCount}{2}
 			}
 			\ifthenelse{\equal{##3}{}}{}{
 				\AddSpellcastingProhibition[Banned School]{##3}
-				\AddToCounter{CharWizardforbiddenschoolsCount}{-1}
+				\AddToCounter{CharWizardForbiddenSchoolsCount}{-1}
 			}
 			\ifthenelse{\equal{##4}{}}{}{
 				\AddSpellcastingProhibition[Banned School]{##4}
-				\AddToCounter{CharWizardforbiddenschoolsCount}{-1}
+				\AddToCounter{CharWizardForbiddenSchoolsCount}{-1}
 			}
 		}
 		\appto{\RunChecks}{
 			%%CHECK NUMBER OF PROHIBITED SCHOOLS
-			\ifthenelse{\value{CharWizardforbiddenschoolsCount} > 0}{
-				\AddWarning{Choose \arabic{CharWizardforbiddenschoolsCount} more prohibited schools}
+			\ifthenelse{\value{CharWizardForbiddenSchoolsCount} > 0}{
+				\AddWarning{Choose \arabic{CharWizardForbiddenSchoolsCount} more prohibited schools}
 			}{
-			\ifthenelse{\value{CharWizardforbiddenschoolsCount} < 0}{
-				\AddWarning{You can remove \DoMath{-\value{CharWizardforbiddenschoolsCount}} prohibited schools}
+			\ifthenelse{\value{CharWizardForbiddenSchoolsCount} < 0}{
+				\AddWarning{You can remove \DoMath{-\value{CharWizardForbiddenSchoolsCount}} prohibited schools}
 			}{}}
 		}
 	}
