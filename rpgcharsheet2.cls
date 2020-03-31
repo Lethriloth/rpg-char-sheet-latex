@@ -475,7 +475,8 @@
 	\ifthenelse{\value{#1}=0}{}{\Arabic{#1}}
 }
 
-
+%As \patchcmd but takes a csname for first arg. Doesn't accept prefixes as patchcmd does.
+\newrobustcmd*{\cspatchcmd}[1]{\expandafter\patchcmd\csname #1\endcsname}
 
 %%%% Internal Coding Tools %%%%
 
