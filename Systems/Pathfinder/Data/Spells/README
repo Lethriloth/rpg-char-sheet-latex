@@ -1,0 +1,63 @@
+This folder contains spells formatted for use with these character sheets. Only spells published by Paizo and available on the SRD are included here. Spells are sorted by source; Each source also includes a file with class spell lists, so for divine casters it should be straightforward to add the entire class spell list for allowed sources to your character.
+
+Spell data is up to date as of 2020-01-19. Credit to Mike Chopswil for maintaining the database. It can be found directly here:
+https://docs.google.com/spreadsheets/d/1cuwb3QSvWDD7GG5McdvyyRBpqycYuKMRsXgyrvxvLFI
+
+Tables (such as appear in e.g. Detect Magic) have not been correctly copied over to the LaTeX format. The following spells contain tables and will have poorly formatted long descriptions:
+"Confusion" from PFRPG Core
+"Contact Other Plane" from PFRPG Core
+"Create Undead" from PFRPG Core
+"Create Greater Undead" from PFRPG Core
+"Detect Evil" from PFRPG Core
+"Detect Magic" from PFRPG Core
+"Detect Undead" from PFRPG Core
+"Eyebite" from PFRPG Core
+"Giant Vermin" from PFRPG Core
+"Helping Hand" from PFRPG Core
+"Imbue with Spell Ability" from PFRPG Core
+"Major Creation" from PFRPG Core
+"Permanency" from PFRPG Core
+"Polymorph Any Object" from PFRPG Core
+"Power Word Blind" from PFRPG Core
+"Power Word Stun" from PFRPG Core
+"Prismatic Wall" from PFRPG Core
+"Reincarnate" from PFRPG Core
+"Scrying" from PFRPG Core
+"Spell Turning" from PFRPG Core
+"Teleport" from PFRPG Core
+"Tree Stride" from PFRPG Core
+"Word Of Chaos" from PFRPG Core
+"Alter Winds" from APG
+"Instant Armor" from APG
+"Swarm Skin" from APG
+"Salvage" from Pirates Of The Inner Sea
+
+
+The following spells did not have an effect or target listed in the database from which I extracted the spell data, and so were not copied:
+"Telekinetic Projectile" from Occult Adventures
+"Commune With Plane" from Planar Adventures
+"Shadow Dragon Aspect" from Kobolds Of Golarion
+"Spherescry" from Classic Treasures
+"Rubberskin" from Melee Tactics Toolbox
+"Lash Of The Astradaemon" from Book of the Damned
+"Sabotage Construct" from People Of The River
+"Deceptive Redundancy" from Adventurer's Guide
+"Wave Form" from Aquatic Adventures
+"Share Shape" from Animal Archive
+"Sand Table" from Villain Codex
+"Akashic Communion" from Magic Tactics Toolbox
+"Furious Fire Barrage" from Agents Of Evil
+"Shadow Endurance" from Agents Of Evil
+"Spawn Calling" from Inner Sea Gods
+"Fey Gate" from Ultimate Wilderness
+"Iron Stake" from Ultimate Wilderness
+"Spiritual Squire" from Armor Masters Handbook
+"Grasp" from Heroes Of The Darklands
+"Animus Mine" from Heroes Of The Darklands
+"Animus Mine, Greater" from Heroes Of The Darklands
+"Authenticating Gaze" from Black Markets
+"Evaluator's Lens" from Black Markets
+"Temporal Regression" from Legacy Of The First World
+"Page-Bound Epiphany" from Pathfinder Society Primer
+"Urban Grace" from Advanced Race Guide
+"Death Candle" from Advanced Race Guide
