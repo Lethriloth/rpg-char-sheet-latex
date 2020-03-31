@@ -82,16 +82,16 @@
 \NewDocumentCommand{\PrintCSVList}{O{, } O{} m}{% Option 1 is list separator (Default ', '), Option 2 is inserted before the very last item of the list (e.g. 'and')
 	\edef\@PrintList{}%
 	\edef\@@PrintList{}%
-	\edef\@PrintListlast{}%
+	\edef\@PrintLListLast{}%
 	\renewcommand{\do}[1]{%
 		\let\@@PrintList\@PrintList%
-		\edef\@PrintListlast{##1}%
+		\edef\@PrintLListLast{##1}%
 		\listadd{\@PrintList}{##1}%
 	}\docsvlist{#3}%
 	\renewcommand{\do}[1]{%
 		##1#1%
 	}\dolistloop{\@@PrintList}%
-	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintListlast%
+	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintLListLast%
 }
 
 %% Printing weights
@@ -490,7 +490,7 @@
 	\forlistloop{\listadd#1}{\@tmplisttwoforlistinsert}
 }
 \newcommand\listinsert@s[4]{
-	\ifnumcomp{\pdf@strcmp{#4}{#1}}<{0}
+	\ifnumcomp{\pdfstrcmp{#4}{#1}}<{0}
 	{\listadd#2{#4}}
 	{\listadd#3{#4}}
 }
@@ -508,6 +508,15 @@
 % Shortcut for entering csnames faster
 \ProvideDocumentCommand{\cs}{m}{
 	\csname #1\endcsname
+}
+
+% if False that should work in tables
+\newcommand{\TableIfF}[1]{
+	\if\relax \detokenize{#1}\relax%
+	\expandafter\@gobble%
+	\else%
+	\expandafter\@firstofone%
+	\fi%
 }
 
 %%Debug and Alerts%%
