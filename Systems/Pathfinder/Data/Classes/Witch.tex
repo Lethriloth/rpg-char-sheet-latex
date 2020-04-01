@@ -47,13 +47,13 @@
 	\def\CharPatronType{}
 	\AddClassFeature{\CharPatronType Patron}
 		\NewDocumentCommand{\SetPatron}{m m}{
-			\renewcommand{\CharPatronType}{##1}
+			\renewcommand{\CharPatronType}{##1 }
 			\setcounter{@i}{0}
 			\setcounter{@j}{#1 / 2}
 			\renewcommand\do[1]{
 				\ifthenelse{\value{@i}<\value{@j}}{
 					\stepcounter{@i}
-					\AddSpell[Witch]{\value{@i}}{####1}
+					\AddSpell[Witch]{\arabic{@i}}{####1}
 				}{}
 			}
 			\docsvlist{##2}
