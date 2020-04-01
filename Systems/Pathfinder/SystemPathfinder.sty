@@ -1539,3 +1539,16 @@
 		}{}}
 	}{}
 }
+
+%Functions for adding class specific checks and warnings:
+\NewDocumentCommand{\CheckRightNumberSelected}{m m o}{
+	\gappto{\RunChecks}{
+
+		\ifthenelse{\value{Char#1Count} < 0}{
+			\AddWarning{\DoMath{-\value{Char#1Count}} too many selections made for #2}
+		}{
+		\ifthenelse{\value{Char#1Count} > 0}{
+			\AddWarning{Make \arabic{Char#1Count} more selections for #2.\IfNoValueF{#3}{Use the function \texttt{\textbackslash#3}}}
+		}{}}
+	}
+}

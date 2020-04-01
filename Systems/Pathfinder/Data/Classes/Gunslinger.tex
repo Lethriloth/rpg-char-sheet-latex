@@ -6,4 +6,56 @@
 \SetCounter{GunslingerSkillRanksPerLevelCount}{4}
 \NewCounter{GunslingerHitDieSize}
 \SetCounter{GunslingerHitDieSize}{10}
-\edef\GunslingerClassSkillsList{}\forcsvlist\listadd{\GunslingerClassSkillsList}{Acrobatics, Bluff, Climb, Craft, HandleAnimal, Heal, Intimidate, KnowledgeEngineering, KnowledgeLocal, Perception, Profession, Ride, SleightOfHand, Survival, Swim}
+\edef\GunslingerClassSkillsList{}\forcsvlist{\listadd{\GunslingerClassSkillsList}}{Acrobatics, Bluff, Climb, Craft, HandleAnimal, Heal, Intimidate, KnowledgeEngineering, KnowledgeLocal, Perception, Profession, Ride, SleightOfHand, Survival, Swim}
+\NewDocumentCommand{\AddGunslingerClassFeatures}{m}{
+		\AddClassFeature{Gunsmith}
+			\AddFeat**{Gunsmithing}
+		\AddLimitedUse{Grit}{\DoMath{\value{CharGritPointsCount} + \value{CharWisModCount}}}
+			\NewCounter{CharGritPointsCount}
+		\AddClassFeature{Deeds\forlistloop{\\~~~~}{\CharGunslingerDeedsList}}
+			\edef\CharGunslingerDeedsList{}
+			\newcommand{\AddDeed}[1]{\listadd{\CharGunslingerDeedsList}{##1}}
+		\AddDeed{Deadeye}
+		\AddDeed{Gunslinger's Dodge}
+		\AddDeed{Quick Clear}
+	\ifthenelse{#1 > 1}{
+		\AddClassFeature{Nimble +\DoMath{(#1 + 2) / 4}}
+			\preto{\Initialise}{\ifthenelse{\equal\CharArmorType H}{}{\ifthenelse{\equal\CharArmorType M }{}{\AddDodgeBonus{(#1 + 2) / 4}}}}
+	\ifthenelse{#1 > 2}{
+		\AddDeed{Gunslinger Initiative}
+			\MiscBonus{Initiative}{2}
+		\AddDeed{Pistol Whip}
+		\AddDeed{Utility Shot}
+	\ifthenelse{#1 > 3}{
+		\AddToCounter{CharBonusFeatsCount}{#1 / 4}
+		\AddClassFeature{Gunslinger Bonus Feat\ifthenelse{#1 > 7}{ $\times\DoMath{#1 / 4}$}{}}
+	\ifthenelse{#1 > 4}{
+		\AddClassFeature{Gun Training (\PrintList{\CharGunTrainingList})}
+			\edef\CharGunTrainingList{}
+			\SetCounter{CharGunTrainingCount}{(#1 - 1) / 4}
+			\newcommand{\AddGunTraining}[1]{\listadd{\CharGunTrainingList}{##1}\AddToCounter{CharGunTrainingCount}{-1}}
+			\CheckRightNumberSelected{GunTraining}{Gunslinger gun training}[AddGunTraining\{gun\}]
+	\ifthenelse{#1 > 6}{
+		\AddDeed{Dead Shot}
+		\AddDeed{Startling Shot}
+		\AddDeed{Targeting}
+	\ifthenelse{#1 > 10}{
+		\AddDeed{Bleeding Wound}
+		\AddDeed{Expert Loading}
+		\AddDeed{Lightning Reload}
+	\ifthenelse{#1 > 15}{
+		\AddDeed{Evasive}
+		\AddDeed{Menacing Shot}
+		\AddDeed{Slinger's Luck}
+	\ifthenelse{#1 > 18}{
+		\AddDeed{Cheat Death}
+		\AddDeed{Death's Shot}
+		\AddDeed{Stunning Shot}
+	\ifthenelse{#1 > 19}{
+		\AddClassFeature{True Grit (\PrintList{\CharTrueGritDeedsList})}
+			\edef\CharTrueGritDeedsList{}
+			\SetCounter{CharTrueGritDeedsCount}{2}
+			\newcommand{\AddTrueGritDeeds}[1]{\listadd{\CharTrueGritDeedsList}{##1}\AddToCounter{CharTrueGritDeedsCount}{-1}}
+			\CheckRightNumberSelected{TrueGritDeeds}{Gunslinger True Grit deeds}[AddTrueGritDeeds\{deed\}]
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}
