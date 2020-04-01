@@ -691,7 +691,7 @@
 		\\\textbf{Range} \cs{Spell#1Range}
 		\\\textbf{\cs{Spell#1EffectType}} \cs{Spell#1Effect}
 		\\\textbf{Duration} \cs{Spell#1Duration}
-		\\\textbf{Saving Throw} \cs{Spell#1Save}; \textbf{Spell Resistance} \cs{Spell#1SR}
+		\ifthenelse{\equal{\csexpandonce{Spell#1Save}}{|}}{}{\\\textbf{Saving Throw} \cs{Spell#1Save}; \textbf{Spell Resistance} \cs{Spell#1SR}}
 	\end{minipage}
 	
 	\cs{Spell#1LongDescription}

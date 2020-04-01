@@ -822,21 +822,21 @@
 }
 
 \ProvideDocumentCommand{\DeclareSpell}{m >{\SplitArgument{7}{|}}m O{}}{%{Name}{Attributes}[Short desc]
-	\csdef{Spell#1ShortDescription}{#3}
+	\csdef{Spell#1ShortDescription}{#3}%
 	\DeclareSpellInternal{#1}#2%
 	\NewCounter{CharSpell#1PreparedCount}%
 	\NewCounter{CharSpell#1CastCount}%
 }
 
-\ProvideDocumentCommand{\DeclareSpellInternal}{m m m m m m m m m}{%
+\ProvideDocumentCommand{\DeclareSpellInternal}{m m m m m m m m m}{%Name, School, Components, Cast Time, Range, Effect Type: Effect, Duration, Save, SR
 	\csdef{Spell#1School}{#2}%
 	\csdef{Spell#1Components}{#3}%
 	\csdef{Spell#1CastTime}{#4}%
 	\csdef{Spell#1Range}{#5}%
 	\DeclareSpellEffect{#1}{#6}%
 	\csdef{Spell#1Duration}{#7}%
-	\csdef{Spell#1Save}{#8}%
-	\csdef{Spell#1SR}{#9}%
+	\ifthenelse{\equal{#8}{}}{\csdef{Spell#1Save}{|}}{\csdef{Spell#1Save}{#8}}%
+	\ifthenelse{\equal{#9}{}}{\csdef{Spell#1SR}{|}}{\csdef{Spell#1SR}{#9}}%
 }
 \ProvideDocumentCommand{\DeclareSpellEffectInternal}{m m m}{%
 	\csdef{Spell#1EffectType}{#2}%
