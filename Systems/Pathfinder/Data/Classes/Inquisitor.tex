@@ -6,4 +6,70 @@
 \SetCounter{InquisitorSkillRanksPerLevelCount}{6}
 \NewCounter{InquisitorHitDieSize}
 \SetCounter{InquisitorHitDieSize}{8}
-\edef\InquisitorClassSkillsList{}\forcsvlist\listadd{\InquisitorClassSkillsList}{Bluff, Climb, Craft, Diplomacy, Disguise, Heal, Intimidate, KnowledgeArcana, KnowledgeDungeoneering, KnowledgeNature, KnowledgePlanes, KnowledgeReligion, Perception, Profession, Ride, SenseMotive, Spellcraft, Stealth, Survival, Swim}
+\edef\InquisitorClassSkillsList{}\forcsvlist{\listadd\InquisitorClassSkillsList}{Bluff, Climb, Craft, Diplomacy, Disguise, Heal, Intimidate, KnowledgeArcana, KnowledgeDungeoneering, KnowledgeNature, KnowledgePlanes, KnowledgeReligion, Perception, Profession, Ride, SenseMotive, Spellcraft, Stealth, Survival, Swim}
+\NewDocumentCommand{\AddInquisitorClassFeatures}{m}{
+		\
+		\AddClassFeature{\CharInquisitorDomain \CharInquisitorDomainType}
+			\newcommand\CharInquisitorDomain{}
+			\newcommand\CharInquisitorDomainType{Domain}
+			\NewDocumentCommand{\SetDomain}{m}{
+				\renewcommand{\CharInquisitorDomain}{##1}
+				\renewcommand{\CharInquisitorDomainType}{ Domain}
+			}
+			\NewDocumentCommand{\SetInquisition}{m}{
+				\renewcommand{\CharInquisitorDomain}{##1}
+				\renewcommand{\CharInquisitorDomainType}{ Inquisition}
+			}
+			\gappto{\RunChecks}{
+				\ifcsempty{CharInquisitorDomain}{%
+					\AddWarning{No inquisitor domain is selected. Use one of the functions \texttt{\textbackslash SetDomain\{domain name\}} or \texttt{\textbackslash SetInquisition\{inquisition name\}} to select it.}%
+				}{}
+			}
+		\AddLimitedUse{Judgment}{\arabic{CharJudgmentUsesCount}}
+			\SetCounter{CharJudgmentUsesCount}{(#1 + 2) / 3}
+		\AddClassFeature{Monster Lore}
+			\AddConditionalSkillMod{+\arabic{CharWisModCount} to Knowledge checks to identify the abilities and weaknesses of creatures}
+		\AddClassFeature{Stern Gaze}
+			\ifthenelse{#1 > 1} {
+				\MiscBonus[Morale]{Intimidate}{#1 / 2}
+				\MiscBonus[Morale]{Sense Motive}{#1 / 2}
+			}{
+				\MiscBonus[Morale]{Intimidate}{1}
+				\MiscBonus[Morale]{Sense Motive}{1}
+			}
+	\ifthenelse{#1 > 1}{
+		\AddClassFeature{Cunning Initiative}
+			\gappto{\Initialize}{
+				\MiscBonus{Initiative}{\value{CharWisModCount}}
+			}
+		\AddClassFeature{Detect Alignment}
+		\AddClassFeature{Track}
+			\AddConditionalSkillMod{+\DoMath{#1 / 2} to Survival checks to track}
+	\ifthenelse{#1 > 2}{
+		\AddClassFeature{Solo Tactics}
+		\AddClassFeature{Bonus Teamwork Feat\ifthenelse{#1 > 5}{$\times \DoMath{#1 / 3}$}{}}
+		\AddToCounter{CharBonusFeatsCount}{#1 / 3}
+	\ifthenelse{#1 > 4}{
+		\AddLimitedUse{\ifthenelse{#1 > 11}{Greater }{}Bane}{\arabic{CharBaneRoundsCount} rd}
+			\SetCounter{CharBaneRoundsCount}{#1}
+		\AddLimitedUse{Discern Lies}{#1 rd}
+	\ifthenelse{#1 > 7}{
+		\AddClassFeature{\ifthenelse{#1 > 15}{Third}{Second} Judgment}
+	\ifthenelse{#1 > 13}{
+		\AddClassFeature{Exploit Weakness}
+	\ifthenelse{#1 > 16}{
+		\AddClassFeature{Slayer}
+	\ifthenelse{#1 > 19}{
+		\AddClassFeature{True Judgment}
+	}{}}{}}{}}{}}{}}{}}{}
+	\newcommand{\AddInquisitorSpellcasting}[1]{
+		\ifthenelse{##1 < 2}{\SetCounter{@i}{0}}{
+			\ifthenelse{##1 < 4}{\SetCounter{@i}{1}}{
+				\ifthenelse{##1 < 7}{\SetCounter{@i}{2}}{
+					\ifthenelse{##1 < 10}{\SetCounter{@i}{3}}{
+						\ifthenelse{##1 < 13}{\SetCounter{@i}{4}}{
+							\ifthenelse{##1 < 16}{\SetCounter{@i}{5}}{\SetCounter{@i}{6}}}}}}}
+		\NewSpellcasting[\value{@i}]{Inquisitor}{##1}{Wis}
+		\AddTwoThirdsSpellcasing{##1}
+	}
+}
