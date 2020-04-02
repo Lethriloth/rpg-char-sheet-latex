@@ -978,79 +978,142 @@
 		\AddSpellSlots{9}{2}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
-\newcommand{\AddTwoThirdsSpellcasing}[1]{
-		\AddSpellSlots{0}{2}
+\newcommand{\AddTwoThirdsSpellcasting}[1]{
 		\AddSpellsKnown{0}{4}
-	\ifthenelse{#1 > 1}{
-		\AddSpellSlots{0}{1}
-		\AddSpellsKnown{0}{1}
+		\AddSpellSlots{1}{1}
 		\AddSpellsKnown{1}{2}
+	\ifthenelse{#1 > 1}{
+		\AddSpellsKnown{0}{1}
+		\AddSpellsKnown{1}{1}
+		\AddSpellSlots{1}{1}
 	\ifthenelse{#1 > 2}{
 		\AddSpellSlots{1}{1}
 		\AddSpellsKnown{0}{1}
 		\AddSpellsKnown{1}{1}
 	\ifthenelse{#1 > 3}{
-		\AddSpellSlots{1}{1}
+		\AddSpellSlots{2}{1}
 		\AddSpellsKnown{2}{2}
 	\ifthenelse{#1 > 4}{
 		\AddSpellSlots{1}{1}
 		\AddSpellSlots{2}{1}
-		\AddSpellsKnown{1}{1}
 		\AddSpellsKnown{2}{1}
 	\ifthenelse{#1 > 5}{
 		\AddSpellSlots{2}{1}
-	\ifthenelse{#1 > 6}{
 		\AddSpellsKnown{2}{1}
+	\ifthenelse{#1 > 6}{
+		\AddSpellSlots{3}{1}
+		\AddSpellsKnown{1}{1}
 		\AddSpellsKnown{3}{2}
 	\ifthenelse{#1 > 7}{
 		\AddSpellSlots{2}{1}
 		\AddSpellSlots{3}{1}
 		\AddSpellsKnown{3}{1}
 	\ifthenelse{#1 > 8}{
+		\AddSpellSlots{1}{1}
 		\AddSpellSlots{3}{1}
-	\ifthenelse{#1 > 9}{
 		\AddSpellsKnown{3}{1}
+	\ifthenelse{#1 > 9}{
+		\AddSpellSlots{4}{1}
+		\AddSpellsKnown{2}{1}
 		\AddSpellsKnown{4}{2}
 	\ifthenelse{#1 > 10}{
 		\AddSpellSlots{3}{1}
 		\AddSpellSlots{4}{1}
+		\AddSpellsKnown{1}{1}
 		\AddSpellsKnown{4}{1}
 	\ifthenelse{#1 > 11}{
+		\AddSpellSlots{2}{1}
 		\AddSpellSlots{4}{1}
-	\ifthenelse{#1 > 12}{
 		\AddSpellsKnown{4}{1}
+	\ifthenelse{#1 > 12}{
+		\AddSpellSlots{5}{1}
+		\AddSpellsKnown{3}{1}
 		\AddSpellsKnown{5}{2}
 	\ifthenelse{#1 > 13}{
-		\AddSpellSlots{0}{1}
 		\AddSpellSlots{4}{1}
 		\AddSpellSlots{5}{1}
+		\AddSpellsKnown{2}{1}
 		\AddSpellsKnown{5}{1}
 	\ifthenelse{#1 > 14}{
-		\AddSpellSlots{1}{1}
-		\AddSpellSlots{5}{1}
-	\ifthenelse{#1 > 15}{
-		\AddSpellSlots{2}{1}
-		\AddSpellsKnown{1}{1}
-		\AddSpellsKnown{5}{1}
-		\AddSpellsKnown{6}{2}
-	\ifthenelse{#1 > 16}{
 		\AddSpellSlots{3}{1}
 		\AddSpellSlots{5}{1}
+		\AddSpellsKnown{5}{1}
+	\ifthenelse{#1 > 15}{
 		\AddSpellSlots{6}{1}
-		\AddSpellsKnown{2}{1}
+		\AddSpellsKnown{4}{1}
+		\AddSpellsKnown{6}{2}
+	\ifthenelse{#1 > 16}{
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{6}{1}
+		\AddSpellsKnown{3}{1}
 		\AddSpellsKnown{6}{1}
 	\ifthenelse{#1 > 17}{
 		\AddSpellSlots{4}{1}
 		\AddSpellSlots{6}{1}
-		\AddSpellsKnown{3}{1}
+		\AddSpellsKnown{6}{1}
 	\ifthenelse{#1 > 18}{
 		\AddSpellSlots{5}{1}
 		\AddSpellSlots{6}{1}
-		\AddSpellsKnown{4}{1}
-		\AddSpellsKnown{6}{1}
+		\AddSpellsKnown{5}{1}
 	\ifthenelse{#1 > 19}{
 		\AddSpellSlots{6}{1}
-		\AddSpellsKnown{5}{1}
+		\AddSpellsKnown{4}{1}
+		\AddSpellsKnown{6}{1}
+	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
+}
+\newcommand{\AddTwoThirdsPreparedSpellcasting}[1]{
+		\AddSpellSlots{0}{3}
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 1}{
+		\AddSpellSlots{0}{1}
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 2}{
+		\AddSpellSlots{1}{1}
+	\ifthenelse{#1 > 3}{
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 4}{
+		\AddSpellSlots{1}{1}
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 5}{
+		\AddSpellSlots{0}{1}
+		\AddSpellSlots{2}{1}
+	\ifthenelse{#1 > 6}{
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 7}{
+		\AddSpellSlots{2}{1}
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 8}{
+		\AddSpellSlots{1}{1}
+		\AddSpellSlots{3}{1}
+	\ifthenelse{#1 > 9}{
+		\AddSpellSlots{4}{1}
+	\ifthenelse{#1 > 10}{
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{4}{1}
+	\ifthenelse{#1 > 11}{
+		\AddSpellSlots{2}{1}
+		\AddSpellSlots{4}{1}
+	\ifthenelse{#1 > 12}{
+		\AddSpellSlots{5}{1}
+	\ifthenelse{#1 > 13}{
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{5}{1}
+	\ifthenelse{#1 > 14}{
+		\AddSpellSlots{3}{1}
+		\AddSpellSlots{5}{1}
+	\ifthenelse{#1 > 15}{
+		\AddSpellSlots{6}{1}
+	\ifthenelse{#1 > 16}{
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{6}{1}
+	\ifthenelse{#1 > 17}{
+		\AddSpellSlots{4}{1}
+		\AddSpellSlots{6}{1}
+	\ifthenelse{#1 > 18}{
+		\AddSpellSlots{5}{1}
+		\AddSpellSlots{6}{1}
+	\ifthenelse{#1 > 19}{
+		\AddSpellSlots{6}{1}
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 \newcommand{\AddHalfSpellcasting}[1]{
