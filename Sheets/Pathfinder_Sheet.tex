@@ -437,7 +437,9 @@
 
   
 \end{picture}
-
+\renewcommand{\do}[1]{
+	\CleanArabic{CharSpell#1PreparedCount}& \CleanArabic{CharSpell#1CastCount}& \textit{#1}: \cs{Spell#1ShortDescription} & \cs{Spell#1School} & \cs{Spell#1Duration} & \cs{Spell#1Range}& \ifcsempty{Spell#1Save}{|}{\cs{Spell#1Save}} & \ifcsempty{Spell#1SR}{|}{\cs{Spell#1SR}}\\\hline
+}
 \ifthenelse{\equal{\CharSpellcastingClassOne}{}}{}{
 	\newpage
 	\centering
@@ -513,9 +515,6 @@
 	\singletitlebox{0}{0}{420}{12}{\CharSpellcastingClassOne{} Spells}
 	\end{picture}%
 	\noindent\vspace{-9\unitlength}%
-	\renewcommand{\do}[1]{
-		\CleanArabic{CharSpell#1PreparedCount}& \CleanArabic{CharSpell#1CastCount}& \textit{#1}: \cs{Spell#1ShortDescription} & \cs{Spell#1School} & \cs{Spell#1Duration} & \cs{Spell#1Range}&\cs{Spell#1Save}&\cs{Spell#1SR}\\\hline
-	}
 	\SetLength{\tabcolsep}{.1cm}%
 	\centering%
 	\begin{longtable}{@{}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|p{6.1cm}|>{\centering}p{2.1cm}|>{\centering}p{2.82cm}|>{\centering}p{1.7cm}|>{\centering}p{1.6cm}|>{\centering\arraybackslash}p{1.6cm}|@{}}
@@ -633,9 +632,6 @@
 	\singletitlebox{0}{0}{420}{12}{\CharSpellcastingClassTwo{} Spells}
 	\end{picture}%
 	\noindent\vspace{-9\unitlength}%
-	\renewcommand{\do}[1]{
-		\CleanArabic{CharSpell#1PreparedCount}& \CleanArabic{CharSpell#1CastCount}& \textit{#1}: \cs{Spell#1ShortDescription} & \cs{Spell#1School} & \cs{Spell#1Duration} & \cs{Spell#1Range}&\cs{Spell#1Save}&\cs{Spell#1SR}\\\hline
-	}
 	\SetLength{\tabcolsep}{.1cm}%
 	\centering%
 	\begin{longtable}{@{}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|>{\centering}p{.7cm}|p{6cm}|>{\centering}p{2cm}|>{\centering}p{2.6cm}|>{\centering}p{1.6cm}|>{\centering}p{1.5cm}|>{\centering\arraybackslash}p{1.3cm}|@{}}
@@ -691,7 +687,7 @@
 		\\\textbf{Range} \cs{Spell#1Range}
 		\\\textbf{\cs{Spell#1EffectType}} \cs{Spell#1Effect}
 		\\\textbf{Duration} \cs{Spell#1Duration}
-		\ifthenelse{\equal{\csexpandonce{Spell#1Save}}{|}}{}{\\\textbf{Saving Throw} \cs{Spell#1Save}; \textbf{Spell Resistance} \cs{Spell#1SR}}
+		\ifcsempty{Spell#1Save}{}{\\\textbf{Saving Throw} \cs{Spell#1Save}; \textbf{Spell Resistance} \cs{Spell#1SR}}
 	\end{minipage}
 	
 	\cs{Spell#1LongDescription}

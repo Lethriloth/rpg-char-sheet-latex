@@ -835,8 +835,8 @@
 	\csdef{Spell#1Range}{#5}%
 	\DeclareSpellEffect{#1}{#6}%
 	\csdef{Spell#1Duration}{#7}%
-	\ifthenelse{\equal{#8}{}}{\csdef{Spell#1Save}{|}}{\csdef{Spell#1Save}{#8}}%
-	\ifthenelse{\equal{#9}{}}{\csdef{Spell#1SR}{|}}{\csdef{Spell#1SR}{#9}}%
+	\csdef{Spell#1Save}{#8}%
+	\csdef{Spell#1SR}{#9}%
 }
 \ProvideDocumentCommand{\DeclareSpellEffectInternal}{m m m}{%
 	\csdef{Spell#1EffectType}{#2}%
@@ -1548,7 +1548,15 @@
 			\AddWarning{\DoMath{-\value{Char#1Count}} too many selections made for #2}
 		}{
 		\ifthenelse{\value{Char#1Count} > 0}{
-			\AddWarning{Make \arabic{Char#1Count} more selections for #2.\IfNoValueF{#3}{Use the function \texttt{\textbackslash#3}}}
+			\AddWarning{Make \arabic{Char#1Count} more selections for #2.\IfNoValueF{#3}{ Use the function \texttt{\textbackslash#3}} to add one.}
 		}{}}
+	}
+}
+
+\NewDocumentCommand{\CheckIsSelected}{m m o}{
+	\gappto{\RunChecks}{
+		\ifcsempty{Char#1}{%
+			\AddWarning{No #2 is selected.\IfNoValueF{#3}{ Use the function \texttt{\textbackslash#3}} to select it.}%
+		}{}
 	}
 }
