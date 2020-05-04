@@ -22,7 +22,7 @@
 		\AddLimitedUse{Charmed Life}{\DoMath{2 + (#1 + 2) / 4}}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Nimble}
-			\preto{\Initialise}{\ifthenelse{\equal\CharArmorType H}{}{\ifthenelse{\equal\CharArmorType M }{}{\AddDodgeBonus{(#1 + 1) / 4}}}}
+			\preto{\Initialize}{\ifthenelse{\equal\CharArmorType{H}}{}{\ifthenelse{\equal\CharArmorType{M}}{}{\AddDodgeBonus{(#1 + 1) / 4}}}}
 		\AddDeed{Kip-Up}
 		\AddDeed{Menacing Swordplay}
 		\AddDeed{Precise Strike}

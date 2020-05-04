@@ -605,7 +605,7 @@
 	\ifthenelse{\equal{#3}{}}{}{\SetCounter{CharMaxDexArmorCount}{#3}}
 	\ifthenelse{\value{CharMaxDexArmorCount}<\value{CharMaxDexBonusCount}}
 	{\SetCounter{CharMaxDexBonusCount}{\value{CharMaxDexArmorCount}}}{}
-	\AddToCounter{CharArmorArmorCheckpenaltyCount}{#4}
+	\AddToCounter{CharArmorArmorCheckPenaltyCount}{#4}
 	\renewcommand{\do}[1]{
 		\MiscBonus{##1}{#4}
 	}\dolistloop{\ArmorCheckSkillsList}
@@ -622,13 +622,14 @@
 	\ifthenelse{\equal{#3}{}}{}{\SetCounter{CharMaxDexShieldCount}{#3}}
 	\ifthenelse{\value{CharMaxDexShieldCount}<\value{CharMaxDexBonusCount}}
 	{\SetCounter{CharMaxDexBonusCount}{\value{CharMaxDexShieldCount}}}{}
-	\AddCounter{CharShieldArmorCheckPenaltyCount}{#4}
+	\AddToCounter{CharShieldArmorCheckPenaltyCount}{#4}
 	\renewcommand{\do}[1]{
 		\MiscBonus{##1}{#4}
 	}\dolistloop{\ArmorCheckSkillsList}
 	\SetCounter{CharShieldSpellFailureCount}{#5}
 	\AddToCounter{TotalACItemsSpellFailure}{#5}
 	\renewcommand{\CharShieldNotes}{#7}
+	\renewcommand{\CharShieldName}{#1}
 	\AddGearItem{#1}{#6}
 }
 
