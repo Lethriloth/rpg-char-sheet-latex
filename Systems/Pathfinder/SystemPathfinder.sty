@@ -1,140 +1,19 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{SystemPathfinder}[2016/12/29 Pathfinder system-specific features for rpgcharsheet2.cls]
-
+\RequirePackage{Systems/D20-Common/SystemD20-Common}
 
 %%%% Character Attributes %%%%
 
 %% Ability Scores %%
-\edef\AbilityScoresList{}
-\forcsvlist{\listadd\AbilityScoresList}{Str,Dex,Con,Int,Wis,Cha}
-
-\renewcommand{\do}[1]{
-	\NewCounter{Char#1Count}
-	\NewCounter{Char#1BaseCount}
-	\NewCounter{Char#1EnhancementCount}
-	\NewCounter{Char#1MiscCount}
-	\NewCounter{Char#1TmpCount}
-	\NewCounter{Char#1ModCount}
-	\expandafter\newcommand\csname SetChar#1\endcsname[1]{
-		\SetCounter{Char#1BaseCount}{##1}
-	}
-}\dolistloop{\AbilityScoresList}
-\newcommand{\ComputeAbilityScores}{
-	\renewcommand{\do}[1]{
-		\SetCounter{Char##1Count}{\value{Char##1BaseCount}}
-		\AddToCounter{Char##1Count}{\value{Char##1EnhancementCount}}
-		\AddToCounter{Char##1Count}{\value{Char##1MiscCount}}
-		\AddToCounter{Char##1Count}{\value{Char##1TmpCount}}
-		\SetCounter{Char##1ModCount}{0}
-		\ifthenelse{10 > \value{Char##1Count}}{
-			\AddToCounter{Char##1Count}{-1}
-			\SetCounter{Char##1ModCount}{(\value{Char##1Count} - 10) / 2}
-			\AddToCounter{Char##1Count}{1}
-		}{
-			\SetCounter{Char##1ModCount}{(\value{Char##1Count}-10)/2}
-		}
-	}\dolistloop{\AbilityScoresList}
-	\SetCounter{CharCMDAbilityModCount}{\value{CharStrModCount}+\value{CharDexModCount}}
-}
+\appto{\ComputeAbilityScores}{\SetCounter{CharCMDAbilityModCount}{\value{CharStrModCount}+\value{CharDexModCount}}}
 
 %% Armor Class %%
-\NewCounter{CharArmorBonusCount}
-	\newcommand{\AddArmorBonus}[1]{\ifthenelse{\value{CharArmorBonusCount}<#1}{\SetCounter{CharArmorBonusCount}{#1}}{}}
-\NewCounter{CharShieldBonusCount}
-	\newcommand{\AddShieldBonus}[1]{\ifthenelse{\value{CharShieldBonusCount}<#1}{\SetCounter{CharShieldBonusCount}{#1}}{}}
-\NewCounter{CharNaturalArmorModCount}
-	\newcommand{\AddNaturalArmorBonus}[1]{\ifthenelse{\value{CharNaturalArmorModCount}<#1}{\Setcounter{CharNaturalArmorModCount}{#1}}{}}
-\NewCounter{CharDodgeModCount}
-	\newcommand{\AddDodgeBonus}[1]{\AddToCounter{CharDodgeModCount}{#1}}
-\NewCounter{CharSizeModCount}
-\NewCounter{CharDeflectionModCount}
-	\newcommand{\AddDeflectionBonus}[1]{\ifthenelse{\value{Chardeflectionmodcount}<#1}{\Setcounter{Chardeflectionmodcount}{#1}}{}}
-\NewCounter{CharACMiscCount}\NewCounter{CharACTmpCount}
-\NewCounter{CharTouchACMiscCount}\NewCounter{CharTouchACTmpCount}
-\NewCounter{CharFlatFootedACMiscCount}\NewCounter{CharFlatFootedACTmpCount}
 
 %% Saving Throws
-\renewcommand{\do}[1]{
-	\NewCounter{Char#1Count}
-	\NewCounter{Char#1MiscCount}
-	\NewCounter{Char#1TmpCount}
-}\docsvlist{Fortitude, Reflex, Will}
-\NewCounter{CharResistanceModCount}
-\newcommand{\AddResistanceBonus}[1]{\ifthenelse{\value{CharResistanceModCount}<#1}{\SetCounter{CharResistanceModCount}{#1}}{}}
 
 %% Special Defenses
-\edef\CharResistancesList{}
-\newcommand{\AddResistance}[2]{
-	\ifinlist{#1}{\CharImmunitiesList}{}{
-		\ifinlist{#1}{\CharResistancesList}{}{
-			\NewCounter{CharResist#1Count}
-			\listadd{\CharResistancesList}{#1}
-		}
-		\ifthenelse{\value{CharResist#1Count} < #2}{
-			\SetCounter{CharResist#1Count}{#2}
-		}{}
-	}
-}
-\NewDocumentCommand{\PrintResistances}{O{, } O{}}{%
-	\edef\@PrintList{}%
-	\edef\@@PrintList{}%
-	\edef\@PrintListlast{}
-	\renewcommand{\do}[1]{%
-		\ifthenelse{\value{CharResist##1Count} = 0}{}{%
-			\let\@@PrintList\@PrintList%
-			\edef\@PrintListlast{Resist ##1 \arabic{CharResist##1Count}}%
-			\listadd{\@PrintList}{Resist ##1 \arabic{CharResist##1Count}}%
-		}
-	}\dolistloop{\CharResistancesList}%
-	\renewcommand{\do}[1]{%
-		##1#1%
-	}\dolistloop{\@@PrintList}%
-	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintListlast%
-}
-\edef\CharImmunitiesList{}
-\newcommand{\AddImmunity}[1]{
-	\ifinlist{#1}{\CharImmunitiesList}{}{
-		\listinsert{\CharImmunitiesList}{#1}
-		\ifinlist{#1}{\CharResistancesList}{
-			\SetCounter{CharResist#1Count}{0}
-		}{}
-	}
-}
-\edef\CharDRTypesList{}
-\newcommand{\AddDR}[2]{
-	\ifinlist{#1}{\CharDRTypesList}{}{
-		\NewCounter{CharDR/#1Count}
-		\listadd{\CharDRTypesList}{#1}
-	}
-	\ifthenelse{\value{CharDR/#1Count} < #2}{
-		\SetCounter{CharDR/#1Count}{#2}
-	}{}
-}
-\NewDocumentCommand{\PrintDR}{O{, } O{}}{%
-	\edef\@PrintList{}%
-	\edef\@@PrintList{}%
-	\edef\@PrintListlast{}
-	\renewcommand{\do}[1]{%
-		\let\@@PrintList\@PrintList%
-		\edef\@PrintListlast{DR \arabic{CharDR/##1Count}/##1}%
-		\listadd{\@PrintList}{DR \arabic{CharDR/##1Count}/##1}%
-	}\dolistloop{\CharDRTypesList}%
-	\renewcommand{\do}[1]{%
-		##1#1%
-	}\dolistloop{\@@PrintList}%
-	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintListlast%
-}
-
-\edef\CharSpecialDefensesList{}
-\newcommand{\AddSpecialDefense}[1]{
-	\listinsert{\CharSpecialDefensesList}{#1}
-}
 
 %% BAB, attacks, combat maneuvers
-\NewCounter{CharBABCount}
-\NewCounter{CharIteratedAttacksCount}
-\NewCounter{CharIteratedAttackBonusCount}
-\NewCounter{CharExtraAttacksCount}
 \renewcommand{\do}[1]{
 	\NewCounter{Char#1MiscCount}
 	\NewCounter{Char#1TmpCount}
@@ -194,40 +73,12 @@
 }
 
 %% Speed
-\NewCounter{CharSpeedReducibleBool}
-\SetCounter{CharSpeedReducibleBool}{1}
-\renewcommand{\do}[1]{
-	\NewCounter{Char#1SpeedCount}
-	\NewCounter{Char#1SpeedMiscCount}
-}
-\docsvlist{Base, Fly, Swim, Burrow, Climb}
-\newcommand{\SetCharSpeed}[1]{
-	\SetCounter{CharBaseSpeedCount}{#1}
-}
 \NewCounter{CharManeuverabilityCount}
 \newcommand{\AddFlySpeed}[2]{
 	\SetCounter{CharFlySpeedCount}{#1}
 	\SetCounter{CharManeuverabilityCount}{#2}
 }
-\newcommand{\AddClimbSpeed}[1]{
-	\SetCounter{CharClimbSpeedCount}{#1}
-}
-\newcommand{\AddSwimSpeed}[1]{
-	\SetCounter{CharSwimSpeedCount}{#1}
-}
-\newcommand{\AddBurrowSpeed}[1]{
-	\SetCounter{CharBurrowSpeedCount}{#1}
-}
-\NewCounter{CharSpeedMiscCount}
-\newcommand{\SpeedInitialize}{
-	\renewcommand{\do}[1]{
-		\ifthenelse{\value{Char##1SpeedCount}=0}{
-		}{
-			\AddToCounter{Char##1SpeedCount}{\value{CharSpeedMiscCount}}
-		}
-		\AddToCounter{Char##1SpeedCount}{\value{Char##1SpeedMiscCount}}
-	}
-	\docsvlist{Base, Fly, Swim, Burrow, Climb}
+\appto{\SpeedInitialize}{%
 	\MiscBonus{Fly}{\value{CharManeuverabilityCount}}
 	\MiscBonus{Fly}{\value{CharSizeModCount} * 2}
 }
@@ -242,23 +93,6 @@
 \NewCounter{CharFeatsCount}
 \NewCounter{CharBonusFeatsCount}
 \NewCounter{CountFeats-Mode}
-
-\NewDocumentCommand{\AddFeat}{s s O{1} m}{
-	\IfBooleanTF #1 {
-		\IfBooleanF #2 {
-			\AddToCounter{CharBonusFeatsCount}{-#3}
-		}
-		\listadd\CharFeatsList{#4\textsuperscript{B} \ifthenelse{#3 = 1}{}{$\times#3$}}
-	}{
-		\listadd\CharFeatsList{#4 \ifthenelse{#3 = 1}{}{$\times#3$}}
-		\AddToCounter{CharFeatsCount}{-#3}
-	}
-}
-\newcommand\AddClassFeature[1]{\listadd\CharClassFeaturesList{#1}}
-\newcommand\AddRaceFeature[1]{\listadd\CharRaceFeaturesList{#1}}
-\newcommand\AddLimitedUse[2]{\listadd\CharLimitedUseList{#1 & #2}}
-
-
 
 %% Favored Classes %%
 \NewCounter{CheckFavoredClass-Mode}
@@ -309,72 +143,18 @@
 	}{
 		\input{"\datafolder/Classes/#3_#4.tex"}
 	}
+
+	\ImportCharClassCommon{#3}{#5}
+
 	\ifthenelse{\equal{#2}{}}{
 		\appto\CharLevel{\capitalize{#3} #5 }
 	}{
 		\appto\CharLevel{#2 #5 }
 	}
-	\listadd{\CharClassesList}{#3}
-	\if\csname#3BAB\endcsname g
-		\AddToCounter{CharBABCount}{#5}
-	\fi
-	\if\csname#3BAB\endcsname a
-		\AddToCounter{CharBABCount}{#5 * 3 / 4}
-	\fi
-	\if\csname#3BAB\endcsname p
-		\AddToCounter{CharBABCount}{#5 / 2}
-	\fi
-	\if\csname#3Fort\endcsname g
-		\AddToCounter{CharFortitudeCount}{2 + #5 / 2}
-	\fi
-	\if\csname#3Fort\endcsname p
-		\AddToCounter{CharFortitudeCount}{#5 / 3}
-	\fi
-	\if\csname#3Ref\endcsname g
-		\AddToCounter{CharReflexCount}{2 + #5 / 2}
-	\fi
-	\if\csname#3Ref\endcsname p
-		\AddToCounter{CharReflexCount}{#5 / 3}
-	\fi
-	\if\csname#3Will\endcsname g
-		\AddToCounter{CharWillCount}{2 + #5 / 2}
-	\fi
-	\if\csname#3Will\endcsname p
-		\AddToCounter{CharWillCount}{#5 / 3}
-	\fi
-	\NewCounter{Char#3ClassLevelCount}
-	\SetCounter{Char#3ClassLevelCount}{#5}
-	\ifthenelse{\value{CharTotalLevelCount} = 0}{
-		\ifthenelse{\value{HP-Mode} = 1}{
-			\AddToCounter{CharHPCount}{\value{#3HitDieSize}}
-			\AddToCounter{CharHPRollsCount}{1}
-		}{
-			\ifthenelse{\value{HP-Mode} = 2}{
-				\AddToCounter{CharHPCount}{\value{#3HitDieSize} + (\value{#3HitDieSize} + 1) * (#5 - 1) / 2}
-			}
-			{}
-		}
-	}{
-		\ifthenelse{\value{HP-Mode} = 1}{
-		}{
-			\ifthenelse{\value{HP-Mode} = 2}{
-				\AddToCounter{CharHPCount}{(\value{#3HitDieSize} + 1) * #5 / 2}
-			}
-			{}
-		}
-	}
-	\AddToCounter{CharTotalLevelCount}{#5}
 	\AddToCounter{CharSpareSkillRanksCount}{(\value{#3SkillRanksPerLevelCount} + \value{CharBonusSkillRanksPerLevelCount})* #5}
-	\renewcommand\do[1]{
-		\IsClassSkill{##1}
-	}\expandafter\dolistloop\csname#3ClassSkillsList\endcsname
 	\IfBooleanT #1 {\AddToCounter{CharSpareFavoredClassLevelsCount}{#5}}
-	\csname Add#3ClassFeatures\endcsname{#5}
 }
 
-\NewDocumentCommand{\ImportCharRace}{m}{
-	\input{\datafolder/Races/#1.tex}
-}
 
 %%%% Skills %%%%
 
