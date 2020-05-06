@@ -116,44 +116,19 @@
 %%%% Skills %%%%
 
 % Define Skills lists
-\edef\SkillsList{}
-\edef\KnowledgeSkillsList{}
-\forcsvlist{\listadd\KnowledgeSkillsList}{KnowledgeArcana, KnowledgeDungeoneering, KnowledgeEngineering, KnowledgeGeography, KnowledgeHistory, KnowledgeLocal, KnowledgeNature, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion}
 \forcsvlist{\listadd\SkillsList}{Appraise, Balance, Bluff, Climb, Concentration, CraftOne, CraftTwo, CraftThree, DecipherScript, Diplomacy, DisableDevice, Disguise, EscapeArtist, Forgery, GatherInformation, HandleAnimal, Heal, Hide, Intimidate, Jump, Listen, MoveSilently, OpenLock, PerformOne, PerformTwo, PerformThree, ProfessionOne, ProfessionTwo, Ride, Search, SenseMotive, SleightOfHand, SpeakLanguage, Spellcraft, Spot, Survival, Swim, Tumble, UseMagicDevice, UseRope}
-\forlistloop{\listadd\SkillsList}{\KnowledgeSkillsList}
 
-%% Define lists for armor check Penalty and trained-only
-\edef\ArmorCheckSkillsList{}
+% Define lists for armor check Penalty and trained-only
 \forcsvlist{\listadd\ArmorCheckSkillsList}{Balance, Climb, EscapeArtist, Hide, Jump, MoveSilently, SleightOfHand, Swim, Swim, Tumble}
-\edef\TrainedSkillsList{}
 \forcsvlist{\listadd\TrainedSkillsList}{DecipherScript, DisableDevice, HandleAnimal, OpenLock, ProfessionOne, ProfessionTwo, SleightOfHand, SpeakLanguage, Spellcraft, Tumble, UseMagicDevice}
-%% Default "Optional" for craft, profession, perform categories
-\renewcommand\do[1]{
-	\expandafter\newcommand\csname Char#1Name\endcsname{Optional}
-}\docsvlist{CraftOne, CraftTwo, CraftThree, ProfessionOne, ProfessionTwo, PerformOne, PerformTwo}
 
-%% Initialize skill variables
+% Initialize skill variables
 \renewcommand{\do}[1]{
 	\NewCounter{Char#1Count}
 	\NewCounter{Char#1ClassSkillBool}
 	\NewCounter{Char#1RanksCount}
 	\NewCounter{Char#1MiscCount}
 }\dolistloop{\SkillsList}
-
-%adds Skill to Class Skill list
-\newcommand\IsClassSkill[1]{
-	\ifthenelse{\equal{#1}{KnowledgeAll}}{
-		\forlistloop{\IsClassSkill}{\KnowledgeSkillsList}
-	}{\ifthenelse{\equal{#1}{Craft}}{
-		\forcsvlist{\IsClassSkill}{CraftOne, CraftTwo, CraftThree}
-	}{\ifthenelse{\equal{#1}{Perform}}{
-		\forcsvlist{\IsClassSkill}{PerformOne, PerformTwo}
-	}{\ifthenelse{\equal{#1}{Profession}}{
-		\forcsvlist{\IsClassSkill}{ProfessionOne, ProfessionTwo}
-	}{
-		\SetCounter{Char#1ClassSkillBool}{1}
-	}}}}
-}
 
 %Command to add skill ranks
 \newcommand\AddRanks[3][]{
@@ -171,9 +146,7 @@
 	}
 }
 
-\NewCounter{CharBonusSkillRanksPerLevelCount}
 %Commands to be run at sheet initialization
-\newcounter{AutoSkillRanks-Mode}
 \newcommand{\AddIntToSkillRanks}{
 	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
 		\SetCounter{@i}{1}
@@ -201,6 +174,7 @@
 		}\dolistloop{\CharClassesList}
 	}{}
 }
+
 \newcommand{\CalculateSynergyBonuses}{
 	\ifthenelse{\value{CharBluffRanksCount} > 4}{
 		\MiscBonus{Diplomacy}{2}
@@ -266,22 +240,6 @@
 
 
 %%%% Character Name & Description %%%%
-
-\newcommand\CharName{}
-\newcommand\CharLevel{}
-\newcommand\CharPlayerName{}
-\newcommand\CharAlignment{}
-\newcommand\CharReligion{}
-\newcommand\CharRace{}
-\newcommand\CharHomeland{}
-\newcommand\CharSize{}
-\newcommand\CharGender{}
-\newcommand\CharAge{}
-\newcommand\CharHeight{}
-\newcommand\CharWeight{}
-\newcommand\CharHair{}
-\newcommand\CharEyes{}
-
 
 %%%% Items %%%%
 

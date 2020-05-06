@@ -1,6 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{D20-Common}[2020/05/06 Common system features between D\&D 3.5 and Pathfinder for rpgcharsheet2.cls]
 
+%% Toggles %%
+\NewCounter{AutoSkillRanks-Mode}
+
 %% Ability Scores %%
 \edef\AbilityScoresList{}
 \forcsvlist{\listadd\AbilityScoresList}{Str,Dex,Con,Int,Wis,Cha}
@@ -49,7 +52,7 @@
 \NewCounter{CharTouchACMiscCount}\NewCounter{CharTouchACTmpCount}
 \NewCounter{CharFlatFootedACMiscCount}\NewCounter{CharFlatFootedACTmpCount}
 
-%% Saving Throws
+%% Saving Throws %%
 \renewcommand{\do}[1]{
 	\NewCounter{Char#1Count}
 	\NewCounter{Char#1MiscCount}
@@ -58,7 +61,7 @@
 \NewCounter{CharResistanceModCount}
 \newcommand{\AddResistanceBonus}[1]{\ifthenelse{\value{CharResistanceModCount}<#1}{\SetCounter{CharResistanceModCount}{#1}}{}}
 
-%% Special Defenses
+%% Special Defenses %%
 \edef\CharResistancesList{}
 \newcommand{\AddResistance}[2]{
 	\ifinlist{#1}{\CharImmunitiesList}{}{
@@ -126,7 +129,7 @@
 	\listinsert{\CharSpecialDefensesList}{#1}
 }
 
-%% BAB, attacks, combat maneuvers
+%% BAB, attacks, combat maneuvers %%
 \NewCounter{CharBABCount}
 \NewCounter{CharIteratedAttacksCount}
 \NewCounter{CharIteratedAttackBonusCount}
@@ -243,3 +246,56 @@
 \NewDocumentCommand{\ImportCharRace}{m}{
 	\input{\datafolder/Races/#1.tex}
 }
+
+%%%% Skills %%%%
+
+% Define Skills lists
+\edef\SkillsList{}
+\edef\KnowledgeSkillsList{}
+\forcsvlist{\listadd\KnowledgeSkillsList}{KnowledgeArcana, KnowledgeDungeoneering, KnowledgeEngineering, KnowledgeGeography, KnowledgeHistory, KnowledgeLocal, KnowledgeNature, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion}
+\forlistloop{\listadd\SkillsList}{\KnowledgeSkillsList}
+
+%Define lists for Armor check penalty and trained-only
+\edef\ArmorCheckSkillsList{}
+\edef\TrainedSkillsList{}
+\forlistloop{\listadd\TrainedSkillsList}{\KnowledgeSkillsList}
+
+% Default "Optional" for Craft, Profession, Perform categories
+\renewcommand\do[1]{
+	\expandafter\newcommand\csname Char#1Name\endcsname{Optional}
+}\docsvlist{CraftOne,CraftTwo,CraftThree,ProfessionOne,ProfessionTwo,PerformOne,PerformTwo}
+
+%adds Skill to Class Skill list
+\newcommand\IsClassSkill[1]{
+	\ifthenelse{\equal{#1}{KnowledgeAll}}{
+		\forlistloop{\IsClassSkill}{\KnowledgeSkillsList}
+	}{\ifthenelse{\equal{#1}{Craft}}{
+			\forcsvlist{\IsClassSkill}{CraftOne, CraftTwo, CraftThree}
+		}{\ifthenelse{\equal{#1}{Perform}}{
+				\forcsvlist{\IsClassSkill}{PerformOne, PerformTwo}
+			}{\ifthenelse{\equal{#1}{Profession}}{
+					\forcsvlist{\IsClassSkill}{ProfessionOne, ProfessionTwo}
+				}{
+					\SetCounter{Char#1ClassSkillBool}{1}
+	}}}}
+}
+
+\NewCounter{CharBonusSkillRanksPerLevelCount}
+
+
+%%%% Character Name & Description %%%%
+
+\newcommand\CharName{}
+\newcommand\CharLevel{}
+\newcommand\CharPlayerName{}
+\newcommand\CharAlignment{}
+\newcommand\CharReligion{}
+\newcommand\CharRace{}
+\newcommand\CharHomeland{}
+\newcommand\CharSize{}
+\newcommand\CharGender{}
+\newcommand\CharAge{}
+\newcommand\CharHeight{}
+\newcommand\CharWeight{}
+\newcommand\CharHair{}
+\newcommand\CharEyes{}
