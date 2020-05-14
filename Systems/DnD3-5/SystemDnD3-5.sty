@@ -255,57 +255,6 @@
 
 %%%% Spells %%%%
 
-\ProvideDocumentCommand{\AddSpell}{o m m}{%[Class]{Level}{Spell Name}
-	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{
-		\listcsinsert{Char#2SpellsListOne}{#3}
-	}{
-		\listcsinsert{Char#2SpellsListTwo}{#3}
-	}
-	%% Implementation for when the switch to class-specific spell lists (instead of SpellcastingClassOne/SpellcastingClassTwo) is made
-	%	\IfValueTF #1 {
-	%		\listcsinsert{Char#1#2SpellsList}{#3}
-	%		\StepCounter{Char#1#2SpellsActuallyKnown}
-	%	}{
-	%		\listcsinsert{Char\CharCurrentSpellcastingClass #2SpellsList}{#3}
-	%		\StepCounter{Char\CharCurrentSpellcastingClass #2SpellsActuallyKnown}
-	%	}
-}
-
-\newcommand{\DeclareSpellDescription}[2]{
-	\expandafter\newcommand\csname Spell#1LongDescription\endcsname{#2}
-}
-
-\ProvideDocumentCommand{\DeclareSpell}{m >{\SplitArgument{7}{|}}m O{}}{%{Name}{Attributes}[Short desc]
-	\csdef{Spell#1ShortDescription}{#3}
-	\DeclareSpellInternal{#1}#2%
-	\NewCounter{CharSpell#1PreparedCount}%
-	\NewCounter{CharSpell#1CastCount}%
-}
-
-\ProvideDocumentCommand{\DeclareSpellInternal}{m m m m m m m m m}{%
-	\csdef{Spell#1School}{#2}%
-	\csdef{Spell#1Components}{#3}%
-	\csdef{Spell#1CastTime}{#4}%
-	\csdef{Spell#1Range}{#5}%
-	\DeclareSpellEffect{#1}{#6}%
-	\csdef{Spell#1Duration}{#7}%
-	\csdef{Spell#1Save}{#8}%
-	\csdef{Spell#1SR}{#9}%
-}
-\ProvideDocumentCommand{\DeclareSpellEffectInternal}{m m m}{%
-	\csdef{Spell#1EffectType}{#2}%
-	\csdef{Spell#1Effect}{#3}%
-}
-
-\ProvideDocumentCommand{\DeclareSpellEffect}{m >{\SplitArgument{1}{:}}m}{%
-	\DeclareSpellEffectInternal{#1}#2%
-}
-
-\renewcommand{\do}[1]{
-	\expandafter\edef\csname Char#1SpellsListOne\endcsname{}
-	\expandafter\edef\csname Char#1SpellsListTwo\endcsname{}
-}\docsvlist{0,1,2,3,4,5,6,7,8,9}
-
 \newcommand{\AddPrimarySpellcasting}[1]{
 		\AddSpellSlots{0}{3}
 		\AddSpellSlots{1}{1}
@@ -566,30 +515,6 @@
 	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
 }
 
-\renewcommand{\do}[1]{
-	\expandafter\newcommand\csname CharSpellcastingClass#1\endcsname{}
-	\expandafter\newcommand\csname CharSpellcastingClass#1Ability\endcsname{}
-	\NewCounter{CharCL#1Count}
-	\NewCounter{CharSpellcastingClass#1MaxSpellLevelCount}
-	\SetCounter{CharSpellcastingClass#1MaxSpellLevelCount}{-1}
-	\NewCounter{CharSpellcasting#1HasCantrips}
-	\SetCounter{CharSpellcasting#1HasCantrips}{0}
-	\expandafter\NewDocumentCommand\csname NewSpellcasting#1\endcsname{s O{9} m m m}{
-		\IfBooleanF ##1 {\SetCounter{CharSpellcasting#1HasCantrips}{1}}
-		\SetCounter{CharSpellcastingClass#1MaxSpellLevelCount}{##2}
-		\expandafter\renewcommand\csname CharSpellcastingClass#1\endcsname{##3}
-		\expandafter\renewcommand\csname CharSpellcastingClass#1Ability\endcsname{##5}
-		\SetCounter{CharCL#1Count}{##4}
-	}
-}\docsvlist{One,Two}
-
-\NewDocumentCommand{\NewSpellcasting}{s O{9} m m m}{
-	\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{
-		\IfBooleanTF #1 {\NewSpellcastingOne*[#2]{#3}{#4}{#5}} {\NewSpellcastingOne[#2]{#3}{#4}{#5}}
-	}{
-		\IfBooleanTF #1 {\NewSpellcastingTwo*[#2]{#3}{#4}{#5}} {\NewSpellcastingTwo[#2]{#3}{#4}{#5}}
-	}
-}
 %Initialize Spellcasting variables
 \ForLoop{@i}{0}{\value{@i}<10}{
 	\NewCounter{CharAbilitySpellSlotsOne\arabic{@i}Count}
