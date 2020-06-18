@@ -1,0 +1,11 @@
+\def\CerebremancerBAB{p}
+\def\CerebremancerFort{p}
+\def\CerebremancerRef{p}
+\def\CerebremancerWill{g}
+\NewCounter{CerebremancerSkillRanksPerLevelCount}
+\SetCounter{CerebremancerSkillRanksPerLevelCount}{2}
+\NewCounter{CerebremancerHitDieSize}
+\SetCounter{CerebremancerHitDieSize}{4}
+\edef\CerebremancerClassSkillsList{}
+\forcsvlist{\listadd{\CerebremancerClassSkillsList}}{Concentration, CraftOne, CraftTwo, CraftThree, DecipherScript, KnowledgeArcana, KnowledgePsionics, Profession, Psicraft, Spellcraft}
+\newcommand{\AddCerebremancerClassFeatures}[1]{}

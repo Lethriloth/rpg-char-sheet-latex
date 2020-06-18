@@ -48,14 +48,14 @@
 	}
 }\docsvlist{One,Two}
 
-\NewDocumentCommand{\NewManifesting}{s O{9} m m m}{
+\NewDocumentCommand{\NewManifesting}{O{9} m m m}{
 	\ifthenelse{\equal{\CharManifestingClassOne}{}}{
-		\IfBooleanTF #1 {\NewManifestingOne*[#2]{#3}{#4}{#5}} {\NewManifestingOne[#2]{#3}{#4}{#5}}
+		\NewManifestingOne[#1]{#2}{#3}{#4}
 	}{
-		\IfBooleanTF #1 {\NewManifestingTwo*[#2]{#3}{#4}{#5}} {\NewManifestingTwo[#2]{#3}{#4}{#5}}
+		\NewManifestingTwo[#1]{#2}{#3}{#4}
 	}
-	\NewCounter{Char#3PowersKnownCount}
-	\NewCounter{Char#3PowersActuallyKnownCount}
+	\NewCounter{Char#2PowersKnownCount}
+	\NewCounter{Char#2PowersActuallyKnownCount}
 }
 
 \newcommand{\CalculatePowerRange}[1]{

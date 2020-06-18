@@ -1,0 +1,100 @@
+\def\PsionBAB{p}
+\def\PsionFort{p}
+\def\PsionRef{p}
+\def\PsionWill{g}
+\NewCounter{PsionSkillRanksPerLevelCount}
+\SetCounter{PsionSkillRanksPerLevelCount}{2}
+\NewCounter{PsionHitDieSize}
+\SetCounter{PsionHitDieSize}{4}
+\edef\PsionClassSkillsList{}
+\forcsvlist{\listadd{\PsionClassSkillsList}}{Concentration, Craft, Profession, Psicraft}\forlistloop{\listadd{\PsionClassSkillsList}}{\KnowledgeSkillsList}
+\newcommand{\AddPsionClassFeatures}[1]{
+	\AddToCounter{CharBonusFeatsCount}{#1 / 5 + 1}
+	\ifthenelse{#1 > 4}{
+		\AddClassFeature{Psion Bonus Feat\ifthenelse{#1 > 9}{ $\times\DoMath{#1 / 5}$}{}}
+	}{}
+	\newcommand{\CharPsionDiscipline}{}
+	\AddClassFeature{\CharPsionDiscipline{} Discipline}
+	\newcommand\AddPsionDiscipline[1]{%
+		\renewcommand{\CharPsionDiscipline}{##1}%
+		\renewcommand\do[1]{\listadd{\PsionClassSkillsList}{####1}\IsClassSkill{####1}}
+		\ifthenelse{\equal{##1}{Clairsentience}}{%
+			\docsvlist{GatherInformation, Listen, Spot}
+		}{%
+		\ifthenelse{\equal{##1}{Metacreativity}}{%
+			\docsvlist{Bluff,Disguise,UsePsionicDevice}
+		}{
+		\ifthenelse{\equal{##1}{Psychokinesis}}{%
+			\docsvlist{Autohypnosis,DisableDevice,Intimidate}
+		}{
+		\ifthenelse{\equal{##1}{Psychometabolism}}{%
+			\docsvlist{Autohypnosis,Balance,Heal}
+		}{
+		\ifthenelse{\equal{##1}{Psychoportation}}{%
+			\docsvlist{Climb,Jump,Ride,Survival,Swim}
+		}{
+		\ifthenelse{\equal{##1}{Telepathy}}{%
+			\docsvlist{Bluff,Diplomacy,GatherInformation,SenseMotive}
+		}{}}}}}}
+	}
+	\appto{\RunChecks}{%
+		%%Check Psion Discipline
+		\ifthenelse{\equal{\CharPsionDiscipline}{}}{
+			\AddWarning{Choose a Psion Discipline. Use the command \texttt{$\backslash$AddPsionDiscipline\{discipline name\}}}
+		}{
+			\ifthenelse{\equal{\CharPsionDiscipline}{Clairsentience} \or \equal{\CharPsionDiscipline}{Metacreativity} \or \equal{\CharPsionDiscipline}{Psychokinesis} \or \equal{\CharPsionDiscipline}{Psychometabolism} \or \equal{\CharPsionDiscipline}{Psychoportation} \or \equal{\CharPsionDiscipline}{Telepathy}}{}{
+				\AddWarning{Unrecognized Psion discipline: `\CharPsionDiscipline' is not one of `Clairsentience', `Metacreativity', `Psychokinesis', `Psychometabolism', `Psychoportation', or `Telepathy'.}
+		}}
+	}
+	\NewDocumentCommand{\AddPsionManifesting}{O{Psion} m}{
+		\NewManifesting[(##2 + 1) / 2]{##1}{##2}{Int}
+		\AddToCounter{Char##1PowersKnownCount}{##2 * 2 + 1}
+		\ifthenelse{##2 > 10}{
+			\AddToCounter{Char##1PowersKnownCount}{5 - ((##2 + 1 ) / 2)}
+		}{}
+		\AddToCounter{CharPPCount}{2}
+		\ifthenelse{##2 > 1}{
+			\AddToCounter{CharPPCount}{4}
+		\ifthenelse{##2 > 2}{
+			\AddToCounter{CharPPCount}{5}
+		\ifthenelse{##2 > 3}{
+			\AddToCounter{CharPPCount}{6}
+		\ifthenelse{##2 > 4}{
+			\AddToCounter{CharPPCount}{8}
+		\ifthenelse{##2 > 5}{
+			\AddToCounter{CharPPCount}{10}
+		\ifthenelse{##2 > 6}{
+			\AddToCounter{CharPPCount}{11}
+		\ifthenelse{##2 > 7}{
+			\AddToCounter{CharPPCount}{12}
+		\ifthenelse{##2 > 8}{
+			\AddToCounter{CharPPCount}{14}
+		\ifthenelse{##2 > 9}{
+			\AddToCounter{CharPPCount}{16}
+		\ifthenelse{##2 > 10}{
+			\AddToCounter{CharPPCount}{18}
+		\ifthenelse{##2 > 11}{
+			\AddToCounter{CharPPCount}{20}
+		\ifthenelse{##2 > 12}{
+			\AddToCounter{CharPPCount}{21}
+		\ifthenelse{##2 > 13}{
+			\AddToCounter{CharPPCount}{23}
+		\ifthenelse{##2 > 14}{
+			\AddToCounter{CharPPCount}{25}
+		\ifthenelse{##2 > 15}{
+			\AddToCounter{CharPPCount}{26}
+		\ifthenelse{##2 > 16}{
+			\AddToCounter{CharPPCount}{29}
+		\ifthenelse{##2 > 17}{
+			\AddToCounter{CharPPCount}{30}
+		\ifthenelse{##2 > 18}{
+			\AddToCounter{CharPPCount}{31}
+		\ifthenelse{##2 > 19}{
+			\AddToCounter{CharPPCount}{32}
+		}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}%
+%
+		\gappto{\Initialize}{
+			\AddToCounter{CharPPCount}{##2 * \value{CharIntModCount} / 2}
+		}
+	}
+}
