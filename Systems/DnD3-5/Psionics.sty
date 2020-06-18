@@ -1,0 +1,127 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{Psionics}[Psionics!!]
+
+
+\listinsert{\KnowledgeSkillsList}{KnowledgePsionics}
+\renewcommand{\do}[1]{
+	\listinsert{\SkillsList}{#1}
+	\listinsert{\TrainedSkillsList}{#1}
+	\NewCounter{Char#1Count}
+	\NewCounter{Char#1ClassSkillBool}
+	\NewCounter{Char#1RanksCount}
+	\NewCounter{Char#1MiscCount}
+}\docsvlist{Autohypnosis,KnowledgePsionics,Psicraft,UsePsionicDevice}
+\gappto{\CalculateSynergyBonuses}{
+	\ifthenelse{\value{CharConcentrationRanksCount} > 4}{
+		\MiscBonus{Autohypnosis}{2}
+	}{}
+	\ifthenelse{\value{CharAutohypnosisRanksCount} > 4}{
+		\MiscBonus{KnowledgePsionics}{2}
+	}{}
+	\ifthenelse{\value{CharKnowledgePsionicsRanksCount} > 4}{
+		\MiscBonus{Psicraft}{2}
+	}{}
+	\ifthenelse{\value{CharPsicraftRanksCount} > 4}{
+		\AddConditionalSkillMod{+2 to Use Psionic Device checks involving power stones}
+	}{}
+	\ifthenelse{\value{CharUsePsionicDeviceRanksCount} > 4}{
+		\AddConditionalSkillMod{+2 to Psicraft checks to address power stones}
+	}{}
+}
+
+\newcounter{CharPPCount}
+
+
+\renewcommand{\do}[1]{
+	\expandafter\newcommand\csname CharManifestingClass#1\endcsname{}
+	\expandafter\newcommand\csname CharManifestingClass#1Ability\endcsname{}
+	\NewCounter{CharML#1Count}
+	\NewCounter{CharManifestingClass#1MaxPowerLevelCount}
+	\SetCounter{CharManifestingClass#1MaxPowerLevelCount}{-1}
+	\NewCounter{CharManifesting#1HasCantrips}
+	\SetCounter{CharManifesting#1HasCantrips}{0}
+	\expandafter\NewDocumentCommand\csname NewManifesting#1\endcsname{O{9} m m m}{
+		\SetCounter{CharManifestingClass#1MaxPowerLevelCount}{##1}
+		\expandafter\renewcommand\csname CharManifestingClass#1\endcsname{##2}
+		\expandafter\renewcommand\csname CharManifestingClass#1Ability\endcsname{##4}
+		\SetCounter{CharML#1Count}{##3}
+	}
+}\docsvlist{One,Two}
+
+\NewDocumentCommand{\NewManifesting}{s O{9} m m m}{
+	\ifthenelse{\equal{\CharManifestingClassOne}{}}{
+		\IfBooleanTF #1 {\NewManifestingOne*[#2]{#3}{#4}{#5}} {\NewManifestingOne[#2]{#3}{#4}{#5}}
+	}{
+		\IfBooleanTF #1 {\NewManifestingTwo*[#2]{#3}{#4}{#5}} {\NewManifestingTwo[#2]{#3}{#4}{#5}}
+	}
+	\NewCounter{Char#3PowersKnownCount}
+	\NewCounter{Char#3PowersActuallyKnownCount}
+}
+
+\newcommand{\CalculatePowerRange}[1]{
+	\SetCounter{CharPowerRangecloseCount}{25+\value{CharCL#1Count}/2*5}
+	\SetCounter{CharPowerRangemediumCount}{100+\value{CharCL#1Count}*10}
+	\SetCounter{CharPowerRangelongCount}{400+\value{CharCL#1Count}*40}
+}
+
+
+\ProvideDocumentCommand{\AddPower}{m m}{%[Class]{Level}{Power Name}
+	\ifthenelse{\equal{\CharManifestingClassTwo}{}}{
+		\listcsinsert{Char#1PowersListOne}{#2}
+		\stepcounter{Char\CharManifestingClassOne PowersActuallyKnownCount}
+	}{
+		\listcsinsert{Char\CharManifestingClassTwo PowersListTwo}{#2}
+	}
+	
+	%% Implementation for when the switch to class-specific spell lists (instead of ManifestingClassOne/ManifestingClassTwo) is made
+	%	\IfValueTF #1 {
+	%		\listcsinsert{Char#1#2PowersList}{#3}
+	%		\StepCounter{Char#1#2PowersActuallyKnown}
+	%	}{
+	%		\listcsinsert{Char\CharCurrentManifestingClass #2PowersList}{#3}
+	%		\StepCounter{Char\CharCurrentManifestingClass #2PowersActuallyKnown}
+	%	}
+}
+
+\newcommand{\DeclarePowerDescription}[2]{
+	\expandafter\newcommand\csname Power#1LongDescription\endcsname{#2}
+}
+
+\ProvideDocumentCommand{\DeclarePower}{m >{\SplitArgument{7}{|}}m O{}}{%{Name}{Attributes}[Short desc]
+	\csdef{Power#1ShortDescription}{#3}
+	\DeclarePowerInternal{#1}#2%
+	\NewCounter{CharPower#1PreparedCount}%
+	\NewCounter{CharPower#1CastCount}%
+}
+
+\ProvideDocumentCommand{\DeclarePowerInternal}{m m m m m m m m m}{%
+	\csdef{Power#1School}{#2}%
+	\csdef{Power#1Components}{#3}%
+	\csdef{Power#1CastTime}{#4}%
+	\csdef{Power#1Range}{#5}%
+	\DeclarePowerEffect{#1}{#6}%
+	\csdef{Power#1Duration}{#7}%
+	\csdef{Power#1Save}{#8}%
+	\csdef{Power#1SR}{#9}%
+}
+\ProvideDocumentCommand{\DeclarePowerEffectInternal}{m m m}{%
+	\csdef{Power#1EffectType}{#2}%
+	\csdef{Power#1Effect}{#3}%
+}
+
+\ProvideDocumentCommand{\DeclarePowerEffect}{m >{\SplitArgument{1}{:}}m}{%
+	\DeclarePowerEffectInternal{#1}#2%
+}
+
+\renewcommand{\do}[1]{
+	\expandafter\edef\csname Char#1PowersListOne\endcsname{}
+	\expandafter\edef\csname Char#1PowersListTwo\endcsname{}
+}\docsvlist{0,1,2,3,4,5,6,7,8,9}
+
+
+\renewcommand{\do}[1]{
+	\expandafter\edef\csname CharManifesting#1NotesList\endcsname{}
+	\expandafter\newcommand\csname AddManifesting#1Note\endcsname[1]{
+		\expandafter\listadd\csname CharManifesting#1NotesList\endcsname{##1}
+	}
+}\docsvlist{One,Two}
