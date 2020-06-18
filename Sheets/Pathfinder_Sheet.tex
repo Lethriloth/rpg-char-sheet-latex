@@ -225,63 +225,22 @@
 \newcommand\ClassSkillBox[1]{
 	\ifthenelse{\value{#1} = 1}{$\cancel{\square}$}{$\square$}
 }
-\newcommand\PrintSkill[3]{
-	\ifthenelse{\value{Char#1RanksCount} > 0}{
-		\SetCounter{@i}{\value{Char#1ClassSkillBool}*3}
-	}{
-		\SetCounter{@i}{0}
-	}
-	\SetCounter{@j}{\value{Char#3ModCount}+\value{Char#1RanksCount}+\value{Char#1MiscCount}+\value{@i}}%
-	\ClassSkillBox{Char#1ClassSkillBool} &  #2\ifinlist{#1}{\ArmorCheckSkillsList}{$\dagger$}{}\ifinlist{#1}{\TrainedSkillsList}{*}{} & 
-	\Arabic{@j} &~$=$~\capitalize{#3} & 
-	$\Arabic{Char#3ModCount}$ & $+$ & 
-	$\Arabic{Char#1RanksCount}$ &  $+$ & 
+\newcommand\PrintSkill[1]{
+	\ifthenelse{\value{Char#1RanksCount} > 0}{\SetCounter{@i}{\value{Char#1ClassSkillBool}*3}}{\SetCounter{@i}{0}}
+	\ClassSkillBox{Char#1ClassSkillBool} &  \cs{Skill#1DisplayName}\ifinlist{#1}{\ArmorCheckSkillsList}{$\dagger$}{}\ifinlist{#1}{\TrainedSkillsList}{*}{} &
+	\DoMath{\value{Char\cs{Skill#1KeyAbility}ModCount}+\value{Char#1RanksCount}+\value{Char#1MiscCount}+\value{@i}} &~$=$~\cs{Skill#1KeyAbility} &
+	$\Arabic{Char\cs{Skill#1KeyAbility}ModCount}$ & $+$ &
+	$\Arabic{Char#1RanksCount}$ &  $+$ &
 	$\Arabic{@i}$ & $+$ &
-	$\Arabic{Char#1MiscCount}$ 
+	$\Arabic{Char#1MiscCount}$
 	\tabularnewline\cline{3-3}\cline{5-5}\cline{7-7}\cline{9-9}\cline{11-11}
 }
+\renewcommand\SkillKnowledgeDisplayName{Know}
+
 \put(214,120){%Skills
 	\begin{tabular}[b]{A{10}B{78}A{15}B{22}A{15}A{7}A{15}A{7}A{15}A{7}A{15}}
 		&\footnotesize \scshape Skill Names   &\lfont Total Bonus& &\lfont Ability Mod. &  &\lfont Ranks & & \lfont Trained&  &\lfont Misc.\ Mod.\ \tabularnewline\hline
-		\PrintSkill{Acrobatics}{Acrobatics}{Dex}
-		\PrintSkill{Appraise}{Appraise}{Int}
-		\PrintSkill{Bluff}{Bluff}{Cha}
-		\PrintSkill{Climb}{Climb}{Str}
-		\PrintSkill{CraftOne}{Craft (\CharCraftOneName)}{Int}
-		\PrintSkill{CraftTwo}{Craft (\CharCraftTwoName)}{Int}
-		\PrintSkill{CraftThree}{Craft (\CharCraftThreeName)}{Int}
-		\PrintSkill{Diplomacy}{Diplomacy}{Cha}
-		\PrintSkill{DisableDevice}{Disable Device}{Dex}
-		\PrintSkill{Disguise}{Disguise}{Cha}
-		\PrintSkill{EscapeArtist}{Escape Artist}{Dex}
-		\PrintSkill{Fly}{Fly}{Dex}
-		\PrintSkill{HandleAnimal}{Handle Animal}{Cha}
-		\PrintSkill{Heal}{Heal}{Wis}
-		\PrintSkill{Intimidate}{Intimidate}{Cha}
-		\PrintSkill{KnowledgeArcana}{Know (arcana)}{Int}
-		\PrintSkill{KnowledgeDungeoneering}{Know (dungeoneering)}{Int}
-		\PrintSkill{KnowledgeEngineering}{Know (engineering)}{Int}
-		\PrintSkill{KnowledgeGeography}{Know (geography)}{Int}
-		\PrintSkill{KnowledgeHistory}{Know (history)}{Int}
-		\PrintSkill{KnowledgeLocal}{Know (local)}{Int}
-		\PrintSkill{KnowledgeNature}{Know (nature)}{Int}
-		\PrintSkill{KnowledgeNobility}{Know (nobility)}{Int}
-		\PrintSkill{KnowledgePlanes}{Know (planes)}{Int}
-		\PrintSkill{KnowledgeReligion}{Know (religion)}{Int}
-		\PrintSkill{Linguistics}{Linguistics}{Int}
-		\PrintSkill{Perception}{Perception}{Wis}
-		\PrintSkill{PerformOne}{Perform (\CharPerformOneName)}{Cha}
-		\PrintSkill{PerformTwo}{Perform (\CharPerformTwoName)}{Cha}
-		\PrintSkill{ProfessionOne}{Prof (\CharProfessionOneName)}{Wis}
-		\PrintSkill{ProfessionTwo}{Prof (\CharProfessionTwoName)}{Wis}
-		\PrintSkill{Ride}{Ride}{Dex}
-		\PrintSkill{SenseMotive}{Sense Motive}{Wis}
-		\PrintSkill{SleightOfHand}{Sleight of Hand}{Dex}
-		\PrintSkill{Spellcraft}{Spellcraft}{Int}
-		\PrintSkill{Stealth}{Stealth}{Dex}
-		\PrintSkill{Survival}{Survival}{Wis}
-		\PrintSkill{Swim}{Swim}{Str}
-		\PrintSkill{UseMagicDevice}{Use Magic Device}{Cha}
+		\forlistloop{\PrintSkill}{\SkillsList}
 	\end{tabular}
 }
 \put(214,0){ %Skills trailer

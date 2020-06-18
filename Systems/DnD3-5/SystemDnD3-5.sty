@@ -109,20 +109,25 @@
 
 %%%% Skills %%%%
 
-% Define Skills lists
-\forcsvlist{\listadd\SkillsList}{Appraise, Balance, Bluff, Climb, Concentration, CraftOne, CraftTwo, CraftThree, DecipherScript, Diplomacy, DisableDevice, Disguise, EscapeArtist, Forgery, GatherInformation, HandleAnimal, Heal, Hide, Intimidate, Jump, Listen, MoveSilently, OpenLock, PerformOne, PerformTwo, PerformThree, ProfessionOne, ProfessionTwo, Ride, Search, SenseMotive, SleightOfHand, SpeakLanguage, Spellcraft, Spot, Survival, Swim, Tumble, UseMagicDevice, UseRope}
+% Add 3.5-only skills
+\DeclareSkill[ArmorCheck]{Balance}{Dex}
+\DeclareSkill{Concentration}{Con}
+\DeclareSkill[Trained]{DecipherScript}{Int}
+\DeclareSkill{Forgery}{Int}
+\DeclareSkill{GatherInformation}{Cha}
+\DeclareSkill[ArmorCheck]{Hide}{Dex}
+\DeclareSkill[ArmorCheck]{Jump}{Str}
+\DeclareSkill{Listen}{Wis}
+\DeclareSkill[ArmorCheck] {MoveSilently}{Dex}
+\DeclareSkill[Trained]{OpenLock}{Dex}
+\DeclareSkill{Search}{Int}
+\DeclareSkill[Trained]{SpeakLanguage}{Int}
+\DeclareSkill{Spot}{Wis}
+\DeclareSkill[Trained,ArmorCheck]{Tumble}{Dex}
+\DeclareSkill{UseRope}{Dex}
 
-% Define lists for armor check Penalty and trained-only
-\forcsvlist{\listadd\ArmorCheckSkillsList}{Balance, Climb, EscapeArtist, Hide, Jump, MoveSilently, SleightOfHand, Swim, Swim, Tumble}
-\forcsvlist{\listadd\TrainedSkillsList}{DecipherScript, DisableDevice, HandleAnimal, OpenLock, ProfessionOne, ProfessionTwo, SleightOfHand, SpeakLanguage, Spellcraft, Tumble, UseMagicDevice}
+\listinsert\ArmorCheckSkillsList{Swim} %Double swim Armor check penalty
 
-% Initialize skill variables
-\renewcommand{\do}[1]{
-	\NewCounter{Char#1Count}
-	\NewCounter{Char#1ClassSkillBool}
-	\NewCounter{Char#1RanksCount}
-	\NewCounter{Char#1MiscCount}
-}\dolistloop{\SkillsList}
 
 %Command to add skill ranks
 \newcommand\AddRanks[3][]{

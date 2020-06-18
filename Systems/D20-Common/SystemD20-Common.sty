@@ -258,17 +258,65 @@
 % Define Skills lists
 \edef\SkillsList{}
 \edef\KnowledgeSkillsList{}
-\forcsvlist{\listadd\KnowledgeSkillsList}{KnowledgeArcana, KnowledgeDungeoneering, KnowledgeEngineering, KnowledgeGeography, KnowledgeHistory, KnowledgeLocal, KnowledgeNature, KnowledgeNobility, KnowledgePlanes, KnowledgeReligion}
-\forlistloop{\listadd\SkillsList}{\KnowledgeSkillsList}
-
-%Define lists for Armor check penalty and trained-only
 \edef\ArmorCheckSkillsList{}
 \edef\TrainedSkillsList{}
+
+% Command to declare a new skill, adding it to the appropriate skill lists
+\newcommand\DeclareSkillDo[1]{}
+\ProvideDocumentCommand{\DeclareSkill}{o m o m}{% Tags, Skill name, display name, key ability
+	\expandafter\newcommand\csname Skill#2KeyAbility\endcsname{#4}
+	\IfNoValueTF{#3}{\csdef{Skill#2DisplayName}{#2}}{\csdef{Skill#2DisplayName}{#3}}
+	\listinsert{\SkillsList}{#2}
+	\IfNoValueF{#1}{
+		\renewcommand\DeclareSkillDo[1]{
+			\listcsinsert{##1SkillsList}{#2}
+		}
+		\forcsvlist{\DeclareSkillDo}{#1}
+	}
+	\NewCounter{Char#2Count}
+	\NewCounter{Char#2ClassSkillBool}
+	\NewCounter{Char#2RanksCount}
+	\NewCounter{Char#2MiscCount}
+}
+
+\DeclareSkill{Appraise}{Int}
+\DeclareSkill{Bluff}{Cha}
+\DeclareSkill[ArmorCheck]{Climb}{Str}
+\renewcommand\do[1]{
+	\DeclareSkill{Craft#1}[\SkillCraftDisplayName{} (\cs{CharCraft#1Name})]{Int}
+}\docsvlist{One,Two,Three} \newcommand\SkillCraftDisplayName{Craft}
+\DeclareSkill{Diplomacy}{Cha}
+\DeclareSkill[Trained]{DisableDevice}[Disable Device]{Dex}
+\DeclareSkill{Disguise}{Cha}
+\DeclareSkill[ArmorCheck]{EscapeArtist}[Escape Artist]{Dex}
+\DeclareSkill[Trained]{HandleAnimal}[Handle Animal]{Cha}
+\DeclareSkill{Heal}{Wis}
+\DeclareSkill{Intimidate}{Cha}
+\renewcommand{\do}[1]{
+	\DeclareSkill[Knowledge,Trained]{Knowledge#1}[\SkillKnowledgeDisplayName{} (#1)]{Int}
+}\docsvlist{Arcana,Dungeoneering,Engineering,Geography,History,Local,Nature,Nobility,Planes,Religion}
+	\newcommand\SkillKnowledgeDisplayName{Knowledge}
+\renewcommand\do[1]{
+	\DeclareSkill{Perform#1}[\SkillPerformDisplayName{} (\cs{CharPerform#1Name})]{Cha}
+}\docsvlist{One,Two} \newcommand\SkillPerformDisplayName{Perform}
+\renewcommand\do[1]{
+	\DeclareSkill[Trained]{Profession#1}[\SkillProfessionDisplayName{} (\cs{CharProfession#1Name})]{Wis}
+}\docsvlist{One,Two} \newcommand\SkillProfessionDisplayName{Profession}
+\DeclareSkill{Ride}{Dex}
+\DeclareSkill{SenseMotive}[Sense Motive]{Wis}
+\DeclareSkill[Trained,ArmorCheck]{SleightOfHand}[Sleight of Hand]{Dex}
+\DeclareSkill[Trained]{Spellcraft}{Int}
+\DeclareSkill{Survival}{Wis}
+\DeclareSkill[ArmorCheck]{Swim}{Str}
+\DeclareSkill[Trained]{UseMagicDevice}[Use Magic Device]{Cha}
+
+%Define lists for Armor check penalty and trained-only
+
 \forlistloop{\listadd\TrainedSkillsList}{\KnowledgeSkillsList}
 
-% Default "Optional" for Craft, Profession, Perform categories
+% Default blank option for Craft, Profession, Perform categories; 
 \renewcommand\do[1]{
-	\expandafter\newcommand\csname Char#1Name\endcsname{Optional}
+	\expandafter\newcommand\csname Char#1Name\endcsname{\underline{~~~~~~~~~~~~~~~~~~~~~~}}
 }\docsvlist{CraftOne,CraftTwo,CraftThree,ProfessionOne,ProfessionTwo,PerformOne,PerformTwo}
 
 %adds Skill to Class Skill list

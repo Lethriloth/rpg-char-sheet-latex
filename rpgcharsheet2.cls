@@ -507,8 +507,8 @@
 }
 
 % Shortcut for entering csnames faster
-\ProvideDocumentCommand{\cs}{m}{
-	\csname #1\endcsname
+\ProvideDocumentCommand{\cs}{m}{%
+	\csname #1\endcsname%
 }
 
 % if False that should work in tables

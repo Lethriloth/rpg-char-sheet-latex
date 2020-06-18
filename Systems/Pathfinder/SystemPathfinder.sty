@@ -86,14 +86,6 @@
 
 %%%% Feats, Class & Race Features %%%%
 
-\edef\CharFeatsList{}
-\edef\CharRaceFeaturesList{}
-\edef\CharClassFeaturesList{}
-\edef\CharLimitedUseList{}
-\NewCounter{CharFeatsCount}
-\NewCounter{CharBonusFeatsCount}
-\NewCounter{CountFeats-Mode}
-
 %% Favored Classes %%
 \NewCounter{CheckFavoredClass-Mode}
 \SetCounter{CheckFavoredClass-Mode}{1}
@@ -152,21 +144,15 @@
 
 %%%% Skills %%%%
 
-% Define Skills lists
-\forcsvlist{\listadd\SkillsList}{Acrobatics, Appraise, Bluff, Climb, CraftOne, CraftTwo, CraftThree, Diplomacy, DisableDevice, Disguise, EscapeArtist, Fly, HandleAnimal, Heal, Intimidate, Linguistics, Perception, PerformOne, PerformTwo, PerformThree, ProfessionOne, ProfessionTwo, Ride, SenseMotive, SleightOfHand, Spellcraft, Stealth, Survival, Swim, UseMagicDevice}
+% Add PF-only skills
+\DeclareSkill[ArmorCheck]{Acrobatics}{Dex}
+\DeclareSkill[ArmorCheck]{Fly}{Dex}
+\DeclareSkill[Trained]{Linguistics}{Int}
+\DeclareSkill{Perception}{Wis}
+\DeclareSkill[ArmorCheck]{Stealth}{Dex}
 
-% Define lists for Armor check penalty and trained-only
-\forcsvlist{\listadd\ArmorCheckSkillsList}{Acrobatics, Climb, DisableDevice, EscapeArtist, Fly, Ride, SleightOfHand, Stealth, Swim}
-\forcsvlist{\listadd\TrainedSkillsList}{DisableDevice, HandleAnimal, Linguistics, ProfessionOne, ProfessionTwo, SleightofHand, Spellcraft, UseMagicDevice}
+\listinsert\ArmorCheckSkillsList{Disable Device} %Armor check penalty applies to disable device in pathfinder only
 
-
-% Initialize Skill variables
-\renewcommand{\do}[1]{
-	\NewCounter{Char#1Count}
-	\NewCounter{Char#1ClassSkillBool}
-	\NewCounter{Char#1RanksCount}
-	\NewCounter{Char#1MiscCount}
-}\dolistloop{\SkillsList}
 
 %Command to add Skill Ranks
 \newcommand\AddRanks[2]{
