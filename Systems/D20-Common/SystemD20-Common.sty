@@ -727,6 +727,22 @@
 	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddBonusSpellSlotsOne{#1}{#2}}{\AddBonusSpellSlotsTwo{#1}{#2}}
 }
 
+
+% Utilities for adding spell slots and spells known in bulk in class definitions %
+\ProvideDocumentCommand{\AddSpellSlotsByLevel}{m m m}{% {Spell Level}{csv of levels where you get spell slots}{Character Level}
+	\renewcommand{\do}[1]{
+		\ifthenelse{#3 < ##1}{}{
+			\AddSpellSlots{#1}{1}
+		}
+	}\docsvlist{#2}
+}
+\ProvideDocumentCommand{\AddSpellsKnownByLevel}{m m m}{% {Spell Level}{csv of levels where you get spells Known}{Character Level}
+	\renewcommand{\do}[1]{
+		\ifthenelse{#3 < ##1}{}{
+			\AddSpellsKnown{#1}{1}
+		}
+	}\docsvlist{#2}
+}
 %% Commands for defining spells and adding them to a character %%
 
 \ProvideDocumentCommand{\AddSpell}{o m m}{%[Class]{Level}{Spell Name}

@@ -16,8 +16,8 @@
 			\ifthenelse{##1 < 10}{\SetCounter{@i}{3}}{
 			\ifthenelse{##1 < 13}{\SetCounter{@i}{4}}{
 			\ifthenelse{##1 < 16}{\SetCounter{@i}{5}}{\SetCounter{@i}{6}}}}}}}
-			\NewSpellcasting[\value{@i}]{Alchemist}{##1}{Int}
-			\AddTwoThirdsSpellcasing{##1}
+			\NewSpellcasting*[\value{@i}]{Alchemist}{##1}{Int}
+			\AddTwoThirdsSpellcasting{##1}
 		}
 		\AddClassFeature{\ifthenelse{#1 > 2}{\ifthenelse{#1 > 17}{Instant}{Swift} }{}Alchemy}
 			\expandafter\AddConditionalSkillMod{Can use Craft (Alchemy) to identify potions as if using Detect Magic}

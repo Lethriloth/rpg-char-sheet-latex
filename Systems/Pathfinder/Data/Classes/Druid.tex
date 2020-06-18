@@ -11,7 +11,7 @@
 \newcommand{\AddDruidClassFeatures}[1]{
 		\newcommand{\AddDruidSpellcasting}[1]{
 			\NewSpellcasting[(##1 + 1) / 2]{Druid}{##1}{Wis}
-			\AddPrimarySpellcasting{##1}
+			\AddFullSpellcasting{##1}
 		}
 		\AddClassFeature{Nature Bond}
 		\AddClassFeature{Nature Sense}\MiscBonus{KnowledgeNature}{2}\MiscBonus{Survival}{2}

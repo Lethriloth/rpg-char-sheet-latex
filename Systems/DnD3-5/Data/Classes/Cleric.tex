@@ -13,7 +13,7 @@
 	\AddLimitedUse{Turn/Rebuke Undead}{\DoMath{3 + \value{CharChaModCount} + \value{CharTurnRebukeUndeadUsesCount}}}
 	\newcommand{\AddClericSpellcasting}[3]{
 		\NewSpellcasting[(##1 + 1) / 2]{Cleric}{##1}{Wis}
-		\AddPrimarySpellcasting{##1}
+		\AddClericLikeSpellcasting{##1}
 		\ForLoop{@i}{1}{\value{@i}<10}{
 			\AddBonusSpellSlots{\arabic{@i}}{1}
 		}

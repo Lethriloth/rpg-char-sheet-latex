@@ -45,8 +45,11 @@
 	\AddCharLanguage{#1}
 	}\docsvlist{Common}
 	
-	\ImportCharClass{Wizard}{1}
-	\AddWizardSpellcasting{\value{CharWizardClassLevelCount}}
+	\renewcommand\do[1]{
+		\ImportCharClass{#1}{20}
+	}\do{Fighter}\do{Gunslinger}
+%	}\docsvlist{Druid, Inquisitor, Magus, Paladin, Ranger, Sorcerer, Witch, Wizard, Barbarian, Cavalier, Fighter, Gunslinger, Monk, Rogue, Swashbuckler}
+	
 	
 	% Character Level Ability Increases
 	
