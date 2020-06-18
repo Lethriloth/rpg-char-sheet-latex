@@ -656,7 +656,6 @@
 %%%% Spells %%%%
 
 %% Initialize variables %%
-
 \renewcommand{\do}[1]{
 	\expandafter\newcommand\csname CharSpellcastingClass#1\endcsname{}
 	\expandafter\newcommand\csname CharSpellcastingClass#1Ability\endcsname{}
@@ -672,20 +671,60 @@
 		\expandafter\renewcommand\csname CharSpellcastingClass#1Ability\endcsname{##5}
 		\SetCounter{CharCL#1Count}{##4}
 	}
+	\ForLoop{@i}{0}{\value{@i}<10}{
+		\NewCounter{CharAbilitySpellSlots#1\arabic{@i}Count}
+		\NewCounter{CharClassSpellSlots#1\arabic{@i}Count}
+		\NewCounter{CharBonusSpellSlots#1\arabic{@i}Count}
+		\NewCounter{CharTotalSpellSlots#1\arabic{@i}Count}
+		\NewCounter{CharSpellsKnown#1\arabic{@i}Count}
+		\expandafter\edef\csname Char\arabic{@i}SpellsList#1\endcsname{}
+	}
 }\docsvlist{One,Two}
 
-\renewcommand{\do}[1]{
-	\expandafter\edef\csname Char#1SpellsListOne\endcsname{}
-	\expandafter\edef\csname Char#1SpellsListTwo\endcsname{}
-}\docsvlist{0,1,2,3,4,5,6,7,8,9}
+% Initialize variables for calculating spell range from caster level
+\NewCounter{CharSpellRangeCloseCount}
+\NewCounter{CharSpellRangeMediumCount}
+\NewCounter{CharSpellRangeLongCount}
+\newcommand{\CalculateSpellRange}[1]{
+	\SetCounter{CharSpellRangeCloseCount}{25+\value{CharCL#1Count}/2*5}
+	\SetCounter{CharSpellRangeMediumCount}{100+\value{CharCL#1Count}*10}
+	\SetCounter{CharSpellRangeLongCount}{400+\value{CharCL#1Count}*40}
+}
 
 
+%% Commands for declaring spellcasting classes and adding spell slots and spells known%%
 \NewDocumentCommand{\NewSpellcasting}{s O{9} m m m}{
 	\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{
 		\IfBooleanTF #1 {\NewSpellcastingOne*[#2]{#3}{#4}{#5}} {\NewSpellcastingOne[#2]{#3}{#4}{#5}}
 	}{
 		\IfBooleanTF #1 {\NewSpellcastingTwo*[#2]{#3}{#4}{#5}} {\NewSpellcastingTwo[#2]{#3}{#4}{#5}}
 	}
+}
+
+\newcommand{\AddBonusSpellSlotsOne}[2]{
+	\AddToCounter{CharBonusSpellSlotsOne#1Count}{#2}}
+\newcommand{\AddBonusSpellSlotsTwo}[2]{
+	\AddToCounter{CharBonusSpellSlotsTwo#1Count}{#2}}
+
+\newcommand{\AddSpellSlotsOne}[2]{
+	\AddToCounter{CharClassSpellSlotsOne#1Count}{#2}}
+\newcommand{\AddSpellSlotsTwo}[2]{
+	\AddToCounter{CharClassSpellSlotsTwo#1Count}{#2}}
+\newcommand{\SetSpellSlotsOne}[2]{
+	\SetCounter{CharClassSpellSlotsOne#1Count}{#2}}
+\newcommand{\SetSpellSlotsTwo}[2]{
+	\SetCounter{CharClassSpellSlotsTwo#1Count}{#2}}
+\newcommand{\AddSpellsKnownOne}[2]{
+	\AddToCounter{CharSpellsKnownOne#1Count}{#2}}
+\newcommand{\AddSpellsKnownTwo}[2]{
+	\AddToCounter{CharSpellsKnownTwo#1Count}{#2}}
+
+\newcommand{\AddSpellSlots}[2]{
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSpellSlotsOne{#1}{#2}}{\AddSpellSlotsTwo{#1}{#2}}}
+\newcommand{\AddSpellsKnown}[2]{
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSpellsKnownOne{#1}{#2}}{\AddSpellsKnownTwo{#1}{#2}}}
+\newcommand{\AddBonusSpellSlots}[2]{
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddBonusSpellSlotsOne{#1}{#2}}{\AddBonusSpellSlotsTwo{#1}{#2}}
 }
 
 %% Commands for defining spells and adding them to a character %%
@@ -735,3 +774,122 @@
 \ProvideDocumentCommand{\DeclareSpellEffect}{m >{\SplitArgument{1}{:}}m}{%
 	\DeclareSpellEffectInternal{#1}#2%
 }
+
+%% Command to be run at sheet initialization %%
+\newcommand{\InitializeSpellSlots}{
+	\ifthenelse{\equal{\CharSpellcastingClassOneAbility}{}}{}{
+		\SetCounter{CharTotalSpellSlotsOne0Count}{\value{CharClassSpellSlotsOne0Count} + \value{CharBonusSpellSlotsOne0Count}}
+		\ForLoop{@i}{1}{\value{@i}<10}{
+			\SetCounter{CharAbilitySpellSlotsOne\arabic{@i}Count}{(\value{Char\CharSpellcastingClassOneAbility ModCount}+4-\value{@i})/4}
+			\SetCounter{CharTotalSpellSlotsOne\arabic{@i}Count}{
+				\value{CharAbilitySpellSlotsOne\arabic{@i}Count} +
+				\value{CharClassSpellSlotsOne\arabic{@i}Count} +
+				\value{CharBonusSpellSlotsOne\arabic{@i}Count}
+			}
+		}
+		\AddDebug{Adjusting max Spell Level for \CharSpellcastingClassOne}
+		\AddDebug{Ability = \CharSpellcastingClassOneAbility}
+		\AddDebug{-Ability score = \arabic{Char\CharSpellcastingClassOneAbility Count}}
+		\AddDebug{-New max Spell Level = \DoMath{\value{Char\CharSpellcastingClassOneAbility Count} - 10}}
+		\AddDebug{-Old max Spell Level = \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
+		\DoMath*{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
+		\ifthenelse{\value{CharSpellcastingClassOneMaxSpellLevelCount} > \value{@DoMathCounter}}{
+			\SetCounter{CharSpellcastingClassOneMaxSpellLevelCount}{\value{Char\CharSpellcastingClassOneAbility Count} - 10}
+			\AddDebug{-Max Spell Level set to \arabic{CharSpellcastingClassOneMaxSpellLevelCount}}
+		}{
+			\AddDebug{-No adjustment needed}
+		}
+	}
+	\ifthenelse{\equal{\CharSpellcastingClassTwoAbility}{}}{}{
+		\SetCounter{CharTotalSpellSlotsTwo0Count}{\value{CharClassSpellSlotsTwo0Count} + \value{CharBonusSpellSlotsTwo0Count}}
+		\ForLoop{@i}{1}{\value{@i}<10}{
+			\SetCounter{CharAbilitySpellSlotsTwo\arabic{@i}Count}{(\value{Char\CharSpellcastingClassTwoAbility ModCount}+4-\value{@i})/4}
+			\SetCounter{CharTotalSpellSlotsTwo\arabic{@i}Count}{
+				\value{CharAbilitySpellSlotsTwo\arabic{@i}Count} +
+				\value{CharClassSpellSlotsTwo\arabic{@i}Count} +
+				\value{CharBonusSpellSlotsTwo\arabic{@i}Count}
+			}
+		}
+		\AddDebug{Adjusting max Spell Level for \CharSpellcastingClassTwo}
+		\AddDebug{-Ability score = \arabic{Char\CharSpellcastingClassTwoAbility Count}}
+		\AddDebug{-New max Spell Level = \DoMath{\value{Char\CharSpellcastingClassTwoAbility Count} - 10}}
+		\AddDebug{-Old max Spell Level = \arabic{CharSpellcastingClassTwoMaxSpellLevelCount}}
+		\DoMath*{\value{Char\CharSpellcastingClassTwoAbility Count} - 10}
+		\ifthenelse{\value{CharSpellcastingClassTwoMaxSpellLevelCount} > \value{@DoMathCounter}}{
+			\SetCounter{CharSpellcastingClassTwoMaxSpellLevelCount}{\value{Char\CharSpellcastingClassTwoAbility Count} - 10}
+			\AddDebug{-Max Spell Level set to \arabic{CharSpellcastingClassTwoMaxSpellLevelCount}}
+		}{
+			\AddDebug{-No adjustment needed}
+		}
+	}
+}
+
+%% Magic Specializations e.g. wizard schools
+\renewcommand{\do}[1]{
+	\expandafter\newcommand\csname CharSpellcastingOneSpecialization#1\endcsname{}
+	\expandafter\newcommand\csname CharSpellcastingOneSpecialization#1Type\endcsname{Specialization}
+	\expandafter\newcommand\csname AddSpellcastingOneSpecialization#1\endcsname[2][Specialization]{
+		\expandafter\renewcommand\csname CharSpellcastingOneSpecialization#1Type\endcsname{##1}
+		\expandafter\renewcommand\csname CharSpellcastingOneSpecialization#1\endcsname{##2}
+	}
+	\expandafter\newcommand\csname CharSpellcastingTwoSpecialization#1\endcsname{}
+	\expandafter\newcommand\csname CharSpellcastingTwoSpecialization#1Type\endcsname{Specialization}
+	\expandafter\newcommand\csname AddSpellcastingTwoSpecialization#1\endcsname[2][Specialization]{
+		\expandafter\renewcommand\csname CharSpellcastingTwoSpecialization#1Type\endcsname{##1}
+		\expandafter\renewcommand\csname CharSpellcastingTwoSpecialization#1\endcsname{##2}
+	}
+}\docsvlist{One, Two}
+\newcommand\AddSpellcastingOneSpecialization[2][Specialization]{
+	\ifthenelse{\equal{\CharSpellcastingOneSpecializationOne}{}}{%
+		\AddSpellcastingOneSpecializationOne[#1]{#2}%
+	}{%
+		\AddSpellcastingOneSpecializationTwo[#1]{#2}%
+	}
+}
+\newcommand\AddSpellcastingTwoSpecialization[2][Specialization]{
+	\ifthenelse{\equal{\CharSpellcastingTwoSpecializationOne}{}}{
+		\AddSpellcastingTwoSpecializationOne[#1]{#2}
+	}{
+		\AddSpellcastingTwoSpecializationTwo[#1]{#2}
+	}
+}
+
+
+\renewcommand{\do}[1]{
+	\expandafter\newcommand\csname CharSpellcastingOneProhibition#1\endcsname{}
+	\expandafter\newcommand\csname CharSpellcastingOneProhibition#1Type\endcsname{Prohibition}
+	\expandafter\newcommand\csname AddSpellcastingOneProhibition#1\endcsname[2][Prohibition]{
+		\expandafter\renewcommand\csname CharSpellcastingOneProhibition#1Type\endcsname{##1}
+		\expandafter\renewcommand\csname CharSpellcastingOneProhibition#1\endcsname{##2}
+	}
+	\expandafter\newcommand\csname CharSpellcastingTwoProhibition#1\endcsname{}
+	\expandafter\newcommand\csname CharSpellcastingTwoProhibition#1Type\endcsname{Prohibition}
+	\expandafter\newcommand\csname AddSpellcastingTwoProhibition#1\endcsname[2][Prohibition]{
+		\expandafter\renewcommand\csname CharSpellcastingTwoProhibition#1Type\endcsname{##1}
+		\expandafter\renewcommand\csname CharSpellcastingTwoProhibition#1\endcsname{##2}
+	}
+}\docsvlist{One, Two, Three}
+\newcommand\AddSpellcastingOneProhibition[2][Prohibition]{
+	\ifthenelse{\equal{\CharSpellcastingOneProhibitionOne}{}}{\AddSpellcastingOneProhibitionOne[#1]{#2}}{
+		\ifthenelse{\equal{\CharSpellcastingOneProhibitionTwo}{}}{\AddSpellcastingOneProhibitionTwo[#1]{#2}}{
+			\AddSpellcastingOneProhibitionThree[#1]{#2}}}
+}
+\newcommand\AddSpellcastingTwoProhibition[2][Prohibition]{
+	\ifthenelse{\equal{\CharSpellcastingTwoProhibitionOne}{}}{\AddSpellcastingTwoProhibitionOne[#1]{#2}}{
+		\ifthenelse{\equal{\CharSpellcastingTwoProhibitionTwo}{}}{\AddSpellcastingTwoProhibitionTwo[#1]{#2}}{
+			\AddSpellcastingTwoProhibitionThree[#1]{#2}}}
+}
+
+\newcommand{\AddSpellcastingSpecialization}[2][Specialization]{
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSpellcastingOneSpecialization[#1]{#2}}{\AddSpellcastingTwoSpecialization[#1]{#2}}
+}
+\newcommand{\AddSpellcastingProhibition}[2][Prohibition]{
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSpellcastingOneProhibition[#1]{#2}}{\AddSpellcastingTwoProhibition[#1]{#2}}
+}
+%Spellcasting Notes
+\renewcommand{\do}[1]{
+	\expandafter\edef\csname CharSpellcasting#1NotesList\endcsname{}
+	\expandafter\newcommand\csname AddSpellcasting#1Note\endcsname[1]{
+		\expandafter\listadd\csname CharSpellcasting#1NotesList\endcsname{##1}
+	}
+}\docsvlist{One,Two}
