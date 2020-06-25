@@ -9,9 +9,10 @@
 \edef\DruidClassSkillsList{}
 \forcsvlist{\listadd{\DruidClassSkillsList}}{Climb, Craft, Fly, HandleAnimal, Heal, KnowledgeGeography, KnowledgeNature, Perception, Profession, Ride, Spellcraft, Survival, Swim}
 \newcommand{\AddDruidClassFeatures}[1]{
+		\AddCharLanguage*{Druidic}
 		\newcommand{\AddDruidSpellcasting}[1]{
 			\NewSpellcasting[(##1 + 1) / 2]{Druid}{##1}{Wis}
-			\AddPrimarySpellcasting{##1}
+			\AddFullSpellcasting{##1}
 		}
 		\AddClassFeature{Nature Bond}
 		\AddClassFeature{Nature Sense}\MiscBonus{KnowledgeNature}{2}\MiscBonus{Survival}{2}
@@ -22,8 +23,8 @@
 		\AddClassFeature{Trackless Step}
 	\ifthenelse{#1 > 3}{
 		\AddClassFeature{Resist Nature's Lure}\AddConditionalDefMod{+4 to saves vs. Spell-like abilities of fey and Spells that target plants}
-		\NewCounter{CharwildshapeusesCount}
-		\SetCounter{CharwildshapeusesCount}{#1 / 2 - 1}
+		\NewCounter{CharWildShapeUsesCount}
+		\SetCounter{CharWildShapeUsesCount}{#1 / 2 - 1}
 		\AddClassFeature{Wild Shape \ifthenelse{#1 < 20}{}{(At-Will)}
 		\ifthenelse{#1 > 5}{\ifthenelse{#1 > 7}{\ifthenelse{#1 > 9}{\ifthenelse{#1 > 11}{
 		\\~~~~Beast Shape III\\~~~~Elemental Body IV\\~~~~Plant Shape III
@@ -33,7 +34,7 @@
 		}{\\~~~~Beast Shape I}
 		}
 		\ifthenelse{#1 < 20}{
-			\AddLimitedUse{Wild Shape}{\arabic{CharwildshapeusesCount}}
+			\AddLimitedUse{Wild Shape}{\arabic{CharWildShapeUsesCount}}
 		}{}
 	\ifthenelse{#1 > 8}{
 		\AddClassFeature{Venom Immunity}

@@ -16,26 +16,6 @@
 		}{
 			\NewSpellcasting[##1 / 2]{Sorcerer}{##1}{Cha}
 		}
-		\AddSpontaneousPrimarySpellcasting{##1}
-		\ifthenelse{##1 > 9}{\AddSpellsKnown{0}{9}}{\AddSpellsKnown{0}{{##1/2 + 4}}}
-		\ifthenelse{##1 > 6}{\AddSpellsKnown{1}{5}}{\AddSpellsKnown{1}{##1/3 + 2}}
-		\ifthenelse{##1 > 10}{
-			\AddSpellsKnown{2}{5}
-			\AddSpellsKnown{3}{4}
-		}{
-			\AddSpellsKnown{2}{(##1 - 1)/2}
-			\AddSpellsKnown{3}{(##1 - 3)/2}
-		}
-		\ifthenelse{##1 > 12}{\AddSpellsKnown{4}{4}}{\AddSpellsKnown{4}{(##1 - 5)/2}}
-		\ifthenelse{##1 > 14}{
-			\AddSpellsKnown{5}{4}
-			\AddSpellsKnown{6}{3}
-		}{
-			\AddSpellsKnown{5}{(##1 - 7)/2}
-			\AddSpellsKnown{6}{(##1 - 9)/2}
-		}
-		\ifthenelse{##1 > 16}{\AddSpellsKnown{7}{3}}{\AddSpellsKnown{7}{(##1 - 11)/2}}
-		\AddSpellsKnown{8}{(##1 - 13) / 2}
-		\AddSpellsKnown{9}{##1 - 17}
+		\AddSorcererLikeSpellcasting{##1}
 	}
 }

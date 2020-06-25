@@ -58,24 +58,24 @@
 	}{
 		\NewSpellcasting[#1 / 2]{Favored Soul}{#1}{Cha}
 	}
-	\AddSpontaneousPrimarySpellcasting{#1}
-	\ifthenelse{#1 > 9}{\AddSpellsKnown{0}{9}}{\AddSpellsKnown{0}{{#1/2 + 4}}}{
-	\ifthenelse{#1 > 6}{\AddSpellsKnown{1}{6}}{\AddSpellsKnown{1}{(#1 + 5) / 2}}{
-	\ifthenelse{#1 > 3}{
-		\ifthenelse{#1 > 9}{\AddSpellsKnown{2}{6}}{\AddSpellsKnown{2}{#1 / 2 + 1}}
-	\ifthenelse{#1 > 5}{
-		\ifthenelse{#1 > 11}{\AddSpellsKnown{3}{6}}{\AddSpellsKnown{3}{#1 / 2}}
-	\ifthenelse{#1 > 7}{
-		\ifthenelse{#1 > 13}{\AddSpellsKnown{4}{6}}{\AddSpellsKnown{4}{#1 / 2 - 1}}
-	\ifthenelse{#1 > 9}{
-		\ifthenelse{#1 > 15}{\AddSpellsKnown{5}{6}}{\AddSpellsKnown{5}{#1 / 2 - 2}}
-	\ifthenelse{#1 > 11}{
-		\ifthenelse{#1 > 17}{\AddSpellsKnown{6}{6}}{\AddSpellsKnown{6}{#1 / 2 - 3}}
-	\ifthenelse{#1 > 13}{
-		\AddSpellsKnown{7}{#1 / 2 - 4}
-	\ifthenelse{#1 > 15}{
-		\AddSpellsKnown{8}{#1 / 2 - 5}
-	\ifthenelse{#1 > 17}{
-		\AddSpellsKnown{9}{#1 / 2 - 6}
-	}{}}{}}{}}{}}{}}{}}{}}{}}{}}{}
-}
+	\AddSpellSlotsByLevel{0}{1,1,1,1,1,2}{#1}
+	\AddSpellSlotsByLevel{1}{1,1,1,2,3,4}{#1}
+	\AddSpellSlotsByLevel{2}{4,4,4,5,6,7}{#1}
+	\AddSpellSlotsByLevel{3}{6,6,6,7,8,9}{#1}
+	\AddSpellSlotsByLevel{4}{8,8,8,9,10,11}{#1}
+	\AddSpellSlotsByLevel{5}{10,10,10,11,12,13}{#1}
+	\AddSpellSlotsByLevel{6}{12,12,12,13,14,15}{#1}
+	\AddSpellSlotsByLevel{7}{14,14,14,15,16,17}{#1}
+	\AddSpellSlotsByLevel{8}{16,16,16,17,18,19}{#1}
+	\AddSpellSlotsByLevel{9}{18,18,18,19,20,20}{#1}
+	\AddSpellsKnownByLevel{0}{1,1,1,1,2,4,6,8,10}{#1}
+	\AddSpellsKnownByLevel{1}{1,1,1,3,5,7}{#1}
+	\AddSpellsKnownByLevel{2}{4,4,4,6,8,10}{#1}
+	\AddSpellsKnownByLevel{3}{6,6,6,8,10,12}{#1}
+	\AddSpellsKnownByLevel{4}{8,8,8,10,12,14}{#1}
+	\AddSpellsKnownByLevel{5}{10,10,10,12,14,16}{#1}
+	\AddSpellsKnownByLevel{6}{12,12,12,14,16,18}{#1}
+	\AddSpellsKnownByLevel{7}{14,14,14,16,18,20}{#1}
+	\AddSpellsKnownByLevel{8}{16,16,16,18,20}{#1}
+	\AddSpellsKnownByLevel{9}{18,18,18,20}{#1}
+

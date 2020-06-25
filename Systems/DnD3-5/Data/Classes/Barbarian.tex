@@ -16,11 +16,11 @@
 			\newcommand{\IWouldLikeToRage}{
 				\TmpBonus{AC}{-2}
 				\ifthenelse{#1 > 10}{\ifthenelse{#1 > 19}{
-					\TmpBonus{Con}{8}\TmpBonus{str}{8}\TmpBonus[morale]{Will}{4} %Mighty Rage
+					\TmpBonus{Con}{8}\TmpBonus{Str}{8}\TmpBonus[Morale]{Will}{4} %Mighty Rage
 				}{
-					\TmpBonus{Con}{6}\TmpBonus{str}{6}\TmpBonus[morale]{Will}{3} %Greater Rage
+					\TmpBonus{Con}{6}\TmpBonus{Str}{6}\TmpBonus[Morale]{Will}{3} %Greater Rage
 				}}{
-					\TmpBonus{Con}{4}\TmpBonus{str}{4}\TmpBonus[morale]{Will}{2} %Rage
+					\TmpBonus{Con}{4}\TmpBonus{Str}{4}\TmpBonus[Morale]{Will}{2} %Rage
 				}
 				\ifthenelse{#1 > 13}{
 					\AddConditionalDefMod{+4 vs. Enchantments}

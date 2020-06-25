@@ -1,6 +1,7 @@
 \unitlength\textwidth
 \divide\unitlength 432
 \Initialize
+\RunChecks
 %\ifthenelse{\equal{\PrintDebug}{}}{}{\noindent \show\show\PrintWarning\PrintDebug}  % %Disable when not printing PrintDebug info
 \ifthenelse{\equal{\PrintWarning}{}}{}{\noindent NOTICES:\show\show\PrintWarning\relax}
 \NewCounter{localvspacing}
@@ -32,6 +33,15 @@
 	    \end{tabular}
 	}
 }
+
+%Initializes if not already initialized
+\NewCounter{CharStrEnhancementModCount}
+\NewCounter{CharDexEnhancementModCount}
+\NewCounter{CharConEnhancementModCount}
+\NewCounter{CharIntEnhancementModCount}
+\NewCounter{CharWisEnhancementModCount}
+\NewCounter{CharChaEnhancementModCount}
+
 \put(0,480){ % % Ability Scores
 	%% Labels
 	\put(0,72){\makebox(28,3){\tiny\scshape attribute}}
@@ -43,32 +53,32 @@
 	%% STR
 	\titlebox{0}{60}{28}{STR}{strength}
 	\StretchAttributes{30}{60}{63}{\arabic{CharStrCount},\PlusMinus{CharStrModCount}}
-	\StretchAttributes{68}{60}{139}{\arabic{CharStrBaseCount},\PlusMinus{CharStrEnhancementCount},\PlusMinus{CharStrMiscCount},\PlusMinus{CharStrTmpCount}}
+	\StretchAttributes{68}{60}{139}{\arabic{CharStrBaseCount},\PlusMinus{CharStrEnhancementModCount},\MathPM{\value{CharStrMiscCount} - \value{CharStrEnhancementModCount}},\PlusMinus{CharStrTmpCount}}
 	
 	%% DEX
 	\titlebox{0}{48}{28}{DEX}{dexterity}
 	\StretchAttributes{30}{48}{63}{\arabic{CharDexCount},\PlusMinus{CharDexModCount}}
-	\StretchAttributes{68}{48}{139}{\arabic{CharDexBaseCount},\PlusMinus{CharDexEnhancementCount},\PlusMinus{CharDexMiscCount},\PlusMinus{CharDexTmpCount}}
+	\StretchAttributes{68}{48}{139}{\arabic{CharDexBaseCount},\PlusMinus{CharDexEnhancementModCount},\MathPM{\value{CharDexMiscCount} - \value{CharDexEnhancementModCount}},\PlusMinus{CharDexTmpCount}}
 	
 	%% CON
 	\titlebox{0}{36}{28}{CON}{constitution}
 	\StretchAttributes{30}{36}{63}{\arabic{CharConCount},\PlusMinus{CharConModCount}}
-	\StretchAttributes{68}{36}{139}{\arabic{CharConBaseCount},\PlusMinus{CharConEnhancementCount},\PlusMinus{CharConMiscCount},\PlusMinus{CharConTmpCount}}
+	\StretchAttributes{68}{36}{139}{\arabic{CharConBaseCount},\PlusMinus{CharConEnhancementModCount},\MathPM{\value{CharConMiscCount} - \value{CharConEnhancementModCount}},\PlusMinus{CharConTmpCount}}
 	
 	%% INT
 	\titlebox{0}{24}{28}{INT}{intelligence}
 	\StretchAttributes{30}{24}{63}{\arabic{CharIntCount},\PlusMinus{CharIntModCount}}
-	\StretchAttributes{68}{24}{139}{\arabic{CharIntBaseCount},\PlusMinus{CharIntEnhancementCount},\PlusMinus{CharIntMiscCount},\PlusMinus{CharIntTmpCount}}
+	\StretchAttributes{68}{24}{139}{\arabic{CharIntBaseCount},\PlusMinus{CharIntEnhancementModCount},\MathPM{\value{CharIntMiscCount} - \value{CharIntEnhancementModCount}},\PlusMinus{CharIntTmpCount}}
 	
 	%% WIS
 	\titlebox{0}{12}{28}{WIS}{wisdom}
 	\StretchAttributes{30}{12}{63}{\arabic{CharWisCount},\PlusMinus{CharWisModCount}}
-	\StretchAttributes{68}{12}{139}{\arabic{CharWisBaseCount},\PlusMinus{CharWisEnhancementCount},\PlusMinus{CharWisMiscCount},\PlusMinus{CharWisTmpCount}}
+	\StretchAttributes{68}{12}{139}{\arabic{CharWisBaseCount},\PlusMinus{CharWisEnhancementModCount},\MathPM{\value{CharWisMiscCount} - \value{CharWisEnhancementModCount}},\PlusMinus{CharWisTmpCount}}
 	
 	%% CHA
 	\titlebox{0}{0}{28}{CHA}{Charisma}
 	\StretchAttributes{30}{0}{63}{\arabic{CharChaCount},\PlusMinus{CharChaModCount}}
-	\StretchAttributes{68}{0}{139}{\arabic{CharChaBaseCount},\PlusMinus{CharChaEnhancementCount},\PlusMinus{CharChaMiscCount},\PlusMinus{CharChaTmpCount}}
+	\StretchAttributes{68}{0}{139}{\arabic{CharChaBaseCount},\PlusMinus{CharChaEnhancementModCount},\MathPM{\value{CharChaMiscCount} - \value{CharChaEnhancementModCount}},\PlusMinus{CharChaTmpCount}}
 }
 
 \put(143,480){ % % XP
@@ -156,7 +166,7 @@
 \put(163,338){  %% Defensive Conditional Modifiers
 	\put(0,0){\framebox(70,37){}}
 	\put(1,28){\parbox[b][8\unitlength][t]{68\unitlength}{\raggedright \lfont Conditional Defensive Modifiers}}
-%	\put(1,5){\parbox[b][28\unitlength][t]{68\unitlength}{\scriptsize \PrintList{\ConditionalDefModList}}}
+	\put(1,5){\parbox[b][28\unitlength][t]{68\unitlength}{\scriptsize \PrintList{\CharConditionalDefModList}}}
 }
 
 \put(0,238){  %%Base Attack Bonus, grapple, etc.
@@ -190,7 +200,7 @@
 \put(163,238){%% Offensive Conditional Modifiers
   \put(0,0){\framebox(70,81){}}
   \put(1,72){\parbox[b][8\unitlength][t]{68\unitlength}{\raggedright \lfont Conditional Offensive Modifiers}}
-  \put(1,5){\parbox[b][72\unitlength][t]{68\unitlength}{\scriptsize \PrintList{\ConditionalAttackModList}}}
+  \put(1,5){\parbox[b][72\unitlength][t]{68\unitlength}{\scriptsize \PrintList{\CharConditionalAttackModList}}}
 }
 
 \put(0,0){%% Weapons & Armor
@@ -244,73 +254,25 @@
 \newcommand\ClassSkillBox[1]{
 	\ifthenelse{\value{#1} = 1}{$\cancel{\square}$}{$\square$}
 }
-\newcommand\PrintSkill[3]{
-	\SetCounter{@i}{\value{Char#3ModCount}+\value{Char#1RanksCount}+\value{Char#1MiscCount}}
-	\ClassSkillBox{Char#1ClassSkillBool} &  #2\ifinlist{#1}{\ArmorCheckSkillsList}{$\dagger$}{}\ifinlist{#1}{\TrainedSkillsList}{*}{} & 
-	\arabic{@i} & $=$ \capitalize{#3} & 
-	$\arabic{Char#3ModCount}$ & $+$ & 
-	$\arabic{Char#1RanksCount}$ & $+$ & 
-	$\arabic{Char#1MiscCount}$ 
+\newcommand\PrintSkill[1]{
+	\ClassSkillBox{Char#1ClassSkillBool} &  \cs{Skill#1DisplayName}\ifinlist{#1}{\ArmorCheckSkillsList}{$\dagger$}{}\ifinlist{#1}{\TrainedSkillsList}{*}{} &
+	\DoMath{\value{Char\cs{Skill#1KeyAbility}ModCount}+\value{Char#1RanksCount}+\value{Char#1MiscCount}} & $=$ \cs{Skill#1KeyAbility} &
+	$\arabic{Char\cs{Skill#1KeyAbility}ModCount}$ & $+$ &
+	$\arabic{Char#1RanksCount}$ & $+$ &
+	$\arabic{Char#1MiscCount}$
 	\tabularnewline[-1.5\unitlength]\cline{3-3}\cline{5-5}\cline{7-7}\cline{9-9}
 }
+\renewcommand\SkillKnowledgeDisplayName{Know}
 	\put(240,110){%skills
 	  \begin{tabular}[b]{A{10}B{78}A{14}B{20}A{14}A{8}A{14}A{8}A{14}}
 		  &\footnotesize \scshape Skill Names   &\lfont Total Bonus& &\lfont Ability Mod. &  &\lfont Ranks & & \lfont Misc.\ Mod.\ \tabularnewline\hline
-		  \PrintSkill{Appraise}{Appraise}{Int}
-		  \PrintSkill{Balance}{Balance}{Dex}
-		  \PrintSkill{Bluff}{Bluff}{Cha}
-		  \PrintSkill{Climb}{Climb}{Str}
-		  \PrintSkill{Concentration}{Concentration}{Con}
-		  \PrintSkill{CraftOne}{Craft (\CharCraftOneName)}{Int}
-		  \PrintSkill{CraftTwo}{Craft (\CharCraftTwoName)}{Int}
-		  \PrintSkill{CraftThree}{Craft (\CharCraftThreeName)}{Int}
-		  \PrintSkill{DecipherScript}{Decipher Script}{Int}
-		  \PrintSkill{Diplomacy}{Diplomacy}{Cha}
-		  \PrintSkill{DisableDevice}{Disable Device}{Dex}
-		  \PrintSkill{Disguise}{Disguise}{Cha}
-		  \PrintSkill{EscapeArtist}{Escape Artist}{Dex}
-		  \PrintSkill{Forgery}{Forgery}{Int}
-		  \PrintSkill{GatherInformation}{Gather Information}{Cha}
-		  \PrintSkill{HandleAnimal}{Handle Animal}{Cha}
-		  \PrintSkill{Heal}{Heal}{Wis}
-		  \PrintSkill{Hide}{Hide}{Dex}
-		  \PrintSkill{Intimidate}{Intimidate}{Cha}
-		  \PrintSkill{Jump}{Jump}{Str}
-		  \PrintSkill{KnowledgeArcana}{Know (arcana)}{Int}
-		  \PrintSkill{KnowledgeDungeoneering}{Know (dungeoneering)}{Int}
-		  \PrintSkill{KnowledgeEngineering}{Know (engineering)}{Int}
-		  \PrintSkill{KnowledgeGeography}{Know (geography)}{Int}
-		  \PrintSkill{KnowledgeHistory}{Know (history)}{Int}
-		  \PrintSkill{KnowledgeLocal}{Know (local)}{Int}
-		  \PrintSkill{KnowledgeNature}{Know (nature)}{Int}
-		  \PrintSkill{KnowledgeNobility}{Know (nobility)}{Int}
-		  \PrintSkill{KnowledgePlanes}{Know (planes)}{Int}
-		  \PrintSkill{KnowledgeReligion}{Know (religion)}{Int}
-		  \PrintSkill{Listen}{Listen}{Wis}
-		  \PrintSkill{MoveSilently}{Move Silently}{Dex}
-		  \PrintSkill{OpenLock}{Open Lock}{Dex}
-		  \PrintSkill{PerformOne}{Perform (\CharPerformOneName)}{Cha}
-		  \PrintSkill{PerformTwo}{Perform (\CharPerformTwoName)}{Cha}
-		  \PrintSkill{ProfessionOne}{Prof (\CharProfessionOneName)}{Wis}
-		  \PrintSkill{ProfessionTwo}{Prof (\CharProfessionTwoName)}{Wis}
-		  \PrintSkill{Ride}{Ride}{Dex}
-		  \PrintSkill{Search}{Search}{Int}
-		  \PrintSkill{SenseMotive}{Sense Motive}{Wis}
-		  \PrintSkill{SleightOfHand}{Sleight of Hand}{Dex}
-		  \PrintSkill{SpeakLanguage}{Speak Language}{Int}
-		  \PrintSkill{Spellcraft}{Spellcraft}{Int}
-		  \PrintSkill{Spot}{Spot}{Wis}
-		  \PrintSkill{Survival}{Survival}{Wis}
-		  \PrintSkill{Swim}{Swim}{Str}
-		  \PrintSkill{Tumble}{Tumble}{Dex}
-		  \PrintSkill{UseMagicDevice}{Use Magic Device}{Cha}
-		  \PrintSkill{UseRope}{Use Rope}{Dex}
+		  \forlistloop{\PrintSkill}{\SkillsList}
 	  \end{tabular}
 	}
 	\put(243,0){ %skills trailer
 		\put(4.5,103){\parbox[b][10\unitlength][c]{150\unitlength}{ \tiny\scshape $\footnotesize\cancel\square$  Class Skill\hspace{2ex} $\dagger$ Armor Check Penalty applies\hspace{2ex}* trained only}}
 		\put(0,94){\parbox[b][10\unitlength][c]{176\unitlength}{\small\scshape Conditional Modifiers:}}
-		\put(1,49){\parbox[b][43\unitlength][t]{176\unitlength}{\PrintList{\ConditionalSkillsModList}}}
+		\put(1,49){\parbox[b][43\unitlength][t]{176\unitlength}{\PrintList{\CharConditionalSkillsModList}}}
 		\put(0,49){\framebox(177,45){}}
 		\put(0,39){\parbox[b][10\unitlength][c]{176\unitlength}{\small\scshape Languages Spoken:}}
 		\put(1,0){\parbox[b][36\unitlength][t]{176\unitlength}{\itshape\PrintList{\CharLanguagesList}}}
@@ -441,7 +403,7 @@
 	\put(53,18){%
 		\begin{tabular}{@{}>{\centering\scshape\scriptsize}p{28\unitlength}@{}>{\centering\scshape\scriptsize}p{28\unitlength}@{}>{\centering\scshape\scriptsize}p{28\unitlength}@{}>{\scshape\scriptsize\centering}p{28\unitlength}@{}}%
 			light& medium&heavy&overload\tabularnewline[-5pt]
-			\EncumberanceBox{1}&\EncumberanceBox{2}&\EncumberanceBox{3}&\EncumberanceBox{4}
+			\EncumbranceBox{1}&\EncumbranceBox{2}&\EncumbranceBox{3}&\EncumbranceBox{4}
 		\end{tabular}
 	}
 	\put(7,5){\parbox[t]{38\unitlength}{\scshape\scriptsize Consequences}}%
@@ -496,17 +458,17 @@
 		}
 	}
 	\put(145,99){% Spell Range
-		\calculateSpellRange{One}
+		\CalculateSpellRange{One}
 		\singletitlebox{0}{14}{140}{10}{Spell Range}
 		\put(0,4){\parbox{20\unitlength}{\centering\tiny\scshape Close:\\25 ft+\\5ft/2 lvl}}
 		\put(21,0){\framebox(22,12){\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{}{
-		\arabic{CharSpellRangecloseCount} ft.}}}
+		\arabic{CharSpellRangeCloseCount} ft.}}}
 		\put(44,4){\parbox{20\unitlength}{\centering\tiny\scshape Medium:\\100 ft+\\10ft/lvl}}
 		\put(65,0){\framebox(25,12){\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{}{
-		\arabic{CharSpellRangemediumCount} ft.}}}
+		\arabic{CharSpellRangeMediumCount} ft.}}}
 		\put(91,4){\parbox{20\unitlength}{\centering\tiny\scshape Long:\\400 ft+\\40ft/lvl}}
 		\put(111,0){\framebox(29,12){\ifthenelse{\equal{\CharSpellcastingClassOne}{}}{}{
-		\arabic{CharSpellRangelongCount} ft.}}}
+		\arabic{CharSpellRangeLongCount} ft.}}}
 	}
 	\put(145,21){%Focus Schools, Domains, Etc.
 		\singletitlebox{0}{64}{140}{10}{Focus Schools, Domains, Etc.}
@@ -616,7 +578,7 @@
 		}
 	}
 	\put(145,99){% Spell Range
-		\calculateSpellRange{Two}
+		\CalculateSpellRange{Two}
 		\singletitlebox{0}{14}{140}{10}{Spell Range}
 		\put(0,4){\parbox{20\unitlength}{\centering\tiny\scshape Close:\\25 ft+\\5ft/2 lvl}}
 		\put(21,0){\framebox(22,12){\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{}{

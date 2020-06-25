@@ -507,8 +507,8 @@
 }
 
 % Shortcut for entering csnames faster
-\ProvideDocumentCommand{\cs}{m}{
-	\csname #1\endcsname
+\ProvideDocumentCommand{\cs}{m}{%
+	\csname #1\endcsname%
 }
 
 % if False that should work in tables
@@ -545,6 +545,14 @@
 \NewDocumentCommand{\DoMath}{s m}{%
 	\SetCounter{@DoMathCounter}{#2}%
 	\IfBooleanTF #1 {%
+	}{%
+		\arabic{@DoMathCounter}%
+	}%
+}
+\NewDocumentCommand{\MathPM}{m}{%
+	\SetCounter{@DoMathCounter}{#1}%
+	\ifthenelse{\value{@DoMathCounter} > 0} {%
+		+\arabic{@DoMathCounter}%
 	}{%
 		\arabic{@DoMathCounter}%
 	}%

@@ -51,7 +51,7 @@
 		\StepCounter{CharBonusFeatsCount}
 	\ifthenelse{#1 > 2}{
 		\AddClassFeature{Still Mind}\AddConditionalDefMod{+2 on saves vs. Enchantment}
-		\EnhancementBonus{Speed}{#1 / 3 * 10}
+		\MiscBonus[Enhancement]{Speed}{#1 / 3 * 10}
 	\ifthenelse{#1 > 3}{
 		\AddClassFeature{Ki Strike (magic\ifthenelse{#1 > 9}{%
 			, lawful%
