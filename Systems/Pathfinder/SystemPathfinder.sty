@@ -7,12 +7,6 @@
 %% Ability Scores %%
 \appto{\ComputeAbilityScores}{\SetCounter{CharCMDAbilityModCount}{\value{CharStrModCount}+\value{CharDexModCount}}}
 
-%% Armor Class %%
-
-%% Saving Throws
-
-%% Special Defenses
-
 %% BAB, attacks, combat maneuvers
 \renewcommand{\do}[1]{
 	\NewCounter{Char#1MiscCount}
@@ -182,12 +176,6 @@
 
 %%%% Items %%%%
 
-%% Gear %%
-
-%% Stored Items %%
-
-%% Weapons %%
-
 %% Armor and Shield %%
 %Pathfinder separated out magic armor (and other armor slot items) from the body slot
 \patchcmd{\AddArmor}{AddBodyItem}{AddArmorItem}{}{}
@@ -207,12 +195,6 @@
 	}
 }\docsvlist{Armor, Headband}
 
-%% Money %%
-
-%% Weight Carried %%
-
-%% Carrying Capacity %%
-
 %%%% Spells %%%%
 
 % In pathfinder these are consistent (clerics, druids, wizards all get the same number of spells per day)
@@ -228,6 +210,7 @@
 	\AddSpellSlotsByLevel{8}{15,16,18,20}{#1}
 	\AddSpellSlotsByLevel{9}{17,18,19,20}{#1}
 }
+
 \newcommand{\AddSpontaneousFullSpellcasting}[1]{
 	\AddSpellSlotsByLevel{1}{1,1,1,2,3,4}{#1}
 	\AddSpellSlotsByLevel{2}{4,4,4,5,6,7}{#1}
@@ -259,6 +242,7 @@
 	\AddSpellSlotsByLevel{5}{13,14,15,17,19}{#1}
 	\AddSpellSlotsByLevel{6}{16,17,18,19,20}{#1}
 }
+
 \newcommand{\AddSpontaneousTwoThirdsSpellcasting}[1]{
 	\AddSpellSlotsByLevel{1}{1,2,3,5,9}{#1}
 	\AddSpellSlotsByLevel{2}{4,5,6,8,12}{#1}
@@ -283,59 +267,6 @@
 }
 
 %%%%Miscllany%%%%
-
-%% Health Counter
-\NewCounter{CharHPCount}
-\NewCounter{CharTempHPCount}
-\NewCounter{CharHPRollsCount}
-\newcommand{\HPRoll}[1]{
-	\AddToCounter{CharHPCount}{#1}
-	\AddToCounter{CharHPRollsCount}{1}
-}
-
-%% Miscellaneous Bonus
-\newcommand{\MiscBonus}[3][]{
-	\ifthenelse{\equal{#1}{}}{
-		\AddToCounter{Char#2MiscCount}{#3}
-	}{
-		\IfCounter{Char#2#1ModCount}{
-			\ifthenelse{\value{Char#2#1ModCount} < #3}{
-				\AddToCounter{Char#2MiscCount}{#3 - \value{Char#2#1ModCount}}
-				\SetCounter{Char#2#1ModCount}{#3}
-			}{}
-		}{
-			\NewCounter{Char#2#1ModCount}
-			\SetCounter{Char#2#1ModCount}{#3}
-			\AddToCounter{Char#2MiscCount}{#3}
-		}
-	}
-}
-\newcommand{\TmpBonus}[3][]{
-	\ifthenelse{\equal{#1}{}}{
-		\AddToCounter{Char#2TmpCount}{#3}
-	}{
-		\IfCounter{Char#2#1ModCount}{
-			\ifthenelse{\value{Char#2#1ModCount} < #3}{
-				\AddToCounter{Char#2TmpCount}{#3 - \value{Char#2#1ModCount}}
-				\SetCounter{Char#2#1ModCount}{#3}
-			}{}
-		}{
-			\NewCounter{Char#2#1ModCount}
-			\SetCounter{Char#2#1ModCount}{#3}
-			\AddToCounter{Char#2TmpCount}{#3}
-		}
-	}
-}
-\newcommand{\EnhancementBonus}[2]{
-	\IfCounter{Char#1EnhancementCount}{
-		\ifthenelse{\value{Char#1EnhancementCount} < #2}{
-			\SetCounter{Char#1EnhancementCount}{#2}
-		}{}
-	}{
-		\NewCounter{Char#1EnhancementCount}
-		\SetCounter{Char#1EnhancementCount}{#2}
-	}
-}
 
 %%Spell Resistance%%
 \NewCounter{CharSpellResistanceCount}

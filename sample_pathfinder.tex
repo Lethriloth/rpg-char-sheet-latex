@@ -27,8 +27,6 @@
 	\renewcommand\CharHeight{}
 	\renewcommand\CharAge{}
 	
-	
-	
 	\SetCharStr{10}
 	\SetCharDex{10}
 	\SetCharCon{10}
@@ -45,10 +43,9 @@
 	\AddCharLanguage{#1}
 	}\docsvlist{Common}
 	
-	\renewcommand\do[1]{
-		\ImportCharClass{#1}{20}
-	}\do{Fighter}\do{Gunslinger}
-%	}\docsvlist{Druid, Inquisitor, Magus, Paladin, Ranger, Sorcerer, Witch, Wizard, Barbarian, Cavalier, Fighter, Gunslinger, Monk, Rogue, Swashbuckler}
+	\ImportCharClass{Wizard}{1}
+	\AddWizardSpellcasting{\value{CharWizardClassLevelCount}}
+
 	
 	
 	% Character Level Ability Increases
@@ -79,8 +76,8 @@
 	\AddWeapon{Sword +2}{+X/+X-5}{1d2+2}{19-20}{S/P}{}{}
 	
 	% %Belt
-	\AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
-	\EnhancementBonus{Str}{0}
+	% \AddBeltItem{Belt of Strength +0}{Does Nothing}{0}
+	% \MiscBonus[Enhancement]{Str}{0}
 	
 	% %Armor
 	%\AddArmor{Armor}{3}{10}{0}{5}{L}{10}{Notes}{More Notes}

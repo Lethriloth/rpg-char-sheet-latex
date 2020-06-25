@@ -40,35 +40,43 @@
 	%% Line
 	{\linethickness{1.3pt}
 	\put(65.5,78){\line(0,-1){79}}}
+
+%Initializes if not already initialized
+\NewCounter{CharStrEnhancementModCount}
+\NewCounter{CharDexEnhancementModCount}
+\NewCounter{CharConEnhancementModCount}
+\NewCounter{CharIntEnhancementModCount}
+\NewCounter{CharWisEnhancementModCount}
+\NewCounter{CharChaEnhancementModCount}
 	%% STR
 	\titlebox{0}{60}{28}{STR}{strength}
 	\StretchAttributes{30}{60}{63}{\arabic{CharStrCount},\PlusMinus{CharStrModCount}}
-	\StretchAttributes{68}{60}{139}{\arabic{CharStrBaseCount},\PlusMinus{CharStrEnhancementCount},\PlusMinus{CharStrMiscCount},\PlusMinus{CharStrTmpCount}}
+	\StretchAttributes{68}{60}{139}{\arabic{CharStrBaseCount},\PlusMinus{CharStrEnhancementModCount},\MathPM{\value{CharStrMiscCount} - \value{CharStrEnhancementModCount}},\PlusMinus{CharStrTmpCount}}
 	
 	%% DEX
 	\titlebox{0}{48}{28}{DEX}{dexterity}
 	\StretchAttributes{30}{48}{63}{\arabic{CharDexCount},\PlusMinus{CharDexModCount}}
-	\StretchAttributes{68}{48}{139}{\arabic{CharDexBaseCount},\PlusMinus{CharDexEnhancementCount},\PlusMinus{CharDexMiscCount},\PlusMinus{CharDexTmpCount}}
+	\StretchAttributes{68}{48}{139}{\arabic{CharDexBaseCount},\PlusMinus{CharDexEnhancementModCount},\MathPM{\value{CharDexMiscCount} - \value{CharDexEnhancementModCount}},\PlusMinus{CharDexTmpCount}}
 	
 	%% CON
 	\titlebox{0}{36}{28}{CON}{constitution}
 	\StretchAttributes{30}{36}{63}{\arabic{CharConCount},\PlusMinus{CharConModCount}}
-	\StretchAttributes{68}{36}{139}{\arabic{CharConBaseCount},\PlusMinus{CharConEnhancementCount},\PlusMinus{CharConMiscCount},\PlusMinus{CharConTmpCount}}
+	\StretchAttributes{68}{36}{139}{\arabic{CharConBaseCount},\PlusMinus{CharConEnhancementModCount},\MathPM{\value{CharConMiscCount} - \value{CharConEnhancementModCount}},\PlusMinus{CharConTmpCount}}
 	
 	%% INT
 	\titlebox{0}{24}{28}{INT}{intelligence}
 	\StretchAttributes{30}{24}{63}{\arabic{CharIntCount},\PlusMinus{CharIntModCount}}
-	\StretchAttributes{68}{24}{139}{\arabic{CharIntBaseCount},\PlusMinus{CharIntEnhancementCount},\PlusMinus{CharIntMiscCount},\PlusMinus{CharIntTmpCount}}
+	\StretchAttributes{68}{24}{139}{\arabic{CharIntBaseCount},\PlusMinus{CharIntEnhancementModCount},\MathPM{\value{CharIntMiscCount} - \value{CharIntEnhancementModCount}},\PlusMinus{CharIntTmpCount}}
 	
 	%% WIS
 	\titlebox{0}{12}{28}{WIS}{wisdom}
 	\StretchAttributes{30}{12}{63}{\arabic{CharWisCount},\PlusMinus{CharWisModCount}}
-	\StretchAttributes{68}{12}{139}{\arabic{CharWisBaseCount},\PlusMinus{CharWisEnhancementCount},\PlusMinus{CharWisMiscCount},\PlusMinus{CharWisTmpCount}}
+	\StretchAttributes{68}{12}{139}{\arabic{CharWisBaseCount},\PlusMinus{CharWisEnhancementModCount},\MathPM{\value{CharWisMiscCount} - \value{CharWisEnhancementModCount}},\PlusMinus{CharWisTmpCount}}
 	
 	%% CHA
 	\titlebox{0}{0}{28}{CHA}{Charisma}
 	\StretchAttributes{30}{0}{63}{\arabic{CharChaCount},\PlusMinus{CharChaModCount}}
-	\StretchAttributes{68}{0}{139}{\arabic{CharChaBaseCount},\PlusMinus{CharChaEnhancementCount},\PlusMinus{CharChaMiscCount},\PlusMinus{CharChaTmpCount}}
+	\StretchAttributes{68}{0}{139}{\arabic{CharChaBaseCount},\PlusMinus{CharChaEnhancementModCount},\MathPM{\value{CharChaMiscCount} - \value{CharChaEnhancementModCount}},\PlusMinus{CharChaTmpCount}}
 }
 
 \put(143,480){ % % XP

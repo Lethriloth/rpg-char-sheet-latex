@@ -549,6 +549,14 @@
 		\arabic{@DoMathCounter}%
 	}%
 }
+\NewDocumentCommand{\MathPM}{m}{%
+	\SetCounter{@DoMathCounter}{#1}%
+	\ifthenelse{\value{@DoMathCounter} > 0} {%
+		+\arabic{@DoMathCounter}%
+	}{%
+		\arabic{@DoMathCounter}%
+	}%
+}
 
 %% Handy Loop/Temp variables
 \NewCounter{@i}
