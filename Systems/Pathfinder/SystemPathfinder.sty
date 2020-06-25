@@ -115,6 +115,17 @@
 	}
 }
 
+\newcommand\CheckFavoredClassBonuses{
+	\ifthenelse{\value{CheckFavoredClass-Mode} = 1}{
+		\AddDebug{Checking Favored Class Levels}
+		\ifthenelse{\value{CharSpareFavoredClassLevelsCount} < 0}{
+			\AddWarning{\DoMath{-\value{CharSpareFavoredClassLevelsCount}} too many favored class bonuses assigned}
+		}{
+			\ifthenelse{\value{CharSpareFavoredClassLevelsCount} > 0}{
+				\AddWarning{\arabic{CharSpareFavoredClassLevelsCount} favored class bonuses left to assign}
+			}{}}
+	}{}
+}
 %% Class Importing %%
 \NewDocumentCommand{\ImportCharClass}{s O{} m O{} m}{
 	\AddDebug{IMPORTCHARCLASS: add #5 Levels of #4 #3}
@@ -171,6 +182,16 @@
 	}{}
 }
 
+\newcommand{\CheckSkillRanks}{
+	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
+	\AddDebug{Checking Skill Ranks}
+	\ifthenelse{\value{CharSpareSkillRanksCount} > 0}{
+		\AddWarning{Character has \arabic{CharSpareSkillRanksCount} Skill Ranks left to spend}
+	}{\ifthenelse{\value{CharSpareSkillRanksCount} < 0}{
+			\AddWarning{Character has spent \DoMath{-\value{CharSpareSkillRanksCount}} too many Skill Ranks}
+		}{}}
+	}{}
+}
 
 %%%% Character Name & Description %%%%
 
@@ -266,38 +287,9 @@
 	\AddSpellSlotsByLevel{4}{14,18,20}{#1}
 }
 
-%%%%Miscllany%%%%
-
-%%Spell Resistance%%
-\NewCounter{CharSpellResistanceCount}
-\newcommand{\AddSpellResistance}[1]{
-	\SetCounter{CharSpellResistanceCount}{\maxof{\value{CharSpellResistanceCount}}{#1}}
-}
-
-%%Initiative%%
-\NewCounter{CharInitiativeMiscCount}
-
-%%Conditional Modifiers
-\edef\CharConditionalSkillsModList{}
-\edef\CharConditionalAttackModList{}
-\edef\CharConditionalDefModList{}
-\newcommand{\AddConditionalSkillMod}[1]{
-	\listadd\CharConditionalSkillsModList{#1}}
-\newcommand{\AddConditionalAttackMod}[1]{
-	\listadd\CharConditionalAttackModList{#1}}
-\newcommand{\AddConditionalDefMod}[1]{
-	\listadd\CharConditionalDefModList{#1}}
-
-%% Languages
-\edef\CharLanguagesList{}
-\newcommand{\AddCharLanguage}[1]{
-	\listinsert{\CharLanguagesList}{#1}
-}
+%%%%Miscellany%%%%
 
 %% XP
-\NewCounter{CharXPCount}
-\NewCounter{CharNextLevelXPCount}
-\NewCounter{XP-Mode}
 \newcommand{\CalculateNextLevelXP}{
 	\ifthenelse{\value{XP-Mode} = 0}{}{
 		\ifthenelse{\value{XP-Mode} = 1}{
@@ -428,101 +420,15 @@
 }
 
 
-%%%%Initialization%%%%
-\newcommand{\Initialize}{
-	\CalculateNextLevelXP
-	\ComputeAbilityScores
+%%%%Sheet Initialization%%%%
+\gappto{\Initialize}{
 	% Size bonus to Stealth
 	\MiscBonus{Stealth}{\value{CharSizeModCount} * 4}
-	% Add Con to HP
-	\ifthenelse{\value{HP-Mode} > 0}{\AddToCounter{CharHPCount}{\value{CharConModCount} * \value{CharTotalLevelCount}}}{}
 	% Add feats from levels
 	\AddToCounter{CharFeatsCount}{(\value{CharTotalLevelCount} + 1) / 2}
-	% Add INT to Skill Ranks
-	\AddIntToSkillRanks
-	\SetCounter{CharIteratedAttacksCount}{(\value{CharBABCount}-1)/5+1}
-	\InitializeSpellSlots
-	\CalculateLoads
-	\CalculateWeights
-	\CheckEncumberance
-	\SpeedInitialize
-	\SetCounter{CharDextoACCount}{\minof{\value{CharDexModCount}}{\value{CharMaxDexBonusCount}}}
-	\RunChecks
 }
 
 %%Pathfinder System Checks
-\newcommand{\RunChecks}{
-	\AddDebug{Running checks}
-	\AddDebug{Checking HP Rolls}
-	%CHECK HP ROLLS
-	\ifthenelse{\value{HP-Mode} = 1}{ %Only run if we are in rolls Mode for HP
-		\AddDebug{HP Mode == 1. Checking that the number of HP rolls is correct:\\
-				  Number of HP rolls: \arabic{CharHPRollsCount}\\
-				  Level: \arabic{CharTotalLevelCount}}
-		\ifthenelse{\arabic{CharHPRollsCount} < \arabic{CharTotalLevelCount}}{
-			\AddDebug{Num HP rolls less than expected}
-			\AddWarning{\DoMath{\value{CharTotalLevelCount} - \value{CharHPRollsCount}} HP rolls missing}
-		}{
-			\ifthenelse{\arabic{CharHPRollsCount} > \arabic{CharTotalLevelCount}}{
-				\AddDebug{Num HP rolls more than expected}
-				\AddWarning{\DoMath{\value{CharHPRollsCount} - \value{CharTotalLevelCount}} Extra HP rolls}
-			}{\AddDebug{Num HP rolls is correct}}
-		}
-	}{\AddDebug{HP Mode != 1. No need to check HP rolls}}
-	%CHECK SKILL RANKS
-	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
-		\AddDebug{Checking Skill Ranks}
-		\ifthenelse{\value{CharSpareSkillRanksCount} > 0}{
-			\AddWarning{Character has \arabic{CharSpareSkillRanksCount} Skill Ranks left to spend}
-		}{\ifthenelse{\value{CharSpareSkillRanksCount} < 0}{
-			\AddWarning{Character has spent \DoMath{-\value{CharSpareSkillRanksCount}} too many Skill Ranks}
-		}{}}
-	}{}
-	%CHECK FEATS
-	\ifthenelse{\value{CountFeats-Mode} = 1}{
-		\AddDebug{Checking Feats}
-		\ifthenelse{\value{CharBonusFeatsCount} < 0}{
-			\AddWarning{\DoMath{-\value{CharBonusFeatsCount}} too many Bonus Feats selected}
-		}{
-		\ifthenelse{\value{CharBonusFeatsCount} > 0}{
-			\AddWarning{\arabic{CharBonusFeatsCount} Bonus Feats left to select}
-		}{}}
-		\ifthenelse{\value{CharFeatsCount} < 0}{
-			\AddWarning{\DoMath{-\value{CharFeatsCount}} too many Feats selected}
-		}{
-		\ifthenelse{\value{CharFeatsCount} > 0}{
-			\AddWarning{\arabic{CharFeatsCount} Feats left to select}
-		}{}}
-	}{}
-	%CHECK FAVORED CLASS LEVELS
-	\ifthenelse{\value{CheckFavoredClass-Mode} = 1}{
-		\AddDebug{Checking Favored Class Levels}
-		\ifthenelse{\value{CharSpareFavoredClassLevelsCount} < 0}{
-			\AddWarning{\DoMath{-\value{CharSpareFavoredClassLevelsCount}} too many favored class bonuses assigned}
-		}{
-		\ifthenelse{\value{CharSpareFavoredClassLevelsCount} > 0}{
-			\AddWarning{\arabic{CharSpareFavoredClassLevelsCount} favored class bonuses left to assign}
-		}{}}
-	}{}
-}
-
-%Functions for adding class specific checks and warnings:
-\NewDocumentCommand{\CheckRightNumberSelected}{m m o}{
-	\gappto{\RunChecks}{
-
-		\ifthenelse{\value{Char#1Count} < 0}{
-			\AddWarning{\DoMath{-\value{Char#1Count}} too many selections made for #2}
-		}{
-		\ifthenelse{\value{Char#1Count} > 0}{
-			\AddWarning{Make \arabic{Char#1Count} more selections for #2.\IfNoValueF{#3}{ Use the function \texttt{\textbackslash#3}} to add one.}
-		}{}}
-	}
-}
-
-\NewDocumentCommand{\CheckIsSelected}{m m o}{
-	\gappto{\RunChecks}{
-		\ifcsempty{Char#1}{%
-			\AddWarning{No #2 is selected.\IfNoValueF{#3}{ Use the function \texttt{\textbackslash#3}} to select it.}%
-		}{}
-	}
+\gappto{\RunChecks}{
+	\CheckFavoredClassBonuses
 }

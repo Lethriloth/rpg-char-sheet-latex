@@ -1,6 +1,7 @@
 \unitlength\textwidth
 \divide\unitlength 432
 \Initialize
+\RunChecks
 %\ifthenelse{\equal{\PrintDebug}{}}{}{\noindent \show\show\PrintWarning\PrintDebug}  % %Disable when not printing PrintDebug info
 \ifthenelse{\equal{\PrintWarning}{}}{}{\noindent NOTICES:\show\show\PrintWarning\relax}
 \NewCounter{localvspacing}
@@ -388,7 +389,7 @@
 	\put(53,18){%
 		\begin{tabular}{@{}>{\centering\scshape\scriptsize}p{28\unitlength}@{}>{\centering\scshape\scriptsize}p{28\unitlength}@{}>{\centering\scshape\scriptsize}p{28\unitlength}@{}>{\scshape\scriptsize\centering}p{28\unitlength}@{}}%
 			light& medium&heavy&overload\tabularnewline[-5pt]
-			\EncumberanceBox{1}&\EncumberanceBox{2}&\EncumberanceBox{3}&\EncumberanceBox{4}
+			\EncumbranceBox{1}&\EncumbranceBox{2}&\EncumbranceBox{3}&\EncumbranceBox{4}
 		\end{tabular}
 	}
 	\put(7,5){\parbox[t]{38\unitlength}{\scshape\scriptsize Consequences}}%

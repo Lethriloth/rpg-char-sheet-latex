@@ -9,6 +9,7 @@
 	\SetCounter{HP-Mode}{2} % 0 = manual HP, 1 = roll HP (auto 1st lvl, auto CON), 2 = average HP
 	\SetCounter{AutoSkillRanks-Mode}{1} % 0 = manual, 1 = auto. Auto assumes INT increases give retroactive skill point increases.
 	\SetCounter{CountFeats-Mode}{1} % Boolean, check that character has the right number of feats
+	\let\CountLanguagesMode\BooleanTrue
 	
 	%\preto\Initialize{ %Put temporary adjustments here (e.g. from spells commonly cast, rage, etc.) so they can be easily turned on and off by commenting out
 	%}
@@ -37,9 +38,10 @@
 	
 	% Racial Mods
 	\ImportCharRace{Human}
+	
 	\renewcommand\do[1]{
 		\AddCharLanguage{#1}
-	}\docsvlist{Common}
+	}\docsvlist{Bonus Language 1, Bonus Language 2, etc.}
 
 	
 	\ImportCharClass{Wizard}{1}
@@ -49,7 +51,8 @@
 	% Character Level Ability Increases
 	
 	% Feats
-	\AddFeat{Feat}
+	%\AddFeat{Example Feat}
+	%\AddFeat*{Example Bonus Feat}
 
 
 	% items

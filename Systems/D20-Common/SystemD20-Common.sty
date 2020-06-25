@@ -123,6 +123,10 @@
 	}\dolistloop{\@@PrintList}%
 	\ifthenelse{\equal\@@PrintList{}}{}{#2}\@PrintListlast%
 }
+\NewCounter{CharSpellResistanceCount}
+\newcommand{\AddSpellResistance}[1]{
+	\SetCounter{CharSpellResistanceCount}{\maxof{\value{CharSpellResistanceCount}}{#1}}
+}
 
 \edef\CharSpecialDefensesList{}
 \newcommand{\AddSpecialDefense}[1]{
@@ -189,6 +193,25 @@
 		\AddToCounter{CharFeatsCount}{-#3}
 	}
 }
+
+\newcommand{\CheckFeatsCount}{
+	\ifthenelse{\value{CountFeats-Mode} = 1}{
+		\AddDebug{Checking Feats}
+		\ifthenelse{\value{CharBonusFeatsCount} < 0}{
+			\AddWarning{\DoMath{-\value{CharBonusFeatsCount}} too many bonus feats selected}
+		}{
+			\ifthenelse{\value{CharBonusFeatsCount} > 0}{
+				\AddWarning{\arabic{CharBonusFeatsCount} bonus feats left to select}
+			}{}}
+		\ifthenelse{\value{CharFeatsCount} < 0}{
+			\AddWarning{\DoMath{-\value{CharFeatsCount}} too many feats selected}
+		}{
+			\ifthenelse{\value{CharFeatsCount} > 0}{
+				\AddWarning{\arabic{CharFeatsCount} feats left to select}
+			}{}}
+	}{}
+}
+
 \newcommand\AddClassFeature[1]{\listadd\CharClassFeaturesList{#1}}
 \newcommand\AddRaceFeature[1]{\listadd\CharRaceFeaturesList{#1}}
 \newcommand\AddLimitedUse[2]{\listadd\CharLimitedUseList{#1 & #2}}
@@ -615,30 +638,30 @@
 	\SetCounter{CharDragLoadCount}{\value{CharHeavyLoadCount}*5}
 }
 
-\NewCounter{CharEncumberanceLevelCount}
+\NewCounter{CharEncumbranceLevelCount}
 \NewCounter{CharEncumberedMaxDexCount}
 \SetCounter{CharEncumberedMaxDexCount}{100}
 \NewCounter{CharEncumberedArmorCheckPenaltyCount}
 \NewCounter{CharEncumberedSpeedReducedBool}
 \newlength\loadaslength
 
-\newcommand\CheckEncumberance{
+\newcommand\CheckEncumbrance{
 	\SetLength\loadaslength{1pt*\value{CharLightLoadCount}}
 	\ifthenelse{\lengthtest{\TotalCarriedWeight<\loadaslength}}{
-		\SetCounter{CharEncumberanceLevelCount}{1}}{
+		\SetCounter{CharEncumbranceLevelCount}{1}}{
 		\SetLength\loadaslength{1pt*\value{CharMediumLoadCount}}
 		\ifthenelse{\lengthtest{\TotalCarriedWeight<\loadaslength}}{
-			\SetCounter{CharEncumberanceLevelCount}{2}
+			\SetCounter{CharEncumbranceLevelCount}{2}
 			\SetCounter{CharEncumberedArmorCheckPenaltyCount}{-3}
 			\SetCounter{CharEncumberedMaxDexCount}{3}
 			\SetCounter{CharEncumberedSpeedReducedBool}{\value{CharSpeedReducibleBool}}}{
 			\SetLength\loadaslength{1pt*\value{CharHeavyLoadCount}}
 			\ifthenelse{\lengthtest{\TotalCarriedWeight<\loadaslength}}{
-				\SetCounter{CharEncumberanceLevelCount}{3}
+				\SetCounter{CharEncumbranceLevelCount}{3}
 				\SetCounter{CharEncumberedArmorCheckPenaltyCount}{-6}
 				\SetCounter{CharEncumberedMaxDexCount}{1}
 				\SetCounter{CharEncumberedSpeedReducedBool}{\value{CharSpeedReducibleBool}}}{
-				\SetCounter{CharEncumberanceLevelCount}{4}
+				\SetCounter{CharEncumbranceLevelCount}{4}
 				\SetCounter{CharEncumberedArmorCheckPenaltyCount}{-10}
 				\SetCounter{CharEncumberedMaxDexCount}{0}
 				\SetCounter{CharEncumberedSpeedReducedBool}{\value{CharSpeedReducibleBool}}}}}
@@ -649,8 +672,14 @@
 	}\dolistloop{\ArmorCheckSkillsList}
 }
 
-\newcommand\EncumberanceBox[1]{
-	\ifthenelse{#1 = \value{CharEncumberanceLevelCount}}{$\cancel{\square}$}{$\square$}
+\newcommand\CalculateEncumbrance{
+	\CalculateLoads
+	\CalculateWeights
+	\CheckEncumbrance
+}
+
+\newcommand\EncumbranceBox[1]{
+	\ifthenelse{#1 = \value{CharEncumbranceLevelCount}}{$\cancel{\square}$}{$\square$}
 }
 
 %%%% Spells %%%%
@@ -910,7 +939,7 @@
 	}
 }\docsvlist{One,Two}
 
-%%%%Miscllany%%%%
+%%%%Miscellany%%%%
 
 %% Health Counter
 \NewCounter{CharHPCount}
@@ -919,6 +948,23 @@
 \newcommand{\AddHPRoll}[1]{
 	\AddToCounter{CharHPCount}{#1}
 	\AddToCounter{CharHPRollsCount}{1}
+}
+
+\newcommand{\CheckHPRolls}{
+	\ifthenelse{\value{HP-Mode} = 1}{ %Only run if we are in rolls mode for HP
+		\AddDebug{HP Mode == 1. Checking that the number of HP rolls is correct:\\
+			Number of HP rolls: \arabic{CharHPRollsCount}\\
+			Level: \arabic{CharTotalLevelCount}}
+		\ifthenelse{\arabic{CharHPRollsCount} < \arabic{CharTotalLevelCount}}{
+			\AddDebug{Num HP rolls less than expected}
+			\AddWarning{\DoMath{\value{CharTotalLevelCount} - \value{CharHPRollsCount}} HP rolls missing}
+		}{
+			\ifthenelse{\arabic{CharHPRollsCount} > \arabic{CharTotalLevelCount}}{
+				\AddDebug{Num HP rolls more than expected}
+				\AddWarning{\DoMath{\value{CharHPRollsCount} - \value{CharTotalLevelCount}} extra HP rolls}
+			}{\AddDebug{Num HP rolls is correct}}
+		}
+	}{\AddDebug{HP Mode != 1. No need to check HP rolls}}
 }
 
 %% Miscellaneous Bonus
@@ -952,5 +998,103 @@
 			\SetCounter{Char#2#1ModCount}{#3}
 			\AddToCounter{Char#2TmpCount}{#3}
 		}
+	}
+}
+
+
+%%Initiative%%
+\newcounter{CharInitiativeMiscCount}
+
+%%Conditional Modifiers
+\edef\CharConditionalSkillsModList{}
+\edef\CharConditionalAttackModList{}
+\edef\CharConditionalDefModList{}
+\newcommand{\AddConditionalSkillMod}[1]{
+	\listadd\CharConditionalSkillsModList{#1}}
+\newcommand{\AddConditionalAttackMod}[1]{
+	\listadd\CharConditionalAttackModList{#1}}
+\newcommand{\AddConditionalDefMod}[1]{
+	\listadd\CharConditionalDefModList{#1}}
+
+%% Languages
+\NewCounter{CharLanguagesCount}
+\SetCounter{CharExpectedLanguagesCount}{0}
+\let\CountLanguagesMode\BooleanFalse
+\edef\CharLanguagesList{}
+\ProvideDocumentCommand{\AddCharLanguage}{s m}{
+	\listinsert{\CharLanguagesList}{#2}
+	\StepCounter{CharLanguagesCount}
+	\IfBooleanT #1 {
+		\StepCounter{CharExpectedLanguagesCount}
+	}
+}
+
+\newcommand{\CheckLanguagesCount}{
+	\IfBooleanT \CountLanguagesMode {
+		\AddDebug{Checking Char Language Count}	
+		\AddToCounter{CharExpectedLanguagesCount}{\value{CharSpeakLanguageRanksCount}}
+		\ifthenelse{\value{CharIntBaseCount} > 9}{
+			\AddDebug{Expecting \arabic{CharExpectedLanguagesCount} languages from race, class, etc., plus \arabic{CharSpeakLanguageRanksCount} Speak Language ranks, plus \DoMath{(\value{CharIntBaseCount} - 10) / 2} from high INT}
+			\AddToCounter{CharExpectedLanguagesCount}{(\value{CharIntBaseCount} - 10) / 2}
+		}{
+			\AddDebug{Expecting \arabic{CharExpectedLanguagesCount} languages from race, class, etc., plus \arabic{CharSpeakLanguageRanksCount} Speak Language ranks, plus 0 from negative INT mod}
+		}
+		\AddToCounter{CharExpectedLanguagesCount}{\value{CharSpeakLanguageRanksCount}}
+		\ifthenelse{\value{CharExpectedLanguagesCount} > \value{CharLanguagesCount}}{
+			\AddWarning{Pick \DoMath{\value{CharExpectedLanguagesCount} - \value{CharLanguagesCount}} more languages}
+		}{
+			\ifthenelse{\value{CharExpectedLanguagesCount} < \value{CharLanguagesCount}}{
+				\AddWarning{Pick \DoMath{\value{CharLanguagesCount} - \value{CharExpectedLanguagesCount}} fewer languages}
+			}{}
+		}
+	}
+}
+
+%% XP
+\NewCounter{CharXPCount}
+\NewCounter{CharNextLevelXPCount}
+\NewCounter{XP-Mode}
+
+%%%%Sheet Initialization%%%%
+
+\newcommand{\Initialize}{
+	\CalculateNextLevelXP
+	\ComputeAbilityScores
+	% add Con to HP
+	\ifthenelse{\value{HP-Mode} > 0}{\AddToCounter{CharHPCount}{\value{CharConModCount} * \value{CharTotalLevelCount}}}{}
+	% add INT to Skill Ranks
+	\AddIntToSkillRanks
+	\SetCounter{CharIteratedAttacksCount}{(\value{CharBABCount}-1)/5+1}
+	\InitializeSpellSlots
+	\CalculateEncumbrance
+	\SpeedInitialize
+	\SetCounter{CharDextoACCount}{\minof{\value{CharDexModCount}}{\value{CharMaxDexBonusCount}}}
+}
+
+\newcommand{\RunChecks}{
+	\CheckHPRolls
+	\CheckSkillRanks
+	\CheckFeatsCount
+	\CheckLanguagesCount
+}
+
+%Functions for adding class specific checks and warnings:
+\NewDocumentCommand{\CheckRightNumberSelected}{m m o}{
+	\gappto{\RunChecks}{
+		
+		\ifthenelse{\value{Char#1Count} < 0}{
+			\AddWarning{\DoMath{-\value{Char#1Count}} too many selections made for #2}
+		}{
+			\ifthenelse{\value{Char#1Count} > 0}{
+				\AddWarning{Make \arabic{Char#1Count} more selections for #2.\IfNoValueF{#3}{ Use the function \texttt{\textbackslash#3}} to add one.}
+			}{}}
+	}
+}
+
+\NewDocumentCommand{\CheckIsSelected}{m m o}{
+	\gappto{\RunChecks}{
+		\ifcsempty{Char#1}{%
+			\AddWarning{No #2 is selected.\IfNoValueF{#3}{ Use the function \texttt{\textbackslash#3}} to select it.}%
+		}{}
 	}
 }

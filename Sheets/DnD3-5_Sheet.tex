@@ -1,6 +1,7 @@
 \unitlength\textwidth
 \divide\unitlength 432
 \Initialize
+\RunChecks
 %\ifthenelse{\equal{\PrintDebug}{}}{}{\noindent \show\show\PrintWarning\PrintDebug}  % %Disable when not printing PrintDebug info
 \ifthenelse{\equal{\PrintWarning}{}}{}{\noindent NOTICES:\show\show\PrintWarning\relax}
 \NewCounter{localvspacing}
@@ -32,14 +33,6 @@
 	    \end{tabular}
 	}
 }
-\put(0,480){ % % Ability Scores
-	%% Labels
-	\put(0,72){\makebox(28,3){\tiny\scshape attribute}}
-	\stretchlabels{30}{72}{63}{Ability Score,  Ability Modifier}
-	\stretchlabels{68}{72}{139}{Base\\ Score, Enhancement Bonus, Misc.\\ Bonus, Temp.\\ Bonus}
-	%% Line
-	{\linethickness{1.3pt}
-	\put(65.5,78){\line(0,-1){79}}}
 
 %Initializes if not already initialized
 \NewCounter{CharStrEnhancementModCount}
@@ -48,6 +41,15 @@
 \NewCounter{CharIntEnhancementModCount}
 \NewCounter{CharWisEnhancementModCount}
 \NewCounter{CharChaEnhancementModCount}
+
+\put(0,480){ % % Ability Scores
+	%% Labels
+	\put(0,72){\makebox(28,3){\tiny\scshape attribute}}
+	\stretchlabels{30}{72}{63}{Ability Score,  Ability Modifier}
+	\stretchlabels{68}{72}{139}{Base\\ Score, Enhancement Bonus, Misc.\\ Bonus, Temp.\\ Bonus}
+	%% Line
+	{\linethickness{1.3pt}
+	\put(65.5,78){\line(0,-1){79}}}
 	%% STR
 	\titlebox{0}{60}{28}{STR}{strength}
 	\StretchAttributes{30}{60}{63}{\arabic{CharStrCount},\PlusMinus{CharStrModCount}}
@@ -164,7 +166,7 @@
 \put(163,338){  %% Defensive Conditional Modifiers
 	\put(0,0){\framebox(70,37){}}
 	\put(1,28){\parbox[b][8\unitlength][t]{68\unitlength}{\raggedright \lfont Conditional Defensive Modifiers}}
-%	\put(1,5){\parbox[b][28\unitlength][t]{68\unitlength}{\scriptsize \PrintList{\ConditionalDefModList}}}
+	\put(1,5){\parbox[b][28\unitlength][t]{68\unitlength}{\scriptsize \PrintList{\CharConditionalDefModList}}}
 }
 
 \put(0,238){  %%Base Attack Bonus, grapple, etc.
@@ -198,7 +200,7 @@
 \put(163,238){%% Offensive Conditional Modifiers
   \put(0,0){\framebox(70,81){}}
   \put(1,72){\parbox[b][8\unitlength][t]{68\unitlength}{\raggedright \lfont Conditional Offensive Modifiers}}
-  \put(1,5){\parbox[b][72\unitlength][t]{68\unitlength}{\scriptsize \PrintList{\ConditionalAttackModList}}}
+  \put(1,5){\parbox[b][72\unitlength][t]{68\unitlength}{\scriptsize \PrintList{\CharConditionalAttackModList}}}
 }
 
 \put(0,0){%% Weapons & Armor
@@ -270,7 +272,7 @@
 	\put(243,0){ %skills trailer
 		\put(4.5,103){\parbox[b][10\unitlength][c]{150\unitlength}{ \tiny\scshape $\footnotesize\cancel\square$  Class Skill\hspace{2ex} $\dagger$ Armor Check Penalty applies\hspace{2ex}* trained only}}
 		\put(0,94){\parbox[b][10\unitlength][c]{176\unitlength}{\small\scshape Conditional Modifiers:}}
-		\put(1,49){\parbox[b][43\unitlength][t]{176\unitlength}{\PrintList{\ConditionalSkillsModList}}}
+		\put(1,49){\parbox[b][43\unitlength][t]{176\unitlength}{\PrintList{\CharConditionalSkillsModList}}}
 		\put(0,49){\framebox(177,45){}}
 		\put(0,39){\parbox[b][10\unitlength][c]{176\unitlength}{\small\scshape Languages Spoken:}}
 		\put(1,0){\parbox[b][36\unitlength][t]{176\unitlength}{\itshape\PrintList{\CharLanguagesList}}}
@@ -401,7 +403,7 @@
 	\put(53,18){%
 		\begin{tabular}{@{}>{\centering\scshape\scriptsize}p{28\unitlength}@{}>{\centering\scshape\scriptsize}p{28\unitlength}@{}>{\centering\scshape\scriptsize}p{28\unitlength}@{}>{\scshape\scriptsize\centering}p{28\unitlength}@{}}%
 			light& medium&heavy&overload\tabularnewline[-5pt]
-			\EncumberanceBox{1}&\EncumberanceBox{2}&\EncumberanceBox{3}&\EncumberanceBox{4}
+			\EncumbranceBox{1}&\EncumbranceBox{2}&\EncumbranceBox{3}&\EncumbranceBox{4}
 		\end{tabular}
 	}
 	\put(7,5){\parbox[t]{38\unitlength}{\scshape\scriptsize Consequences}}%

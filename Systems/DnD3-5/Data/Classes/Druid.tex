@@ -11,6 +11,7 @@
 \newcommand{\AddDruidClassFeatures}[1]{
 	\AddClassFeature{Animal Companion}
 	\AddClassFeature{Nature Sense}\MiscBonus{KnowledgeNature}{2}\MiscBonus{Survival}{2}
+	\AddCharLanguage*{Druidic}
 	\ifthenelse{\value{CharHandleAnimalRanksCount} > 4}{
 		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{CharChaModCount} + 2}}
 	}{

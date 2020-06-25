@@ -101,16 +101,16 @@
 % Add 3.5-only skills
 \DeclareSkill[ArmorCheck]{Balance}{Dex}
 \DeclareSkill{Concentration}{Con}
-\DeclareSkill[Trained]{DecipherScript}{Int}
+\DeclareSkill[Trained]{DecipherScript}[Decipher Script]{Int}
 \DeclareSkill{Forgery}{Int}
-\DeclareSkill{GatherInformation}{Cha}
+\DeclareSkill{GatherInformation}[Gather Information]{Cha}
 \DeclareSkill[ArmorCheck]{Hide}{Dex}
 \DeclareSkill[ArmorCheck]{Jump}{Str}
 \DeclareSkill{Listen}{Wis}
-\DeclareSkill[ArmorCheck] {MoveSilently}{Dex}
-\DeclareSkill[Trained]{OpenLock}{Dex}
+\DeclareSkill[ArmorCheck]{MoveSilently}[Move Silently]{Dex}
+\DeclareSkill[Trained]{OpenLock}[Open Lock]{Dex}
 \DeclareSkill{Search}{Int}
-\DeclareSkill[Trained]{SpeakLanguage}{Int}
+\DeclareSkill[Trained]{SpeakLanguage}[Speak Language]{Int}
 \DeclareSkill{Spot}{Wis}
 \DeclareSkill[Trained,ArmorCheck]{Tumble}{Dex}
 \DeclareSkill{UseRope}{Dex}
@@ -133,6 +133,7 @@
 		\AddToCounter{Char#1SpareSkillRanksCount}{-1 * (#3)}
 	}
 }
+
 
 %Commands to be run at sheet initialization
 \newcommand{\AddIntToSkillRanks}{
@@ -226,6 +227,22 @@
 	}{}
 }
 
+\newcommand{\CheckSkillRanks}{
+	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
+		\AddDebug{Checking Skill Ranks}
+		\AddDebug{Class List: \PrintList{\CharClassesList}}
+		\renewcommand{\do}[1]{
+			\AddDebug{Checking skill ranks for Class: ##1\\}
+			\ifthenelse{\value{Char##1SpareSkillRanksCount} > 0}{
+				\AddWarning{Class ##1 has \arabic{Char##1SpareSkillRanksCount} skill ranks left to spend}
+			}{
+				\ifthenelse{\value{Char##1SpareSkillRanksCount} < 0}{
+					\AddWarning{Class ##1 has spent \DoMath{-\value{Char##1SpareSkillRanksCount}} too many skill ranks}
+				}{}
+			}
+		}\dolistloop{\CharClassesList}
+	}{}
+}
 
 %%%% Spells %%%%
 
@@ -302,45 +319,11 @@
 	\AddSpellSlotsByLevel{4}{15,19,20}{#1}
 }
 
-
-%%%%Miscllany%%%%
-
-%%Spell Resistance%%
-\NewCounter{CharSpellResistanceCount}
-\newcommand{\AddSpellResistance}[1]{
-	\SetCounter{CharSpellResistanceCount}{\maxof{\value{CharSpellResistanceCount}}{#1}}
-}
-
-%%Initiative%%
-\newcounter{CharInitiativeMiscCount}
-
-%%Conditional Modifiers
-\edef\ConditionalSkillsModList{}
-\edef\ConditionalAttackModList{}
-\edef\ConditionalDefModList{}
-\newcommand{\AddConditionalSkillMod}[1]{
-	\listadd\ConditionalSkillsModList{#1}}
-\newcommand{\AddConditionalAttackMod}[1]{
-	\listadd\ConditionalAttackModList{#1}}
-\newcommand{\AddConditionalDefMod}[1]{
-	\listadd\ConditionalDefModList{#1}}
+%%%%Miscellany%%%%
 
 %% Languages
-\NewCounter{CharLanguagesCount}
-\SetCounter{CharExpectedLanguagesCount}{0}
-\edef\CharLanguagesList{}
-\ProvideDocumentCommand{\AddCharLanguage}{s m}{
-	\listinsert{\CharLanguagesList}{#2}
-	\StepCounter{CharLanguagesCount}
-	\IfBooleanT #1 {
-		\StepCounter{CharExpectedLanguagesCount}
-	}
-}
 
 %% XP
-\newcounter{CharXPCount}
-\newcounter{CharNextLevelXPCount}
-\newcounter{XP-Mode}
 \newcommand{\CalculateNextLevelXP}{
 	\ifthenelse{\arabic{XP-Mode} = 0}{}{
 		\ifthenelse{\arabic{XP-Mode} = 1}{
@@ -355,97 +338,12 @@
 }
 
 
-%%%%Initialization%%%%
+%%%%Sheet Initialization%%%%
 
-\newcommand{\Initialize}{
-	\CalculateNextLevelXP
-	\ComputeAbilityScores
-	% add Con to HP
-	\ifthenelse{\value{HP-Mode} > 0}{\AddToCounter{CharHPCount}{\value{CharConModCount} * \value{CharTotalLevelCount}}}{}
+\gappto{\Initialize}{
+	% Size bonus to hide
+	\MiscBonus{Hide}{\value{CharSpecialSizeModCount} * -1}
 	% add feats from levels
 	\AddToCounter{CharFeatsCount}{\value{CharTotalLevelCount} / 3 + 1}
-	% add INT to Skill Ranks
-	\AddIntToSkillRanks
-	\SetCounter{CharIteratedAttacksCount}{(\value{CharBABCount}-1)/5+1}
-	\InitializeSpellSlots
 	\CalculateSynergyBonuses
-	\CalculateLoads
-	\CalculateWeights
-	\CheckEncumberance
-	\SpeedInitialize
-	\SetCounter{CharDextoACCount}{\minof{\value{CharDexModCount}}{\value{CharMaxDexBonusCount}}}
-	\RunChecks
-}
-
-\let\CountLanguagesMode\BooleanFalse
-%%3.5 System Checks
-\newcommand{\RunChecks}{
-	\AddDebug{Running checks}
-	\AddDebug{Checking HP Rolls}
-	%CHECK HP ROLLS
-	\ifthenelse{\value{HP-Mode} = 1}{ %Only run if we are in rolls mode for HP
-		\AddDebug{HP Mode == 1. Checking that the number of HP rolls is correct:\\
-			Number of HP rolls: \arabic{CharHPRollsCount}\\
-			Level: \arabic{CharTotalLevelCount}}
-		\ifthenelse{\arabic{CharHPRollsCount} < \arabic{CharTotalLevelCount}}{
-			\AddDebug{Num HP rolls less than expected}
-			\AddWarning{\DoMath{\value{CharTotalLevelCount} - \value{CharHPRollsCount}} HP rolls missing}
-		}{
-			\ifthenelse{\arabic{CharHPRollsCount} > \arabic{CharTotalLevelCount}}{
-				\AddDebug{Num HP rolls more than expected}
-				\AddWarning{\DoMath{\value{CharHPRollsCount} - \value{CharTotalLevelCount}} extra HP rolls}
-			}{\AddDebug{Num HP rolls is correct}}
-		}
-	}{\AddDebug{HP Mode != 1. No need to check HP rolls}}
-	%CHECK SKILL RANKS
-	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
-		\AddDebug{Checking Skill Ranks}
-		\AddDebug{Class List: \PrintList{\CharClassesList}}
-		\renewcommand{\do}[1]{
-			\AddDebug{Checking skill ranks for Class: ##1\\}
-			\ifthenelse{\value{Char##1SpareSkillRanksCount} > 0}{
-				\AddWarning{Class ##1 has \arabic{Char##1SpareSkillRanksCount} skill ranks left to spend}
-			}{
-				\ifthenelse{\value{Char##1SpareSkillRanksCount} < 0}{
-					\AddWarning{Class ##1 has spent \DoMath{-\value{Char##1SpareSkillRanksCount}} too many skill ranks}
-				}{}
-			}
-		}\dolistloop{\CharClassesList}
-	}{}
-	%CHECK FEATS
-	\ifthenelse{\value{CountFeats-Mode} = 1}{
-		\AddDebug{Checking Feats}
-		\ifthenelse{\value{CharBonusFeatsCount} < 0}{
-			\AddWarning{\DoMath{-\value{CharBonusFeatsCount}} too many bonus feats selected}
-		}{
-			\ifthenelse{\value{CharBonusFeatsCount} > 0}{
-				\AddWarning{\arabic{CharBonusFeatsCount} bonus feats left to select}
-			}{}}
-		\ifthenelse{\value{CharFeatsCount} < 0}{
-			\AddWarning{\DoMath{-\value{CharFeatsCount}} too many feats selected}
-		}{
-			\ifthenelse{\value{CharFeatsCount} > 0}{
-				\AddWarning{\arabic{CharFeatsCount} feats left to select}
-			}{}}
-	}{}
-	%CHECK LANGUAGES
-	\IfBooleanT \CountLanguagesMode {
-		\AddDebug{Checking Char Language Count}	
-
-		\AddToCounter{CharExpectedLanguagesCount}{\value{CharSpeakLanguageRanksCount}}
-		\ifthenelse{((\value{CharIntBaseCount} - 10) / 2) > -1}{
-			\AddDebug{Expecting \arabic{CharExpectedLanguagesCount} languages from race, class, etc., plus \arabic{CharSpeakLanguageRanksCount} Speak Language ranks, plus \DoMath{(\value{CharIntBaseCount} - 10) / 2} from high INT}
-			\AddToCounter{CharExpectedLanguagesCount}{(\value{CharIntBaseCount} - 10) / 2}
-		}{
-			\AddDebug{Expecting \arabic{CharExpectedLanguagesCount} languages from race, class, etc., plus \arabic{CharSpeakLanguageRanksCount} Speak Language ranks, plus 0 from negative INT mod}
-		}
-		\AddToCounter{CharExpectedLanguagesCount}{\value{CharSpeakLanguageRanksCount}}
-		\ifthenelse{\value{CharExpectedLanguagesCount} > \value{CharLanguagesCount}}{
-			\AddNotice{Pick \DoMath{\value{CharExpectedLanguagesCount} - \value{CharLanguagesCount}} more languages}
-		}{
-			\ifthenelse{\value{CharExpectedLanguagesCount} < \value{CharLanguagesCount}}{
-				\AddNotice{Pick \DoMath{\value{CharLanguagesCount} - \value{CharExpectedLanguagesCount}} fewer languages}
-			}{}
-		}
-	}
 }
