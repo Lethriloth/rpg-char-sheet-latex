@@ -1,0 +1,25 @@
+%% Make sure to include this file in your normal character sheet file AFTER the final sheet input and  BEFORE the \end{document}.
+%% e.g. your sheet might end:
+% 	 \input{Sheets/Pathfinder_Sheet.tex}
+%    \input{sample_leadership.tex}
+%\end{document}
+
+
+%% Star the command for any modifiers your character actually has. Add an optional argument between the two mandatory ones to multiply the effect (e.g. for repeated cohort deaths)
+\AddLeadershipReputationModifier{Great Renown}{+2}
+\AddLeadershipReputationModifier{Fairness and Generosity}{+1}
+\AddLeadershipReputationModifier{Special Power}{+1}
+\AddLeadershipReputationModifier{Failure}{-1}
+\AddLeadershipReputationModifier{Aloofness}{-1}
+\AddLeadershipReputationModifier{Cruelty}{-2}
+
+\AddLeadershipReputationModifier[Cohort]{Has Familiar, special mount, or animal companion}{-2}
+\AddLeadershipReputationModifier[Cohort]{Recruits a cohort of a different alignment}{-1}
+\AddLeadershipReputationModifier[Cohort]{Caused the death of a cohort}{-2}
+
+\AddLeadershipReputationModifier[Follower]{Has a stronghold, base of operations, guildhouse, etc.}{+2}
+\AddLeadershipReputationModifier[Follower]{Moves around a lot}{-1}
+\AddLeadershipReputationModifier[Follower]{Caused the death of other followers}{-1}
+
+
+\input{Sheets/Leadership_Sheet.tex}

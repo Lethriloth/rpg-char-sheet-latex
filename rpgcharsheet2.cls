@@ -100,7 +100,6 @@
 	\pgfmathprintnumber[precision=1,fixed]{\@outWeight}
 }
 
-
 \newcommand\lfont{\fontsize{4}{4}\selectfont\scshape}
 
 
@@ -447,7 +446,7 @@
   \NewCount\downabitCount
   \downabitCount=#2
   \advance\downabitCount-1
-  \put(#1,\downabitCount){\setlength\fboxsep{0pt}\colorbox{gray!40}{\makebox(#3,11){}}}%
+  \put(#1,\downabitCount){\setlength\fboxsep{0pt}\colorbox{\sheetboxcolor}{\makebox(#3,11){}}}%
   \advance\yCount1
   \put(#1,\yCount){\makebox(#3,\hCount){\color{black}{\uppercase{#4}}}}
   \advance\hCount-7
@@ -458,7 +457,7 @@
 \newcommand\singletitlebox[5]{
   % \put(#1,#2){\framebox(#3,#4){\uppercase{#5}}}
   \put(#1,#2){%
-    \setlength\fboxsep{0pt}\colorbox{gray!40}{%
+    \setlength\fboxsep{0pt}\colorbox{\sheetboxcolor}{%
       \makebox(#3,#4){%
         \color{black}{\centering\uppercase{#5}}%
       }%
@@ -594,6 +593,11 @@
 \NewCounter{@j}
 \NewCounter{@k}
 
+%% Colors %%
+
+\newcommand{\sheetboxcolor}{gray!40}
+
+\newcommand{\grayout}[1]{\begingroup\renewcommand\sheetboxcolor{gray!20}\textcolor{gray!50}{#1}\endgroup}
 
 
 %%%% Miscellaney %%%%

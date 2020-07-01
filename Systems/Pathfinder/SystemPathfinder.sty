@@ -1,5 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{SystemPathfinder}[2016/12/29 Pathfinder system-specific features for rpgcharsheet2.cls]
+
+\DeclareOption*{\PassOptionsToPackage{\CurrentOption}{Systems/D20-Common/SystemD20-Common}}
+\ProcessOptions\relax
 \RequirePackage{Systems/D20-Common/SystemD20-Common}
 
 %%%% Character Attributes %%%%

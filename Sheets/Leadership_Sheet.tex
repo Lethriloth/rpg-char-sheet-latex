@@ -1,0 +1,46 @@
+\centering\begin{picture}(420,545)
+%\put(0,0){\framebox(420,545){}}
+\put(0,492){
+	\titlebox{0}{43}{143}{Leadership}{Score}
+	\scaleattributelabels{43}{35}{TOTAL,Level,\AbilityFullName{\CharLeadershipKeyAbility},Reputation,Misc}{20}
+	\put(0,27){%
+		\titlebox{0}{0}{45}{BASE}{Leadership Score}
+		\equalattributes{43}{0}{\arabic{CharTotalLevelCount},\arabic{Char\CharLeadershipKeyAbility ModCount}, \arabic{CharLeadershipScoreReputationCount},\arabic{CharLeadershipScoreMiscCount}}{20}
+	}
+	\put(0,14){
+		\titlebox{0}{0}{45}{COHORT}{Leadership Score}
+		\equalattributes{43}{0}{\arabic{CharTotalLevelCount},\arabic{Char\CharLeadershipKeyAbility ModCount}, \arabic{CharCohortLeadershipScoreReputationCount},\arabic{CharCohortLeadershipScoreMiscCount}}{20}
+	}
+	\put(0,1){
+		\titlebox{0}{0}{45}{FOLLOWER}{Leadership Score}
+		\equalattributes{43}{0}{\arabic{CharTotalLevelCount},\arabic{Char\CharLeadershipKeyAbility ModCount}, \arabic{CharFollowerLeadershipScoreReputationCount},\arabic{CharFollowerLeadershipScoreMiscCount}}{20}
+	}
+}
+
+\DeclareDocumentCommand{\PrintListItemInternal}{m m m m}{%
+	\IfBooleanTF{#1}{%
+		#2\ifthenelse{#3=1}{}{ ($\times #3$)}\dotfill\MathPM{#3 * #4}\\%
+	}{
+		\grayout{#2\ifthenelse{#3=1}{}{ ($\times #3$)}\dotfill\MathPM{#3 * #4}\\}%
+	}
+}
+\DeclareDocumentCommand{\PrintListItem}{>{\SplitArgument{3}{|}} m}{%
+	\PrintListItemInternal #1%
+}
+\put(145,492) {%
+	\parbox[b][53\unitlength][t]{135\unitlength}{\centering\itshape%
+			{\fmmfamily\large Reputation Modifiers}\\%
+			\footnotesize%
+			\forlistloop{\PrintListItem}{\CharLeadershipReputationModifiersList}%
+	}%
+}
+\put(283,492) {%
+	\parbox[b][53\unitlength][t]{135\unitlength}{\centering\itshape%
+		{\fmmfamily \normalsize Cohort Reputation Modifiers}\\%
+		\scriptsize%
+		\forlistloop{\PrintListItem}{\CharCohortLeadershipReputationModifiersList}%
+		{\fmmfamily \normalsize Follower Reputation Modifiers}\\%
+		\forlistloop{\PrintListItem}{\CharFollowerLeadershipReputationModifiersList}%
+	}
+}
+\end{picture}

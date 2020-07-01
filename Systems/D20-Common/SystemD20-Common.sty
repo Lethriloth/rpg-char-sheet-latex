@@ -34,6 +34,17 @@
 	}\dolistloop{\AbilityScoresList}
 }
 
+\newcommand{\AbilityFullName}[1]{%
+	\ifthenelse{\equal{#1}{Str}}{Strength}{%
+	\ifthenelse{\equal{#1}{Dex}}{Dexterity}{%
+	\ifthenelse{\equal{#1}{Con}}{Constitution}{%
+	\ifthenelse{\equal{#1}{Int}}{Intelligence}{%
+	\ifthenelse{\equal{#1}{Wis}}{Wisdom}{%
+	\ifthenelse{\equal{#1}{Cha}}{Charisma}{%
+	#1}}}}}}
+}
+
+
 %% Armor Class %%
 \NewCounter{CharArmorBonusCount}
 \newcommand{\AddArmorBonus}[1]{\ifthenelse{\value{CharArmorBonusCount}<#1}{\SetCounter{CharArmorBonusCount}{#1}}{}}
@@ -1099,3 +1110,33 @@
 		}{}
 	}
 }
+\DeclareOption{Leadership}{
+	\renewcommand\do[1]{
+		\newcounter{Char#1LeadershipScoreCount}
+		\newcounter{Char#1LeadershipScoreMiscCount}
+		\newcounter{Char#1LeadershipScoreReputationCount}
+	}\docsvlist{Cohort,Follower}\do{}
+	\newcommand{\CharLeadershipKeyAbility}{Cha}
+
+	\let\CharLeadershipReputationModifiersList\empty
+	\let\CharCohortLeadershipReputationModifiersList\empty
+	\let\CharFollowerLeadershipReputationModifiersList\empty
+	\NewDocumentCommand\AddLeadershipReputationModifier{s O{} m O{1} m}{%[Follower||Cohort]{Name}[Count]{Bonus}: If starred the character will be treated as having the modifier
+		\IfBooleanT #1 {\addtocounter{Char#2LeadershipScoreReputationCount}{#5 * #4}}%
+		\listcsadd{Char#2LeadershipReputationModifiersList}{%
+			#1|#3|#4|#5%
+		}
+	}
+
+	\ProvideDocumentCommand{\CalculateLeadership}{}{
+		\SetCounter{CharLeadershipScoreCount}{\value{Char\CharLeadershipKeyAbility ModCount} + \value{CharTotalLevelCount} +\value{CharLeadershipScoreMiscCount} + \value{CharLeadershipScoreReputationCount}}
+		\SetCounter{CharCohortLeadershipScoreCount}{\value{CharLeadershipScoreCount} +\value{CharCohortLeadershipScoreMiscCount} + \value{CharCohortLeadershipScoreReputationCount}}
+		\SetCounter{CharFollowerLeadershipScoreCount}{\value{CharLeadershipScoreCount} +\value{CharFollowerLeadershipScoreMiscCount} + \value{CharFollowerLeadershipScoreReputationCount}}
+		\AddToCounter{CharFollowerLeadershipScoreMiscCount}{\value{CharLeadershipScoreMiscCount}}
+		\AddToCounter{CharFollowerLeadershipScoreReputationCount}{\value{CharLeadershipScoreReputationCount}}
+		\AddToCounter{CharCohortLeadershipScoreMiscCount}{\value{CharLeadershipScoreMiscCount}}
+		\AddToCounter{CharCohortLeadershipScoreReputationCount}{\value{CharLeadershipScoreReputationCount}}
+	}
+	\gappto{\Initialize}{\CalculateLeadership}
+}
+\ProcessOptions\relax
