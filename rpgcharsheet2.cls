@@ -149,9 +149,6 @@
 	\advance\xCount by #4
 	
 	\@for\tmp:=#3\do{%
-		\plusCount=0
-		\advance\plusCount by #4
-		\advance\plusCount by -15
 		\tmpCount=\xCount
 		\advance\tmpCount by \number\plusCount
 		\ifnum\number\firstCount=0 
@@ -167,14 +164,38 @@
 	}
 	
 	%% reset to give the first box
-	\xCount=#1
-	\plusCount=0
-	\advance\plusCount by #4
-	\advance\plusCount by -15
-	\tmpCount=\xCount
+	\tmpCount=#1
 	\advance\tmpCount by \number\plusCount
 	\put(\tmpCount,#2){\framebox(15,9){$\number\mytotalCount$}}
-	\advance\xCount by #4
+}
+
+\newcounter{EqualAttributes@x}
+\newcounter{EqualAttributes@Total}
+\newcounter{EqualAttributes@First}
+\newcounter{EqualAttributes@Tmp}
+\newcounter{EqualAttributes@Plus}
+\newcommand\EqualAttributes@Do[1]{}
+
+\ProvideDocumentCommand{\EqualAttributes}{m m m m}{%
+	\renewcommand\EqualAttributes@Do[1]{%
+		\setcounter{EqualAttributes@Tmp}{\value{EqualAttributes@x}}%
+		\ifnum\value{EqualAttributes@First}=0%
+			\put(\arabic{EqualAttributes@x}, #2){\makebox(\value{EqualAttributes@Plus},9){\tiny = }}%
+			\stepcounter{EqualAttributes@First}%
+		\else%
+			\put(\arabic{EqualAttributes@x}, #2){\makebox(\value{EqualAttributes@Plus},9){\tiny + }}%
+		\fi%
+		\put(\arabic{EqualAttributes@Tmp}, #2){\framebox(15,9){$\IfNullF{##1}{\DoMath{##1}}$}}%
+		\addtocounter{EqualAttributes@x}{#4}%
+		\IfNullF{##1}{\addtocounter{EqualAttributes@Total}{##1}}%
+	}%
+	% Skip 1st box to start
+	\setcounter{EqualAttributes@x}{#1 + #4}%
+	\setcounter{EqualAttributes@Total}{0}%
+	\setcounter{EqualAttributes@First}{0}%
+	\setcounter{EqualAttributes@Plus}{16 - #4}%
+	\forcsvlist{\EqualAttributes@Do}{#3}%
+	\put(#1,#2){\framebox(15,9){$\arabic{EqualAttributes@Total}$}}%
 }
 
 \def\specialequalattributes#1#2#3#4#5{%
@@ -520,6 +541,11 @@
 	\fi%
 }
 
+\ProvideDocumentCommand{\IfNullTF}{m m m}{\ifthenelse{\equal{#1}{}}{#2}{#3}}
+\ProvideDocumentCommand{\IfNullT}{m m}{\IfNullTF{#1}{#2}{}}
+\ProvideDocumentCommand{\IfNullF}{m m}{\IfNullTF{#1}{}{#2}}
+\ProvideDocumentCommand{\IfNullFT}{m m m}{\IfNullTF{#1}{#3}{#2}}
+
 %%Debug and Alerts%%
 \edef\PrintDebug{}
 \newcommand{\AddDebug}[1]{
@@ -528,6 +554,11 @@
 \edef\PrintWarning{}
 \newcommand\AddWarning[1]{
 	\gappto\PrintWarning{#1; }
+}
+
+%%patchcmd which works on all instances of the search target
+\ProvideDocumentCommand{\PatchAllCmd}{m m m}{%
+\patchcmd{#1}{#2}{#3}{\PatchAllCmd{#1}{#2}{#3}}{}%
 }
 
 %%For Loop%%

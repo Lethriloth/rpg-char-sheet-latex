@@ -139,7 +139,8 @@
 \newcommand{\AddIntToSkillRanks}{
 	\ifthenelse{\value{AutoSkillRanks-Mode} = 1}{
 		\SetCounter{@i}{1}
-		\SetCounter{@j}{(\value{CharIntCount} - \value{CharIntEnhancementCount} - \value{CharIntTmpCount}) / 2 - 5}
+		\NewCounter{CharIntEnhancementModCount}
+		\SetCounter{@j}{(\value{CharIntCount} - \value{CharIntEnhancementModCount} - \value{CharIntTmpCount}) / 2 - 5}
 		\renewcommand\do[1]{
 			\SetCounter{@k}{\value{@j} + \value{##1SkillRanksPerLevelCount}}
 			\ifthenelse{\value{@i} = 1}{

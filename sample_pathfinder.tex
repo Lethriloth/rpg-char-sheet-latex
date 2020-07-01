@@ -3,6 +3,8 @@
 \usepackage{multicol}
 \usepackage{Systems/Pathfinder/SystemPathfinder}
 \usepackage{adjustbox}
+\usepackage{miama}
+\usepackage[T1]{fontenc}
 \begin{document}
 	\renewcommand{\datafolder}{Systems/Pathfinder/Data}
 	\SetCounter{XP-Mode}{1} % Boolean, automatically calculates next-Level XP
@@ -55,7 +57,7 @@
 	\AddFeat{Example Feat}
 	\AddFeat*{Example Bonus Feat}
 	
-	
+
 	% Skill Ranks
 	\renewcommand{\do}[1]{
 		\AddRanks{#1}{\value{CharTotalLevelCount}}
@@ -115,7 +117,3 @@
 	
 	\input{Sheets/Pathfinder_Sheet.tex}
 \end{document}
-%%% Local Variables: 
-%%% Mode: latex
-%%% TeX-master: t
-%%% End:

@@ -11,26 +11,28 @@
 
 \centering\begin{picture}(420,558)
 
-%   \put(0,0){\framebox(420,558)}
+%\put(0,0){\framebox(420,558)}
 
-\put(137,510){  %% Name, Description, etc.
-	\put(0,0){
-	  	\renewcommand{\arraystretch}{.9}
-		\begin{tabular}[b]{D{46} D{25}  D{23}  D{23}  D{23}  D{23}  D{23}  D{23} }
-			\multicolumn{3}{D{113}}{\CharName} & \CharAlignment & \multicolumn{4}{D{121}}{\CharPlayerName} \\[-3\unitlength]
-			\cmidrule(rl){1-3}\cmidrule(rl){4-4}\cmidrule(rl){5-8}\\
-			\multicolumn{4}{D{144}}{\CharLevel} &\multicolumn{2}{D{55}}{\CharReligion} & \multicolumn{2}{D{55}}{\CharHomeland} \\[-3\unitlength]
-			\cmidrule(rl){1-4}\cmidrule(rl){5-6}\cmidrule(rl){7-8}\\
+\put(139,510){%% Name, Description, etc.
+	\setlength\tabcolsep{3\unitlength}%
+	\setlength\cmidrulekern{\tabcolsep}%
+	\put(0,0){%
+		\renewcommand{\arraystretch}{.9}%
+		\begin{tabular}[b]{ @{} D{53} D{27}  D{27}  D{27}  D{27}  D{27}  D{27}  D{27}@{}}%
+			\multicolumn{3}{@{}D{119}}{\CharName} & \multicolumn{2}{D{60}}{\CharAlignment} & \multicolumn{3}{D{93}@{}}{\CharPlayerName} \\[-3\unitlength]
+			\cmidrule(r){1-3}\cmidrule(lr){4-5}\cmidrule(lr){6-8}\\
+			\multicolumn{4}{@{}D{152}}{\CharLevel} &\multicolumn{2}{D{60}}{\CharReligion} & \multicolumn{2}{D{60}@{}}{\CharHomeland} \\[-3\unitlength]
+			\cmidrule(r){1-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}\\
 			\CharRace & \CharSize & \CharGender & \CharAge & \CharHeight & \CharWeight & \CharHair & \CharEyes\\[-3\unitlength]
-			\cmidrule(rl){1-1}\cmidrule(rl){2-2}\cmidrule(rl){3-3}\cmidrule(rl){4-4}\cmidrule(rl){5-5}\cmidrule(rl){6-6}\cmidrule(rl){7-7}\cmidrule(rl){8-8}
-    	\end{tabular}
-	}
-	\put(0,-1){\renewcommand{\arraystretch}{1.9}
-    	\begin{tabular}[b]{D{46} D{23}  D{23}  D{23}  D{23}  D{23}  D{23}  D{23} }
-			\multicolumn{3}{D{111}}{\lfont character name} & \lfont alignment & \multicolumn{4}{D{121}}{\lfont player name} \\
-			\multicolumn{4}{D{144}}{\lfont character level} &\multicolumn{2}{D{55}}{\lfont religion} & \multicolumn{2}{D{55}}{\lfont homeland} \\
+			\cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4}\cmidrule(lr){5-5}\cmidrule(lr){6-6}\cmidrule(lr){7-7}\cmidrule(lr){8-8}
+		\end{tabular}%
+	}%
+	\put(0,-1){\renewcommand{\arraystretch}{1.9}%
+		\begin{tabular}[b]{ @{} D{53} D{27}  D{27}  D{27}  D{27}  D{27}  D{27}  D{27} @{} }%
+			\multicolumn{3}{@{}D{119}}{\lfont character name} & \multicolumn{2}{D{60}}{\lfont alignment} & \multicolumn{3}{D{93}}{\lfont player name} \\
+			\multicolumn{4}{@{}D{152}}{\lfont character level} &\multicolumn{2}{D{60}}{\lfont religion} & \multicolumn{2}{D{60}}{\lfont homeland} \\
 			\lfont race & \lfont size & \lfont gender & \lfont age & \lfont height & \lfont weight & \lfont hair & \lfont eyes \\
-	    \end{tabular}
+		\end{tabular}
 	}
 }
 
@@ -42,50 +44,43 @@
 \NewCounter{CharWisEnhancementModCount}
 \NewCounter{CharChaEnhancementModCount}
 
-\put(0,480){ % % Ability Scores
+\put(0,480){%% Ability Scores
 	%% Labels
 	\put(0,72){\makebox(28,3){\tiny\scshape attribute}}
-	\stretchlabels{30}{72}{63}{Ability Score,  Ability Modifier}
-	\stretchlabels{68}{72}{139}{Base\\ Score, Enhancement Bonus, Misc.\\ Bonus, Temp.\\ Bonus}
+	\stretchlabels{30}{72}{137}{Ability Score,  Ability Modifier, Base\\ Score, Enhancement Bonus, Misc.\\ Bonus, Temp.\\ Bonus}
 	%% Line
 	{\linethickness{1.3pt}
-	\put(65.5,78){\line(0,-1){79}}}
+		\put(64.5,-2){\line(0,1){77}}}
 	%% STR
-	\titlebox{0}{60}{28}{STR}{strength}
-	\StretchAttributes{30}{60}{63}{\arabic{CharStrCount},\PlusMinus{CharStrModCount}}
-	\StretchAttributes{68}{60}{139}{\arabic{CharStrBaseCount},\PlusMinus{CharStrEnhancementModCount},\MathPM{\value{CharStrMiscCount} - \value{CharStrEnhancementModCount}},\PlusMinus{CharStrTmpCount}}
+	\titlebox{0}{60}{28}{STR}{Strength}
+	\StretchAttributes{30}{60}{137}{\Arabic{CharStrCount},\PlusMinus{CharStrModCount},\Arabic{CharStrBaseCount},\PlusMinus{CharStrEnhancementModCount},\MathPM{\value{CharStrMiscCount} - \value{CharStrEnhancementModCount}},\PlusMinus{CharStrTmpCount}}
 	
 	%% DEX
-	\titlebox{0}{48}{28}{DEX}{dexterity}
-	\StretchAttributes{30}{48}{63}{\arabic{CharDexCount},\PlusMinus{CharDexModCount}}
-	\StretchAttributes{68}{48}{139}{\arabic{CharDexBaseCount},\PlusMinus{CharDexEnhancementModCount},\MathPM{\value{CharDexMiscCount} - \value{CharDexEnhancementModCount}},\PlusMinus{CharDexTmpCount}}
+	\titlebox{0}{48}{28}{DEX}{Dexterity}
+	\StretchAttributes{30}{48}{137}{\Arabic{CharDexCount},\PlusMinus{CharDexModCount},\Arabic{CharDexBaseCount},\PlusMinus{CharDexEnhancementModCount},\MathPM{\value{CharStrMiscCount} - \value{CharStrEnhancementModCount}},\PlusMinus{CharDexTmpCount}}
 	
 	%% CON
-	\titlebox{0}{36}{28}{CON}{constitution}
-	\StretchAttributes{30}{36}{63}{\arabic{CharConCount},\PlusMinus{CharConModCount}}
-	\StretchAttributes{68}{36}{139}{\arabic{CharConBaseCount},\PlusMinus{CharConEnhancementModCount},\MathPM{\value{CharConMiscCount} - \value{CharConEnhancementModCount}},\PlusMinus{CharConTmpCount}}
+	\titlebox{0}{36}{28}{CON}{Constitution}
+	\StretchAttributes{30}{36}{137}{\Arabic{CharConCount},\PlusMinus{CharConModCount},\Arabic{CharConBaseCount},\PlusMinus{CharConEnhancementModCount},\MathPM{\value{CharConMiscCount} - \value{CharConEnhancementModCount}},\PlusMinus{CharConTmpCount}}
 	
 	%% INT
-	\titlebox{0}{24}{28}{INT}{intelligence}
-	\StretchAttributes{30}{24}{63}{\arabic{CharIntCount},\PlusMinus{CharIntModCount}}
-	\StretchAttributes{68}{24}{139}{\arabic{CharIntBaseCount},\PlusMinus{CharIntEnhancementModCount},\MathPM{\value{CharIntMiscCount} - \value{CharIntEnhancementModCount}},\PlusMinus{CharIntTmpCount}}
+	\titlebox{0}{24}{28}{INT}{Intelligence}
+	\StretchAttributes{30}{24}{137}{\Arabic{CharIntCount},\PlusMinus{CharIntModCount},\Arabic{CharIntBaseCount},\PlusMinus{CharIntEnhancementModCount},\MathPM{\value{CharIntMiscCount} - \value{CharIntEnhancementModCount}},\PlusMinus{CharIntTmpCount}}
 	
 	%% WIS
-	\titlebox{0}{12}{28}{WIS}{wisdom}
-	\StretchAttributes{30}{12}{63}{\arabic{CharWisCount},\PlusMinus{CharWisModCount}}
-	\StretchAttributes{68}{12}{139}{\arabic{CharWisBaseCount},\PlusMinus{CharWisEnhancementModCount},\MathPM{\value{CharWisMiscCount} - \value{CharWisEnhancementModCount}},\PlusMinus{CharWisTmpCount}}
+	\titlebox{0}{12}{28}{WIS}{Wisdom}
+	\StretchAttributes{30}{12}{137}{\Arabic{CharWisCount},\PlusMinus{CharWisModCount},\Arabic{CharWisBaseCount},\PlusMinus{CharWisEnhancementModCount},\MathPM{\value{CharWisMiscCount} - \value{CharWisEnhancementModCount}},\PlusMinus{CharWisTmpCount}}
 	
 	%% CHA
 	\titlebox{0}{0}{28}{CHA}{Charisma}
-	\StretchAttributes{30}{0}{63}{\arabic{CharChaCount},\PlusMinus{CharChaModCount}}
-	\StretchAttributes{68}{0}{139}{\arabic{CharChaBaseCount},\PlusMinus{CharChaEnhancementModCount},\MathPM{\value{CharChaMiscCount} - \value{CharChaEnhancementModCount}},\PlusMinus{CharChaTmpCount}}
+	\StretchAttributes{30}{0}{137}{\Arabic{CharChaCount},\PlusMinus{CharChaModCount},\Arabic{CharChaBaseCount},\PlusMinus{CharChaEnhancementModCount},\MathPM{\value{CharChaMiscCount} - \value{CharChaEnhancementModCount}},\PlusMinus{CharChaTmpCount}}
 }
 
-\put(143,480){ % % XP
-	\titlebox{0}{12}{30}{XP}{Current XP}
-	\titlebox{0}{0}{30}{XP}{To Next Level}
-	\put(32,12){\framebox(58,10){\CleanArabic{CharXPCount}}}
-	\put(32,0){\framebox(58,10){\CleanArabic{CharNextLevelXPCount}}}
+\put(139,480){ % % XP
+	\titlebox{0}{12}{32}{XP}{Current XP}
+	\titlebox{0}{0}{32}{XP}{To Next Level}
+	\put(34,12){\framebox(59,9){\CleanArabic{CharXPCount}}}
+	\put(34,0){\framebox(59,9){\CleanArabic{CharNextLevelXPCount}}}
 }
 {  %% HP
   \titlebox{0}{465}{35}{HP}{Hit Points}
@@ -153,14 +148,24 @@
 	\equalattributes{35}{0}{10,\arabic{CharArmorBonusCount},\arabic{CharShieldBonusCount},,,\arabic{CharSizeModCount},\arabic{CharNaturalArmorModCount},\arabic{CharDeflectionModCount},\arabic{CharFlatFootedACMiscCount},\arabic{CharFlatFootedACTmpCount}}{18}
  }
 
+\NewCounter{CharFortitudeResistanceModCount}
+\NewCounter{CharReflexResistanceModCount}
+\NewCounter{CharWillResistanceModCount}
+\AddResistanceBonus{2}
 \put(0,338){  %% fort, reflex and will
 	\scaleattributelabels{53}{31}{TOTAL, base, ability, resistance, misc,temp}{18}
-	\titlebox{0}{24}{55}{fortitude}{(constitution)}
-	\equalattributes{53}{24}{\arabic{CharFortitudeCount},\arabic{CharConModCount},\arabic{CharResistanceModCount},\arabic{CharFortitudeMiscCount},\arabic{CharFortitudeTmpCount}}{18}
-	\titlebox{0}{12}{55}{reflex}{(dexterity)}
-	\equalattributes{53}{12}{\arabic{CharReflexCount},\arabic{CharDexModCount},\arabic{CharResistanceModCount},\arabic{CharReflexMiscCount},\arabic{CharReflexTmpCount}}{18}
-	\titlebox{0}{0}{55}{will}{(wisdom)}  
-	\equalattributes{53}{0}{\arabic{CharWillCount},\arabic{CharWisModCount},\arabic{CharResistanceModCount},\arabic{CharWillMiscCount},\arabic{CharWillTmpCount}}{18}
+	\put(0,24){
+		\titlebox{0}{0}{55}{Fortitude}{(Constitution)}
+		\EqualAttributes{56}{0}{\arabic{CharFortitudeCount},\arabic{CharConModCount},\arabic{CharFortitudeResistanceModCount},\arabic{CharFortitudeMiscCount} - \value{CharFortitudeResistanceModCount},\arabic{CharFortitudeTmpCount}}{18}
+	}
+	\put(0,12){
+		\titlebox{0}{0}{55}{Reflex}{(Dexterity)}
+		\EqualAttributes{56}{0}{\arabic{CharReflexCount},\arabic{CharDexModCount},\arabic{CharReflexResistanceModCount},\arabic{CharReflexMiscCount}-\value{CharReflexResistanceModCount},\arabic{CharReflexTmpCount}}{18}
+	}
+	\put(0,0){
+		\titlebox{0}{0}{55}{Will}{(Wisdom)}
+		\EqualAttributes{56}{0}{\arabic{CharWillCount},\arabic{CharWisModCount},\arabic{CharWillResistanceModCount},\arabic{CharWillMiscCount}-\value{CharWillResistanceModCount},\arabic{CharWillTmpCount}}{18}
+	}
 }
   
 \put(163,338){  %% Defensive Conditional Modifiers

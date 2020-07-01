@@ -11,7 +11,6 @@
 \renewcommand{\do}[1]{
 	\NewCounter{Char#1Count}
 	\NewCounter{Char#1BaseCount}
-	\NewCounter{Char#1EnhancementCount}
 	\NewCounter{Char#1MiscCount}
 	\NewCounter{Char#1TmpCount}
 	\NewCounter{Char#1ModCount}
@@ -22,7 +21,6 @@
 \newcommand{\ComputeAbilityScores}{
 	\renewcommand{\do}[1]{
 		\SetCounter{Char##1Count}{\value{Char##1BaseCount}}
-		\AddToCounter{Char##1Count}{\value{Char##1EnhancementCount}}
 		\AddToCounter{Char##1Count}{\value{Char##1MiscCount}}
 		\AddToCounter{Char##1Count}{\value{Char##1TmpCount}}
 		\SetCounter{Char##1ModCount}{0}
@@ -47,7 +45,7 @@
 \newcommand{\AddDodgeBonus}[1]{\AddToCounter{CharDodgeModCount}{#1}}
 \NewCounter{CharSizeModCount}
 \NewCounter{CharDeflectionModCount}
-\newcommand{\AddDeflectionBonus}[1]{\ifthenelse{\value{Chardeflectionmodcount}<#1}{\Setcounter{Chardeflectionmodcount}{#1}}{}}
+\newcommand{\AddDeflectionBonus}[1]{\ifthenelse{\value{CharDeflectionModCount}<#1}{\SetCounter{CharDeflectionModCount}{#1}}{}}
 \NewCounter{CharACMiscCount}\NewCounter{CharACTmpCount}
 \NewCounter{CharTouchACMiscCount}\NewCounter{CharTouchACTmpCount}
 \NewCounter{CharFlatFootedACMiscCount}\NewCounter{CharFlatFootedACTmpCount}
@@ -58,8 +56,11 @@
 	\NewCounter{Char#1MiscCount}
 	\NewCounter{Char#1TmpCount}
 }\docsvlist{Fortitude, Reflex, Will}
-\NewCounter{CharResistanceModCount}
-\newcommand{\AddResistanceBonus}[1]{\ifthenelse{\value{CharResistanceModCount}<#1}{\SetCounter{CharResistanceModCount}{#1}}{}}
+\newcommand{\AddResistanceBonus}[1]{%
+	\MiscBonus[Resistance]{Fortitude}{#1}%
+	\MiscBonus[Resistance]{Reflex}{#1}%
+	\MiscBonus[Resistance]{Will}{#1}%
+}
 
 %% Special Defenses %%
 \edef\CharResistancesList{}
@@ -405,7 +406,7 @@
 }
 
 %% Weapons %%
-\renewcommand\do[1]{%
+\newcommand{\DeclareWeapon}[1]{%
 	\expandafter\newcommand\csname CharWeapon#1Name\endcsname{}%
 	\expandafter\newcommand\csname CharWeapon#1AttackBonus\endcsname{}%
 	\NewCounter{CharWeapon#1MiscCount}%
@@ -466,7 +467,7 @@
 		\expandafter\renewcommand\csname CharWeapon#1Notes\endcsname{##8}
 	}
 }
-\docsvlist{One,Two,Three}
+\forcsvlist{\DeclareWeapon}{One,Two,Three}
 
 \newcommand\AddWeapon[7]{%
 	\ifthenelse{\equal{\CharWeaponOneName}{}}
