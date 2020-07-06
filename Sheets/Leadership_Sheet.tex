@@ -101,23 +101,23 @@
 }
 
 \put(0,390){%% AC
-	\scaleattributelabels{29}{33}{\phantom{\&}\\TOTAL,Base\\AC,Armor \\\& Shield, Natural\\ Armor, Dex \&\\Dodge, Misc\\Modifier}{20}
+	\scaleattributelabels{29}{31}{TOTAL,Base,Armor ,Shield, Natural, Dex ,Dodge, Misc}{20}
 	\put(0,24){
 		\titlebox{0}{0}{32}{AC}{Armour Class}
-		\EqualAttributes{34}{0}{10,\value{CohortArmorBonusCount}+\value{CohortShieldBonusCount},\arabic{CohortNaturalArmorModCount}, \arabic{CohortDextoACCount} + \arabic{CohortDodgeModCount},\arabic{CohortSizeModCount} + \arabic{CohortDeflectionModCount} + \arabic{CohortACMiscCount}}{20}
+		\EqualAttributes{34}{0}{10,\value{CohortArmorBonusCount},\value{CohortShieldBonusCount},\arabic{CohortNaturalArmorModCount}, \arabic{CohortDextoACCount} , \arabic{CohortDodgeModCount},\arabic{CohortSizeModCount} + \arabic{CohortDeflectionModCount} + \arabic{CohortACMiscCount}}{20}
 	}
 	
 	% Touch, Flat footed
 	\put(0,12){
 		\titlebox{0}{0}{32}{TOUCH}{Armour Class}
-		\EqualAttributes{34}{0}{10,{},{}, \arabic{CohortDextoACCount} + \arabic{CohortDodgeModCount},\arabic{CohortSizeModCount} + \arabic{CohortDeflectionModCount} + \arabic{CohortACMiscCount}}{20}
+		\EqualAttributes{34}{0}{10,{},{},{}, \arabic{CohortDextoACCount} , \arabic{CohortDodgeModCount},\arabic{CohortSizeModCount} + \arabic{CohortDeflectionModCount} + \arabic{CohortACMiscCount}}{20}
 	}
 	\put(0,0){
 		\titlebox{0}{0}{32}{\fontsize{6}{7}\selectfont Flat-Footed}{Armour Class}
-		\EqualAttributes{34}{0}{10,\value{CohortArmorBonusCount}+\value{CohortShieldBonusCount},\arabic{CohortNaturalArmorModCount},{},\arabic{CohortSizeModCount} + \arabic{CohortDeflectionModCount} + \arabic{CohortACMiscCount}}{20}
+		\EqualAttributes{34}{0}{10,\value{CohortArmorBonusCount},\value{CohortShieldBonusCount},\arabic{CohortNaturalArmorModCount},{},{},\arabic{CohortSizeModCount} + \arabic{CohortDeflectionModCount} + \arabic{CohortACMiscCount}}{20}
 	}
 }
-\put(152,390){% % Saves
+\put(192,390){% % Saves
 	\scaleattributelabels{46}{33}{\phantom{\&}\\TOTAL, Base\\Save, Ability\\Modifier, Misc\\Modifier}{20}
 	\put(0,24){
 		\titlebox{0}{0}{48}{Fortitude}{(Constitution)}
@@ -137,7 +137,7 @@
 \let\PrintListFirstItem\BooleanTrue
 %\newcommand{\PrintCohortSkill}[1]{\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\BooleanFalse}{, }\cs{Skill#1DisplayName} \PlusMinus{Cohort#1Count}}
 
-\put(152,327){
+\put(192,327){
 	\put(0,0){\framebox(200,60){}}
 	\put(1,1){\parbox[b][58\unitlength][t]{198\unitlength}{\textit{%
 		\textbf{Skills: }%
@@ -147,9 +147,19 @@
 	}}}
 }
 
-\put(152,264){
+\put(192,264){
 	\put(0,0){\framebox(200,60){}}
 	\put(1,1){\parbox[b][58\unitlength][t]{198\unitlength}{\textit{\textbf{Feats: }\PrintList{\CohortFeatsList}}}}
 }
-
+\newcommand{\PrintCohortWeapon}[1]{%
+	\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
+	\multicolumn{3}{A{105}}{\itshape \cs{CohortAttack#1Name}} & \cs{CohortAttack#1AttackBonus} & \cs{CohortAttack#1Damage} &\cs{CohortAttack#1Critical} \tabularnewline\hline\\[-16pt]
+	\multicolumn{3}{A{105}}{\tiny\scshape ATTACK} &\tiny\scshape  attack Bonus &\tiny\scshape Damage &\tiny\scshape  Critical  \tabularnewline
+	\itshape \cs{CohortAttack#1Type} &  \cs{CohortAttack#1Range} & \multicolumn{4}{A{160}}{\cs{CohortAttack#1Notes}}  \tabularnewline\hline\\[-16pt]
+	\tiny\scshape Type & \tiny\scshape Range &\multicolumn{4}{A{160}} {\tiny\scshape ammunition \& Notes } \tabularnewline
+	\end{tabular}
+}
+\put(0,355){
+	\PrintCohortWeapon{One}
+}
 \end{picture}

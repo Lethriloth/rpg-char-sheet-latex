@@ -1084,7 +1084,8 @@
 \NewCounter{XP-Mode}
 
 %% Command to initialize character variables for companions (animal companions, special mounts, familiars, cohorts)
-\ProvideDocumentCommand{\InitCompanionVariables}{m}{
+
+\ProvideDocumentCommand{\InitCompanionVariablesCommon}{m}{
 	\renewcommand\do[1]{\csdef{#1##1}{}}%
 	\docsvlist{Name,Alignment,Religion,Homeland,Race,Level,Gender,Age}
 
@@ -1139,12 +1140,36 @@
 		}
 	}
 
-	\let\DeclareCompanionWeapon\DeclareWeapon
-		\PatchAllCmd{\DeclareCompanionWeapon}{Char}{#1}
-		\patchcmd\DeclareCompanionWeapon{AddWeapon}{Add#1Weapon}{}{}
-		\patchcmd\DeclareCompanionWeapon{AddAutoWeapon}{Add#1AutoWeapon}{}{}
-	\forcsvlist{\DeclareCompanionWeapon}{One,Two}
+	\NewCounter{#1BABCount}
+	\NewCounter{#1IteratedAttacksCount}
+	\NewCounter{#1IteratedAttackBonusCount}
+	\NewCounter{#1ExtraAttacksCount}
 
+	
+	\let\DeclareCompanionAttack\DeclareWeapon
+		\PatchAllCmd{\DeclareCompanionAttack}{Char}{#1}
+		\patchcmd\DeclareCompanionAttack{AddWeapon}{Add#1Attack}{}{}
+		\patchcmd\DeclareCompanionAttack{AddAutoWeapon}{Add#1AutoAttack}{}{}
+		\PatchAllCmd{\DeclareCompanionAttack}{Weapon}{Attack}
+	\forcsvlist{\DeclareCompanionAttack}{One,Two}
+	\expandafter\newcommand\csname Add#1Attack\endcsname[7]{%
+		\ifthenelse{\equal{\cs{#1AttackOneName}}{}}{%
+		\cs{Add#1AttackOne}{##1}{##2}{##3}{##4}{##5}{##6}{##7}}{%
+		\ifthenelse{\equal{\cs{#1AttackTwoName}}{}}{%
+			\cs{Add#1AttackTwo}{##1}{##2}{##3}{##4}{##5}{##6}{##7}%
+		}%
+			\cs{Add#1AttackOne}{##1}{##2}{##3}{##4}{##5}{##6}{##7}%
+		}%
+	}
+	\expandafter\newcommand\csname Add#1AutoAttack\endcsname[9][0]{%
+		\ifthenelse{\equal{\cs{#1AutoAttackOneName}}{}}{%
+			\cs{Add#1AutoAttackOne}[##1]{##2}{##3}{##4}{##5}{##6}{##7}{##8}{##9}}{%
+			\ifthenelse{\equal{\cs{#1AutoAttackTwoName}}{}}{%
+				\cs{Add#1AutoAttackTwo}[##1]{##2}{##3}{##4}{##5}{##6}{##7}{##8}{##9}%
+			}%
+			\cs{Add#1AutoAttackOne}[##1]{##2}{##3}{##4}{##5}{##6}{##7}{##8}{##9}%
+		}%
+	}
 
 	\NewCounter{#1ArmorBonusCount}
 	\expandafter\newcommand\csname Add#1ArmorBonus\endcsname[1]{\ifthenelse{\value{#1ArmorBonusCount}<#1}{\SetCounter{#1ArmorBonusCount}{#1}}{}}
