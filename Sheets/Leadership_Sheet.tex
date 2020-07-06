@@ -1,6 +1,7 @@
-\centering\begin{picture}(420,545)
-%\put(0,0){\framebox(420,545){}}
-\put(0,492){
+\InitializeCohort
+\centering\begin{picture}(420,558)
+\put(0,0){\framebox(420,558){}}
+\put(0,505){
 	\titlebox{0}{43}{143}{Leadership}{Score}
 	\scaleattributelabels{43}{35}{TOTAL,Level,\AbilityFullName{\CharLeadershipKeyAbility},Reputation,Misc}{20}
 	\put(0,27){%
@@ -27,20 +28,108 @@
 \DeclareDocumentCommand{\PrintListItem}{>{\SplitArgument{3}{|}} m}{%
 	\PrintListItemInternal #1%
 }
-\put(145,492) {%
+\put(145,505) {%
 	\parbox[b][53\unitlength][t]{135\unitlength}{\centering\itshape%
 			{\fmmfamily\large Reputation Modifiers}\\%
 			\footnotesize%
 			\forlistloop{\PrintListItem}{\CharLeadershipReputationModifiersList}%
 	}%
 }
-\put(283,492) {%
+\put(283,505) {%
 	\parbox[b][53\unitlength][t]{135\unitlength}{\centering\itshape%
 		{\fmmfamily \normalsize Cohort Reputation Modifiers}\\%
 		\scriptsize%
 		\forlistloop{\PrintListItem}{\CharCohortLeadershipReputationModifiersList}%
 		{\fmmfamily \normalsize Follower Reputation Modifiers}\\%
 		\forlistloop{\PrintListItem}{\CharFollowerLeadershipReputationModifiersList}%
+	}
+}
+
+\put(0,456){%% Cohort Name, Description, etc.
+	\singletitlebox{0}{34}{420}{12}{COHORT}
+	\setlength\tabcolsep{3\unitlength}%
+	\setlength\cmidrulekern{\tabcolsep}%
+	\put(0,1){%
+		\renewcommand{\arraystretch}{.9}%
+		\begin{tabular}[b]{ @{} D{55} D{55} D{55} D{55}  D{55}@{}}%
+		\multicolumn{2}{@{}D{116}}{\CohortName} & \CohortAlignment & \CohortReligion & \CohortHomeland \\[-3\unitlength]
+		\cmidrule(r){1-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4} \cmidrule(lr){5-5}\\
+		\CohortRace & \multicolumn{2}{D{116}}{\CohortLevel} &\CohortGender & \CohortAge \\[-3\unitlength]
+		\cmidrule(r){1-1}\cmidrule(lr){2-3}\cmidrule(lr){4-4} \cmidrule(lr){5-5}
+		\end{tabular}%
+	}%
+	\put(0,0){\renewcommand{\arraystretch}{1.9}%
+		\begin{tabular}[b]{ @{} D{55} D{55} D{55}  D{55}  D{55}@{}}%
+		\multicolumn{2}{@{}D{116}}{\lfont Cohort Name} & \lfont Cohort Alignment & \lfont Cohort Religion & \lfont Cohort Homeland \\
+		\lfont Cohort Race/Species & \multicolumn{2}{D{116}}{\lfont Cohort Class and Level} & \lfont Cohort Gender & \lfont Cohort Age
+		\end{tabular}
+	}
+}
+
+\put(0,433){%% Ability Scores
+	%% STR
+	\put(0,0){
+		\titlebox{0}{10}{35}{Str}{}
+		\scaleattributelabels{-5}{7}{Score,Modifier}{20}
+		\scaleattributes{-5}{0}{\Arabic{CohortStrCount},\PlusMinus{CohortStrModCount}}{20}
+	}
+	\put(40,0){
+		\titlebox{0}{10}{35}{Dex}{}
+		\scaleattributelabels{-5}{7}{Score,Modifier}{20}
+		\scaleattributes{-5}{0}{\Arabic{CohortDexCount},\PlusMinus{CohortDexModCount}}{20}
+	}
+	\put(80,0){
+		\titlebox{0}{10}{35}{Con}{}
+		\scaleattributelabels{-5}{7}{Score,Modifier}{20}
+		\scaleattributes{-5}{0}{\Arabic{CohortConCount},\PlusMinus{CohortConModCount}}{20}
+	}
+	\put(120,0){
+		\titlebox{0}{10}{35}{Int}{}
+		\scaleattributelabels{-5}{7}{Score,Modifier}{20}
+		\scaleattributes{-5}{0}{\Arabic{CohortIntCount},\PlusMinus{CohortIntModCount}}{20}
+	}
+	\put(160,0){
+		\titlebox{0}{10}{35}{Wis}{}
+		\scaleattributelabels{-5}{7}{Score,Modifier}{20}
+		\scaleattributes{-5}{0}{\Arabic{CohortWisCount},\PlusMinus{CohortWisModCount}}{20}
+	}
+	\put(200,0){
+		\titlebox{0}{10}{35}{Cha}{}
+		\scaleattributelabels{-5}{7}{Score,Modifier}{20}
+		\scaleattributes{-5}{0}{\Arabic{CohortChaCount},\PlusMinus{CohortChaModCount}}{20}
+	}
+}
+
+\put(0,390){%% AC
+	\scaleattributelabels{29}{33}{\phantom{\&}\\TOTAL,Base\\AC,Armor \\\& Shield, Natural\\ Armor, Dex \&\\Dodge, Misc\\Modifier}{20}
+	\put(0,24){
+		\titlebox{0}{0}{32}{AC}{Armour Class}
+		\EqualAttributes{34}{0}{10,\value{CohortArmorBonusCount}+\value{CohortShieldBonusCount},\arabic{CohortNaturalArmorModCount}, \arabic{CohortDextoACCount} + \arabic{CohortDodgeModCount},\arabic{CohortSizeModCount} + \arabic{CohortDeflectionModCount} + \arabic{CohortACMiscCount}}{20}
+	}
+	
+	% Touch, Flat footed
+	\put(0,12){
+		\titlebox{0}{0}{32}{TOUCH}{Armour Class}
+		\EqualAttributes{34}{0}{10,{},{}, \arabic{CohortDextoACCount} + \arabic{CohortDodgeModCount},\arabic{CohortSizeModCount} + \arabic{CohortDeflectionModCount} + \arabic{CohortACMiscCount}}{20}
+	}
+	\put(0,0){
+		\titlebox{0}{0}{32}{\fontsize{6}{7}\selectfont Flat-Footed}{Armour Class}
+		\EqualAttributes{34}{0}{10,\value{CohortArmorBonusCount}+\value{CohortShieldBonusCount},\arabic{CohortNaturalArmorModCount},{},\arabic{CohortSizeModCount} + \arabic{CohortDeflectionModCount} + \arabic{CohortACMiscCount}}{20}
+	}
+}
+\put(152,390){% % Saves
+	\scaleattributelabels{46}{33}{\phantom{\&}\\TOTAL, Base\\Save, Ability\\Modifier, Misc\\Modifier}{20}
+	\put(0,24){
+		\titlebox{0}{0}{48}{Fortitude}{(Constitution)}
+		\equalattributes{46}{0}{\arabic{CohortFortitudeCount},\arabic{CohortConModCount},\arabic{CohortFortitudeMiscCount}}{20}
+	}
+	\put(0,12){
+		\titlebox{0}{0}{48}{Reflex}{(Dexterity)}
+		\equalattributes{46}{0}{\arabic{CohortReflexCount},\arabic{CohortDexModCount},\arabic{CohortReflexMiscCount}}{20}
+	}
+	\put(0,0){
+		\titlebox{0}{0}{48}{Will}{(Wisdom)}  
+		\equalattributes{46}{0}{\arabic{CohortWillCount},\arabic{CohortWisModCount},\arabic{CohortWillMiscCount}}{20}
 	}
 }
 \end{picture}

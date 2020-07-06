@@ -1067,6 +1067,62 @@
 \NewCounter{CharNextLevelXPCount}
 \NewCounter{XP-Mode}
 
+%% Command to initialize character variables for companions (animal companions, special mounts, familiars, cohorts)
+\ProvideDocumentCommand{\InitCompanionVariables}{m}{
+	\renewcommand\do[1]{\csdef{#1##1}{}}%
+	\docsvlist{Name,Alignment,Religion,Homeland,Race,Level,Gender,Age}
+	\renewcommand\do[1]{%
+		\NewCounter{#1##1Count}
+		\NewCounter{#1##1BaseCount}
+		\NewCounter{#1##1MiscCount}
+		\NewCounter{#1##1TmpCount}
+		\NewCounter{#1##1ModCount}
+		\expandafter\newcommand\csname Set#1##1\endcsname[1]{
+			\SetCounter{#1##1BaseCount}{####1}
+		}
+	}\dolistloop{\AbilityScoresList}
+	\cslet{Compute#1AbilityScores}\ComputeAbilityScores
+	\expandafter\PatchAllCmd\csname Compute#1AbilityScores\endcsname{Char}{#1}
+	\renewcommand\do[1]{%
+		\NewCounter{#1##1Count}
+		\NewCounter{#1##1ClassSkillBool}
+		\NewCounter{#1##1RanksCount}
+		\NewCounter{#1##1MiscCount}
+	}\dolistloop{\SkillsList}
+	\let\DeclareCompanionWeapon\DeclareWeapon
+		\PatchAllCmd{\DeclareCompanionWeapon}{Char}{#1}{}{}
+		\patchcmd\DeclareCompanionWeapon{AddWeapon}{Add#1Weapon}{}{}
+		\patchcmd\DeclareCompanionWeapon{AddAutoWeapon}{Add#1AutoWeapon}{}{}
+	\forcsvlist{\DeclareCompanionWeapon}{One,Two}
+
+
+	\NewCounter{#1ArmorBonusCount}
+	\expandafter\newcommand\csname Add#1ArmorBonus\endcsname[1]{\ifthenelse{\value{#1ArmorBonusCount}<#1}{\SetCounter{#1ArmorBonusCount}{#1}}{}}
+	\NewCounter{#1ShieldBonusCount}
+	\expandafter\newcommand\csname Add#1ShieldBonus\endcsname[1]{\ifthenelse{\value{#1ShieldBonusCount}<#1}{\SetCounter{#1ShieldBonusCount}{#1}}{}}
+	\NewCounter{#1NaturalArmorModCount}
+	\expandafter\newcommand\csname Add#1NaturalArmorBonus\endcsname[1]{\ifthenelse{\value{#1NaturalArmorModCount}<#1}{\Setcounter{#1NaturalArmorModCount}{#1}}{}}
+	\NewCounter{#1DodgeModCount}
+	\expandafter\newcommand\csname Add#1DodgeBonus\endcsname[1]{\AddToCounter{#1DodgeModCount}{#1}}
+	\NewCounter{#1SizeModCount}
+	\NewCounter{#1DeflectionModCount}
+	\expandafter\newcommand\csname Add#1DeflectionBonus\endcsname[1]{\ifthenelse{\value{#1DeflectionModCount}<#1}{\SetCounter{#1DeflectionModCount}{#1}}{}}
+	\NewCounter{#1ACMiscCount}\NewCounter{#1ACTmpCount}
+	\NewCounter{#1TouchACMiscCount}\NewCounter{#1TouchACTmpCount}
+	\NewCounter{#1FlatFootedACMiscCount}\NewCounter{#1FlatFootedACTmpCount}
+	\SetCounter{#1MaxDexBonusCount}{100}
+
+	\expandafter\newcommand\csname Initialize#1\endcsname{
+		\cs{Compute#1AbilityScores}
+		\SetCounter{#1DextoACCount}{\minof{\value{#1DexModCount}}{\value{#1MaxDexBonusCount}}}
+	}
+
+	\renewcommand{\do}[1]{
+		\NewCounter{#1##1Count}
+		\NewCounter{#1##1MiscCount}
+	}\docsvlist{Fortitude, Reflex, Will}
+}
+
 %%%%Sheet Initialization%%%%
 
 \newcommand{\Initialize}{
@@ -1138,5 +1194,7 @@
 		\AddToCounter{CharCohortLeadershipScoreReputationCount}{\value{CharLeadershipScoreReputationCount}}
 	}
 	\gappto{\Initialize}{\CalculateLeadership}
+	
+	\InitCompanionVariables{Cohort}
 }
 \ProcessOptions\relax
