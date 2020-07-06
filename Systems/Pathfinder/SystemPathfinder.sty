@@ -196,6 +196,13 @@
 	}{}
 }
 
+\renewcommand\CalculateSkillTotals{
+	\renewcommand\do[1]{
+		\ifthenelse{\value{Char##1RanksCount} > 0}{\SetCounter{@i}{\value{Char##1ClassSkillBool}*3}}{\SetCounter{@i}{0}}
+		\SetCounter{Char##1Count}{\value{Char##1RanksCount} + \value{Char##1MiscCount} + \value{Char\cs{Skill##1KeyAbility}ModCount} + \value{@i}}
+	}\dolistloop{\SkillsList}
+}
+
 %%%% Character Name & Description %%%%
 
 %%%% Items %%%%

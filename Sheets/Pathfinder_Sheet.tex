@@ -247,7 +247,7 @@
 \newcommand\PrintSkill[1]{
 	\ifthenelse{\value{Char#1RanksCount} > 0}{\SetCounter{@i}{\value{Char#1ClassSkillBool}*3}}{\SetCounter{@i}{0}}
 	\ClassSkillBox{Char#1ClassSkillBool} &  \cs{Skill#1DisplayName}\ifinlist{#1}{\ArmorCheckSkillsList}{$\dagger$}{}\ifinlist{#1}{\TrainedSkillsList}{*}{} &
-	\DoMath{\value{Char\cs{Skill#1KeyAbility}ModCount}+\value{Char#1RanksCount}+\value{Char#1MiscCount}+\value{@i}} &~$=$~\cs{Skill#1KeyAbility} &
+	$\Arabic{Char#1Count}$ &~$=$~\cs{Skill#1KeyAbility} &
 	$\Arabic{Char\cs{Skill#1KeyAbility}ModCount}$ & $+$ &
 	$\Arabic{Char#1RanksCount}$ &  $+$ &
 	$\Arabic{@i}$ & $+$ &

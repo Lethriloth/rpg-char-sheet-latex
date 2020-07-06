@@ -371,6 +371,22 @@
 
 \NewCounter{CharBonusSkillRanksPerLevelCount}
 
+\newcommand\CalculateSkillTotals{
+	\renewcommand\do[1]{
+		\SetCounter{Char##1Count}{\value{Char##1RanksCount} + \value{Char##1MiscCount} + \value{Char\cs{Skill##1KeyAbility}ModCount}}
+	}\dolistloop{\SkillsList}
+}
+%% Boolean check for whether a skill uses its default value - True if Ranks are 0 AND (Misc bonus is 0 OR skill is trained only); Defaults to using char skill but can take an optional first argument to instead check a cohort or companion skill
+
+\ProvideDocumentCommand{\IfSkillDefaultTF}{O{Char} m m m}{% [Char/Cohort/AnimalCompaion/etc.]{SkillName}{True code}{False code}
+	\ifthenelse{\value{#1#2RanksCount} = 0}{%
+		\ifinlist{#2}{\TrainedSkillsList}{#3}{\ifthenelse{\value{#1#2MiscCount} = 0}{#3}{#4}}%
+	}{#4}%
+}
+\ProvideDocumentCommand{\IfSkillDefaultFT}{O{Char} m m m}{\IfSkillDefaultTF[#1]{#2}{#4}{#3}}
+\ProvideDocumentCommand{\IfSkillDefaultT}{O{Char} m m}{\IfSkillDefaultTF[#1]{#2}{#3}{}}
+\ProvideDocumentCommand{\IfSkillDefaultF}{O{Char} m m}{\IfSkillDefaultTF[#1]{#2}{}{#3}}
+
 
 %%%% Character Name & Description %%%%
 
@@ -1071,6 +1087,8 @@
 \ProvideDocumentCommand{\InitCompanionVariables}{m}{
 	\renewcommand\do[1]{\csdef{#1##1}{}}%
 	\docsvlist{Name,Alignment,Religion,Homeland,Race,Level,Gender,Age}
+
+	%Ability Scores
 	\renewcommand\do[1]{%
 		\NewCounter{#1##1Count}
 		\NewCounter{#1##1BaseCount}
@@ -1083,14 +1101,23 @@
 	}\dolistloop{\AbilityScoresList}
 	\cslet{Compute#1AbilityScores}\ComputeAbilityScores
 	\expandafter\PatchAllCmd\csname Compute#1AbilityScores\endcsname{Char}{#1}
+
+	%Skills
 	\renewcommand\do[1]{%
 		\NewCounter{#1##1Count}
 		\NewCounter{#1##1ClassSkillBool}
 		\NewCounter{#1##1RanksCount}
 		\NewCounter{#1##1MiscCount}
 	}\dolistloop{\SkillsList}
+	
+	\cslet{Add#1SkillRanks}\AddRanks
+	\expandafter\PatchAllCmd\csname Add#1SkillRanks\endcsname{Char}{#1}
+	
+	\cslet{Calculate#1SkillTotals}\CalculateSkillTotals
+	\expandafter\PatchAllCmd\csname Calculate#1SkillTotals\endcsname{Char}{#1}
+
 	\let\DeclareCompanionWeapon\DeclareWeapon
-		\PatchAllCmd{\DeclareCompanionWeapon}{Char}{#1}{}{}
+		\PatchAllCmd{\DeclareCompanionWeapon}{Char}{#1}
 		\patchcmd\DeclareCompanionWeapon{AddWeapon}{Add#1Weapon}{}{}
 		\patchcmd\DeclareCompanionWeapon{AddAutoWeapon}{Add#1AutoWeapon}{}{}
 	\forcsvlist{\DeclareCompanionWeapon}{One,Two}
@@ -1112,15 +1139,17 @@
 	\NewCounter{#1FlatFootedACMiscCount}\NewCounter{#1FlatFootedACTmpCount}
 	\SetCounter{#1MaxDexBonusCount}{100}
 
-	\expandafter\newcommand\csname Initialize#1\endcsname{
-		\cs{Compute#1AbilityScores}
-		\SetCounter{#1DextoACCount}{\minof{\value{#1DexModCount}}{\value{#1MaxDexBonusCount}}}
-	}
-
 	\renewcommand{\do}[1]{
 		\NewCounter{#1##1Count}
 		\NewCounter{#1##1MiscCount}
 	}\docsvlist{Fortitude, Reflex, Will}
+
+
+	\expandafter\newcommand\csname Initialize#1\endcsname{
+		\cs{Compute#1AbilityScores}
+		\SetCounter{#1DextoACCount}{\minof{\value{#1DexModCount}}{\value{#1MaxDexBonusCount}}}
+		\cs{Calculate#1SkillTotals}
+	}
 }
 
 %%%%Sheet Initialization%%%%
@@ -1135,6 +1164,7 @@
 	\SetCounter{CharIteratedAttacksCount}{(\value{CharBABCount}-1)/5+1}
 	\InitializeSpellSlots
 	\CalculateEncumbrance
+	\CalculateSkillTotals
 	\SpeedInitialize
 	\SetCounter{CharDextoACCount}{\minof{\value{CharDexModCount}}{\value{CharMaxDexBonusCount}}}
 }
@@ -1166,6 +1196,7 @@
 		}{}
 	}
 }
+
 \DeclareOption{Leadership}{
 	\renewcommand\do[1]{
 		\newcounter{Char#1LeadershipScoreCount}
@@ -1195,6 +1226,8 @@
 	}
 	\gappto{\Initialize}{\CalculateLeadership}
 	
-	\InitCompanionVariables{Cohort}
+	\AtBeginDocument{%
+		\InitCompanionVariables{Cohort}%
+	}
 }
 \ProcessOptions\relax

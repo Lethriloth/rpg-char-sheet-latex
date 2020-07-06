@@ -132,4 +132,19 @@
 		\equalattributes{46}{0}{\arabic{CohortWillCount},\arabic{CohortWisModCount},\arabic{CohortWillMiscCount}}{20}
 	}
 }
+
+\newcommand{\PrintCohortSkill}[1]{\IfSkillDefaultF[Cohort]{#1}{\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\BooleanFalse}{, }\cs{Skill#1DisplayName} \PlusMinus{Cohort#1Count}}}
+\let\PrintListFirstItem\BooleanTrue
+%\newcommand{\PrintCohortSkill}[1]{\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\BooleanFalse}{, }\cs{Skill#1DisplayName} \PlusMinus{Cohort#1Count}}
+
+\put(152,327){
+	\put(0,0){\framebox(200,60){}}
+	\put(1,1){\parbox[b][58\unitlength][t]{198\unitlength}{\textit{%
+		\textbf{Skills: }%
+		\forlistloop{%
+			\PrintCohortSkill%
+		}{\SkillsList}%
+	}}}
+}
+
 \end{picture}
