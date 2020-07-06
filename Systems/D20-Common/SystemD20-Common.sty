@@ -1112,9 +1112,32 @@
 	
 	\cslet{Add#1SkillRanks}\AddRanks
 	\expandafter\PatchAllCmd\csname Add#1SkillRanks\endcsname{Char}{#1}
-	
 	\cslet{Calculate#1SkillTotals}\CalculateSkillTotals
 	\expandafter\PatchAllCmd\csname Calculate#1SkillTotals\endcsname{Char}{#1}
+	
+	%Feats
+	\csedef{#1FeatsList}{}
+	\NewCounter{#1FeatsCount}
+	\NewCounter{#1BonusFeatsCount}
+	\expandafter\NewDocumentCommand\csname Add#1Feat\endcsname{s s O{1} m}{
+		\IfBooleanTF ##1 {
+			\IfBooleanF ##2 {
+				\AddToCounter{#1BonusFeatsCount}{-##3}
+			}
+			\ifthenelse{##3 = 1}{%
+				\listcsadd{#1FeatsList}{##4$^B$}%
+			}{%
+				\listcsadd{#1FeatsList}{##4$^B\times##3$}%
+			}%
+		}{%
+			\ifthenelse{##3 = 1}{%
+				\listcsadd{#1FeatsList}{##4}%
+			}{%
+				\listcsadd{#1FeatsList}{##4 $\times##3$}%
+			}%
+			\AddToCounter{#1FeatsCount}{-##3}
+		}
+	}
 
 	\let\DeclareCompanionWeapon\DeclareWeapon
 		\PatchAllCmd{\DeclareCompanionWeapon}{Char}{#1}
