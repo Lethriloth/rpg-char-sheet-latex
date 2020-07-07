@@ -1087,7 +1087,7 @@
 
 \ProvideDocumentCommand{\InitCompanionVariablesCommon}{m}{
 	\renewcommand\do[1]{\csdef{#1##1}{}}%
-	\docsvlist{Name,Alignment,Religion,Homeland,Race,Level,Gender,Age}
+	\docsvlist{Name,Alignment,Religion,Homeland,Race,Level,Gender,Age, Size}
 
 	%Ability Scores
 	\renewcommand\do[1]{%
@@ -1151,24 +1151,28 @@
 		\patchcmd\DeclareCompanionAttack{AddWeapon}{Add#1Attack}{}{}
 		\patchcmd\DeclareCompanionAttack{AddAutoWeapon}{Add#1AutoAttack}{}{}
 		\PatchAllCmd{\DeclareCompanionAttack}{Weapon}{Attack}
-	\forcsvlist{\DeclareCompanionAttack}{One,Two}
+	\forcsvlist{\DeclareCompanionAttack}{One,Two,Three}
 	\expandafter\newcommand\csname Add#1Attack\endcsname[7]{%
-		\ifthenelse{\equal{\cs{#1AttackOneName}}{}}{%
+		\ifthenelse{\equal\cs{#1AttackOneName}{}}{%
 		\cs{Add#1AttackOne}{##1}{##2}{##3}{##4}{##5}{##6}{##7}}{%
-		\ifthenelse{\equal{\cs{#1AttackTwoName}}{}}{%
+		\ifthenelse{\equal\cs{#1AttackTwoName}{}}{%
 			\cs{Add#1AttackTwo}{##1}{##2}{##3}{##4}{##5}{##6}{##7}%
-		}%
+		}{%
+		\ifthenelse{\equal\cs{#1AttackThreeName}{}}{%
+				\cs{Add#1AttackThree}{##1}{##2}{##3}{##4}{##5}{##6}{##7}%
+		}{%
 			\cs{Add#1AttackOne}{##1}{##2}{##3}{##4}{##5}{##6}{##7}%
-		}%
+		}}}%
 	}
 	\expandafter\newcommand\csname Add#1AutoAttack\endcsname[9][0]{%
-		\ifthenelse{\equal{\cs{#1AutoAttackOneName}}{}}{%
-			\cs{Add#1AutoAttackOne}[##1]{##2}{##3}{##4}{##5}{##6}{##7}{##8}{##9}}{%
-			\ifthenelse{\equal{\cs{#1AutoAttackTwoName}}{}}{%
-				\cs{Add#1AutoAttackTwo}[##1]{##2}{##3}{##4}{##5}{##6}{##7}{##8}{##9}%
-			}%
+		\ifcsvoid{#1AttackOneName}{%
 			\cs{Add#1AutoAttackOne}[##1]{##2}{##3}{##4}{##5}{##6}{##7}{##8}{##9}%
-		}%
+		}{\ifcsvoid{#1AttackTwoName}{%
+			\cs{Add#1AutoAttackTwo}[##1]{##2}{##3}{##4}{##5}{##6}{##7}{##8}{##9}%
+		}{\ifcsvoid{#1AttackThreeName}{%
+			\cs{Add#1AutoAttackThree}[##1]{##2}{##3}{##4}{##5}{##6}{##7}{##8}{##9}%
+		}{
+	}}}%
 	}
 
 	\NewCounter{#1ArmorBonusCount}
@@ -1179,7 +1183,6 @@
 	\expandafter\newcommand\csname Add#1NaturalArmorBonus\endcsname[1]{\ifthenelse{\value{#1NaturalArmorModCount}<#1}{\Setcounter{#1NaturalArmorModCount}{#1}}{}}
 	\NewCounter{#1DodgeModCount}
 	\expandafter\newcommand\csname Add#1DodgeBonus\endcsname[1]{\AddToCounter{#1DodgeModCount}{#1}}
-	\NewCounter{#1SizeModCount}
 	\NewCounter{#1DeflectionModCount}
 	\expandafter\newcommand\csname Add#1DeflectionBonus\endcsname[1]{\ifthenelse{\value{#1DeflectionModCount}<#1}{\SetCounter{#1DeflectionModCount}{#1}}{}}
 	\NewCounter{#1ACMiscCount}\NewCounter{#1ACTmpCount}
@@ -1192,6 +1195,37 @@
 		\NewCounter{#1##1MiscCount}
 	}\docsvlist{Fortitude, Reflex, Will}
 
+	\newcounter{#1InitiativeMiscCount}
+
+	\NewCounter{#1SizeModCount}
+	\NewCounter{#1SpecialSizeModCount}
+	\expandafter\newcommand\csname Set#1Size\endcsname[1]{
+		\cs{Set#1Size##1}
+	}
+	\cslet{Set#1SizeFine}\SetSizeFine
+	\expandafter\PatchAllCmd\csname Set#1SizeFine\endcsname{Char}{#1}
+	\cslet{Set#1SizeDiminutive}\SetSizeDiminutive
+	\expandafter\PatchAllCmd\csname Set#1SizeDiminutive\endcsname{Char}{#1}
+	\cslet{Set#1SizeTiny}\SetSizeTiny
+	\expandafter\PatchAllCmd\csname Set#1SizeTiny\endcsname{Char}{#1}
+	\cslet{Set#1SizeSmall}\SetSizeSmall
+	\expandafter\PatchAllCmd\csname Set#1SizeSmall\endcsname{Char}{#1}
+	\cslet{Set#1SizeMedium}\SetSizeMedium
+	\expandafter\PatchAllCmd\csname Set#1SizeMedium\endcsname{Char}{#1}
+	\cslet{Set#1SizeLarge}\SetSizeLarge
+	\expandafter\PatchAllCmd\csname Set#1SizeLarge\endcsname{Char}{#1}
+	\cslet{Set#1SizeHuge}\SetSizeHuge
+	\expandafter\PatchAllCmd\csname Set#1SizeHuge\endcsname{Char}{#1}
+	\cslet{Set#1SizeGargantuan}\SetSizeGargantuan
+	\expandafter\PatchAllCmd\csname Set#1SizeGargantuan\endcsname{Char}{#1}
+	\cslet{Set#1SizeColossal}\SetSizeColossal
+	\expandafter\PatchAllCmd\csname Set#1SizeColossal\endcsname{Char}{#1}
+	
+	
+	\csedef{#1SpecialQualityList}{}
+	\csedef{#1SpecialAttackList}{}
+	\csdef{Add#1SpecialQuality}##1{\listcsinsert{##1}{#1SpecialQualityList}}
+	\csdef{Add#1SpecialAttack}##1{\listcsinsert{##1}{#1SpecialAttackList}}
 
 	\expandafter\newcommand\csname Initialize#1\endcsname{
 		\cs{Compute#1AbilityScores}

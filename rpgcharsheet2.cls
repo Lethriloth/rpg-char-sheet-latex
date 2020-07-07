@@ -168,33 +168,33 @@
 	\put(\tmpCount,#2){\framebox(15,9){$\number\mytotalCount$}}
 }
 
-\newcounter{EqualAttributes@x}
-\newcounter{EqualAttributes@Total}
-\newcounter{EqualAttributes@First}
-\newcounter{EqualAttributes@Tmp}
-\newcounter{EqualAttributes@Plus}
+\newcounter{@xCount}
+\newcounter{@TotalCount}
+\newcounter{@FirstCount}
+\newcounter{@TmpCount}
+\newcounter{@PlusCount}
 \newcommand\EqualAttributes@Do[1]{}
 
 \ProvideDocumentCommand{\EqualAttributes}{m m m m}{%
 	\renewcommand\EqualAttributes@Do[1]{%
-		\setcounter{EqualAttributes@Tmp}{\value{EqualAttributes@x}}%
-		\ifnum\value{EqualAttributes@First}=0%
-			\put(\arabic{EqualAttributes@x}, #2){\makebox(\value{EqualAttributes@Plus},9){\tiny = }}%
-			\stepcounter{EqualAttributes@First}%
+		\setcounter{@TmpCount}{\value{@xCount}}%
+		\ifnum\value{@FirstCount}=0%
+			\put(\arabic{@xCount}, #2){\makebox(\value{@PlusCount},9){\tiny = }}%
+			\stepcounter{@FirstCount}%
 		\else%
-			\put(\arabic{EqualAttributes@x}, #2){\makebox(\value{EqualAttributes@Plus},9){\tiny + }}%
+			\put(\arabic{@xCount}, #2){\makebox(\value{@PlusCount},9){\tiny + }}%
 		\fi%
-		\put(\arabic{EqualAttributes@Tmp}, #2){\framebox(15,9){$\IfNullF{##1}{\DoMath{##1}}$}}%
-		\addtocounter{EqualAttributes@x}{#4}%
-		\IfNullF{##1}{\addtocounter{EqualAttributes@Total}{##1}}%
+		\put(\arabic{@TmpCount}, #2){\framebox(15,9){$\IfNullF{##1}{\DoMath{##1}}$}}%
+		\addtocounter{@xCount}{#4}%
+		\IfNullF{##1}{\addtocounter{@TotalCount}{##1}}%
 	}%
 	% Skip 1st box to start
-	\setcounter{EqualAttributes@x}{#1 + #4}%
-	\setcounter{EqualAttributes@Total}{0}%
-	\setcounter{EqualAttributes@First}{0}%
-	\setcounter{EqualAttributes@Plus}{16 - #4}%
+	\setcounter{@xCount}{#1 + #4}%
+	\setcounter{@TotalCount}{0}%
+	\setcounter{@FirstCount}{0}%
+	\setcounter{@PlusCount}{16 - #4}%
 	\forcsvlist{\EqualAttributes@Do}{#3}%
-	\put(#1,#2){\framebox(15,9){$\arabic{EqualAttributes@Total}$}}%
+	\put(#1,#2){\framebox(15,9){$\arabic{@TotalCount}$}}%
 }
 
 \def\specialequalattributes#1#2#3#4#5{%
@@ -426,18 +426,35 @@
 \def\scaleattributelabels#1#2#3#4{%
 \NewCount\xCount
 \xCount=#1
-\NewCount\plusCount
-\NewCount\tmpCount
+\advance\xCount by -16
 \@for\tmp:=#3\do{%
-  \plusCount=0
-  \advance\plusCount by #4
-  \advance\plusCount by -15
-  \tmpCount=\xCount
-  \advance\tmpCount by \number\plusCount
-  \advance\tmpCount by -1
-\put(\tmpCount,#2){\parbox[b][9\unitlength][c]{17\unitlength}{\lfont\centering\tmp}}
-  \advance\xCount by #4
+	\advance\xCount by #4
+\put(\xCount,#2){\parbox[b][9\unitlength][c]{17\unitlength}{\lfont\centering\tmp}}
 }}
+
+\newcommand\ScaleAttributeLabels@Do[1]{}
+\NewDocumentCommand{\ScaleAttributeLabels}{D(){0,0} m m}{%
+	\renewcommand\ScaleAttributeLabels@Do[1]{%
+		\put(\arabic{@xCount},0){\parbox[b][9\unitlength][b]{17\unitlength}{\lfont\centering ##1}}%
+		\addtocounter{@xCount}{#3}%
+	}%
+	\setcounter{@xCount}{-1}%
+	\put(#1){%
+		\forcsvlist{\ScaleAttributeLabels@Do}{#2}%
+	}%
+}
+
+%  Redefines the old command in terms of the new one; Note that this will not reproduce things perfectly as the 
+%  old command used centered vertical alignment and the new one uses bottom vertical alignment. This is mostly a
+%  reference for how to replace the old with the new.
+%\def\scaleattributelabels#1#2#3#4{%
+%	\SetCounter{@xCount}{#1 + 3}%
+%	\SetCounter{@yCount}{#2 + 3}%
+%	\edef\@x{\arabic{@xCount}}
+%	\edef\@y{\arabic{@yCount}.5}
+%	\ScaleAttributeLabels(\@x,\@y){#3}{#4}%
+%}
+
 
 \def\titlebox#1#2#3#4#5{
   \NewCount\yCount\yCount#2

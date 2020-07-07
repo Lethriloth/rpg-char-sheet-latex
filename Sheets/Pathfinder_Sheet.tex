@@ -195,48 +195,41 @@
 	\put(107,4){\begin{tabular}[b]{F{15}E{2}F{12}E{0}}\Arabic{CharBurrowSpeedCount} &ft. & \DoMath{\value{CharBurrowSpeedCount} / 5}& sq.\end{tabular}}
 	\put(107,0){\parbox[b][3\unitlength][b]{32\unitlength}{\centering\lfont Burrow}}
 }
-  
+
+\newcommand{\PrintWeapon}[1]{%
+	\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
+		\multicolumn{3}{A{105}}{\itshape \cs{CharWeapon#1Name}} & \cs{CharWeapon#1AttackBonus} & \cs{CharWeapon#1Damage} &\cs{CharWeapon#1Critical} \tabularnewline\hline\\[-16pt]
+		\multicolumn{3}{A{105}}{\tiny\scshape WEAPON} &\tiny\scshape  attack Bonus &\tiny\scshape Damage &\tiny\scshape  Critical  \tabularnewline
+		\itshape \cs{CharWeapon#1Type} &  \cs{CharWeapon#1Range} & \multicolumn{4}{A{160}}{\cs{CharWeapon#1Notes}}  \tabularnewline\hline\\[-16pt]
+		\tiny\scshape Type & \tiny\scshape Range &\multicolumn{4}{A{160}} {\tiny\scshape ammunition \& Notes } \tabularnewline
+	\end{tabular}
+}
 \put(0,0){%% Weapons & Armor
 	\put(0,200){% Weapon 1
-		\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
-			\multicolumn{3}{A{105}}{\itshape \CharWeaponOneName} & \CharWeaponOneAttackBonus & \CharWeaponOneDamage &\CharWeaponOneCritical \tabularnewline\hline
-			\multicolumn{3}{A{105}}{\tiny\scshape WEAPON} &\tiny\scshape  attack Bonus &\tiny\scshape Damage &\tiny\scshape  Critical  \tabularnewline
-			\itshape \CharWeaponOneType &  \CharWeaponOneRange & \multicolumn{4}{A{160}}{\CharWeaponOneNotes}  \tabularnewline\hline 
-			\tiny\scshape Type & \tiny\scshape Range &\multicolumn{4}{A{160}} {\tiny\scshape ammunition \& Notes } \tabularnewline
-		\end{tabular}
+		\PrintWeapon{One}
 	}
 	\put(0,150){% Weapon 2
-		\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
-			\multicolumn{3}{A{105}}{\itshape \CharWeaponTwoName} & \CharWeaponTwoAttackBonus & \CharWeaponTwoDamage &\CharWeaponTwoCritical \tabularnewline\hline
-			\multicolumn{3}{A{105}}{\tiny\scshape WEAPON} &\tiny\scshape  attack Bonus &\tiny\scshape Damage &\tiny\scshape  Critical  \tabularnewline
-			\itshape \CharWeaponTwoType &  \CharWeaponTwoRange & \multicolumn{4}{A{160}}{\CharWeaponTwoNotes}  \tabularnewline\hline
-			\tiny\scshape Type & \tiny\scshape Range &\multicolumn{4}{A{160}} {\tiny\scshape ammunition \& Notes } \tabularnewline
-		\end{tabular}
+		\PrintWeapon{Two}
 	}
 	\put(0,100){% Weapon 3
-		\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
-    		\multicolumn{3}{A{105}}{\itshape \CharWeaponThreeName} & \CharWeaponThreeAttackBonus & \CharWeaponThreeDamage &\CharWeaponThreeCritical \tabularnewline\hline
-    		\multicolumn{3}{A{105}}{\tiny\scshape WEAPON} &\tiny\scshape  attack Bonus &\tiny\scshape Damage &\tiny\scshape  Critical  \tabularnewline
-    		\itshape \CharWeaponThreeType &  \CharWeaponThreeRange & \multicolumn{4}{A{160}}{\CharWeaponThreeNotes}  \tabularnewline\hline
-    		\tiny\scshape Type & \tiny\scshape Range &\multicolumn{4}{A{160}} {\tiny\scshape ammunition \& Notes } \tabularnewline
-		\end{tabular}
+		\PrintWeapon{Three}
 	}
 	{\linethickness{1.3pt}
     	\put(0,95){\line(1,0){205}}}
     \put(0,50){% Armor
 		\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
-      		\multicolumn{3}{A{105}}{\itshape \CharArmorName} & \CleanPM{CharArmorBonusCount} & \ifthenelse{\value{CharMaxDexArmorCount} < 100}{\PlusMinus{CharMaxDexArmorCount}}{} &\ifthenelse{\equal\CharArmorName{}}{}{\Arabic{CharArmorArmorCheckPenaltyCount}} \tabularnewline\hline
-		\multicolumn{3}{A{105}}{\tiny\scshape ARMOR} &\tiny\scshape Armor Bonus &\tiny\scshape Max Dex &\tiny\scshape  check penalty \tabularnewline
-      		\itshape \Arabic{CharArmorSpellFailureCount}\% &  \CharArmorType & \multicolumn{4}{A{160}}{\CharArmorNotes}  \tabularnewline\hline
-		\tiny\scshape Spell failure & \tiny\scshape Type &\multicolumn{4}{A{160}} {\tiny\scshape Notes } \tabularnewline
+      		\multicolumn{3}{A{105}}{\itshape \CharArmorName} & \CleanPM{CharArmorBonusCount} & \ifthenelse{\value{CharMaxDexArmorCount} < 100}{\PlusMinus{CharMaxDexArmorCount}}{} &\ifthenelse{\equal\CharArmorName{}}{}{\Arabic{CharArmorArmorCheckPenaltyCount}} \tabularnewline\hline\\[-16pt]
+		\multicolumn{3}{A{105}}{\tiny\scshape ARMOR\\} &\tiny\scshape Armor Bonus\\ &\tiny\scshape Max Dex\\ &\tiny\scshape  Check Penalty \tabularnewline
+      		\itshape \Arabic{CharArmorSpellFailureCount}\% &  \CharArmorType & \multicolumn{4}{A{160}}{\CharArmorNotes}  \tabularnewline\hline\\[-16pt]
+		\tiny\scshape Spell failure & \tiny\scshape Type &\multicolumn{4}{A{160}} {\tiny\scshape Notes \\} \tabularnewline
 		\end{tabular}
 	}
 	\put(0,0){% Shield
 		\begin{tabular}[b]{A{15}A{25}A{65}A{45}A{25}A{25}}
-			\multicolumn{3}{A{105}}{\itshape \CharShieldName} & \CleanPM{CharShieldBonusCount} & \ifthenelse{\value{CharMaxDexShieldCount} < 100}{\PlusMinus{CharMaxDexShieldCount}}{} &\ifthenelse{\equal\CharShieldName{}}{}{\Arabic{CharShieldArmorCheckPenaltyCount}}\tabularnewline\hline
-			\multicolumn{3}{A{105}}{\tiny\scshape Shield} &\tiny\scshape Shield Bonus &\tiny\scshape max Dex &\tiny\scshape  check penalty \tabularnewline
-			\itshape \Arabic{CharShieldSpellFailureCount}\% &  \multicolumn{5}{A{185}}{\CharShieldNotes}  \tabularnewline\hline
-			\tiny\scshape Spell failure & & \multicolumn{4}{A{160}} {\tiny\scshape Notes } \tabularnewline
+			\multicolumn{3}{A{105}}{\itshape \CharShieldName} & \CleanPM{CharShieldBonusCount} & \ifthenelse{\value{CharMaxDexShieldCount} < 100}{\PlusMinus{CharMaxDexShieldCount}}{} &\ifthenelse{\equal\CharShieldName{}}{}{\Arabic{CharShieldArmorCheckPenaltyCount}}\tabularnewline\hline\\[-16pt]
+			\multicolumn{3}{A{105}}{\tiny\scshape Shield\\} &\tiny\scshape Shield Bonus\\ &\tiny\scshape Max Dex\\ &\tiny\scshape  Check Penalty \tabularnewline
+			\itshape \Arabic{CharShieldSpellFailureCount}\% &  \multicolumn{5}{A{185}}{\CharShieldNotes}  \tabularnewline\hline\\[-16pt]
+			\tiny\scshape Spell failure & & \multicolumn{4}{A{160}} {\tiny\scshape Notes \\} \tabularnewline
 	    \end{tabular}
 	}
 }
