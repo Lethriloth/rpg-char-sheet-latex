@@ -123,11 +123,10 @@
 
 %Command to add skill ranks
 \newcommand\AddRanks[3][]{
-	\ifthenelse{\equal#1{}}{
+	\ifthenelse{\equal{#1}{}}{
 		\AddToCounter{Char#2RanksCount}{#3}
 	}{
-		\expandafter\let\expandafter\TmpClassSkillList\csname #1ClassSkillsList\endcsname
-		\ifinlist{#2}{\TmpClassSkillList}
+		\ifinlistcs{#2}{#1ClassSkillsList}
 		{
 			\AddToCounter{Char#2RanksCount}{#3}
 		}{
@@ -349,6 +348,19 @@
 		\NewCounter{#1##1MiscCount}
 		\NewCounter{#1##1TmpCount}
 	}\docsvlist{Melee,Ranged,Grapple,BullRush,Disarm,Overrun,Sunder,Trip}
+	\expandafter\renewcommand\csname Add#1SkillRanks\endcsname[3][]{
+		\ifthenelse{\equal{##1}{}}{
+			\AddToCounter{#1##2RanksCount}{##3}
+		}{
+			\ifinlistcs{##2}{##1ClassSkillsList}
+			{
+				\AddToCounter{#1##2RanksCount}{##3}
+			}{
+				\AddToCounter{#1##2RanksCount}{##3 / 2}
+			}
+			\AddToCounter{#1##1SpareSkillRanksCount}{-1 * (##3)}
+		}
+	}
 }
 
 %%%%Sheet Initialization%%%%

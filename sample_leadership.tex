@@ -32,12 +32,7 @@
 \SetCohortWis{10}
 \SetCohortCha{10}
 
-\IfCounter{CohortCMBMiscCount}{
-	\AddCohortSkillRanks{Appraise}{1}
-}
-\IfCounter{CohortGrappleMiscCount}{
-	\AddCohortSkillRanks[Wizard]{Appraise}{1}
-}
+\AddCohortSkillRanks{Appraise}{1}
 
 \AddCohortFeat{Power Attack}
 \AddCohortFeat*{Cleave}
@@ -45,6 +40,10 @@
 \AddCohortAutoAttack[1]{Axe +1}{1}{1d1+3}{20}{S}{Melee}{}{Str}
 \AddCohortAutoAttack[1]{Axe +2}{1}{1d1+3}{20}{S}{Melee}{}{Str}
 \AddCohortAutoAttack[1]{Axe +3}{1}{1d1+3}{20}{S}{Melee}{}{Str}
+\AddCohortConditionalDefMod{+4 on saves vs poison}
+\AddCohortImmunity{Fire}
+\AddCohortResistance{Cold}{5}
+\AddCohortResistance{Fire}{10}
 
 
 

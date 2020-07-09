@@ -89,13 +89,13 @@
 \NewDocumentCommand{\PrintResistances}{O{, } O{}}{%
 	\edef\@PrintList{}%
 	\edef\@@PrintList{}%
-	\edef\@PrintListlast{}
+	\edef\@PrintListlast{}%
 	\renewcommand{\do}[1]{%
 		\ifthenelse{\value{CharResist##1Count} = 0}{}{%
 			\let\@@PrintList\@PrintList%
 			\edef\@PrintListlast{Resist ##1 \arabic{CharResist##1Count}}%
 			\listadd{\@PrintList}{Resist ##1 \arabic{CharResist##1Count}}%
-		}
+		}%
 	}\dolistloop{\CharResistancesList}%
 	\renewcommand{\do}[1]{%
 		##1#1%
@@ -349,7 +349,7 @@
 
 \forlistloop{\listadd\TrainedSkillsList}{\KnowledgeSkillsList}
 
-% Default blank option for Craft, Profession, Perform categories; 
+% Default blank option for Craft, Profession, Perform categories;
 \renewcommand\do[1]{
 	\expandafter\newcommand\csname Char#1Name\endcsname{\underline{~~~~~~~~~~~~~~~~~~~~~~}}
 }\docsvlist{CraftOne,CraftTwo,CraftThree,ProfessionOne,ProfessionTwo,PerformOne,PerformTwo}
@@ -1059,7 +1059,7 @@
 
 \newcommand{\CheckLanguagesCount}{
 	\IfBooleanT \CountLanguagesMode {
-		\AddDebug{Checking Char Language Count}	
+		\AddDebug{Checking Char Language Count}
 		\AddToCounter{CharExpectedLanguagesCount}{\value{CharSpeakLanguageRanksCount}}
 		\ifthenelse{\value{CharIntBaseCount} > 9}{
 			\AddDebug{Expecting \arabic{CharExpectedLanguagesCount} languages from race, class, etc., plus \arabic{CharSpeakLanguageRanksCount} Speak Language ranks, plus \DoMath{(\value{CharIntBaseCount} - 10) / 2} from high INT}
@@ -1110,12 +1110,12 @@
 		\NewCounter{#1##1RanksCount}
 		\NewCounter{#1##1MiscCount}
 	}\dolistloop{\SkillsList}
-	
+
 	\cslet{Add#1SkillRanks}\AddRanks
 	\expandafter\PatchAllCmd\csname Add#1SkillRanks\endcsname{Char}{#1}
 	\cslet{Calculate#1SkillTotals}\CalculateSkillTotals
 	\expandafter\PatchAllCmd\csname Calculate#1SkillTotals\endcsname{Char}{#1}
-	
+
 	%Feats
 	\csedef{#1FeatsList}{}
 	\NewCounter{#1FeatsCount}
@@ -1145,7 +1145,7 @@
 	\NewCounter{#1IteratedAttackBonusCount}
 	\NewCounter{#1ExtraAttacksCount}
 
-	
+
 	\let\DeclareCompanionAttack\DeclareWeapon
 		\PatchAllCmd{\DeclareCompanionAttack}{Char}{#1}
 		\patchcmd\DeclareCompanionAttack{AddWeapon}{Add#1Attack}{}{}
@@ -1220,12 +1220,96 @@
 	\expandafter\PatchAllCmd\csname Set#1SizeGargantuan\endcsname{Char}{#1}
 	\cslet{Set#1SizeColossal}\SetSizeColossal
 	\expandafter\PatchAllCmd\csname Set#1SizeColossal\endcsname{Char}{#1}
-	
-	
+
+
 	\csedef{#1SpecialQualityList}{}
 	\csedef{#1SpecialAttackList}{}
 	\csdef{Add#1SpecialQuality}##1{\listcsinsert{##1}{#1SpecialQualityList}}
 	\csdef{Add#1SpecialAttack}##1{\listcsinsert{##1}{#1SpecialAttackList}}
+
+	%% Special Defenses %%
+	\csedef{#1ResistancesList}{}
+	\csdef{Add#1Resistance}##1##2{
+		\ifinlistcs{##1}{#1ImmunitiesList}{}{
+			\ifinlistcs{##1}{#1ResistancesList}{}{
+				\NewCounter{#1Resist##1Count}
+				\listcsadd{#1ResistancesList}{##1}
+			}
+			\ifthenelse{\value{#1Resist##1Count} < ##2}{
+				\SetCounter{#1Resist##1Count}{##2}
+			}{}
+		}
+	}
+	\expandafter\NewDocumentCommand\csname Print#1Resistances\endcsname{O{, } O{}}{%
+		\edef\@PrintList{}%
+		\edef\@@PrintList{}%
+		\edef\@PrintListlast{}%
+		\renewcommand{\do}[1]{%
+			\ifthenelse{\value{#1Resist####1Count} = 0}{}{%
+				\let\@@PrintList\@PrintList%
+				\edef\@PrintListlast{Resist ####1 \arabic{#1Resist####1Count}}%
+				\listadd{\@PrintList}{Resist ####1 \arabic{#1Resist####1Count}}%
+			}%
+		}\dolistcsloop{#1ResistancesList}%
+		\renewcommand{\do}[1]{%
+			####1##1%
+		}\dolistloop{\@@PrintList}%
+		\ifthenelse{\equal\@@PrintList{}}{}{##2}\@PrintListlast%
+	}
+	\csedef{#1ImmunitiesList}{}
+	\expandafter\newcommand\csname Add#1Immunity\endcsname [1]{
+		\ifinlistcs{##1}{#1ImmunitiesList}{}{
+			\listcsinsert{#1ImmunitiesList}{##1}
+			\ifinlistcs{##1}{#1ResistancesList}{
+				\SetCounter{#1Resist##1Count}{0}
+			}{}
+		}
+	}
+	\csedef{#1DRTypesList}{}
+	\expandafter\newcommand\csname Add#1DR\endcsname[2]{
+		\ifinlistcs{##1}{#1DRTypesList}{}{
+			\NewCounter{#1DR/##1Count}
+			\listcsadd{#1DRTypesList}{##1}
+		}
+		\ifthenelse{\value{#1DR/##1Count} < ##2}{
+			\SetCounter{#1DR/##1Count}{##2}
+		}{}
+	}
+	\expandafter\NewDocumentCommand\csname Print#1DR\endcsname{O{, } O{}}{%
+		\edef\@PrintList{}%
+		\edef\@@PrintList{}%
+		\edef\@PrintListlast{}%
+		\renewcommand{\do}[1]{%
+			\let\@@PrintList\@PrintList%
+			\edef\@PrintListlast{DR \arabic{#1DR/####1Count}/####1}%
+			\listadd{\@PrintList}{DR \arabic{#1DR/####1Count}/####1}%
+		}\dolistcsloop{#1DRTypesList}%
+		\renewcommand{\do}[1]{%
+			####1##1%
+		}\dolistloop{\@@PrintList}%
+		\ifthenelse{\equal\@@PrintList{}}{}{##2}\@PrintListlast%
+	}
+	\NewCounter{#1SpellResistanceCount}
+	\csdef{Add#1SpellResistance}##1{
+		\SetCounter{#1SpellResistanceCount}{\maxof{\value{#1SpellResistanceCount}}{##1}}
+	}
+
+	\csedef{#1SpecialDefensesList}{}
+	\expandafter\newcommand\csname Add#1SpecialDefense\endcsname[1]{
+		\listcsinsert{#1SpecialDefensesList}{##1}
+	}
+
+	%%Conditional Modifiers
+	\csedef{#1ConditionalSkillsModList}{}
+	\csedef{#1ConditionalAttackModList}{}
+	\csedef{#1ConditionalDefModList}{}
+	\expandafter\newcommand\csname Add#1ConditionalSkillMod\endcsname[1]{%
+		\listcsadd{#1ConditionalSkillsModList}{##1}}
+	\expandafter\newcommand\csname Add#1ConditionalAttackMod\endcsname[1]{%
+		\listcsadd{#1ConditionalAttackModList}{##1}}
+	\expandafter\newcommand\csname Add#1ConditionalDefMod\endcsname[1]{%
+		\listcsadd{#1ConditionalDefModList}{##1}}
+
 
 	\expandafter\newcommand\csname Initialize#1\endcsname{
 		\cs{Compute#1AbilityScores}
@@ -1261,7 +1345,7 @@
 %Functions for adding class specific checks and warnings:
 \NewDocumentCommand{\CheckRightNumberSelected}{m m o}{
 	\gappto{\RunChecks}{
-		
+
 		\ifthenelse{\value{Char#1Count} < 0}{
 			\AddWarning{\DoMath{-\value{Char#1Count}} too many selections made for #2}
 		}{
@@ -1307,7 +1391,7 @@
 		\AddToCounter{CharCohortLeadershipScoreReputationCount}{\value{CharLeadershipScoreReputationCount}}
 	}
 	\gappto{\Initialize}{\CalculateLeadership}
-	
+
 	\AtBeginDocument{%
 		\InitCompanionVariables{Cohort}%
 	}
