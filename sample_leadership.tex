@@ -4,7 +4,7 @@
 %    \input{sample_leadership.tex}
 %\end{document}
 
-\newcommand{\CharLeadershipName}{A Good Leader}
+\newcommand{\CharLeadershipName}{[Insert Name Here]}
 
 
 %% Star the command for any modifiers your character actually has. Add an optional argument between the two mandatory ones to multiply the effect (e.g. for repeated cohort deaths)
@@ -34,6 +34,8 @@
 \SetCohortWis{10}
 \SetCohortCha{10}
 
+%% Uncomment to stop graying-out the cohort
+%\let\CharHasCohort\True
 \AddCohortSkillRanks{Appraise}{1}
 
 \AddCohortFeat{Power Attack}
@@ -46,7 +48,13 @@
 \AddCohortImmunity{Fire}
 \AddCohortResistance{Cold}{5}
 \AddCohortResistance{Fire}{10}
+\AddCohortNote{This is a note.}
+\AddCohortNote{Another note.}
 
+\AddCohortSpellcasting*[3]{Wizard}{5}{Int}
+\SetCounter{CohortTotalSpellSlots1}{4}
+\cslet{Cohort1SpellsList}\empty
+\AddCohortSpell{1}{Magic Missile}
 
 
 \input{Sheets/Leadership_Sheet.tex}

@@ -65,6 +65,7 @@
 
 %%%% Output Formatting %%%%
 %% List Printing
+
 \NewDocumentCommand{\PrintList}{O{, } O{} m}{% Option 1 is list separator (Default ', '), Option 2 is inserted before the very last item of the list (e.g. 'and')
 	\edef\@PrintList{}%
 	\edef\@@PrintList{}%
@@ -465,10 +466,10 @@
   \advance\downabitCount-1
   \put(#1,\downabitCount){\setlength\fboxsep{0pt}\colorbox{\sheetboxcolor}{\makebox(#3,11){}}}%
   \advance\yCount1
-  \put(#1,\yCount){\makebox(#3,\hCount){\color{black}{\uppercase{#4}}}}
+  \put(#1,\yCount){\makebox(#3,\hCount){{\uppercase{#4}}}}
   \advance\hCount-7
   \advance\yCount-1
-  \put(#1,\yCount){\makebox(#3,\hCount){\color{black}{\tiny\scshape #5}}}
+  \put(#1,\yCount){\makebox(#3,\hCount){{\tiny\scshape #5}}}
 }
 
 \newcommand\singletitlebox[5]{
@@ -476,7 +477,7 @@
   \put(#1,#2){%
     \setlength\fboxsep{0pt}\colorbox{\sheetboxcolor}{%
       \makebox(#3,#4){%
-        \color{black}{\centering\uppercase{#5}}%
+        {\centering\uppercase{#5}}%
       }%
     }%
   }%
@@ -610,12 +611,22 @@
 \NewCounter{@j}
 \NewCounter{@k}
 
+%% Kinda tired of typing "boolean"
+\let\False\BooleanFalse
+\let\True\BooleanTrue
+
 %% Colors %%
 
 \newcommand{\sheetboxcolor}{gray!40}
 
 \newcommand{\grayout}[1]{\begingroup\renewcommand\sheetboxcolor{gray!20}\textcolor{gray!50}{#1}\endgroup}
 
+
+% Box shows up in light blue only if draft option is enabled
+\ProvideDocumentCommand{\exbox}{d() m}{}
+\DeclareOption{draft}{
+	\RenewDocumentCommand{\exbox}{d() m}{\color{blue!30}\framebox(#1){#2}}
+}\ProcessOptions\relax
 
 %%%% Miscellaney %%%%
 

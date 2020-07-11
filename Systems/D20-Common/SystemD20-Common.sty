@@ -802,13 +802,13 @@
 }
 %% Commands for defining spells and adding them to a character %%
 
-\ProvideDocumentCommand{\AddSpell}{o m m}{%[Class]{Level}{Spell Name}
+\newcommand{\AddSpell}[2]{%{Level}{Spell Name}
 	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{
-		\listcsinsert{Char#2SpellsListOne}{#3}
+		\listcsinsert{Char#1SpellsListOne}{#2}
 	}{
-		\listcsinsert{Char#2SpellsListTwo}{#3}
+		\listcsinsert{Char#1SpellsListTwo}{#2}
 	}
-	%% Implementation for when the switch to class-specific spell lists (instead of SpellcastingClassOne/SpellcastingClassTwo) is made
+	%% Implementation for when the switch to class-specific spell lists (instead of SpellcastingClassOne/SpellcastingClassTwo) is made; Needs
 	%	\IfValueTF #1 {
 	%		\listcsinsert{Char#1#2SpellsList}{#3}
 	%		\StepCounter{Char#1#2SpellsActuallyKnown}
@@ -1316,6 +1316,36 @@
 		\SetCounter{#1DextoACCount}{\minof{\value{#1DexModCount}}{\value{#1MaxDexBonusCount}}}
 		\cs{Calculate#1SkillTotals}
 	}
+
+	\csedef{#1Notes}{}
+	\expandafter\ProvideDocumentCommand\csname Add#1Note\endcsname{m}{%
+		\listcsadd{#1Notes}{##1}%
+	}
+	
+	\expandafter\newcommand\csname Add#1Spell\endcsname[2]{\listcsinsert{#1##1SpellsList}{##2}}
+	
+	\expandafter\newcommand\csname #1SpellcastingClass\endcsname{}
+	\expandafter\newcommand\csname #1SpellcastingAbility\endcsname{}
+	\NewCounter{#1CLCount}
+	\NewCounter{#1SpellcastingMaxSpellLevelCount}
+	\SetCounter{#1SpellcastingMaxSpellLevelCount}{-1}
+	\NewCounter{#1SpellcastingHasCantrips}
+	\SetCounter{#1SpellcastingHasCantrips}{0}
+	\expandafter\NewDocumentCommand\csname Add#1Spellcasting\endcsname{s O{9} m m m}{
+		\IfBooleanF ##1 {\SetCounter{#1SpellcastingHasCantrips}{1}}
+		\SetCounter{#1SpellcastingMaxSpellLevelCount}{##2}
+		\expandafter\renewcommand\csname #1SpellcastingClass\endcsname{##3}
+		\expandafter\renewcommand\csname #1SpellcastingAbility\endcsname{##5}
+		\SetCounter{#1CLCount}{##4}
+	}
+	\ForLoop{@i}{0}{\value{@i}<10}{
+		\NewCounter{#1AbilitySpellSlots\arabic{@i}Count}
+		\NewCounter{#1ClassSpellSlots\arabic{@i}Count}
+		\NewCounter{#1BonusSpellSlots\arabic{@i}Count}
+		\NewCounter{#1TotalSpellSlots\arabic{@i}Count}
+		\NewCounter{#1SpellsKnown\arabic{@i}Count}
+		\expandafter\edef\csname #1\arabic{@i}SpellsList\endcsname{}
+	}
 }
 
 %%%%Sheet Initialization%%%%
@@ -1380,7 +1410,8 @@
 			#1|#3|#4|#5%
 		}
 	}
-
+	
+	\let\CharHasCohort\False
 	\ProvideDocumentCommand{\CalculateLeadership}{}{
 		\SetCounter{CharLeadershipScoreCount}{\value{Char\CharLeadershipKeyAbility ModCount} + \value{CharTotalLevelCount} +\value{CharLeadershipScoreMiscCount} + \value{CharLeadershipScoreReputationCount}}
 		\SetCounter{CharCohortLeadershipScoreCount}{\value{CharLeadershipScoreCount} +\value{CharCohortLeadershipScoreMiscCount} + \value{CharCohortLeadershipScoreReputationCount}}
