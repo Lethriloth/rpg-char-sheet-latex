@@ -1,111 +1,108 @@
-\InitializeCohort
-\let\PrintListFirstItem\BooleanTrue
-\ProvideDocumentCommand{\maybesemicolon}{}{\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\BooleanFalse}{; }}
-\ProvideDocumentCommand{\maybepar}{}{\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\BooleanFalse}{\par}}
-\centering\begin{picture}(420,558)
-\put(0,0){\exbox(420,558){}}
-\put(0,548){
-	\put(0,0){\exbox(420,10){}}
-	\parbox[b][10\unitlength][b]{420\unitlength}{\centering\fmmfamily\huge The Leadership Of \ifdefvoid{\CharLeadershipName}{\CharName}{\CharLeadershipName}\vspace{-7\unitlength}\hrule}
-}
-
-\put(0,488){
-	\DeclareDocumentCommand{\PrintListItemInternal}{m m m m}{%
-		\IfBooleanTF{#1}{%
-			#2\ifthenelse{#3=1}{}{ ($\times #3$)}\dotfill\MathPM{#3 * #4}\\%
-		}{
-			\grayout{#2\ifthenelse{#3=1}{}{ ($\times #3$)}\dotfill\MathPM{#3 * #4}\\}%
-		}
-	}
-	\DeclareDocumentCommand{\PrintListItem}{>{\SplitArgument{3}{|}} m}{%
-		\PrintListItemInternal #1%
-	}
-	\put(138,0){
-		\titlebox{0}{43}{143}{Leadership}{Score}
-		\ScaleAttributeLabels(48,38){TOTAL,Level,\AbilityFullName{\CharLeadershipKeyAbility},Reputation,Misc}{20}
-		\put(0,27){%
-			\titlebox{0}{0}{45}{BASE}{Leadership Score}
-			\equalattributes{43}{0}{\arabic{CharTotalLevelCount},\arabic{Char\CharLeadershipKeyAbility ModCount}, \arabic{CharLeadershipScoreReputationCount},\arabic{CharLeadershipScoreMiscCount}}{20}
-		}
-		\put(0,14){
-			\titlebox{0}{0}{45}{COHORT}{Leadership Score}
-			\equalattributes{43}{0}{\arabic{CharTotalLevelCount},\arabic{Char\CharLeadershipKeyAbility ModCount}, \arabic{CharCohortLeadershipScoreReputationCount},\arabic{CharCohortLeadershipScoreMiscCount}}{20}
-		}
-		\put(0,1){
-			\titlebox{0}{0}{45}{FOLLOWER}{Leadership Score}
-			\equalattributes{43}{0}{\arabic{CharTotalLevelCount},\arabic{Char\CharLeadershipKeyAbility ModCount}, \arabic{CharFollowerLeadershipScoreReputationCount},\arabic{CharFollowerLeadershipScoreMiscCount}}{20}
-		}
-	}
-	\put(0,0) {%
-		\parbox[b][58\unitlength][t]{135\unitlength}{\centering\itshape%
-				{\fmmfamily\large Reputation Modifiers}\\%
-				\small%
-				\forlistloop{\PrintListItem}{\CharLeadershipReputationModifiersList}%
-		}%
-	}
-	\put(283,0) {%
-		\parbox[b][58\unitlength][t]{135\unitlength}{\centering\itshape%
-			{\fmmfamily \large Cohort Reputation Modifiers}\\%
-			\scriptsize%
-			\forlistloop{\PrintListItem}{\CharCohortLeadershipReputationModifiersList}%
-			{\vspace{2.6\unitlength}\fmmfamily \large Follower Reputation Modifiers}\\%
-			\forlistloop{\PrintListItem}{\CharFollowerLeadershipReputationModifiersList}%
-		}
-	}
-	\put(0,0){\exbox(420,58){}}
-}
-\put(0,0){% Cohort
-	\IfBooleanF\CharHasCohort{%
-		\renewcommand\sheetboxcolor{gray!20}%
-		\color{gray!40}%
+\newpage%
+\let\PrintListFirstItem\BooleanTrue%
+\ProvideDocumentCommand{\maybesemicolon}{}{\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\BooleanFalse}{; }}%
+\ProvideDocumentCommand{\maybepar}{}{\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\BooleanFalse}{\par}}%
+\noindent\centering\begin{picture}(420,70)(0,0)%
+	\put(0,0){\exbox(420,70){}}%
+	\put(0,60){%
+		\put(0,0){\exbox(420,10){}}
+		\parbox[b][10\unitlength][b]{420\unitlength}{\centering\fmmfamily\huge The Leadership Of \ifdefvoid{\CharLeadershipName}{\CharName}{\CharLeadershipName}\vspace{-7\unitlength}\hrule}
 	}%
+	\put(0,0){%
+		\DeclareDocumentCommand{\PrintListItemInternal}{m m m m}{%
+			\IfBooleanTF{#1}{%
+				#2\ifthenelse{#3=1}{}{ ($\times #3$)}\dotfill\MathPM{#3 * #4}\\%
+			}{%
+				\grayout{#2\ifthenelse{#3=1}{}{ ($\times #3$)}\dotfill\MathPM{#3 * #4}\\}%
+			}%
+		}%
+		\DeclareDocumentCommand{\PrintListItem}{>{\SplitArgument{3}{|}} m}{%
+			\PrintListItemInternal #1%
+		}%
+		\put(0,0) {%
+			\parbox[b][58\unitlength][t]{135\unitlength}{\centering\itshape%
+					{\fmmfamily\large Reputation Modifiers}\\%
+					\small%
+					\forlistloop{\PrintListItem}{\CharLeadershipReputationModifiersList}%
+			}%
+		}%
+		\put(138,0){%
+			\titlebox{0}{43}{143}{Leadership}{Score}%
+			\ScaleAttributeLabels(48,38){TOTAL,Level,\AbilityFullName{\CharLeadershipKeyAbility},Reputation,Misc}{20}%
+			\put(0,27){%
+				\titlebox{0}{0}{45}{BASE}{Leadership Score}
+				\equalattributes{43}{0}{\arabic{CharTotalLevelCount},\arabic{Char\CharLeadershipKeyAbility ModCount}, \arabic{CharLeadershipScoreReputationCount},\arabic{CharLeadershipScoreMiscCount}}{20}
+			}
+			\put(0,14){
+				\titlebox{0}{0}{45}{COHORT}{Leadership Score}
+				\equalattributes{43}{0}{\arabic{CharTotalLevelCount},\arabic{Char\CharLeadershipKeyAbility ModCount}, \arabic{CharCohortLeadershipScoreReputationCount},\arabic{CharCohortLeadershipScoreMiscCount}}{20}
+			}
+			\put(0,1){
+				\titlebox{0}{0}{45}{FOLLOWER}{Leadership Score}
+				\equalattributes{43}{0}{\arabic{CharTotalLevelCount},\arabic{Char\CharLeadershipKeyAbility ModCount}, \arabic{CharFollowerLeadershipScoreReputationCount},\arabic{CharFollowerLeadershipScoreMiscCount}}{20}
+			}
+		}
+		\put(283,0) {%
+			\parbox[b][58\unitlength][t]{135\unitlength}{\centering\itshape%
+				{\fmmfamily \large Cohort Reputation Modifiers}\\%
+				\scriptsize%
+				\forlistloop{\PrintListItem}{\CharCohortLeadershipReputationModifiersList}%
+				{\vspace{2.6\unitlength}\fmmfamily \large Follower Reputation Modifiers}\\%
+				\forlistloop{\PrintListItem}{\CharFollowerLeadershipReputationModifiersList}%
+			}
+		}
+		\put(0,0){\exbox(420,58){}}
+	}%
+\end{picture}\\%
+\IfBooleanT\CharHasCohort{\InitializeCohort\centering\begin{picture}(420,485)%
+	\put(0,0){\exbox(420,485){}}%
+	\put(0,0){% Cohort
 	\put(0,439){%% Cohort Name, Description, etc.
-		\singletitlebox{0}{34}{420}{12}{COHORT}
+		\singletitlebox{0}{34}{420}{12}{COHORT}%
 		\setlength\tabcolsep{3\unitlength}%
 		\setlength\cmidrulekern{\tabcolsep}%
 		\put(0,1){%
 			\renewcommand{\arraystretch}{.9}%
 			\begin{tabular}[b]{ @{} D{55} D{55} D{55} D{55} D{55}  D{55}@{}}%
-			\multicolumn{2}{@{}D{116}}{\CohortName} &\CohortAlignment & \multicolumn{3}{D{170}}{\CohortLevel} \\[-3\unitlength]
-			\cmidrule(r){1-2}\cmidrule(lr){3-3}\cmidrule(lr){4-6}\\
-			\CohortSize &  \CohortRace & \CohortHomeland & \CohortGender & \CohortReligion &\CohortAge \\[-3\unitlength]
-			\cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4} \cmidrule(lr){5-5}\cmidrule(lr){6-6}
+			\multicolumn{2}{@{}D{116}}{\CohortName} &\CohortAlignment & \multicolumn{3}{D{170}}{\CohortLevel}\\[-3\unitlength]%
+			\cmidrule(r){1-2}\cmidrule(lr){3-3}\cmidrule(lr){4-6}\\%
+			\CohortSize &  \CohortRace & \CohortHomeland & \CohortGender & \CohortReligion &\CohortAge \\[-3\unitlength]%
+			\cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(lr){3-3}\cmidrule(lr){4-4} \cmidrule(lr){5-5}\cmidrule(lr){6-6}%
 			\end{tabular}%
 		}%
 		\put(0,0){\renewcommand{\arraystretch}{1.9}%
 			\begin{tabular}[b]{ @{} D{55} D{55} D{55} D{55} D{55}  D{55}@{}}%
-			\multicolumn{2}{@{}D{116}}{\lfont Cohort Name} & \lfont Cohort Alignment & \multicolumn{3}{D{170}}{\lfont Cohort Class and Level} \\
-			\lfont Cohort Size & \lfont Cohort Race/Species & \lfont Cohort Homeland  & \lfont Cohort Gender & \lfont Cohort Religion & \lfont Cohort Age
-			\end{tabular}
-		}
-	}
-	
+			\multicolumn{2}{@{}D{116}}{\lfont Cohort Name} & \lfont Cohort Alignment & \multicolumn{3}{D{170}}{\lfont Cohort Class and Level} \\%
+			\lfont Cohort Size & \lfont Cohort Race/Species & \lfont Cohort Homeland  & \lfont Cohort Gender & \lfont Cohort Religion & \lfont Cohort Age%
+			\end{tabular}%
+		}%
+	}%
 	\put(0,416){%% Ability Scores
 		%% STR
-		\put(0,0){
-			\titlebox{0}{10}{35}{Str}{}
-			\scaleattributelabels{-5}{7}{Score,Modifier}{20}
-			\scaleattributes{-5}{0}{\Arabic{CohortStrCount},\PlusMinus{CohortStrModCount}}{20}
-		}
-		\put(40,0){
-			\titlebox{0}{10}{35}{Dex}{}
-			\scaleattributelabels{-5}{7}{Score,Modifier}{20}
-			\scaleattributes{-5}{0}{\Arabic{CohortDexCount},\PlusMinus{CohortDexModCount}}{20}
-		}
-		\put(80,0){
-			\titlebox{0}{10}{35}{Con}{}
-			\scaleattributelabels{-5}{7}{Score,Modifier}{20}
-			\scaleattributes{-5}{0}{\Arabic{CohortConCount},\PlusMinus{CohortConModCount}}{20}
-		}
-		\put(120,0){
-			\titlebox{0}{10}{35}{Int}{}
-			\scaleattributelabels{-5}{7}{Score,Modifier}{20}
-			\scaleattributes{-5}{0}{\Arabic{CohortIntCount},\PlusMinus{CohortIntModCount}}{20}
-		}
-		\put(160,0){
-			\titlebox{0}{10}{35}{Wis}{}
-			\scaleattributelabels{-5}{7}{Score,Modifier}{20}
-			\scaleattributes{-5}{0}{\Arabic{CohortWisCount},\PlusMinus{CohortWisModCount}}{20}
+		\put(0,0){%
+			\titlebox{0}{10}{35}{Str}{}%
+			\scaleattributelabels{-5}{7}{Score,Modifier}{20}%
+			\scaleattributes{-5}{0}{\Arabic{CohortStrCount},\PlusMinus{CohortStrModCount}}{20}%
+		}%
+		\put(40,0){%
+			\titlebox{0}{10}{35}{Dex}{}%
+			\scaleattributelabels{-5}{7}{Score,Modifier}{20}%
+			\scaleattributes{-5}{0}{\Arabic{CohortDexCount},\PlusMinus{CohortDexModCount}}{20}%
+		}%
+		\put(80,0){%
+			\titlebox{0}{10}{35}{Con}{}%
+			\scaleattributelabels{-5}{7}{Score,Modifier}{20}%
+			\scaleattributes{-5}{0}{\Arabic{CohortConCount},\PlusMinus{CohortConModCount}}{20}%
+		}%
+		\put(120,0){%
+			\titlebox{0}{10}{35}{Int}{}%
+			\scaleattributelabels{-5}{7}{Score,Modifier}{20}%
+			\scaleattributes{-5}{0}{\Arabic{CohortIntCount},\PlusMinus{CohortIntModCount}}{20}%
+		}%
+		\put(160,0){%
+			\titlebox{0}{10}{35}{Wis}{}%
+			\scaleattributelabels{-5}{7}{Score,Modifier}{20}%
+			\scaleattributes{-5}{0}{\Arabic{CohortWisCount},\PlusMinus{CohortWisModCount}}{20}%
 		}
 		\put(200,0){
 			\titlebox{0}{10}{35}{Cha}{}
@@ -113,16 +110,13 @@
 			\scaleattributes{-5}{0}{\Arabic{CohortChaCount},\PlusMinus{CohortChaModCount}}{20}
 		}
 	}
-	
-	
-	
 	\put(0,373){%% AC
 		\scaleattributelabels{29}{31}{TOTAL,Base,Armor ,Shield, Natural, Dex ,Dodge, Misc}{20}
 		\put(0,24){
 			\titlebox{0}{0}{32}{AC}{Armour Class}
 			\EqualAttributes{34}{0}{10,\value{CohortArmorBonusCount},\value{CohortShieldBonusCount},\arabic{CohortNaturalArmorModCount}, \arabic{CohortDextoACCount} , \arabic{CohortDodgeModCount},\arabic{CohortSizeModCount} + \arabic{CohortDeflectionModCount} + \arabic{CohortACMiscCount}}{20}
 		}
-	
+
 		% Touch, Flat footed
 		\put(0,12){
 			\titlebox{0}{0}{32}{TOUCH}{Armour Class}
@@ -147,8 +141,7 @@
 			\titlebox{0}{0}{48}{Will}{(Wisdom)}
 			\equalattributes{46}{0}{\arabic{CohortWillCount},\arabic{CohortWisModCount},\arabic{CohortWillMiscCount}}{20}
 		}
-	}
-	
+	}%
 	\put(321,373){% % BAB, CMB/CMD or Grapple
 		\IfCounter{CohortCMBMiscCount}{
 			\put(0,0){\exbox(99,40){}}
@@ -175,7 +168,7 @@
 				\singletitlebox{0}{0}{82}{9}{Base Attack Bonus}
 				\put(84,0){\framebox(15,9){\Arabic{CohortBABCount}}}
 			}
-	
+
 			\put(0,17){
 				\ScaleAttributeLabels(30,11){TOTAL,BAB, Str, Misc}{18}
 				\titlebox{0}{0}{28}{\footnotesize Grapple}{Modifier}
@@ -187,13 +180,10 @@
 				\EqualAttributes{44}{0}{\arabic{CohortDexModCount},\arabic{CohortInitiativeMiscCount}}{20}
 			}
 		}}
-	}
-	
-
-
+	}%
 	\put(192,330){%Defenses
-		\put(0,0){\exbox(228,40){}}
-		\let\PrintListFirstItem\BooleanTrue
+		\put(0,0){\exbox(228,40){}}%
+		\let\PrintListFirstItem\BooleanTrue%
 		\put(1,1){\parbox[b][38\unitlength][t]{226\unitlength}{\textit{%
 			\textbf{Defenses: }%
 			\ifthenelse{\value{CohortSpellResistanceCount} > 0}{\maybesemicolon SR \arabic{CohortSpellResistanceCount}}{}%
@@ -201,100 +191,146 @@
 			\ifdefvoid\CohortImmunitiesList{}{\maybesemicolon Immune to \PrintList[, Immune to ]{\CohortImmunitiesList}}%
 			\ifdefvoid\CohortResistancesList{}{\maybesemicolon\PrintCohortResistances}%
 			\ifdefvoid\CohortSpecialDefensesList{}{\maybesemicolon\PrintList\CohortSpecialDefensesList}%
-			\ifdefvoid\CohortConditionalDefModList{}{\maybesemicolon\PrintList\CohortConditionalDefModList}
-		}}}
-	}
-	
-	\newcommand{\PrintCohortSkill}[1]{\IfSkillDefaultF[Cohort]{#1}{\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\BooleanFalse}{, }\cs{Skill#1DisplayName} \PlusMinus{Cohort#1Count}}}
-	%\newcommand{\PrintCohortSkill}[1]{\IfSkillDefaultTF[Cohort]{#1}{\color{gray!50}}{\color{black}}\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\BooleanFalse}{, }\cs{Skill#1DisplayName} \PlusMinus{Cohort#1Count}}
-	\let\PrintListFirstItem\BooleanTrue
+			\ifdefvoid\CohortConditionalDefModList{}{\maybesemicolon\PrintList\CohortConditionalDefModList}%
+		}}}%
+	}%
+	\newcommand{\PrintCohortSkill}[1]{\IfSkillDefaultF[Cohort]{#1}{\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\BooleanFalse}{, }\cs{Skill#1DisplayName} \PlusMinus{Cohort#1Count}}}%
+	\let\PrintListFirstItem\BooleanTrue%
 	\put(192,277){%Skills
-		\put(0,0){\exbox(228,50){}}
+		\put(0,0){\exbox(228,50){}}%
 		\put(1,1){\parbox[b][48\unitlength][t]{226\unitlength}{\textit{%
 			\textbf{Skills: }%
 			\forlistloop{%
 				\PrintCohortSkill%
-			}{\SkillsList}\\
-		\ifdefvoid{\CohortConditionalSkillModList}{}{\small \PrintList{\CohortConditionalSkillModList}}
-		}}}
-	}
-	
+			}{\SkillsList}\\%
+		\ifdefvoid{\CohortConditionalSkillModList}{}{\small \PrintList{\CohortConditionalSkillModList}}%
+		}}}%
+	}%
 	\put(192,234){%Feats
-		\put(0,0){\exbox(228,40){}}
-		\put(1,1){\parbox[b][38\unitlength][t]{226\unitlength}{\textit{\textbf{Feats: }\PrintList{\CohortFeatsList}}}}
-	}
+		\put(0,0){\exbox(228,40){}}%
+		\put(1,1){\parbox[b][38\unitlength][t]{226\unitlength}{\textit{\textbf{Feats: }\PrintList{\CohortFeatsList}}}}%
+	}%
 	\put(192,191){%SQ
-		\put(0,0){\exbox(228,40){}}
-		\put(1,1){\parbox[b][38\unitlength][t]{226\unitlength}{\textit{\textbf{Special Qualities: }\PrintList{\CohortSpecialQualityList}}}}
-	}
+		\put(0,0){\exbox(228,40){}}%
+		\put(1,1){\parbox[b][38\unitlength][t]{226\unitlength}{\textit{\textbf{Special Qualities: }\PrintList{\CohortSpecialQualityList}}}}%
+	}%
 	\put(0,262){%Attacks
 		\newcommand{\PrintCohortAttack}[1]{%
 			\begin{tabular}[b]{A{15}A{25}A{55}A{45}A{25}A{25}}%
-			\multicolumn{3}{A{95}}{\itshape \cs{CohortAttack#1Name}} & \cs{CohortAttack#1AttackBonus} & \cs{CohortAttack#1Damage} &\cs{CohortAttack#1Critical} \tabularnewline\hline\\[-16pt]
-			\multicolumn{3}{A{95}}{\tiny\scshape ATTACK} &\tiny\scshape  attack Bonus &\tiny\scshape Damage &\tiny\scshape  Critical  \tabularnewline
-			\itshape \cs{CohortAttack#1Type} &  \cs{CohortAttack#1Range} & \multicolumn{4}{A{150}}{\cs{CohortAttack#1Notes}}  \tabularnewline\hline\\[-16pt]
-			\tiny\scshape Type & \tiny\scshape Range &\multicolumn{4}{A{150}} {\tiny\scshape ammunition \& Notes } \tabularnewline
-			\end{tabular}
-		}
-		\put(0,76){\PrintCohortAttack{One}}
-		\put(0,38){\PrintCohortAttack{Two}}
-		\put(0,0){\PrintCohortAttack{Three}}
-	}
+			\multicolumn{3}{A{95}}{\itshape \cs{CohortAttack#1Name}} & \cs{CohortAttack#1AttackBonus} & \cs{CohortAttack#1Damage} &\cs{CohortAttack#1Critical} \tabularnewline\hline\\[-16pt]%
+			\multicolumn{3}{A{95}}{\tiny\scshape ATTACK} &\tiny\scshape  attack Bonus &\tiny\scshape Damage &\tiny\scshape  Critical  \tabularnewline%
+			\itshape \cs{CohortAttack#1Type} &  \cs{CohortAttack#1Range} & \multicolumn{4}{A{150}}{\cs{CohortAttack#1Notes}}  \tabularnewline\hline\\[-16pt]%
+			\tiny\scshape Type & \tiny\scshape Range &\multicolumn{4}{A{150}} {\tiny\scshape ammunition \& Notes } \tabularnewline%
+			\end{tabular}%
+		}%
+		\put(0,76){\PrintCohortAttack{One}}%
+		\put(0,38){\PrintCohortAttack{Two}}%
+		\put(0,0){\PrintCohortAttack{Three}}%
+	}%
 	\put(0,191){%Conditional attack mods & special attacks
 		\let\PrintListFirstItem\BooleanTrue%
-		\put(0,0){\exbox(190,68){}}
-		\put(1,1){\parbox[b][66\unitlength][t]{188\unitlength}{\textit{\textbf{Conditional Attack Modifiers and Special Attacks: }\\\PrintList{\CohortConditionalAttackModList}\maybesemicolon\PrintList{\CohortSpecialAttackList}}}}
-	}
-	
+		\put(0,0){\exbox(190,68){}}%
+		\put(1,1){\parbox[b][66\unitlength][t]{188\unitlength}{\textit{\textbf{Conditional Attack Modifiers and Special Attacks: }\\\PrintList{\CohortConditionalAttackModList}\maybesemicolon\PrintList{\CohortSpecialAttackList}}}}%
+	}%
 	\put(0,0){%Spells or Notes
-		
 		\ifdefvoid{\CohortSpellcastingClass}{%Notes Only
 			\put(0,0){%
 				\exbox(190,189){}%
-			}
-			\put(1,1){
-				\parbox[b][187\unitlength][t]{188\unitlength}{\textit{\textbf{Notes:  }\forlistloop\maybepar\CohortNotes}}
-			}
+			}%
+			\put(1,1){%
+				\parbox[b][187\unitlength][t]{188\unitlength}{\textit{\textbf{Notes:  }\forlistloop\maybepar\CohortNotes}}%
+			}%
 		}{%Spells Only
-			\singletitlebox{0}{180}{190}{9}{\CohortSpellcastingClass{} Spellcasting }
+			\singletitlebox{0}{180}{190}{9}{\CohortSpellcastingClass{} Spellcasting }%
 			\put(0,142){%
 				\exbox(190,38){Ability Mod, Save DC, range?}%
-			}
-			\put(0,0){\exbox(190,140){}}
-			\put(1,1){
+			}%
+			\put(0,0){\exbox(190,140){}}%
+			\put(1,1){%
 				\parbox[b][138\unitlength][t]{188\unitlength}{%
 					\textit{\textbf{Spells: }\\%
-						\ForLoop{@i}{0}{\value{@i}<10}{
-							\ifcsvoid{Cohort\arabic{@i}SpellsList}{}{
-								\ifthenelse{\value{@i}>\value{CohortSpellcastingMaxSpellLevelCount}}{}{
+						\ForLoop{@i}{0}{\value{@i}<10}{%
+							\ifcsvoid{Cohort\arabic{@i}SpellsList}{}{%
+								\ifthenelse{\value{@i}>\value{CohortSpellcastingMaxSpellLevelCount}}{}{%
 									\let\PrintListFirstItem\True%
 									\arabic{@i}%
-									\IfCounter{CohortTotalSpellSlots\arabic{@i}}{ (\arabic{CohortTotalSpellSlots\arabic{@i}}/day)}{} ---
+									\IfCounter{CohortTotalSpellSlots\arabic{@i}}{ (\arabic{CohortTotalSpellSlots\arabic{@i}}/day)}{} ---%
 									\forlistcsloop{\IfBooleanTF\PrintListFirstItem{\let\PrintListFirstItem\False}{, }}{Cohort\arabic{@i}SpellsList}%
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+								}%
+							}%
+						}%
+					}%
+				}%
+			}%
+		}%
+	}%
 	\put(192,0){%Equipment and (maybe) notes
-		\NewDocumentCommand{\PrintCohortEquipment}{}{}
 		\ifdefvoid{\CohortSpellcastingClass}{%Equipment only
-			\put(0,0){\exbox(228,189){Equipment?}}
+			\put(0,0){\exbox(228,189){}}%
+			\put(1,1){\parbox[b][187\unitlength][t]{226\unitlength}{\textit{\textbf{Equipment: } \PrintList\CohortGearList}}}
 		}{%Equipment and notes
-			\put(0,70){\exbox(228,119){Equipment?}}
+			\put(0,70){\exbox(228,119){}}%
+			\put(1,71){\parbox[b][117\unitlength][t]{226\unitlength}{\textit{\textbf{Equipment: } \PrintList\CohortGearList}}}
 			\put(0,0){%Notes
-				\put(0,0){\exbox(228,68){}}
-				\put(1,1){
-					\parbox[b][66\unitlength][t]{188\unitlength}{\textit{\textbf{Notes:  }\forlistloop\maybepar\CohortNotes}}
-				}
-			}
+				\put(0,0){\exbox(228,68){}}%
+				\put(1,1){%
+					\parbox[b][66\unitlength][t]{188\unitlength}{\textit{\textbf{Notes:  }\forlistloop\maybepar\CohortNotes}}%
+				}%
+			}%
+		}%
+	}%
+	\put(240,416){\exbox(120,21){Hit points????}}%
+	\put(360,416){\exbox(60,57){Whitespace bad.}}%
+}%
+\end{picture}\newpage}%
+%Followers
+\ProvideDocumentCommand\CleanArabicFraction{o m m}{%
+	\ifthenelse{\value{#2} = 0 \AND \value{#3} = 0}{}{%
+		\IfNoValueTF{#1}{\Arabic{#2} / \Arabic{#3}}{%
+			\ifthenelse{\value{#2} > \value{#3}}{\textcolor{#1}{\Arabic{#2} / \Arabic{#3}}}{\Arabic{#2} / \Arabic{#3}}%
+		}%
+	}%
+}%
+\begin{picture}(420,24)%
+	\put(0,0){\exbox(420,24){}}%
+	\singletitlebox{0}{0}{420}{12}{FOLLOWERS}%
+	\put(0,13){
+		\put(0,0){
+			\titlebox{0}{1}{29}{Lvl 1}{Followers}%
+			\put(31,0){\framebox(29,11){\CleanArabicFraction[red]{CharFollower1ActualCount}{CharFollower1Count}}}
+		}
+		\put(72,0){
+			\titlebox{0}{1}{29}{Lvl 2}{Followers}%
+			\put(31,0){\framebox(29,11){\CleanArabicFraction[red]{CharFollower2ActualCount}{CharFollower2Count}}}
+		}
+		\put(144,0){
+			\titlebox{0}{1}{29}{Lvl 3}{Followers}%
+			\put(31,0){\framebox(29,11){\CleanArabicFraction[red]{CharFollower3ActualCount}{CharFollower3Count}}}
+		}
+		\put(216,0){
+			\titlebox{0}{1}{29}{Lvl 4}{Followers}%
+			\put(31,0){\framebox(29,11){\CleanArabicFraction[red]{CharFollower4ActualCount}{CharFollower4Count}}}
+		}
+		\put(288,0){
+			\titlebox{0}{1}{29}{Lvl 5}{Followers}%
+			\put(31,0){\framebox(29,11){\CleanArabicFraction[red]{CharFollower5ActualCount}{CharFollower5Count}}}
+		}
+		\put(360,0){
+			\titlebox{0}{1}{29}{Lvl 6}{Followers}%
+			\put(31,0){\framebox(29,11){\CleanArabicFraction[red]{CharFollower6ActualCount}{CharFollower6Count}}}
 		}
 	}
-	\put(240,416){\exbox(120,21){Hit points????}}
-	\put(360,416){\exbox(60,57){Whitespace bad.}}
+\end{picture}%
+	\noindent\vspace{-9\unitlength}%
+\SetLength{\tabcolsep}{5\unitlength}%
+\centering%
+\renewcommand\do[1]{
+#1\tabularnewline\hline
 }
-
-\end{picture}
+\begin{longtable}{@{}|>{\centering}p{15\unitlength}|p{134\unitlength}|p{140\unitlength}|>{\raggedleft}p{70\unitlength}|>{\centering}p{10\unitlength}|@{}}
+	\hline
+	Level & Class, Race, Description & Name(s) & Location & {}\#\tabularnewline\hline
+	\endhead
+	\endfoot
+	\dolistloop\CharFollowersList
+\end{longtable}

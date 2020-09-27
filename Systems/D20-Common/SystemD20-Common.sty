@@ -1321,9 +1321,9 @@
 	\expandafter\ProvideDocumentCommand\csname Add#1Note\endcsname{m}{%
 		\listcsadd{#1Notes}{##1}%
 	}
-	
+
 	\expandafter\newcommand\csname Add#1Spell\endcsname[2]{\listcsinsert{#1##1SpellsList}{##2}}
-	
+
 	\expandafter\newcommand\csname #1SpellcastingClass\endcsname{}
 	\expandafter\newcommand\csname #1SpellcastingAbility\endcsname{}
 	\NewCounter{#1CLCount}
@@ -1345,6 +1345,12 @@
 		\NewCounter{#1TotalSpellSlots\arabic{@i}Count}
 		\NewCounter{#1SpellsKnown\arabic{@i}Count}
 		\expandafter\edef\csname #1\arabic{@i}SpellsList\endcsname{}
+	}
+
+	\cslet{#1GearList}\empty
+	\expandafter\NewDocumentCommand\csname Add#1Item\endcsname{s O{1} m m}{%
+		\expandafter\AddToLength\csname #1GearWeight\endcsname{##2pt * ##4}%
+		\listcsadd{#1GearList}{##3\ifnum ##2 > 1{ (##2)}\fi}
 	}
 }
 
@@ -1410,8 +1416,15 @@
 			#1|#3|#4|#5%
 		}
 	}
-	
+	\def\FollowerDefaultLocation{In Company}
+	\let\CharFollowersList\empty
+	\ProvideDocumentCommand{\AddFollowers}{O{1} m m m O{\FollowerDefaultLocation}}{
+		\AddToCounter{CharFollower#2ActualCount}{#1}
+		\listinsert\CharFollowersList{#2 & #3 & #4 & #5 & #1}
+	}
+
 	\let\CharHasCohort\False
+	\renewcommand\do[1]{\NewCounter{CharFollower#1Count}\NewCounter{CharFollower#1ActualCount}}\docsvlist{1,2,3,4,5,6}
 	\ProvideDocumentCommand{\CalculateLeadership}{}{
 		\SetCounter{CharLeadershipScoreCount}{\value{Char\CharLeadershipKeyAbility ModCount} + \value{CharTotalLevelCount} +\value{CharLeadershipScoreMiscCount} + \value{CharLeadershipScoreReputationCount}}
 		\SetCounter{CharCohortLeadershipScoreCount}{\value{CharLeadershipScoreCount} +\value{CharCohortLeadershipScoreMiscCount} + \value{CharCohortLeadershipScoreReputationCount}}
@@ -1420,6 +1433,22 @@
 		\AddToCounter{CharFollowerLeadershipScoreReputationCount}{\value{CharLeadershipScoreReputationCount}}
 		\AddToCounter{CharCohortLeadershipScoreMiscCount}{\value{CharLeadershipScoreMiscCount}}
 		\AddToCounter{CharCohortLeadershipScoreReputationCount}{\value{CharLeadershipScoreReputationCount}}
+
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 9}{\AddToCounter{CharFollower1Count}{5}%
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 10}{\AddToCounter{CharFollower1Count}{1}%
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 11}{\AddToCounter{CharFollower1Count}{2}%
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 12}{\AddToCounter{CharFollower1Count}{2}%
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 13}{\AddToCounter{CharFollower1Count}{(\value{CharFollowerLeadershipScoreCount} - 13) * 5}%
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 19}{\AddToCounter{CharFollower1Count}{(\value{CharFollowerLeadershipScoreCount} - 19) * 5}%
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 21}{\AddToCounter{CharFollower1Count}{(\value{CharFollowerLeadershipScoreCount} - 21) * 5}%
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 23}{\AddToCounter{CharFollower1Count}{(\value{CharFollowerLeadershipScoreCount} - 23) * 5}%
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 24}{\AddToCounter{CharFollower1Count}{(\value{CharFollowerLeadershipScoreCount} - 24) * 5}%
+		}{}}{}}{}}{}}{}}{}}{}}{}}{}
+		\SetCounter{CharFollower2Count}{\value{CharFollower1Count} / 10}
+		\ifthenelse{\value{CharFollower2Count} < 5}{\SetCounter{CharFollower3Count}{\value{CharFollower2Count} / 2}}{\SetCounter{CharFollower3Count}{(\value{CharFollower2Count} + 1) / 2}}
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 16}{\SetCounter{CharFollower4Count}{(\value{CharFollower3Count} + 1) / 2}}{}
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 18}{\SetCounter{CharFollower5Count}{(\value{CharFollower3Count} + 4) / 4}}{}
+		\ifthenelse{\value{CharFollowerLeadershipScoreCount} > 20}{\SetCounter{CharFollower6Count}{(\value{CharFollower4Count} + 4) / 4}}{}
 	}
 	\gappto{\Initialize}{\CalculateLeadership}
 

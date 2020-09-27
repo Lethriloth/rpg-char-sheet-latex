@@ -7,6 +7,7 @@
 \newcommand{\CharLeadershipName}{[Insert Name Here]}
 
 
+
 %% Star the command for any modifiers your character actually has. Add an optional argument between the two mandatory ones to multiply the effect (e.g. for repeated cohort deaths)
 \AddLeadershipReputationModifier{Great Renown}{+2}
 \AddLeadershipReputationModifier{Fairness and Generosity}{+1}
@@ -34,8 +35,8 @@
 \SetCohortWis{10}
 \SetCohortCha{10}
 
-%% Uncomment to stop graying-out the cohort
-%\let\CharHasCohort\True
+%% Comment this out in order to skip including a cohort sheet here (for example, if you have an entirely separate character sheet for your cohort, or if you do not have a cohort) and start Followers on the first page.
+\let\CharHasCohort\True
 \AddCohortSkillRanks{Appraise}{1}
 
 \AddCohortFeat{Power Attack}
@@ -56,5 +57,6 @@
 \cslet{Cohort1SpellsList}\empty
 \AddCohortSpell{1}{Magic Missile}
 
+\AddFollowers[3]{1}{Human Expert (Entertainer)}{Larry, Moe, Curly}[At Large]
 
 \input{Sheets/Leadership_Sheet.tex}
