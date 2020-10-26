@@ -42,11 +42,11 @@
 			\ifthenelse{#1 > 1}{\AddConditionalSkillMod{+\DoMath{#1 / 2} to Survival checks to follow tracks}}{\AddConditionalSkillMod{+1 to Survival checks to follow tracks}}
 		\AddClassFeature{Wild Empathy +\DoMath{#1 + \value{CharChaModCount}}}
 	\ifthenelse{#1 > 1}{
-		\AddClassFeature{Combat Style Bonus Feat\ifthenelse{#1 > 5}{$ \times \DoMath{(#1 + 2) / 4}$}{}: \Charcombatstyle}
+		\AddClassFeature{Combat Style Bonus Feat\ifthenelse{#1 > 5}{$ \times \DoMath{(#1 + 2) / 4}$}{}: \CharCombatStyle}
 			\StepCounter{CharBonusFeatsCount}
-			\newcommand\Charcombatstyle{}
-			\newcommand\Addcombatstyle[1]{%
-				\renewcommand{\Charcombatstyle}{##1}%
+			\newcommand\CharCombatStyle{}
+			\newcommand\AddCombatStyle[1]{%
+				\renewcommand{\CharCombatStyle}{##1}%
 			}
 			\appto{\RunChecks}{%
 				%Check Ranger Combat Style
