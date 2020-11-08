@@ -939,6 +939,10 @@
 		\expandafter\listadd\csname CharSpellcasting#1NotesList\endcsname{##1}
 	}
 }\docsvlist{One,Two}
+\newcommand{\AddSpellcastingNote}[1]{
+	\ifthenelse{\equal{\CharSpellcastingClassTwo}{}}{\AddSpellcastingOneNote{#1}}{\AddSpellcastingTwoNote{#1}}
+}
+
 
 %%%%Miscellany%%%%
 
